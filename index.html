@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Innovation Portfolio</title>
+    <style>
+        :root {
+            --fhda-blue: #004b8d;
+            --accent: #ffb81c;
+            --bg: #f4f7f6;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        header {
+            background: var(--fhda-blue);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: -50px auto 50px;
+            padding: 20px;
+        }
+
+        .mission-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 5px solid var(--fhda-blue);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .difficulty { color: #e67e22; font-size: 0.9rem; }
+        .category-tag {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: bold;
+            background: #eee;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        #card-viewer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            display: none;
+            z-index: 100;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            z-index: 99;
+        }
+
+        button.close-btn {
+            background: var(--fhda-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Strategic Learning Systems</h1>
+    <p>Scaling Student Agency & Deep Expertise</p>
+</header>
+
+<div class="container">
+    <div class="mission-box">
+        <h2>Mission: Anti-Oppressive Education</h2>
+        <p>This interactive dashboard showcases a framework for training peer educators. It focuses on moving students from <strong>"Survival Mode"</strong> to the <strong>"Sweet Spot"</strong> of deep, lasting mastery.</p>
+    </div>
+
+    <div id="card-grid" class="grid">
+        </div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<div id="card-viewer">
+    <span class="category-tag" id="view-cat"></span>
+    <h2 id="view-title"></h2>
+    <p id="view-content"></p>
+    <div id="view-prompts"></div>
+    <button class="close-btn" onclick="closeCard()">Return to Dashboard</button>
+</div>
+
+<script>
+    const cardsData = {
+        scenario: [
+            { title: "The Spiraling Student", difficulty: "⭐⭐⭐", content: "A student has been stuck on the same problem for 40 minutes and is frustrated.", prompts: ["How would you respond?", "What questions regain agency?"] },
+            { title: "The Add Code Plea", difficulty: "⭐⭐", content: "A student is desperate for an add code citing a personal emergency.", prompts: ["How do you apply 'Health First'?", "What defines 'extraordinary circumstances'?"] }
+        ],
+        principle: [
+            { title: "Retrieval Practice", difficulty: "⭐⭐", content: "Recalling information strengthens learning more than rereading.", prompts: ["How is this applied in tutoring?", "Why do students resist this?"] },
+            { title: "Veggies Before Dessert", difficulty: "⭐⭐⭐", content: "Professional foundations must be met before pursuing passion projects.", prompts: ["How do you define 'career capital'?", "When do you withhold 'dessert'?"] }
+        ],
+        reflection: [
+            { title: "Tutoring Origin Story", difficulty: "⭐⭐", content: "What shaped your philosophy as a peer educator?", prompts: ["What assumptions do you carry?", "What are you still learning?"] }
+        ]
+    };
+
+    const grid = document.getElementById('card-grid');
+
+    // Flatten and render cards
+    Object.keys(cardsData).forEach(category => {
+        cardsData[category].forEach(card => {
+            const div = document.createElement('div');
+            div.className = 'card';
+            div.innerHTML = `
+                <span class="category-tag">${category}</span>
+                <h3>${card.title}</h3>
+                <div class="difficulty">${card.difficulty}</div>
+            `;
+            div.onclick = () => openCard(card, category);
+            grid.appendChild(div);
+        });
+    });
+
+    function openCard(card, category) {
+        document.getElementById('view-cat').innerText = category;
+        document.getElementById('view-title').innerText = card.title;
+        document.getElementById('view-content').innerText = card.content;
+        
+        const promptDiv = document.getElementById('view-prompts');
+        promptDiv.innerHTML = "<strong>Prompts:</strong><ul>" + 
+            card.prompts.map(p => `<li>${p}</li>`).join('') + "</ul>";
+
+        document.getElementById('overlay').style.display = 'block';
+        document.getElementById('card-viewer').style.display = 'block';
+    }
+
+    function closeCard() {
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('card-viewer').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
