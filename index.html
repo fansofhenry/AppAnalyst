@@ -2,183 +2,104 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Applications Support Portfolio | Enterprise Systems</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educational Innovation Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.0/lucide.min.js"></script>
     <style>
-        :root {
-            --fhda-blue: #004b8d;
-            --accent: #ffb81c;
-            --bg: #f4f7f6;
-            --text: #333;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            background: var(--bg);
-            color: var(--text);
-        }
-
-        header {
-            background: var(--fhda-blue);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: -50px auto 50px;
-            padding: 20px;
-        }
-
-        .mission-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 5px solid var(--fhda-blue);
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .difficulty { color: #e67e22; font-size: 0.9rem; }
-        .category-tag {
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            font-weight: bold;
-            background: #eee;
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        #card-viewer {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 500px;
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
-            display: none;
-            z-index: 100;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            display: none;
-            z-index: 99;
-        }
-
-        button.close-btn {
-            background: var(--fhda-blue);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-top: 20px;
-            cursor: pointer;
-        }
+        :root { --bg: #f8fafc; --panel: #ffffff; --primary: #2563eb; --text: #1e293b; --border: #e2e8f0; --code-bg: #1e1e1e; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; line-height: 1.6; }
+        header { background: #0f172a; color: white; padding: 2rem; border-bottom: 4px solid var(--primary); }
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .full-width { grid-column: 1 / -1; }
+        .card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        h2 { margin-top: 0; font-size: 1.25rem; color: var(--primary); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        pre { background: var(--code-bg); color: #d4d4d4; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.85rem; }
+        .status-badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+        .status-err { background: #fee2e2; color: #991b1b; }
+        .status-ok { background: #dcfce7; color: #166534; }
+        .log-window { background: #1e1e1e; color: #a6accd; font-family: 'Courier New', monospace; padding: 1rem; height: 150px; overflow-y: scroll; border-radius: 4px; font-size: 0.8rem; }
+        .btn { background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 600; }
+        .btn:hover { background: #1d4ed8; }
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Strategic Learning Systems</h1>
-    <p>Scaling Student Agency & Deep Expertise</p>
+    <h1>System Support Portfolio</h1>
+    <p>Enterprise Applications | API Troubleshooting | Higher Ed Data Integrity</p>
 </header>
 
 <div class="container">
-    <div class="mission-box">
-        <h2>Mission: Anti-Oppressive Education</h2>
-        <p>This interactive dashboard showcases a framework for training peer educators. It focuses on moving students from <strong>"Survival Mode"</strong> to the <strong>"Sweet Spot"</strong> of deep, lasting mastery.</p>
+    
+    <div class="card full-width">
+        <h2>Integration Architecture: CVC Exchange Flow</h2>
+        <p>Expertise in supporting the data handshake between <strong>Home Colleges</strong> and <strong>Teaching Colleges</strong> via API middleware.</p>
+        <div style="display: flex; justify-content: space-around; text-align: center; background: #f1f5f9; padding: 1rem; border-radius: 8px;">
+            <div><strong>Student Portal</strong><br>⬇️ JSON Payload</div>
+            <div><strong>API Gateway</strong><br>Auth & Routing</div>
+            <div><strong>SIS (Banner/Colleague)</strong><br>DB Records</div>
+        </div>
     </div>
 
-    <div id="card-grid" class="grid">
+    <div class="card">
+        <h2>API Integration Diagnostics</h2>
+        <p>Demonstrating the ability to parse JSON responses and identify field-level mismatches in cross-college enrollments.</p>
+        <div class="log-window" id="logWindow">
+            [SYS] Waiting for trigger...
         </div>
-</div>
+        <button class="btn" style="margin-top: 1rem;" onclick="runDiagnostic()">Run System Diagnostic</button>
+    </div>
 
-<div class="overlay" id="overlay"></div>
-<div id="card-viewer">
-    <span class="category-tag" id="view-cat"></span>
-    <h2 id="view-title"></h2>
-    <p id="view-content"></p>
-    <div id="view-prompts"></div>
-    <button class="close-btn" onclick="closeCard()">Return to Dashboard</button>
+    <div class="card">
+        <h2>Data Integrity (SQL)</h2>
+        <p>Identifying "Orphaned Enrollments" where the student exists in the Exchange but lacks a matching <code>OpenCCCID</code> in the local SIS.</p>
+        <pre><code>SELECT e.enrollment_id, s.last_name
+FROM cvc_exchange.enrollments e
+LEFT JOIN sis.student_master s 
+  ON e.student_id = s.external_id
+WHERE s.open_ccc_id IS NULL;</code></pre>
+    </div>
+
+    <div class="card">
+        <h2>Technical Support Workflow</h2>
+        <ul style="padding-left: 1.2rem;">
+            <li><strong>Triage:</strong> Assess urgency via ServiceNow/Jira.</li>
+            <li><strong>Replication:</strong> Test API endpoint in Postman (Sandbox).</li>
+            <li><strong>Data Validation:</strong> Check for special character corruption in XML/JSON payloads.</li>
+            <li><strong>Resolution:</strong> Update KB documentation & notify stakeholders.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>SOP: API Credential Rotation</h2>
+        <p>Process for updating OAuth2 secrets for vendor integrations without service interruption:</p>
+        <ol>
+            <li>Stage new secret in middleware environment.</li>
+            <li>Perform health check on <code>/auth/status</code>.</li>
+            <li>Update production headers during low-traffic maintenance window.</li>
+        </ol>
+    </div>
 </div>
 
 <script>
-    const cardsData = {
-        scenario: [
-            { title: "The Spiraling Student", difficulty: "⭐⭐⭐", content: "A student has been stuck on the same problem for 40 minutes and is frustrated.", prompts: ["How would you respond?", "What questions regain agency?"] },
-            { title: "The Add Code Plea", difficulty: "⭐⭐", content: "A student is desperate for an add code citing a personal emergency.", prompts: ["How do you apply 'Health First'?", "What defines 'extraordinary circumstances'?"] }
-        ],
-        principle: [
-            { title: "Retrieval Practice", difficulty: "⭐⭐", content: "Recalling information strengthens learning more than rereading.", prompts: ["How is this applied in tutoring?", "Why do students resist this?"] },
-            { title: "Veggies Before Dessert", difficulty: "⭐⭐⭐", content: "Professional foundations must be met before pursuing passion projects.", prompts: ["How do you define 'career capital'?", "When do you withhold 'dessert'?"] }
-        ],
-        reflection: [
-            { title: "Tutoring Origin Story", difficulty: "⭐⭐", content: "What shaped your philosophy as a peer educator?", prompts: ["What assumptions do you carry?", "What are you still learning?"] }
-        ]
-    };
-
-    const grid = document.getElementById('card-grid');
-
-    // Flatten and render cards
-    Object.keys(cardsData).forEach(category => {
-        cardsData[category].forEach(card => {
-            const div = document.createElement('div');
-            div.className = 'card';
-            div.innerHTML = `
-                <span class="category-tag">${category}</span>
-                <h3>${card.title}</h3>
-                <div class="difficulty">${card.difficulty}</div>
-            `;
-            div.onclick = () => openCard(card, category);
-            grid.appendChild(div);
-        });
-    });
-
-    function openCard(card, category) {
-        document.getElementById('view-cat').innerText = category;
-        document.getElementById('view-title').innerText = card.title;
-        document.getElementById('view-content').innerText = card.content;
-        
-        const promptDiv = document.getElementById('view-prompts');
-        promptDiv.innerHTML = "<strong>Prompts:</strong><ul>" + 
-            card.prompts.map(p => `<li>${p}</li>`).join('') + "</ul>";
-
-        document.getElementById('overlay').style.display = 'block';
-        document.getElementById('card-viewer').style.display = 'block';
+    function addLog(msg, type) {
+        const log = document.getElementById('logWindow');
+        const time = new Date().toLocaleTimeString();
+        const color = type === 'err' ? '#ff5555' : '#50fa7b';
+        log.innerHTML += `<div>[${time}] <span style="color:${color}">${msg}</span></div>`;
+        log.scrollTop = log.scrollHeight;
     }
 
-    function closeCard() {
-        document.getElementById('overlay').style.display = 'none';
-        document.getElementById('card-viewer').style.display = 'none';
+    function runDiagnostic() {
+        addLog('Initiating handshake with Teaching College SIS...', 'ok');
+        setTimeout(() => {
+            addLog('Requesting GET /api/v1/enrollment/99823...', 'ok');
+        }, 800);
+        setTimeout(() => {
+            addLog('CRITICAL_ERR: Missing "term_code" in response payload.', 'err');
+            addLog('Action: Escalating to Tier 2 / Vendor Support.', 'err');
+        }, 1800);
     }
 </script>
 
