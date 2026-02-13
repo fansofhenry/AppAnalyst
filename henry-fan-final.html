@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Henry Fan — Application Support Analyst</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:    #0f1117;
+      --paper:  #f6f4ef;
+      --cream:  #edeae1;
+      --rule:   #d8d2c5;
+      --accent: #1a4f8a;
+      --warm:   #b53a0a;
+      --mid:    #58544f;
+      --light:  #8a847d;
+      --green:  #1a5c36;
+      --serif:  'DM Serif Display', serif;
+      --mono:   'DM Mono', monospace;
+      --sans:   'Instrument Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.65; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
+    }
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+    /* ─── NAV ─── */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(246,244,239,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--rule); }
+    .nav-in { max-width: 1060px; margin: 0 auto; padding: 0.9rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .nav-name { font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--light); text-decoration: none; transition: color 0.2s; }
+    nav a:hover, nav a.on { color: var(--accent); }
+
+    /* ─── HERO ─── */
+    #hero { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 5rem; padding: 5.5rem 2rem 5rem; max-width: 1060px; margin: 0 auto; }
+    .ht { animation: up 0.75s ease both; }
+    .eyebrow { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.7rem; }
+    .eyebrow::before { content: ''; width: 1.8rem; height: 1.5px; background: var(--warm); flex-shrink: 0; }
+    h1 { font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.08; margin-bottom: 1.4rem; }
+    h1 em { font-style: italic; color: var(--accent); }
+    .hero-p { font-size: 1.03rem; color: var(--mid); line-height: 1.85; margin-bottom: 1.75rem; max-width: 460px; }
+    .hero-p strong { color: var(--ink); font-weight: 600; }
+    .hero-p a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(26,79,138,0.3); transition: border-color 0.2s; }
+    .hero-p a:hover { border-color: var(--accent); }
+    .btns { display: flex; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 0.78rem 1.5rem; border-radius: 3px; transition: all 0.2s; border: 1.5px solid transparent; }
+    .btn-fill { background: var(--accent); color: white; }
+    .btn-fill:hover { background: #133d6e; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(26,79,138,0.25); }
+    .btn-out { border-color: var(--rule); color: var(--mid); }
+    .btn-out:hover { border-color: var(--accent); color: var(--accent); }
+    .stats { display: flex; gap: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+    .sv { font-family: var(--serif); font-size: 1.9rem; color: var(--accent); display: block; line-height: 1; }
+    .sl { font-family: var(--mono); font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--light); margin-top: 0.28rem; display: block; }
+
+    /* hero right */
+    .hr-card { animation: up 0.75s 0.1s ease both; }
+    .fc { background: white; border: 1px solid var(--rule); border-radius: 12px; padding: 1.75rem; box-shadow: 0 2px 14px rgba(0,0,0,0.04); margin-bottom: 0.9rem; }
+    .fc-lbl { font-family: var(--mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--warm); margin-bottom: 1.2rem; }
+    .fc-row { display: flex; gap: 0.8rem; padding: 0.85rem 0; border-bottom: 1px solid var(--rule); align-items: flex-start; }
+    .fc-row:last-child { border: none; padding-bottom: 0; }
+    .fc-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
+    .fc-req { font-family: var(--mono); font-size: 0.58rem; color: var(--light); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.18rem; }
+    .fc-ans { font-size: 0.86rem; color: var(--ink); line-height: 1.5; }
+    .fc-ans strong { color: var(--accent); font-weight: 600; }
+
+    /* gap note — now framed as context, not apology */
+    .ctx-note { background: white; border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 6px; padding: 1rem 1.2rem; font-size: 0.82rem; color: var(--mid); line-height: 1.75; }
+    .ctx-note strong { color: var(--ink); }
+
+    /* ─── SHARED SECTION ─── */
+    section { padding: 5rem 0; }
+    .s-eyebrow { font-family: var(--mono); font-size: 0.63rem; text-transform: uppercase; letter-spacing: 0.22em; color: var(--warm); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.55rem; }
+    .s-eyebrow::before { content: ''; width: 1.4rem; height: 1px; background: var(--warm); flex-shrink: 0; }
+    h2 { font-family: var(--serif); font-size: clamp(1.75rem, 3vw, 2.65rem); line-height: 1.15; margin-bottom: 0.6rem; }
+    .s-sub { font-size: 0.96rem; color: var(--mid); max-width: 560px; line-height: 1.82; margin-bottom: 2.75rem; }
+    hr.div { border: none; border-top: 1px solid var(--rule); }
+
+    /* ─── ORIGIN STORY ─── */
+    #origin { background: var(--accent); padding: 4.5rem 0; }
+    .origin-in { max-width: 1060px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1.8fr; gap: 5rem; align-items: start; }
+    .origin-left .tag-line { font-family: var(--mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); margin-bottom: 0.9rem; }
+    .origin-pull { font-family: var(--serif); font-size: clamp(1.7rem, 2.5vw, 2.3rem); color: white; line-height: 1.22; }
+    .origin-pull em { font-style: italic; color: #a8d4f4; }
+    .origin-body p { font-size: 1rem; color: rgba(200,220,240,0.9); line-height: 1.9; }
+    .origin-body p + p { margin-top: 1.2rem; }
+    .origin-body strong { color: white; }
+    .origin-body em { font-style: italic; color: #c8e4f8; }
+
+    /* ─── WORK SAMPLES ─── */
+    #samples { background: var(--cream); }
+    .samples-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+    .sc { background: white; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
+    .sc:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.07); }
+    .sc-head { padding: 1.5rem 1.6rem 0; flex: 1; }
+    .sc-type { font-family: var(--mono); font-size: 0.56rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--warm); margin-bottom: 0.45rem; }
+    .sc-title { font-family: var(--serif); font-size: 1.1rem; line-height: 1.3; margin-bottom: 0.35rem; }
+    .sc-ctx { font-size: 0.78rem; color: var(--light); line-height: 1.65; margin-bottom: 0.9rem; }
+    .sc-code { margin: 0 1.6rem 0; background: #f3f0e8; border: 1px solid var(--rule); border-radius: 6px; padding: 0.95rem 1rem; font-family: var(--mono); font-size: 0.67rem; color: var(--mid); line-height: 1.95; }
+    .sc-code span { display: block; }
+    .ln { color: #cdc7bb; user-select: none; display: inline-block; min-width: 1.3rem; text-align: right; margin-right: 0.6rem; }
+    .kw { color: var(--accent); }
+    .vl { color: var(--green); }
+    .cm { color: var(--light); font-style: italic; }
+    .ky { color: var(--warm); }
+    .sc-tags { padding: 0.9rem 1.6rem 1.6rem; display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; }
+    .t { font-family: var(--mono); font-size: 0.56rem; text-transform: uppercase; letter-spacing: 0.07em; padding: 0.2rem 0.55rem; border-radius: 2px; }
+    .t-hi { background: #e4edf8; border: 1px solid #b0c8e8; color: var(--accent); }
+    .t-md { background: var(--cream); border: 1px solid var(--rule); color: var(--mid); }
+
+    /* ─── PRODUCT KNOWLEDGE ─── */
+    #product { background: white; }
+    .pk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .pk-diagram { background: var(--cream); border: 1px solid var(--rule); border-radius: 10px; padding: 2rem; }
+    .pk-d-label { font-family: var(--mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--light); margin-bottom: 1.5rem; }
+    .pk-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+    .pk-node { font-family: var(--mono); font-size: 0.68rem; padding: 0.4rem 0.8rem; border-radius: 4px; border: 1px solid var(--rule); background: white; color: var(--mid); text-align: center; line-height: 1.35; }
+    .pk-node small { display: block; font-size: 0.55rem; color: var(--light); margin-top: 0.1rem; }
+    .pk-node.hi { background: var(--accent); color: white; border-color: var(--accent); }
+    .pk-node.hi small { color: rgba(255,255,255,0.65); }
+    .pk-node.warm { background: var(--warm); color: white; border-color: var(--warm); }
+    .pk-node.warm small { color: rgba(255,255,255,0.65); }
+    .pk-arr { color: var(--rule); font-size: 0.8rem; flex-shrink: 0; }
+    .pk-sep { border: none; border-top: 1px dashed var(--rule); margin: 1.25rem 0; }
+    .pk-henry { display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+    .pk-h { font-family: var(--mono); font-size: 0.62rem; padding: 0.4rem 0.7rem; background: #e4edf8; border: 1px solid #b0c8e8; color: var(--accent); border-radius: 4px; text-align: center; line-height: 1.35; }
+    .pk-h.center { background: var(--accent); color: white; border-color: var(--accent); font-size: 0.72rem; padding: 0.5rem 1rem; }
+    .pk-copy h3 { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 0.75rem; line-height: 1.25; }
+    .pk-copy p { font-size: 0.9rem; color: var(--mid); line-height: 1.82; margin-bottom: 1rem; }
+    .pk-copy p strong { color: var(--ink); }
+    .pk-copy p:last-child { margin: 0; }
+
+    /* ─── TIMELINE ─── */
+    #experience { background: var(--paper); }
+    .tl-item { display: grid; grid-template-columns: 160px 1fr; gap: 2.75rem; padding: 2.4rem 0; border-top: 1px solid var(--rule); opacity: 0; transform: translateY(14px); transition: opacity 0.5s, transform 0.5s; }
+    .tl-item.show { opacity: 1; transform: none; }
+    .tm-date { font-family: var(--mono); font-size: 0.65rem; color: var(--light); line-height: 1.55; }
+    .tm-org { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); font-weight: 500; margin: 0.28rem 0 0.45rem; }
+    .tm-badge { display: inline-block; font-family: var(--mono); font-size: 0.53rem; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.14rem 0.48rem; border-radius: 2px; border: 1px solid; }
+    .b-a { color: var(--warm); border-color: var(--warm); background: #fff4f0; }
+    .b-b { color: var(--accent); border-color: #b8cce4; background: #f0f5ff; }
+    .tl-title { font-family: var(--serif); font-size: 1.38rem; margin-bottom: 0.55rem; line-height: 1.22; }
+    .tl-body { font-size: 0.89rem; color: var(--mid); line-height: 1.82; }
+    .tl-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.9rem; }
+
+    /* ─── STACK ─── */
+    #stack { background: var(--cream); }
+    .sk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .sk { background: white; border: 1px solid var(--rule); border-radius: 8px; padding: 1.35rem; transition: border-color 0.2s, transform 0.2s; }
+    .sk:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .sk-icon { font-size: 1.3rem; margin-bottom: 0.6rem; }
+    .sk-name { font-family: var(--serif); font-size: 1rem; margin-bottom: 0.3rem; }
+    .sk-body { font-size: 0.76rem; color: var(--mid); line-height: 1.65; margin-bottom: 0.75rem; }
+    .sk-bar { display: flex; align-items: center; gap: 0.45rem; font-family: var(--mono); font-size: 0.57rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--light); }
+    .bar { flex: 1; height: 2.5px; background: var(--rule); border-radius: 2px; overflow: hidden; }
+    .fill { height: 100%; border-radius: 2px; background: var(--accent); }
+    .f90{width:90%} .f80{width:80%} .f72{width:72%} .f60{width:60%}
+
+    /* ─── CLOSE ─── */
+    #close { background: #0f1117; color: white; padding: 6rem 2rem; text-align: center; }
+    #close .s-eyebrow { color: #5a8fc0; justify-content: center; }
+    #close .s-eyebrow::before { background: #5a8fc0; }
+    #close h2 { color: white; font-size: clamp(1.9rem, 3.2vw, 3rem); max-width: 680px; margin: 0 auto 1.2rem; }
+    .close-p { font-size: 0.97rem; color: #706a62; max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.9; }
+    .close-p strong { color: #a09890; }
+    .clinks { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .cl { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 0.82rem 1.65rem; border-radius: 3px; transition: all 0.2s; }
+    .cl-w { background: white; color: var(--accent); }
+    .cl-w:hover { background: var(--cream); }
+    .cl-g { border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.6); }
+    .cl-g:hover { border-color: rgba(255,255,255,0.4); color: white; background: rgba(255,255,255,0.06); }
+
+    footer { background: #080a0d; color: #252018; text-align: center; padding: 1.5rem; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.07em; }
+
+    @keyframes up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+
+    @media (max-width: 860px) {
+      #hero, .origin-in, .pk-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      #hero { padding-top: 3.5rem; }
+      .tl-item { grid-template-columns: 1fr; gap: 0.4rem; }
+      .samples-grid { grid-template-columns: 1fr; }
+      nav ul { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-in">
+    <span class="nav-name">Henry Fan</span>
+    <ul>
+      <li><a href="#origin">Background</a></li>
+      <li><a href="#samples">Work samples</a></li>
+      <li><a href="#product">Platform knowledge</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#stack">Tech stack</a></li>
+      <li><a href="#close">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<div id="hero" class="wrap">
+  <div class="ht">
+    <p class="eyebrow">Application Support Analyst · CVC-OEI at FHDA</p>
+    <h1>The system<br>that changed<br>my life is<br><em>the one I want<br>to keep running.</em></h1>
+    <p class="hero-p">
+      I'm Henry Fan. I started at <strong>Foothill College</strong> — the institution that houses the CVC — because it was what I could access. I've spent the seven years since building the technical skills to support the systems that make that access possible for everyone else.
+    </p>
+    <p class="hero-p">
+      I'm currently completing my <strong>M.S. in Computer Science at Georgia Tech</strong> (ML focus, online) while actively seeking this role. The Oct 2025 end date on my SMCCD position reflects that transition — not a gap, but a deliberate focus on finishing my degree and finding the right next step. This is it.
+    </p>
+    <div class="btns">
+      <a href="mailto:fansofhenry@gmail.com" class="btn btn-fill">
+        fansofhenry@gmail.com
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/fansofhenry" target="_blank" class="btn btn-out">LinkedIn</a>
+    </div>
+    <div class="stats">
+      <div><span class="sv">7+</span><span class="sl">Years edu tech</span></div>
+      <div><span class="sv">B.S.+</span><span class="sl">Computer Science</span></div>
+      <div><span class="sv">CCC</span><span class="sl">Foothill alum</span></div>
+    </div>
+  </div>
+
+  <div class="hr-card">
+    <div class="fc">
+      <p class="fc-lbl">// How the JD maps to my background</p>
+      <div class="fc-row">
+        <div class="fc-dot"></div>
+        <div>
+          <div class="fc-req">Ticketing · SLA · Incident management</div>
+          <div class="fc-ans"><strong>ServiceNow & Jira at enterprise scale</strong> — Tier 1–2, SLA-bound, multi-department, with KB systems that reduced repeat ticket volume</div>
+        </div>
+      </div>
+      <div class="fc-row">
+        <div class="fc-dot"></div>
+        <div>
+          <div class="fc-req">Higher ed SIS · FA/enrollment systems</div>
+          <div class="fc-ans">Daily support inside <strong>SIS-driven FA and enrollment platforms at SMCCD</strong> — data validation, integration troubleshooting, Title IV and state compliance workflows</div>
+        </div>
+      </div>
+      <div class="fc-row">
+        <div class="fc-dot"></div>
+        <div>
+          <div class="fc-req">API integrations · Data exchange · Sync failures</div>
+          <div class="fc-ans">Traced cross-system integration failures and validated data flows — <strong>at SMCCD and SCC Schools</strong> — coordinating with IT and engineering on root causes</div>
+        </div>
+      </div>
+      <div class="fc-row">
+        <div class="fc-dot"></div>
+        <div>
+          <div class="fc-req">Canvas LMS · Instructional platforms</div>
+          <div class="fc-ans"><strong>Canvas admin support at Rice University</strong> — SSO issues, auth failures, faculty and student-facing troubleshooting across academic systems</div>
+        </div>
+      </div>
+      <div class="fc-row">
+        <div class="fc-dot"></div>
+        <div>
+          <div class="fc-req">Python · JS · SQL · Bash · Linux · SDLC</div>
+          <div class="fc-ans"><strong>B.S. CS at SJSU + M.S. in progress at Georgia Tech</strong> — scripting, data analysis, application lifecycle, automation, testing. These aren't aspirational.</div>
+        </div>
+      </div>
+      <div class="fc-row">
+        <div class="fc-dot"></div>
+        <div>
+          <div class="fc-req">Documentation · Training · Remote work</div>
+          <div class="fc-ans">5 years curriculum development + <strong>policy-to-workflow translation at SMCCD</strong> + KB authoring that cut repeat tickets. Fully remote since 2022.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ctx-note">
+      <strong>On Banner / PeopleSoft / Colleague:</strong> At SMCCD I worked daily within FA and enrollment systems built on these platforms — resolving data discrepancies, tracing integration failures, validating student records under Title IV and California state regulations. Working knowledge from the integration and compliance side, backed by the CS foundation to deepen it fast.
+    </div>
+  </div>
+</div>
+
+<hr class="div" />
+
+<!-- ══ ORIGIN STORY ══ -->
+<section id="origin">
+  <div class="origin-in">
+    <div class="origin-left">
+      <p class="tag-line">// Why this role, specifically</p>
+      <h2 class="origin-pull">I'm a product of the system<br>the CVC exists to <em>protect.</em></h2>
+    </div>
+    <div class="origin-body">
+      <p>I didn't start at a four-year university. I started at <strong>Foothill College</strong> — the same institution that houses the CVC — because community college was what I could access. My A.S. thesis was on andragogy: how adults learn, and why traditional systems so often fail them. My B.S. thesis at SJSU was titled <em>"Critical Computation: Utilizing Technology for Social Good."</em></p>
+      <p>Those weren't just academic exercises. They are how I understand the stakes of this work. When a student can't access a CVC Exchange course because of an enrollment sync failure, or can't receive financial aid because of a data discrepancy that nobody caught — that's not a ticket volume problem. That's someone's semester, possibly their degree. <strong>I know what that feels like from the other side of the screen.</strong></p>
+      <p>The CVC's minimum qualification calls for sensitivity to and respect for the diverse backgrounds of community college students. For me that's not a checkbox. It's the reason I'm applying to this role and not the dozens of other analyst positions I could pursue with this background.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WORK SAMPLES ══ -->
+<section id="samples">
+  <div class="wrap">
+    <p class="s-eyebrow">Work samples</p>
+    <h2>How I actually approach this work.</h2>
+    <p class="s-sub">These samples are drawn from real situations across SMCCD and Faraday Future. They reflect how I structure diagnostics, document compliance workflows, and use data to prevent recurring problems rather than just resolve them.</p>
+
+    <div class="samples-grid">
+
+      <div class="sc">
+        <div class="sc-head">
+          <p class="sc-type">KB Article · Integration Support · From SMCCD</p>
+          <h3 class="sc-title">Diagnosing Enrollment Sync Failures: SIS ↔ CVC Exchange</h3>
+          <p class="sc-ctx">Structure I used at SMCCD for IT-facing KB articles on integration issues — built for someone troubleshooting independently with a queue behind them.</p>
+        </div>
+        <div class="sc-code">
+          <span><span class="ln">1</span><span class="ky">ISSUE:</span> Student cross-enrolled; SIS not updated after 24h</span>
+          <span><span class="ln">2</span><span class="cm">## Symptoms</span></span>
+          <span><span class="ln">3</span><span>- Home SIS shows enrollment "pending" past sync window</span></span>
+          <span><span class="ln">4</span><span>- FA not applied to cross-enrolled course</span></span>
+          <span><span class="ln">5</span><span class="cm">## Triage — Analyst I</span></span>
+          <span><span class="ln">6</span><span><span class="kw">1.</span> Check API token validity: Settings › Integrations › CVC</span></span>
+          <span><span class="ln">7</span><span><span class="kw">2.</span> Compare enrollment timestamp vs. sync window (2–4am PST)</span></span>
+          <span><span class="ln">8</span><span><span class="kw">3.</span> Pull exchange log → HTTP <span class="vl">200</span> on <span class="vl">/api/v2/enrollments</span>?</span></span>
+          <span><span class="ln">9</span><span><span class="kw">4.</span> <span class="vl">401</span>: re-auth + re-trigger → <span class="vl">422</span>: escalate to Analyst II</span></span>
+          <span><span class="ln">10</span><span class="cm">## Escalate pattern: 3+ students, same district, same window</span></span>
+        </div>
+        <div class="sc-tags">
+          <span class="t t-hi">API Troubleshooting</span>
+          <span class="t t-hi">SIS Integration</span>
+          <span class="t t-md">KB Structure</span>
+          <span class="t t-md">Escalation Logic</span>
+        </div>
+      </div>
+
+      <div class="sc">
+        <div class="sc-head">
+          <p class="sc-type">Process Doc · FA Compliance · From SMCCD</p>
+          <h3 class="sc-title">FA Disbursement Verification: Cross-Enrolled Students</h3>
+          <p class="sc-ctx">Adapted from workflow documentation I authored at SMCCD — translating Title IV and state FA regulations into a checklist staff can run without re-reading policy.</p>
+        </div>
+        <div class="sc-code">
+          <span><span class="ln">1</span><span class="ky">PROCESS:</span> Disbursement hold — cross-enrolled student</span>
+          <span><span class="ln">2</span><span class="cm">## Pre-conditions</span></span>
+          <span><span class="ln">3</span><span>- Active FAFSA/CADAA on file at home college</span></span>
+          <span><span class="ln">4</span><span>- Home college is confirmed CVC Consortium member</span></span>
+          <span><span class="ln">5</span><span class="cm">## FA Technician checklist</span></span>
+          <span><span class="ln">6</span><span><span class="kw">□</span> SIS shows correct enrollment intensity (units affect Pell)</span></span>
+          <span><span class="ln">7</span><span><span class="kw">□</span> Census date confirmed passed at teaching college</span></span>
+          <span><span class="ln">8</span><span><span class="kw">□</span> No duplicate COA between home/teaching college</span></span>
+          <span><span class="ln">9</span><span><span class="kw">□</span> Disbursement routing matches verified student record</span></span>
+          <span><span class="ln">10</span><span class="cm">## Escalate: COA conflict / SAP hold / SSN mismatch</span></span>
+        </div>
+        <div class="sc-tags">
+          <span class="t t-hi">FA Compliance</span>
+          <span class="t t-hi">Title IV / CADAA</span>
+          <span class="t t-md">Process Design</span>
+          <span class="t t-md">Staff Workflow</span>
+        </div>
+      </div>
+
+      <div class="sc">
+        <div class="sc-head">
+          <p class="sc-type">Data Analysis · Python · From Faraday Future</p>
+          <h3 class="sc-title">Root Cause Analysis to Reduce Recurring Support Volume</h3>
+          <p class="sc-ctx">At Faraday I ran quarterly ticket analyses like this. The output drove KB article prioritization — turning reactive support into proactive documentation.</p>
+        </div>
+        <div class="sc-code">
+          <span><span class="ln">1</span><span class="cm"># Q1 ticket root cause analysis</span></span>
+          <span><span class="ln">2</span><span><span class="kw">import</span> pandas <span class="kw">as</span> pd</span></span>
+          <span><span class="ln">3</span></span>
+          <span><span class="ln">4</span><span>df = pd.read_csv(<span class="vl">'tickets_q1.csv'</span>)</span></span>
+          <span><span class="ln">5</span><span>top = df.groupby(<span class="vl">'category'</span>)[<span class="vl">'ticket_id'</span>] \</span></span>
+          <span><span class="ln">6</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.count().sort_values(ascending=<span class="vl">False</span>)</span></span>
+          <span><span class="ln">7</span></span>
+          <span><span class="ln">8</span><span class="cm"># Top categories: auth-failure 28%, access-provision 24%,</span></span>
+          <span><span class="ln">9</span><span class="cm">#   onboarding-gap 19%, VPN-config 16%, hardware 13%</span></span>
+          <span><span class="ln">10</span><span class="cm"># Built KB for top 2 → -35% repeat tickets next quarter</span></span>
+        </div>
+        <div class="sc-tags">
+          <span class="t t-hi">Python / Pandas</span>
+          <span class="t t-hi">Trend Analysis</span>
+          <span class="t t-md">KB Prioritization</span>
+          <span class="t t-md">Queue Reduction</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRODUCT KNOWLEDGE ══ -->
+<section id="product">
+  <div class="wrap">
+    <p class="s-eyebrow">Platform understanding</p>
+    <h2>I understand what I'd be supporting.</h2>
+    <p class="s-sub">Most applicants know ticketing systems. Fewer understand the CVC Exchange's specific architecture — and why getting it right matters at every layer.</p>
+
+    <div class="pk-grid">
+      <div class="pk-diagram">
+        <p class="pk-d-label">// CVC Exchange ecosystem</p>
+        <div class="pk-row">
+          <div class="pk-node hi">CVC Exchange<small>cvc.edu · SaaS</small></div>
+          <div class="pk-arr">⟷</div>
+          <div class="pk-node">Home College SIS<small>Banner / PS / Colleague</small></div>
+          <div class="pk-arr">⟷</div>
+          <div class="pk-node">Canvas LMS<small>All 115 CCCs</small></div>
+        </div>
+        <div class="pk-row">
+          <div class="pk-node">API Data Exchange<small>Enrollment / FA / Credits</small></div>
+          <div class="pk-arr">⟷</div>
+          <div class="pk-node warm">Teaching College SIS<small>Cross-enrollment target</small></div>
+          <div class="pk-arr">⟷</div>
+          <div class="pk-node">SSO / Identity<small>Auth layer</small></div>
+        </div>
+        <div class="pk-row">
+          <div class="pk-node">Payment Integration<small>Fee processing</small></div>
+          <div class="pk-arr">⟷</div>
+          <div class="pk-node">Financial Aid<small>FAFSA / CADAA</small></div>
+          <div class="pk-arr">⟷</div>
+          <div class="pk-node">CCCCO Compliance<small>State regulations</small></div>
+        </div>
+        <div class="pk-sep"></div>
+        <p class="pk-d-label">// Where my experience maps in</p>
+        <div class="pk-henry">
+          <div class="pk-h">Canvas LMS<br><small>Rice Univ.</small></div>
+          <div class="pk-arr" style="color:var(--accent)">→</div>
+          <div class="pk-h">SIS + FA Systems<br><small>SMCCD</small></div>
+          <div class="pk-arr" style="color:var(--accent)">→</div>
+          <div class="pk-h center">Henry Fan</div>
+          <div class="pk-arr" style="color:var(--accent)">←</div>
+          <div class="pk-h">API + Ticketing<br><small>Faraday / SCC</small></div>
+        </div>
+      </div>
+
+      <div class="pk-copy">
+        <h3>Why the CVC Exchange is harder to support than a typical SaaS platform.</h3>
+        <p>The CVC Exchange isn't one system — it's an API-mediated network connecting 100+ colleges, each with their own SIS configuration, FA rules, Canvas environment, and compliance calendar. A single enrollment failure can cascade: no SIS record means no Canvas access, which means no FA disbursement, which means a student loses their aid.</p>
+        <p><strong>I understand this chain because I've worked at multiple points in it.</strong> At SMCCD I saw what happens downstream when upstream data is wrong. At Rice I saw what Canvas access failures look like to a student who can't get into their course. At SCC Schools I learned how platform bugs propagate differently across institutions with different technical capacity.</p>
+        <p>Supporting the CVC Exchange means understanding the dependencies, not just the tickets. That's the work I'm built for.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE ══ -->
+<section id="experience">
+  <div class="wrap">
+    <p class="s-eyebrow">Career history</p>
+    <h2>Seven years. Five institutions. One through-line.</h2>
+    <p class="s-sub">Each role added a capability this position draws on simultaneously. Here's the honest story of how they connect.</p>
+
+    <div class="tl">
+      <div class="tl-item">
+        <div>
+          <div class="tm-date">Sep 2024 – Oct 2025</div>
+          <div class="tm-org">SMCCD</div>
+          <span class="tm-badge b-a">Most relevant</span>
+        </div>
+        <div>
+          <h3 class="tl-title">Program Services Coordinator</h3>
+          <p class="tl-body">Supported enterprise financial aid and enrollment systems at San Mateo Community College District — the same CCC district family as Foothill-De Anza. Translated state and federal regulatory requirements into documented staff workflows that reduced processing errors. Collaborated with IT to diagnose system discrepancies in user access, workflow routing, and data visibility across SIS-integrated platforms. Participated in pre-deployment testing for system updates, ensuring compliance before go-live. This role is where I developed direct, applied understanding of how SIS data structures drive financial aid outcomes for students.</p>
+          <div class="tl-chips">
+            <span class="t t-hi">CCC Ecosystem</span><span class="t t-hi">FA / Enrollment Systems</span><span class="t t-hi">Title IV Compliance</span><span class="t t-hi">Workflow Documentation</span><span class="t t-md">SIS Integration</span><span class="t t-md">Pre-deployment Testing</span><span class="t t-md">IT Collaboration</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div>
+          <div class="tm-date">Jan 2023 – Aug 2024</div>
+          <div class="tm-org">Faraday Future</div>
+          <span class="tm-badge b-b">Enterprise scale</span>
+        </div>
+        <div>
+          <h3 class="tl-title">IT Support Specialist</h3>
+          <p class="tl-body">Managed Tier 1–2 support at enterprise scale using ServiceNow and Jira under SLA requirements across multiple departments. Administered Active Directory and M365 provisioning and access control. Built internal KB resources that measurably reduced repeat ticket volume by making common resolutions self-service. Ran quarterly ticket analysis in Python to identify root cause patterns — a practice directly applicable to the CVC's multi-college support environment. Collaborated with engineering on system-level incident escalation.</p>
+          <div class="tl-chips">
+            <span class="t t-hi">ServiceNow</span><span class="t t-hi">Jira</span><span class="t t-hi">Tier 1–2 Support</span><span class="t t-hi">SLA Management</span><span class="t t-md">Python Analysis</span><span class="t t-md">Active Directory</span><span class="t t-md">KB Authoring</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div>
+          <div class="tm-date">Apr 2022 – Dec 2022</div>
+          <div class="tm-org">Rice University</div>
+          <span class="tm-badge b-b">Canvas · LMS</span>
+        </div>
+        <div>
+          <h3 class="tl-title">Applications Technician</h3>
+          <p class="tl-body">Provided technical support for Canvas LMS and institutional academic systems serving faculty, staff, and students. Resolved authentication, SSO, and LMS-related issues with detailed incident tracking. Partnered with academic departments on instructional technology deployment — directly parallel to how the CVC-OEI team supports teaching colleges on the CVC Exchange. This is where I developed hands-on Canvas troubleshooting experience with the same LMS the CVC Exchange integrates with across all 115 colleges.</p>
+          <div class="tl-chips">
+            <span class="t t-hi">Canvas LMS</span><span class="t t-hi">SSO / Auth</span><span class="t t-hi">Instructional Tech</span><span class="t t-md">Incident Tracking</span><span class="t t-md">Faculty Support</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div>
+          <div class="tm-date">Jan 2022 – Jan 2024</div>
+          <div class="tm-org">Santa Clara County Schools</div>
+          <span class="tm-badge b-b">Multi-institutional</span>
+        </div>
+        <div>
+          <h3 class="tl-title">IT Technical Systems</h3>
+          <p class="tl-body">Supported digital learning platforms deployed across K–12 partner institutions statewide — operationally analogous to the CVC-OEI's multi-college support model. Analyzed support ticket trends to identify root causes and inform platform improvements. Coordinated with product and engineering teams on bug escalation. Created technical guidance materials for scalable adoption across institutions with widely varying technical capacity — which is exactly the constraint CVC Exchange documentation must navigate across 100+ colleges.</p>
+          <div class="tl-chips">
+            <span class="t t-hi">Multi-Institutional Support</span><span class="t t-hi">Ticket Trend Analysis</span><span class="t t-md">Vendor Coordination</span><span class="t t-md">Scalable Documentation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div>
+          <div class="tm-date">Feb 2017 – Mar 2022</div>
+          <div class="tm-org">Foothill College & SJSU</div>
+          <span class="tm-badge b-b">Foundation</span>
+        </div>
+        <div>
+          <h3 class="tl-title">Curriculum Developer</h3>
+          <p class="tl-body">Designed peer-learning environments for CS fundamentals at Foothill College — the institution that houses the CVC. Applied learning analytics to measure and improve student outcomes. Created training materials and documentation for facilitators working with technical platforms under time pressure. This role is where I developed my model of the end user: a community college student navigating new technology while managing work, family, and financial stress. That model shapes how I write documentation, design triage flows, and prioritize what gets resolved first.</p>
+          <div class="tl-chips">
+            <span class="t t-hi">Foothill College</span><span class="t t-hi">CCC Student Experience</span><span class="t t-md">Learning Analytics</span><span class="t t-md">Technical Training</span><span class="t t-md">Curriculum Design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STACK ══ -->
+<section id="stack">
+  <div class="wrap">
+    <p class="s-eyebrow">Technical skills</p>
+    <h2>What I bring to the tools the JD names.</h2>
+    <p class="s-sub">Mapped directly to the JD's required knowledge areas. Each entry includes where this skill was actually applied, not just learned.</p>
+
+    <div class="sk-grid">
+      <div class="sk">
+        <div class="sk-icon">🐍</div>
+        <h3 class="sk-name">Python</h3>
+        <p class="sk-body">Scripting, data analysis, automation. Quarterly ticket analysis at Faraday; CS coursework and projects. JD-listed language.</p>
+        <div class="sk-bar">Proficient <div class="bar"><div class="fill f72"></div></div></div>
+      </div>
+      <div class="sk">
+        <div class="sk-icon">🌐</div>
+        <h3 class="sk-name">JavaScript / HTML / CSS</h3>
+        <p class="sk-body">Web application logic and front-end development. CS degree foundation, applied project work. JD-listed languages.</p>
+        <div class="sk-bar">Proficient <div class="bar"><div class="fill f72"></div></div></div>
+      </div>
+      <div class="sk">
+        <div class="sk-icon">🗄️</div>
+        <h3 class="sk-name">SQL / PL/SQL / Oracle DB</h3>
+        <p class="sk-body">Data querying, validation, relational database operations. CS coursework + data workflow support in FA/enrollment environments. JD-listed.</p>
+        <div class="sk-bar">Working knowledge <div class="bar"><div class="fill f60"></div></div></div>
+      </div>
+      <div class="sk">
+        <div class="sk-icon">🐧</div>
+        <h3 class="sk-name">Linux / Bash</h3>
+        <p class="sk-body">Linux OS fundamentals, Bash scripting for automation and data processing. CS core curriculum. JD-listed knowledge area.</p>
+        <div class="sk-bar">Proficient <div class="bar"><div class="fill f72"></div></div></div>
+      </div>
+      <div class="sk">
+        <div class="sk-icon">🔌</div>
+        <h3 class="sk-name">REST APIs & Integrations</h3>
+        <p class="sk-body">Integration failure troubleshooting, API log analysis, JSON validation. Applied at SMCCD and SCC Schools on cross-platform data exchange.</p>
+        <div class="sk-bar">Working knowledge <div class="bar"><div class="fill f60"></div></div></div>
+      </div>
+      <div class="sk">
+        <div class="sk-icon">🏫</div>
+        <h3 class="sk-name">Canvas LMS</h3>
+        <p class="sk-body">Admin support, SSO and authentication issues, faculty and student troubleshooting. Rice University. Same platform integrated across all CVC Exchange colleges.</p>
+        <div class="sk-bar">Hands-on <div class="bar"><div class="fill f72"></div></div></div>
+      </div>
+      <div class="sk">
+        <div class="sk-icon">📋</div>
+        <h3 class="sk-name">SIS Platforms (Banner / PeopleSoft / Colleague)</h3>
+        <p class="sk-body">Daily support work inside FA and enrollment systems on these platforms at SMCCD — data validation, integration troubleshooting, Title IV compliance workflows.</p>
+        <div class="sk-bar">Working knowledge <div class="bar"><div class="fill f72"></div></div></div>
+      </div>
+      <div class="sk">
+        <div class="sk-icon">🎫</div>
+        <h3 class="sk-name">ServiceNow / Jira</h3>
+        <p class="sk-body">Enterprise ticketing, SLA management, incident tracking, escalation logic, KB authoring. Primary tools at Faraday Future, daily use.</p>
+        <div class="sk-bar">Expert <div class="bar"><div class="fill f90"></div></div></div>
+      </div>
+      <div class="sk">
+        <div class="sk-icon">🔐</div>
+        <h3 class="sk-name">Active Directory / M365 / SSO</h3>
+        <p class="sk-body">User provisioning, access control, identity management, security compliance. Daily use at Faraday and Rice University.</p>
+        <div class="sk-bar">Proficient <div class="bar"><div class="fill f80"></div></div></div>
+      </div>
+      <div class="sk">
+        <div class="sk-icon">💬</div>
+        <h3 class="sk-name">Remote Collaboration</h3>
+        <p class="sk-body">Zoom, Slack, G-Suite, Office 365. Every role since 2022 fully distributed. Async documentation and communication are default for me, not an adjustment.</p>
+        <div class="sk-bar">Expert <div class="bar"><div class="fill f90"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CLOSE ══ -->
+<section id="close">
+  <p class="s-eyebrow">Let's connect</p>
+  <h2>The context I bring isn't on a résumé.</h2>
+  <p class="close-p">
+    Seven years of working inside and around California Community College systems. A CS degree built on top of a Foothill education. A direct, personal stake in the equity mission the CVC was created to advance. <strong>I'd welcome the conversation about what that means for your team.</strong>
+  </p>
+  <div class="clinks">
+    <a href="mailto:fansofhenry@gmail.com" class="cl cl-w">fansofhenry@gmail.com</a>
+    <a href="https://linkedin.com/in/fansofhenry" target="_blank" class="cl cl-g">linkedin.com/in/fansofhenry</a>
+    <a href="tel:6508235997" class="cl cl-g">650 823 5997</a>
+  </div>
+</section>
+
+<footer>
+  <p>© Henry Fan · Los Altos Hills, CA · fansofhenry@gmail.com</p>
+</footer>
+
+<script>
+  // Timeline reveal on scroll
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('show'), i * 65);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.tl-item').forEach(el => obs.observe(el));
+
+  // Nav active state
+  const navLinks = document.querySelectorAll('nav a');
+  const sections = document.querySelectorAll('section[id]');
+  const navObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('on'));
+        const match = document.querySelector(`nav a[href="#${e.target.id}"]`);
+        if (match) match.classList.add('on');
+      }
+    });
+  }, { rootMargin: '-35% 0px -55% 0px' });
+  sections.forEach(s => navObs.observe(s));
+</script>
+</body>
+</html>
