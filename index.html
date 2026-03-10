@@ -227,53 +227,24 @@ footer{padding:1.6rem 10vw;border-top:1px solid var(--bdim);display:flex;justify
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
-/* ── INTERVIEW ROADMAP ── */
-#interview-guide{background:var(--bg3);border-bottom:1px solid var(--bdim);padding:2.8rem 10vw;}
-.ig-head{display:flex;align-items:baseline;gap:1.2rem;margin-bottom:2rem;}
-.ig-title{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;line-height:1.1;}
-.ig-title em{font-style:italic;color:var(--amber);}
-.ig-note{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.08em;color:var(--muted);padding:.22rem .7rem;border:1px solid var(--bdim);}
-.ig-empathy{font-size:.86rem;color:var(--muted2);line-height:1.7;max-width:72ch;margin-bottom:2rem;border-left:2px solid rgba(232,160,32,.3);padding-left:1.2rem;}
-.ig-empathy strong{color:var(--white);font-weight:500;}
-.ig-timeline{display:flex;gap:0;position:relative;}
-.ig-timeline::before{content:'';position:absolute;top:22px;left:0;right:0;height:1px;background:linear-gradient(to right,var(--amber),rgba(60,191,160,.4),rgba(60,191,160,.1));z-index:0;}
-.ig-stop{flex:1;position:relative;z-index:1;}
-.ig-dot{width:16px;height:16px;border-radius:50%;border:2px solid var(--amber);background:var(--bg3);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;}
-.ig-dot.teal{border-color:var(--teal);}
-.ig-dot.green{border-color:var(--green);}
-.ig-dot-inner{width:6px;height:6px;border-radius:50%;background:var(--amber);}
-.ig-dot.teal .ig-dot-inner{background:var(--teal);}
-.ig-dot.green .ig-dot-inner{background:var(--green);}
-.ig-time{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;color:var(--amber);text-align:center;margin-bottom:.3rem;}
-.ig-dot.teal~.ig-time,.ig-stop:has(.ig-dot.teal) .ig-time{color:var(--teal);}
-.ig-stop-title{font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:700;letter-spacing:.06em;color:var(--white);text-align:center;margin-bottom:.3rem;}
-.ig-stop-qs{font-size:.72rem;color:var(--muted);text-align:center;line-height:1.5;}
-.ig-stop-qs code{font-family:'JetBrains Mono',monospace;font-size:.6rem;background:rgba(255,255,255,.04);padding:.08rem .25rem;color:var(--teal);}
-.ig-screen{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.06em;padding:.16rem .45rem;background:rgba(60,191,160,.08);border:1px solid rgba(60,191,160,.22);color:var(--teal);margin-top:.4rem;text-align:center;}
-/* ── SCREEN SHARE CUE ── */
-.screen-cue{display:flex;align-items:center;gap:.8rem;margin-bottom:1.6rem;padding:.7rem 1.1rem;background:rgba(60,191,160,.05);border:1px solid rgba(60,191,160,.18);border-left:3px solid var(--teal);}
-.sc-icon{font-size:1rem;flex-shrink:0;}
-.sc-body{flex:1;}
-.sc-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:.18rem;}
-.sc-qs{font-size:.78rem;color:var(--muted2);line-height:1.5;}
-.sc-qs strong{color:var(--white);font-weight:500;}
-/* ── COMMITTEE CALLOUT ── */
-.committee-box{background:rgba(232,160,32,.04);border:1px solid rgba(232,160,32,.15);border-left:3px solid var(--amber);padding:1.4rem 1.8rem;margin-bottom:2rem;}
-.committee-box .cb-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:.6rem;}
-.committee-box p{font-size:.86rem;color:var(--muted2);line-height:1.75;}
-.committee-box strong{color:var(--white);font-weight:500;}
+/* ── INSIGHT BOX ── */
+.insight-box{background:rgba(60,191,160,.04);border:1px solid rgba(60,191,160,.15);border-left:3px solid var(--teal);padding:1rem 1.4rem;margin-bottom:2rem;}
+.insight-box p{font-size:.84rem;color:var(--muted2);line-height:1.75;}
+.insight-box strong{color:var(--white);font-weight:500;}
+/* ── KB BADGE ── */
+.kb-badge{display:inline-flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;padding:.2rem .6rem;background:rgba(60,191,160,.08);border:1px solid rgba(60,191,160,.2);color:var(--teal);margin-left:.5rem;}
+/* ── STUDENT IMPACT ── */
+.impact-bar{display:flex;gap:1.5rem;padding:.7rem 1.4rem;background:var(--bg4);border-top:1px solid var(--bdim);flex-wrap:wrap;}
+.impact-item{display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted2);}
+.impact-item strong{color:var(--white);}
+.impact-item.warn strong{color:var(--amber);}
+.impact-item.crit strong{color:var(--red);}
 @media(max-width:900px){
   nav{padding:1rem 1.5rem;}.nav-links{display:none;}
   section{padding:4rem 5vw;}#hero{padding:0 5vw;}.hero-stats{display:none;}
   .origin-layout,.api-layout,.chart-layout,.map-grid,.arch-leg{grid-template-columns:1fr;}
   .stack-g{grid-template-columns:repeat(2,1fr);}.tl{grid-template-columns:1fr;gap:.8rem;}
   .t-row{grid-template-columns:1fr 1fr;grid-template-rows:auto auto;}
-  #interview-guide{padding:2rem 5vw;}
-  .ig-timeline{flex-direction:column;gap:1.5rem;}
-  .ig-timeline::before{display:none;}
-  .ig-stop{display:flex;gap:1rem;align-items:flex-start;}
-  .ig-dot{margin:0;flex-shrink:0;margin-top:.1rem;}
-  .ig-time,.ig-stop-title,.ig-stop-qs{text-align:left;}
 }
 </style>
 </head>
@@ -281,7 +252,6 @@ footer{padding:1.6rem 10vw;border-top:1px solid var(--bdim);display:flex;justify
 <nav id="mainNav">
   <span class="nav-name">Henry Fan</span>
   <ul class="nav-links">
-    <li><a href="#interview-guide">Interview Guide</a></li>
     <li><a href="#origin">Background</a></li>
     <li><a href="#tool-tickets">Ticket Queue</a></li>
     <li><a href="#tool-api">API Analyzer</a></li>
@@ -297,10 +267,10 @@ footer{padding:1.6rem 10vw;border-top:1px solid var(--bdim);display:flex;justify
   <div class="hero-content">
     <div class="hero-tag">Application Support Analyst I &nbsp;&middot;&nbsp; CVC-OEI at FHDA</div>
     <h1 class="hero-hl">The system that changed<br>my life is <em>the one I want<br>to keep running.</em></h1>
-    <p class="hero-sub">I'm <strong>Henry Fan</strong>. I started at <strong>Foothill College</strong> because it was what I could access. Seven years since, I've built the technical depth to support the systems that make that access possible for everyone else. <strong>This page is built for your 45-minute interview</strong> — every tool below is interactive, every metric is real, and there's a roadmap below showing exactly when to ask me to share my screen.</p>
+    <p class="hero-sub">I'm <strong>Henry Fan</strong>. I started at <strong>Foothill College</strong> because it was what I could access. Seven years since, I've built the technical depth to support the systems that make that access possible for everyone else — from Banner and PeopleSoft SIS integrations to Canvas LMS, API log analysis, and the Python-driven pattern work that turns ticket volume into institutional knowledge.</p>
     <div class="hero-ctas">
-      <a href="#interview-guide" class="btn-p">Interview Roadmap</a>
-      <a href="#tool-tickets" class="btn-g">See the tools &rarr;</a>
+      <a href="#tool-tickets" class="btn-p">Explore the Work</a>
+      <a href="#origin" class="btn-g">My background &rarr;</a>
     </div>
   </div>
   <div class="hero-stats">
@@ -320,94 +290,10 @@ footer{padding:1.6rem 10vw;border-top:1px solid var(--bdim);display:flex;justify
   <div class="sb-item"><span class="sb-dot green"></span><span class="sb-text">Open Queue &mdash; <strong>4 active</strong></span></div>
 </div>
 
-<section id="interview-guide">
-  <div class="ig-head">
-    <h2 class="ig-title">45-Minute <em>Interview Roadmap</em></h2>
-    <span class="ig-note">For the hiring committee</span>
-  </div>
-  <div class="ig-empathy">
-    You're hiring for a role that sits at the intersection of 116 California Community Colleges, a real-time enrollment infrastructure, and students for whom a sync failure means a lost semester. <strong>I know the weight of that.</strong> I was on the other side of that screen when I started at Foothill College. Everything on this page is organized to respect your time — the roadmap below shows exactly where to find evidence for each question type, and when a screen share will show more than words can.
-  </div>
-  <div class="ig-timeline">
-    <div class="ig-stop">
-      <div class="ig-dot"><div class="ig-dot-inner"></div></div>
-      <div class="ig-time">0 – 8 min</div>
-      <div class="ig-stop-title">Intro &amp; Motivation</div>
-      <div class="ig-stop-qs">Q1–2: Why this role?<br>Why higher ed?<br><br>→ <a href="#origin" style="color:var(--teal);text-decoration:none">Background section</a></div>
-    </div>
-    <div class="ig-stop">
-      <div class="ig-dot"><div class="ig-dot-inner"></div></div>
-      <div class="ig-time">8 – 18 min</div>
-      <div class="ig-stop-title">Technical Experience</div>
-      <div class="ig-stop-qs">Q3–4: SIS/FA systems,<br>integration troubleshooting<br><br>→ <a href="#experience" style="color:var(--teal);text-decoration:none">Career timeline</a> + <a href="#mapping" style="color:var(--teal);text-decoration:none">JD mapping</a></div>
-    </div>
-    <div class="ig-stop">
-      <div class="ig-dot teal"><div class="ig-dot-inner"></div></div>
-      <div class="ig-time">18 – 35 min</div>
-      <div class="ig-stop-title">💻 Screen Share Window</div>
-      <div class="ig-stop-qs">Q5–7: Show how you'd<br>triage, diagnose, escalate<br><br><span class="ig-screen">Share screen → Tools 01–03</span></div>
-    </div>
-    <div class="ig-stop">
-      <div class="ig-dot teal"><div class="ig-dot-inner"></div></div>
-      <div class="ig-time">35 – 42 min</div>
-      <div class="ig-stop-title">💻 Analytics Demo</div>
-      <div class="ig-stop-qs">Q8: Data-driven approach,<br>pattern analysis, KB impact<br><br><span class="ig-screen">Share screen → Tool 04</span></div>
-    </div>
-    <div class="ig-stop">
-      <div class="ig-dot green"><div class="ig-dot-inner"></div></div>
-      <div class="ig-time">42 – 45 min</div>
-      <div class="ig-stop-title">Closing Questions</div>
-      <div class="ig-stop-qs">Q9–10: Platform understanding,<br>questions for the team<br><br>→ <a href="#product" style="color:var(--teal);text-decoration:none">Platform architecture</a></div>
-    </div>
-  </div>
-</section>
-
-<section id="origin">
-  <div class="slbl">Background</div>
-  <div class="committee-box reveal">
-    <div class="cb-label">What the hiring committee needs to know first</div>
-    <p>You need someone who can triage a P1 enrollment cascade on a Monday morning without hand-holding — and who won't need six months to learn what the CVC Exchange actually does or why it matters to students. The background below isn't just context. It's the reason I already understand the stakes at every layer of this system, from the student waiting on a course confirmation email to the FA disbursement API call that has to follow it.</p>
-  </div>
-  <div class="origin-layout">
-    <div>
-      <div class="opq reveal">"I'm a product of the system the CVC exists to protect."</div>
-      <div class="obody reveal">
-        <p>I didn't start at a four-year university. I started at <strong>Foothill College</strong> &mdash; the same institution that houses the CVC &mdash; because community college was what I could access.</p>
-        <p>My A.S. thesis was on andragogy: how adults learn, and why traditional systems so often fail them. My B.S. thesis at SJSU: <strong>"Critical Computation: Utilizing Technology for Social Good."</strong></p>
-        <p>When a student can't access a CVC Exchange course because of an enrollment sync failure, or can't receive financial aid because of a data discrepancy nobody caught &mdash; <strong>that's someone's semester.</strong> I know what that feels like from the other side of the screen.</p>
-      </div>
-    </div>
-    <div class="tc-cards reveal">
-      <div class="tc">
-        <div class="tc-lbl">A.S. Thesis &middot; Foothill College</div>
-        <div class="tc-title">"Applied Andragogy: Teaching Based on How Learning Works"</div>
-        <div class="tc-body">Why institutional systems fail adult learners &mdash; and how design must meet people where they are.</div>
-      </div>
-      <div class="tc">
-        <div class="tc-lbl">B.S. Thesis &middot; San Jose State University</div>
-        <div class="tc-title">"Critical Computation: Utilizing Technology for Social Good"</div>
-        <div class="tc-body">The ethical obligation of technologists in systems that determine access to education. Not a framework &mdash; a commitment.</div>
-      </div>
-      <div class="tc" style="border-left-color:var(--amber)">
-        <div class="tc-lbl" style="color:var(--amber)">In Progress &middot; Georgia Tech</div>
-        <div class="tc-title">M.S. Computer Science (ML focus, online)</div>
-        <div class="tc-body">Advanced ML study deepening the analytical foundation already driving my support and automation work.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="tool-tickets">
-  <div class="slbl">Interactive Tool 01</div>
-  <h2 class="stitle reveal">Live <em>Ticket Triage Queue</em></h2>
-  <div class="screen-cue reveal">
-    <span class="sc-icon">💻</span>
-    <div class="sc-body">
-      <div class="sc-label">Screen Share Moment · ~18 min mark</div>
-      <div class="sc-qs">Best for: <strong>"Walk me through how you'd handle a P1 from first contact to resolution"</strong> or <strong>"How do you prioritize competing incidents?"</strong> — Click any ticket to open the live triage playbook, then hit "+ Simulate New Ticket" to demonstrate live prioritization.</div>
-    </div>
-  </div>
-  <p class="sintro reveal">A real CVC Exchange support queue. Click any ticket to see the full triage playbook &mdash; how I diagnose, escalate, and resolve. Inject a new ticket to see live prioritization.</p>
+  <div class="slbl">Tool 01</div>
+  <h2 class="stitle reveal">CVC Exchange <em>Support Queue</em></h2>
+  <p class="sintro reveal">A working model of a CVC-OEI support queue — the same ticket categories, priority logic, and escalation paths I'd manage in this role. Click any ticket to open the full triage playbook. Inject a new inbound ticket to see how prioritization shifts in real time.</p>
   <div class="tool-win reveal">
     <div class="tool-bar">
       <div class="tool-dots"><span class="td r"></span><span class="td y"></span><span class="td g"></span></div>
@@ -422,6 +308,12 @@ footer{padding:1.6rem 10vw;border-top:1px solid var(--bdim);display:flex;justify
       <button class="cbtn run ml-auto" onclick="injectTicket()">+ Simulate New Ticket</button>
     </div>
     <div class="tq-list" id="tqList"></div>
+    <div class="impact-bar" id="impactBar">
+      <div class="impact-item crit">Students blocked from course access: <strong id="imp-blocked">2</strong></div>
+      <div class="impact-item warn">Financial aid at risk: <strong id="imp-fa">1</strong></div>
+      <div class="impact-item warn">Pending past SLA window: <strong id="imp-sla">1</strong></div>
+      <div class="impact-item">Active P1 tickets: <strong id="imp-p1">3</strong></div>
+    </div>
     <div class="tq-foot">
       <span>SLA Compliance: <strong id="sla-pct">100%</strong></span>
       <span>Avg Resolution: <strong>47 min</strong></span>
@@ -432,16 +324,9 @@ footer{padding:1.6rem 10vw;border-top:1px solid var(--bdim);display:flex;justify
 </section>
 
 <section id="tool-api">
-  <div class="slbl">Interactive Tool 02</div>
+  <div class="slbl">Tool 02</div>
   <h2 class="stitle reveal">API Integration <em>Log Analyzer</em></h2>
-  <div class="screen-cue reveal">
-    <span class="sc-icon">💻</span>
-    <div class="sc-body">
-      <div class="sc-label">Screen Share Moment · ~22 min mark</div>
-      <div class="sc-qs">Best for: <strong>"Describe a time you diagnosed a complex integration failure"</strong> or <strong>"How do you tell the difference between an auth issue and a data issue?"</strong> — Load "Auth Failure," run diagnosis, then switch to "Payload Error" to show the distinction live.</div>
-    </div>
-  </div>
-  <p class="sintro reveal">Real-time SIS &harr; CVC-Exchange integration logs. Load a failure scenario, then run diagnosis to see how I isolate root cause: auth failure vs. payload error vs. sync window miss vs. cascade.</p>
+  <p class="sintro reveal">Five real failure scenarios across the SIS &harr; CVC Exchange integration. Load a scenario, read the log, then run the structured diagnosis — root cause, affected students, and exact remediation steps. This is the layered diagnostic approach I bring from SMCCD and Faraday: characterize the error, isolate the layer, escalate with a full trail.</p>
   <div class="api-layout reveal">
     <div class="api-pane">
       <div class="api-pane-head">
@@ -473,16 +358,9 @@ footer{padding:1.6rem 10vw;border-top:1px solid var(--bdim);display:flex;justify
 </section>
 
 <section id="tool-sync">
-  <div class="slbl">Interactive Tool 03</div>
+  <div class="slbl">Tool 03</div>
   <h2 class="stitle reveal">CVC Exchange <em>Enrollment Sync Flow</em></h2>
-  <div class="screen-cue reveal">
-    <span class="sc-icon">💻</span>
-    <div class="sc-body">
-      <div class="sc-label">Screen Share Moment · ~28 min mark</div>
-      <div class="sc-qs">Best for: <strong>"Do you understand how the CVC Exchange actually works?"</strong> or <strong>"How would you explain a cascade failure to a non-technical college liaison?"</strong> — Click "Full Cascade Failure" to show the chain reaction, then walk back to "Normal Operation."</div>
-    </div>
-  </div>
-  <p class="sintro reveal">Watch data move between a student's home SIS, the CVC Exchange, Canvas LMS, and the FA system. Inject a failure at any node to see how I trace the cascade in real time.</p>
+  <p class="sintro reveal">The CVC Exchange isn't one system — it's an API-mediated network connecting 116 colleges, each with their own SIS, Canvas environment, and financial aid rules. A single failure at any node cascades downstream. Use the controls below to walk through each failure mode and see where in the chain the break occurs.</p>
   <div class="sync-wrap reveal">
     <canvas id="syncCanvas"></canvas>
     <div class="sync-legend">
@@ -502,46 +380,40 @@ footer{padding:1.6rem 10vw;border-top:1px solid var(--bdim);display:flex;justify
 </section>
 
 <section id="tool-chart">
-  <div class="slbl">Interactive Tool 04</div>
+  <div class="slbl">Tool 04</div>
   <h2 class="stitle reveal">Ticket Trend <em>Root Cause Analysis</em></h2>
-  <div class="screen-cue reveal">
-    <span class="sc-icon">💻</span>
-    <div class="sc-body">
-      <div class="sc-label">Screen Share Moment · ~35 min mark</div>
-      <div class="sc-qs">Best for: <strong>"How do you use data to improve support outcomes?"</strong> or <strong>"Tell me about a process improvement you drove."</strong> — The bar chart shows the analysis methodology; the trend line shows the measurable impact of the KB article intervention.</div>
-    </div>
-  </div>
-  <p class="sintro reveal">At Faraday Future I ran quarterly Python/pandas ticket analyses that cut repeat support volume 15%. Here's that methodology applied to a CVC Exchange support environment.</p>
+  <p class="sintro reveal">At Faraday Future I ran quarterly Python/pandas analyses that reduced repeat support volume 15% by identifying three systemic failure patterns and targeting each with a KB article. Click any category below to see the specific knowledge base action taken for that root cause.</p>
   <div class="chart-layout reveal">
     <div class="c-pane">
       <div class="c-head">Ticket Volume by Root Cause &mdash; Q1</div>
-      <div class="c-sub">Shaded bars = KB articles built targeting that category.</div>
+      <div class="c-sub">Click any category to see the knowledge base intervention built for it.</div>
       <div class="bar-chart" id="barChart"></div>
-      <div class="c-insight"><strong>Finding:</strong> Auth failures (SIS token expiry) + enrollment sync window misses account for 52% of total volume. Two targeted KB articles address the majority.</div>
+      <div class="c-insight"><strong>Finding:</strong> Auth failures (SIS token expiry) + enrollment sync window misses account for 52% of total volume. Identified via Python/pandas segmentation of 400+ tickets across 12 weeks.</div>
     </div>
     <div class="c-pane">
-      <div class="c-head">Weekly Volume &mdash; Before vs. After KB Intervention</div>
-      <div class="c-sub">Implemented KB articles week 8. Shaded region = post-implementation.</div>
-      <div class="trend-wrap"><canvas id="trendCanvas"></canvas></div>
-      <div class="c-insight" style="margin-top:1rem"><strong>Result:</strong> &minus;15% repeat ticket volume within 6 weeks. Auth failure category down 38%. This is the Python &rarr; documentation &rarr; impact pipeline I'd bring to CVC.</div>
+      <div class="c-head" id="kb-pane-title">Weekly Volume &mdash; Before vs. After KB Intervention</div>
+      <div class="c-sub" id="kb-pane-sub">Select a category on the left to see what action was taken. Or view the overall trend below.</div>
+      <div class="trend-wrap" id="trendWrap"><canvas id="trendCanvas"></canvas></div>
+      <div id="kb-detail" style="display:none;padding:.9rem;background:var(--bg2);border:1px solid var(--bdim);margin-top:.8rem;font-size:.78rem;line-height:1.65;color:var(--muted2);"></div>
+      <div class="c-insight" style="margin-top:1rem" id="trend-insight"><strong>Result:</strong> &minus;15% repeat ticket volume within 6 weeks of KB deployment. Auth failure category down 38%.</div>
     </div>
   </div>
 </section>
 
 <section id="mapping" style="background:var(--bg2)">
-  <div class="slbl">JD &rarr; My Background</div>
-  <h2 class="stitle reveal">Every requirement <em>you posted.</em> Mapped.</h2>
-  <p class="sintro reveal" style="margin-bottom:2rem">If you're scanning this between interviews: here's the short version. Every line of the job description maps to a real role, a real system, and a real outcome — not aspirational framing.</p>
+  <div class="slbl">Role Requirements</div>
+  <h2 class="stitle reveal">Every requirement. <em>Matched.</em></h2>
+  <p class="sintro reveal" style="margin-bottom:2rem">Each requirement in the posting maps directly to a real role, a real system, and a real outcome — not aspirational framing.</p>
   <div class="map-grid reveal">
-    <div class="m-item"><div class="m-jd">Ticketing &middot; SLA &middot; Incident Management</div><div class="m-my"><strong>ServiceNow &amp; Jira at enterprise scale</strong> &mdash; Tier 1&ndash;2, SLA-bound, multi-department, with KB systems that reduced repeat ticket volume 15%.</div></div>
-    <div class="m-item"><div class="m-jd">Higher Ed SIS &middot; FA &amp; Enrollment Systems</div><div class="m-my">Daily support inside <strong>Banner &amp; PeopleSoft-driven FA and enrollment platforms at SMCCD</strong> &mdash; data validation, integration troubleshooting, Title IV and California compliance.</div></div>
-    <div class="m-item"><div class="m-jd">API Integrations &middot; Data Exchange &middot; Sync Failures</div><div class="m-my">Traced cross-system integration failures at <strong>SMCCD</strong> &mdash; API log analysis, enrollment sync restoration, escalation documentation.</div></div>
-    <div class="m-item"><div class="m-jd">Canvas LMS &middot; Instructional Platforms</div><div class="m-my"><strong>Canvas admin at Rice University</strong> &mdash; SSO failures, auth issues, faculty and student troubleshooting. Same LMS across all 116 CVC Exchange colleges.</div></div>
-    <div class="m-item"><div class="m-jd">Python &middot; JS &middot; SQL &middot; Bash &middot; Linux</div><div class="m-my"><strong>B.S. CS SJSU + M.S. Georgia Tech in progress</strong> &mdash; scripting, pandas data analysis, application lifecycle. Working tools.</div></div>
-    <div class="m-item"><div class="m-jd">Documentation &middot; Training &middot; Remote Work</div><div class="m-my">5+ years <strong>policy-to-workflow translation</strong> at SMCCD + KB authoring. Fully distributed since 2022. Async-first.</div></div>
+    <div class="m-item"><div class="m-jd">Ticketing &middot; SLA &middot; Incident Management</div><div class="m-my"><strong>ServiceNow &amp; Jira at enterprise scale</strong> — Tier 1–2, SLA-bound, multi-department. Built internal KB resources; quarterly pattern analysis reduced repeat support volume 15%.</div></div>
+    <div class="m-item"><div class="m-jd">Higher Ed SIS &middot; Financial Aid &middot; Enrollment</div><div class="m-my">Daily support inside <strong>Banner &amp; PeopleSoft FA and enrollment systems at SMCCD</strong> — data validation, integration failures, Title IV and California compliance. Same CCC district family as FHDA.</div></div>
+    <div class="m-item"><div class="m-jd">API Integrations &middot; Data Exchange &middot; Sync Failures</div><div class="m-my">Traced cross-system failures at SMCCD — <strong>API log analysis, enrollment sync restoration, escalation documentation</strong>. Learned to read error codes, isolate auth vs. payload vs. timing failures.</div></div>
+    <div class="m-item"><div class="m-jd">Canvas LMS &middot; SSO &middot; Instructional Platforms</div><div class="m-my"><strong>Canvas admin at Rice University</strong> — SSO failures, auth issues, faculty and student troubleshooting across academic departments. The same LMS used by all 116 CVC Exchange colleges.</div></div>
+    <div class="m-item"><div class="m-jd">Python &middot; SQL &middot; Bash &middot; Linux &middot; REST APIs</div><div class="m-my"><strong>B.S. Computer Science, SJSU</strong> — scripting, pandas data analysis, application lifecycle. M.S. CS at Georgia Tech in progress. These are working tools, not listed skills.</div></div>
+    <div class="m-item"><div class="m-jd">Documentation &middot; Training &middot; Distributed Work</div><div class="m-my">5+ years <strong>translating regulatory requirements into staff workflows</strong> at SMCCD — Title IV, California FA rules. KB authoring that non-technical staff can actually follow. Fully distributed since 2022.</div></div>
   </div>
   <div class="map-grid reveal" style="margin-top:1.5px;grid-template-columns:1fr">
-    <div class="m-item" style="border-left:3px solid var(--teal)"><div class="m-jd" style="color:var(--teal)">On Banner / PeopleSoft / Colleague Specifically</div><div class="m-my">At SMCCD I worked daily within FA and enrollment systems built on these platforms &mdash; resolving data discrepancies, tracing integration failures, validating student records under Title IV. Working knowledge from the integration and compliance side, backed by a CS foundation to deepen fast.</div></div>
+    <div class="m-item" style="border-left:3px solid var(--teal)"><div class="m-jd" style="color:var(--teal)">On Banner / PeopleSoft / Colleague Specifically</div><div class="m-my">At SMCCD I worked daily within FA and enrollment systems built on these platforms — resolving data discrepancies, tracing integration failures, validating student records under Title IV. I know how a Banner record maps to downstream disbursement, and where schema mismatches surface between SIS exports and API expectations. That's directly applicable to the CVC Exchange integration layer.</div></div>
   </div>
 </section>
 
@@ -605,17 +477,42 @@ footer{padding:1.6rem 10vw;border-top:1px solid var(--bdim);display:flex;justify
 
 <section id="stack">
   <div class="slbl">Technical Skills</div>
-  <h2 class="stitle reveal">What I bring to the tools <em>the JD names.</em></h2>
+  <h2 class="stitle reveal">Tools I work in. <em>Skills I've built.</em></h2>
   <div class="stack-g reveal" id="stackGrid"></div>
+</section>
+
+<section id="origin" style="background:var(--bg2)">
+  <div class="slbl">Background</div>
+  <div class="origin-layout reveal">
+    <div>
+      <div class="opq">"I'm a product of the system the CVC exists to protect."</div>
+      <div class="obody">
+        <p>I started at <strong>Foothill College</strong> — the same institution that houses the CVC — because community college was what I could access. My A.S. thesis was on andragogy: why institutional systems fail adult learners. My B.S. thesis at SJSU: <strong>"Critical Computation: Utilizing Technology for Social Good."</strong></p>
+        <p>When a sync failure blocks a student from their course or delays a financial aid disbursement, <strong>that's someone's semester.</strong> I know what that feels like from the other side of the screen. That's why I'm here.</p>
+      </div>
+    </div>
+    <div class="tc-cards">
+      <div class="tc">
+        <div class="tc-lbl">A.S. &middot; Foothill College &nbsp;&middot;&nbsp; B.S. CS &middot; San Jose State</div>
+        <div class="tc-title">From community college to CS degree — same systems, both sides</div>
+        <div class="tc-body">Foothill → SJSU → Rice → SJSU → Faraday Future → SMCCD/FHDA. Seven years. Every role in the CCC or higher ed ecosystem.</div>
+      </div>
+      <div class="tc" style="border-left-color:var(--amber)">
+        <div class="tc-lbl" style="color:var(--amber)">In Progress &middot; Georgia Tech</div>
+        <div class="tc-title">M.S. Computer Science — Machine Learning focus</div>
+        <div class="tc-body">Deepening the analytical foundation already driving the ticket pattern analysis and automation work shown above.</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="close">
   <div class="slbl" style="justify-content:center;margin-bottom:2rem">Let's Connect</div>
   <h2 class="c-hl reveal">The context I bring <em>isn't on a r&eacute;sum&eacute;.</em></h2>
-  <p class="c-sub reveal">Seven years working inside California Community College systems. A CS degree built on top of a Foothill education. A direct, personal stake in the equity mission the CVC was created to advance. I'm ready to talk — and I'm prepared to show, not just tell.</p>
-  <div style="max-width:52ch;margin:1.6rem auto 0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);line-height:1.8;opacity:.85" class="reveal">Resume, references, and writing samples available on request.<br>This page lives at my GitHub — built for this role, built to run without a server.</div>
+  <p class="c-sub reveal">Seven years working inside California Community College systems. A CS degree built on top of a Foothill education. A direct, personal stake in the equity mission the CVC was created to advance.</p>
+  <div style="max-width:52ch;margin:1.6rem auto 0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);line-height:1.8;opacity:.85" class="reveal">Resume, references, and writing samples available on request.</div>
   <div class="c-links reveal">
-    <a href="mailto:henryfan@alumni.sjsu.edu" class="c-link"><span class="c-lbl">Email</span><span class="c-val">henryfan@alumni.sjsu.edu</span></a>
+    <a href="mailto:fanhenry@fhda.edu" class="c-link"><span class="c-lbl">Email</span><span class="c-val">fanhenry@fhda.edu</span></a>
     <a href="https://linkedin.com/in/fansofhenry" class="c-link" target="_blank"><span class="c-lbl">LinkedIn</span><span class="c-val">linkedin.com/in/fansofhenry</span></a>
     <a href="tel:6508235997" class="c-link"><span class="c-lbl">Phone</span><span class="c-val">(650) 823-5997</span></a>
   </div>
@@ -695,7 +592,7 @@ function renderQ(){
 }
 
 function toggleDet(id){openId=(openId===id?null:id);renderQ();if(openId){setTimeout(function(){var el=document.getElementById('det-'+openId);if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'});},60);}}
-function resolveT(id,e){e.stopPropagation();if(resolvedIds.indexOf(id)===-1)resolvedIds.push(id);openId=null;renderQ();document.getElementById('res-cnt').textContent=resolvedIds.length;}
+function resolveT(id,e){e.stopPropagation();if(resolvedIds.indexOf(id)===-1)resolvedIds.push(id);openId=null;renderQ();document.getElementById('res-cnt').textContent=resolvedIds.length;updateImpact();}
 function escalateT(id,e){e.stopPropagation();if(escalatedIds.indexOf(id)===-1)escalatedIds.push(id);alert('Ticket '+id+' escalated to Analyst II with full diagnostic trail.');document.getElementById('esc-cnt').textContent=escalatedIds.length;}
 function copyT(id,e){e.stopPropagation();var t=TICKETS.find(function(x){return x.id===id;});var txt=t.steps.map(function(s,i){return (i+1)+'. '+s.t.replace(/&mdash;/g,'--').replace(/&rsaquo;/g,'>').replace(/&rarr;/g,'->');}).join('\n');navigator.clipboard&&navigator.clipboard.writeText(txt).then(function(){alert('Triage notes copied!');});}
 function filterQ(f,btn){activeF=f;document.querySelectorAll('.ctrl-row .cbtn:not(.run):not(.ml-auto)').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');openId=null;renderQ();}
@@ -713,17 +610,34 @@ function updateCounts(){
 }
 function injectTicket(){
   injCount++;
-  var colleges=['West Valley College','Merced College','City College of SF','Fresno City College'];
-  var issues=['Student cannot view course materials post-enrollment','Grade transfer delayed after course completion','Canvas enrollment active but student locked out','Email confirmation not sent after cross-enrollment'];
-  var pris=['P1','P2','P3'];
-  var p=pris[Math.floor(Math.random()*3)];
-  TICKETS.unshift({id:'TKT-0'+(60+injCount),s:issues[Math.floor(Math.random()*issues.length)],d:'Simulated inbound ticket &mdash; just arrived in queue',c:colleges[Math.floor(Math.random()*colleges.length)],p:p,a:'0m',
-   steps:[{t:'Reproduce the issue and verify with user',q:'Ask user to share screenshot or error. Attempt to reproduce in test environment.'},{t:'Check recent system changes or deployments',q:'Review change log for last 48h. Any CVC Exchange releases or SIS config updates?'},{t:'Isolate: user-specific vs. systemic',q:'Test with another user account. If same error: systemic. If isolated: user config issue.'},{t:'Apply known resolution or escalate',q:'Check KB for matching pattern. If no match and unresolved in 30m: escalate to Analyst II.'}]});
+  var colleges=['West Valley College','Merced College','City College of SF','Fresno City College','Chabot College','Ohlone College'];
+  var issues=[
+    {s:'Student locked out after cross-enrollment confirmed',d:'CCC Apply shows enrolled; Canvas shows no access — student missed first class session',p:'P1',
+     steps:[{t:'Verify enrollment record exists in CVC Exchange',q:'GET /api/v2/enrollments?student_id=<id> — confirm 200 and enrollment_status=ACTIVE'},{t:'Check Canvas provisioning log for this student',q:'Canvas Admin → Enrollments → search by SIS ID. Note: provisioning can lag up to 60 min after CVC sync.'},{t:'Confirm SSO chain: CCC Apply → CVC Exchange → Canvas SIS ID match',q:'Common failure: CCC Apply ID vs Canvas SIS ID field mismatch. Compare student_id in both systems.'},{t:'Manual enrollment as immediate workaround if confirmed mismatch',q:'Canvas Admin → Course → Enroll User → document as workaround, flag SSO bug for escalation.'},{t:'Escalate to vendor if pattern repeats across 2+ students same college',q:'Provide: SIS ID comparison, CVC enrollment record, Canvas error, college name.'}]},
+    {s:'Grade transfer not appearing after course completion',d:'Student completed teaching college course; home college transcript shows no transfer',p:'P2',
+     steps:[{t:'Confirm course marked complete in CVC Exchange',q:'GET /api/v2/courses/<id>/completions — verify student record and completion_date'},{t:'Check grade passback API log between teaching and home college SIS',q:'Look for POST /api/v2/grades/transfer — 422 often means schema mismatch between college SIS versions'},{t:'Verify home college has accepted transfer credit setup in Banner/PS',q:'Contact home college registrar: is cross-enrollment grade passback enabled for this student level?'},{t:'Escalate to registrar staff at both colleges with full record summary',q:'Provide: completion record, grade passback log, both college SIS IDs, student consent if needed for FERPA.'}]},
+    {s:'Email confirmation not received after cross-enrollment',d:'Student enrolled successfully but reporting no confirmation email — concerned about enrollment status',p:'P3',
+     steps:[{t:'Verify enrollment record and status in CVC Exchange',q:'Confirm enrollment_status=ACTIVE. Check notification_sent field — may show sent but spam-filtered.'},{t:'Confirm student email address matches CCC Apply record',q:'Common issue: student has multiple email addresses; notification goes to CCC Apply primary, not Canvas email.'},{t:'Manually resend enrollment confirmation if system allows',q:'Admin → Student Record → Resend Notification. Document action.'},{t:'If email infrastructure issue: advise student on enrollment verification workaround',q:'Student can verify at cvc.edu → My Courses. Enrollment is valid regardless of notification delivery.'}]}
+  ];
+  var issue=issues[Math.floor(Math.random()*issues.length)];
+  TICKETS.unshift({id:'TKT-0'+(60+injCount),s:issue.s,d:issue.d,c:colleges[Math.floor(Math.random()*colleges.length)],p:issue.p,a:'0m',steps:issue.steps});
   renderQ();
+  updateImpact();
 }
 renderQ();
 
-// ── API LOG ANALYZER ─────────────────────────────────────────────
+function updateImpact(){
+  var open=TICKETS.filter(function(t){return resolvedIds.indexOf(t.id)===-1;});
+  var p1=open.filter(function(t){return t.p==='P1';}).length;
+  var faTickets=open.filter(function(t){return t.s.toLowerCase().indexOf('financial')>-1||t.s.toLowerCase().indexOf('aid')>-1||t.s.toLowerCase().indexOf('disburs')>-1;}).length;
+  var blocked=open.filter(function(t){return t.p==='P1';}).length;
+  var pastSla=open.filter(function(t){return t.a&&(t.a.indexOf('d')>-1||(parseInt(t.a)>4&&t.a.indexOf('h')>-1));}).length;
+  document.getElementById('imp-blocked').textContent=blocked;
+  document.getElementById('imp-fa').textContent=Math.max(faTickets,1);
+  document.getElementById('imp-sla').textContent=pastSla||1;
+  document.getElementById('imp-p1').textContent=p1;
+}
+updateImpact();
 var SCENARIOS={
   healthy:{label:'&#9679; HEALTHY',color:'var(--green)',logs:[
     {ts:'08:14:02',c:'200',t:'s',m:'GET /api/v2/enrollments &mdash; 847 records synced'},
@@ -890,23 +804,46 @@ loadSc('healthy',document.querySelector('#tool-api .ctrl-row .cbtn'));
 
 // ── BAR CHART ────────────────────────────────────────────────────
 var BAR_DATA=[
-  {lbl:'Auth Failure (SIS token)',pct:28,cl:'r'},
-  {lbl:'Enroll Sync Window Miss',pct:24,cl:'a'},
-  {lbl:'Canvas Provisioning Lag',pct:19,cl:'bl'},
-  {lbl:'Payload Schema Mismatch',pct:16,cl:'t'},
-  {lbl:'FA Disbursement Hold',pct:9,cl:'t'},
-  {lbl:'User Account / SSO',pct:4,cl:'bl'},
+  {lbl:'Auth Failure (SIS token)',pct:28,cl:'r',kb:{title:'KB-001: SIS API Token Expiry — Recognition & Rotation',action:'Built a step-by-step token rotation guide for district IT contacts. Included: how to recognize a 401 vs. 403, the exact rotation steps per SIS type (Banner, PeopleSoft, Colleague), and a token age monitoring script in Python. Distributed to all district IT liaisons.',impact:'Auth failure tickets down 38% in Q2. Token rotation now proactive rather than reactive at 12 of 14 affected districts.',method:'pandas groupby on error_code + district fields isolated that 89% of 401 failures came from tokens >85 days old. Threshold: 90 days.'}},
+  {lbl:'Enroll Sync Window Miss',pct:24,cl:'a',kb:{title:'KB-002: Enrollment Sync Window Failures — Diagnosis & Re-trigger',action:'Documented the 2–4 AM PST sync window schedule, how to identify a window miss vs. a true failure, and the exact re-trigger API call. Included a decision tree: timeout → check SIS performance log → contact district IT vs. re-trigger immediately.',impact:'Mean time to resolution on sync window misses dropped from 3.2 hours to 47 minutes.',method:'Time-of-incident analysis showed 84% of sync failures clustered in the 2–4 AM window. Correlated with district SIS maintenance schedules.'}},
+  {lbl:'Canvas Provisioning Lag',pct:19,cl:'bl',kb:{title:'KB-003: Canvas Provisioning Delay — User Guidance & Workarounds',action:'Created a user-facing guide explaining the up-to-60-minute Canvas provisioning delay post-enrollment. Added triage decision logic: wait vs. escalate. Included manual enrollment workaround steps for urgent cases where student has confirmed SIS enrollment.',impact:'Reduced L1 escalations for provisioning lag by 61% — most resolved through user guidance alone.',method:'Identified via resolution notes analysis: 73% of Canvas access tickets were resolved with "wait and retry" or manual enrollment — no platform fix needed.'}},
+  {lbl:'Payload Schema Mismatch',pct:16,cl:'t',kb:{title:'KB-004: SIS Export Schema Mismatch — District Migration Guide',action:'Built a schema mapping table comparing CVC Exchange API v2.1 vs. v2.3 field names. Included a Python validation script districts could run against their SIS exports before submission to catch mismatches proactively.',impact:'Schema mismatch tickets dropped to near-zero for districts that adopted the pre-validation script.',method:'422 error body parsing revealed consistent field-level patterns. Grouped by district SIS type to build targeted migration guides.'}},
+  {lbl:'FA Disbursement Hold',pct:9,cl:'t',kb:{title:'KB-005: Financial Aid Disbursement Holds — Compliance Checklist',action:'Created a pre-census FA eligibility checklist for district FA staff — covering FAFSA/CADAA status, consortium membership verification, Cost of Attendance deduplication, and census date timing. Built to catch holds before they require support tickets.',impact:'Proactive FA holds identified before census date increased; reactive disbursement-blocked tickets decreased 40%.',method:'Root cause classification showed FA holds split into: timing (census not passed), eligibility (COA conflict), and routing (student record mismatch). Each required a different stakeholder response.'}},
+  {lbl:'User Account / SSO',pct:4,cl:'bl',kb:{title:'KB-006: SSO Authentication Failures — IdP Configuration Checklist',action:'Documented common SSO failure patterns (SAML assertion expiry, certificate rotation, CCC ID vs. Canvas SIS ID mismatch) and the diagnostic steps for each. Included an IdP metadata verification checklist for district IT.',impact:'SSO tickets now typically resolved in first contact by referencing the KB checklist.',method:'Low volume but high frustration — SSO failures block access entirely. Prioritized documentation quality over automation for this category.'}},
 ];
+var selectedBar=null;
 (function(){
   var cont=document.getElementById('barChart');
-  BAR_DATA.forEach(function(d){
-    var row=document.createElement('div');row.className='b-row';
+  BAR_DATA.forEach(function(d,idx){
+    var row=document.createElement('div');row.className='b-row';row.style.cursor='pointer';
     row.innerHTML='<span class="b-lbl">'+d.lbl+'</span><div class="b-track"><div class="b-fill '+d.cl+'" data-pct="'+d.pct+'" style="width:0"></div></div><span class="b-pct">'+d.pct+'%</span>';
+    row.addEventListener('click',function(){
+      selectedBar=idx;
+      document.querySelectorAll('.b-row').forEach(function(r){r.style.opacity='.4';});
+      row.style.opacity='1';
+      var kb=d.kb;
+      document.getElementById('trendWrap').style.display='none';
+      document.getElementById('trend-insight').style.display='none';
+      var det=document.getElementById('kb-detail');
+      det.style.display='block';
+      document.getElementById('kb-pane-title').textContent=kb.title;
+      document.getElementById('kb-pane-sub').textContent='';
+      det.innerHTML='<div style="margin-bottom:.8rem"><span style="font-family:JetBrains Mono,monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)">Action Taken</span><p style="margin-top:.3rem;color:var(--muted2)">'+kb.action+'</p></div><div style="margin-bottom:.8rem"><span style="font-family:JetBrains Mono,monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)">Impact</span><p style="margin-top:.3rem;color:var(--muted2)">'+kb.impact+'</p></div><div><span style="font-family:JetBrains Mono,monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)">How I Found It</span><p style="margin-top:.3rem;color:var(--muted2)">'+kb.method+'</p></div><div style="margin-top:.8rem"><button style="font-family:JetBrains Mono,monospace;font-size:.6rem;padding:.25rem .7rem;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--muted);cursor:pointer;" onclick="resetChart()">← Back to trend view</button></div>';
+    });
     cont.appendChild(row);
   });
   var bo=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('.b-fill').forEach(function(b,i){setTimeout(function(){b.style.width=b.dataset.pct+'%';},i*100+200);});bo.unobserve(e.target);}});},{threshold:.2});
   bo.observe(cont);
 })();
+function resetChart(){
+  selectedBar=null;
+  document.querySelectorAll('.b-row').forEach(function(r){r.style.opacity='1';});
+  document.getElementById('trendWrap').style.display='';
+  document.getElementById('trend-insight').style.display='';
+  document.getElementById('kb-detail').style.display='none';
+  document.getElementById('kb-pane-title').textContent='Weekly Volume \u2014 Before vs. After KB Intervention';
+  document.getElementById('kb-pane-sub').textContent='Select a category on the left to see what action was taken. Or view the overall trend below.';
+}
 
 // ── TREND LINE ───────────────────────────────────────────────────
 (function(){
