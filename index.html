@@ -1,650 +1,979 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Henry Fan — Application Support Analyst</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --ink:    #0f1117;
-      --paper:  #f6f4ef;
-      --cream:  #edeae1;
-      --rule:   #d8d2c5;
-      --accent: #1a4f8a;
-      --warm:   #b53a0a;
-      --mid:    #58544f;
-      --light:  #8a847d;
-      --green:  #1a5c36;
-      --serif:  'DM Serif Display', serif;
-      --mono:   'DM Mono', monospace;
-      --sans:   'Instrument Sans', sans-serif;
-    }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.65; overflow-x: hidden; }
-    body::before {
-      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
-    }
-    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
-
-    /* ─── NAV ─── */
-    nav { position: sticky; top: 0; z-index: 100; background: rgba(246,244,239,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--rule); }
-    .nav-in { max-width: 1060px; margin: 0 auto; padding: 0.9rem 2rem; display: flex; align-items: center; justify-content: space-between; }
-    .nav-name { font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; }
-    nav ul { list-style: none; display: flex; gap: 2rem; }
-    nav a { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--light); text-decoration: none; transition: color 0.2s; }
-    nav a:hover, nav a.on { color: var(--accent); }
-
-    /* ─── HERO ─── */
-    #hero { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 5rem; padding: 5.5rem 2rem 5rem; max-width: 1060px; margin: 0 auto; }
-    .ht { animation: up 0.75s ease both; }
-    .eyebrow { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.7rem; }
-    .eyebrow::before { content: ''; width: 1.8rem; height: 1.5px; background: var(--warm); flex-shrink: 0; }
-    h1 { font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.08; margin-bottom: 1.4rem; }
-    h1 em { font-style: italic; color: var(--accent); }
-    .hero-p { font-size: 1.03rem; color: var(--mid); line-height: 1.85; margin-bottom: 1.75rem; max-width: 460px; }
-    .hero-p strong { color: var(--ink); font-weight: 600; }
-    .hero-p a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(26,79,138,0.3); transition: border-color 0.2s; }
-    .hero-p a:hover { border-color: var(--accent); }
-    .btns { display: flex; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
-    .btn { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 0.78rem 1.5rem; border-radius: 3px; transition: all 0.2s; border: 1.5px solid transparent; }
-    .btn-fill { background: var(--accent); color: white; }
-    .btn-fill:hover { background: #133d6e; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(26,79,138,0.25); }
-    .btn-out { border-color: var(--rule); color: var(--mid); }
-    .btn-out:hover { border-color: var(--accent); color: var(--accent); }
-    .stats { display: flex; gap: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
-    .sv { font-family: var(--serif); font-size: 1.9rem; color: var(--accent); display: block; line-height: 1; }
-    .sl { font-family: var(--mono); font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--light); margin-top: 0.28rem; display: block; }
-
-    /* hero right */
-    .hr-card { animation: up 0.75s 0.1s ease both; }
-    .fc { background: white; border: 1px solid var(--rule); border-radius: 12px; padding: 1.75rem; box-shadow: 0 2px 14px rgba(0,0,0,0.04); margin-bottom: 0.9rem; }
-    .fc-lbl { font-family: var(--mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--warm); margin-bottom: 1.2rem; }
-    .fc-row { display: flex; gap: 0.8rem; padding: 0.85rem 0; border-bottom: 1px solid var(--rule); align-items: flex-start; }
-    .fc-row:last-child { border: none; padding-bottom: 0; }
-    .fc-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
-    .fc-req { font-family: var(--mono); font-size: 0.58rem; color: var(--light); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.18rem; }
-    .fc-ans { font-size: 0.86rem; color: var(--ink); line-height: 1.5; }
-    .fc-ans strong { color: var(--accent); font-weight: 600; }
-
-    /* gap note — now framed as context, not apology */
-    .ctx-note { background: white; border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 6px; padding: 1rem 1.2rem; font-size: 0.82rem; color: var(--mid); line-height: 1.75; }
-    .ctx-note strong { color: var(--ink); }
-
-    /* ─── SHARED SECTION ─── */
-    section { padding: 5rem 0; }
-    .s-eyebrow { font-family: var(--mono); font-size: 0.63rem; text-transform: uppercase; letter-spacing: 0.22em; color: var(--warm); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.55rem; }
-    .s-eyebrow::before { content: ''; width: 1.4rem; height: 1px; background: var(--warm); flex-shrink: 0; }
-    h2 { font-family: var(--serif); font-size: clamp(1.75rem, 3vw, 2.65rem); line-height: 1.15; margin-bottom: 0.6rem; }
-    .s-sub { font-size: 0.96rem; color: var(--mid); max-width: 560px; line-height: 1.82; margin-bottom: 2.75rem; }
-    hr.div { border: none; border-top: 1px solid var(--rule); }
-
-    /* ─── ORIGIN STORY ─── */
-    #origin { background: var(--accent); padding: 4.5rem 0; }
-    .origin-in { max-width: 1060px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1.8fr; gap: 5rem; align-items: start; }
-    .origin-left .tag-line { font-family: var(--mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); margin-bottom: 0.9rem; }
-    .origin-pull { font-family: var(--serif); font-size: clamp(1.7rem, 2.5vw, 2.3rem); color: white; line-height: 1.22; }
-    .origin-pull em { font-style: italic; color: #a8d4f4; }
-    .origin-body p { font-size: 1rem; color: rgba(200,220,240,0.9); line-height: 1.9; }
-    .origin-body p + p { margin-top: 1.2rem; }
-    .origin-body strong { color: white; }
-    .origin-body em { font-style: italic; color: #c8e4f8; }
-
-    /* ─── WORK SAMPLES ─── */
-    #samples { background: var(--cream); }
-    .samples-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
-    .sc { background: white; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
-    .sc:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.07); }
-    .sc-head { padding: 1.5rem 1.6rem 0; flex: 1; }
-    .sc-type { font-family: var(--mono); font-size: 0.56rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--warm); margin-bottom: 0.45rem; }
-    .sc-title { font-family: var(--serif); font-size: 1.1rem; line-height: 1.3; margin-bottom: 0.35rem; }
-    .sc-ctx { font-size: 0.78rem; color: var(--light); line-height: 1.65; margin-bottom: 0.9rem; }
-    .sc-code { margin: 0 1.6rem 0; background: #f3f0e8; border: 1px solid var(--rule); border-radius: 6px; padding: 0.95rem 1rem; font-family: var(--mono); font-size: 0.67rem; color: var(--mid); line-height: 1.95; }
-    .sc-code span { display: block; }
-    .ln { color: #cdc7bb; user-select: none; display: inline-block; min-width: 1.3rem; text-align: right; margin-right: 0.6rem; }
-    .kw { color: var(--accent); }
-    .vl { color: var(--green); }
-    .cm { color: var(--light); font-style: italic; }
-    .ky { color: var(--warm); }
-    .sc-tags { padding: 0.9rem 1.6rem 1.6rem; display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; }
-    .t { font-family: var(--mono); font-size: 0.56rem; text-transform: uppercase; letter-spacing: 0.07em; padding: 0.2rem 0.55rem; border-radius: 2px; }
-    .t-hi { background: #e4edf8; border: 1px solid #b0c8e8; color: var(--accent); }
-    .t-md { background: var(--cream); border: 1px solid var(--rule); color: var(--mid); }
-
-    /* ─── PRODUCT KNOWLEDGE ─── */
-    #product { background: white; }
-    .pk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-    .pk-diagram { background: var(--cream); border: 1px solid var(--rule); border-radius: 10px; padding: 2rem; }
-    .pk-d-label { font-family: var(--mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--light); margin-bottom: 1.5rem; }
-    .pk-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
-    .pk-node { font-family: var(--mono); font-size: 0.68rem; padding: 0.4rem 0.8rem; border-radius: 4px; border: 1px solid var(--rule); background: white; color: var(--mid); text-align: center; line-height: 1.35; }
-    .pk-node small { display: block; font-size: 0.55rem; color: var(--light); margin-top: 0.1rem; }
-    .pk-node.hi { background: var(--accent); color: white; border-color: var(--accent); }
-    .pk-node.hi small { color: rgba(255,255,255,0.65); }
-    .pk-node.warm { background: var(--warm); color: white; border-color: var(--warm); }
-    .pk-node.warm small { color: rgba(255,255,255,0.65); }
-    .pk-arr { color: var(--rule); font-size: 0.8rem; flex-shrink: 0; }
-    .pk-sep { border: none; border-top: 1px dashed var(--rule); margin: 1.25rem 0; }
-    .pk-henry { display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
-    .pk-h { font-family: var(--mono); font-size: 0.62rem; padding: 0.4rem 0.7rem; background: #e4edf8; border: 1px solid #b0c8e8; color: var(--accent); border-radius: 4px; text-align: center; line-height: 1.35; }
-    .pk-h.center { background: var(--accent); color: white; border-color: var(--accent); font-size: 0.72rem; padding: 0.5rem 1rem; }
-    .pk-copy h3 { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 0.75rem; line-height: 1.25; }
-    .pk-copy p { font-size: 0.9rem; color: var(--mid); line-height: 1.82; margin-bottom: 1rem; }
-    .pk-copy p strong { color: var(--ink); }
-    .pk-copy p:last-child { margin: 0; }
-
-    /* ─── TIMELINE ─── */
-    #experience { background: var(--paper); }
-    .tl-item { display: grid; grid-template-columns: 160px 1fr; gap: 2.75rem; padding: 2.4rem 0; border-top: 1px solid var(--rule); opacity: 0; transform: translateY(14px); transition: opacity 0.5s, transform 0.5s; }
-    .tl-item.show { opacity: 1; transform: none; }
-    .tm-date { font-family: var(--mono); font-size: 0.65rem; color: var(--light); line-height: 1.55; }
-    .tm-org { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); font-weight: 500; margin: 0.28rem 0 0.45rem; }
-    .tm-badge { display: inline-block; font-family: var(--mono); font-size: 0.53rem; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.14rem 0.48rem; border-radius: 2px; border: 1px solid; }
-    .b-a { color: var(--warm); border-color: var(--warm); background: #fff4f0; }
-    .b-b { color: var(--accent); border-color: #b8cce4; background: #f0f5ff; }
-    .tl-title { font-family: var(--serif); font-size: 1.38rem; margin-bottom: 0.55rem; line-height: 1.22; }
-    .tl-body { font-size: 0.89rem; color: var(--mid); line-height: 1.82; }
-    .tl-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.9rem; }
-
-    /* ─── STACK ─── */
-    #stack { background: var(--cream); }
-    .sk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
-    .sk { background: white; border: 1px solid var(--rule); border-radius: 8px; padding: 1.35rem; transition: border-color 0.2s, transform 0.2s; }
-    .sk:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .sk-icon { font-size: 1.3rem; margin-bottom: 0.6rem; }
-    .sk-name { font-family: var(--serif); font-size: 1rem; margin-bottom: 0.3rem; }
-    .sk-body { font-size: 0.76rem; color: var(--mid); line-height: 1.65; margin-bottom: 0.75rem; }
-    .sk-bar { display: flex; align-items: center; gap: 0.45rem; font-family: var(--mono); font-size: 0.57rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--light); }
-    .bar { flex: 1; height: 2.5px; background: var(--rule); border-radius: 2px; overflow: hidden; }
-    .fill { height: 100%; border-radius: 2px; background: var(--accent); }
-    .f90{width:90%} .f80{width:80%} .f72{width:72%} .f60{width:60%}
-
-    /* ─── CLOSE ─── */
-    #close { background: #0f1117; color: white; padding: 6rem 2rem; text-align: center; }
-    #close .s-eyebrow { color: #5a8fc0; justify-content: center; }
-    #close .s-eyebrow::before { background: #5a8fc0; }
-    #close h2 { color: white; font-size: clamp(1.9rem, 3.2vw, 3rem); max-width: 680px; margin: 0 auto 1.2rem; }
-    .close-p { font-size: 0.97rem; color: #706a62; max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.9; }
-    .close-p strong { color: #a09890; }
-    .clinks { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-    .cl { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 0.82rem 1.65rem; border-radius: 3px; transition: all 0.2s; }
-    .cl-w { background: white; color: var(--accent); }
-    .cl-w:hover { background: var(--cream); }
-    .cl-g { border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.6); }
-    .cl-g:hover { border-color: rgba(255,255,255,0.4); color: white; background: rgba(255,255,255,0.06); }
-
-    footer { background: #080a0d; color: #252018; text-align: center; padding: 1.5rem; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.07em; }
-
-    @keyframes up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
-
-    @media (max-width: 860px) {
-      #hero, .origin-in, .pk-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      #hero { padding-top: 3.5rem; }
-      .tl-item { grid-template-columns: 1fr; gap: 0.4rem; }
-      .samples-grid { grid-template-columns: 1fr; }
-      nav ul { display: none; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Henry Fan — Application Support Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@300;400;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080C14;--bg2:#0D1220;--bg3:#131825;--bg4:#1A2235;--amber:#E8A020;--amlo:rgba(232,160,32,.12);--teal:#3CBFA0;--tello:rgba(60,191,160,.1);--red:#E05050;--redlo:rgba(224,80,80,.1);--blue:#5B9BD5;--bluelo:rgba(91,155,213,.1);--green:#4CAF80;--greenlo:rgba(76,175,128,.1);--white:#F0EDE6;--muted:#6B7A90;--muted2:#9AABB8;--bdim:rgba(255,255,255,.055);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.2rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:all .3s;}
+nav.scrolled{background:rgba(8,12,20,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--bdim);}
+.nav-name{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:600;letter-spacing:.14em;color:var(--amber);text-transform:uppercase;}
+.nav-links{display:flex;gap:1.8rem;list-style:none;}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.1em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--white);}
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 10vw;position:relative;overflow:hidden;}
+#heroCanvas{position:absolute;inset:0;z-index:0;opacity:.6;}
+.hero-content{position:relative;z-index:2;}
+.hero-tag{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.22em;color:var(--amber);text-transform:uppercase;margin-bottom:2.2rem;opacity:0;animation:fadeUp .8s .2s forwards;}
+.hero-tag::before{content:'// ';opacity:.4;}
+h1.hero-hl{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5.8vw,5.2rem);font-weight:900;line-height:1.05;letter-spacing:-.025em;max-width:20ch;opacity:0;animation:fadeUp .8s .4s forwards;}
+h1.hero-hl em{font-style:italic;color:var(--amber);}
+.hero-sub{margin-top:2rem;font-size:1rem;color:var(--muted2);max-width:56ch;opacity:0;animation:fadeUp .8s .6s forwards;}
+.hero-sub strong{color:var(--white);font-weight:500;}
+.hero-ctas{margin-top:2.5rem;display:flex;gap:1.5rem;align-items:center;opacity:0;animation:fadeUp .8s .8s forwards;}
+.btn-p{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.85rem 2rem;background:var(--amber);color:var(--bg);border:none;cursor:pointer;transition:background .2s,transform .15s;}
+.btn-p:hover{background:#F0B840;transform:translateY(-2px);}
+.btn-g{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:2px;transition:color .2s;}
+.btn-g:hover{color:var(--white);}
+.hero-stats{position:absolute;right:8vw;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:1.8rem;opacity:0;animation:fadeIn 1s 1.2s forwards;z-index:2;}
+.h-stat{text-align:right;border-right:2px solid var(--amber);padding-right:1.4rem;}
+.h-stat-num{display:block;font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;line-height:1;color:var(--white);}
+.h-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.scroll-ind{position:absolute;bottom:2.5rem;left:10vw;display:flex;align-items:center;gap:1rem;opacity:0;animation:fadeIn 1s 1.6s forwards;z-index:2;}
+.scroll-line{width:50px;height:1px;background:linear-gradient(to right,var(--amber),transparent);}
+.scroll-ind span{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+#statusbar{background:var(--bg2);border-bottom:1px solid var(--bdim);padding:.65rem 10vw;display:flex;gap:2.5rem;align-items:center;overflow:hidden;white-space:nowrap;}
+.sb-item{display:flex;align-items:center;gap:.5rem;}
+.sb-dot{width:7px;height:7px;border-radius:50%;}
+.sb-dot.green{background:var(--green);box-shadow:0 0 6px var(--green);}
+.sb-dot.amber{background:var(--amber);box-shadow:0 0 6px var(--amber);animation:pulse 2s infinite;}
+.sb-dot.red{background:var(--red);box-shadow:0 0 6px var(--red);animation:pulse 1.5s infinite;}
+.sb-text{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.07em;color:var(--muted2);}
+.sb-text strong{color:var(--white);}
+section{padding:7rem 10vw;position:relative;}
+.slbl{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.24em;color:var(--amber);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;}
+.slbl::after{content:'';flex:1;max-width:60px;height:1px;background:rgba(184,127,24,.5);}
+h2.stitle{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.8vw,3.2rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.2rem;}
+h2.stitle em{font-style:italic;color:var(--amber);}
+.sintro{font-size:.93rem;color:var(--muted2);max-width:64ch;margin-bottom:3rem;line-height:1.8;}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:none;}
+/* ── TOOL SHARED ── */
+.tool-win{background:var(--bg3);border:1px solid var(--bdim);overflow:hidden;margin-top:.5rem;}
+.tool-bar{background:var(--bg4);padding:.65rem 1.2rem;display:flex;align-items:center;gap:.7rem;border-bottom:1px solid var(--bdim);}
+.tool-dots{display:flex;gap:.35rem;}
+.td{width:10px;height:10px;border-radius:50%;}
+.td.r{background:#FF5F57;}.td.y{background:#FEBC2E;}.td.g{background:#28C840;}
+.tool-lbl{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.1em;color:var(--muted);margin-left:.4rem;}
+.ctrl-row{padding:.7rem 1.2rem;background:var(--bg2);border-bottom:1px solid var(--bdim);display:flex;gap:.7rem;align-items:center;flex-wrap:wrap;}
+.cbtn{font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:.28rem .8rem;border:1px solid var(--bdim);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;letter-spacing:.06em;}
+.cbtn:hover,.cbtn.active{border-color:var(--amber);color:var(--amber);background:var(--amlo);}
+.cbtn.run{background:var(--amber);color:var(--bg);border-color:var(--amber);font-weight:700;}
+.cbtn.run:hover{background:#F0B840;}
+.cbtn.ml-auto{margin-left:auto;}
+/* ── TICKET QUEUE ── */
+#tool-tickets{background:var(--bg2);}
+.tq-list{padding:1rem 1.2rem;display:flex;flex-direction:column;gap:.55rem;min-height:260px;}
+.t-row{background:var(--bg2);border:1px solid var(--bdim);padding:.8rem 1.1rem;display:grid;grid-template-columns:90px 1fr 120px 110px 72px;gap:.8rem;align-items:center;cursor:pointer;transition:border-color .2s,background .2s;position:relative;overflow:hidden;}
+.t-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--bdim);transition:background .2s;}
+.t-row:hover{border-color:rgba(232,160,32,.3);background:var(--bg3);}
+.t-row.p1::before{background:var(--red);}.t-row.p2::before{background:var(--amber);}.t-row.p3::before{background:var(--blue);}
+.t-row.done{opacity:.45;}.t-row.done::before{background:var(--green);}
+.t-id{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--muted);}
+.t-subj{font-size:.83rem;color:var(--white);font-weight:500;line-height:1.25;}
+.t-subj small{display:block;font-size:.72rem;color:var(--muted);font-weight:300;margin-top:.1rem;}
+.t-col{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--teal);}
+.t-pri{font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:.18rem .55rem;text-align:center;font-weight:700;}
+.t-pri.P1{background:var(--redlo);border:1px solid rgba(224,80,80,.3);color:var(--red);}
+.t-pri.P2{background:var(--amlo);border:1px solid rgba(232,160,32,.3);color:var(--amber);}
+.t-pri.P3{background:var(--bluelo);border:1px solid rgba(91,155,213,.3);color:var(--blue);}
+.t-pri.DONE{background:var(--greenlo);border:1px solid rgba(76,175,128,.3);color:var(--green);}
+.t-age{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--muted);}
+.t-det{background:var(--bg);border:1px solid var(--bdim);padding:1.4rem;margin:0 1.2rem .8rem;display:none;animation:fadeIn .2s;}
+.t-det.open{display:block;}
+.tdet-head{display:flex;justify-content:space-between;margin-bottom:1rem;}
+.tdet-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;}
+.tdet-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem;}
+.tdet-meta-item{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted);}
+.tdet-meta-item strong{color:var(--amber);display:block;margin-bottom:.15rem;}
+.tdet-steps{margin-top:.8rem;}
+.ts{display:flex;gap:.7rem;padding:.55rem 0;border-bottom:1px solid var(--bdim);}
+.ts:last-child{border-bottom:none;}
+.ts-num{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--amber);min-width:20px;margin-top:.05rem;}
+.ts-txt{font-size:.81rem;color:var(--muted2);line-height:1.5;}
+.ts-txt code{font-family:'JetBrains Mono',monospace;font-size:.72rem;background:rgba(255,255,255,.04);padding:.1rem .3rem;color:var(--teal);}
+.tdet-actions{margin-top:1rem;display:flex;gap:.7rem;flex-wrap:wrap;}
+.tq-foot{padding:.7rem 1.2rem;background:var(--bg4);border-top:1px solid var(--bdim);display:flex;gap:2rem;font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--muted);}
+.tq-foot strong{color:var(--white);}
+/* ── API ANALYZER ── */
+#tool-api{background:var(--bg);}
+.api-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:.5rem;}
+.api-pane{background:var(--bg3);border:1px solid var(--bdim);overflow:hidden;}
+.api-pane-head{background:var(--bg4);padding:.65rem 1.2rem;border-bottom:1px solid var(--bdim);font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.08em;color:var(--muted);display:flex;justify-content:space-between;align-items:center;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 5px var(--green);animation:pulse 2s infinite;display:inline-block;margin-right:.4rem;}
+.log-feed{padding:.7rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;line-height:1.85;height:240px;overflow-y:auto;background:#030608;}
+.ll{display:flex;gap:.7rem;align-items:baseline;}
+.ll.error .lm{color:var(--red);}.ll.warn .lm{color:var(--amber);}.ll.ok .lm{color:var(--green);}.ll.info .lm{color:var(--muted2);}
+.lts{color:#1E2D3D;min-width:76px;}.lc{min-width:32px;text-align:center;font-weight:700;}
+.lc.e{color:var(--red);}.lc.w{color:var(--amber);}.lc.s{color:var(--green);}.lc.i{color:var(--blue);}
+.lm{flex:1;}
+.diag-feed{padding:1rem;min-height:240px;background:#030608;font-family:'JetBrains Mono',monospace;font-size:.7rem;line-height:1.75;height:240px;overflow-y:auto;}
+.diag-head{color:var(--amber);font-weight:700;margin-bottom:.5rem;}
+.di{color:var(--muted2);padding-left:.8rem;}
+.di.ok::before{content:'✓ ';color:var(--green);}
+.di.err::before{content:'✗ ';color:var(--red);}
+.di.warn::before{content:'⚠ ';color:var(--amber);}
+.diag-root{background:rgba(224,80,80,.07);border:1px solid rgba(224,80,80,.18);padding:.7rem .9rem;margin:.6rem 0;color:var(--red);}
+.diag-fix{background:rgba(60,191,160,.06);border:1px solid rgba(60,191,160,.18);padding:.7rem .9rem;color:var(--teal);}
+.diag-lbl{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.2rem;opacity:.7;}
+/* ── SYNC FLOW ── */
+#tool-sync{background:var(--bg2);}
+.sync-wrap{border:1px solid var(--bdim);background:var(--bg3);overflow:hidden;}
+#syncCanvas{display:block;width:100%;height:300px;}
+.sync-legend{display:flex;gap:2rem;padding:.8rem 1.4rem;background:var(--bg4);border-top:1px solid var(--bdim);flex-wrap:wrap;}
+.sl-item{display:flex;align-items:center;gap:.45rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted2);}
+.sl-dot{width:7px;height:7px;border-radius:50%;}
+/* ── CHART ── */
+#tool-chart{background:var(--bg);}
+.chart-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:.5rem;}
+.c-pane{background:var(--bg3);border:1px solid var(--bdim);padding:1.4rem;}
+.c-head{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.12em;color:var(--amber);text-transform:uppercase;margin-bottom:.25rem;}
+.c-sub{font-size:.76rem;color:var(--muted);margin-bottom:1.3rem;}
+.bar-chart{display:flex;flex-direction:column;gap:.65rem;}
+.b-row{display:flex;align-items:center;gap:.8rem;}
+.b-lbl{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted2);width:128px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.b-track{flex:1;background:rgba(255,255,255,.04);height:16px;overflow:hidden;}
+.b-fill{height:100%;transition:width 1.1s cubic-bezier(.16,1,.3,1);width:0;}
+.b-fill.a{background:var(--amber);}.b-fill.t{background:var(--teal);}.b-fill.bl{background:var(--blue);}.b-fill.r{background:var(--red);}
+.b-pct{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted);width:34px;}
+.trend-wrap{position:relative;height:150px;margin-top:.5rem;}
+#trendCanvas{width:100%;height:100%;}
+.c-insight{margin-top:1rem;padding:.75rem .9rem;background:var(--tello);border-left:2px solid var(--teal);font-size:.78rem;color:var(--muted2);line-height:1.6;}
+.c-insight strong{color:var(--teal);}
+/* ── ORIGIN ── */
+#origin{background:var(--bg2);}
+.origin-layout{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:start;}
+.opq{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;line-height:1.35;border-left:3px solid var(--amber);padding-left:1.7rem;margin-bottom:1.8rem;}
+.obody{font-size:.91rem;color:#8A9BAB;line-height:1.85;}
+.obody p+p{margin-top:1rem;}.obody strong{color:var(--white);font-weight:500;}
+.tc-cards{display:flex;flex-direction:column;gap:1.1rem;}
+.tc{background:var(--bg3);border:1px solid var(--bdim);border-left:3px solid var(--teal);padding:1.2rem 1.5rem;transition:border-color .2s;}
+.tc:hover{border-left-color:var(--amber);}
+.tc-lbl{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:.45rem;}
+.tc-title{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:700;margin-bottom:.35rem;}
+.tc-body{font-size:.8rem;color:var(--muted);}
+/* ── MAP ── */
+#mapping{background:var(--bg);}
+.map-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--bdim);border:1px solid var(--bdim);}
+.m-item{background:var(--bg2);padding:1.5rem 1.7rem;transition:background .2s;position:relative;overflow:hidden;}
+.m-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber);transform:scaleY(0);transform-origin:bottom;transition:transform .3s;}
+.m-item:hover::before{transform:scaleY(1);}.m-item:hover{background:var(--bg3);}
+.m-jd{font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;letter-spacing:.1em;color:var(--amber);text-transform:uppercase;margin-bottom:.55rem;}
+.m-my{font-size:.85rem;color:#8A9BAB;line-height:1.6;}.m-my strong{color:var(--white);font-weight:500;}
+/* ── ARCH ── */
+#product{background:var(--bg2);}
+.arch-outer{background:var(--bg3);border:1px solid var(--bdim);padding:2.2rem;margin-bottom:1.8rem;}
+.arch-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.45rem;margin-bottom:.8rem;}
+.arch-row:last-child{margin-bottom:0;}
+.an{background:var(--bg2);border:1px solid var(--bdim);padding:.8rem 1.1rem;text-align:center;min-width:100px;transition:border-color .25s;}
+.an:hover{border-color:var(--teal);}
+.an.me{border-color:var(--amber);background:rgba(232,160,32,.05);}
+.an-l{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);display:block;margin-bottom:.15rem;}
+.an-s{font-size:.6rem;color:var(--muted);}
+.an.me .an-l{color:var(--amber);}
+.arch-arr{color:var(--muted);font-size:.9rem;}
+.arch-leg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
+.al{background:var(--bg3);border:1px solid var(--bdim);padding:1rem 1.2rem;}
+.al-l{font-family:'JetBrains Mono',monospace;font-size:.63rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.35rem;display:flex;align-items:center;gap:.4rem;}
+.al-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);}
+.al-dot.a{background:var(--amber);}
+.al-b{font-size:.77rem;color:var(--muted);line-height:1.5;}
+.hl-box{margin-top:1.8rem;padding:1.8rem 2.2rem;background:var(--bg2);border:1px solid var(--bdim);border-left:3px solid var(--amber);}
+.hl-box p{font-size:.91rem;color:#8A9BAB;line-height:1.8;}.hl-box strong{color:var(--white);font-weight:500;}
+/* ── TIMELINE ── */
+#experience{background:var(--bg);}
+.timeline{display:flex;flex-direction:column;}
+.tl{display:grid;grid-template-columns:185px 1fr;gap:2.2rem;padding:2rem 0;border-bottom:1px solid var(--bdim);}
+.tl:last-child{border-bottom:none;}
+.tl-meta{padding-top:.15rem;}
+.tl-dt{font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;letter-spacing:.1em;color:var(--amber);margin-bottom:.35rem;}
+.tl-org{font-size:.86rem;font-weight:500;margin-bottom:.25rem;}
+.tl-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;padding:.18rem .5rem;background:var(--tello);border:1px solid rgba(60,191,160,.2);color:var(--teal);margin-top:.35rem;}
+.tl-badge.hi{background:var(--amlo);border-color:rgba(232,160,32,.22);color:var(--amber);}
+.tl-role{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:.55rem;}
+.tl-body{font-size:.84rem;color:#7A8BA0;line-height:1.75;margin-bottom:.9rem;}
+.tl-body strong{color:var(--white);font-weight:500;}
+.tl-tags{display:flex;flex-wrap:wrap;gap:.38rem;}
+.ttag{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.06em;padding:.16rem .52rem;background:rgba(255,255,255,.03);border:1px solid var(--bdim);color:var(--muted);text-transform:uppercase;}
+/* ── STACK ── */
+#stack{background:var(--bg2);}
+.stack-g{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5px;background:var(--bdim);border:1px solid var(--bdim);}
+.si{background:var(--bg3);padding:1.5rem 1.1rem;text-align:center;transition:background .2s;}
+.si:hover{background:var(--bg4);}
+.si-icon{font-size:1.6rem;margin-bottom:.55rem;display:block;}
+.si-name{font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.22rem;}
+.si-note{font-size:.68rem;color:var(--muted);line-height:1.4;margin-bottom:.65rem;}
+.si-bar-t{height:2px;background:var(--bdim);overflow:hidden;}
+.si-bar{height:100%;background:var(--amber);transition:width .9s ease;}
+/* ── CONTACT ── */
+#close{background:var(--bg3);text-align:center;padding:7rem 10vw;}
+.c-hl{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4.5vw,3.8rem);font-weight:900;line-height:1.1;letter-spacing:-.02em;max-width:22ch;margin:0 auto 1.8rem;}
+.c-hl em{font-style:italic;color:var(--amber);}
+.c-sub{color:var(--muted2);font-size:.93rem;max-width:52ch;margin:0 auto;line-height:1.8;}
+.c-links{display:flex;justify-content:center;gap:1.8rem;flex-wrap:wrap;margin-top:2.2rem;}
+.c-link{display:flex;flex-direction:column;gap:.22rem;text-decoration:none;padding:1.2rem 2rem;border:1px solid var(--bdim);background:var(--bg2);transition:border-color .2s,transform .2s;}
+.c-link:hover{border-color:var(--amber);transform:translateY(-3px);}
+.c-lbl{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);}
+.c-val{font-size:.88rem;color:var(--white);}
+footer{padding:1.6rem 10vw;border-top:1px solid var(--bdim);display:flex;justify-content:space-between;}
+.f-c{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--muted);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+/* ── INTERVIEW ROADMAP ── */
+#interview-guide{background:var(--bg3);border-bottom:1px solid var(--bdim);padding:2.8rem 10vw;}
+.ig-head{display:flex;align-items:baseline;gap:1.2rem;margin-bottom:2rem;}
+.ig-title{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;line-height:1.1;}
+.ig-title em{font-style:italic;color:var(--amber);}
+.ig-note{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.08em;color:var(--muted);padding:.22rem .7rem;border:1px solid var(--bdim);}
+.ig-empathy{font-size:.86rem;color:var(--muted2);line-height:1.7;max-width:72ch;margin-bottom:2rem;border-left:2px solid rgba(232,160,32,.3);padding-left:1.2rem;}
+.ig-empathy strong{color:var(--white);font-weight:500;}
+.ig-timeline{display:flex;gap:0;position:relative;}
+.ig-timeline::before{content:'';position:absolute;top:22px;left:0;right:0;height:1px;background:linear-gradient(to right,var(--amber),rgba(60,191,160,.4),rgba(60,191,160,.1));z-index:0;}
+.ig-stop{flex:1;position:relative;z-index:1;}
+.ig-dot{width:16px;height:16px;border-radius:50%;border:2px solid var(--amber);background:var(--bg3);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;}
+.ig-dot.teal{border-color:var(--teal);}
+.ig-dot.green{border-color:var(--green);}
+.ig-dot-inner{width:6px;height:6px;border-radius:50%;background:var(--amber);}
+.ig-dot.teal .ig-dot-inner{background:var(--teal);}
+.ig-dot.green .ig-dot-inner{background:var(--green);}
+.ig-time{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;color:var(--amber);text-align:center;margin-bottom:.3rem;}
+.ig-dot.teal~.ig-time,.ig-stop:has(.ig-dot.teal) .ig-time{color:var(--teal);}
+.ig-stop-title{font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:700;letter-spacing:.06em;color:var(--white);text-align:center;margin-bottom:.3rem;}
+.ig-stop-qs{font-size:.72rem;color:var(--muted);text-align:center;line-height:1.5;}
+.ig-stop-qs code{font-family:'JetBrains Mono',monospace;font-size:.6rem;background:rgba(255,255,255,.04);padding:.08rem .25rem;color:var(--teal);}
+.ig-screen{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.06em;padding:.16rem .45rem;background:rgba(60,191,160,.08);border:1px solid rgba(60,191,160,.22);color:var(--teal);margin-top:.4rem;text-align:center;}
+/* ── SCREEN SHARE CUE ── */
+.screen-cue{display:flex;align-items:center;gap:.8rem;margin-bottom:1.6rem;padding:.7rem 1.1rem;background:rgba(60,191,160,.05);border:1px solid rgba(60,191,160,.18);border-left:3px solid var(--teal);}
+.sc-icon{font-size:1rem;flex-shrink:0;}
+.sc-body{flex:1;}
+.sc-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:.18rem;}
+.sc-qs{font-size:.78rem;color:var(--muted2);line-height:1.5;}
+.sc-qs strong{color:var(--white);font-weight:500;}
+/* ── COMMITTEE CALLOUT ── */
+.committee-box{background:rgba(232,160,32,.04);border:1px solid rgba(232,160,32,.15);border-left:3px solid var(--amber);padding:1.4rem 1.8rem;margin-bottom:2rem;}
+.committee-box .cb-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:.6rem;}
+.committee-box p{font-size:.86rem;color:var(--muted2);line-height:1.75;}
+.committee-box strong{color:var(--white);font-weight:500;}
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}.nav-links{display:none;}
+  section{padding:4rem 5vw;}#hero{padding:0 5vw;}.hero-stats{display:none;}
+  .origin-layout,.api-layout,.chart-layout,.map-grid,.arch-leg{grid-template-columns:1fr;}
+  .stack-g{grid-template-columns:repeat(2,1fr);}.tl{grid-template-columns:1fr;gap:.8rem;}
+  .t-row{grid-template-columns:1fr 1fr;grid-template-rows:auto auto;}
+  #interview-guide{padding:2rem 5vw;}
+  .ig-timeline{flex-direction:column;gap:1.5rem;}
+  .ig-timeline::before{display:none;}
+  .ig-stop{display:flex;gap:1rem;align-items:flex-start;}
+  .ig-dot{margin:0;flex-shrink:0;margin-top:.1rem;}
+  .ig-time,.ig-stop-title,.ig-stop-qs{text-align:left;}
+}
+</style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-in">
-    <span class="nav-name">Henry Fan</span>
-    <ul>
-      <li><a href="#origin">Background</a></li>
-      <li><a href="#samples">Work samples</a></li>
-      <li><a href="#product">Platform knowledge</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#stack">Tech stack</a></li>
-      <li><a href="#close">Contact</a></li>
-    </ul>
-  </div>
+<nav id="mainNav">
+  <span class="nav-name">Henry Fan</span>
+  <ul class="nav-links">
+    <li><a href="#interview-guide">Interview Guide</a></li>
+    <li><a href="#origin">Background</a></li>
+    <li><a href="#tool-tickets">Ticket Queue</a></li>
+    <li><a href="#tool-api">API Analyzer</a></li>
+    <li><a href="#tool-sync">Sync Flow</a></li>
+    <li><a href="#tool-chart">Analytics</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#close">Contact</a></li>
+  </ul>
 </nav>
 
-<!-- ══ HERO ══ -->
-<div id="hero" class="wrap">
-  <div class="ht">
-    <p class="eyebrow">Application Support Analyst · CVC-OEI at FHDA</p>
-    <h1>The system<br>that changed<br>my life is<br><em>the one I want<br>to keep running.</em></h1>
-    <p class="hero-p">
-      I'm Henry Fan. I started at <strong>Foothill College</strong> — the institution that houses the CVC — because it was what I could access. I've spent the seven years since building the technical skills to support the systems that make that access possible for everyone else.
-    </p>
-    <p class="hero-p">
-      I'm currently completing my <strong>M.S. in Computer Science at Georgia Tech</strong> (ML focus, online) while actively seeking this role. The Oct 2025 end date on my SMCCD position reflects that transition — not a gap, but a deliberate focus on finishing my degree and finding the right next step. This is it.
-    </p>
-    <div class="btns">
-      <a href="mailto:fansofhenry@gmail.com" class="btn btn-fill">
-        fansofhenry@gmail.com
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <a href="https://linkedin.com/in/fansofhenry" target="_blank" class="btn btn-out">LinkedIn</a>
-    </div>
-    <div class="stats">
-      <div><span class="sv">7+</span><span class="sl">Years edu tech</span></div>
-      <div><span class="sv">B.S.+</span><span class="sl">Computer Science</span></div>
-      <div><span class="sv">CCC</span><span class="sl">Foothill alum</span></div>
+<section id="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-tag">Application Support Analyst I &nbsp;&middot;&nbsp; CVC-OEI at FHDA</div>
+    <h1 class="hero-hl">The system that changed<br>my life is <em>the one I want<br>to keep running.</em></h1>
+    <p class="hero-sub">I'm <strong>Henry Fan</strong>. I started at <strong>Foothill College</strong> because it was what I could access. Seven years since, I've built the technical depth to support the systems that make that access possible for everyone else. <strong>This page is built for your 45-minute interview</strong> — every tool below is interactive, every metric is real, and there's a roadmap below showing exactly when to ask me to share my screen.</p>
+    <div class="hero-ctas">
+      <a href="#interview-guide" class="btn-p">Interview Roadmap</a>
+      <a href="#tool-tickets" class="btn-g">See the tools &rarr;</a>
     </div>
   </div>
+  <div class="hero-stats">
+    <div class="h-stat"><span class="h-stat-num">7+</span><span class="h-stat-lbl">Years Edu-Tech</span></div>
+    <div class="h-stat"><span class="h-stat-num">5</span><span class="h-stat-lbl">Institutions</span></div>
+    <div class="h-stat"><span class="h-stat-num">B.S.</span><span class="h-stat-lbl">CS &middot; SJSU</span></div>
+  </div>
+  <div class="scroll-ind"><div class="scroll-line"></div><span>Scroll to explore</span></div>
+</section>
 
-  <div class="hr-card">
-    <div class="fc">
-      <p class="fc-lbl">// How the JD maps to my background</p>
-      <div class="fc-row">
-        <div class="fc-dot"></div>
-        <div>
-          <div class="fc-req">Ticketing · SLA · Incident management</div>
-          <div class="fc-ans"><strong>ServiceNow & Jira at enterprise scale</strong> — Tier 1–2, SLA-bound, multi-department, with KB systems that reduced repeat ticket volume</div>
-        </div>
-      </div>
-      <div class="fc-row">
-        <div class="fc-dot"></div>
-        <div>
-          <div class="fc-req">Higher ed SIS · FA/enrollment systems</div>
-          <div class="fc-ans">Daily support inside <strong>SIS-driven FA and enrollment platforms at SMCCD</strong> — data validation, integration troubleshooting, Title IV and state compliance workflows</div>
-        </div>
-      </div>
-      <div class="fc-row">
-        <div class="fc-dot"></div>
-        <div>
-          <div class="fc-req">API integrations · Data exchange · Sync failures</div>
-          <div class="fc-ans">Traced cross-system integration failures and validated data flows — <strong>at SMCCD and SCC Schools</strong> — coordinating with IT and engineering on root causes</div>
-        </div>
-      </div>
-      <div class="fc-row">
-        <div class="fc-dot"></div>
-        <div>
-          <div class="fc-req">Canvas LMS · Instructional platforms</div>
-          <div class="fc-ans"><strong>Canvas admin support at Rice University</strong> — SSO issues, auth failures, faculty and student-facing troubleshooting across academic systems</div>
-        </div>
-      </div>
-      <div class="fc-row">
-        <div class="fc-dot"></div>
-        <div>
-          <div class="fc-req">Python · JS · SQL · Bash · Linux · SDLC</div>
-          <div class="fc-ans"><strong>B.S. CS at SJSU + M.S. in progress at Georgia Tech</strong> — scripting, data analysis, application lifecycle, automation, testing. These aren't aspirational.</div>
-        </div>
-      </div>
-      <div class="fc-row">
-        <div class="fc-dot"></div>
-        <div>
-          <div class="fc-req">Documentation · Training · Remote work</div>
-          <div class="fc-ans">5 years curriculum development + <strong>policy-to-workflow translation at SMCCD</strong> + KB authoring that cut repeat tickets. Fully remote since 2022.</div>
-        </div>
-      </div>
-    </div>
-    <div class="ctx-note">
-      <strong>On Banner / PeopleSoft / Colleague:</strong> At SMCCD I worked daily within FA and enrollment systems built on these platforms — resolving data discrepancies, tracing integration failures, validating student records under Title IV and California state regulations. Working knowledge from the integration and compliance side, backed by the CS foundation to deepen it fast.
-    </div>
-  </div>
+<div id="statusbar">
+  <div class="sb-item"><span class="sb-dot green"></span><span class="sb-text"><strong>CVC Exchange</strong> &mdash; All systems operational</span></div>
+  <div class="sb-item"><span class="sb-dot amber"></span><span class="sb-text"><strong>TKT-0047</strong> &mdash; SIS sync degraded &middot; De Anza</span></div>
+  <div class="sb-item"><span class="sb-dot green"></span><span class="sb-text"><strong>Canvas LMS</strong> &mdash; 116 colleges connected</span></div>
+  <div class="sb-item"><span class="sb-dot green"></span><span class="sb-text"><strong>FA Disbursement API</strong> &mdash; Healthy</span></div>
+  <div class="sb-item"><span class="sb-dot red"></span><span class="sb-text"><strong>TKT-0051</strong> &mdash; Auth failure &middot; Ca&ntilde;ada College</span></div>
+  <div class="sb-item"><span class="sb-dot green"></span><span class="sb-text">Open Queue &mdash; <strong>4 active</strong></span></div>
 </div>
 
-<hr class="div" />
+<section id="interview-guide">
+  <div class="ig-head">
+    <h2 class="ig-title">45-Minute <em>Interview Roadmap</em></h2>
+    <span class="ig-note">For the hiring committee</span>
+  </div>
+  <div class="ig-empathy">
+    You're hiring for a role that sits at the intersection of 116 California Community Colleges, a real-time enrollment infrastructure, and students for whom a sync failure means a lost semester. <strong>I know the weight of that.</strong> I was on the other side of that screen when I started at Foothill College. Everything on this page is organized to respect your time — the roadmap below shows exactly where to find evidence for each question type, and when a screen share will show more than words can.
+  </div>
+  <div class="ig-timeline">
+    <div class="ig-stop">
+      <div class="ig-dot"><div class="ig-dot-inner"></div></div>
+      <div class="ig-time">0 – 8 min</div>
+      <div class="ig-stop-title">Intro &amp; Motivation</div>
+      <div class="ig-stop-qs">Q1–2: Why this role?<br>Why higher ed?<br><br>→ <a href="#origin" style="color:var(--teal);text-decoration:none">Background section</a></div>
+    </div>
+    <div class="ig-stop">
+      <div class="ig-dot"><div class="ig-dot-inner"></div></div>
+      <div class="ig-time">8 – 18 min</div>
+      <div class="ig-stop-title">Technical Experience</div>
+      <div class="ig-stop-qs">Q3–4: SIS/FA systems,<br>integration troubleshooting<br><br>→ <a href="#experience" style="color:var(--teal);text-decoration:none">Career timeline</a> + <a href="#mapping" style="color:var(--teal);text-decoration:none">JD mapping</a></div>
+    </div>
+    <div class="ig-stop">
+      <div class="ig-dot teal"><div class="ig-dot-inner"></div></div>
+      <div class="ig-time">18 – 35 min</div>
+      <div class="ig-stop-title">💻 Screen Share Window</div>
+      <div class="ig-stop-qs">Q5–7: Show how you'd<br>triage, diagnose, escalate<br><br><span class="ig-screen">Share screen → Tools 01–03</span></div>
+    </div>
+    <div class="ig-stop">
+      <div class="ig-dot teal"><div class="ig-dot-inner"></div></div>
+      <div class="ig-time">35 – 42 min</div>
+      <div class="ig-stop-title">💻 Analytics Demo</div>
+      <div class="ig-stop-qs">Q8: Data-driven approach,<br>pattern analysis, KB impact<br><br><span class="ig-screen">Share screen → Tool 04</span></div>
+    </div>
+    <div class="ig-stop">
+      <div class="ig-dot green"><div class="ig-dot-inner"></div></div>
+      <div class="ig-time">42 – 45 min</div>
+      <div class="ig-stop-title">Closing Questions</div>
+      <div class="ig-stop-qs">Q9–10: Platform understanding,<br>questions for the team<br><br>→ <a href="#product" style="color:var(--teal);text-decoration:none">Platform architecture</a></div>
+    </div>
+  </div>
+</section>
 
-<!-- ══ ORIGIN STORY ══ -->
 <section id="origin">
-  <div class="origin-in">
-    <div class="origin-left">
-      <p class="tag-line">// Why this role, specifically</p>
-      <h2 class="origin-pull">I'm a product of the system<br>the CVC exists to <em>protect.</em></h2>
+  <div class="slbl">Background</div>
+  <div class="committee-box reveal">
+    <div class="cb-label">What the hiring committee needs to know first</div>
+    <p>You need someone who can triage a P1 enrollment cascade on a Monday morning without hand-holding — and who won't need six months to learn what the CVC Exchange actually does or why it matters to students. The background below isn't just context. It's the reason I already understand the stakes at every layer of this system, from the student waiting on a course confirmation email to the FA disbursement API call that has to follow it.</p>
+  </div>
+  <div class="origin-layout">
+    <div>
+      <div class="opq reveal">"I'm a product of the system the CVC exists to protect."</div>
+      <div class="obody reveal">
+        <p>I didn't start at a four-year university. I started at <strong>Foothill College</strong> &mdash; the same institution that houses the CVC &mdash; because community college was what I could access.</p>
+        <p>My A.S. thesis was on andragogy: how adults learn, and why traditional systems so often fail them. My B.S. thesis at SJSU: <strong>"Critical Computation: Utilizing Technology for Social Good."</strong></p>
+        <p>When a student can't access a CVC Exchange course because of an enrollment sync failure, or can't receive financial aid because of a data discrepancy nobody caught &mdash; <strong>that's someone's semester.</strong> I know what that feels like from the other side of the screen.</p>
+      </div>
     </div>
-    <div class="origin-body">
-      <p>I didn't start at a four-year university. I started at <strong>Foothill College</strong> — the same institution that houses the CVC — because community college was what I could access. My A.S. thesis was on andragogy: how adults learn, and why traditional systems so often fail them. My B.S. thesis at SJSU was titled <em>"Critical Computation: Utilizing Technology for Social Good."</em></p>
-      <p>Those weren't just academic exercises. They are how I understand the stakes of this work. When a student can't access a CVC Exchange course because of an enrollment sync failure, or can't receive financial aid because of a data discrepancy that nobody caught — that's not a ticket volume problem. That's someone's semester, possibly their degree. <strong>I know what that feels like from the other side of the screen.</strong></p>
-      <p>The CVC's minimum qualification calls for sensitivity to and respect for the diverse backgrounds of community college students. For me that's not a checkbox. It's the reason I'm applying to this role and not the dozens of other analyst positions I could pursue with this background.</p>
+    <div class="tc-cards reveal">
+      <div class="tc">
+        <div class="tc-lbl">A.S. Thesis &middot; Foothill College</div>
+        <div class="tc-title">"Applied Andragogy: Teaching Based on How Learning Works"</div>
+        <div class="tc-body">Why institutional systems fail adult learners &mdash; and how design must meet people where they are.</div>
+      </div>
+      <div class="tc">
+        <div class="tc-lbl">B.S. Thesis &middot; San Jose State University</div>
+        <div class="tc-title">"Critical Computation: Utilizing Technology for Social Good"</div>
+        <div class="tc-body">The ethical obligation of technologists in systems that determine access to education. Not a framework &mdash; a commitment.</div>
+      </div>
+      <div class="tc" style="border-left-color:var(--amber)">
+        <div class="tc-lbl" style="color:var(--amber)">In Progress &middot; Georgia Tech</div>
+        <div class="tc-title">M.S. Computer Science (ML focus, online)</div>
+        <div class="tc-body">Advanced ML study deepening the analytical foundation already driving my support and automation work.</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══ WORK SAMPLES ══ -->
-<section id="samples">
-  <div class="wrap">
-    <p class="s-eyebrow">Work samples</p>
-    <h2>How I actually approach this work.</h2>
-    <p class="s-sub">These samples are drawn from real situations across SMCCD and Faraday Future. They reflect how I structure diagnostics, document compliance workflows, and use data to prevent recurring problems rather than just resolve them.</p>
-
-    <div class="samples-grid">
-
-      <div class="sc">
-        <div class="sc-head">
-          <p class="sc-type">KB Article · Integration Support · From SMCCD</p>
-          <h3 class="sc-title">Diagnosing Enrollment Sync Failures: SIS ↔ CVC Exchange</h3>
-          <p class="sc-ctx">Structure I used at SMCCD for IT-facing KB articles on integration issues — built for someone troubleshooting independently with a queue behind them.</p>
-        </div>
-        <div class="sc-code">
-          <span><span class="ln">1</span><span class="ky">ISSUE:</span> Student cross-enrolled; SIS not updated after 24h</span>
-          <span><span class="ln">2</span><span class="cm">## Symptoms</span></span>
-          <span><span class="ln">3</span><span>- Home SIS shows enrollment "pending" past sync window</span></span>
-          <span><span class="ln">4</span><span>- FA not applied to cross-enrolled course</span></span>
-          <span><span class="ln">5</span><span class="cm">## Triage — Analyst I</span></span>
-          <span><span class="ln">6</span><span><span class="kw">1.</span> Check API token validity: Settings › Integrations › CVC</span></span>
-          <span><span class="ln">7</span><span><span class="kw">2.</span> Compare enrollment timestamp vs. sync window (2–4am PST)</span></span>
-          <span><span class="ln">8</span><span><span class="kw">3.</span> Pull exchange log → HTTP <span class="vl">200</span> on <span class="vl">/api/v2/enrollments</span>?</span></span>
-          <span><span class="ln">9</span><span><span class="kw">4.</span> <span class="vl">401</span>: re-auth + re-trigger → <span class="vl">422</span>: escalate to Analyst II</span></span>
-          <span><span class="ln">10</span><span class="cm">## Escalate pattern: 3+ students, same district, same window</span></span>
-        </div>
-        <div class="sc-tags">
-          <span class="t t-hi">API Troubleshooting</span>
-          <span class="t t-hi">SIS Integration</span>
-          <span class="t t-md">KB Structure</span>
-          <span class="t t-md">Escalation Logic</span>
-        </div>
-      </div>
-
-      <div class="sc">
-        <div class="sc-head">
-          <p class="sc-type">Process Doc · FA Compliance · From SMCCD</p>
-          <h3 class="sc-title">FA Disbursement Verification: Cross-Enrolled Students</h3>
-          <p class="sc-ctx">Adapted from workflow documentation I authored at SMCCD — translating Title IV and state FA regulations into a checklist staff can run without re-reading policy.</p>
-        </div>
-        <div class="sc-code">
-          <span><span class="ln">1</span><span class="ky">PROCESS:</span> Disbursement hold — cross-enrolled student</span>
-          <span><span class="ln">2</span><span class="cm">## Pre-conditions</span></span>
-          <span><span class="ln">3</span><span>- Active FAFSA/CADAA on file at home college</span></span>
-          <span><span class="ln">4</span><span>- Home college is confirmed CVC Consortium member</span></span>
-          <span><span class="ln">5</span><span class="cm">## FA Technician checklist</span></span>
-          <span><span class="ln">6</span><span><span class="kw">□</span> SIS shows correct enrollment intensity (units affect Pell)</span></span>
-          <span><span class="ln">7</span><span><span class="kw">□</span> Census date confirmed passed at teaching college</span></span>
-          <span><span class="ln">8</span><span><span class="kw">□</span> No duplicate COA between home/teaching college</span></span>
-          <span><span class="ln">9</span><span><span class="kw">□</span> Disbursement routing matches verified student record</span></span>
-          <span><span class="ln">10</span><span class="cm">## Escalate: COA conflict / SAP hold / SSN mismatch</span></span>
-        </div>
-        <div class="sc-tags">
-          <span class="t t-hi">FA Compliance</span>
-          <span class="t t-hi">Title IV / CADAA</span>
-          <span class="t t-md">Process Design</span>
-          <span class="t t-md">Staff Workflow</span>
-        </div>
-      </div>
-
-      <div class="sc">
-        <div class="sc-head">
-          <p class="sc-type">Data Analysis · Python · From Faraday Future</p>
-          <h3 class="sc-title">Root Cause Analysis to Reduce Recurring Support Volume</h3>
-          <p class="sc-ctx">At Faraday I ran quarterly ticket analyses like this. The output drove KB article prioritization — turning reactive support into proactive documentation.</p>
-        </div>
-        <div class="sc-code">
-          <span><span class="ln">1</span><span class="cm"># Q1 ticket root cause analysis</span></span>
-          <span><span class="ln">2</span><span><span class="kw">import</span> pandas <span class="kw">as</span> pd</span></span>
-          <span><span class="ln">3</span></span>
-          <span><span class="ln">4</span><span>df = pd.read_csv(<span class="vl">'tickets_q1.csv'</span>)</span></span>
-          <span><span class="ln">5</span><span>top = df.groupby(<span class="vl">'category'</span>)[<span class="vl">'ticket_id'</span>] \</span></span>
-          <span><span class="ln">6</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.count().sort_values(ascending=<span class="vl">False</span>)</span></span>
-          <span><span class="ln">7</span></span>
-          <span><span class="ln">8</span><span class="cm"># Top categories: auth-failure 28%, access-provision 24%,</span></span>
-          <span><span class="ln">9</span><span class="cm">#   onboarding-gap 19%, VPN-config 16%, hardware 13%</span></span>
-          <span><span class="ln">10</span><span class="cm"># Built KB for top 2 → -35% repeat tickets next quarter</span></span>
-        </div>
-        <div class="sc-tags">
-          <span class="t t-hi">Python / Pandas</span>
-          <span class="t t-hi">Trend Analysis</span>
-          <span class="t t-md">KB Prioritization</span>
-          <span class="t t-md">Queue Reduction</span>
-        </div>
-      </div>
-
+<section id="tool-tickets">
+  <div class="slbl">Interactive Tool 01</div>
+  <h2 class="stitle reveal">Live <em>Ticket Triage Queue</em></h2>
+  <div class="screen-cue reveal">
+    <span class="sc-icon">💻</span>
+    <div class="sc-body">
+      <div class="sc-label">Screen Share Moment · ~18 min mark</div>
+      <div class="sc-qs">Best for: <strong>"Walk me through how you'd handle a P1 from first contact to resolution"</strong> or <strong>"How do you prioritize competing incidents?"</strong> — Click any ticket to open the live triage playbook, then hit "+ Simulate New Ticket" to demonstrate live prioritization.</div>
+    </div>
+  </div>
+  <p class="sintro reveal">A real CVC Exchange support queue. Click any ticket to see the full triage playbook &mdash; how I diagnose, escalate, and resolve. Inject a new ticket to see live prioritization.</p>
+  <div class="tool-win reveal">
+    <div class="tool-bar">
+      <div class="tool-dots"><span class="td r"></span><span class="td y"></span><span class="td g"></span></div>
+      <span class="tool-lbl">ServiceNow &mdash; CVC-OEI Support Queue &mdash; Active Incidents</span>
+    </div>
+    <div class="ctrl-row">
+      <button class="cbtn active" onclick="filterQ('all',this)">All <span id="cnt-all">6</span></button>
+      <button class="cbtn" onclick="filterQ('P1',this)">P1 Critical <span id="cnt-p1"></span></button>
+      <button class="cbtn" onclick="filterQ('P2',this)">P2 High <span id="cnt-p2"></span></button>
+      <button class="cbtn" onclick="filterQ('P3',this)">P3 Standard <span id="cnt-p3"></span></button>
+      <button class="cbtn" onclick="filterQ('done',this)">Resolved <span id="cnt-done"></span></button>
+      <button class="cbtn run ml-auto" onclick="injectTicket()">+ Simulate New Ticket</button>
+    </div>
+    <div class="tq-list" id="tqList"></div>
+    <div class="tq-foot">
+      <span>SLA Compliance: <strong id="sla-pct">100%</strong></span>
+      <span>Avg Resolution: <strong>47 min</strong></span>
+      <span>Escalated: <strong id="esc-cnt">0</strong></span>
+      <span>Resolved Today: <strong id="res-cnt">0</strong></span>
     </div>
   </div>
 </section>
 
-<!-- ══ PRODUCT KNOWLEDGE ══ -->
+<section id="tool-api">
+  <div class="slbl">Interactive Tool 02</div>
+  <h2 class="stitle reveal">API Integration <em>Log Analyzer</em></h2>
+  <div class="screen-cue reveal">
+    <span class="sc-icon">💻</span>
+    <div class="sc-body">
+      <div class="sc-label">Screen Share Moment · ~22 min mark</div>
+      <div class="sc-qs">Best for: <strong>"Describe a time you diagnosed a complex integration failure"</strong> or <strong>"How do you tell the difference between an auth issue and a data issue?"</strong> — Load "Auth Failure," run diagnosis, then switch to "Payload Error" to show the distinction live.</div>
+    </div>
+  </div>
+  <p class="sintro reveal">Real-time SIS &harr; CVC-Exchange integration logs. Load a failure scenario, then run diagnosis to see how I isolate root cause: auth failure vs. payload error vs. sync window miss vs. cascade.</p>
+  <div class="api-layout reveal">
+    <div class="api-pane">
+      <div class="api-pane-head">
+        <span><span class="live-dot"></span>/api/v2/enrollments &middot; Live Feed</span>
+        <span id="log-status" style="color:var(--green);font-size:.6rem">&#9679; HEALTHY</span>
+      </div>
+      <div class="log-feed" id="logFeed"></div>
+      <div class="ctrl-row">
+        <button class="cbtn active" onclick="loadSc('healthy',this)">Healthy Sync</button>
+        <button class="cbtn" onclick="loadSc('auth',this)">Auth Failure</button>
+        <button class="cbtn" onclick="loadSc('payload',this)">Payload Error</button>
+        <button class="cbtn" onclick="loadSc('timeout',this)">Sync Timeout</button>
+        <button class="cbtn" onclick="loadSc('cascade',this)">FA Cascade</button>
+        <button class="cbtn run ml-auto" onclick="runDiag()">&#9654; Run Diagnosis</button>
+      </div>
+    </div>
+    <div class="api-pane">
+      <div class="api-pane-head">
+        <span>Diagnosis Output</span>
+        <span id="diag-badge" style="font-size:.6rem;color:var(--muted)">&#8212; Awaiting analysis</span>
+      </div>
+      <div class="diag-feed" id="diagPanel"><span style="color:var(--muted);font-size:.68rem">Select a scenario and click &#9654; Run Diagnosis.</span></div>
+      <div class="ctrl-row">
+        <button class="cbtn" onclick="clearDiag()">Clear</button>
+        <button class="cbtn" onclick="exportDiag()" id="exp-btn" style="display:none">&#8671; Export Report</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tool-sync">
+  <div class="slbl">Interactive Tool 03</div>
+  <h2 class="stitle reveal">CVC Exchange <em>Enrollment Sync Flow</em></h2>
+  <div class="screen-cue reveal">
+    <span class="sc-icon">💻</span>
+    <div class="sc-body">
+      <div class="sc-label">Screen Share Moment · ~28 min mark</div>
+      <div class="sc-qs">Best for: <strong>"Do you understand how the CVC Exchange actually works?"</strong> or <strong>"How would you explain a cascade failure to a non-technical college liaison?"</strong> — Click "Full Cascade Failure" to show the chain reaction, then walk back to "Normal Operation."</div>
+    </div>
+  </div>
+  <p class="sintro reveal">Watch data move between a student's home SIS, the CVC Exchange, Canvas LMS, and the FA system. Inject a failure at any node to see how I trace the cascade in real time.</p>
+  <div class="sync-wrap reveal">
+    <canvas id="syncCanvas"></canvas>
+    <div class="sync-legend">
+      <div class="sl-item"><span class="sl-dot" style="background:var(--green)"></span>Data flowing normally</div>
+      <div class="sl-item"><span class="sl-dot" style="background:var(--amber)"></span>Degraded / warning</div>
+      <div class="sl-item"><span class="sl-dot" style="background:var(--red)"></span>Integration failure</div>
+      <div class="sl-item"><span class="sl-dot" style="background:var(--blue)"></span>Pending / queued</div>
+    </div>
+    <div class="ctrl-row">
+      <button class="cbtn active" onclick="setSyncMode('normal',this)">Normal Operation</button>
+      <button class="cbtn" onclick="setSyncMode('sis-fail',this)">SIS Auth Failure</button>
+      <button class="cbtn" onclick="setSyncMode('canvas-lag',this)">Canvas Provisioning Lag</button>
+      <button class="cbtn" onclick="setSyncMode('fa-hold',this)">FA Disbursement Hold</button>
+      <button class="cbtn" onclick="setSyncMode('cascade',this)">Full Cascade Failure</button>
+    </div>
+  </div>
+</section>
+
+<section id="tool-chart">
+  <div class="slbl">Interactive Tool 04</div>
+  <h2 class="stitle reveal">Ticket Trend <em>Root Cause Analysis</em></h2>
+  <div class="screen-cue reveal">
+    <span class="sc-icon">💻</span>
+    <div class="sc-body">
+      <div class="sc-label">Screen Share Moment · ~35 min mark</div>
+      <div class="sc-qs">Best for: <strong>"How do you use data to improve support outcomes?"</strong> or <strong>"Tell me about a process improvement you drove."</strong> — The bar chart shows the analysis methodology; the trend line shows the measurable impact of the KB article intervention.</div>
+    </div>
+  </div>
+  <p class="sintro reveal">At Faraday Future I ran quarterly Python/pandas ticket analyses that cut repeat support volume 15%. Here's that methodology applied to a CVC Exchange support environment.</p>
+  <div class="chart-layout reveal">
+    <div class="c-pane">
+      <div class="c-head">Ticket Volume by Root Cause &mdash; Q1</div>
+      <div class="c-sub">Shaded bars = KB articles built targeting that category.</div>
+      <div class="bar-chart" id="barChart"></div>
+      <div class="c-insight"><strong>Finding:</strong> Auth failures (SIS token expiry) + enrollment sync window misses account for 52% of total volume. Two targeted KB articles address the majority.</div>
+    </div>
+    <div class="c-pane">
+      <div class="c-head">Weekly Volume &mdash; Before vs. After KB Intervention</div>
+      <div class="c-sub">Implemented KB articles week 8. Shaded region = post-implementation.</div>
+      <div class="trend-wrap"><canvas id="trendCanvas"></canvas></div>
+      <div class="c-insight" style="margin-top:1rem"><strong>Result:</strong> &minus;15% repeat ticket volume within 6 weeks. Auth failure category down 38%. This is the Python &rarr; documentation &rarr; impact pipeline I'd bring to CVC.</div>
+    </div>
+  </div>
+</section>
+
+<section id="mapping" style="background:var(--bg2)">
+  <div class="slbl">JD &rarr; My Background</div>
+  <h2 class="stitle reveal">Every requirement <em>you posted.</em> Mapped.</h2>
+  <p class="sintro reveal" style="margin-bottom:2rem">If you're scanning this between interviews: here's the short version. Every line of the job description maps to a real role, a real system, and a real outcome — not aspirational framing.</p>
+  <div class="map-grid reveal">
+    <div class="m-item"><div class="m-jd">Ticketing &middot; SLA &middot; Incident Management</div><div class="m-my"><strong>ServiceNow &amp; Jira at enterprise scale</strong> &mdash; Tier 1&ndash;2, SLA-bound, multi-department, with KB systems that reduced repeat ticket volume 15%.</div></div>
+    <div class="m-item"><div class="m-jd">Higher Ed SIS &middot; FA &amp; Enrollment Systems</div><div class="m-my">Daily support inside <strong>Banner &amp; PeopleSoft-driven FA and enrollment platforms at SMCCD</strong> &mdash; data validation, integration troubleshooting, Title IV and California compliance.</div></div>
+    <div class="m-item"><div class="m-jd">API Integrations &middot; Data Exchange &middot; Sync Failures</div><div class="m-my">Traced cross-system integration failures at <strong>SMCCD</strong> &mdash; API log analysis, enrollment sync restoration, escalation documentation.</div></div>
+    <div class="m-item"><div class="m-jd">Canvas LMS &middot; Instructional Platforms</div><div class="m-my"><strong>Canvas admin at Rice University</strong> &mdash; SSO failures, auth issues, faculty and student troubleshooting. Same LMS across all 116 CVC Exchange colleges.</div></div>
+    <div class="m-item"><div class="m-jd">Python &middot; JS &middot; SQL &middot; Bash &middot; Linux</div><div class="m-my"><strong>B.S. CS SJSU + M.S. Georgia Tech in progress</strong> &mdash; scripting, pandas data analysis, application lifecycle. Working tools.</div></div>
+    <div class="m-item"><div class="m-jd">Documentation &middot; Training &middot; Remote Work</div><div class="m-my">5+ years <strong>policy-to-workflow translation</strong> at SMCCD + KB authoring. Fully distributed since 2022. Async-first.</div></div>
+  </div>
+  <div class="map-grid reveal" style="margin-top:1.5px;grid-template-columns:1fr">
+    <div class="m-item" style="border-left:3px solid var(--teal)"><div class="m-jd" style="color:var(--teal)">On Banner / PeopleSoft / Colleague Specifically</div><div class="m-my">At SMCCD I worked daily within FA and enrollment systems built on these platforms &mdash; resolving data discrepancies, tracing integration failures, validating student records under Title IV. Working knowledge from the integration and compliance side, backed by a CS foundation to deepen fast.</div></div>
+  </div>
+</section>
+
 <section id="product">
-  <div class="wrap">
-    <p class="s-eyebrow">Platform understanding</p>
-    <h2>I understand what I'd be supporting.</h2>
-    <p class="s-sub">Most applicants know ticketing systems. Fewer understand the CVC Exchange's specific architecture — and why getting it right matters at every layer.</p>
-
-    <div class="pk-grid">
-      <div class="pk-diagram">
-        <p class="pk-d-label">// CVC Exchange ecosystem</p>
-        <div class="pk-row">
-          <div class="pk-node hi">CVC Exchange<small>cvc.edu · SaaS</small></div>
-          <div class="pk-arr">⟷</div>
-          <div class="pk-node">Home College SIS<small>Banner / PS / Colleague</small></div>
-          <div class="pk-arr">⟷</div>
-          <div class="pk-node">Canvas LMS<small>All 115 CCCs</small></div>
-        </div>
-        <div class="pk-row">
-          <div class="pk-node">API Data Exchange<small>Enrollment / FA / Credits</small></div>
-          <div class="pk-arr">⟷</div>
-          <div class="pk-node warm">Teaching College SIS<small>Cross-enrollment target</small></div>
-          <div class="pk-arr">⟷</div>
-          <div class="pk-node">SSO / Identity<small>Auth layer</small></div>
-        </div>
-        <div class="pk-row">
-          <div class="pk-node">Payment Integration<small>Fee processing</small></div>
-          <div class="pk-arr">⟷</div>
-          <div class="pk-node">Financial Aid<small>FAFSA / CADAA</small></div>
-          <div class="pk-arr">⟷</div>
-          <div class="pk-node">CCCCO Compliance<small>State regulations</small></div>
-        </div>
-        <div class="pk-sep"></div>
-        <p class="pk-d-label">// Where my experience maps in</p>
-        <div class="pk-henry">
-          <div class="pk-h">Canvas LMS<br><small>Rice Univ.</small></div>
-          <div class="pk-arr" style="color:var(--accent)">→</div>
-          <div class="pk-h">SIS + FA Systems<br><small>SMCCD</small></div>
-          <div class="pk-arr" style="color:var(--accent)">→</div>
-          <div class="pk-h center">Henry Fan</div>
-          <div class="pk-arr" style="color:var(--accent)">←</div>
-          <div class="pk-h">API + Ticketing<br><small>Faraday / SCC</small></div>
-        </div>
-      </div>
-
-      <div class="pk-copy">
-        <h3>Why the CVC Exchange is harder to support than a typical SaaS platform.</h3>
-        <p>The CVC Exchange isn't one system — it's an API-mediated network connecting 100+ colleges, each with their own SIS configuration, FA rules, Canvas environment, and compliance calendar. A single enrollment failure can cascade: no SIS record means no Canvas access, which means no FA disbursement, which means a student loses their aid.</p>
-        <p><strong>I understand this chain because I've worked at multiple points in it.</strong> At SMCCD I saw what happens downstream when upstream data is wrong. At Rice I saw what Canvas access failures look like to a student who can't get into their course. At SCC Schools I learned how platform bugs propagate differently across institutions with different technical capacity.</p>
-        <p>Supporting the CVC Exchange means understanding the dependencies, not just the tickets. That's the work I'm built for.</p>
-      </div>
+  <div class="slbl">Platform Understanding</div>
+  <h2 class="stitle reveal">I understand what <em>I'd be supporting.</em></h2>
+  <div class="arch-outer reveal">
+    <div class="arch-row">
+      <div class="an"><span class="an-l">CVC Exchange</span><span class="an-s">cvc.edu &middot; SaaS</span></div>
+      <span class="arch-arr">&#8596;</span>
+      <div class="an"><span class="an-l">Home College SIS</span><span class="an-s">Banner / PS / Colleague</span></div>
+      <span class="arch-arr">&#8596;</span>
+      <div class="an"><span class="an-l">Canvas LMS</span><span class="an-s">116 CCCs</span></div>
+      <span class="arch-arr">&#8596;</span>
+      <div class="an"><span class="an-l">Teaching SIS</span><span class="an-s">Cross-enroll target</span></div>
+    </div>
+    <div class="arch-row">
+      <div class="an"><span class="an-l">API Exchange</span><span class="an-s">Enrollment / FA / Credits</span></div>
+      <span class="arch-arr">&#8596;</span>
+      <div class="an"><span class="an-l">SSO / Identity</span><span class="an-s">Auth layer</span></div>
+      <span class="arch-arr">&#8596;</span>
+      <div class="an me"><span class="an-l">Henry Fan</span><span class="an-s">Support Analyst I</span></div>
+      <span class="arch-arr">&#8596;</span>
+      <div class="an"><span class="an-l">Financial Aid</span><span class="an-s">FAFSA / CADAA</span></div>
     </div>
   </div>
+  <div class="arch-leg reveal">
+    <div class="al"><div class="al-l"><span class="al-dot a"></span>Canvas LMS &middot; Rice Univ.</div><div class="al-b">Hands-on SSO, auth failures, faculty &amp; student troubleshooting. Same LMS across all CVC Exchange colleges.</div></div>
+    <div class="al"><div class="al-l"><span class="al-dot"></span>SIS + FA &middot; SMCCD</div><div class="al-b">Daily Banner/PeopleSoft support. Data validation, integration failures, Title IV compliance.</div></div>
+    <div class="al"><div class="al-l"><span class="al-dot"></span>API + Ticketing &middot; Faraday</div><div class="al-b">Enterprise-scale incident management, API integration troubleshooting, pattern analysis in Python.</div></div>
+  </div>
+  <div class="hl-box reveal"><p>The CVC Exchange isn't one system &mdash; it's an API-mediated network connecting 116 colleges, each with their own SIS config, FA rules, Canvas environment, and compliance calendar. A single enrollment failure can cascade: no SIS record &rarr; no Canvas access &rarr; no FA disbursement &rarr; student loses aid. <strong>I understand this chain because I've worked at multiple points in it.</strong></p></div>
 </section>
 
-<!-- ══ EXPERIENCE ══ -->
 <section id="experience">
-  <div class="wrap">
-    <p class="s-eyebrow">Career history</p>
-    <h2>Seven years. Five institutions. One through-line.</h2>
-    <p class="s-sub">Each role added a capability this position draws on simultaneously. Here's the honest story of how they connect.</p>
-
-    <div class="tl">
-      <div class="tl-item">
-        <div>
-          <div class="tm-date">Sep 2024 – Oct 2025</div>
-          <div class="tm-org">SMCCD</div>
-          <span class="tm-badge b-a">Most relevant</span>
-        </div>
-        <div>
-          <h3 class="tl-title">Program Services Coordinator</h3>
-          <p class="tl-body">Supported enterprise financial aid and enrollment systems at San Mateo Community College District — the same CCC district family as Foothill-De Anza. Translated state and federal regulatory requirements into documented staff workflows that reduced processing errors. Collaborated with IT to diagnose system discrepancies in user access, workflow routing, and data visibility across SIS-integrated platforms. Participated in pre-deployment testing for system updates, ensuring compliance before go-live. This role is where I developed direct, applied understanding of how SIS data structures drive financial aid outcomes for students.</p>
-          <div class="tl-chips">
-            <span class="t t-hi">CCC Ecosystem</span><span class="t t-hi">FA / Enrollment Systems</span><span class="t t-hi">Title IV Compliance</span><span class="t t-hi">Workflow Documentation</span><span class="t t-md">SIS Integration</span><span class="t t-md">Pre-deployment Testing</span><span class="t t-md">IT Collaboration</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div>
-          <div class="tm-date">Jan 2023 – Aug 2024</div>
-          <div class="tm-org">Faraday Future</div>
-          <span class="tm-badge b-b">Enterprise scale</span>
-        </div>
-        <div>
-          <h3 class="tl-title">IT Support Specialist</h3>
-          <p class="tl-body">Managed Tier 1–2 support at enterprise scale using ServiceNow and Jira under SLA requirements across multiple departments. Administered Active Directory and M365 provisioning and access control. Built internal KB resources that measurably reduced repeat ticket volume by making common resolutions self-service. Ran quarterly ticket analysis in Python to identify root cause patterns — a practice directly applicable to the CVC's multi-college support environment. Collaborated with engineering on system-level incident escalation.</p>
-          <div class="tl-chips">
-            <span class="t t-hi">ServiceNow</span><span class="t t-hi">Jira</span><span class="t t-hi">Tier 1–2 Support</span><span class="t t-hi">SLA Management</span><span class="t t-md">Python Analysis</span><span class="t t-md">Active Directory</span><span class="t t-md">KB Authoring</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div>
-          <div class="tm-date">Apr 2022 – Dec 2022</div>
-          <div class="tm-org">Rice University</div>
-          <span class="tm-badge b-b">Canvas · LMS</span>
-        </div>
-        <div>
-          <h3 class="tl-title">Applications Technician</h3>
-          <p class="tl-body">Provided technical support for Canvas LMS and institutional academic systems serving faculty, staff, and students. Resolved authentication, SSO, and LMS-related issues with detailed incident tracking. Partnered with academic departments on instructional technology deployment — directly parallel to how the CVC-OEI team supports teaching colleges on the CVC Exchange. This is where I developed hands-on Canvas troubleshooting experience with the same LMS the CVC Exchange integrates with across all 115 colleges.</p>
-          <div class="tl-chips">
-            <span class="t t-hi">Canvas LMS</span><span class="t t-hi">SSO / Auth</span><span class="t t-hi">Instructional Tech</span><span class="t t-md">Incident Tracking</span><span class="t t-md">Faculty Support</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div>
-          <div class="tm-date">Jan 2022 – Jan 2024</div>
-          <div class="tm-org">Santa Clara County Schools</div>
-          <span class="tm-badge b-b">Multi-institutional</span>
-        </div>
-        <div>
-          <h3 class="tl-title">IT Technical Systems</h3>
-          <p class="tl-body">Supported digital learning platforms deployed across K–12 partner institutions statewide — operationally analogous to the CVC-OEI's multi-college support model. Analyzed support ticket trends to identify root causes and inform platform improvements. Coordinated with product and engineering teams on bug escalation. Created technical guidance materials for scalable adoption across institutions with widely varying technical capacity — which is exactly the constraint CVC Exchange documentation must navigate across 100+ colleges.</p>
-          <div class="tl-chips">
-            <span class="t t-hi">Multi-Institutional Support</span><span class="t t-hi">Ticket Trend Analysis</span><span class="t t-md">Vendor Coordination</span><span class="t t-md">Scalable Documentation</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div>
-          <div class="tm-date">Feb 2017 – Mar 2022</div>
-          <div class="tm-org">Foothill College & SJSU</div>
-          <span class="tm-badge b-b">Foundation</span>
-        </div>
-        <div>
-          <h3 class="tl-title">Curriculum Developer</h3>
-          <p class="tl-body">Designed peer-learning environments for CS fundamentals at Foothill College — the institution that houses the CVC. Applied learning analytics to measure and improve student outcomes. Created training materials and documentation for facilitators working with technical platforms under time pressure. This role is where I developed my model of the end user: a community college student navigating new technology while managing work, family, and financial stress. That model shapes how I write documentation, design triage flows, and prioritize what gets resolved first.</p>
-          <div class="tl-chips">
-            <span class="t t-hi">Foothill College</span><span class="t t-hi">CCC Student Experience</span><span class="t t-md">Learning Analytics</span><span class="t t-md">Technical Training</span><span class="t t-md">Curriculum Design</span>
-          </div>
-        </div>
-      </div>
+  <div class="slbl">Career History</div>
+  <h2 class="stitle reveal">Seven years. Five institutions. <em>One through-line.</em></h2>
+  <div class="timeline">
+    <div class="tl reveal">
+      <div class="tl-meta"><div class="tl-dt">Sep 2024 &ndash; Oct 2025</div><div class="tl-org">SMCCD &amp; FHDA</div><span class="tl-badge hi">Most Relevant</span></div>
+      <div><div class="tl-role">Program Services Coordinator</div><div class="tl-body">Supported enterprise financial aid and enrollment systems at <strong>San Mateo Community College District</strong> &mdash; the same CCC district family as Foothill-De Anza. Translated state and federal regulatory requirements into documented staff workflows that reduced processing errors. Diagnosed system discrepancies across SIS-integrated platforms. Participated in pre-deployment testing for system updates, ensuring compliance before go-live. Conducted root cause analysis on recurring system breakdowns.</div><div class="tl-tags"><span class="ttag">CCC Ecosystem</span><span class="ttag">Banner / PeopleSoft</span><span class="ttag">Title IV</span><span class="ttag">Workflow Docs</span><span class="ttag">SIS Integration</span><span class="ttag">Pre-deploy Testing</span><span class="ttag">Root Cause Analysis</span></div></div>
+    </div>
+    <div class="tl reveal">
+      <div class="tl-meta"><div class="tl-dt">May 2023 &ndash; Aug 2024</div><div class="tl-org">Faraday Future</div><span class="tl-badge">Enterprise Scale</span></div>
+      <div><div class="tl-role">IT Support Specialist</div><div class="tl-body">Managed Tier 1&ndash;2 support at enterprise scale using <strong>ServiceNow and Jira</strong> under SLA requirements. Administered Active Directory and M365 provisioning. Built internal KB resources. <strong>Ran quarterly ticket analysis in Python (pandas)</strong> to identify root cause patterns &mdash; reducing repeat support volume 15%. Collaborated with engineering on incident escalation.</div><div class="tl-tags"><span class="ttag">ServiceNow</span><span class="ttag">Jira</span><span class="ttag">SLA Management</span><span class="ttag">Python Analytics</span><span class="ttag">Active Directory</span><span class="ttag">KB Authoring</span></div></div>
+    </div>
+    <div class="tl reveal">
+      <div class="tl-meta"><div class="tl-dt">Apr 2022 &ndash; Dec 2022</div><div class="tl-org">Rice University</div><span class="tl-badge">Canvas &middot; LMS</span></div>
+      <div><div class="tl-role">Applications Technician</div><div class="tl-body">Provided technical support for <strong>Canvas LMS</strong> and institutional academic systems. Resolved authentication, SSO, and LMS-related issues with detailed incident tracking. Partnered with academic departments on instructional technology deployment &mdash; directly parallel to CVC-OEI support model.</div><div class="tl-tags"><span class="ttag">Canvas LMS</span><span class="ttag">SSO / Auth</span><span class="ttag">Incident Tracking</span><span class="ttag">Faculty Support</span></div></div>
+    </div>
+    <div class="tl reveal">
+      <div class="tl-meta"><div class="tl-dt">Aug 2019 &ndash; Mar 2022</div><div class="tl-org">San Jose State University</div><span class="tl-badge">Multi-Institutional</span></div>
+      <div><div class="tl-role">Technical Product Support</div><div class="tl-body">Applied <strong>learning analytics to identify student-system interaction bottlenecks</strong> and inform platform improvements. Designed data-informed feedback systems bridging student services and instructional technology.</div><div class="tl-tags"><span class="ttag">Learning Analytics</span><span class="ttag">Platform Support</span><span class="ttag">Student Outcomes</span></div></div>
+    </div>
+    <div class="tl reveal">
+      <div class="tl-meta"><div class="tl-dt">Jan 2017 &ndash; Jun 2020</div><div class="tl-org">Foothill College &amp; SJSU</div><span class="tl-badge">Foundation</span></div>
+      <div><div class="tl-role">Curriculum Developer</div><div class="tl-body">Designed peer-learning environments for CS fundamentals at <strong>Foothill College</strong> &mdash; the institution that houses the CVC. Applied learning analytics. This role is where I developed my model of the end user: a community college student navigating technology while managing work, family, and financial stress. That model shapes every KB article and triage flow I write.</div><div class="tl-tags"><span class="ttag">Foothill College</span><span class="ttag">CCC Student UX</span><span class="ttag">Learning Analytics</span><span class="ttag">Technical Training</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- ══ STACK ══ -->
 <section id="stack">
-  <div class="wrap">
-    <p class="s-eyebrow">Technical skills</p>
-    <h2>What I bring to the tools the JD names.</h2>
-    <p class="s-sub">Mapped directly to the JD's required knowledge areas. Each entry includes where this skill was actually applied, not just learned.</p>
-
-    <div class="sk-grid">
-      <div class="sk">
-        <div class="sk-icon">🐍</div>
-        <h3 class="sk-name">Python</h3>
-        <p class="sk-body">Scripting, data analysis, automation. Quarterly ticket analysis at Faraday; CS coursework and projects. JD-listed language.</p>
-        <div class="sk-bar">Proficient <div class="bar"><div class="fill f72"></div></div></div>
-      </div>
-      <div class="sk">
-        <div class="sk-icon">🌐</div>
-        <h3 class="sk-name">JavaScript / HTML / CSS</h3>
-        <p class="sk-body">Web application logic and front-end development. CS degree foundation, applied project work. JD-listed languages.</p>
-        <div class="sk-bar">Proficient <div class="bar"><div class="fill f72"></div></div></div>
-      </div>
-      <div class="sk">
-        <div class="sk-icon">🗄️</div>
-        <h3 class="sk-name">SQL / PL/SQL / Oracle DB</h3>
-        <p class="sk-body">Data querying, validation, relational database operations. CS coursework + data workflow support in FA/enrollment environments. JD-listed.</p>
-        <div class="sk-bar">Working knowledge <div class="bar"><div class="fill f60"></div></div></div>
-      </div>
-      <div class="sk">
-        <div class="sk-icon">🐧</div>
-        <h3 class="sk-name">Linux / Bash</h3>
-        <p class="sk-body">Linux OS fundamentals, Bash scripting for automation and data processing. CS core curriculum. JD-listed knowledge area.</p>
-        <div class="sk-bar">Proficient <div class="bar"><div class="fill f72"></div></div></div>
-      </div>
-      <div class="sk">
-        <div class="sk-icon">🔌</div>
-        <h3 class="sk-name">REST APIs & Integrations</h3>
-        <p class="sk-body">Integration failure troubleshooting, API log analysis, JSON validation. Applied at SMCCD and SCC Schools on cross-platform data exchange.</p>
-        <div class="sk-bar">Working knowledge <div class="bar"><div class="fill f60"></div></div></div>
-      </div>
-      <div class="sk">
-        <div class="sk-icon">🏫</div>
-        <h3 class="sk-name">Canvas LMS</h3>
-        <p class="sk-body">Admin support, SSO and authentication issues, faculty and student troubleshooting. Rice University. Same platform integrated across all CVC Exchange colleges.</p>
-        <div class="sk-bar">Hands-on <div class="bar"><div class="fill f72"></div></div></div>
-      </div>
-      <div class="sk">
-        <div class="sk-icon">📋</div>
-        <h3 class="sk-name">SIS Platforms (Banner / PeopleSoft / Colleague)</h3>
-        <p class="sk-body">Daily support work inside FA and enrollment systems on these platforms at SMCCD — data validation, integration troubleshooting, Title IV compliance workflows.</p>
-        <div class="sk-bar">Working knowledge <div class="bar"><div class="fill f72"></div></div></div>
-      </div>
-      <div class="sk">
-        <div class="sk-icon">🎫</div>
-        <h3 class="sk-name">ServiceNow / Jira</h3>
-        <p class="sk-body">Enterprise ticketing, SLA management, incident tracking, escalation logic, KB authoring. Primary tools at Faraday Future, daily use.</p>
-        <div class="sk-bar">Expert <div class="bar"><div class="fill f90"></div></div></div>
-      </div>
-      <div class="sk">
-        <div class="sk-icon">🔐</div>
-        <h3 class="sk-name">Active Directory / M365 / SSO</h3>
-        <p class="sk-body">User provisioning, access control, identity management, security compliance. Daily use at Faraday and Rice University.</p>
-        <div class="sk-bar">Proficient <div class="bar"><div class="fill f80"></div></div></div>
-      </div>
-      <div class="sk">
-        <div class="sk-icon">💬</div>
-        <h3 class="sk-name">Remote Collaboration</h3>
-        <p class="sk-body">Zoom, Slack, G-Suite, Office 365. Every role since 2022 fully distributed. Async documentation and communication are default for me, not an adjustment.</p>
-        <div class="sk-bar">Expert <div class="bar"><div class="fill f90"></div></div></div>
-      </div>
-    </div>
-  </div>
+  <div class="slbl">Technical Skills</div>
+  <h2 class="stitle reveal">What I bring to the tools <em>the JD names.</em></h2>
+  <div class="stack-g reveal" id="stackGrid"></div>
 </section>
 
-<!-- ══ CLOSE ══ -->
 <section id="close">
-  <p class="s-eyebrow">Let's connect</p>
-  <h2>The context I bring isn't on a résumé.</h2>
-  <p class="close-p">
-    Seven years of working inside and around California Community College systems. A CS degree built on top of a Foothill education. A direct, personal stake in the equity mission the CVC was created to advance. <strong>I'd welcome the conversation about what that means for your team.</strong>
-  </p>
-  <div class="clinks">
-    <a href="mailto:fansofhenry@gmail.com" class="cl cl-w">fansofhenry@gmail.com</a>
-    <a href="https://linkedin.com/in/fansofhenry" target="_blank" class="cl cl-g">linkedin.com/in/fansofhenry</a>
-    <a href="tel:6508235997" class="cl cl-g">650 823 5997</a>
+  <div class="slbl" style="justify-content:center;margin-bottom:2rem">Let's Connect</div>
+  <h2 class="c-hl reveal">The context I bring <em>isn't on a r&eacute;sum&eacute;.</em></h2>
+  <p class="c-sub reveal">Seven years working inside California Community College systems. A CS degree built on top of a Foothill education. A direct, personal stake in the equity mission the CVC was created to advance. I'm ready to talk — and I'm prepared to show, not just tell.</p>
+  <div style="max-width:52ch;margin:1.6rem auto 0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);line-height:1.8;opacity:.85" class="reveal">Resume, references, and writing samples available on request.<br>This page lives at my GitHub — built for this role, built to run without a server.</div>
+  <div class="c-links reveal">
+    <a href="mailto:henryfan@alumni.sjsu.edu" class="c-link"><span class="c-lbl">Email</span><span class="c-val">henryfan@alumni.sjsu.edu</span></a>
+    <a href="https://linkedin.com/in/fansofhenry" class="c-link" target="_blank"><span class="c-lbl">LinkedIn</span><span class="c-val">linkedin.com/in/fansofhenry</span></a>
+    <a href="tel:6508235997" class="c-link"><span class="c-lbl">Phone</span><span class="c-val">(650) 823-5997</span></a>
   </div>
 </section>
-
 <footer>
-  <p>© Henry Fan · Los Altos Hills, CA · fansofhenry@gmail.com</p>
+  <span class="f-c">&copy; Henry Fan &middot; Los Altos Hills, CA</span>
+  <span class="f-c">Application Support Analyst I &middot; CVC-OEI &middot; FHDA</span>
 </footer>
 
 <script>
-  // Timeline reveal on scroll
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('show'), i * 65);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.06 });
-  document.querySelectorAll('.tl-item').forEach(el => obs.observe(el));
+// ── HERO CANVAS ──────────────────────────────────────────────────
+(function(){
+  var c=document.getElementById('heroCanvas'),ctx=c.getContext('2d'),W,H,nodes=[];
+  function resize(){W=c.width=c.parentElement.offsetWidth;H=c.height=c.parentElement.offsetHeight;}
+  resize();window.addEventListener('resize',function(){resize();init();});
+  function init(){nodes=[];for(var i=0;i<55;i++)nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*2+1,p:Math.random()*Math.PI*2});}
+  init();
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<nodes.length;i++){var a=nodes[i];for(var j=i+1;j<nodes.length;j++){var b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);if(d<160){ctx.strokeStyle='rgba(232,160,32,'+(1-d/160)*.22+')';ctx.lineWidth=.6;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}}
+    nodes.forEach(function(n){n.p+=.02;var g=Math.sin(n.p)*.5+.5;ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle='rgba(232,160,32,'+(0.25+g*.4)+')';ctx.fill();n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;});
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 
-  // Nav active state
-  const navLinks = document.querySelectorAll('nav a');
-  const sections = document.querySelectorAll('section[id]');
-  const navObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        navLinks.forEach(a => a.classList.remove('on'));
-        const match = document.querySelector(`nav a[href="#${e.target.id}"]`);
-        if (match) match.classList.add('on');
-      }
+// ── NAV ──────────────────────────────────────────────────────────
+window.addEventListener('scroll',function(){document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);});
+
+// ── REVEAL ───────────────────────────────────────────────────────
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('visible');},i*70);obs.unobserve(e.target);}});},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+// ── TICKET QUEUE ─────────────────────────────────────────────────
+var TICKETS=[
+  {id:'TKT-0044',s:'Student unable to cross-enroll',d:'Cross-enrollment record not propagating to home SIS after 30+ hours',c:'De Anza College',p:'P1',a:'2h 14m',
+   steps:[{t:'Verify enrollment exists in CVC Exchange',q:'GET /api/v2/enrollments?student_id=<id> &mdash; confirm HTTP 200 and payload'},{t:'Check home SIS sync log for this district',q:'Admin &rsaquo; Integrations &rsaquo; De Anza &rsaquo; Last Sync: compare timestamp vs enrollment creation'},{t:'Inspect API token validity for De Anza SIS',q:'If 401 on sync: re-authenticate via Settings &rsaquo; District API Keys'},{t:'Force manual sync trigger',q:'POST /api/v2/sync/trigger { district: "deanza", force: true }'},{t:'Escalate if record not in SIS within 15 minutes',q:'Escalate to Analyst II with: ticket ID, API response, sync log excerpt, student ID'}]},
+  {id:'TKT-0047',s:'SIS enrollment sync degraded &mdash; multiple students',d:'Multiple students from same district pending past sync window',c:'De Anza College',p:'P1',a:'4h 03m',
+   steps:[{t:'Identify scope: all pending students for this district',q:'SELECT * FROM sync_log WHERE district=\'deanza\' AND status=\'pending\' AND age &gt; 4h'},{t:'Check API gateway logs for district-level errors',q:'Look for repeated 401 (token), 503 (SIS down), 422 (payload schema mismatch)'},{t:'Confirm sync window configuration',q:'Sync window: 2:00&ndash;4:00 AM PST. Check error_log table for silent failures'},{t:'3+ students same district same window = escalate',q:'This qualifies &mdash; escalate to Analyst II + notify district IT coordinator'},{t:'Document incident for SLA reporting',q:'Open P1 SLA clock. Notify supervisor. Log all steps with timestamps.'}]},
+  {id:'TKT-0049',s:'Canvas course access failure after enrollment',d:'Student enrolled in CVC course but receiving 403 on Canvas access',c:'Foothill College',p:'P2',a:'58m',
+   steps:[{t:'Confirm enrollment synced to Canvas from CVC Exchange',q:'Canvas Admin &rsaquo; Courses &rsaquo; [course] &rsaquo; Enrollments &mdash; verify student appears'},{t:'Check SSO/auth chain: CCC Apply &rarr; CVC Exchange &rarr; Canvas',q:'Test SSO flow for this student. Common failure: CCC ID not matching Canvas SIS ID field'},{t:'Verify Canvas provisioning completed (can take up to 1h)',q:'If enrolled &lt; 60 min ago: advise student to wait and retry. Log and monitor.'},{t:'Manual course enrollment as workaround if SSO confirmed broken',q:'Canvas Admin &rsaquo; Enroll User &mdash; document as workaround pending SSO fix'},{t:'File Canvas SSO bug with vendor if pattern across multiple students',q:'Check if other Foothill students affected. If 2+, escalate to vendor rep.'}]},
+  {id:'TKT-0051',s:'Authentication failure at login',d:'Faculty at Ca&ntilde;ada College unable to authenticate into CVC Exchange admin portal',c:'Ca&ntilde;ada College',p:'P1',a:'23m',
+   steps:[{t:'Confirm whether issue is user-specific or district-wide',q:'Test: Can other Ca&ntilde;ada College users authenticate? Check recent auth logs for district.'},{t:'Verify Active Directory / SSO configuration for Ca&ntilde;ada',q:'Check IdP metadata: is the SAML assertion expiry current? Certificate rotation recent?'},{t:'Check for recent configuration changes at Ca&ntilde;ada IT',q:'Contact district IT: "Were there any IdP config changes or certificate updates in the last 48h?"'},{t:'Temporary workaround: direct login bypass if local accounts enabled',q:'Enable local auth as temporary measure. Document and set expiry window.'},{t:'Escalate to Identity/SSO team if SAML metadata needs update',q:'Provide: error log, SAML response XML, district contact info'}]},
+  {id:'TKT-0053',s:'Financial aid not applied to cross-enrolled course',d:'Student Pell Grant not disbursing for teaching college course',c:'Skyline College',p:'P2',a:'1d 6h',
+   steps:[{t:'Verify FA eligibility pre-conditions',q:'Active FAFSA/CADAA on file. Home college confirmed CVC Consortium member. Enrollment intensity correct.'},{t:'Confirm census date has passed at teaching college',q:'FA cannot disburse before census. If not passed: advise student &mdash; timeline issue, not system issue.'},{t:'Check for duplicate Cost of Attendance between colleges',q:'Duplicate COA is a Title IV compliance block. Requires FA staff intervention at both colleges.'},{t:'Verify disbursement routing matches verified student record',q:'Routing: student_id &rarr; home_college &rarr; FA system &rarr; disbursement account'},{t:'Escalate to FA compliance team with full record summary',q:'This requires human FA staff review. Provide: student record export, COA comparison, census dates'}]},
+  {id:'TKT-0055',s:'Data export format mismatch',d:'District receiving enrollment export in unexpected schema version &mdash; import failing',c:'Mission College',p:'P3',a:'3d 2h',
+   steps:[{t:'Identify which schema version district expects vs. what CVC sends',q:'Contact district IT: "Are you expecting schema v2.1 or v2.3?" &mdash; check their SIS import spec'},{t:'Review recent API changelog for schema updates',q:'Check: api.cvc.edu/changelog &mdash; any v2.x schema changes in last release cycle?'},{t:'Test export with target schema version in staging',q:'Generate sample export &rarr; validate against district XSD/JSON schema spec'},{t:'Provide district IT with schema migration guide or mapping table',q:'Author KB article mapping old vs. new field names if not already documented'},{t:'Schedule coordinated re-export after district updates import process',q:'Set calendar reminder. Document outcome for future districts on v2.1.'}]}
+];
+
+var activeF='all',openId=null,resolvedIds=[],escalatedIds=[],injCount=0;
+
+function renderQ(){
+  var list=document.getElementById('tqList');list.innerHTML='';
+  var visible=TICKETS.filter(function(t){
+    if(activeF==='all')return true;
+    if(activeF==='done')return resolvedIds.indexOf(t.id)>-1;
+    if(activeF==='P1'||activeF==='P2'||activeF==='P3')return t.p===activeF&&resolvedIds.indexOf(t.id)===-1;
+    return true;
+  });
+  if(!visible.length){list.innerHTML='<div style="padding:2rem;text-align:center;font-family:JetBrains Mono,monospace;font-size:.68rem;color:var(--muted)">No tickets match this filter.</div>';updateCounts();return;}
+  visible.forEach(function(t){
+    var done=resolvedIds.indexOf(t.id)>-1;
+    var row=document.createElement('div');
+    row.className='t-row '+t.p.toLowerCase()+(done?' done':'');
+    row.innerHTML='<span class="t-id">'+t.id+'</span><span class="t-subj">'+t.s+'<small>'+t.d+'</small></span><span class="t-col">'+t.c+'</span><span class="t-pri '+(done?'DONE':t.p)+'">'+(done?'RESOLVED':t.p)+'</span><span class="t-age">'+t.a+'</span>';
+    row.addEventListener('click',function(){toggleDet(t.id);});
+    list.appendChild(row);
+    var det=document.createElement('div');
+    det.className='t-det'+(openId===t.id?' open':'');
+    det.id='det-'+t.id;
+    var stepsHtml=t.steps.map(function(s,i){return '<div class="ts"><span class="ts-num">'+(i<9?'0':'')+(i+1)+'</span><span class="ts-txt">'+s.t+'<br><code>'+s.q+'</code></span></div>';}).join('');
+    var actionsHtml=done?'<div style="margin-top:.8rem;font-family:JetBrains Mono,monospace;font-size:.66rem;color:var(--green)">&#10003; Ticket resolved</div>':'<div class="tdet-actions"><button class="cbtn" style="border-color:rgba(76,175,128,.3);color:var(--green)" onclick="resolveT(\''+t.id+'\',event)">&#10003; Mark Resolved</button><button class="cbtn" onclick="escalateT(\''+t.id+'\',event)">&#8593; Escalate to Analyst II</button><button class="cbtn" onclick="copyT(\''+t.id+'\',event)">&#10034; Copy Triage Notes</button></div>';
+    det.innerHTML='<div class="tdet-head"><div class="tdet-title">'+t.s+'</div><button class="cbtn" onclick="toggleDet(\''+t.id+'\')">&#x2715; Close</button></div><div class="tdet-meta"><div class="tdet-meta-item"><strong>ID</strong>'+t.id+'</div><div class="tdet-meta-item"><strong>College</strong>'+t.c+'</div><div class="tdet-meta-item"><strong>Priority</strong>'+t.p+'</div><div class="tdet-meta-item"><strong>Age</strong>'+t.a+'</div></div><div class="tdet-steps">'+stepsHtml+'</div>'+actionsHtml;
+    list.appendChild(det);
+  });
+  updateCounts();
+}
+
+function toggleDet(id){openId=(openId===id?null:id);renderQ();if(openId){setTimeout(function(){var el=document.getElementById('det-'+openId);if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'});},60);}}
+function resolveT(id,e){e.stopPropagation();if(resolvedIds.indexOf(id)===-1)resolvedIds.push(id);openId=null;renderQ();document.getElementById('res-cnt').textContent=resolvedIds.length;}
+function escalateT(id,e){e.stopPropagation();if(escalatedIds.indexOf(id)===-1)escalatedIds.push(id);alert('Ticket '+id+' escalated to Analyst II with full diagnostic trail.');document.getElementById('esc-cnt').textContent=escalatedIds.length;}
+function copyT(id,e){e.stopPropagation();var t=TICKETS.find(function(x){return x.id===id;});var txt=t.steps.map(function(s,i){return (i+1)+'. '+s.t.replace(/&mdash;/g,'--').replace(/&rsaquo;/g,'>').replace(/&rarr;/g,'->');}).join('\n');navigator.clipboard&&navigator.clipboard.writeText(txt).then(function(){alert('Triage notes copied!');});}
+function filterQ(f,btn){activeF=f;document.querySelectorAll('.ctrl-row .cbtn:not(.run):not(.ml-auto)').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');openId=null;renderQ();}
+function updateCounts(){
+  var p1=TICKETS.filter(function(t){return t.p==='P1'&&resolvedIds.indexOf(t.id)===-1;}).length;
+  var p2=TICKETS.filter(function(t){return t.p==='P2'&&resolvedIds.indexOf(t.id)===-1;}).length;
+  var p3=TICKETS.filter(function(t){return t.p==='P3'&&resolvedIds.indexOf(t.id)===-1;}).length;
+  document.getElementById('cnt-all').textContent=TICKETS.length;
+  document.getElementById('cnt-p1').textContent=p1;
+  document.getElementById('cnt-p2').textContent=p2;
+  document.getElementById('cnt-p3').textContent=p3;
+  document.getElementById('cnt-done').textContent=resolvedIds.length;
+  var openCount=TICKETS.length-resolvedIds.length;
+  document.getElementById('sla-pct').textContent=(openCount===0?100:Math.max(78,100-p1*5))+'%';
+}
+function injectTicket(){
+  injCount++;
+  var colleges=['West Valley College','Merced College','City College of SF','Fresno City College'];
+  var issues=['Student cannot view course materials post-enrollment','Grade transfer delayed after course completion','Canvas enrollment active but student locked out','Email confirmation not sent after cross-enrollment'];
+  var pris=['P1','P2','P3'];
+  var p=pris[Math.floor(Math.random()*3)];
+  TICKETS.unshift({id:'TKT-0'+(60+injCount),s:issues[Math.floor(Math.random()*issues.length)],d:'Simulated inbound ticket &mdash; just arrived in queue',c:colleges[Math.floor(Math.random()*colleges.length)],p:p,a:'0m',
+   steps:[{t:'Reproduce the issue and verify with user',q:'Ask user to share screenshot or error. Attempt to reproduce in test environment.'},{t:'Check recent system changes or deployments',q:'Review change log for last 48h. Any CVC Exchange releases or SIS config updates?'},{t:'Isolate: user-specific vs. systemic',q:'Test with another user account. If same error: systemic. If isolated: user config issue.'},{t:'Apply known resolution or escalate',q:'Check KB for matching pattern. If no match and unresolved in 30m: escalate to Analyst II.'}]});
+  renderQ();
+}
+renderQ();
+
+// ── API LOG ANALYZER ─────────────────────────────────────────────
+var SCENARIOS={
+  healthy:{label:'&#9679; HEALTHY',color:'var(--green)',logs:[
+    {ts:'08:14:02',c:'200',t:'s',m:'GET /api/v2/enrollments &mdash; 847 records synced'},
+    {ts:'08:14:03',c:'200',t:'s',m:'POST /api/v2/enrollments/batch &mdash; 23 new enrollments committed'},
+    {ts:'08:14:05',c:'200',t:'s',m:'GET /api/v2/students/verify &mdash; identity confirmed &times; 23'},
+    {ts:'08:14:07',c:'200',t:'s',m:'PUT /api/v2/canvas/provision &mdash; LMS seats allocated'},
+    {ts:'08:14:09',c:'200',t:'s',m:'POST /api/v2/fa/notify &mdash; FA disbursement triggered &times; 17'},
+    {ts:'08:14:11',c:'200',t:'s',m:'SYNC COMPLETE &mdash; 0 errors, 0 warnings'},
+  ],d:{title:'HEALTHY SYNC &mdash; No Action Required',color:'var(--green)',checks:[{t:'ok',v:'API token valid and unexpired'},{t:'ok',v:'Enrollment batch accepted (HTTP 200)'},{t:'ok',v:'Student identity verification passed &times; 23'},{t:'ok',v:'Canvas provisioning completed'},{t:'ok',v:'FA disbursement triggered successfully'}],root:'No root cause &mdash; system operating normally.',fix:'Continue monitoring. No action required. Document as successful sync in log.'}},
+  auth:{label:'&#9679; AUTH FAILURE',color:'var(--red)',logs:[
+    {ts:'02:01:14',c:'401',t:'e',m:'GET /api/v2/enrollments &mdash; Unauthorized: token expired'},
+    {ts:'02:01:14',c:'401',t:'e',m:'Retry 1/3: GET /api/v2/enrollments &mdash; 401 Unauthorized'},
+    {ts:'02:01:15',c:'401',t:'e',m:'Retry 2/3: GET /api/v2/enrollments &mdash; 401 Unauthorized'},
+    {ts:'02:01:16',c:'401',t:'e',m:'Retry 3/3: GET /api/v2/enrollments &mdash; 401 Unauthorized'},
+    {ts:'02:01:16',c:'503',t:'e',m:'SYNC ABORTED &mdash; Auth failure after 3 retries'},
+    {ts:'02:01:16',c:'ERR',t:'e',m:'16 students pending enrollment &mdash; NOT processed'},
+  ],d:{title:'ROOT CAUSE: API TOKEN EXPIRED',color:'var(--red)',checks:[{t:'err',v:'HTTP 401 on initial request and all 3 retries'},{t:'err',v:'Sync aborted &mdash; 16 students NOT processed'},{t:'warn',v:'Token rotation schedule: last rotated 89 days ago (threshold: 90d)'},{t:'ok',v:'SIS endpoint reachable (connection established before 401)'},{t:'ok',v:'No network or firewall issues detected'}],root:'API token expired or revoked. Token age: 89 days. Rotation threshold exceeded.',fix:'1. Settings &rsaquo; District API Keys &rsaquo; [District] &rsaquo; Rotate token\n2. Update integration config with new value\n3. Re-trigger sync: POST /api/v2/sync/trigger { force: true }\n4. Verify 16 pending enrollments processed\n5. Set token rotation reminder for T+85 days'}},
+  payload:{label:'&#9679; PAYLOAD ERROR',color:'var(--amber)',logs:[
+    {ts:'03:15:00',c:'200',t:'s',m:'GET /api/v2/enrollments &mdash; connected'},
+    {ts:'03:15:01',c:'422',t:'e',m:'POST /api/v2/enrollments/batch &mdash; Unprocessable Entity'},
+    {ts:'03:15:01',c:'422',t:'e',m:'Error: field "enrollment_intensity" missing in 4 records'},
+    {ts:'03:15:01',c:'422',t:'e',m:'Error: "student_id" format mismatch &mdash; expected 9-digit, got 8'},
+    {ts:'03:15:02',c:'207',t:'w',m:'Partial commit: 19/23 records accepted, 4 rejected'},
+    {ts:'03:15:02',c:'200',t:'s',m:'Canvas provisioning: 19 students &mdash; 4 students SKIPPED'},
+  ],d:{title:'ROOT CAUSE: SIS EXPORT SCHEMA MISMATCH',color:'var(--amber)',checks:[{t:'ok',v:'API token valid &mdash; authentication passed'},{t:'err',v:'4 records rejected (HTTP 422) &mdash; schema validation failure'},{t:'err',v:'Field "enrollment_intensity" missing in affected records'},{t:'err',v:'student_id: SIS sending 8-digit, CVC expects 9-digit (leading zero missing)'},{t:'warn',v:'Partial commit: 19/23 processed &mdash; 4 students without Canvas or FA access'}],root:'District SIS export schema diverged from CVC v2.3 spec. Likely caused by a SIS version update at district.',fix:'1. Contact district IT: request SIS export spec, confirm recent version update\n2. Identify 4 affected student IDs from 422 error response body\n3. Manually provision those 4 students as immediate workaround\n4. Author schema migration guide for district\n5. Re-process rejected records after district corrects export format'}},
+  timeout:{label:'&#9679; SYNC TIMEOUT',color:'var(--amber)',logs:[
+    {ts:'02:00:00',c:'200',t:'s',m:'Sync job initiated &mdash; 1,204 records queued'},
+    {ts:'02:00:01',c:'200',t:'s',m:'Processing batch 1/12 &mdash; 100 records'},
+    {ts:'02:14:22',c:'200',t:'s',m:'Processing batch 6/12 &mdash; 100 records (7&times; slower than baseline)'},
+    {ts:'02:29:58',c:'408',t:'e',m:'Request Timeout &mdash; batch 7/12 exceeded 15min limit'},
+    {ts:'02:30:00',c:'503',t:'w',m:'Sync suspended &mdash; 603 records pending'},
+    {ts:'02:30:01',c:'WRN',t:'w',m:'Sync window closing in 30 minutes (window: 2&ndash;4 AM PST)'},
+  ],d:{title:'ROOT CAUSE: SYNC WINDOW OVERRUN &mdash; DISTRICT SIS PERFORMANCE',color:'var(--amber)',checks:[{t:'ok',v:'API token valid, connection healthy'},{t:'warn',v:'Batch processing rate: 100 records / 14 min (expected: 100 records / 2 min)'},{t:'err',v:'Batch 7 timed out &mdash; 603 records unprocessed'},{t:'warn',v:'Sync window: 2:00&ndash;4:00 AM PST &mdash; only 30 minutes remaining'},{t:'err',v:'603 students NOT enrolled in Canvas or notified to FA'}],root:'District SIS responding 7&times; slower than baseline. Likely: scheduled maintenance task running concurrently with sync window.',fix:'1. Notify district IT of performance degradation during sync window\n2. Request SIS maintenance schedule to avoid 2&ndash;4 AM window\n3. Re-trigger sync: POST /api/v2/sync/trigger { batch: "remaining", priority: "high" }\n4. Monitor: verify 603 records process before next business day\n5. Open improvement ticket: stagger large-district sync jobs'}},
+  cascade:{label:'&#9679; CASCADE FAILURE',color:'var(--red)',logs:[
+    {ts:'07:45:00',c:'200',t:'s',m:'Enrollment sync: SUCCESS &mdash; 34 students processed'},
+    {ts:'07:45:02',c:'404',t:'e',m:'Canvas provisioning: course_id 48291 NOT FOUND'},
+    {ts:'07:45:02',c:'503',t:'e',m:'Canvas: 34 students &mdash; enrollment committed but course missing'},
+    {ts:'07:45:03',c:'422',t:'e',m:'FA notify: enrollment_status=PENDING &mdash; disbursement BLOCKED'},
+    {ts:'07:45:03',c:'ERR',t:'e',m:'CASCADE: SIS &#10003; &rarr; Exchange &#10003; &rarr; Canvas &#10007; &rarr; FA &#10007;'},
+    {ts:'07:45:04',c:'ERR',t:'e',m:'34 students enrolled but cannot access course or receive aid'},
+  ],d:{title:'CASCADE FAILURE: CANVAS COURSE DELETED/UNPUBLISHED AFTER SYNC',color:'var(--red)',checks:[{t:'ok',v:'SIS sync completed &mdash; 34 enrollments written to CVC Exchange'},{t:'err',v:'Canvas: course_id 48291 returns 404 &mdash; course not found or unpublished'},{t:'err',v:'34 students enrolled in Exchange but have no Canvas course to access'},{t:'err',v:'FA disbursement BLOCKED &mdash; enrollment_status=PENDING (requires Canvas access confirmation)'},{t:'warn',v:'FERPA note: students have been sent enrollment confirmation emails &mdash; expectation set'}],root:'Downstream cascade from Canvas-layer failure. Likely: instructor deleted or unpublished course after enrollment opened, OR Canvas course ID changed in a platform migration.',fix:'1. IMMEDIATE: Contact teaching college Canvas admin &mdash; locate course 48291 or replacement\n2. If course was unpublished: request re-publish or substitution course ID\n3. Update CVC Exchange course record with correct Canvas course_id\n4. Re-trigger Canvas provisioning for 34 students\n5. Unblock FA disbursement once Canvas access confirmed\n6. Notify 34 students of delay and resolution timeline\n7. Add monitoring alert for Canvas course deletion on active CVC Exchange listings'}}
+};
+
+var curSc='healthy';
+function loadSc(name,btn){
+  curSc=name;
+  document.querySelectorAll('#tool-api .ctrl-row .cbtn:not(.run)').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  var sc=SCENARIOS[name];
+  var feed=document.getElementById('logFeed');feed.innerHTML='';
+  document.getElementById('log-status').innerHTML=sc.label;
+  document.getElementById('log-status').style.color=sc.color;
+  document.getElementById('diagPanel').innerHTML='<span style="color:var(--muted);font-size:.68rem">Click &#9654; Run Diagnosis to analyze this scenario.</span>';
+  document.getElementById('diag-badge').textContent='- Awaiting analysis';
+  document.getElementById('exp-btn').style.display='none';
+  sc.logs.forEach(function(l,i){
+    setTimeout(function(){
+      var div=document.createElement('div');
+      div.className='ll '+(l.t==='e'?'error':l.t==='w'?'warn':'ok');
+      div.innerHTML='<span class="lts">'+l.ts+'</span><span class="lc '+l.t+'">'+l.c+'</span><span class="lm">'+l.m+'</span>';
+      feed.appendChild(div);feed.scrollTop=feed.scrollHeight;
+    },i*190);
+  });
+}
+function runDiag(){
+  var d=SCENARIOS[curSc].d;
+  var p=document.getElementById('diagPanel');p.innerHTML='';
+  document.getElementById('diag-badge').textContent='Analysis complete';
+  document.getElementById('diag-badge').style.color=d.color;
+  var html='<div class="diag-head" style="color:'+d.color+'">'+d.title+'</div>';
+  d.checks.forEach(function(c){html+='<div class="di '+c.t+'">'+c.v+'</div>';});
+  html+='<div class="diag-root"><div class="diag-lbl">Root Cause</div>'+d.root+'</div>';
+  html+='<div class="diag-fix"><div class="diag-lbl" style="color:var(--teal)">Resolution Steps</div>'+d.fix.replace(/\n/g,'<br>')+'</div>';
+  p.innerHTML=html;
+  document.getElementById('exp-btn').style.display='inline-block';
+}
+function clearDiag(){document.getElementById('diagPanel').innerHTML='<span style="color:var(--muted);font-size:.68rem">Select a scenario and click &#9654; Run Diagnosis.</span>';document.getElementById('diag-badge').textContent='- Awaiting analysis';document.getElementById('exp-btn').style.display='none';}
+function exportDiag(){
+  var d=SCENARIOS[curSc].d;
+  var txt='CVC Exchange - Integration Diagnosis Report\n'+'='.repeat(50)+'\n\n'+d.title+'\n\nChecks:\n'+d.checks.map(function(c){return (c.t==='ok'?'[OK]':c.t==='err'?'[FAIL]':'[WARN]')+' '+c.v.replace(/&mdash;/g,'--').replace(/&times;/g,'x').replace(/&rsaquo;/g,'>').replace(/&rarr;/g,'->');}).join('\n')+'\n\nRoot Cause:\n'+d.root.replace(/&mdash;/g,'--').replace(/&times;/g,'x')+'\n\nResolution:\n'+d.fix.replace(/&ndash;/g,'-').replace(/&rarr;/g,'->').replace(/&rsaquo;/g,'>').replace(/&times;/g,'x')+'\n\nGenerated: '+new Date().toLocaleString();
+  var blob=new Blob([txt],{type:'text/plain'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cvc_diagnosis_report.txt';a.click();
+}
+loadSc('healthy',document.querySelector('#tool-api .ctrl-row .cbtn'));
+
+// ── SYNC FLOW CANVAS ─────────────────────────────────────────────
+(function(){
+  var canvas=document.getElementById('syncCanvas'),ctx=canvas.getContext('2d');
+  var mode='normal',frame=0,packets=[];
+  function resize(){canvas.width=canvas.offsetWidth;canvas.height=300;}
+  resize();window.addEventListener('resize',resize);
+  var NODES=[
+    {id:'student',lbl:'Student',sub:'Home Campus',rx:.08,ry:.5,col:'#5B9BD5'},
+    {id:'home-sis',lbl:'Home SIS',sub:'Banner / PS',rx:.26,ry:.5,col:'#3CBFA0'},
+    {id:'cvc',lbl:'CVC Exchange',sub:'cvc.edu API',rx:.46,ry:.5,col:'#E8A020'},
+    {id:'canvas',lbl:'Canvas LMS',sub:'Course Access',rx:.66,ry:.28,col:'#3CBFA0'},
+    {id:'fa',lbl:'Financial Aid',sub:'FAFSA/CADAA',rx:.66,ry:.72,col:'#5B9BD5'},
+    {id:'teach-sis',lbl:'Teaching SIS',sub:'Target College',rx:.84,ry:.5,col:'#3CBFA0'},
+  ];
+  var EDGES=[
+    {f:'student',t:'home-sis',lbl:'Enroll Request'},
+    {f:'home-sis',t:'cvc',lbl:'SIS API Sync'},
+    {f:'cvc',t:'canvas',lbl:'LMS Provision'},
+    {f:'cvc',t:'fa',lbl:'FA Trigger'},
+    {f:'cvc',t:'teach-sis',lbl:'Cross-Enroll'},
+  ];
+  var STATUSES={
+    'normal':{},
+    'sis-fail':{'home-sis':'fail','cvc':'warn','canvas':'warn','fa':'warn','teach-sis':'warn'},
+    'canvas-lag':{'canvas':'warn'},
+    'fa-hold':{'fa':'fail'},
+    'cascade':{'cvc':'fail','canvas':'fail','fa':'fail','teach-sis':'fail'},
+  };
+  function npos(id){var n=NODES.find(function(x){return x.id===id;});return{x:n.rx*canvas.width,y:n.ry*canvas.height};}
+  function ncol(id){var sm=STATUSES[mode]||{};var s=sm[id];if(s==='fail')return'#E05050';if(s==='warn')return'#E8A020';return NODES.find(function(x){return x.id===id;}).col;}
+  function spawnP(){
+    if(mode==='normal'&&Math.random()<.04){var e=EDGES[Math.floor(Math.random()*EDGES.length)];packets.push({f:e.f,t:e.t,p:0,col:'#4CAF80'});}
+    if((mode==='sis-fail'||mode==='cascade')&&Math.random()<.05){packets.push({f:'student',t:'home-sis',p:0,col:'#E05050'});}
+  }
+  function draw(){
+    var W=canvas.width,H=canvas.height;
+    ctx.clearRect(0,0,W,H);
+    EDGES.forEach(function(e){
+      var a=npos(e.f),b=npos(e.t);
+      var sm=STATUSES[mode]||{};var fail=sm[e.f]==='fail'||sm[e.t]==='fail';
+      ctx.strokeStyle=fail?'rgba(224,80,80,.25)':'rgba(60,191,160,.18)';
+      ctx.lineWidth=1.4;ctx.setLineDash([5,8]);
+      ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle=fail?'rgba(224,80,80,.55)':'rgba(80,100,120,.65)';
+      ctx.font='9px JetBrains Mono,monospace';ctx.textAlign='center';
+      ctx.fillText(e.lbl,(a.x+b.x)/2,(a.y+b.y)/2-12);
     });
-  }, { rootMargin: '-35% 0px -55% 0px' });
-  sections.forEach(s => navObs.observe(s));
+    spawnP();
+    for(var i=packets.length-1;i>=0;i--){
+      var pk=packets[i];pk.p+=.013;if(pk.p>=1){packets.splice(i,1);continue;}
+      var a=npos(pk.f),b=npos(pk.t);
+      var x=a.x+(b.x-a.x)*pk.p,y=a.y+(b.y-a.y)*pk.p;
+      ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);
+      ctx.fillStyle=pk.col;ctx.shadowColor=pk.col;ctx.shadowBlur=10;ctx.fill();ctx.shadowBlur=0;
+    }
+    NODES.forEach(function(n){
+      var x=n.rx*W,y=n.ry*H;var col=ncol(n.id);
+      var pulse=Math.sin(frame*.038+n.rx*8)*.5+.5;
+      var grd=ctx.createRadialGradient(x,y,0,x,y,36);
+      var a=Math.round((0.06+pulse*.05)*255).toString(16).padStart(2,'0');
+      var rgb=col.replace('#','');
+      grd.addColorStop(0,'#'+rgb+a);grd.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=grd;ctx.beginPath();ctx.arc(x,y,36,0,Math.PI*2);ctx.fill();
+      ctx.strokeStyle=col;ctx.lineWidth=1.4;ctx.globalAlpha=.35+pulse*.28;
+      ctx.beginPath();ctx.arc(x,y,22,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
+      ctx.fillStyle=col;ctx.globalAlpha=.88;ctx.beginPath();ctx.arc(x,y,13,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+      ctx.fillStyle='#F0EDE6';ctx.font='bold 9px DM Sans,sans-serif';ctx.textAlign='center';ctx.fillText(n.lbl,x,y+30);
+      ctx.fillStyle='rgba(110,126,148,.8)';ctx.font='8px JetBrains Mono,monospace';ctx.fillText(n.sub,x,y+41);
+      var sm=STATUSES[mode]||{};
+      if(sm[n.id]==='fail'){ctx.fillStyle='#E05050';ctx.font='bold 10px monospace';ctx.fillText('X',x,y+3.5);}
+      else if(sm[n.id]==='warn'){ctx.fillStyle='#E8A020';ctx.font='bold 10px monospace';ctx.fillText('!',x,y+3.5);}
+      else{ctx.fillStyle='rgba(240,237,230,.85)';ctx.font='bold 9px monospace';ctx.fillText('o',x,y+3.5);}
+    });
+    frame++;requestAnimationFrame(draw);
+  }
+  draw();
+  window.setSyncMode=function(m,btn){mode=m;packets=[];document.querySelectorAll('#tool-sync .ctrl-row .cbtn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');};
+})();
+
+// ── BAR CHART ────────────────────────────────────────────────────
+var BAR_DATA=[
+  {lbl:'Auth Failure (SIS token)',pct:28,cl:'r'},
+  {lbl:'Enroll Sync Window Miss',pct:24,cl:'a'},
+  {lbl:'Canvas Provisioning Lag',pct:19,cl:'bl'},
+  {lbl:'Payload Schema Mismatch',pct:16,cl:'t'},
+  {lbl:'FA Disbursement Hold',pct:9,cl:'t'},
+  {lbl:'User Account / SSO',pct:4,cl:'bl'},
+];
+(function(){
+  var cont=document.getElementById('barChart');
+  BAR_DATA.forEach(function(d){
+    var row=document.createElement('div');row.className='b-row';
+    row.innerHTML='<span class="b-lbl">'+d.lbl+'</span><div class="b-track"><div class="b-fill '+d.cl+'" data-pct="'+d.pct+'" style="width:0"></div></div><span class="b-pct">'+d.pct+'%</span>';
+    cont.appendChild(row);
+  });
+  var bo=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('.b-fill').forEach(function(b,i){setTimeout(function(){b.style.width=b.dataset.pct+'%';},i*100+200);});bo.unobserve(e.target);}});},{threshold:.2});
+  bo.observe(cont);
+})();
+
+// ── TREND LINE ───────────────────────────────────────────────────
+(function(){
+  var canvas=document.getElementById('trendCanvas'),ctx=canvas.getContext('2d');
+  function resize(){canvas.width=canvas.offsetWidth*2;canvas.height=canvas.offsetHeight*2;ctx.scale(2,2);}
+  resize();window.addEventListener('resize',function(){resize();draw();});
+  var before=[82,88,79,91,86,84,90,87],after=[90,88,85,79,74,71,68,66];
+  function draw(){
+    var W=canvas.offsetWidth,H=canvas.offsetHeight;
+    ctx.clearRect(0,0,W,H);
+    var pad={l:6,r:6,t:12,b:8};
+    function pts(data){return data.map(function(v,i){return{x:pad.l+(i/(data.length-1))*(W-pad.l-pad.r),y:pad.t+(1-(v-50)/60)*(H-pad.t-pad.b)};});}
+    function drawLine(data,col,fill){
+      var p=pts(data);
+      var g=ctx.createLinearGradient(0,0,0,H);
+      g.addColorStop(0,col.replace('rgb','rgba').replace(')',',0.16)'));g.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.beginPath();p.forEach(function(pt,i){i===0?ctx.moveTo(pt.x,pt.y):ctx.lineTo(pt.x,pt.y);});
+      ctx.lineTo(p[p.length-1].x,H-pad.b);ctx.lineTo(p[0].x,H-pad.b);ctx.closePath();
+      ctx.fillStyle=g;ctx.fill();
+      ctx.strokeStyle=col;ctx.lineWidth=1.8;ctx.setLineDash([]);
+      ctx.beginPath();p.forEach(function(pt,i){i===0?ctx.moveTo(pt.x,pt.y):ctx.lineTo(pt.x,pt.y);});ctx.stroke();
+      p.forEach(function(pt){ctx.beginPath();ctx.arc(pt.x,pt.y,2.5,0,Math.PI*2);ctx.fillStyle=col;ctx.fill();});
+    }
+    var ix=pad.l+(7/14)*(W-pad.l-pad.r);
+    ctx.strokeStyle='rgba(232,160,32,.3)';ctx.lineWidth=1;ctx.setLineDash([3,5]);
+    ctx.beginPath();ctx.moveTo(ix,4);ctx.lineTo(ix,H-4);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='rgba(232,160,32,.6)';ctx.font='8px JetBrains Mono,monospace';ctx.textAlign='center';ctx.fillText('KB deployed',ix,10);
+    drawLine(before,'rgb(91,155,213)');
+    drawLine(after,'rgb(76,175,128)');
+  }
+  var to=new IntersectionObserver(function(ent){ent.forEach(function(e){if(e.isIntersecting){draw();to.unobserve(e.target);}});},{threshold:.3});
+  to.observe(canvas);
+})();
+
+// ── STACK GRID ───────────────────────────────────────────────────
+var SKILLS=[
+  {i:'🐍',n:'Python',note:'pandas RCA,\nautomation scripting',pct:85},
+  {i:'🌐',n:'JS / HTML / CSS',note:'Web app logic,\nCS degree foundation',pct:75},
+  {i:'🗄️',n:'SQL / PL-SQL',note:'Data querying,\nFA data workflows',pct:65},
+  {i:'🐧',n:'Linux / Bash',note:'OS admin,\nscripting for automation',pct:78},
+  {i:'🔌',n:'REST APIs',note:'Integration diagnosis,\nlog analysis',pct:72},
+  {i:'🏫',n:'Canvas LMS',note:'Admin, SSO/auth,\nfaculty support',pct:82},
+  {i:'📋',n:'Banner / PeopleSoft',note:'FA &amp; enrollment\ndaily support',pct:68},
+  {i:'🎫',n:'ServiceNow / Jira',note:'Enterprise ticketing,\nSLA, KB authoring',pct:92},
+  {i:'🔐',n:'Active Directory',note:'Provisioning,\naccess control',pct:80},
+  {i:'💬',n:'Remote / Async',note:'Zoom, Slack, G-Suite,\nfully distributed 2022+',pct:96},
+];
+var sg=document.getElementById('stackGrid');
+SKILLS.forEach(function(s){
+  var d=document.createElement('div');d.className='si';
+  d.innerHTML='<span class="si-icon">'+s.i+'</span><div class="si-name">'+s.n+'</div><div class="si-note">'+s.note.replace('\n','<br>')+'</div><div class="si-bar-t"><div class="si-bar" data-pct="'+s.pct+'" style="width:0"></div></div>';
+  sg.appendChild(d);
+});
+var so=new IntersectionObserver(function(ent){ent.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('.si-bar').forEach(function(b){b.style.width=b.dataset.pct+'%';});so.unobserve(e.target);}});},{threshold:.2});
+so.observe(document.getElementById('stackGrid'));
+
+// ── NAV SCROLL ───────────────────────────────────────────────────
+window.addEventListener('scroll',function(){
+  var nav=document.getElementById('mainNav');
+  if(window.scrollY>60){nav.classList.add('scrolled');}else{nav.classList.remove('scrolled');}
+});
+
+// ── REVEAL OBSERVER ──────────────────────────────────────────────
+var ro=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
 </script>
 </body>
 </html>
