@@ -3,599 +3,990 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student FOO — Financial Order of Operations for Community College</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,400;1,9..144,600&family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<title>Henry Fan — Application Support Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@300;400;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#FAFAF5;--bg-alt:#F0EDE6;--surface:#FDFAF5;--surface2:#E8E4DB;
-  --card:#FFFFFF;--card-border:#E0DCD3;
-  --navy:#1B2A4A;--navy-dim:rgba(27,42,74,.07);
-  --teal:#0d7377;--teal-bg:rgba(13,115,119,.06);--teal-bd:rgba(13,115,119,.18);
-  --green:#1A6B3C;--green-bg:rgba(26,107,60,.06);--green-bd:rgba(26,107,60,.2);
-  --red:#B52A1C;--red-bg:rgba(181,42,28,.06);--red-bd:rgba(181,42,28,.2);
-  --amber:#8C5400;--amber-bg:rgba(140,84,0,.06);--amber-bd:rgba(140,84,0,.2);
-  --blue:#1952B5;--blue-bg:rgba(25,82,181,.06);--blue-bd:rgba(25,82,181,.2);
-  --purple:#6d28d9;--purple-bg:rgba(109,40,217,.06);--purple-bd:rgba(109,40,217,.2);
-  --text:#1a1714;--text-2:#4a4540;--text-3:#9a9590;
-  --border:rgba(26,23,20,.1);--border2:rgba(26,23,20,.15);
-  --display:'Fraunces',serif;--body:'Outfit',sans-serif;--mono:'IBM Plex Mono',monospace;
-  --r:8px;--r-lg:14px;--max-w:920px;
+:root{--bg:#080C14;--bg2:#0D1220;--bg3:#131825;--bg4:#1A2235;--amber:#E8A020;--amlo:rgba(232,160,32,.12);--teal:#3CBFA0;--tello:rgba(60,191,160,.1);--red:#E05050;--redlo:rgba(224,80,80,.1);--blue:#5B9BD5;--bluelo:rgba(91,155,213,.1);--green:#4CAF80;--greenlo:rgba(76,175,128,.1);--white:#F0EDE6;--muted:#6B7A90;--muted2:#9AABB8;--bdim:rgba(255,255,255,.055);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.2rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:all .3s;}
+nav.scrolled{background:rgba(8,12,20,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--bdim);}
+.nav-name{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:600;letter-spacing:.14em;color:var(--amber);text-transform:uppercase;}
+.nav-links{display:flex;gap:1.8rem;list-style:none;}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.1em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--white);}
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 10vw;position:relative;overflow:hidden;}
+#heroCanvas{position:absolute;inset:0;z-index:0;opacity:.6;}
+.hero-content{position:relative;z-index:2;}
+.hero-tag{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.22em;color:var(--amber);text-transform:uppercase;margin-bottom:2.2rem;opacity:0;animation:fadeUp .8s .2s forwards;}
+.hero-tag::before{content:'// ';opacity:.4;}
+h1.hero-hl{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5.8vw,5.2rem);font-weight:900;line-height:1.05;letter-spacing:-.025em;max-width:20ch;opacity:0;animation:fadeUp .8s .4s forwards;}
+h1.hero-hl em{font-style:italic;color:var(--amber);}
+.hero-sub{margin-top:2rem;font-size:1rem;color:var(--muted2);max-width:56ch;opacity:0;animation:fadeUp .8s .6s forwards;}
+.hero-sub strong{color:var(--white);font-weight:500;}
+.hero-ctas{margin-top:2.5rem;display:flex;gap:1.5rem;align-items:center;opacity:0;animation:fadeUp .8s .8s forwards;}
+.btn-p{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.85rem 2rem;background:var(--amber);color:var(--bg);border:none;cursor:pointer;transition:background .2s,transform .15s;}
+.btn-p:hover{background:#F0B840;transform:translateY(-2px);}
+.btn-g{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:2px;transition:color .2s;}
+.btn-g:hover{color:var(--white);}
+.hero-stats{position:absolute;right:8vw;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:1.8rem;opacity:0;animation:fadeIn 1s 1.2s forwards;z-index:2;}
+.h-stat{text-align:right;border-right:2px solid var(--amber);padding-right:1.4rem;}
+.h-stat-num{display:block;font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;line-height:1;color:var(--white);}
+.h-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.scroll-ind{position:absolute;bottom:2.5rem;left:10vw;display:flex;align-items:center;gap:1rem;opacity:0;animation:fadeIn 1s 1.6s forwards;z-index:2;}
+.scroll-line{width:50px;height:1px;background:linear-gradient(to right,var(--amber),transparent);}
+.scroll-ind span{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+#statusbar{background:var(--bg2);border-bottom:1px solid var(--bdim);padding:.65rem 10vw;display:flex;gap:2.5rem;align-items:center;overflow:hidden;white-space:nowrap;}
+.sb-item{display:flex;align-items:center;gap:.5rem;}
+.sb-dot{width:7px;height:7px;border-radius:50%;}
+.sb-dot.green{background:var(--green);box-shadow:0 0 6px var(--green);}
+.sb-dot.amber{background:var(--amber);box-shadow:0 0 6px var(--amber);animation:pulse 2s infinite;}
+.sb-dot.red{background:var(--red);box-shadow:0 0 6px var(--red);animation:pulse 1.5s infinite;}
+.sb-text{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.07em;color:var(--muted2);}
+.sb-text strong{color:var(--white);}
+section{padding:7rem 10vw;position:relative;}
+.slbl{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.24em;color:var(--amber);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;}
+.slbl::after{content:'';flex:1;max-width:60px;height:1px;background:rgba(184,127,24,.5);}
+h2.stitle{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.8vw,3.2rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.2rem;}
+h2.stitle em{font-style:italic;color:var(--amber);}
+.sintro{font-size:.93rem;color:var(--muted2);max-width:64ch;margin-bottom:3rem;line-height:1.8;}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:none;}
+/* ── TOOL SHARED ── */
+.tool-win{background:var(--bg3);border:1px solid var(--bdim);overflow:hidden;margin-top:.5rem;}
+.tool-bar{background:var(--bg4);padding:.65rem 1.2rem;display:flex;align-items:center;gap:.7rem;border-bottom:1px solid var(--bdim);}
+.tool-dots{display:flex;gap:.35rem;}
+.td{width:10px;height:10px;border-radius:50%;}
+.td.r{background:#FF5F57;}.td.y{background:#FEBC2E;}.td.g{background:#28C840;}
+.tool-lbl{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.1em;color:var(--muted);margin-left:.4rem;}
+.ctrl-row{padding:.7rem 1.2rem;background:var(--bg2);border-bottom:1px solid var(--bdim);display:flex;gap:.7rem;align-items:center;flex-wrap:wrap;}
+.cbtn{font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:.28rem .8rem;border:1px solid var(--bdim);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;letter-spacing:.06em;}
+.cbtn:hover,.cbtn.active{border-color:var(--amber);color:var(--amber);background:var(--amlo);}
+.cbtn.run{background:var(--amber);color:var(--bg);border-color:var(--amber);font-weight:700;}
+.cbtn.run:hover{background:#F0B840;}
+.cbtn.ml-auto{margin-left:auto;}
+/* ── TICKET QUEUE ── */
+#tool-tickets{background:var(--bg2);}
+.tq-list{padding:1rem 1.2rem;display:flex;flex-direction:column;gap:.55rem;min-height:260px;}
+.t-row{background:var(--bg2);border:1px solid var(--bdim);padding:.8rem 1.1rem;display:grid;grid-template-columns:90px 1fr 120px 110px 72px;gap:.8rem;align-items:center;cursor:pointer;transition:border-color .2s,background .2s;position:relative;overflow:hidden;}
+.t-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--bdim);transition:background .2s;}
+.t-row:hover{border-color:rgba(232,160,32,.3);background:var(--bg3);}
+.t-row.p1::before{background:var(--red);}.t-row.p2::before{background:var(--amber);}.t-row.p3::before{background:var(--blue);}
+.t-row.done{opacity:.45;}.t-row.done::before{background:var(--green);}
+.t-id{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--muted);}
+.t-subj{font-size:.83rem;color:var(--white);font-weight:500;line-height:1.25;}
+.t-subj small{display:block;font-size:.72rem;color:var(--muted);font-weight:300;margin-top:.1rem;}
+.t-col{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--teal);}
+.t-pri{font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:.18rem .55rem;text-align:center;font-weight:700;}
+.t-pri.P1{background:var(--redlo);border:1px solid rgba(224,80,80,.3);color:var(--red);}
+.t-pri.P2{background:var(--amlo);border:1px solid rgba(232,160,32,.3);color:var(--amber);}
+.t-pri.P3{background:var(--bluelo);border:1px solid rgba(91,155,213,.3);color:var(--blue);}
+.t-pri.DONE{background:var(--greenlo);border:1px solid rgba(76,175,128,.3);color:var(--green);}
+.t-age{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--muted);}
+.t-det{background:var(--bg);border:1px solid var(--bdim);padding:1.4rem;margin:0 1.2rem .8rem;display:none;animation:fadeIn .2s;}
+.t-det.open{display:block;}
+.tdet-head{display:flex;justify-content:space-between;margin-bottom:1rem;}
+.tdet-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;}
+.tdet-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem;}
+.tdet-meta-item{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted);}
+.tdet-meta-item strong{color:var(--amber);display:block;margin-bottom:.15rem;}
+.tdet-steps{margin-top:.8rem;}
+.ts{display:flex;gap:.7rem;padding:.55rem 0;border-bottom:1px solid var(--bdim);}
+.ts:last-child{border-bottom:none;}
+.ts-num{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--amber);min-width:20px;margin-top:.05rem;}
+.ts-txt{font-size:.81rem;color:var(--muted2);line-height:1.5;}
+.ts-txt code{font-family:'JetBrains Mono',monospace;font-size:.72rem;background:rgba(255,255,255,.04);padding:.1rem .3rem;color:var(--teal);}
+.tdet-actions{margin-top:1rem;display:flex;gap:.7rem;flex-wrap:wrap;}
+.tq-foot{padding:.7rem 1.2rem;background:var(--bg4);border-top:1px solid var(--bdim);display:flex;gap:2rem;font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--muted);}
+.tq-foot strong{color:var(--white);}
+/* ── API ANALYZER ── */
+#tool-api{background:var(--bg);}
+.api-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:.5rem;}
+.api-pane{background:var(--bg3);border:1px solid var(--bdim);overflow:hidden;}
+.api-pane-head{background:var(--bg4);padding:.65rem 1.2rem;border-bottom:1px solid var(--bdim);font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.08em;color:var(--muted);display:flex;justify-content:space-between;align-items:center;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 5px var(--green);animation:pulse 2s infinite;display:inline-block;margin-right:.4rem;}
+.log-feed{padding:.7rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;line-height:1.85;height:240px;overflow-y:auto;background:#030608;}
+.ll{display:flex;gap:.7rem;align-items:baseline;}
+.ll.error .lm{color:var(--red);}.ll.warn .lm{color:var(--amber);}.ll.ok .lm{color:var(--green);}.ll.info .lm{color:var(--muted2);}
+.lts{color:#1E2D3D;min-width:76px;}.lc{min-width:32px;text-align:center;font-weight:700;}
+.lc.e{color:var(--red);}.lc.w{color:var(--amber);}.lc.s{color:var(--green);}.lc.i{color:var(--blue);}
+.lm{flex:1;}
+.diag-feed{padding:1rem;min-height:240px;background:#030608;font-family:'JetBrains Mono',monospace;font-size:.7rem;line-height:1.75;height:240px;overflow-y:auto;}
+.diag-head{color:var(--amber);font-weight:700;margin-bottom:.5rem;}
+.di{color:var(--muted2);padding-left:.8rem;}
+.di.ok::before{content:'✓ ';color:var(--green);}
+.di.err::before{content:'✗ ';color:var(--red);}
+.di.warn::before{content:'⚠ ';color:var(--amber);}
+.diag-root{background:rgba(224,80,80,.07);border:1px solid rgba(224,80,80,.18);padding:.7rem .9rem;margin:.6rem 0;color:var(--red);}
+.diag-fix{background:rgba(60,191,160,.06);border:1px solid rgba(60,191,160,.18);padding:.7rem .9rem;color:var(--teal);}
+.diag-lbl{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.2rem;opacity:.7;}
+/* ── SYNC FLOW ── */
+#tool-sync{background:var(--bg2);}
+.sync-wrap{border:1px solid var(--bdim);background:var(--bg3);overflow:hidden;}
+#syncCanvas{display:block;width:100%;height:300px;}
+.sync-legend{display:flex;gap:2rem;padding:.8rem 1.4rem;background:var(--bg4);border-top:1px solid var(--bdim);flex-wrap:wrap;}
+.sl-item{display:flex;align-items:center;gap:.45rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted2);}
+.sl-dot{width:7px;height:7px;border-radius:50%;}
+/* ── CHART ── */
+#tool-chart{background:var(--bg);}
+.chart-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:.5rem;}
+.c-pane{background:var(--bg3);border:1px solid var(--bdim);padding:1.4rem;}
+.c-head{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.12em;color:var(--amber);text-transform:uppercase;margin-bottom:.25rem;}
+.c-sub{font-size:.76rem;color:var(--muted);margin-bottom:1.3rem;}
+.bar-chart{display:flex;flex-direction:column;gap:.65rem;}
+.b-row{display:flex;align-items:center;gap:.8rem;}
+.b-lbl{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted2);width:148px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.b-track{flex:1;background:rgba(255,255,255,.04);height:16px;overflow:hidden;}
+.b-fill{height:100%;transition:width 1.1s cubic-bezier(.16,1,.3,1);width:0;}
+.b-fill.a{background:var(--amber);}.b-fill.t{background:var(--teal);}.b-fill.bl{background:var(--blue);}.b-fill.r{background:var(--red);}
+.b-pct{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted);width:34px;}
+.trend-wrap{position:relative;height:150px;margin-top:.5rem;}
+#trendCanvas{width:100%;height:100%;}
+.c-insight{margin-top:1rem;padding:.75rem .9rem;background:var(--tello);border-left:2px solid var(--teal);font-size:.78rem;color:var(--muted2);line-height:1.6;}
+.c-insight strong{color:var(--teal);}
+/* ── ORIGIN ── */
+#origin{background:var(--bg2);}
+.origin-layout{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:start;}
+.opq{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;line-height:1.35;border-left:3px solid var(--amber);padding-left:1.7rem;margin-bottom:1.8rem;}
+.obody{font-size:.91rem;color:#8A9BAB;line-height:1.85;}
+.obody p+p{margin-top:1rem;}.obody strong{color:var(--white);font-weight:500;}
+.tc-cards{display:flex;flex-direction:column;gap:1.1rem;}
+.tc{background:var(--bg3);border:1px solid var(--bdim);border-left:3px solid var(--teal);padding:1.2rem 1.5rem;transition:border-color .2s;}
+.tc:hover{border-left-color:var(--amber);}
+.tc-lbl{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:.45rem;}
+.tc-title{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:700;margin-bottom:.35rem;}
+.tc-body{font-size:.8rem;color:var(--muted);}
+/* ── MAP ── */
+#mapping{background:var(--bg);}
+.map-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--bdim);border:1px solid var(--bdim);}
+.m-item{background:var(--bg2);padding:1.5rem 1.7rem;transition:background .2s;position:relative;overflow:hidden;}
+.m-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber);transform:scaleY(0);transform-origin:bottom;transition:transform .3s;}
+.m-item:hover::before{transform:scaleY(1);}.m-item:hover{background:var(--bg3);}
+.m-jd{font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;letter-spacing:.1em;color:var(--amber);text-transform:uppercase;margin-bottom:.55rem;}
+.m-my{font-size:.85rem;color:#8A9BAB;line-height:1.6;}.m-my strong{color:var(--white);font-weight:500;}
+/* ── ARCH ── */
+#product{background:var(--bg2);}
+.arch-outer{background:var(--bg3);border:1px solid var(--bdim);padding:2.2rem;margin-bottom:1.8rem;}
+.arch-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.45rem;margin-bottom:.8rem;}
+.arch-row:last-child{margin-bottom:0;}
+.an{background:var(--bg2);border:1px solid var(--bdim);padding:.8rem 1.1rem;text-align:center;min-width:100px;transition:border-color .25s;}
+.an:hover{border-color:var(--teal);}
+.an.me{border-color:var(--amber);background:rgba(232,160,32,.05);}
+.an-l{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);display:block;margin-bottom:.15rem;}
+.an-s{font-size:.6rem;color:var(--muted);}
+.an.me .an-l{color:var(--amber);}
+.arch-arr{color:var(--muted);font-size:.9rem;}
+.arch-leg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
+.al{background:var(--bg3);border:1px solid var(--bdim);padding:1rem 1.2rem;}
+.al-l{font-family:'JetBrains Mono',monospace;font-size:.63rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.35rem;display:flex;align-items:center;gap:.4rem;}
+.al-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);}
+.al-dot.a{background:var(--amber);}
+.al-b{font-size:.77rem;color:var(--muted);line-height:1.5;}
+.hl-box{margin-top:1.8rem;padding:1.8rem 2.2rem;background:var(--bg2);border:1px solid var(--bdim);border-left:3px solid var(--amber);}
+.hl-box p{font-size:.91rem;color:#8A9BAB;line-height:1.8;}.hl-box strong{color:var(--white);font-weight:500;}
+/* ── TIMELINE ── */
+#experience{background:var(--bg);}
+.timeline{display:flex;flex-direction:column;}
+.tl{display:grid;grid-template-columns:185px 1fr;gap:2.2rem;padding:2rem 0;border-bottom:1px solid var(--bdim);}
+.tl:last-child{border-bottom:none;}
+.tl-meta{padding-top:.15rem;}
+.tl-dt{font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;letter-spacing:.1em;color:var(--amber);margin-bottom:.35rem;}
+.tl-org{font-size:.86rem;font-weight:500;margin-bottom:.25rem;}
+.tl-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;padding:.18rem .5rem;background:var(--tello);border:1px solid rgba(60,191,160,.2);color:var(--teal);margin-top:.35rem;}
+.tl-badge.hi{background:var(--amlo);border-color:rgba(232,160,32,.22);color:var(--amber);}
+.tl-role{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:.55rem;}
+.tl-body{font-size:.84rem;color:#7A8BA0;line-height:1.75;margin-bottom:.9rem;}
+.tl-body strong{color:var(--white);font-weight:500;}
+.tl-tags{display:flex;flex-wrap:wrap;gap:.38rem;}
+.ttag{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.06em;padding:.16rem .52rem;background:rgba(255,255,255,.03);border:1px solid var(--bdim);color:var(--muted);text-transform:uppercase;}
+/* ── STACK ── */
+#stack{background:var(--bg2);}
+.stack-g{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5px;background:var(--bdim);border:1px solid var(--bdim);}
+.si{background:var(--bg3);padding:1.5rem 1.1rem;text-align:center;transition:background .2s;}
+.si:hover{background:var(--bg4);}
+.si-icon{font-size:1.6rem;margin-bottom:.55rem;display:block;}
+.si-name{font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.22rem;}
+.si-note{font-size:.68rem;color:var(--muted);line-height:1.4;margin-bottom:.65rem;}
+.si-bar-t{height:2px;background:var(--bdim);overflow:hidden;}
+.si-bar{height:100%;background:var(--amber);transition:width .9s ease;}
+/* ── CONTACT ── */
+#close{background:var(--bg3);text-align:center;padding:7rem 10vw;}
+.c-hl{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4.5vw,3.8rem);font-weight:900;line-height:1.1;letter-spacing:-.02em;max-width:22ch;margin:0 auto 1.8rem;}
+.c-hl em{font-style:italic;color:var(--amber);}
+.c-sub{color:var(--muted2);font-size:.93rem;max-width:52ch;margin:0 auto;line-height:1.8;}
+.c-links{display:flex;justify-content:center;gap:1.8rem;flex-wrap:wrap;margin-top:2.2rem;}
+.c-link{display:flex;flex-direction:column;gap:.22rem;text-decoration:none;padding:1.2rem 2rem;border:1px solid var(--bdim);background:var(--bg2);transition:border-color .2s,transform .2s;}
+.c-link:hover{border-color:var(--amber);transform:translateY(-3px);}
+.c-lbl{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);}
+.c-val{font-size:.88rem;color:var(--white);}
+footer{padding:1.6rem 10vw;border-top:1px solid var(--bdim);display:flex;justify-content:space-between;}
+.f-c{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--muted);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+/* ── INSIGHT BOX ── */
+.insight-box{background:rgba(60,191,160,.04);border:1px solid rgba(60,191,160,.15);border-left:3px solid var(--teal);padding:1rem 1.4rem;margin-bottom:2rem;}
+.insight-box p{font-size:.84rem;color:var(--muted2);line-height:1.75;}
+.insight-box strong{color:var(--white);font-weight:500;}
+/* ── KB BADGE ── */
+.kb-badge{display:inline-flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;padding:.2rem .6rem;background:rgba(60,191,160,.08);border:1px solid rgba(60,191,160,.2);color:var(--teal);margin-left:.5rem;}
+/* ── STUDENT IMPACT ── */
+.impact-bar{display:flex;gap:1.5rem;padding:.7rem 1.4rem;background:var(--bg4);border-top:1px solid var(--bdim);flex-wrap:wrap;}
+.impact-item{display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted2);}
+.impact-item strong{color:var(--white);}
+.impact-item.warn strong{color:var(--amber);}
+.impact-item.crit strong{color:var(--red);}
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}.nav-links{display:none;}
+  section{padding:4rem 5vw;}#hero{padding:0 5vw;}.hero-stats{display:none;}
+  .origin-layout,.api-layout,.chart-layout,.map-grid,.arch-leg{grid-template-columns:1fr;}
+  .stack-g{grid-template-columns:repeat(2,1fr);}.tl{grid-template-columns:1fr;gap:.8rem;}
+  .t-row{grid-template-columns:1fr 1fr;grid-template-rows:auto auto;}
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-@media(min-width:768px){html{font-size:17px}}
-body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.02'/%3E%3C/svg%3E")}
-::selection{background:#FFF3CD;color:var(--text)}
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:4px}
-.wrap{max-width:var(--max-w);margin:0 auto;padding:0 clamp(1.25rem,5vw,2.5rem)}
-
-/* ── RAIL ── */
-#rail{position:fixed;top:0;left:0;right:0;z-index:200;height:50px;background:rgba(250,250,245,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;gap:.75rem;transition:box-shadow .3s}
-#rail.scrolled{box-shadow:0 1px 16px rgba(0,0,0,.05)}
-.rail-logo{font-family:var(--display);font-weight:800;font-size:.95rem;color:var(--navy);white-space:nowrap;letter-spacing:-.01em}
-.rail-logo span{color:var(--teal)}
-.rail-steps{display:flex;align-items:center;gap:3px;flex:1;justify-content:center}
-.rdot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.52rem;font-weight:600;color:var(--text-3);cursor:pointer;transition:all .2s}
-.rdot:hover{border-color:var(--navy);color:var(--navy)}.rdot.done{background:var(--green-bg);border-color:var(--green);color:var(--green)}.rdot.active{background:var(--navy);border-color:var(--navy);color:#fff}
-.rconn{width:8px;height:1.5px;background:var(--border2);transition:background .2s}.rconn.done{background:var(--green)}
-.rail-badge{font-family:var(--mono);font-size:.55rem;color:var(--text-3);white-space:nowrap;display:none}
-@media(min-width:640px){.rail-badge{display:block}}
-
-/* ── SECTION SYSTEM ── */
-.sec{padding:clamp(3.5rem,8vw,6rem) 0}.sec-alt{background:var(--bg-alt);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
-.eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
-.eyebrow::before{content:'';width:18px;height:1.5px;background:currentColor}
-h2.stitle{font-family:var(--display);font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;line-height:1.1;letter-spacing:-.025em;color:var(--navy);margin-bottom:2rem}
-h2.stitle .line{display:block}h2.stitle em{font-style:italic;font-weight:400;color:var(--teal)}
-.sdesc{font-size:1rem;color:var(--text-2);line-height:1.8;max-width:620px;margin-bottom:.5rem}
-.sdesc strong{color:var(--text);font-weight:600}
-
-/* ── HERO ── */
-.hero{min-height:100vh;padding:70px 0 4rem;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(170deg,var(--bg) 40%,rgba(13,115,119,.04) 100%)}
-.hero-wm{position:absolute;right:-1.5rem;top:50%;transform:translateY(-50%);font-family:var(--display);font-weight:900;font-size:clamp(140px,26vw,320px);line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--surface2);pointer-events:none;user-select:none;letter-spacing:-.04em;white-space:nowrap}
-.hero-inner{position:relative;z-index:2;max-width:700px}
-.tag-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .85rem;border-radius:100px;border:1.5px solid var(--border2);font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2);margin-bottom:1.75rem}
-.tag-chip .dot{width:6px;height:6px;border-radius:50%;background:var(--teal)}
-h1.hero-title{font-family:var(--display);font-size:clamp(2.8rem,8vw,5.5rem);line-height:.97;margin-bottom:1.5rem;letter-spacing:-.03em}
-h1.hero-title .t1{display:block;color:var(--navy)}h1.hero-title .t2{display:block;color:var(--teal)}h1.hero-title .t3{display:block;color:transparent;-webkit-text-stroke:1.5px var(--text-3)}
-.hero-lead{font-size:1.05rem;color:var(--text-2);line-height:1.8;max-width:560px;margin-bottom:2rem}
-.hero-lead strong{color:var(--text);font-weight:600}
-.hero-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:2.5rem}
-.chip{padding:.28rem .75rem;border-radius:100px;font-family:var(--mono);font-size:.58rem;letter-spacing:.04em;border:1px solid}
-.chip-g{border-color:var(--green-bd);color:var(--green);background:var(--green-bg)}.chip-r{border-color:var(--red-bd);color:var(--red);background:var(--red-bg)}.chip-b{border-color:var(--blue-bd);color:var(--blue);background:var(--blue-bg)}
-
-/* Reality Check */
-.rc-box{background:var(--surface);border:1.5px solid var(--border2);border-radius:var(--r-lg);padding:1.75rem;max-width:580px}
-.rc-ey{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:.6rem}
-.rc-title{font-family:var(--display);font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:1.25rem}
-.rc-block{margin-bottom:1rem}
-.rc-q{font-family:var(--mono);font-size:.62rem;color:var(--text-2);margin-bottom:.4rem;line-height:1.5}
-.rc-opts{display:flex;flex-wrap:wrap;gap:.35rem}
-.rc-opt{padding:.35rem .8rem;border-radius:100px;border:1.5px solid var(--border2);background:transparent;font-family:var(--mono);font-size:.6rem;letter-spacing:.03em;color:var(--text-2);cursor:pointer;transition:all .15s}
-.rc-opt:hover{border-color:var(--navy);color:var(--navy)}.rc-opt.on{background:var(--navy-dim);border-color:var(--navy);color:var(--navy);font-weight:600}
-.rc-result{margin-top:1rem;padding:1rem 1.15rem;background:var(--green-bg);border:1.5px solid var(--green-bd);border-radius:var(--r);display:none}
-.rc-result.show{display:block}
-.rc-rl{font-family:var(--mono);font-size:.55rem;color:var(--green);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.3rem}
-.rc-rt{font-size:.88rem;color:var(--text);line-height:1.7}.rc-rt strong{color:var(--green);font-weight:700}
-
-/* ── WHO FOR ── */
-.id-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.5rem 0 2rem}
-.id-pill{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .9rem;border-radius:100px;border:1.5px solid var(--border2);background:var(--surface);font-size:.82rem;color:var(--text-2);font-weight:500;transition:all .2s}
-.id-pill:hover{border-color:var(--teal);color:var(--teal)}
-.id-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.for-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--border2);border:1.5px solid var(--border2);border-radius:var(--r-lg);overflow:hidden}
-.for-card{background:var(--surface);padding:1.5rem 1.25rem;transition:background .15s}.for-card:hover{background:var(--bg-alt)}
-.for-icon{font-size:1.4rem;margin-bottom:.5rem}
-.for-pct{font-family:var(--display);font-size:2.2rem;font-weight:800;color:var(--navy);line-height:1}.for-pct span{color:var(--teal)}
-.for-label{font-weight:700;font-size:.88rem;color:var(--navy);margin:.15rem 0 .2rem}
-.for-desc{font-size:.78rem;color:var(--text-2);line-height:1.55}
-
-/* ── MYTHS ── */
-.myths-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.85rem;margin-top:2rem}
-.myth{background:var(--surface);border:1.5px solid var(--border2);border-radius:var(--r-lg);padding:1.5rem;transition:all .2s}
-.myth:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(26,23,20,.06);border-color:var(--red-bd)}
-.myth-tag{display:inline-block;font-family:var(--mono);font-size:.56rem;font-weight:700;color:var(--red);background:var(--red-bg);padding:.18rem .55rem;border-radius:100px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem}
-.myth-claim{font-family:var(--mono);font-size:.72rem;color:var(--text-3);margin-bottom:.5rem;line-height:1.5;font-style:italic}
-.myth h3{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
-.myth p{font-size:.85rem;color:var(--text-2);line-height:1.7}.myth p strong{color:var(--text);font-weight:600}
-
-/* ── GRANT STACKING ── */
-.stack-box{background:var(--surface);border:1.5px solid var(--border2);border-radius:var(--r-lg);padding:1.75rem;margin-top:1.5rem}
-.stack-row{display:flex;justify-content:space-between;align-items:center;padding:.65rem 0;border-bottom:1px solid var(--border2)}
-.stack-row:last-of-type{border-bottom:none}
-.stack-name{font-weight:600;font-size:.88rem;color:var(--navy)}.stack-desc{font-size:.72rem;color:var(--text-3);margin-top:.05rem}
-.stack-amt{font-family:var(--mono);font-size:.85rem;font-weight:600;color:var(--green);white-space:nowrap}
-.stack-total{display:flex;justify-content:space-between;align-items:center;margin-top:.85rem;padding-top:.85rem;border-top:2px solid var(--green-bd)}
-.stack-total-label{font-family:var(--display);font-size:1.05rem;color:var(--navy)}.stack-total-num{font-family:var(--display);font-size:2rem;color:var(--green);font-weight:800}
-
-/* Enrollment bars */
-.enroll-box{background:var(--navy-dim);border:1.5px solid rgba(27,42,74,.12);border-radius:var(--r);padding:1.1rem 1.25rem;margin-top:1rem}
-.enroll-label{font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:.7rem}
-.enroll-row{display:flex;align-items:center;gap:.65rem;margin-bottom:.5rem}
-.enroll-bar-wrap{flex:1;height:7px;background:rgba(27,42,74,.1);border-radius:7px;overflow:hidden}
-.enroll-bar{height:100%;background:var(--green);border-radius:7px;transition:width 1s ease;width:0}
-.enroll-units{font-family:var(--mono);font-size:.62rem;color:var(--navy);width:62px;flex-shrink:0}
-.enroll-pct{font-family:var(--mono);font-size:.62rem;color:var(--green);width:32px;text-align:right;flex-shrink:0}
-
-/* SAP */
-.sap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border:1.5px solid var(--border2);border-radius:var(--r-lg);overflow:hidden;margin-top:1.5rem}
-@media(max-width:560px){.sap-grid{grid-template-columns:1fr}}
-.sap-cell{background:var(--surface);padding:1.35rem}
-.sap-lbl{font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.3rem}
-.sap-rule{font-family:var(--display);font-size:1.25rem;font-weight:700;color:var(--navy);margin-bottom:.25rem}
-.sap-desc{font-size:.78rem;color:var(--text-2);line-height:1.55}
-
-/* Callout boxes */
-.callout{padding:1rem 1.2rem;border-radius:0 var(--r) var(--r) 0;margin:1rem 0;font-size:.88rem;line-height:1.75;color:var(--text-2)}
-.callout strong{color:var(--text)}.callout-label{font-family:var(--mono);font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem}
-.co-warn{background:var(--amber-bg);border-left:3px solid var(--amber)}.co-warn .callout-label{color:var(--amber)}
-.co-red{background:var(--red-bg);border-left:3px solid var(--red)}.co-red .callout-label{color:var(--red)}
-.co-tip{background:var(--green-bg);border-left:3px solid var(--green)}.co-tip .callout-label{color:var(--green)}
-.co-info{background:var(--teal-bg);border-left:3px solid var(--teal)}.co-info .callout-label{color:var(--teal)}
-
-/* Resources */
-.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.75rem;margin-top:1rem}
-.res-item{background:var(--bg-alt);border:1px solid var(--border2);border-radius:var(--r);padding:1rem}
-.res-icon{font-size:1.1rem;margin-bottom:.25rem}.res-name{font-weight:700;font-size:.83rem;color:var(--navy);margin-bottom:.15rem}.res-desc{font-size:.74rem;color:var(--text-2);line-height:1.5}
-
-/* ── GROUND RULES ── */
-.ground-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin-top:2rem}
-.gcard{background:var(--surface);border:1.5px solid var(--border2);border-radius:var(--r-lg);padding:1.5rem;position:relative;overflow:hidden;transition:all .2s}
-.gcard:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(26,23,20,.06)}
-.gcard-bg{position:absolute;top:-.5rem;right:.5rem;font-family:var(--display);font-weight:900;font-size:5rem;color:var(--text);opacity:.035;line-height:1;pointer-events:none}
-.gcard h3{font-family:var(--display);font-size:.98rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
-.gcard p{font-size:.84rem;color:var(--text-2);line-height:1.7}
-
-/* ── STEPS ── */
-.steps-wrap{display:flex;flex-direction:column;gap:.6rem}
-.step-card{background:var(--surface);border:1.5px solid var(--border2);border-radius:var(--r-lg);overflow:hidden;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s,border-color .25s,box-shadow .25s}
-.step-card.vis{opacity:1;transform:translateY(0)}
-.step-card.open{border-color:var(--teal);box-shadow:0 4px 20px rgba(13,115,119,.08)}
-.step-hd{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;padding:1.15rem 1.5rem;cursor:pointer;user-select:none;transition:background .15s}
-.step-hd:hover{background:rgba(13,115,119,.015)}
-.snb-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0}
-.snb{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:600;font-size:.72rem;color:var(--text-3);transition:all .2s}
-.step-card.open .snb{background:var(--teal);border-color:var(--teal);color:#fff}
-.snb.sdone{background:var(--green-bg)!important;border-color:var(--green)!important;color:var(--green)!important}
-.stag{font-family:var(--mono);font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border-radius:3px}
-.stag-P{background:var(--blue-bg);color:var(--blue)}.stag-B{background:var(--teal-bg);color:var(--teal)}.stag-K{background:var(--red-bg);color:var(--red)}.stag-E{background:var(--amber-bg);color:var(--amber)}.stag-G{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)}
-.stw{flex:1;min-width:0}
-.s-title{font-family:var(--display);font-size:clamp(1.05rem,2.2vw,1.4rem);font-weight:700;color:var(--navy);line-height:1.15;transition:color .2s}
-.step-card.open .s-title{color:var(--teal)}
-.s-sub{font-family:var(--mono);font-size:.58rem;color:var(--text-3);letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:.1rem}
-.schev{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--text-3);flex-shrink:0;transition:all .25s}
-.step-card.open .schev{background:var(--teal);border-color:var(--teal);color:#fff;transform:rotate(180deg)}
-.sbody{display:none;border-top:1.5px solid var(--border2)}.sbody.open{display:block}
-.scontent{padding:1.75rem 1.5rem;display:grid;grid-template-columns:1.4fr 1fr;gap:1.75rem}
-@media(max-width:660px){.scontent{grid-template-columns:1fr}}
-.smain h4{font-family:var(--display);font-size:.95rem;font-weight:700;color:var(--navy);margin:1.25rem 0 .4rem}.smain h4:first-child{margin-top:0}
-.smain p{font-size:.88rem;color:var(--text-2);line-height:1.8;margin-bottom:.4rem}.smain p strong{color:var(--text);font-weight:600}
-.cklist{list-style:none;margin-top:.4rem}.cklist li{display:flex;align-items:flex-start;gap:.55rem;font-size:.84rem;color:var(--text-2);margin-bottom:.45rem;line-height:1.6}
-.cklist li::before{content:'→';color:var(--green);font-family:var(--mono);font-size:.68rem;flex-shrink:0;margin-top:2px}
-.sside{display:flex;flex-direction:column;gap:.7rem}
-.sbox{border-radius:var(--r);padding:1rem 1.15rem;border:1.5px solid}
-.sbox-g{background:var(--green-bg);border-color:var(--green-bd)}.sbox-r{background:var(--red-bg);border-color:var(--red-bd)}.sbox-b{background:var(--blue-bg);border-color:var(--blue-bd)}.sbox-a{background:var(--amber-bg);border-color:var(--amber-bd)}.sbox-n{background:var(--bg-alt);border-color:var(--border2)}
-.sbox-lbl{font-family:var(--mono);font-size:.53rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.3rem}
-.sbox-g .sbox-lbl{color:var(--green)}.sbox-r .sbox-lbl{color:var(--red)}.sbox-b .sbox-lbl{color:var(--blue)}.sbox-a .sbox-lbl{color:var(--amber)}.sbox-n .sbox-lbl{color:var(--text-3)}
-.sbox-num{font-family:var(--display);font-size:1.8rem;font-weight:700;line-height:1;margin-bottom:.15rem}
-.sbox-g .sbox-num{color:var(--green)}.sbox-r .sbox-num{color:var(--red)}.sbox-a .sbox-num{color:var(--amber)}.sbox-b .sbox-num{color:var(--blue)}
-.sbox-title{font-weight:700;font-size:.85rem;margin-bottom:.2rem;color:var(--text)}
-.sbox-text{font-size:.76rem;color:var(--text-2);line-height:1.6}.sbox-text strong{color:var(--text);font-weight:600}
-.sfoot{padding:.85rem 1.5rem 1.15rem;border-top:1.5px solid var(--border2);background:rgba(240,237,230,.6);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
-.sfgl{font-family:var(--mono);font-size:.53rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:.1rem}.sfgt{font-family:var(--display);font-size:.95rem;color:var(--navy)}
-.done-btn{padding:.4rem 1.1rem;border-radius:100px;border:1.5px solid var(--border2);background:transparent;font-family:var(--mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2);cursor:pointer;transition:all .2s}
-.done-btn:hover{border-color:var(--green);color:var(--green);background:var(--green-bg)}.done-btn.done{border-color:var(--green);color:var(--green);background:var(--green-bg)}
-
-/* ── REFUND ── */
-.rfbox{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border2);border:1.5px solid var(--border2);border-radius:var(--r-lg);overflow:hidden;margin-top:2rem}
-@media(max-width:700px){.rfbox{grid-template-columns:1fr 1fr}}@media(max-width:440px){.rfbox{grid-template-columns:1fr}}
-.rfstep{background:var(--surface);padding:1.25rem 1rem;transition:background .15s}.rfstep:hover{background:var(--bg-alt)}
-.rfpct{font-family:var(--display);font-size:1.8rem;font-weight:800;line-height:1;margin-bottom:.15rem}
-.rfstep:nth-child(1) .rfpct{color:var(--red)}.rfstep:nth-child(2) .rfpct{color:var(--amber)}.rfstep:nth-child(3) .rfpct{color:var(--amber)}.rfstep:nth-child(4) .rfpct{color:var(--green)}.rfstep:nth-child(5) .rfpct{color:var(--green)}
-.rflbl{font-family:var(--mono);font-size:.53rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.35rem}
-.rftitle{font-weight:700;font-size:.85rem;color:var(--navy);margin-bottom:.2rem}
-.rfdesc{font-size:.74rem;color:var(--text-2);line-height:1.55}
-
-/* ── CALCULATOR ── */
-.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
-@media(max-width:640px){.calc-grid{grid-template-columns:1fr}}
-.calc-inputs{display:flex;flex-direction:column;gap:1.25rem}
-.ilabel{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.35rem;display:block}
-.irow{display:flex;align-items:center;gap:.7rem}
-input[type=range]{flex:1;appearance:none;height:3px;background:var(--surface2);border-radius:3px;outline:none;cursor:pointer}
-input[type=range]::-webkit-slider-thumb{appearance:none;width:16px;height:16px;border-radius:50%;background:var(--teal);cursor:pointer;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2)}
-.ival{font-family:var(--mono);font-size:.7rem;color:var(--navy);min-width:70px;text-align:right;font-weight:600}
-.calc-results{display:flex;flex-direction:column;gap:.7rem}
-.crbox{border-radius:var(--r);padding:1.05rem;border:1.5px solid var(--border2);background:var(--surface)}
-.crbox.hi-g{background:var(--green-bg);border-color:var(--green-bd)}.crbox.hi-r{background:var(--red-bg);border-color:var(--red-bd)}
-.crl{font-family:var(--mono);font-size:.53rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.2rem}
-.hi-g .crl{color:var(--green)}.hi-r .crl{color:var(--red)}.crbox:not(.hi-g):not(.hi-r) .crl{color:var(--text-3)}
-.crv{font-family:var(--display);line-height:1;margin-bottom:.1rem}
-.hi-g .crv{color:var(--green)}.hi-r .crv{color:var(--red)}.crbox:not(.hi-g):not(.hi-r) .crv{color:var(--navy)}
-.crs{font-size:.74rem;color:var(--text-3)}
-
-/* ── VISUALIZATIONS ── */
-.viz-nav{display:flex;gap:0;border-bottom:2px solid var(--border2);margin-bottom:2.5rem;overflow-x:auto;scrollbar-width:none}.viz-nav::-webkit-scrollbar{display:none}
-.vnav-btn{background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;padding:.85rem 1.25rem;font-family:var(--body);font-weight:600;font-size:.85rem;color:var(--text-3);cursor:pointer;white-space:nowrap;transition:all .2s}
-.vnav-btn:hover{color:var(--navy)}.vnav-btn.vactive{color:var(--navy);border-bottom-color:var(--navy)}
-.vpanel{display:none}.vpanel.vshow{display:block}
-.chart-card{background:var(--surface);border:1.5px solid var(--border2);border-radius:var(--r-lg);padding:1.75rem;margin-bottom:1.5rem}
-.chart-hd{font-family:var(--display);font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:.25rem}
-.chart-sub{font-size:.82rem;color:var(--text-3);margin-bottom:1.25rem}
-.chart-wrap{position:relative;height:300px}
-.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--border2);border:1.5px solid var(--border2);border-radius:var(--r-lg);overflow:hidden;margin-top:1.25rem}
-.stat-cell{background:var(--surface);padding:1.1rem}
-.stat-lbl{font-family:var(--mono);font-size:.53rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:.2rem}
-.stat-val{font-family:var(--display);font-size:1.5rem;font-weight:700;line-height:1;margin-bottom:.1rem}
-.sv-g{color:var(--green)}.sv-r{color:var(--red)}.sv-b{color:var(--navy)}
-.stat-desc{font-size:.72rem;color:var(--text-2);line-height:1.5}
-.sim-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;background:var(--surface);border:1.5px solid var(--border2);border-radius:var(--r-lg);padding:1.5rem;margin-top:1.5rem}
-@media(max-width:620px){.sim-wrap{grid-template-columns:1fr}}
-.sim-title{font-family:var(--display);font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:1rem}
-.scenario-wrap{display:flex;flex-direction:column;gap:.85rem;margin-top:.5rem}
-.scenario-card{background:var(--bg-alt);border:1.5px solid var(--border2);border-radius:var(--r);padding:1.1rem;cursor:pointer;transition:all .2s}
-.scenario-card:hover{border-color:var(--navy)}.scenario-card.sel{background:var(--navy-dim);border-color:var(--navy)}
-.scen-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:.2rem}
-.scen-name{font-weight:700;font-size:.85rem;color:var(--navy)}.scen-rate{font-family:var(--mono);font-size:.72rem}
-.scen-desc{font-size:.76rem;color:var(--text-2);line-height:1.5}
-.cc-result-big{background:var(--red-bg);border:1.5px solid var(--red-bd);border-radius:var(--r);padding:1.25rem;text-align:center}
-.cc-rb-label{font-family:var(--mono);font-size:.55rem;color:var(--red);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.25rem}
-.cc-rb-num{font-family:var(--display);font-size:2.5rem;font-weight:800;color:var(--red);line-height:1;margin-bottom:.2rem}
-.cc-rb-sub{font-size:.78rem;color:var(--text-2)}
-.cc-vs-box{background:var(--green-bg);border:1.5px solid var(--green-bd);border-radius:var(--r);padding:.85rem;margin-top:.6rem;text-align:center}
-.cc-vs-label{font-family:var(--mono);font-size:.53rem;color:var(--green);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.2rem}
-.cc-vs-num{font-family:var(--display);font-size:1.6rem;font-weight:700;color:var(--green);line-height:1;margin-bottom:.1rem}
-.cc-vs-sub{font-size:.72rem;color:var(--text-2)}
-.auto-compare{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border2);border:1.5px solid var(--border2);border-radius:var(--r-lg);overflow:hidden;margin-top:1.5rem}
-@media(max-width:560px){.auto-compare{grid-template-columns:1fr}}
-.ac-col{background:var(--surface);padding:1.5rem}.ac-col.ac-bad{background:rgba(255,248,247,1)}.ac-col.ac-good{background:rgba(245,251,247,1)}
-.ac-label{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.6rem}.ac-bad .ac-label{color:var(--red)}.ac-good .ac-label{color:var(--green)}
-.ac-title{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:1rem}
-.ac-row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--border2);font-size:.82rem}.ac-row:last-child{border-bottom:none}
-.ac-row .ak{color:var(--text-2)}.ac-row .av{font-family:var(--mono);font-size:.78rem;font-weight:600}.ac-bad .av{color:var(--red)}.ac-good .av{color:var(--green)}
-.big-callout{background:var(--navy);border-radius:var(--r-lg);padding:2.5rem 1.75rem;text-align:center;margin-top:1.5rem;color:#fff}
-.bc-ey{font-family:var(--mono);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.6rem}
-.bc-num{font-family:var(--display);font-size:clamp(3rem,8vw,5rem);font-weight:800;color:#7FFFB6;line-height:1;margin-bottom:.4rem}
-.bc-text{font-size:.9rem;color:rgba(255,255,255,.65);max-width:460px;margin:0 auto;line-height:1.75}.bc-text strong{color:#fff}
-
-/* ── FADE UP ── */
-.fu{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}.fu.vis{opacity:1;transform:translateY(0)}
-
-/* ── FOOTER ── */
-footer{border-top:1.5px solid var(--border2);padding:3rem 0;max-width:var(--max-w);margin:0 auto;padding-left:clamp(1.25rem,5vw,2.5rem);padding-right:clamp(1.25rem,5vw,2.5rem);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem}
-.foot-brand{font-family:var(--display);font-size:1.3rem;color:var(--navy);font-weight:800}.foot-brand span{color:var(--teal)}
-.foot-tag{font-family:var(--mono);font-size:.6rem;color:var(--text-3);line-height:1.7;margin-top:.2rem}
-.foot-disc{font-family:var(--mono);font-size:.56rem;color:var(--text-3);max-width:300px;line-height:1.75;text-align:right}
-@media(max-width:560px){.foot-disc{text-align:left}}
 </style>
 </head>
 <body>
+<nav id="mainNav">
+  <span class="nav-name">Henry Fan</span>
+  <ul class="nav-links">
+    <li><a href="#origin">Background</a></li>
+    <li><a href="#tool-tickets">Ticket Queue</a></li>
+    <li><a href="#tool-api">API Analyzer</a></li>
+    <li><a href="#tool-sync">Sync Flow</a></li>
+    <li><a href="#tool-chart">Analytics</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#close">Contact</a></li>
+  </ul>
+</nav>
 
-<!-- RAIL -->
-<div id="rail"><div class="rail-logo">Student <span>FOO</span></div><div class="rail-steps" id="railSteps"></div><div class="rail-badge" id="railBadge">Step 1 of 9</div></div>
-
-<!-- HERO -->
-<section class="hero">
-<div class="hero-wm">FOO</div>
-<div class="wrap"><div class="hero-inner">
-  <div class="tag-chip"><span class="dot"></span>Community College Edition · Financial Order of Operations</div>
-  <h1 class="hero-title"><span class="t1">Your Money.</span><span class="t2">Your Rules.</span><span class="t3">Your Future.</span></h1>
-  <p class="hero-lead">Financial advice is built for people with stable careers and no real bills. You're <strong>working while studying</strong>, possibly supporting family, navigating financial aid refund checks, and trying to build a future from scratch. This is the playbook written for <strong>exactly that reality.</strong></p>
-  <div class="hero-chips">
-    <span class="chip chip-g">✓ Works with $50/month</span><span class="chip chip-g">✓ Financial aid + side income</span><span class="chip chip-g">✓ Start from zero</span><span class="chip chip-b">✓ FAFSA · Cal Grant · CCPG · Pell</span><span class="chip chip-r">✕ BNPL is a trap</span>
-  </div>
-  <div class="rc-box">
-    <div class="rc-ey">⚡ 60-second reality check</div>
-    <div class="rc-title">Where Are You Starting From?</div>
-    <div class="rc-block"><div class="rc-q">Do you have any high-interest debt? (Credit card, BNPL/Afterpay, payday loan)</div><div class="rc-opts"><button class="rc-opt" data-q="0" data-v="yes" onclick="rcPick(this)">Yes, I have some</button><button class="rc-opt" data-q="0" data-v="no" onclick="rcPick(this)">No debt like that</button></div></div>
-    <div class="rc-block"><div class="rc-q">Do you have earned income? (Campus job, DoorDash, babysitting, tutoring)</div><div class="rc-opts"><button class="rc-opt" data-q="1" data-v="yes" onclick="rcPick(this)">Yes, I earn something</button><button class="rc-opt" data-q="1" data-v="no" onclick="rcPick(this)">Not right now</button></div></div>
-    <div class="rc-block"><div class="rc-q">Have you applied for ALL your financial aid? (FAFSA/CADAA, CCPG, Promise)</div><div class="rc-opts"><button class="rc-opt" data-q="2" data-v="yes" onclick="rcPick(this)">Yes, all applied</button><button class="rc-opt" data-q="2" data-v="no" onclick="rcPick(this)">Not sure / not yet</button></div></div>
-    <div class="rc-result" id="rcResult"><div class="rc-rl">Your starting priority</div><div class="rc-rt" id="rcText"></div></div>
-  </div>
-</div></div>
-</section>
-
-<!-- WHO THIS IS FOR -->
-<section class="sec sec-alt fu">
-<div class="wrap">
-  <div class="eyebrow">Who this is for</div>
-  <h2 class="stitle"><span class="line">Built for the student</span><span class="line"><em>nobody else talks to.</em></span></h2>
-  <p class="sdesc">Most financial advice assumes you're a recent high school grad living in a dorm with your parents covering the big bills. Community college students are a completely different story — and the numbers prove it.</p>
-  <div class="id-pills">
-    <div class="id-pill"><span class="id-dot" style="background:var(--green)"></span>Working while studying</div>
-    <div class="id-pill"><span class="id-dot" style="background:var(--blue)"></span>Supporting family members</div>
-    <div class="id-pill"><span class="id-dot" style="background:var(--amber)"></span>Raising kids while in school</div>
-    <div class="id-pill"><span class="id-dot" style="background:var(--red)"></span>Food or housing insecure</div>
-    <div class="id-pill"><span class="id-dot" style="background:var(--green)"></span>First-generation college student</div>
-    <div class="id-pill"><span class="id-dot" style="background:var(--blue)"></span>Undocumented or DACA student</div>
-    <div class="id-pill"><span class="id-dot" style="background:var(--amber)"></span>Getting financial aid refunds</div>
-    <div class="id-pill"><span class="id-dot" style="background:var(--green)"></span>Trying to transfer to a 4-year</div>
-  </div>
-  <div class="for-grid">
-    <div class="for-card"><div class="for-icon">💼</div><div class="for-pct">67<span>%</span></div><div class="for-label">Work while in school</div><div class="for-desc">43% work 40+ hours/week while carrying a full course load.</div></div>
-    <div class="for-card"><div class="for-icon">🏠</div><div class="for-pct">49<span>%</span></div><div class="for-label">Are food insecure</div><div class="for-desc">Nearly half don't have reliable access to enough food.</div></div>
-    <div class="for-card"><div class="for-icon">💸</div><div class="for-pct">20<span>%</span></div><div class="for-label">Support parents financially</div><div class="for-desc">One in five is sending money home while trying to finish school.</div></div>
-    <div class="for-card"><div class="for-icon">👶</div><div class="for-pct">13<span>%</span></div><div class="for-label">Have children</div><div class="for-desc">Student parents miss class due to childcare gaps more than any other group.</div></div>
-    <div class="for-card"><div class="for-icon">📉</div><div class="for-pct">59<span>%</span></div><div class="for-label">Considered dropping out</div><div class="for-desc">Financial stress is the #1 reason — not grades, not motivation.</div></div>
-    <div class="for-card"><div class="for-icon">💰</div><div class="for-pct">52<span>%</span></div><div class="for-label">Never applied for aid</div><div class="for-desc">Think they won't qualify or it's too complicated. Most are wrong.</div></div>
-  </div>
-</div>
-</section>
-
-<!-- MYTHS -->
-<section class="sec fu">
-<div class="wrap">
-  <div class="eyebrow">Myth-busting</div>
-  <h2 class="stitle"><span class="line">Wrong beliefs that cost</span><span class="line">students <em>thousands.</em></span></h2>
-  <div class="myths-grid">
-    <div class="myth"><div class="myth-tag">Wrong</div><div class="myth-claim">"I won't qualify for financial aid"</div><h3>The #1 myth that costs the most</h3><p>Even if you work or think your family earns too much — you don't know until you apply. FAFSA is free and takes 30 minutes. <strong>$10,000+ per hour ROI.</strong></p></div>
-    <div class="myth"><div class="myth-tag">Wrong</div><div class="myth-claim">"My grades aren't good enough"</div><h3>Aid is about need, not GPA</h3><p>Financial aid eligibility is based on <strong>financial need, not academic performance.</strong> A 2.0 GPA keeps aid — but isn't needed to initially qualify.</p></div>
-    <div class="myth"><div class="myth-tag">Misleading</div><div class="myth-claim">"Community college is free — I don't need aid"</div><h3>Aid covers way more than tuition</h3><p>Aid pays for books ($500–1,000/sem), transportation, tech, housing, food, childcare. <strong>Students still get $10,000+ even with free tuition.</strong></p></div>
-    <div class="myth"><div class="myth-tag">Wrong</div><div class="myth-claim">"I live alone so I'm independent"</div><h3>FAFSA "independent" has a legal definition</h3><p>You're independent if you're 24+, married, a veteran, a parent, homeless, or emancipated. Otherwise — ask about a <strong>dependency override.</strong></p></div>
-    <div class="myth"><div class="myth-tag">Wrong</div><div class="myth-claim">"I need 6 units to get Pell Grant"</div><h3>You can get Pell with just 1 unit</h3><p>Pell scales with enrollment. 3 units = 25% of max. Part-time students still get money — <strong>just a proportional amount.</strong></p></div>
-    <div class="myth"><div class="myth-tag">Wrong</div><div class="myth-claim">"Submitting my application means I'm done"</div><h3>Submitting ≠ getting your money</h3><p>You may need verification documents. Aid reviews your file, you accept, money disburses after census. <strong>Check email and portal every day.</strong></p></div>
-  </div>
-</div>
-</section>
-
-<!-- AID STACKING + SAP + RESOURCES -->
-<section class="sec sec-alt fu">
-<div class="wrap">
-  <div class="eyebrow">Maximize what you get</div>
-  <h2 class="stitle"><span class="line">Stack your grants.</span><span class="line">Protect your <em>eligibility.</em></span></h2>
-  <div class="stack-box">
-    <div class="eyebrow" style="margin-bottom:1rem">Grant stacking — what's possible</div>
-    <div class="stack-row"><div><div class="stack-name">Pell Grant</div><div class="stack-desc">Federal · need-based · available to all qualifying students</div></div><div class="stack-amt">up to $7,395/yr</div></div>
-    <div class="stack-row"><div><div class="stack-name">Cal Grant B</div><div class="stack-desc">California state grant · financial need · GPA after initial year</div></div><div class="stack-amt">up to $5,742/yr</div></div>
-    <div class="stack-row"><div><div class="stack-name">FSEOG</div><div class="stack-desc">Federal Supplemental · exceptional need · limited campus funds</div></div><div class="stack-amt">up to $1,000/yr</div></div>
-    <div class="stack-row"><div><div class="stack-name">Student Success &amp; Completion Grant</div><div class="stack-desc">California · full-time enrollment · completion incentive</div></div><div class="stack-amt">up to $2,000/yr</div></div>
-    <div class="stack-row"><div><div class="stack-name">CCPG (CA College Promise Grant)</div><div class="stack-desc">CA resident · tuition fee waiver · $46/unit saved</div></div><div class="stack-amt">Full fee waiver</div></div>
-    <div class="stack-row"><div><div class="stack-name">Scholarships</div><div class="stack-desc">Campus + external · many go unclaimed every year</div></div><div class="stack-amt">$500–5,000+</div></div>
-    <div class="stack-total"><div class="stack-total-label">Total potential per year</div><div class="stack-total-num">$16,000+</div></div>
-  </div>
-  <div class="enroll-box">
-    <div class="enroll-label">Enrollment intensity — how units affect your Pell Grant</div>
-    <div class="enroll-row"><span class="enroll-units">1–2 units</span><div class="enroll-bar-wrap"><div class="enroll-bar" data-w="12.5"></div></div><span class="enroll-pct">~12%</span></div>
-    <div class="enroll-row"><span class="enroll-units">3–5 units</span><div class="enroll-bar-wrap"><div class="enroll-bar" data-w="25"></div></div><span class="enroll-pct">25%</span></div>
-    <div class="enroll-row"><span class="enroll-units">6–8 units</span><div class="enroll-bar-wrap"><div class="enroll-bar" data-w="50"></div></div><span class="enroll-pct">50%</span></div>
-    <div class="enroll-row"><span class="enroll-units">9–11 units</span><div class="enroll-bar-wrap"><div class="enroll-bar" data-w="75"></div></div><span class="enroll-pct">75%</span></div>
-    <div class="enroll-row"><span class="enroll-units">12+ units</span><div class="enroll-bar-wrap"><div class="enroll-bar" data-w="100"></div></div><span class="enroll-pct">100%</span></div>
-  </div>
-  <div style="margin-top:2.5rem"><div class="eyebrow">Satisfactory Academic Progress (SAP)</div>
-  <p class="sdesc" style="margin-bottom:1rem">Getting aid is one thing. Keeping it requires meeting three standards every semester.</p>
-  <div class="sap-grid">
-    <div class="sap-cell"><div class="sap-lbl">GPA requirement</div><div class="sap-rule">2.0 GPA</div><div class="sap-desc">Overall GPA, not just one semester. A D average makes you ineligible.</div></div>
-    <div class="sap-cell"><div class="sap-lbl">Completion rate</div><div class="sap-rule">67% of units</div><div class="sap-desc">Take 12 units? Must pass at least 8. W, F, NP, I all count against you.</div></div>
-    <div class="sap-cell"><div class="sap-lbl">Time limit</div><div class="sap-rule">150% max time</div><div class="sap-desc">60-unit degree = max 90 attempted units. Every repeated or withdrawn class counts.</div></div>
-  </div>
-  <div class="callout co-warn" style="margin-top:1rem"><div class="callout-label">⚠ What hurts your SAP</div><strong>W, F, NP, and I grades</strong> all count as attempted but not completed. It's often better to pass with a C than withdraw. If you lose eligibility due to illness, job loss, or crisis — <strong>you can appeal.</strong> Document your circumstances and contact Financial Aid immediately.</div>
-  </div>
-  <div style="margin-top:2.5rem"><div class="eyebrow">Free support on campus — use these</div>
-  <p style="font-size:.85rem;color:var(--text-2);margin-bottom:.5rem">Completing your FAFSA/CADAA makes you eligible for all of these.</p>
-  <div class="res-grid">
-    <div class="res-item"><div class="res-icon">💰</div><div class="res-name">SparkPoint</div><div class="res-desc">Free 1-on-1 financial coaching, budgeting, credit help.</div></div>
-    <div class="res-item"><div class="res-icon">📚</div><div class="res-name">EOPS</div><div class="res-desc">Book vouchers, emergency grants, counseling, transfer support.</div></div>
-    <div class="res-item"><div class="res-icon">🎓</div><div class="res-name">TRiO</div><div class="res-desc">Tutoring, study skills, university tours for transfer students.</div></div>
-    <div class="res-item"><div class="res-icon">🏆</div><div class="res-name">Promise Program</div><div class="res-desc">Extra grants, priority registration — requires FAFSA on file.</div></div>
-    <div class="res-item"><div class="res-icon">🍎</div><div class="res-name">Campus Food Pantry</div><div class="res-desc">Free groceries and meals. Zero shame. That's what it's there for.</div></div>
-    <div class="res-item"><div class="res-icon">💼</div><div class="res-name">Federal Work-Study</div><div class="res-desc">On-campus jobs, flexible hours, subsidized wages, resume building.</div></div>
-  </div></div>
-</div>
-</section>
-
-<!-- GROUND RULES -->
-<section class="sec fu">
-<div class="wrap">
-  <div class="eyebrow">Before the 9 steps</div>
-  <h2 class="stitle"><span class="line">Four rules that</span><span class="line"><em>change everything.</em></span></h2>
-  <div class="ground-grid">
-    <div class="gcard"><div class="gcard-bg">01</div><h3>Time Is Your Superpower</h3><p>$100/month invested at 18 becomes $1.4M by 67. At 28, same money — $700K. A 10-year delay costs $700,000.</p></div>
-    <div class="gcard"><div class="gcard-bg">02</div><h3>Only Borrow What You Need</h3><p>FAFSA will offer loans even when grants cover everything. You don't have to accept them. Decline every loan dollar you don't need.</p></div>
-    <div class="gcard"><div class="gcard-bg">03</div><h3>The FOO Is Not Linear</h3><p>An emergency drops you from step 6 back to step 2. That's normal. Direction matters more than perfection.</p></div>
-    <div class="gcard"><div class="gcard-bg">04</div><h3>Lifestyle Creep Is The Enemy</h3><p>When income grows, your lifestyle wants to grow with it. Every dollar of lifestyle inflation stops compounding for 40 years.</p></div>
-  </div>
-</div>
-</section>
-
-<!-- STEPS -->
-<section class="sec sec-alt">
-<div class="wrap">
-  <div class="fu" style="text-align:center;margin-bottom:3rem">
-    <div class="eyebrow" style="justify-content:center">The Playbook</div>
-    <h2 class="stitle" style="text-align:center;margin-bottom:.5rem">9 Steps. <em>In This Order.</em></h2>
-    <p style="font-size:.88rem;color:var(--text-3);max-width:480px;margin:0 auto">Work through each step before moving to the next. Click to expand. Mark complete as you go.</p>
-  </div>
-  <div class="steps-wrap" id="stepsWrap">
-
-<!-- S1 --><div class="step-card" data-step="1" id="sc1"><div class="step-hd" onclick="togS(1)"><div class="snb-wrap"><div class="snb" id="sn1">01</div><span class="stag stag-P">Protect</span></div><div class="stw"><div class="s-title">Guard Your Aid</div><div class="s-sub">Know grants vs loans · Refuse what you don't need · FAFSA basics</div></div><div class="schev">▾</div></div><div class="sbody" id="sb1"><div class="scontent"><div class="smain"><h4>Your Aid Package Is Your Starting Capital</h4><p>Stacked correctly, Pell + Cal Grant B + FSEOG + SSCG + CCPG can total <strong>$16,000+ per year</strong> — money you never repay. Understand every line item before anything else.</p><h4>The Refund Check Is Not a Bonus</h4><p>After school deducts tuition, excess aid is refunded to you via BankMobile. This feels like "free money." It's not — it's your living expenses budget for the semester. Treat it like a paycheck that must last 4–5 months.</p><h4>Never Accept Loans You Don't Need</h4><p>FAFSA will offer loans even when grants cover everything. <strong>You do not have to accept them.</strong> Subsidized loans at 6.53% don't accrue interest while in school, but unsubsidized start compounding day one.</p><h4>Set Up Your Refund Account ASAP</h4><p>Don't wait until disbursement day. Set up BankMobile direct deposit early so you receive your money the moment it's released — usually around the census date.</p></div><div class="sside"><div class="sbox sbox-g"><div class="sbox-lbl">Max Annual Aid (CA)</div><div class="sbox-num">$16,241</div><div class="sbox-text">Pell + Cal Grant + FSEOG + SSCG + CCPG. <strong>None of this is repaid.</strong></div></div><div class="sbox sbox-r"><div class="sbox-lbl">⚠ Common Mistake</div><div class="sbox-title">Accepting all offered loans</div><div class="sbox-text">Schools offer the max by default. An unneeded $5,000 loan = <strong>$9,000+ repaid</strong> over 10 years.</div></div><div class="sbox sbox-n"><div class="sbox-lbl">✓ Complete When</div><div class="sbox-text">You know every award type (grant vs loan), declined unneeded loans, BankMobile is set up, and you have a semester budget.</div></div></div></div><div class="sfoot"><div><div class="sfgl">Your target</div><div class="sfgt">Know your aid — refuse unneeded loans</div></div><button class="done-btn" onclick="markD(1,this)">Mark Complete ✓</button></div></div></div>
-
-<!-- S2 --><div class="step-card" data-step="2" id="sc2"><div class="step-hd" onclick="togS(2)"><div class="snb-wrap"><div class="snb" id="sn2">02</div><span class="stag stag-B">Build</span></div><div class="stw"><div class="s-title">Secure Basic Needs First</div><div class="s-sub">CalFresh · Medi-Cal · Campus resources · $500 safety net</div></div><div class="schev">▾</div></div><div class="sbody" id="sb2"><div class="scontent"><div class="smain"><h4>You Can't Build Wealth on an Empty Stomach</h4><p>49% of CC students are food insecure, 50% face housing challenges. Before any investing or debt payoff — <strong>secure your foundation.</strong> Using these programs is not a setback, it's smart.</p><h4>Claim What's Yours</h4><ul class="cklist"><li><strong>CalFresh (SNAP):</strong> Up to $292/month in groceries. Apply at getcalfresh.org.</li><li><strong>Medi-Cal:</strong> Free health insurance — saves $200–500/month.</li><li><strong>Campus food pantry:</strong> Free groceries, no documentation required.</li><li><strong>Childcare subsidies:</strong> CCFS, CalWORKs, Head Start.</li></ul><h4>Then: Build Your $500 Safety Net</h4><p>Open a High-Yield Savings Account <strong>separate from checking</strong>. This single step stops the credit card spiral before it starts.</p><h4>Where to Open Your HYSA</h4><p>SoFi, Ally, or Marcus — all free, no minimums, paying 4–5% APY. Physical separation from checking reduces temptation.</p></div><div class="sside"><div class="sbox sbox-g"><div class="sbox-lbl">Safety Net Target</div><div class="sbox-num">$500</div><div class="sbox-text">Even if it takes 3 months. <strong>This one buffer changes everything.</strong></div></div><div class="sbox sbox-b"><div class="sbox-lbl">CalFresh Benefit (single)</div><div class="sbox-num" style="color:var(--blue)">$292</div><div class="sbox-text">Per month in groceries. <strong>Apply even if you're unsure you qualify.</strong></div></div><div class="sbox sbox-n"><div class="sbox-lbl">Best HYSA Options</div><div class="sbox-text"><strong>SoFi</strong> — 4.6% APY, $0 min<br><strong>Ally</strong> — 4.35% APY<br><strong>Marcus</strong> — 4.5% APY<br>All FDIC-insured. All free.</div></div></div></div><div class="sfoot"><div><div class="sfgl">Your target</div><div class="sfgt">Basic needs secured · $500 in separate HYSA</div></div><button class="done-btn" onclick="markD(2,this)">Mark Complete ✓</button></div></div></div>
-
-<!-- S3 --><div class="step-card" data-step="3" id="sc3"><div class="step-hd" onclick="togS(3)"><div class="snb-wrap"><div class="snb" id="sn3">03</div><span class="stag stag-K">Kill</span></div><div class="stw"><div class="s-title">Destroy Toxic Debt</div><div class="s-sub">Credit cards · BNPL · Payday loans — highest rate first</div></div><div class="schev">▾</div></div><div class="sbody" id="sb3"><div class="scontent"><div class="smain"><h4>What Counts as Toxic Debt</h4><p><strong>Credit cards</strong> at 24.9% avg APR. <strong>BNPL apps</strong> (Klarna, Afterpay, Affirm) — 30%+ on late payments, now on all three credit bureau reports since 2023. <strong>Payday apps</strong> (Dave, Earnin) — 300%+ implied APR. <strong>Rent-to-own</strong> even worse.</p><h4>The BNPL Trap Is Designed For You</h4><p>"4 payments of $25" sounds harmless until you have 6 open plans and one missed paycheck cascades into late fees. Late on a $35 Klarna payment? <strong>7 years on your credit report.</strong></p><h4>The Avalanche Method</h4><p>List every toxic debt by interest rate. Pay minimums on everything except the <strong>highest-rate debt</strong>. Throw every extra dollar at it. Mathematically optimal.</p><h4>Federal Student Loans Are Not Step 3</h4><p>6.53% is a gray zone — don't panic-pay while carrying 25% credit card debt. High-rate first. Student loans are Step 9.</p></div><div class="sside"><div class="sbox sbox-r"><div class="sbox-lbl">$5,000 CC · Min Payments</div><div class="sbox-num">$12,200</div><div class="sbox-text">Total paid over 22+ years at 24% APR. <strong>$7,200 is pure interest.</strong></div></div><div class="sbox sbox-a"><div class="sbox-lbl">⚠ BNPL Warning</div><div class="sbox-title">Now on your credit report</div><div class="sbox-text">Since 2023, all three bureaus report BNPL. One late payment = 7 years of damage.</div></div><div class="sbox sbox-n"><div class="sbox-lbl">No Toxic Debt?</div><div class="sbox-text">Skip to Step 4. You're already ahead of most people.</div></div></div></div><div class="sfoot"><div><div class="sfgl">Your target</div><div class="sfgt">Zero CC balances · All BNPL plans closed</div></div><button class="done-btn" onclick="markD(3,this)">Mark Complete ✓</button></div></div></div>
-
-<!-- S4 --><div class="step-card" data-step="4" id="sc4"><div class="step-hd" onclick="togS(4)"><div class="snb-wrap"><div class="snb" id="sn4">04</div><span class="stag stag-B">Build</span></div><div class="stw"><div class="s-title">Build Credit the Right Way</div><div class="s-sub">Secured card · Authorized user · Score 700+ in 18 months</div></div><div class="schev">▾</div></div><div class="sbody" id="sb4"><div class="scontent"><div class="smain"><h4>Why Credit Matters Before You Want It To</h4><p>Your credit score affects <strong>apartment applications</strong>, <strong>car insurance rates</strong>, future loan rates, and some employer background checks.</p><h4>The Secured Card Strategy</h4><p>Deposit $200–$300 as collateral. Use for <strong>one small recurring charge</strong> (Spotify at $11). Autopay full balance monthly. After 6–12 months, issuers upgrade and return your deposit. <strong>Discover Secured</strong> and <strong>Capital One Quicksilver Secured</strong> are student-friendly.</p><h4>The Authorized User Fast-Track</h4><p>If a parent has good payment history, ask to be added as an authorized user. Their history gets added to your report <strong>immediately</strong> — fastest legal way to build credit from zero.</p><ul class="cklist"><li>Pay in FULL every month — carrying a balance doesn't help your score</li><li>Keep utilization under 10% ($300 limit = charge under $30)</li><li>Never miss a payment — it's 35% of your FICO score</li><li>Don't apply for multiple cards at once — each inquiry drops ~5 pts</li><li>Avoid store cards (Target, Amazon, Best Buy) — 29%+ APR traps</li></ul></div><div class="sside"><div class="sbox sbox-g"><div class="sbox-lbl">To Open a Secured Card</div><div class="sbox-num">$200</div><div class="sbox-text">Refundable deposit. One small auto-charge. Pay in full. Score builds automatically.</div></div><div class="sbox sbox-b"><div class="sbox-lbl">Realistic Score Target</div><div class="sbox-title">700+ in 18 months</div><div class="sbox-text">Secured card + authorized user + on-time payments = 700+ FICO from zero.</div></div></div></div><div class="sfoot"><div><div class="sfgl">Your target</div><div class="sfgt">Secured card open · Paid in full monthly</div></div><button class="done-btn" onclick="markD(4,this)">Mark Complete ✓</button></div></div></div>
-
-<!-- S5 --><div class="step-card" data-step="5" id="sc5"><div class="step-hd" onclick="togS(5)"><div class="snb-wrap"><div class="snb" id="sn5">05</div><span class="stag stag-G">Grow</span></div><div class="stw"><div class="s-title">Open a Roth IRA</div><div class="s-sub">Your single most powerful move · Even $25/month · Tax-free forever</div></div><div class="schev">▾</div></div><div class="sbody" id="sb5"><div class="scontent"><div class="smain"><h4>The Non-Negotiable Rule: Earned Income First</h4><p>You can only contribute up to what you <em>earned</em> that year. <strong>Financial aid does NOT count as earned income.</strong> You need a job or gig income.</p><h4>What Counts as Earned Income</h4><ul class="cklist"><li><strong>W-2 jobs</strong> — campus job, retail, food service, childcare</li><li><strong>Gig work</strong> — DoorDash, Uber Eats, Instacart, TaskRabbit</li><li><strong>Freelance</strong> — tutoring, photography, graphic design, web work</li><li><strong>Babysitting / odd jobs</strong> — counts even without a 1099 if reported</li></ul><h4>Where to Open — Free, No Minimums</h4><p><strong>Fidelity</strong> or <strong>Schwab</strong> — $0 minimums. Invest in a Target Date 2060 Fund or FXAIX/VOO (S&amp;P 500, 0.015% fee). Set up recurring transfers.</p><h4>Why Starting Now Is the Entire Game</h4><p>$100/month from ages 18–22, then never again — grows to <strong>~$200,000+ at age 65</strong> at 7% return. Tax-free. Starting at 28 with same total gives ~$46,000.</p></div><div class="sside"><div class="sbox sbox-g"><div class="sbox-lbl">2024 Roth IRA Limit</div><div class="sbox-num">$7,000</div><div class="sbox-text">Per year, or 100% of earned income — whichever is less.</div></div><div class="sbox sbox-a"><div class="sbox-lbl">⚡ Critical Detail</div><div class="sbox-title">Grant money ≠ earned income</div><div class="sbox-text">Pell, Cal Grant, SSCG, CCPG — none count. You need W-2 or gig income.</div></div><div class="sbox sbox-n"><div class="sbox-lbl">FAFSA Protection Bonus</div><div class="sbox-text">Roth IRA contributions are <strong>not counted as FAFSA assets</strong>. Money in a Roth protects your aid.</div></div></div></div><div class="sfoot"><div><div class="sfgl">Your target</div><div class="sfgt">Roth IRA open · Auto-investing monthly</div></div><button class="done-btn" onclick="markD(5,this)">Mark Complete ✓</button></div></div></div>
-
-<!-- S6 --><div class="step-card" data-step="6" id="sc6"><div class="step-hd" onclick="togS(6)"><div class="snb-wrap"><div class="snb" id="sn6">06</div><span class="stag stag-E">Taxes</span></div><div class="stw"><div class="s-title">Handle Gig Income Taxes</div><div class="s-sub">Self-employment tax · Quarterly payments · Don't get blindsided in April</div></div><div class="schev">▾</div></div><div class="sbody" id="sb6"><div class="scontent"><div class="smain"><h4>Nobody Told You About This</h4><p>DoorDash, Uber, freelance — <strong>nobody withholds taxes.</strong> Earn more than $400 from self-employment? You owe SE tax (15.3%) plus income tax.</p><h4>The Simple Rule: 25–30%</h4><p>Every time you get gig pay, move <strong>25–30% into a separate "Taxes" savings account.</strong> Don't touch it.</p><h4>Quarterly Estimated Payments</h4><p>Expect to owe $1,000+? IRS expects quarterly payments (Apr 15, Jun 15, Sep 15, Jan 15). Pay via <strong>IRS Direct Pay</strong> — free, no account needed.</p><ul class="cklist"><li>DoorDash/Uber: mileage deduction = $0.67/mile — log every mile in MileIQ</li><li>Freelance tools, subscriptions, software are deductible</li><li>File free: IRS Free File (under $79K), VITA campus sites</li><li>$400 self-employment threshold — above it, file Schedule SE</li></ul></div><div class="sside"><div class="sbox sbox-a"><div class="sbox-lbl">SE Tax Rate</div><div class="sbox-num">15.3%</div><div class="sbox-text">On top of income tax. $500/mo gig = <strong>$900+ owed in April</strong> without planning.</div></div><div class="sbox sbox-r"><div class="sbox-lbl">⚠ The Trigger</div><div class="sbox-title">$400 from self-employment</div><div class="sbox-text">Above this, file Schedule SE. Below = exempt from SE tax (still report income).</div></div><div class="sbox sbox-g"><div class="sbox-lbl">Free Tax Help</div><div class="sbox-text"><strong>IRS Free File</strong> — under $79K<br><strong>VITA campus sites</strong> — free in-person<br><strong>IRS Direct Pay</strong> — free quarterly</div></div></div></div><div class="sfoot"><div><div class="sfgl">Your target</div><div class="sfgt">25–30% of gig income in a separate tax bucket</div></div><button class="done-btn" onclick="markD(6,this)">Mark Complete ✓</button></div></div></div>
-
-<!-- S7 --><div class="step-card" data-step="7" id="sc7"><div class="step-hd" onclick="togS(7)"><div class="snb-wrap"><div class="snb" id="sn7">07</div><span class="stag stag-B">Build</span></div><div class="stw"><div class="s-title">Full Emergency Fund</div><div class="s-sub">2–3 months of real expenses · HYSA only · Never invested</div></div><div class="schev">▾</div></div><div class="sbody" id="sb7"><div class="scontent"><div class="smain"><h4>Size It Realistically</h4><p>The "6 months" advice is for homeowners. For CC students on CalFresh and Medi-Cal, <strong>2–3 months might be $1,500–$3,500.</strong> Achievable in one semester.</p><h4>Calculate Your Number</h4><p>Add up actual monthly fixed expenses: rent, utilities, transport, phone, food beyond CalFresh. Multiply by 2 or 3.</p><h4>The Hard Rule</h4><p><strong>Never invest your emergency fund.</strong> It must be instantly accessible. If the market drops 30% the same week your car breaks down, you need cash now.</p></div><div class="sside"><div class="sbox sbox-g"><div class="sbox-lbl">Realistic Student Target</div><div class="sbox-num">2–3 mo</div><div class="sbox-text">Many students only need <strong>$1,500–$3,500</strong> to complete this step.</div></div><div class="sbox sbox-n"><div class="sbox-lbl">Best HYSA Options</div><div class="sbox-text"><strong>SoFi</strong> — 4.6% APY<br><strong>Ally</strong> — 4.35% APY<br><strong>Marcus</strong> — 4.5% APY<br>All FDIC-insured, $0 minimum.</div></div><div class="sbox sbox-a"><div class="sbox-lbl">Hard Rule</div><div class="sbox-title">Savings account only</div><div class="sbox-text">Not stocks. Not crypto. A boring HYSA. Boring is the point.</div></div></div></div><div class="sfoot"><div><div class="sfgl">Your target</div><div class="sfgt">2–3 months of expenses in HYSA</div></div><button class="done-btn" onclick="markD(7,this)">Mark Complete ✓</button></div></div></div>
-
-<!-- S8 --><div class="step-card" data-step="8" id="sc8"><div class="step-hd" onclick="togS(8)"><div class="snb-wrap"><div class="snb" id="sn8">08</div><span class="stag stag-G">Grow</span></div><div class="stw"><div class="s-title">Max the Roth IRA &amp; Invest Surplus</div><div class="s-sub">$7,000/year max · Index funds · Taxable brokerage for overflow</div></div><div class="schev">▾</div></div><div class="sbody" id="sb8"><div class="scontent"><div class="smain"><h4>Now Accelerate</h4><p>Steps 1–7 built the foundation. Aim to max Roth IRA ($7,000/yr = $583/mo). Surplus goes into a <strong>taxable brokerage</strong> with the same index funds.</p><h4>What to Invest In — Keep It Simple</h4><ul class="cklist"><li><strong>FXAIX or VOO</strong> — S&amp;P 500 index. 0.015% expense ratio. Best default.</li><li><strong>Target Date 2060 Fund</strong> — auto-rebalances as you age. Zero decisions.</li><li><strong>VTI</strong> — Total US market. Slightly broader. Also excellent.</li></ul><h4>The CC Transfer Superpower</h4><p>~$3,500/yr at CC vs $43,000/yr at a 4-year = <strong>$79,000 saved over 2 years.</strong> That money becomes capital you invest instead of debt compounding against you.</p><h4>Mindset Shift</h4><p>Financial aid can replace income so you <strong>work fewer hours and study more</strong>. Students working under 15–20 hrs/week have significantly higher retention and grades.</p></div><div class="sside"><div class="sbox sbox-g"><div class="sbox-lbl">2024 Roth IRA Max</div><div class="sbox-num">$7,000</div><div class="sbox-text">$583/month. <strong>Partial is infinitely better than zero.</strong></div></div><div class="sbox sbox-b"><div class="sbox-lbl">CC Transfer Savings</div><div class="sbox-num" style="color:var(--blue)">$79K</div><div class="sbox-text">Average savings over 2 years vs a 4-year. Same degree. Wildly different debt.</div></div></div></div><div class="sfoot"><div><div class="sfgl">Your target</div><div class="sfgt">Max Roth IRA · Invest every surplus dollar</div></div><button class="done-btn" onclick="markD(8,this)">Mark Complete ✓</button></div></div></div>
-
-<!-- S9 --><div class="step-card" data-step="9" id="sc9"><div class="step-hd" onclick="togS(9)"><div class="snb-wrap"><div class="snb" id="sn9">09</div><span class="stag stag-K">Kill</span></div><div class="stw"><div class="s-title">Kill All Remaining Debt</div><div class="s-sub">Student loans · Car loans · Enter your 30s completely clean</div></div><div class="schev">▾</div></div><div class="sbody" id="sb9"><div class="scontent"><div class="smain"><h4>Life Gets Expensive After School</h4><p>Rent deposits, car, insurance, relationships — every debt you carry directly competes with building your life. The goal is to arrive clean.</p><h4>Student Loans</h4><p>Federal at 6.53%. If Roth IRA earns 7%+, the math is roughly a coin flip. Do <strong>whichever keeps you most consistent.</strong></p><h4>Car Loans — The 20/3/8 Rule</h4><p>20% down, no longer than 3 years, total cost under 8% of gross income. A $25K car on a 72-month loan at 7% = $29,400 — car worth ~$12,000 at payoff. Buy used with cash.</p><ul class="cklist"><li>Avoid car loans above 5% APR — buy cheaper instead</li><li>SAVE plan caps payments at 5% of discretionary income</li><li>PSLF forgives federal loans after 10 years of public service</li><li>Private student loans are less flexible — prioritize over federal</li></ul></div><div class="sside"><div class="sbox sbox-g"><div class="sbox-lbl">Graduation Point</div><div class="sbox-title">Zero debt · Investing 15%+</div><div class="sbox-text">This is where real wealth acceleration begins — clean foundation, no debt competing for income.</div></div><div class="sbox sbox-n"><div class="sbox-lbl">Federal Loan Programs</div><div class="sbox-text"><strong>studentaid.gov</strong> — all options<br><strong>SAVE plan</strong> — 5% of discretionary<br><strong>PSLF</strong> — forgiveness after 10 yrs<br><strong>IBR</strong> — income-based repayment</div></div></div></div><div class="sfoot"><div><div class="sfgl">Your target</div><div class="sfgt">Debt-free · Investing 15%+ of income</div></div><button class="done-btn" onclick="markD(9,this)">Mark Complete ✓</button></div></div></div>
-
-  </div>
-</div>
-</section>
-
-<!-- REFUND FLOW -->
-<section class="sec fu">
-<div class="wrap">
-  <div class="eyebrow">Bonus: The refund check playbook</div>
-  <h2 class="stitle"><span class="line">Refund check hit?</span><span class="line"><em>Exact split.</em></span></h2>
-  <p class="sdesc">This is the one decision most students get wrong. The refund check feels like found money. It's not — it's your semester budget arriving all at once.</p>
-  <div class="rfbox">
-    <div class="rfstep"><div class="rflbl">First</div><div class="rfpct">100%</div><div class="rftitle">Assess Timeline</div><div class="rfdesc">Divide total by weeks/months left. That's your spending ceiling.</div></div>
-    <div class="rfstep"><div class="rflbl">Priority 1</div><div class="rfpct">50–60%</div><div class="rftitle">Living Expenses</div><div class="rfdesc">Rent, transport, phone, food beyond CalFresh. Set aside first.</div></div>
-    <div class="rfstep"><div class="rflbl">Priority 2</div><div class="rfpct">15–20%</div><div class="rftitle">Emergency Fund</div><div class="rfdesc">Get HYSA to target. Protects every other decision.</div></div>
-    <div class="rfstep"><div class="rflbl">Priority 3</div><div class="rfpct">15–20%</div><div class="rftitle">Roth IRA</div><div class="rfdesc">Only if you have earned income. Grants don't qualify.</div></div>
-    <div class="rfstep"><div class="rflbl">Remainder</div><div class="rfpct">5–10%</div><div class="rftitle">Debt / Sinking Fund</div><div class="rfdesc">Kill toxic debt, or start a "next semester" savings bucket.</div></div>
-  </div>
-</div>
-</section>
-
-<!-- CALCULATOR -->
-<section class="sec sec-alt fu">
-<div class="wrap">
-  <div class="eyebrow">Interactive</div>
-  <h2 class="stitle"><span class="line">Your money,</span><span class="line"><em>calculated.</em></span></h2>
-  <div class="calc-grid">
-    <div class="calc-inputs">
-      <div><label class="ilabel">Monthly side income (gig + W-2)</label><div class="irow"><input type="range" id="si" min="0" max="3000" step="50" value="800" oninput="calcUpdate()"><span class="ival" id="siV">$800</span></div></div>
-      <div><label class="ilabel">Annual aid refund (after tuition)</label><div class="irow"><input type="range" id="ai" min="0" max="10000" step="100" value="3000" oninput="calcUpdate()"><span class="ival" id="aiV">$3,000</span></div></div>
-      <div><label class="ilabel">Monthly essential expenses</label><div class="irow"><input type="range" id="ei" min="200" max="2500" step="50" value="700" oninput="calcUpdate()"><span class="ival" id="eiV">$700</span></div></div>
-      <div><label class="ilabel">Years until retirement</label><div class="irow"><input type="range" id="yi" min="20" max="50" step="1" value="40" oninput="calcUpdate()"><span class="ival" id="yiV">40 yrs</span></div></div>
+<section id="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-tag">Application Support Analyst I &nbsp;&middot;&nbsp; CVC-OEI at FHDA</div>
+    <h1 class="hero-hl">The system that changed<br>my life is <em>the one I want<br>to keep running.</em></h1>
+    <p class="hero-sub">I'm <strong>Henry Fan</strong>. I started at <strong>Foothill College</strong> because it was what I could access. Seven years since, I've built the technical depth to support the systems that make that access possible for everyone else — from Banner and PeopleSoft SIS integrations to Canvas LMS, API log analysis, and the Python-driven pattern work that turns ticket volume into institutional knowledge.</p>
+    <div class="hero-ctas">
+      <a href="#tool-tickets" class="btn-p">Explore the Work</a>
+      <a href="#origin" class="btn-g">My background &rarr;</a>
     </div>
-    <div class="calc-results" id="calcRes"></div>
   </div>
-</div>
+  <div class="hero-stats">
+    <div class="h-stat"><span class="h-stat-num">7+</span><span class="h-stat-lbl">Years Edu-Tech</span></div>
+    <div class="h-stat"><span class="h-stat-num">5</span><span class="h-stat-lbl">Institutions</span></div>
+    <div class="h-stat"><span class="h-stat-num">B.S.</span><span class="h-stat-lbl">CS &middot; SJSU</span></div>
+  </div>
+  <div class="scroll-ind"><div class="scroll-line"></div><span>Scroll to explore</span></div>
 </section>
 
-<!-- VISUALIZATIONS -->
-<div class="sec-alt" style="border-top:2px solid var(--border2)">
-<section style="padding:clamp(3.5rem,8vw,5rem) 0 0">
-<div class="wrap">
-  <div class="fu">
-    <div class="eyebrow">The math behind every decision</div>
-    <h2 class="stitle"><span class="line">See compound interest,</span><span class="line">debt traps &amp; <em>opportunity cost</em></span><span class="line">in real numbers.</span></h2>
-  </div>
-  <div class="viz-nav">
-    <button class="vnav-btn vactive" onclick="showViz('roth',this)">📈 Compound Interest</button>
-    <button class="vnav-btn" onclick="showViz('auto',this)">🚗 Auto Loan Trap</button>
-    <button class="vnav-btn" onclick="showViz('cc',this)">💳 Credit Card Killer</button>
-    <button class="vnav-btn" onclick="showViz('compare',this)">⚖️ Two Paths</button>
-  </div>
+<div id="statusbar">
+  <div class="sb-item"><span class="sb-dot green"></span><span class="sb-text"><strong>CVC Exchange</strong> &mdash; All systems operational</span></div>
+  <div class="sb-item"><span class="sb-dot red"></span><span class="sb-text"><strong>TKT-0053</strong> &mdash; Trust enrollment broken &middot; Cuyamaca</span></div>
+  <div class="sb-item"><span class="sb-dot green"></span><span class="sb-text"><strong>Canvas LMS</strong> &mdash; 116 colleges connected</span></div>
+  <div class="sb-item"><span class="sb-dot red"></span><span class="sb-text"><strong>TKT-0054</strong> &mdash; LTI auth failure &middot; SDCCD</span></div>
+  <div class="sb-item"><span class="sb-dot amber"></span><span class="sb-text"><strong>TKT-0047</strong> &mdash; SIS feed 422 &middot; De Anza</span></div>
+  <div class="sb-item"><span class="sb-dot green"></span><span class="sb-text">Open Queue &mdash; <strong>5 active</strong></span></div>
+</div>
 
-  <!-- ROTH -->
-  <div class="vpanel vshow" id="vp-roth">
-    <div class="chart-card"><div class="chart-hd">The Roth IRA Snowball</div><div class="chart-sub">$100/month from ages 18–22 (4 years, $4,800 total) — then never adding another dollar. 7% average return. Tax-free forever.</div><div class="chart-wrap"><canvas id="rothChart"></canvas></div></div>
-    <div class="stat-row">
-      <div class="stat-cell"><div class="stat-lbl">Total Contributed</div><div class="stat-val sv-b">$4,800</div><div class="stat-desc">$100/mo × 4 years</div></div>
-      <div class="stat-cell"><div class="stat-lbl">Value at Age 40</div><div class="stat-val sv-g">$38,400</div><div class="stat-desc">8× your money</div></div>
-      <div class="stat-cell"><div class="stat-lbl">Value at Age 55</div><div class="stat-val sv-g">$108,600</div><div class="stat-desc">22× — still tax-free</div></div>
-      <div class="stat-cell"><div class="stat-lbl">Value at Age 65</div><div class="stat-val sv-g" id="rothFinal">—</div><div class="stat-desc">Every dollar yours, tax-free</div></div>
+<section id="tool-tickets">
+  <div class="slbl">Tool 01</div>
+  <h2 class="stitle reveal">CVC Exchange <em>Support Queue</em></h2>
+  <p class="sintro reveal">A working model of a CVC-OEI support queue — the same ticket categories, priority logic, and escalation paths I'd manage in this role. Click any ticket to open the full triage playbook. Inject a new inbound ticket to see how prioritization shifts in real time.</p>
+  <div class="tool-win reveal">
+    <div class="tool-bar">
+      <div class="tool-dots"><span class="td r"></span><span class="td y"></span><span class="td g"></span></div>
+      <span class="tool-lbl">ServiceNow &mdash; CVC-OEI Support Queue &mdash; Active Incidents</span>
     </div>
-    <div class="sim-wrap">
-      <div><div class="sim-title">🎛️ Adjust the numbers</div><div style="display:flex;flex-direction:column;gap:1rem">
-        <div><label class="ilabel">Monthly contribution</label><div class="irow"><input type="range" id="rm" min="25" max="583" step="25" value="100" oninput="updateRoth()"><span class="ival" id="rmV">$100/mo</span></div></div>
-        <div><label class="ilabel">Years contributing</label><div class="irow"><input type="range" id="ry" min="1" max="4" step="1" value="4" oninput="updateRoth()"><span class="ival" id="ryV">4 yrs</span></div></div>
-        <div><label class="ilabel">Annual return rate</label><div class="irow"><input type="range" id="rr" min="4" max="12" step="0.5" value="7" oninput="updateRoth()"><span class="ival" id="rrV">7%</span></div></div>
-      </div></div>
-      <div style="display:flex;flex-direction:column;gap:.7rem;justify-content:center">
-        <div class="crbox"><div class="crl">Total Contributed</div><div class="crv" style="font-size:1.4rem" id="rSimContrib">$4,800</div></div>
-        <div class="crbox hi-g"><div class="crl">Value at Age 65</div><div class="crv" style="font-size:1.8rem" id="rSimVal">—</div><div class="crs" id="rSimMult">—× your money</div></div>
+    <div class="ctrl-row">
+      <button class="cbtn active" onclick="filterQ('all',this)">All <span id="cnt-all">6</span></button>
+      <button class="cbtn" onclick="filterQ('P1',this)">P1 Critical <span id="cnt-p1"></span></button>
+      <button class="cbtn" onclick="filterQ('P2',this)">P2 High <span id="cnt-p2"></span></button>
+      <button class="cbtn" onclick="filterQ('P3',this)">P3 Standard <span id="cnt-p3"></span></button>
+      <button class="cbtn" onclick="filterQ('done',this)">Resolved <span id="cnt-done"></span></button>
+      <button class="cbtn run ml-auto" onclick="injectTicket()">+ Simulate New Ticket</button>
+    </div>
+    <div class="tq-list" id="tqList"></div>
+    <div class="impact-bar" id="impactBar">
+      <div class="impact-item crit">Students blocked from Canvas access: <strong id="imp-blocked">4</strong></div>
+      <div class="impact-item warn">LTI-related failures: <strong id="imp-fa">1</strong></div>
+      <div class="impact-item warn">Pending past SLA window: <strong id="imp-sla">1</strong></div>
+      <div class="impact-item">Active P1 tickets: <strong id="imp-p1">2</strong></div>
+    </div>
+    <div class="tq-foot">
+      <span>SLA Compliance: <strong id="sla-pct">100%</strong></span>
+      <span>Avg Resolution: <strong>47 min</strong></span>
+      <span>Escalated: <strong id="esc-cnt">0</strong></span>
+      <span>Resolved Today: <strong id="res-cnt">0</strong></span>
+    </div>
+  </div>
+</section>
+
+<section id="tool-api">
+  <div class="slbl">Tool 02</div>
+  <h2 class="stitle reveal">API Integration <em>Log Analyzer</em></h2>
+  <p class="sintro reveal">Six real failure scenarios across the SIS &harr; CVC Exchange &harr; Canvas integration stack. Load a scenario, read the log, then run the structured diagnosis — root cause, affected students, and exact remediation steps. This is the layered diagnostic approach I bring from SMCCD and Faraday: characterize the error, isolate the layer, escalate with a full trail.</p>
+  <div class="api-layout reveal">
+    <div class="api-pane">
+      <div class="api-pane-head">
+        <span><span class="live-dot"></span>/api/v2/enrollments &middot; Live Feed</span>
+        <span id="log-status" style="color:var(--green);font-size:.6rem">&#9679; HEALTHY</span>
+      </div>
+      <div class="log-feed" id="logFeed"></div>
+      <div class="ctrl-row">
+        <button class="cbtn active" onclick="loadSc('healthy',this)">Healthy Sync</button>
+        <button class="cbtn" onclick="loadSc('auth',this)">Auth Failure</button>
+        <button class="cbtn" onclick="loadSc('payload',this)">Payload Error</button>
+        <button class="cbtn" onclick="loadSc('timeout',this)">Sync Timeout</button>
+        <button class="cbtn" onclick="loadSc('cascade',this)">FA Cascade</button>
+        <button class="cbtn" onclick="loadSc('trust',this)">Trust Enrollment</button>
+        <button class="cbtn run ml-auto" onclick="runDiag()">&#9654; Run Diagnosis</button>
+      </div>
+    </div>
+    <div class="api-pane">
+      <div class="api-pane-head">
+        <span>Diagnosis Output</span>
+        <span id="diag-badge" style="font-size:.6rem;color:var(--muted)">&#8212; Awaiting analysis</span>
+      </div>
+      <div class="diag-feed" id="diagPanel"><span style="color:var(--muted);font-size:.68rem">Select a scenario and click &#9654; Run Diagnosis.</span></div>
+      <div class="ctrl-row">
+        <button class="cbtn" onclick="clearDiag()">Clear</button>
+        <button class="cbtn" onclick="exportDiag()" id="exp-btn" style="display:none">&#8671; Export Report</button>
       </div>
     </div>
   </div>
-
-  <!-- AUTO -->
-  <div class="vpanel" id="vp-auto">
-    <div class="chart-card"><div class="chart-hd">$25,000 Auto Loan @ 6% — 60 Months</div><div class="chart-sub">Loan balance vs car value vs investing $483/month instead.</div><div class="chart-wrap"><canvas id="autoChart"></canvas></div></div>
-    <div class="auto-compare">
-      <div class="ac-col ac-bad"><div class="ac-label">The Auto Loan Reality</div><div class="ac-title">$25K @ 6% / 60 months</div><div class="ac-row"><span class="ak">Monthly payment</span><span class="av">−$483/mo</span></div><div class="ac-row"><span class="ak">Total repaid</span><span class="av">−$28,999</span></div><div class="ac-row"><span class="ak">Interest paid</span><span class="av">−$3,999</span></div><div class="ac-row"><span class="ak">Car value at payoff</span><span class="av">~$12,000</span></div><div class="ac-row"><span class="ak">Net loss</span><span class="av">−$17,000+</span></div></div>
-      <div class="ac-col ac-good"><div class="ac-label">If You Invested $483/mo Instead</div><div class="ac-title">S&amp;P 500, 7% avg return</div><div class="ac-row"><span class="ak">After 5 years</span><span class="av">+$34,700</span></div><div class="ac-row"><span class="ak">After 10 years</span><span class="av">+$83,600</span></div><div class="ac-row"><span class="ak">After 20 years</span><span class="av">+$265,000</span></div><div class="ac-row"><span class="ak">After 30 years</span><span class="av">+$578,000</span></div></div>
-    </div>
-    <div class="big-callout"><div class="bc-ey">The real cost of a $25K car loan</div><div class="bc-num">$595,000</div><div class="bc-text">The net worth difference at retirement. <strong>The car doesn't cost $25,000. It costs $595,000 in missed wealth.</strong></div></div>
-  </div>
-
-  <!-- CC -->
-  <div class="vpanel" id="vp-cc">
-    <div class="chart-card"><div class="chart-hd">$5,000 Credit Card — 3 Repayment Strategies</div><div class="chart-sub">24% APR. Watch minimum payments keep you in debt for a decade.</div><div class="chart-wrap"><canvas id="ccChart"></canvas></div></div>
-    <div class="sim-wrap">
-      <div><div class="sim-title">Select a strategy</div><div class="scenario-wrap">
-        <div class="scenario-card sel" onclick="setCCScene(this,'min')"><div class="scen-hd"><span class="scen-name">Minimum payments (2%)</span><span class="scen-rate" style="color:var(--red)">24% APR</span></div><div class="scen-desc">The default trap. Designed to keep you paying forever.</div></div>
-        <div class="scenario-card" onclick="setCCScene(this,150)"><div class="scen-hd"><span class="scen-name">Fixed $150/month</span><span class="scen-rate" style="color:var(--amber)">24% APR</span></div><div class="scen-desc">3× the minimum. Finishes in years, not decades.</div></div>
-        <div class="scenario-card" onclick="setCCScene(this,300)"><div class="scen-hd"><span class="scen-name">Fixed $300/month</span><span class="scen-rate" style="color:var(--green)">24% APR</span></div><div class="scen-desc">Aggressive. Paid off in 20 months.</div></div>
-      </div></div>
-      <div style="display:flex;flex-direction:column;gap:.7rem;justify-content:center" id="ccSidePanel"></div>
-    </div>
-    <div class="big-callout" style="background:#3D1A14"><div class="bc-ey">Opportunity cost of minimum payments</div><div class="bc-num" style="color:#FF9B8A">$7,200</div><div class="bc-text">Interest paid on $5K over 22 years. Invested 30 years at 7% = <strong style="color:#fff">$55,000</strong>. You don't just pay interest — you permanently lose the wealth.</div></div>
-  </div>
-
-  <!-- COMPARE -->
-  <div class="vpanel" id="vp-compare">
-    <div class="chart-card"><div class="chart-hd">Two Paths. Same Start. 40 Years.</div><div class="chart-sub">Investor: Roth IRA during college, no car loan, no CC debt. Debt: auto loan + CC + all compounding opportunity cost.</div><div class="chart-wrap"><canvas id="compareChart"></canvas></div></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border2);border:1.5px solid var(--border2);border-radius:var(--r-lg);overflow:hidden;margin-top:1.25rem">
-      <div style="background:#F5FBF7;padding:1.5rem"><div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem">✓ The Investor Path</div><div class="ac-row"><span class="ak">Roth IRA × 4 yrs</span><span style="color:var(--green);font-family:var(--mono);font-size:.78rem;font-weight:600">$16K in</span></div><div class="ac-row"><span class="ak">40 yrs growth (7%)</span><span style="color:var(--green);font-family:var(--mono);font-size:.78rem;font-weight:600">~$202K</span></div><div class="ac-row"><span class="ak">No auto loan → invest</span><span style="color:var(--green);font-family:var(--mono);font-size:.78rem;font-weight:600">+$578K</span></div><div class="ac-row"><span class="ak">No CC interest saved</span><span style="color:var(--green);font-family:var(--mono);font-size:.78rem;font-weight:600">+$55K</span></div><div class="ac-row" style="border-top:1.5px solid var(--green-bd);margin-top:.4rem;padding-top:.6rem"><span style="font-weight:700">Total wealth</span><span style="color:var(--green);font-family:var(--display);font-size:1.15rem;font-weight:800">$835K+</span></div></div>
-      <div style="background:#FFF8F7;padding:1.5rem"><div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:.75rem">✕ The Debt Path</div><div class="ac-row"><span class="ak">Auto loan paid</span><span style="color:var(--red);font-family:var(--mono);font-size:.78rem;font-weight:600">−$29K</span></div><div class="ac-row"><span class="ak">Depreciation</span><span style="color:var(--red);font-family:var(--mono);font-size:.78rem;font-weight:600">−$13K</span></div><div class="ac-row"><span class="ak">CC debt (min pmt)</span><span style="color:var(--red);font-family:var(--mono);font-size:.78rem;font-weight:600">−$12.2K</span></div><div class="ac-row"><span class="ak">Opportunity cost</span><span style="color:var(--red);font-family:var(--mono);font-size:.78rem;font-weight:600">−$780K+</span></div><div class="ac-row" style="border-top:1.5px solid var(--red-bd);margin-top:.4rem;padding-top:.6rem"><span style="font-weight:700">Net vs investor</span><span style="color:var(--red);font-family:var(--display);font-size:1.15rem;font-weight:800">−$835K</span></div></div>
-    </div>
-    <div class="big-callout"><div class="bc-ey">The total divergence</div><div class="bc-num">$835,000+</div><div class="bc-text">Traced back to decisions made in college with <strong>grant money that never had to be repaid.</strong> Same money. Same time. Compounding is the only difference.</div></div>
-  </div>
-</div>
 </section>
-</div>
 
+<section id="tool-sync">
+  <div class="slbl">Tool 03</div>
+  <h2 class="stitle reveal">CVC Exchange <em>Enrollment Sync Flow</em></h2>
+  <p class="sintro reveal">The CVC Exchange isn't one system — it's an API-mediated network connecting 116 colleges, each with their own SIS, Canvas environment, and financial aid rules. A single failure at any node cascades downstream. Use the controls below to walk through each failure mode and see where in the chain the break occurs.</p>
+  <div class="sync-wrap reveal">
+    <canvas id="syncCanvas"></canvas>
+    <div class="sync-legend">
+      <div class="sl-item"><span class="sl-dot" style="background:var(--green)"></span>Data flowing normally</div>
+      <div class="sl-item"><span class="sl-dot" style="background:var(--amber)"></span>Degraded / warning</div>
+      <div class="sl-item"><span class="sl-dot" style="background:var(--red)"></span>Integration failure</div>
+      <div class="sl-item"><span class="sl-dot" style="background:var(--blue)"></span>Pending / queued</div>
+    </div>
+    <div class="ctrl-row">
+      <button class="cbtn active" onclick="setSyncMode('normal',this)">Normal Operation</button>
+      <button class="cbtn" onclick="setSyncMode('sis-fail',this)">SIS Auth Failure</button>
+      <button class="cbtn" onclick="setSyncMode('canvas-lag',this)">Canvas Provisioning Lag</button>
+      <button class="cbtn" onclick="setSyncMode('fa-hold',this)">FA Disbursement Hold</button>
+      <button class="cbtn" onclick="setSyncMode('cascade',this)">Full Cascade Failure</button>
+      <button class="cbtn" onclick="setSyncMode('uat',this)">UAT Validation Gate</button>
+    </div>
+    <div id="sync-annotation" style="display:none;padding:.9rem 1.4rem;background:rgba(60,191,160,.04);border-top:1px solid rgba(60,191,160,.12);font-size:.78rem;color:var(--muted2);line-height:1.7;"></div>
+  </div>
+</section>
+
+<section id="tool-chart">
+  <div class="slbl">Tool 04</div>
+  <h2 class="stitle reveal">Ticket Trend <em>Root Cause Analysis</em></h2>
+  <p class="sintro reveal">At Faraday Future I ran quarterly Python/pandas analyses that reduced repeat support volume 15% by identifying systemic failure patterns and targeting each with a KB article. Click any category below to see the specific knowledge base action taken for that root cause.</p>
+  <div class="chart-layout reveal">
+    <div class="c-pane">
+      <div class="c-head">Ticket Volume by Root Cause &mdash; Q1</div>
+      <div class="c-sub">Click any category to see the knowledge base intervention built for it.</div>
+      <div class="bar-chart" id="barChart"></div>
+      <div class="c-insight"><strong>Finding:</strong> Auth failures (SIS token expiry) and enrollment sync window misses account for 52% of volume. Canvas-layer failures &mdash; trust enrollment misconfigs and LTI credential issues &mdash; account for another 34%. Identified via cross-referencing Canvas API error logs with SIS feed ingestion reports and sub-account audit logs.</div>
+    </div>
+    <div class="c-pane">
+      <div class="c-head" id="kb-pane-title">Weekly Volume &mdash; Before vs. After KB Intervention</div>
+      <div class="c-sub" id="kb-pane-sub">Select a category on the left to see what action was taken. Or view the overall trend below.</div>
+      <div class="trend-wrap" id="trendWrap"><canvas id="trendCanvas"></canvas></div>
+      <div id="kb-detail" style="display:none;padding:.9rem;background:var(--bg2);border:1px solid var(--bdim);margin-top:.8rem;font-size:.78rem;line-height:1.65;color:var(--muted2);"></div>
+      <div class="c-insight" style="margin-top:1rem" id="trend-insight"><strong>Result:</strong> &minus;15% repeat ticket volume within 6 weeks of KB deployment. Auth failure category down 38%. Trust enrollment re-opens down 60%. LTI P1s down 44%.</div>
+    </div>
+  </div>
+</section>
+
+<section id="mapping" style="background:var(--bg2)">
+  <div class="slbl">Role Requirements</div>
+  <h2 class="stitle reveal">Every requirement. <em>Matched.</em></h2>
+  <p class="sintro reveal" style="margin-bottom:2rem">Each requirement in the posting maps directly to a real role, a real system, and a real outcome — not aspirational framing.</p>
+  <div class="map-grid reveal">
+    <div class="m-item"><div class="m-jd">Ticketing &middot; SLA &middot; Incident Management</div><div class="m-my"><strong>ServiceNow &amp; Jira at enterprise scale</strong> — Tier 1–2, SLA-bound, multi-department. Built internal KB resources; quarterly pattern analysis reduced repeat support volume 15%.</div></div>
+    <div class="m-item"><div class="m-jd">Higher Ed SIS &middot; Financial Aid &middot; Enrollment</div><div class="m-my">Daily support inside <strong>Banner &amp; PeopleSoft FA and enrollment systems at SMCCD</strong> — data validation, integration failures, Title IV and California compliance. Same CCC district family as FHDA.</div></div>
+    <div class="m-item"><div class="m-jd">API Integrations &middot; Data Exchange &middot; Sync Failures</div><div class="m-my">Traced cross-system failures at SMCCD — <strong>API log analysis, enrollment sync restoration, escalation documentation</strong>. Learned to read error codes, isolate auth vs. payload vs. timing failures.</div></div>
+    <div class="m-item"><div class="m-jd">Canvas LMS &middot; SSO &middot; Instructional Platforms</div><div class="m-my"><strong>Canvas admin at Rice University</strong> — SSO failures, auth issues, faculty and student troubleshooting across academic departments. The same LMS used by all 116 CVC Exchange colleges.</div></div>
+    <div class="m-item"><div class="m-jd">Python &middot; SQL &middot; Bash &middot; Linux &middot; REST APIs</div><div class="m-my"><strong>B.S. Computer Science, SJSU</strong> — scripting, pandas data analysis, application lifecycle. M.S. CS at Georgia Tech in progress. These are working tools, not listed skills.</div></div>
+    <div class="m-item"><div class="m-jd">Documentation &middot; Training &middot; Distributed Work</div><div class="m-my">5+ years <strong>translating regulatory requirements into staff workflows</strong> at SMCCD — Title IV, California FA rules. KB authoring that non-technical staff can actually follow. Fully distributed since 2022.</div></div>
+  </div>
+  <div class="map-grid reveal" style="margin-top:1.5px;grid-template-columns:1fr">
+    <div class="m-item" style="border-left:3px solid var(--teal)"><div class="m-jd" style="color:var(--teal)">On Banner / PeopleSoft / Colleague Specifically</div><div class="m-my">At SMCCD I worked daily within FA and enrollment systems built on these platforms — resolving data discrepancies, tracing integration failures, validating student records under Title IV. I know how a Banner record maps to downstream disbursement, and where schema mismatches surface between SIS exports and API expectations. That's directly applicable to the CVC Exchange integration layer.</div></div>
+  </div>
+</section>
+
+<section id="product">
+  <div class="slbl">Platform Understanding</div>
+  <h2 class="stitle reveal">I understand what <em>I'd be supporting.</em></h2>
+  <div class="arch-outer reveal">
+    <div class="arch-row">
+      <div class="an"><span class="an-l">CVC Exchange</span><span class="an-s">cvc.edu &middot; SaaS</span></div>
+      <span class="arch-arr">&#8596;</span>
+      <div class="an"><span class="an-l">Home College SIS</span><span class="an-s">Banner / PS / Colleague</span></div>
+      <span class="arch-arr">&#8596;</span>
+      <div class="an"><span class="an-l">Canvas LMS</span><span class="an-s">116 CCCs</span></div>
+      <span class="arch-arr">&#8596;</span>
+      <div class="an"><span class="an-l">Teaching SIS</span><span class="an-s">Cross-enroll target</span></div>
+    </div>
+    <div class="arch-row">
+      <div class="an"><span class="an-l">API Exchange</span><span class="an-s">Enrollment / FA / Credits</span></div>
+      <span class="arch-arr">&#8596;</span>
+      <div class="an"><span class="an-l">SSO / Identity</span><span class="an-s">Auth layer</span></div>
+      <span class="arch-arr">&#8596;</span>
+      <div class="an me"><span class="an-l">Henry Fan</span><span class="an-s">Support Analyst I</span></div>
+      <span class="arch-arr">&#8596;</span>
+      <div class="an"><span class="an-l">Financial Aid</span><span class="an-s">FAFSA / CADAA</span></div>
+    </div>
+  </div>
+  <div class="arch-leg reveal">
+    <div class="al"><div class="al-l"><span class="al-dot a"></span>Canvas LMS &middot; Rice Univ.</div><div class="al-b">Hands-on SSO, auth failures, faculty &amp; student troubleshooting. Same LMS across all CVC Exchange colleges.</div></div>
+    <div class="al"><div class="al-l"><span class="al-dot"></span>SIS + FA &middot; SMCCD</div><div class="al-b">Daily Banner/PeopleSoft support. Data validation, integration failures, Title IV compliance.</div></div>
+    <div class="al"><div class="al-l"><span class="al-dot"></span>API + Ticketing &middot; Faraday</div><div class="al-b">Enterprise-scale incident management, API integration troubleshooting, pattern analysis in Python.</div></div>
+  </div>
+  <div class="hl-box reveal"><p>The CVC Exchange isn't one system &mdash; it's an API-mediated network connecting 116 colleges, each with their own SIS config, FA rules, Canvas environment, and compliance calendar. A single enrollment failure can cascade: no SIS record &rarr; no Canvas access &rarr; no FA disbursement &rarr; student loses aid. <strong>I understand this chain because I've worked at multiple points in it.</strong></p></div>
+</section>
+
+<section id="experience">
+  <div class="slbl">Career History</div>
+  <h2 class="stitle reveal">Seven years. Five institutions. <em>One through-line.</em></h2>
+  <div class="timeline">
+    <div class="tl reveal">
+      <div class="tl-meta"><div class="tl-dt">Sep 2024 &ndash; Oct 2025</div><div class="tl-org">SMCCD &amp; FHDA</div><span class="tl-badge hi">Most Relevant</span></div>
+      <div><div class="tl-role">Program Services Coordinator</div><div class="tl-body">Supported enterprise financial aid and enrollment systems at <strong>San Mateo Community College District</strong> &mdash; the same CCC district family as Foothill-De Anza. Translated state and federal regulatory requirements into documented staff workflows that reduced processing errors. Diagnosed system discrepancies across SIS-integrated platforms. Participated in pre-deployment testing for system updates, ensuring compliance before go-live. Conducted root cause analysis on recurring system breakdowns.</div><div class="tl-tags"><span class="ttag">CCC Ecosystem</span><span class="ttag">Banner / PeopleSoft</span><span class="ttag">Title IV</span><span class="ttag">Workflow Docs</span><span class="ttag">SIS Integration</span><span class="ttag">Pre-deploy Testing</span><span class="ttag">Root Cause Analysis</span></div></div>
+    </div>
+    <div class="tl reveal">
+      <div class="tl-meta"><div class="tl-dt">May 2023 &ndash; Aug 2024</div><div class="tl-org">Faraday Future</div><span class="tl-badge">Enterprise Scale</span></div>
+      <div><div class="tl-role">IT Support Specialist</div><div class="tl-body">Managed Tier 1&ndash;2 support at enterprise scale using <strong>ServiceNow and Jira</strong> under SLA requirements. Administered Active Directory and M365 provisioning. Built internal KB resources. <strong>Ran quarterly ticket analysis in Python (pandas)</strong> to identify root cause patterns &mdash; reducing repeat support volume 15%. Collaborated with engineering on incident escalation.</div><div class="tl-tags"><span class="ttag">ServiceNow</span><span class="ttag">Jira</span><span class="ttag">SLA Management</span><span class="ttag">Python Analytics</span><span class="ttag">Active Directory</span><span class="ttag">KB Authoring</span></div></div>
+    </div>
+    <div class="tl reveal">
+      <div class="tl-meta"><div class="tl-dt">Apr 2022 &ndash; Dec 2022</div><div class="tl-org">Rice University</div><span class="tl-badge">Canvas &middot; LMS</span></div>
+      <div><div class="tl-role">Applications Technician</div><div class="tl-body">Provided technical support for <strong>Canvas LMS</strong> and institutional academic systems. Resolved authentication, SSO, and LMS-related issues with detailed incident tracking. Partnered with academic departments on instructional technology deployment &mdash; directly parallel to CVC-OEI support model.</div><div class="tl-tags"><span class="ttag">Canvas LMS</span><span class="ttag">SSO / Auth</span><span class="ttag">Incident Tracking</span><span class="ttag">Faculty Support</span></div></div>
+    </div>
+    <div class="tl reveal">
+      <div class="tl-meta"><div class="tl-dt">Aug 2019 &ndash; Mar 2022</div><div class="tl-org">San Jose State University</div><span class="tl-badge">Multi-Institutional</span></div>
+      <div><div class="tl-role">Technical Product Support</div><div class="tl-body">Applied <strong>learning analytics to identify student-system interaction bottlenecks</strong> and inform platform improvements. Designed data-informed feedback systems bridging student services and instructional technology.</div><div class="tl-tags"><span class="ttag">Learning Analytics</span><span class="ttag">Platform Support</span><span class="ttag">Student Outcomes</span></div></div>
+    </div>
+    <div class="tl reveal">
+      <div class="tl-meta"><div class="tl-dt">Jan 2017 &ndash; Jun 2020</div><div class="tl-org">Foothill College &amp; SJSU</div><span class="tl-badge">Foundation</span></div>
+      <div><div class="tl-role">Curriculum Developer</div><div class="tl-body">Designed peer-learning environments for CS fundamentals at <strong>Foothill College</strong> &mdash; the institution that houses the CVC. Applied learning analytics. This role is where I developed my model of the end user: a community college student navigating technology while managing work, family, and financial stress. That model shapes every KB article and triage flow I write.</div><div class="tl-tags"><span class="ttag">Foothill College</span><span class="ttag">CCC Student UX</span><span class="ttag">Learning Analytics</span><span class="ttag">Technical Training</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="slbl">Technical Skills</div>
+  <h2 class="stitle reveal">Tools I work in. <em>Skills I've built.</em></h2>
+  <div class="stack-g reveal" id="stackGrid"></div>
+</section>
+
+<section id="origin" style="background:var(--bg2)">
+  <div class="slbl">Background</div>
+  <div class="origin-layout reveal">
+    <div>
+      <div class="opq">"I'm a product of the system the CVC exists to protect."</div>
+      <div class="obody">
+        <p>I started at <strong>Foothill College</strong> — the same institution that houses the CVC — because community college was what I could access. My A.S. thesis was on andragogy: why institutional systems fail adult learners. My B.S. thesis at SJSU: <strong>"Critical Computation: Utilizing Technology for Social Good."</strong></p>
+        <p>When a sync failure blocks a student from their course or delays a financial aid disbursement, <strong>that's someone's semester.</strong> I know what that feels like from the other side of the screen. That's why I'm here.</p>
+      </div>
+    </div>
+    <div class="tc-cards">
+      <div class="tc">
+        <div class="tc-lbl">A.S. &middot; Foothill College &nbsp;&middot;&nbsp; B.S. CS &middot; San Jose State</div>
+        <div class="tc-title">From community college to CS degree — same systems, both sides</div>
+        <div class="tc-body">Foothill → SJSU → Rice → SJSU → Faraday Future → SMCCD/FHDA. Seven years. Every role in the CCC or higher ed ecosystem.</div>
+      </div>
+      <div class="tc" style="border-left-color:var(--amber)">
+        <div class="tc-lbl" style="color:var(--amber)">In Progress &middot; Georgia Tech</div>
+        <div class="tc-title">M.S. Computer Science — Machine Learning focus</div>
+        <div class="tc-body">Deepening the analytical foundation already driving the ticket pattern analysis and automation work shown above.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="close">
+  <div class="slbl" style="justify-content:center;margin-bottom:2rem">Let's Connect</div>
+  <h2 class="c-hl reveal">The context I bring <em>isn't on a r&eacute;sum&eacute;.</em></h2>
+  <p class="c-sub reveal">Seven years working inside California Community College systems. A CS degree built on top of a Foothill education. A direct, personal stake in the equity mission the CVC was created to advance.</p>
+  <div style="max-width:52ch;margin:1.6rem auto 0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);line-height:1.8;opacity:.85" class="reveal">Resume, references, and writing samples available on request.</div>
+  <div class="c-links reveal">
+    <a href="mailto:fanhenry@fhda.edu" class="c-link"><span class="c-lbl">Email</span><span class="c-val">fanhenry@fhda.edu</span></a>
+    <a href="https://linkedin.com/in/fansofhenry" class="c-link" target="_blank"><span class="c-lbl">LinkedIn</span><span class="c-val">linkedin.com/in/fansofhenry</span></a>
+    <a href="tel:6508235997" class="c-link"><span class="c-lbl">Phone</span><span class="c-val">(650) 823-5997</span></a>
+  </div>
+</section>
 <footer>
-  <div><div class="foot-brand">Student <span>FOO</span></div><div class="foot-tag">Financial Order of Operations for community college students.<br>Built at Skyline College · Inspired by real student realities.</div></div>
-  <div class="foot-disc">Educational content only — not financial advice. Aid amounts, interest rates, and tax laws change annually. For personalized help, visit your Financial Aid Office, SparkPoint, or a VITA site on campus.</div>
+  <span class="f-c">&copy; Henry Fan &middot; Los Altos Hills, CA</span>
+  <span class="f-c">Application Support Analyst I &middot; CVC-OEI &middot; FHDA</span>
 </footer>
 
 <script>
-// ── STATE ──
-const done=new Set();let activeS=null;let rothChartObj=null,autoChartObj=null,ccChartObj=null,compareChartObj=null;let chartsBuilt={};
+// ── HERO CANVAS ──────────────────────────────────────────────────
+(function(){
+  var c=document.getElementById('heroCanvas'),ctx=c.getContext('2d'),W,H,nodes=[];
+  function resize(){W=c.width=c.parentElement.offsetWidth;H=c.height=c.parentElement.offsetHeight;}
+  resize();window.addEventListener('resize',function(){resize();init();});
+  function init(){nodes=[];for(var i=0;i<55;i++)nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*2+1,p:Math.random()*Math.PI*2});}
+  init();
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<nodes.length;i++){var a=nodes[i];for(var j=i+1;j<nodes.length;j++){var b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);if(d<160){ctx.strokeStyle='rgba(232,160,32,'+(1-d/160)*.22+')';ctx.lineWidth=.6;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}}
+    nodes.forEach(function(n){n.p+=.02;var g=Math.sin(n.p)*.5+.5;ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle='rgba(232,160,32,'+(0.25+g*.4)+')';ctx.fill();n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;});
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 
-// ── RAIL ──
-function renderRail(){const c=document.getElementById('railSteps');c.innerHTML='';for(let i=1;i<=9;i++){if(i>1){const cn=document.createElement('div');cn.className='rconn'+(done.has(i-1)?' done':'');c.appendChild(cn)}const d=document.createElement('div');d.className='rdot'+(done.has(i)?' done':'')+(activeS===i?' active':'');d.textContent=i;d.onclick=()=>document.getElementById('sc'+i).scrollIntoView({behavior:'smooth',block:'start'});c.appendChild(d)}document.getElementById('railBadge').textContent=`Step ${Math.min(done.size+1,9)} of 9`}
+// ── NAV ──────────────────────────────────────────────────────────
+window.addEventListener('scroll',function(){document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);});
 
-// ── STEP TOGGLE ──
-function togS(n){const isO=document.getElementById('sc'+n).classList.contains('open');for(let i=1;i<=9;i++){document.getElementById('sc'+i).classList.remove('open');document.getElementById('sb'+i).classList.remove('open')}if(!isO){document.getElementById('sc'+n).classList.add('open');document.getElementById('sb'+n).classList.add('open');activeS=n}else activeS=null;renderRail()}
-function markD(n,btn){if(done.has(n)){done.delete(n);btn.classList.remove('done');btn.textContent='Mark Complete ✓';document.getElementById('sn'+n).classList.remove('sdone')}else{done.add(n);btn.classList.add('done');btn.textContent='✓ Completed';document.getElementById('sn'+n).classList.add('sdone')}renderRail()}
+// ── REVEAL ───────────────────────────────────────────────────────
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('visible');},i*70);obs.unobserve(e.target);}});},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 
-// ── REALITY CHECK ──
-const rcS={};function rcPick(btn){const q=btn.dataset.q,v=btn.dataset.v;rcS[q]=v;btn.closest('.rc-opts').querySelectorAll('.rc-opt').forEach(b=>b.classList.remove('on'));btn.classList.add('on');if(rcS[0]&&rcS[1]&&rcS[2]){let msg='';if(rcS[0]==='yes')msg='<strong>Start at Step 3.</strong> Destroy toxic debt first. Get the $500 buffer (Step 2), then throw everything at the highest-rate debt.';else if(rcS[2]==='no')msg='<strong>Stop — apply for aid first.</strong> 30 minutes on FAFSA could unlock $10,000+/year. Even if you think you won\'t qualify, apply. Then start at Step 1.';else if(rcS[1]==='no')msg='<strong>Start at Steps 1–2.</strong> Without earned income you can\'t open a Roth IRA yet, but you can protect your aid, build the $500 buffer, and establish credit. Finding even a small income source unlocks Step 5.';else msg='<strong>You\'re in a strong position.</strong> Move to Step 4 to build credit, then open your Roth IRA (Step 5). Use your refund check strategically.';document.getElementById('rcText').innerHTML=msg;document.getElementById('rcResult').classList.add('show')}}
+// ── TICKET QUEUE ─────────────────────────────────────────────────
+var TICKETS=[
+  {id:'TKT-0053',s:'Trust enrollment broken — cross-enrollment blocked',d:'sub_account_id: null returned for teaching institution; 11 students cannot access course',c:'Cuyamaca → SDCCD',p:'P1',a:'2h 14m',
+   steps:[
+    {t:'Confirm SIS enrollment record at home institution',q:'GET /api/v2/enrollments?student_id=&lt;id&gt; &mdash; verify HTTP 200 and enrollment_status: ACTIVE at Cuyamaca'},
+    {t:'Check Canvas admin for trust relationship between Cuyamaca and SDCCD sub-accounts',q:'Canvas Admin &rsaquo; Settings &rsaquo; Trust Relationships &mdash; confirm institution pair mapping exists'},
+    {t:'Validate sub_account_id mapping in CVC Exchange integration config',q:'Look for TRUST_RELATIONSHIP_NOT_FOUND error and sub_account_id: null in API response body'},
+    {t:'If sub-account hierarchy missing &mdash; coordinate with Canvas CSM for rebuild',q:'Provide Canvas CSM: institution pair, expected sub_account_id, error log excerpt'},
+    {t:'Test fix in sandbox environment (UAT pass required before reprocessing production)',q:'Reproduce trust enrollment in sandbox &mdash; confirm 200 OK with valid canvas_enrollment_id returned'},
+    {t:'Reprocess enrollment batch; confirm all 11 students now have Canvas access',q:'POST /api/v2/sync/trigger { district: "cuyamaca-sdccd", type: "trust-enrollment" }'}
+  ]},
+  {id:'TKT-0054',s:'LTI authentication failure — course materials inaccessible',d:'Consumer key rotation not propagated; 47 students cannot access embedded course materials',c:'San Diego CCD',p:'P1',a:'1h 08m',
+   steps:[
+    {t:'Identify affected LTI tool in Canvas sub-account',q:'Canvas Admin &rsaquo; [Sub-account] &rsaquo; Settings &rsaquo; Apps &mdash; locate tool showing auth errors; confirm consumer key status'},
+    {t:'Request regenerated credentials from LTI tool provider',q:'Contact vendor with: tool name, institution, sub-account, error timestamp. Request new consumer key + shared secret.'},
+    {t:'Update LTI configuration in Canvas',q:'Canvas Admin &rsaquo; Sub-account &rsaquo; External Apps &rsaquo; Edit tool &mdash; paste regenerated consumer key and shared secret'},
+    {t:'Test LTI launch in sandbox &mdash; confirm successful auth handshake',q:'Open sandbox course &rsaquo; launch LTI tool &mdash; verify no 401 or token mismatch in browser console'},
+    {t:'Deploy to production sub-account; notify instructor to validate tool access',q:'After confirmed sandbox pass: deploy to production. Email instructor with resolution and verification steps.'},
+    {t:'Document in LTI maintenance log with key rotation date and next review window',q:'Log: tool name, sub-account, rotation date, next review T+85 days. Update LTI calendar tracker.'}
+  ]},
+  {id:'TKT-0047',s:'SIS feed ingestion failure — 422 Unprocessable Entity',d:'enrollment_type field schema mismatch; 23 records across 4 sections pending ingestion',c:'De Anza College',p:'P2',a:'4h 03m',
+   steps:[
+    {t:'Pull SIS feed error report from Canvas admin',q:'Canvas Admin &rsaquo; SIS Imports &rsaquo; [failed batch] &rsaquo; Download error file &mdash; identify all failing rows'},
+    {t:'Isolate enrollment_type field value in failing records',q:'Error: field value "StudentEnrollment" (legacy) vs. CVC Exchange spec "student" (current). Confirm schema mismatch.'},
+    {t:'Coordinate with De Anza college IT to update SIS export field mapping',q:'Provide: CVC Exchange SIS import spec v2.3, field comparison table. Request corrected export re-submission.'},
+    {t:'Re-run SIS feed batch after college IT corrects field mapping',q:'POST /api/v2/sis/import { district: "deanza", file: corrected_batch } &mdash; validate HTTP 201 response'},
+    {t:'Confirm Canvas course access for 23 affected students',q:'Canvas Admin &rsaquo; Courses &rsaquo; [sections] &rsaquo; Enrollments &mdash; verify all 23 students appear with status: active'}
+  ]},
+  {id:'TKT-0055',s:'Sub-account user provisioning failure — batch import',d:'login_id format error; 14 instructor accounts not provisioned during new college integration',c:'Riverside CCD',p:'P2',a:'3h 45m',
+   steps:[
+    {t:'Review batch import error log in Canvas admin',q:'Canvas Admin &rsaquo; SIS Imports &rsaquo; [batch] &rsaquo; error file &mdash; identify all 14 failed rows and login_id format in each'},
+    {t:'Confirm login_id format mismatch: email format submitted vs. SIS ID format required',q:'CVC Exchange sub-account spec requires SIS ID format login_id (e.g. "rccd-0012847") not email format'},
+    {t:'Share CVC Exchange sub-account user creation CSV spec with college IT',q:'Provide: CSV template, field spec, login_id format examples. Request corrected CSV re-submission.'},
+    {t:'Re-run batch import in sub-account after college IT corrects login_id values',q:'Canvas Admin &rsaquo; Sub-account &rsaquo; SIS Import &rsaquo; upload corrected CSV &mdash; verify 14 accounts created'},
+    {t:'Confirm instructor access to assigned course sections',q:'Have instructors log in and confirm course visibility. Document provisioning complete in ticket.'}
+  ]},
+  {id:'TKT-0051',s:'Sandbox access blocked — UAT enrollees',d:'Sub-account permissions not configured for external UAT participants; no production impact',c:'Cañada College',p:'P3',a:'22m',
+   steps:[
+    {t:'Verify UAT enrollees are assigned to correct sandbox course section',q:'Canvas Admin &rsaquo; Sandbox sub-account &rsaquo; [test course] &rsaquo; Enrollments &mdash; confirm all enrollees appear'},
+    {t:'Check sub-account permissions for sandbox &mdash; confirm external enrollee role allows access',q:'Canvas Admin &rsaquo; Sub-account &rsaquo; Roles &mdash; verify UAT Participant role has course_view permission enabled'},
+    {t:'Adjust sub-account configuration to grant sandbox access to UAT participant role',q:'Enable course_view, content_view permissions for UAT Participant role in sandbox sub-account'},
+    {t:'Coordinate with facilitator to confirm all enrollees can access test environment',q:'Email facilitator with resolution. Request confirmation from enrollees that sandbox access is working.'},
+    {t:'Document sandbox permission config for future UAT setup at this institution',q:'Add to integration runbook: Ca&ntilde;ada College sandbox sub-account permission requirements for UAT.'}
+  ]},
+  {id:'TKT-0049',s:'Duplicate Canvas accounts — account merge required',d:'SIS ID mismatch created parallel accounts; enrollment on one, grade history on the other',c:'College of the Canyons',p:'P2',a:'RESOLVED',resolved:true,
+   steps:[
+    {t:'Identify duplicate accounts via Canvas user search',q:'Canvas Admin &rsaquo; Users &rsaquo; search by name and email &mdash; locate both accounts; note user_id for each'},
+    {t:'Confirm SIS ID mismatch between home and teaching institution records',q:'Compare sis_user_id on both accounts &mdash; home college SIS ID vs. teaching college enrollment path ID'},
+    {t:'Execute Canvas account merge',q:'Canvas Admin &rsaquo; User [primary] &rsaquo; Merge with another user &mdash; select secondary account; confirm grade history transfers'},
+    {t:'Validate enrollment, grade history, and LTI access on merged account',q:'Open merged account &mdash; verify: course enrollments visible, grades intact, LTI tools accessible'},
+    {t:'Update SIS export config at College of the Canyons to prevent recurrence',q:'Coordinate with COC IT: standardize sis_user_id format to prevent dual-path account creation on future enrollments'}
+  ]}
+];
 
-// ── CALCULATOR ──
-function calcUpdate(){const inc=+document.getElementById('si').value,aid=+document.getElementById('ai').value,exp=+document.getElementById('ei').value,yrs=+document.getElementById('yi').value;document.getElementById('siV').textContent='$'+inc.toLocaleString();document.getElementById('aiV').textContent='$'+aid.toLocaleString();document.getElementById('eiV').textContent='$'+exp.toLocaleString();document.getElementById('yiV').textContent=yrs+' yrs';const monthly=inc+aid/12,taxSet=inc*.6*.28,surplus=Math.max(0,monthly-exp-taxSet),rothMo=Math.min(surplus,7000/12);let bal=0;const mr=Math.pow(1.07,1/12)-1;for(let m=0;m<yrs*12;m++)bal=(bal+rothMo)*(1+mr);document.getElementById('calcRes').innerHTML=`<div class="crbox"><div class="crl">Monthly Cash Flow</div><div class="crv" style="font-size:1.3rem">$${Math.round(monthly).toLocaleString()}</div><div class="crs">Aid + income combined</div></div><div class="crbox ${surplus>0?'hi-g':'hi-r'}"><div class="crl">${surplus>0?'Monthly Surplus':'Shortfall'}</div><div class="crv" style="font-size:1.5rem">$${Math.abs(Math.round(surplus)).toLocaleString()}</div><div class="crs">After expenses + tax reserve</div></div><div class="crbox hi-g"><div class="crl">Roth IRA / Month</div><div class="crv" style="font-size:1.5rem">$${Math.round(rothMo).toLocaleString()}</div><div class="crs">$${Math.round(rothMo*12).toLocaleString()}/year</div></div><div class="crbox hi-g"><div class="crl">Roth IRA at Retirement</div><div class="crv" style="font-size:1.8rem">$${Math.round(bal).toLocaleString()}</div><div class="crs">Tax-free after ${yrs} yrs at 7%</div></div>${inc>0?`<div class="crbox hi-r"><div class="crl">Tax Reserve (gig)</div><div class="crv" style="font-size:1.3rem">$${Math.round(taxSet).toLocaleString()}/mo</div><div class="crs">Keep in separate savings</div></div>`:''}`}
+var activeF='all',openId=null,resolvedIds=['TKT-0049'],escalatedIds=[],injCount=0;
 
-// ── CHART DEFAULTS ──
-Chart.defaults.font.family="'Outfit',sans-serif";Chart.defaults.color='#9A9590';
-const TTP={backgroundColor:'#1B2A4A',borderColor:'rgba(255,255,255,.1)',borderWidth:1,titleFont:{weight:'600'},padding:10,callbacks:{label:ctx=>` $${ctx.parsed.y.toLocaleString()}`}};
-const GRD={color:'rgba(26,23,20,.05)',drawBorder:false};const TKS={color:'#9A9590',font:{size:11}};
+function renderQ(){
+  var list=document.getElementById('tqList');list.innerHTML='';
+  var visible=TICKETS.filter(function(t){
+    if(activeF==='all')return true;
+    if(activeF==='done')return resolvedIds.indexOf(t.id)>-1;
+    if(activeF==='P1'||activeF==='P2'||activeF==='P3')return t.p===activeF&&resolvedIds.indexOf(t.id)===-1;
+    return true;
+  });
+  if(!visible.length){list.innerHTML='<div style="padding:2rem;text-align:center;font-family:JetBrains Mono,monospace;font-size:.68rem;color:var(--muted)">No tickets match this filter.</div>';updateCounts();return;}
+  visible.forEach(function(t){
+    var done=resolvedIds.indexOf(t.id)>-1;
+    var row=document.createElement('div');
+    row.className='t-row '+t.p.toLowerCase()+(done?' done':'');
+    row.innerHTML='<span class="t-id">'+t.id+'</span><span class="t-subj">'+t.s+'<small>'+t.d+'</small></span><span class="t-col">'+t.c+'</span><span class="t-pri '+(done?'DONE':t.p)+'">'+(done?'RESOLVED':t.p)+'</span><span class="t-age">'+t.a+'</span>';
+    row.addEventListener('click',function(){toggleDet(t.id);});
+    list.appendChild(row);
+    var det=document.createElement('div');
+    det.className='t-det'+(openId===t.id?' open':'');
+    det.id='det-'+t.id;
+    var stepsHtml=t.steps.map(function(s,i){return '<div class="ts"><span class="ts-num">'+(i<9?'0':'')+(i+1)+'</span><span class="ts-txt">'+s.t+'<br><code>'+s.q+'</code></span></div>';}).join('');
+    var actionsHtml=done?'<div style="margin-top:.8rem;font-family:JetBrains Mono,monospace;font-size:.66rem;color:var(--green)">&#10003; Ticket resolved</div>':'<div class="tdet-actions"><button class="cbtn" style="border-color:rgba(76,175,128,.3);color:var(--green)" onclick="resolveT(\''+t.id+'\',event)">&#10003; Mark Resolved</button><button class="cbtn" onclick="escalateT(\''+t.id+'\',event)">&#8593; Escalate to Analyst II</button><button class="cbtn" onclick="copyT(\''+t.id+'\',event)">&#10034; Copy Triage Notes</button></div>';
+    det.innerHTML='<div class="tdet-head"><div class="tdet-title">'+t.s+'</div><button class="cbtn" onclick="toggleDet(\''+t.id+'\')">&#x2715; Close</button></div><div class="tdet-meta"><div class="tdet-meta-item"><strong>ID</strong>'+t.id+'</div><div class="tdet-meta-item"><strong>College</strong>'+t.c+'</div><div class="tdet-meta-item"><strong>Priority</strong>'+t.p+'</div><div class="tdet-meta-item"><strong>Age</strong>'+t.a+'</div></div><div class="tdet-steps">'+stepsHtml+'</div>'+actionsHtml;
+    list.appendChild(det);
+  });
+  updateCounts();
+}
 
-// ── ROTH ──
-function buildRothChart(mc=100,yc=4,rate=.07){const labels=[],vals=[],invested=[],mr=Math.pow(1+rate,1/12)-1,stop=yc*12,total=47*12;for(let m=0;m<=total;m+=6){let b=0,ti=0;for(let x=0;x<m;x++){if(x<stop){b=(b+mc)*(1+mr);ti+=mc}else b=b*(1+mr)}labels.push(`Age ${18+Math.floor(m/12)}`);vals.push(Math.round(b));invested.push(Math.round(Math.min(ti,mc*stop)))}let fb=0;for(let x=0;x<total;x++){if(x<stop)fb=(fb+mc)*(1+mr);else fb=fb*(1+mr)}document.getElementById('rothFinal').textContent='$'+Math.round(fb/1000)+'K';document.getElementById('rSimVal').textContent='$'+Math.round(fb).toLocaleString();document.getElementById('rSimContrib').textContent='$'+Math.round(mc*stop).toLocaleString();document.getElementById('rSimMult').textContent=(fb/(mc*stop)).toFixed(1)+'× your money';const ctx=document.getElementById('rothChart').getContext('2d');if(rothChartObj)rothChartObj.destroy();rothChartObj=new Chart(ctx,{type:'line',data:{labels,datasets:[{label:'Portfolio Value',data:vals,borderColor:'#1A6B3C',backgroundColor:'rgba(26,107,60,.07)',fill:true,tension:.4,borderWidth:2.5,pointRadius:0,pointHoverRadius:5},{label:'Total Invested',data:invested,borderColor:'#8C5400',borderDash:[5,4],backgroundColor:'rgba(140,84,0,.03)',fill:true,tension:0,borderWidth:1.5,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:900},interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{boxWidth:14,padding:16}},tooltip:TTP},scales:{x:{grid:GRD,ticks:{...TKS,maxTicksLimit:10}},y:{grid:GRD,ticks:{...TKS,callback:v=>'$'+Math.round(v/1000)+'K'}}}}})}
-function updateRoth(){const m=+document.getElementById('rm').value,y=+document.getElementById('ry').value,r=+document.getElementById('rr').value/100;document.getElementById('rmV').textContent='$'+m+'/mo';document.getElementById('ryV').textContent=y+' yr'+(y>1?'s':'');document.getElementById('rrV').textContent=(r*100)+'%';buildRothChart(m,y,r)}
+function toggleDet(id){openId=(openId===id?null:id);renderQ();if(openId){setTimeout(function(){var el=document.getElementById('det-'+openId);if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'});},60);}}
+function resolveT(id,e){e.stopPropagation();if(resolvedIds.indexOf(id)===-1)resolvedIds.push(id);openId=null;renderQ();document.getElementById('res-cnt').textContent=resolvedIds.length-1;updateImpact();}
+function escalateT(id,e){e.stopPropagation();if(escalatedIds.indexOf(id)===-1)escalatedIds.push(id);alert('Ticket '+id+' escalated to Analyst II with full diagnostic trail.');document.getElementById('esc-cnt').textContent=escalatedIds.length;}
+function copyT(id,e){e.stopPropagation();var t=TICKETS.find(function(x){return x.id===id;});var txt=t.steps.map(function(s,i){return (i+1)+'. '+s.t;}).join('\n');navigator.clipboard&&navigator.clipboard.writeText(txt).then(function(){alert('Triage notes copied!');});}
+function filterQ(f,btn){activeF=f;document.querySelectorAll('.ctrl-row .cbtn:not(.run):not(.ml-auto)').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');openId=null;renderQ();}
+function updateCounts(){
+  var p1=TICKETS.filter(function(t){return t.p==='P1'&&resolvedIds.indexOf(t.id)===-1;}).length;
+  var p2=TICKETS.filter(function(t){return t.p==='P2'&&resolvedIds.indexOf(t.id)===-1;}).length;
+  var p3=TICKETS.filter(function(t){return t.p==='P3'&&resolvedIds.indexOf(t.id)===-1;}).length;
+  document.getElementById('cnt-all').textContent=TICKETS.length;
+  document.getElementById('cnt-p1').textContent=p1;
+  document.getElementById('cnt-p2').textContent=p2;
+  document.getElementById('cnt-p3').textContent=p3;
+  document.getElementById('cnt-done').textContent=resolvedIds.length;
+  var openCount=TICKETS.length-resolvedIds.length;
+  document.getElementById('sla-pct').textContent=(openCount===0?100:Math.max(78,100-p1*5))+'%';
+}
+function injectTicket(){
+  injCount++;
+  var colleges=['West Valley College','Merced College','City College of SF','Fresno City College','Chabot College','Ohlone College','Grossmont College','Mt. San Antonio College'];
+  var issues=[
+    {s:'Trust enrollment config missing for new college integration',d:'Teaching institution sub-account not mapped in CVC Exchange; students blocked at Canvas provisioning',p:'P1',
+     steps:[{t:'Check CVC Exchange integration config for teaching institution sub-account mapping',q:'GET /api/v2/institutions/[id]/config &mdash; confirm sub_account_id field is populated'},{t:'If sub_account_id missing: pull institution onboarding checklist',q:'Sub-account mapping is step 7 of 9 in the college integration checklist &mdash; escalate to integration lead'},{t:'Coordinate with Canvas CSM to provision sub-account if hierarchy incomplete',q:'Provide CSM: institution name, expected sub-account scope, CVC Exchange integration ID'},{t:'UAT pass required before reprocessing blocked enrollments',q:'Run trust enrollment test scenario in sandbox &mdash; confirm 200 OK before touching production'}]},
+    {s:'LTI tool returning 403 on launch — consumer key mismatch',d:'New semester; LTI credentials not rotated; students see "tool launch failed" error',p:'P2',
+     steps:[{t:'Check Canvas sub-account LTI configuration for consumer key status',q:'Canvas Admin &rsaquo; Sub-account &rsaquo; Settings &rsaquo; Apps &mdash; note consumer key and shared secret last updated date'},{t:'Contact LTI vendor to regenerate credentials',q:'Provide: sub-account name, tool ID, error timestamp. Request new consumer key + shared secret pair.'},{t:'Update Canvas LTI config and test in sandbox',q:'After receiving new credentials: update in Canvas dev environment &mdash; confirm successful launch before production deploy'},{t:'Add rotation date to LTI maintenance calendar',q:'Log: tool, institution, rotation date, next review T+85 days. Prevents this recurrence.'}]},
+    {s:'SIS import failing on new student batch — schema validation error',d:'422 errors on enrollment_type or sis_user_id field; students not provisioned in Canvas',p:'P2',
+     steps:[{t:'Download SIS import error file from Canvas admin',q:'Canvas Admin &rsaquo; SIS Imports &rsaquo; [batch ID] &rsaquo; Download errors &mdash; identify field names in error rows'},{t:'Cross-reference failing field values against CVC Exchange SIS spec v2.3',q:'Common: enrollment_type "StudentEnrollment" (legacy) vs. "student" (current); sis_user_id leading zero missing'},{t:'Send schema comparison table to college IT with specific correction needed',q:'Attach: CVC Exchange SIS import field spec, example of correct vs. incorrect value for each failing field'},{t:'Re-submit corrected batch and confirm 201 response',q:'POST /api/v2/sis/import &mdash; validate response shows 0 errors; confirm affected students now appear in Canvas'}]}
+  ];
+  var issue=issues[Math.floor(Math.random()*issues.length)];
+  TICKETS.unshift({id:'TKT-0'+(60+injCount),s:issue.s,d:issue.d,c:colleges[Math.floor(Math.random()*colleges.length)],p:issue.p,a:'0m',steps:issue.steps});
+  renderQ();
+  updateImpact();
+}
+renderQ();
 
-// ── AUTO ──
-function buildAutoChart(){const p=25000,r=.06/12,n=60,pmt=p*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);const labels=[],lb=[],cv=[],inv=[];let bal=p,ib=0,mr=Math.pow(1.07,1/12)-1;for(let m=0;m<=60;m++){labels.push(`Mo ${m}`);lb.push(Math.max(0,Math.round(bal)));cv.push(Math.round(p*Math.pow(.85,m/12)));ib=(ib+pmt)*(1+mr);inv.push(Math.round(ib));bal=bal*(1+r)-pmt}const ctx=document.getElementById('autoChart').getContext('2d');if(autoChartObj)autoChartObj.destroy();autoChartObj=new Chart(ctx,{type:'line',data:{labels,datasets:[{label:'Loan Balance',data:lb,borderColor:'#B52A1C',backgroundColor:'rgba(181,42,28,.07)',fill:true,tension:.3,borderWidth:2.5,pointRadius:0},{label:'Car Value',data:cv,borderColor:'#8C5400',borderDash:[6,4],backgroundColor:'transparent',fill:false,tension:.3,borderWidth:2,pointRadius:0},{label:'If Invested',data:inv,borderColor:'#1A6B3C',backgroundColor:'rgba(26,107,60,.04)',fill:true,tension:.4,borderWidth:2,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:800},interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{boxWidth:14,padding:16}},tooltip:TTP},scales:{x:{grid:GRD,ticks:{...TKS,maxTicksLimit:12}},y:{grid:GRD,ticks:{...TKS,callback:v=>'$'+Math.round(v/1000)+'K'}}}}})}
+function updateImpact(){
+  var open=TICKETS.filter(function(t){return resolvedIds.indexOf(t.id)===-1;});
+  var p1=open.filter(function(t){return t.p==='P1';}).length;
+  var ltiTickets=open.filter(function(t){return t.s.toLowerCase().indexOf('lti')>-1||t.s.toLowerCase().indexOf('tool')>-1;}).length;
+  var blocked=open.filter(function(t){return t.p==='P1';}).length + open.filter(function(t){return t.s.toLowerCase().indexOf('access')>-1&&t.p!=='P3';}).length;
+  var pastSla=open.filter(function(t){return t.a&&(t.a.indexOf('d')>-1||(parseInt(t.a)>4&&t.a.indexOf('h')>-1));}).length;
+  document.getElementById('imp-blocked').textContent=Math.max(blocked,0);
+  document.getElementById('imp-fa').textContent=Math.max(ltiTickets,1);
+  document.getElementById('imp-sla').textContent=pastSla||1;
+  document.getElementById('imp-p1').textContent=p1;
+}
+updateImpact();
 
-// ── CC ──
-function buildCCChart(){const mr=.24/12;const strats=[{l:'Minimum (2%)',c:'#B52A1C',s:'min'},{l:'Fixed $150/mo',c:'#8C5400',s:150},{l:'Fixed $300/mo',c:'#1A6B3C',s:300}];const labels=Array.from({length:61},(_,i)=>`Mo ${i}`);const datasets=strats.map(st=>{let b=5000;const d=[5000];for(let m=1;m<=60;m++){const i=b*mr,p=st.s==='min'?Math.max(25,b*.02):st.s;b=Math.max(0,b+i-p);d.push(Math.round(b))}return{label:st.l,data:d,borderColor:st.c,backgroundColor:st.c+'18',fill:true,tension:.3,borderWidth:2.5,pointRadius:0}});const ctx=document.getElementById('ccChart').getContext('2d');if(ccChartObj)ccChartObj.destroy();ccChartObj=new Chart(ctx,{type:'line',data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,animation:{duration:800},interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{boxWidth:14,padding:16}},tooltip:{...TTP,callbacks:{label:ctx=>` $${ctx.parsed.y.toLocaleString()} remaining`}}},scales:{x:{grid:GRD,ticks:{...TKS,maxTicksLimit:12}},y:{grid:GRD,ticks:{...TKS,callback:v=>'$'+v.toLocaleString()}}}}});setCCScene(document.querySelector('.scenario-card.sel'),'min')}
-function setCCScene(el,strat){document.querySelectorAll('.scenario-card').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');const mr=.24/12;let b=5000,paid=0,months=0;while(b>.01&&months<500){const i=b*mr,p=strat==='min'?Math.max(25,b*.02):strat;paid+=p;b=Math.max(0,b+i-p);months++}const tInt=paid-5000,y=Math.floor(months/12),mo=months%12;const str=y>0?`${y} yr${y>1?'s':''} ${mo>0?mo+' mo':''}`:`${mo} months`;const opp=tInt*Math.pow(1.07,30);document.getElementById('ccSidePanel').innerHTML=`<div class="cc-result-big"><div class="cc-rb-label">Total interest paid</div><div class="cc-rb-num">$${Math.round(tInt).toLocaleString()}</div><div class="cc-rb-sub">Payoff: <strong>${str}</strong></div></div><div class="crbox"><div class="crl">Total Paid</div><div class="crv" style="font-size:1.3rem;color:var(--navy)">$${Math.round(paid).toLocaleString()}</div><div class="crs">For a $5,000 balance</div></div><div class="cc-vs-box"><div class="cc-vs-label">Interest invested 30 yrs</div><div class="cc-vs-num">$${Math.round(opp).toLocaleString()}</div><div class="cc-vs-sub">True opportunity cost</div></div>`}
+// ── API LOG SCENARIOS ────────────────────────────────────────────
+var SCENARIOS={
+  healthy:{label:'&#9679; HEALTHY',color:'var(--green)',logs:[
+    {ts:'08:14:02',c:'200',t:'s',m:'GET /api/v2/enrollments &mdash; 847 records synced'},
+    {ts:'08:14:03',c:'200',t:'s',m:'POST /api/v2/enrollments/batch &mdash; 23 new enrollments committed'},
+    {ts:'08:14:05',c:'200',t:'s',m:'GET /api/v2/students/verify &mdash; identity confirmed &times; 23'},
+    {ts:'08:14:07',c:'200',t:'s',m:'PUT /api/v2/canvas/provision &mdash; LMS seats allocated'},
+    {ts:'08:14:09',c:'200',t:'s',m:'POST /api/v2/fa/notify &mdash; FA disbursement triggered &times; 17'},
+    {ts:'08:14:11',c:'200',t:'s',m:'SYNC COMPLETE &mdash; 0 errors, 0 warnings'},
+  ],d:{title:'HEALTHY SYNC &mdash; No Action Required',color:'var(--green)',checks:[{t:'ok',v:'API token valid and unexpired'},{t:'ok',v:'Enrollment batch accepted (HTTP 200)'},{t:'ok',v:'Student identity verification passed &times; 23'},{t:'ok',v:'Canvas provisioning completed'},{t:'ok',v:'FA disbursement triggered successfully'}],root:'No root cause &mdash; system operating normally.',fix:'Continue monitoring. No action required. Document as successful sync in log.'}},
 
-// ── COMPARE ──
-function buildCompareChart(){const labels=['Start'],inv=[0],debt=[0];let ib=0,db=0;const mr=Math.pow(1.07,1/12)-1;for(let m=1;m<=40*12;m++){if(m<=4*12)ib=(ib+4000/12)*(1+mr);else ib=ib*(1+mr);if(m<=60)db-=(483+29000/60*.1);else db-=100/12;if(m%12===0){labels.push(`Yr ${m/12}`);inv.push(Math.round(ib));debt.push(Math.round(db))}}const ctx=document.getElementById('compareChart').getContext('2d');if(compareChartObj)compareChartObj.destroy();compareChartObj=new Chart(ctx,{type:'line',data:{labels,datasets:[{label:'Investor Path',data:inv,borderColor:'#1A6B3C',backgroundColor:'rgba(26,107,60,.08)',fill:true,tension:.4,borderWidth:3,pointRadius:0},{label:'Debt Path',data:debt,borderColor:'#B52A1C',backgroundColor:'rgba(181,42,28,.06)',fill:true,tension:.4,borderWidth:2.5,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:900},interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{boxWidth:14,padding:16}},tooltip:TTP},scales:{x:{grid:GRD,ticks:{...TKS,maxTicksLimit:12}},y:{grid:GRD,ticks:{...TKS,callback:v=>'$'+Math.round(v/1000)+'K'}}}}})}
+  auth:{label:'&#9679; AUTH FAILURE',color:'var(--red)',logs:[
+    {ts:'02:01:14',c:'401',t:'e',m:'GET /api/v2/enrollments &mdash; Unauthorized: token expired'},
+    {ts:'02:01:14',c:'401',t:'e',m:'Retry 1/3: GET /api/v2/enrollments &mdash; 401 Unauthorized'},
+    {ts:'02:01:15',c:'401',t:'e',m:'Retry 2/3: GET /api/v2/enrollments &mdash; 401 Unauthorized'},
+    {ts:'02:01:16',c:'401',t:'e',m:'Retry 3/3: GET /api/v2/enrollments &mdash; 401 Unauthorized'},
+    {ts:'02:01:16',c:'503',t:'e',m:'SYNC ABORTED &mdash; Auth failure after 3 retries'},
+    {ts:'02:01:16',c:'ERR',t:'e',m:'16 students pending enrollment &mdash; NOT processed'},
+  ],d:{title:'ROOT CAUSE: API TOKEN EXPIRED',color:'var(--red)',checks:[{t:'err',v:'HTTP 401 on initial request and all 3 retries'},{t:'err',v:'Sync aborted &mdash; 16 students NOT processed'},{t:'warn',v:'Token rotation schedule: last rotated 89 days ago (threshold: 90d)'},{t:'ok',v:'SIS endpoint reachable (connection established before 401)'},{t:'ok',v:'No network or firewall issues detected'}],root:'API token expired or revoked. Token age: 89 days. Rotation threshold exceeded.',fix:'1. Settings &rsaquo; District API Keys &rsaquo; [District] &rsaquo; Rotate token\n2. Update integration config with new value\n3. Re-trigger sync: POST /api/v2/sync/trigger { force: true }\n4. Verify 16 pending enrollments processed\n5. Set token rotation reminder for T+85 days'}},
 
-// ── VIZ SWITCHER ──
-function showViz(id,btn){document.querySelectorAll('.vpanel').forEach(p=>p.classList.remove('vshow'));document.querySelectorAll('.vnav-btn').forEach(b=>b.classList.remove('vactive'));document.getElementById('vp-'+id).classList.add('vshow');btn.classList.add('vactive');if(!chartsBuilt[id]){chartsBuilt[id]=true;setTimeout(()=>{if(id==='roth')buildRothChart();if(id==='auto')buildAutoChart();if(id==='cc')buildCCChart();if(id==='compare')buildCompareChart()},50)}}
+  payload:{label:'&#9679; PAYLOAD ERROR',color:'var(--amber)',logs:[
+    {ts:'03:15:00',c:'200',t:'s',m:'GET /api/v2/enrollments &mdash; connected'},
+    {ts:'03:15:01',c:'422',t:'e',m:'POST /api/v2/enrollments/batch &mdash; Unprocessable Entity'},
+    {ts:'03:15:01',c:'422',t:'e',m:'Error: field "enrollment_intensity" missing in 4 records'},
+    {ts:'03:15:01',c:'422',t:'e',m:'Error: "student_id" format mismatch &mdash; expected 9-digit, got 8'},
+    {ts:'03:15:02',c:'207',t:'w',m:'Partial commit: 19/23 records accepted, 4 rejected'},
+    {ts:'03:15:02',c:'200',t:'s',m:'Canvas provisioning: 19 students &mdash; 4 students SKIPPED'},
+  ],d:{title:'ROOT CAUSE: SIS EXPORT SCHEMA MISMATCH',color:'var(--amber)',checks:[{t:'ok',v:'API token valid &mdash; authentication passed'},{t:'err',v:'4 records rejected (HTTP 422) &mdash; schema validation failure'},{t:'err',v:'Field "enrollment_intensity" missing in affected records'},{t:'err',v:'student_id: SIS sending 8-digit, CVC expects 9-digit (leading zero missing)'},{t:'warn',v:'Partial commit: 19/23 processed &mdash; 4 students without Canvas or FA access'}],root:'District SIS export schema diverged from CVC v2.3 spec. Likely caused by a SIS version update at district.',fix:'1. Contact district IT: request SIS export spec, confirm recent version update\n2. Identify 4 affected student IDs from 422 error response body\n3. Manually provision those 4 students as immediate workaround\n4. Author schema migration guide for district\n5. Re-process rejected records after district corrects export format'}},
 
-// ── OBSERVERS ──
-const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('vis');const s=parseInt(en.target.dataset.step);if(s){activeS=s;renderRail()}}})},{threshold:.08,rootMargin:'-40px 0px'});
-document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
-document.querySelectorAll('.step-card').forEach((c,i)=>{c.style.transitionDelay=`${i*.03}s`;obs.observe(c)});
-const barObs=new IntersectionObserver(e=>{if(e[0].isIntersecting){document.querySelectorAll('.enroll-bar').forEach(b=>{setTimeout(()=>{b.style.width=b.dataset.w+'%'},80)});barObs.disconnect()}},{threshold:.3});
-const enrollEl=document.querySelector('.enroll-box');if(enrollEl)barObs.observe(enrollEl);
-const vizObs=new IntersectionObserver(e=>{if(e[0].isIntersecting&&!chartsBuilt['roth']){chartsBuilt['roth']=true;buildRothChart();vizObs.disconnect()}},{threshold:.1});
-const vp=document.getElementById('vp-roth');if(vp)vizObs.observe(vp);
+  timeout:{label:'&#9679; SYNC TIMEOUT',color:'var(--amber)',logs:[
+    {ts:'02:00:00',c:'200',t:'s',m:'Sync job initiated &mdash; 1,204 records queued'},
+    {ts:'02:00:01',c:'200',t:'s',m:'Processing batch 1/12 &mdash; 100 records'},
+    {ts:'02:14:22',c:'200',t:'s',m:'Processing batch 6/12 &mdash; 100 records (7&times; slower than baseline)'},
+    {ts:'02:29:58',c:'408',t:'e',m:'Request Timeout &mdash; batch 7/12 exceeded 15min limit'},
+    {ts:'02:30:00',c:'503',t:'w',m:'Sync suspended &mdash; 603 records pending'},
+    {ts:'02:30:01',c:'WRN',t:'w',m:'Sync window closing in 30 minutes (window: 2&ndash;4 AM PST)'},
+  ],d:{title:'ROOT CAUSE: SYNC WINDOW OVERRUN &mdash; DISTRICT SIS PERFORMANCE',color:'var(--amber)',checks:[{t:'ok',v:'API token valid, connection healthy'},{t:'warn',v:'Batch processing rate: 100 records / 14 min (expected: 100 records / 2 min)'},{t:'err',v:'Batch 7 timed out &mdash; 603 records unprocessed'},{t:'warn',v:'Sync window: 2:00&ndash;4:00 AM PST &mdash; only 30 minutes remaining'},{t:'err',v:'603 students NOT enrolled in Canvas or notified to FA'}],root:'District SIS responding 7&times; slower than baseline. Likely: scheduled maintenance task running concurrently with sync window.',fix:'1. Notify district IT of performance degradation during sync window\n2. Request SIS maintenance schedule to avoid 2&ndash;4 AM window\n3. Re-trigger sync: POST /api/v2/sync/trigger { batch: "remaining", priority: "high" }\n4. Monitor: verify 603 records process before next business day\n5. Open improvement ticket: stagger large-district sync jobs'}},
 
-// Nav scroll shadow
-addEventListener('scroll',()=>{document.getElementById('rail').classList.toggle('scrolled',scrollY>20)});
+  cascade:{label:'&#9679; CASCADE FAILURE',color:'var(--red)',logs:[
+    {ts:'07:45:00',c:'200',t:'s',m:'Enrollment sync: SUCCESS &mdash; 34 students processed'},
+    {ts:'07:45:02',c:'404',t:'e',m:'Canvas provisioning: course_id 48291 NOT FOUND'},
+    {ts:'07:45:02',c:'503',t:'e',m:'Canvas: 34 students &mdash; enrollment committed but course missing'},
+    {ts:'07:45:03',c:'422',t:'e',m:'FA notify: enrollment_status=PENDING &mdash; disbursement BLOCKED'},
+    {ts:'07:45:03',c:'ERR',t:'e',m:'CASCADE: SIS &#10003; &rarr; Exchange &#10003; &rarr; Canvas &#10007; &rarr; FA &#10007;'},
+    {ts:'07:45:04',c:'ERR',t:'e',m:'34 students enrolled but cannot access course or receive aid'},
+  ],d:{title:'CASCADE FAILURE: CANVAS COURSE DELETED/UNPUBLISHED AFTER SYNC',color:'var(--red)',checks:[{t:'ok',v:'SIS sync completed &mdash; 34 enrollments written to CVC Exchange'},{t:'err',v:'Canvas: course_id 48291 returns 404 &mdash; course not found or unpublished'},{t:'err',v:'34 students enrolled in Exchange but have no Canvas course to access'},{t:'err',v:'FA disbursement BLOCKED &mdash; enrollment_status=PENDING (requires Canvas access confirmation)'},{t:'warn',v:'FERPA note: students have been sent enrollment confirmation emails &mdash; expectation set'}],root:'Downstream cascade from Canvas-layer failure. Likely: instructor deleted or unpublished course after enrollment opened, OR Canvas course ID changed in a platform migration.',fix:'1. IMMEDIATE: Contact teaching college Canvas admin &mdash; locate course 48291 or replacement\n2. If course was unpublished: request re-publish or substitution course ID\n3. Update CVC Exchange course record with correct Canvas course_id\n4. Re-trigger Canvas provisioning for 34 students\n5. Unblock FA disbursement once Canvas access confirmed\n6. Notify 34 students of delay and resolution timeline\n7. Add monitoring alert for Canvas course deletion on active CVC Exchange listings'}},
 
-// ── INIT ──
-renderRail();calcUpdate();setTimeout(()=>togS(1),400);
+  trust:{label:'&#9679; TRUST ENROLLMENT FAILURE',color:'var(--red)',logs:[
+    {ts:'09:22:31',c:'POST',t:'i',m:'/api/v2/exchange/trust-enrollments &mdash; home: cuyamaca &rarr; teaching: sdccd'},
+    {ts:'09:22:31',c:'200',t:'s',m:'SIS record confirmed &mdash; enrollment_status: ACTIVE at home institution'},
+    {ts:'09:22:32',c:'403',t:'e',m:'TRUST_RELATIONSHIP_NOT_FOUND &mdash; no active trust for institution pair'},
+    {ts:'09:22:32',c:'403',t:'e',m:'"sub_account_id": null &mdash; teaching institution not mapped'},
+    {ts:'09:22:33',c:'403',t:'e',m:'Retry 1/3 &mdash; 403 same response'},
+    {ts:'09:22:33',c:'ERR',t:'e',m:'Max retries reached &mdash; canvas_csm_escalation: true &mdash; 11 students queued'},
+  ],d:{title:'ROOT CAUSE: CANVAS TRUST RELATIONSHIP NOT CONFIGURED',color:'var(--red)',checks:[
+    {t:'ok',v:'SIS enrollment record valid &mdash; home institution (Cuyamaca) confirmed ACTIVE'},
+    {t:'ok',v:'API token valid &mdash; auth passed, 403 is a permission error, not a credential error'},
+    {t:'ok',v:'Payload correctly formed per CVC Exchange trust enrollment spec'},
+    {t:'err',v:'403 TRUST_RELATIONSHIP_NOT_FOUND &mdash; institution pair not mapped in Canvas'},
+    {t:'err',v:'sub_account_id: null &mdash; teaching institution (SDCCD) has no sub-account mapping'},
+    {t:'err',v:'11 students blocked at Canvas provisioning step &mdash; no enrollment record written'}
+  ],root:'Configuration gap in Canvas trust relationship layer. The teaching institution (SDCCD) does not have a configured sub-account mapping in CVC Exchange. This is not an API failure &mdash; the request reached the endpoint and was correctly rejected due to missing config.',fix:'1. Canvas Admin &rsaquo; SDCCD sub-account hierarchy &mdash; confirm sub-account exists for CVC Exchange trust enrollment scope\n2. Map correct sub_account_id in CVC Exchange integration config for SDCCD\n3. If sub-account hierarchy incomplete &mdash; coordinate with Canvas CSM to provision\n4. UAT pass in sandbox required before touching production enrollments\n5. Reprocess batch &mdash; confirm 200 OK + canvas_enrollment_id returned for all 11 students\n6. Document trust relationship config in integration runbook for SDCCD\n\nEscalation: Canvas CSM if sub-account rebuild required | SDCCD college IT for sub-account ownership confirmation'}}
+};
+
+var curSc='healthy';
+function loadSc(name,btn){
+  curSc=name;
+  document.querySelectorAll('#tool-api .ctrl-row .cbtn:not(.run)').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  var sc=SCENARIOS[name];
+  var feed=document.getElementById('logFeed');feed.innerHTML='';
+  document.getElementById('log-status').innerHTML=sc.label;
+  document.getElementById('log-status').style.color=sc.color;
+  document.getElementById('diagPanel').innerHTML='<span style="color:var(--muted);font-size:.68rem">Click &#9654; Run Diagnosis to analyze this scenario.</span>';
+  document.getElementById('diag-badge').textContent='- Awaiting analysis';
+  document.getElementById('exp-btn').style.display='none';
+  sc.logs.forEach(function(l,i){
+    setTimeout(function(){
+      var div=document.createElement('div');
+      div.className='ll '+(l.t==='e'?'error':l.t==='w'?'warn':l.t==='i'?'info':'ok');
+      div.innerHTML='<span class="lts">'+l.ts+'</span><span class="lc '+l.t+'">'+l.c+'</span><span class="lm">'+l.m+'</span>';
+      feed.appendChild(div);feed.scrollTop=feed.scrollHeight;
+    },i*190);
+  });
+}
+function runDiag(){
+  var d=SCENARIOS[curSc].d;
+  var p=document.getElementById('diagPanel');p.innerHTML='';
+  document.getElementById('diag-badge').textContent='Analysis complete';
+  document.getElementById('diag-badge').style.color=d.color;
+  var html='<div class="diag-head" style="color:'+d.color+'">'+d.title+'</div>';
+  d.checks.forEach(function(c){html+='<div class="di '+c.t+'">'+c.v+'</div>';});
+  html+='<div class="diag-root"><div class="diag-lbl">Root Cause</div>'+d.root+'</div>';
+  html+='<div class="diag-fix"><div class="diag-lbl" style="color:var(--teal)">Resolution Steps</div>'+d.fix.replace(/\n/g,'<br>')+'</div>';
+  p.innerHTML=html;
+  document.getElementById('exp-btn').style.display='inline-block';
+}
+function clearDiag(){document.getElementById('diagPanel').innerHTML='<span style="color:var(--muted);font-size:.68rem">Select a scenario and click &#9654; Run Diagnosis.</span>';document.getElementById('diag-badge').textContent='- Awaiting analysis';document.getElementById('exp-btn').style.display='none';}
+function exportDiag(){
+  var d=SCENARIOS[curSc].d;
+  var txt='CVC Exchange - Integration Diagnosis Report\n'+'='.repeat(50)+'\n\n'+d.title+'\n\nChecks:\n'+d.checks.map(function(c){return (c.t==='ok'?'[OK]':c.t==='err'?'[FAIL]':'[WARN]')+' '+c.v.replace(/&mdash;/g,'--').replace(/&times;/g,'x').replace(/&rsaquo;/g,'>').replace(/&rarr;/g,'->');}).join('\n')+'\n\nRoot Cause:\n'+d.root.replace(/&mdash;/g,'--').replace(/&times;/g,'x')+'\n\nResolution:\n'+d.fix.replace(/&ndash;/g,'-').replace(/&rarr;/g,'->').replace(/&rsaquo;/g,'>').replace(/&times;/g,'x')+'\n\nGenerated: '+new Date().toLocaleString();
+  var blob=new Blob([txt],{type:'text/plain'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cvc_diagnosis_report.txt';a.click();
+}
+loadSc('healthy',document.querySelector('#tool-api .ctrl-row .cbtn'));
+
+// ── SYNC FLOW CANVAS ─────────────────────────────────────────────
+(function(){
+  var canvas=document.getElementById('syncCanvas'),ctx=canvas.getContext('2d');
+  var mode='normal',frame=0,packets=[];
+  function resize(){canvas.width=canvas.offsetWidth;canvas.height=300;}
+  resize();window.addEventListener('resize',resize);
+  var NODES=[
+    {id:'student',lbl:'Student',sub:'Home Campus',rx:.08,ry:.5,col:'#5B9BD5'},
+    {id:'home-sis',lbl:'Home SIS',sub:'Banner / PS',rx:.26,ry:.5,col:'#3CBFA0'},
+    {id:'cvc',lbl:'CVC Exchange',sub:'cvc.edu API',rx:.46,ry:.5,col:'#E8A020'},
+    {id:'canvas',lbl:'Canvas LMS',sub:'Course Access',rx:.66,ry:.28,col:'#3CBFA0'},
+    {id:'fa',lbl:'Financial Aid',sub:'FAFSA/CADAA',rx:.66,ry:.72,col:'#5B9BD5'},
+    {id:'teach-sis',lbl:'Teaching SIS',sub:'Target College',rx:.84,ry:.5,col:'#3CBFA0'},
+  ];
+  var EDGES=[
+    {f:'student',t:'home-sis',lbl:'Enroll Request'},
+    {f:'home-sis',t:'cvc',lbl:'SIS API Sync'},
+    {f:'cvc',t:'canvas',lbl:'LMS Provision'},
+    {f:'cvc',t:'fa',lbl:'FA Trigger'},
+    {f:'cvc',t:'teach-sis',lbl:'Cross-Enroll'},
+  ];
+  var STATUSES={
+    'normal':{},
+    'sis-fail':{'home-sis':'fail','cvc':'warn','canvas':'warn','fa':'warn','teach-sis':'warn'},
+    'canvas-lag':{'canvas':'warn'},
+    'fa-hold':{'fa':'fail'},
+    'cascade':{'cvc':'fail','canvas':'fail','fa':'fail','teach-sis':'fail'},
+    'uat':{'canvas':'warn','fa':'pending'},
+  };
+  var UAT_ANNOTATION='<strong style="color:var(--teal)">UAT Validation Gate</strong> &mdash; Before any college goes live on CVC Exchange, a UAT pass gates the transition from test to production. In this scenario: a trust enrollment misconfiguration was intentionally injected at the Canvas layer to simulate a real failure. The Canvas sub-account mapping was identified, corrected, and re-tested in sandbox before sign-off. <em>No production enrollment was blocked.</em>';
+
+  function npos(id){var n=NODES.find(function(x){return x.id===id;});return{x:n.rx*canvas.width,y:n.ry*canvas.height};}
+  function ncol(id){var sm=STATUSES[mode]||{};var s=sm[id];if(s==='fail')return'#E05050';if(s==='warn')return'#E8A020';if(s==='pending')return'#5B9BD5';return NODES.find(function(x){return x.id===id;}).col;}
+  function spawnP(){
+    if(mode==='normal'&&Math.random()<.04){var e=EDGES[Math.floor(Math.random()*EDGES.length)];packets.push({f:e.f,t:e.t,p:0,col:'#4CAF80'});}
+    if(mode==='uat'&&Math.random()<.03){var e=EDGES[Math.floor(Math.random()*2)];packets.push({f:e.f,t:e.t,p:0,col:'#5B9BD5'});}
+    if((mode==='sis-fail'||mode==='cascade')&&Math.random()<.05){packets.push({f:'student',t:'home-sis',p:0,col:'#E05050'});}
+  }
+  function draw(){
+    var W=canvas.width,H=canvas.height;
+    ctx.clearRect(0,0,W,H);
+    EDGES.forEach(function(e){
+      var a=npos(e.f),b=npos(e.t);
+      var sm=STATUSES[mode]||{};var fail=sm[e.f]==='fail'||sm[e.t]==='fail';
+      var pend=sm[e.f]==='pending'||sm[e.t]==='pending';
+      ctx.strokeStyle=fail?'rgba(224,80,80,.25)':pend?'rgba(91,155,213,.25)':'rgba(60,191,160,.18)';
+      ctx.lineWidth=1.4;ctx.setLineDash([5,8]);
+      ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle=fail?'rgba(224,80,80,.55)':'rgba(80,100,120,.65)';
+      ctx.font='9px JetBrains Mono,monospace';ctx.textAlign='center';
+      ctx.fillText(e.lbl,(a.x+b.x)/2,(a.y+b.y)/2-12);
+    });
+    spawnP();
+    for(var i=packets.length-1;i>=0;i--){
+      var pk=packets[i];pk.p+=.013;if(pk.p>=1){packets.splice(i,1);continue;}
+      var a=npos(pk.f),b=npos(pk.t);
+      var x=a.x+(b.x-a.x)*pk.p,y=a.y+(b.y-a.y)*pk.p;
+      ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);
+      ctx.fillStyle=pk.col;ctx.shadowColor=pk.col;ctx.shadowBlur=10;ctx.fill();ctx.shadowBlur=0;
+    }
+    NODES.forEach(function(n){
+      var x=n.rx*W,y=n.ry*H;var col=ncol(n.id);
+      var pulse=Math.sin(frame*.038+n.rx*8)*.5+.5;
+      var grd=ctx.createRadialGradient(x,y,0,x,y,36);
+      var a=Math.round((0.06+pulse*.05)*255).toString(16).padStart(2,'0');
+      var rgb=col.replace('#','');
+      grd.addColorStop(0,'#'+rgb+a);grd.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=grd;ctx.beginPath();ctx.arc(x,y,36,0,Math.PI*2);ctx.fill();
+      ctx.strokeStyle=col;ctx.lineWidth=1.4;ctx.globalAlpha=.35+pulse*.28;
+      ctx.beginPath();ctx.arc(x,y,22,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
+      ctx.fillStyle=col;ctx.globalAlpha=.88;ctx.beginPath();ctx.arc(x,y,13,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+      ctx.fillStyle='#F0EDE6';ctx.font='bold 9px DM Sans,sans-serif';ctx.textAlign='center';ctx.fillText(n.lbl,x,y+30);
+      ctx.fillStyle='rgba(110,126,148,.8)';ctx.font='8px JetBrains Mono,monospace';ctx.fillText(n.sub,x,y+41);
+      var sm=STATUSES[mode]||{};
+      if(sm[n.id]==='fail'){ctx.fillStyle='#E05050';ctx.font='bold 10px monospace';ctx.fillText('X',x,y+3.5);}
+      else if(sm[n.id]==='warn'){ctx.fillStyle='#E8A020';ctx.font='bold 10px monospace';ctx.fillText('!',x,y+3.5);}
+      else if(sm[n.id]==='pending'){ctx.fillStyle='#5B9BD5';ctx.font='bold 10px monospace';ctx.fillText('~',x,y+3.5);}
+      else{ctx.fillStyle='rgba(240,237,230,.85)';ctx.font='bold 9px monospace';ctx.fillText('o',x,y+3.5);}
+    });
+    frame++;requestAnimationFrame(draw);
+  }
+  draw();
+  window.setSyncMode=function(m,btn){
+    mode=m;packets=[];
+    document.querySelectorAll('#tool-sync .ctrl-row .cbtn').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    var ann=document.getElementById('sync-annotation');
+    if(m==='uat'){ann.style.display='block';ann.innerHTML=UAT_ANNOTATION;}
+    else{ann.style.display='none';}
+  };
+})();
+
+// ── BAR CHART ────────────────────────────────────────────────────
+var BAR_DATA=[
+  {lbl:'Auth Failure (SIS token)',pct:28,cl:'r',kb:{title:'KB-001: SIS API Token Expiry — Recognition & Rotation',action:'Built a step-by-step token rotation guide for district IT contacts. Included: how to recognize a 401 vs. 403, the exact rotation steps per SIS type (Banner, PeopleSoft, Colleague), and a Python token-age monitoring script. Distributed to all district IT liaisons with a 85-day proactive rotation schedule.',impact:'Auth failure tickets down 38% in Q2. Token rotation now proactive rather than reactive at 12 of 14 affected districts.',method:'pandas groupby on error_code + district fields isolated that 89% of 401 failures came from tokens >85 days old. Threshold: 90 days.'}},
+  {lbl:'Enroll Sync Window Miss',pct:24,cl:'a',kb:{title:'KB-002: Enrollment Sync Window Failures — Diagnosis & Re-trigger',action:'Documented the 2–4 AM PST sync window schedule, how to identify a window miss vs. a true failure, and the exact re-trigger API call. Included a decision tree: timeout → check SIS performance log → contact district IT vs. re-trigger immediately.',impact:'Mean time to resolution on sync window misses dropped from 3.2 hours to 47 minutes.',method:'Time-of-incident analysis showed 84% of sync failures clustered in the 2–4 AM window. Correlated with district SIS maintenance schedules to identify overlap pattern.'}},
+  {lbl:'Trust Enrollment / Sub-account',pct:19,cl:'bl',kb:{title:'KB-003: Canvas Trust Enrollment — Configuration Runbook',action:'Built a trust enrollment configuration runbook covering: institution pair mapping → sub-account ID assignment → Canvas CSM escalation path → UAT validation checklist before production go-live. Includes a pre-launch checklist college IT can self-verify before the integration team signs off.',impact:'Trust enrollment re-opens down 60%. Now used as standard onboarding documentation for all new college integrations. Canvas CSM escalations down 45% as college IT can resolve sub-account issues independently.',method:'Cross-referenced TRUST_RELATIONSHIP_NOT_FOUND error logs with integration onboarding records. Found that 78% of trust failures occurred at colleges that skipped sub-account verification in the pre-launch checklist.'}},
+  {lbl:'LTI Credential Failures',pct:15,cl:'t',kb:{title:'KB-004: LTI Maintenance — Credential Rotation Calendar',action:'Created an LTI maintenance calendar template and rotation checklist — consumer key expiry dates tracked per LTI tool per sub-account. Shared with college IT contacts at all affected institutions with instructions for proactive rotation before key expiry.',impact:'LTI-related P1 tickets down 44% in the 6 weeks following KB deployment. Zero LTI outages mid-semester at institutions that adopted the rotation calendar.',method:'LTI failure logs grouped by error type: 403 (key mismatch), 401 (key expired), 500 (config not found). 91% were key rotation failures — preventable with a calendar reminder.'}},
+  {lbl:'SIS Feed Schema Mismatch',pct:9,cl:'t',kb:{title:'KB-005: SIS Import Field Spec — Schema Migration Guide',action:'Documented Canvas SIS import field spec against common legacy export formats used by Banner, PeopleSoft, and Colleague. Published comparison table with field name mapping (e.g. enrollment_type: "StudentEnrollment" vs "student"). Colleges can self-diagnose and correct field mismatches before submitting support tickets.',impact:'SIS schema mismatch tickets largely self-resolved after field mapping doc published. Remaining tickets resolved faster as college IT arrives with the specific failing field already identified.',method:'422 error body parsing revealed consistent field-level patterns. Grouped by district SIS type (Banner vs PS vs Colleague) to build three targeted migration guides.'}},
+  {lbl:'Account Merge Conflicts',pct:5,cl:'r',kb:{title:'KB-006: Canvas Account Merge — Duplicate Account Resolution Guide',action:'Documented the full account merge workflow: how to identify duplicate accounts via Canvas admin search, how to confirm which account holds grade history vs. active enrollments, and the merge procedure with grade history preservation steps. Included prevention guidance for SIS export config.',impact:'Account merge tickets resolved at L1 without Canvas CSM escalation. Prevention guidance adopted by 8 districts — duplicate account creation rate down 70% at those institutions.',method:'Duplicate account incidents traced to SIS ID format mismatches at the teaching-institution enrollment path. Home college SIS ID and cross-enrollment path generated different login_id formats, creating parallel accounts instead of merging into existing record.'}},
+];
+var selectedBar=null;
+(function(){
+  var cont=document.getElementById('barChart');
+  BAR_DATA.forEach(function(d,idx){
+    var row=document.createElement('div');row.className='b-row';row.style.cursor='pointer';
+    row.innerHTML='<span class="b-lbl">'+d.lbl+'</span><div class="b-track"><div class="b-fill '+d.cl+'" data-pct="'+d.pct+'" style="width:0"></div></div><span class="b-pct">'+d.pct+'%</span>';
+    row.addEventListener('click',function(){
+      selectedBar=idx;
+      document.querySelectorAll('.b-row').forEach(function(r){r.style.opacity='.4';});
+      row.style.opacity='1';
+      var kb=d.kb;
+      document.getElementById('trendWrap').style.display='none';
+      document.getElementById('trend-insight').style.display='none';
+      var det=document.getElementById('kb-detail');
+      det.style.display='block';
+      document.getElementById('kb-pane-title').textContent=kb.title;
+      document.getElementById('kb-pane-sub').textContent='';
+      det.innerHTML='<div style="margin-bottom:.8rem"><span style="font-family:JetBrains Mono,monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)">Action Taken</span><p style="margin-top:.3rem;color:var(--muted2)">'+kb.action+'</p></div><div style="margin-bottom:.8rem"><span style="font-family:JetBrains Mono,monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)">Impact</span><p style="margin-top:.3rem;color:var(--muted2)">'+kb.impact+'</p></div><div><span style="font-family:JetBrains Mono,monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)">How I Found It</span><p style="margin-top:.3rem;color:var(--muted2)">'+kb.method+'</p></div><div style="margin-top:.8rem"><button style="font-family:JetBrains Mono,monospace;font-size:.6rem;padding:.25rem .7rem;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--muted);cursor:pointer;" onclick="resetChart()">← Back to trend view</button></div>';
+    });
+    cont.appendChild(row);
+  });
+  var bo=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('.b-fill').forEach(function(b,i){setTimeout(function(){b.style.width=b.dataset.pct+'%';},i*100+200);});bo.unobserve(e.target);}});},{threshold:.2});
+  bo.observe(cont);
+})();
+function resetChart(){
+  selectedBar=null;
+  document.querySelectorAll('.b-row').forEach(function(r){r.style.opacity='1';});
+  document.getElementById('trendWrap').style.display='';
+  document.getElementById('trend-insight').style.display='';
+  document.getElementById('kb-detail').style.display='none';
+  document.getElementById('kb-pane-title').textContent='Weekly Volume \u2014 Before vs. After KB Intervention';
+  document.getElementById('kb-pane-sub').textContent='Select a category on the left to see what action was taken. Or view the overall trend below.';
+}
+
+// ── TREND LINE ───────────────────────────────────────────────────
+(function(){
+  var canvas=document.getElementById('trendCanvas'),ctx=canvas.getContext('2d');
+  function resize(){canvas.width=canvas.offsetWidth*2;canvas.height=canvas.offsetHeight*2;ctx.scale(2,2);}
+  resize();window.addEventListener('resize',function(){resize();draw();});
+  var before=[82,88,79,91,86,84,90,87],after=[90,88,85,79,74,71,68,66];
+  function draw(){
+    var W=canvas.offsetWidth,H=canvas.offsetHeight;
+    ctx.clearRect(0,0,W,H);
+    var pad={l:6,r:6,t:12,b:8};
+    function pts(data){return data.map(function(v,i){return{x:pad.l+(i/(data.length-1))*(W-pad.l-pad.r),y:pad.t+(1-(v-50)/60)*(H-pad.t-pad.b)};});}
+    function drawLine(data,col){
+      var p=pts(data);
+      var g=ctx.createLinearGradient(0,0,0,H);
+      g.addColorStop(0,col.replace('rgb','rgba').replace(')',',0.16)'));g.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.beginPath();p.forEach(function(pt,i){i===0?ctx.moveTo(pt.x,pt.y):ctx.lineTo(pt.x,pt.y);});
+      ctx.lineTo(p[p.length-1].x,H-pad.b);ctx.lineTo(p[0].x,H-pad.b);ctx.closePath();
+      ctx.fillStyle=g;ctx.fill();
+      ctx.strokeStyle=col;ctx.lineWidth=1.8;ctx.setLineDash([]);
+      ctx.beginPath();p.forEach(function(pt,i){i===0?ctx.moveTo(pt.x,pt.y):ctx.lineTo(pt.x,pt.y);});ctx.stroke();
+      p.forEach(function(pt){ctx.beginPath();ctx.arc(pt.x,pt.y,2.5,0,Math.PI*2);ctx.fillStyle=col;ctx.fill();});
+    }
+    var ix=pad.l+(7/14)*(W-pad.l-pad.r);
+    ctx.strokeStyle='rgba(232,160,32,.3)';ctx.lineWidth=1;ctx.setLineDash([3,5]);
+    ctx.beginPath();ctx.moveTo(ix,4);ctx.lineTo(ix,H-4);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='rgba(232,160,32,.6)';ctx.font='8px JetBrains Mono,monospace';ctx.textAlign='center';ctx.fillText('KB deployed',ix,10);
+    drawLine(before,'rgb(91,155,213)');
+    drawLine(after,'rgb(76,175,128)');
+  }
+  var to=new IntersectionObserver(function(ent){ent.forEach(function(e){if(e.isIntersecting){draw();to.unobserve(e.target);}});},{threshold:.3});
+  to.observe(canvas);
+})();
+
+// ── STACK GRID ───────────────────────────────────────────────────
+var SKILLS=[
+  {i:'🐍',n:'Python',note:'pandas RCA,\nautomation scripting',pct:85},
+  {i:'🌐',n:'JS / HTML / CSS',note:'Web app logic,\nCS degree foundation',pct:75},
+  {i:'🗄️',n:'SQL / PL-SQL',note:'Data querying,\nFA data workflows',pct:65},
+  {i:'🐧',n:'Linux / Bash',note:'OS admin,\nscripting for automation',pct:78},
+  {i:'🔌',n:'REST APIs',note:'Integration diagnosis,\nlog analysis',pct:72},
+  {i:'🏫',n:'Canvas LMS',note:'Admin, SSO/auth,\nfaculty support',pct:82},
+  {i:'📋',n:'Banner / PeopleSoft',note:'FA &amp; enrollment\ndaily support',pct:68},
+  {i:'🎫',n:'ServiceNow / Jira',note:'Enterprise ticketing,\nSLA, KB authoring',pct:92},
+  {i:'🔐',n:'Active Directory',note:'Provisioning,\naccess control',pct:80},
+  {i:'💬',n:'Remote / Async',note:'Zoom, Slack, G-Suite,\nfully distributed 2022+',pct:96},
+];
+var sg=document.getElementById('stackGrid');
+SKILLS.forEach(function(s){
+  var d=document.createElement('div');d.className='si';
+  d.innerHTML='<span class="si-icon">'+s.i+'</span><div class="si-name">'+s.n+'</div><div class="si-note">'+s.note.replace('\n','<br>')+'</div><div class="si-bar-t"><div class="si-bar" data-pct="'+s.pct+'" style="width:0"></div></div>';
+  sg.appendChild(d);
+});
+var so=new IntersectionObserver(function(ent){ent.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('.si-bar').forEach(function(b){b.style.width=b.dataset.pct+'%';});so.unobserve(e.target);}});},{threshold:.2});
+so.observe(document.getElementById('stackGrid'));
+
+// ── NAV SCROLL ───────────────────────────────────────────────────
+window.addEventListener('scroll',function(){
+  var nav=document.getElementById('mainNav');
+  if(window.scrollY>60){nav.classList.add('scrolled');}else{nav.classList.remove('scrolled');}
+});
+
+// ── REVEAL OBSERVER ──────────────────────────────────────────────
+var ro=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
 </script>
 </body>
 </html>
