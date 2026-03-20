@@ -3,990 +3,528 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Henry Fan — Application Support Analyst</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@300;400;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<title>CVC-OEI Application Support Toolkit</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#080C14;--bg2:#0D1220;--bg3:#131825;--bg4:#1A2235;--amber:#E8A020;--amlo:rgba(232,160,32,.12);--teal:#3CBFA0;--tello:rgba(60,191,160,.1);--red:#E05050;--redlo:rgba(224,80,80,.1);--blue:#5B9BD5;--bluelo:rgba(91,155,213,.1);--green:#4CAF80;--greenlo:rgba(76,175,128,.1);--white:#F0EDE6;--muted:#6B7A90;--muted2:#9AABB8;--bdim:rgba(255,255,255,.055);}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.2rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:all .3s;}
-nav.scrolled{background:rgba(8,12,20,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--bdim);}
-.nav-name{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:600;letter-spacing:.14em;color:var(--amber);text-transform:uppercase;}
-.nav-links{display:flex;gap:1.8rem;list-style:none;}
-.nav-links a{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.1em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .2s;}
-.nav-links a:hover{color:var(--white);}
-#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 10vw;position:relative;overflow:hidden;}
-#heroCanvas{position:absolute;inset:0;z-index:0;opacity:.6;}
-.hero-content{position:relative;z-index:2;}
-.hero-tag{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.22em;color:var(--amber);text-transform:uppercase;margin-bottom:2.2rem;opacity:0;animation:fadeUp .8s .2s forwards;}
-.hero-tag::before{content:'// ';opacity:.4;}
-h1.hero-hl{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5.8vw,5.2rem);font-weight:900;line-height:1.05;letter-spacing:-.025em;max-width:20ch;opacity:0;animation:fadeUp .8s .4s forwards;}
-h1.hero-hl em{font-style:italic;color:var(--amber);}
-.hero-sub{margin-top:2rem;font-size:1rem;color:var(--muted2);max-width:56ch;opacity:0;animation:fadeUp .8s .6s forwards;}
-.hero-sub strong{color:var(--white);font-weight:500;}
-.hero-ctas{margin-top:2.5rem;display:flex;gap:1.5rem;align-items:center;opacity:0;animation:fadeUp .8s .8s forwards;}
-.btn-p{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.85rem 2rem;background:var(--amber);color:var(--bg);border:none;cursor:pointer;transition:background .2s,transform .15s;}
-.btn-p:hover{background:#F0B840;transform:translateY(-2px);}
-.btn-g{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:2px;transition:color .2s;}
-.btn-g:hover{color:var(--white);}
-.hero-stats{position:absolute;right:8vw;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:1.8rem;opacity:0;animation:fadeIn 1s 1.2s forwards;z-index:2;}
-.h-stat{text-align:right;border-right:2px solid var(--amber);padding-right:1.4rem;}
-.h-stat-num{display:block;font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;line-height:1;color:var(--white);}
-.h-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
-.scroll-ind{position:absolute;bottom:2.5rem;left:10vw;display:flex;align-items:center;gap:1rem;opacity:0;animation:fadeIn 1s 1.6s forwards;z-index:2;}
-.scroll-line{width:50px;height:1px;background:linear-gradient(to right,var(--amber),transparent);}
-.scroll-ind span{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
-#statusbar{background:var(--bg2);border-bottom:1px solid var(--bdim);padding:.65rem 10vw;display:flex;gap:2.5rem;align-items:center;overflow:hidden;white-space:nowrap;}
-.sb-item{display:flex;align-items:center;gap:.5rem;}
-.sb-dot{width:7px;height:7px;border-radius:50%;}
-.sb-dot.green{background:var(--green);box-shadow:0 0 6px var(--green);}
-.sb-dot.amber{background:var(--amber);box-shadow:0 0 6px var(--amber);animation:pulse 2s infinite;}
-.sb-dot.red{background:var(--red);box-shadow:0 0 6px var(--red);animation:pulse 1.5s infinite;}
-.sb-text{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.07em;color:var(--muted2);}
-.sb-text strong{color:var(--white);}
-section{padding:7rem 10vw;position:relative;}
-.slbl{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.24em;color:var(--amber);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;}
-.slbl::after{content:'';flex:1;max-width:60px;height:1px;background:rgba(184,127,24,.5);}
-h2.stitle{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.8vw,3.2rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.2rem;}
-h2.stitle em{font-style:italic;color:var(--amber);}
-.sintro{font-size:.93rem;color:var(--muted2);max-width:64ch;margin-bottom:3rem;line-height:1.8;}
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease;}
-.reveal.visible{opacity:1;transform:none;}
-/* ── TOOL SHARED ── */
-.tool-win{background:var(--bg3);border:1px solid var(--bdim);overflow:hidden;margin-top:.5rem;}
-.tool-bar{background:var(--bg4);padding:.65rem 1.2rem;display:flex;align-items:center;gap:.7rem;border-bottom:1px solid var(--bdim);}
-.tool-dots{display:flex;gap:.35rem;}
-.td{width:10px;height:10px;border-radius:50%;}
-.td.r{background:#FF5F57;}.td.y{background:#FEBC2E;}.td.g{background:#28C840;}
-.tool-lbl{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.1em;color:var(--muted);margin-left:.4rem;}
-.ctrl-row{padding:.7rem 1.2rem;background:var(--bg2);border-bottom:1px solid var(--bdim);display:flex;gap:.7rem;align-items:center;flex-wrap:wrap;}
-.cbtn{font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:.28rem .8rem;border:1px solid var(--bdim);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;letter-spacing:.06em;}
-.cbtn:hover,.cbtn.active{border-color:var(--amber);color:var(--amber);background:var(--amlo);}
-.cbtn.run{background:var(--amber);color:var(--bg);border-color:var(--amber);font-weight:700;}
-.cbtn.run:hover{background:#F0B840;}
-.cbtn.ml-auto{margin-left:auto;}
-/* ── TICKET QUEUE ── */
-#tool-tickets{background:var(--bg2);}
-.tq-list{padding:1rem 1.2rem;display:flex;flex-direction:column;gap:.55rem;min-height:260px;}
-.t-row{background:var(--bg2);border:1px solid var(--bdim);padding:.8rem 1.1rem;display:grid;grid-template-columns:90px 1fr 120px 110px 72px;gap:.8rem;align-items:center;cursor:pointer;transition:border-color .2s,background .2s;position:relative;overflow:hidden;}
-.t-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--bdim);transition:background .2s;}
-.t-row:hover{border-color:rgba(232,160,32,.3);background:var(--bg3);}
-.t-row.p1::before{background:var(--red);}.t-row.p2::before{background:var(--amber);}.t-row.p3::before{background:var(--blue);}
-.t-row.done{opacity:.45;}.t-row.done::before{background:var(--green);}
-.t-id{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--muted);}
-.t-subj{font-size:.83rem;color:var(--white);font-weight:500;line-height:1.25;}
-.t-subj small{display:block;font-size:.72rem;color:var(--muted);font-weight:300;margin-top:.1rem;}
-.t-col{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--teal);}
-.t-pri{font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:.18rem .55rem;text-align:center;font-weight:700;}
-.t-pri.P1{background:var(--redlo);border:1px solid rgba(224,80,80,.3);color:var(--red);}
-.t-pri.P2{background:var(--amlo);border:1px solid rgba(232,160,32,.3);color:var(--amber);}
-.t-pri.P3{background:var(--bluelo);border:1px solid rgba(91,155,213,.3);color:var(--blue);}
-.t-pri.DONE{background:var(--greenlo);border:1px solid rgba(76,175,128,.3);color:var(--green);}
-.t-age{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--muted);}
-.t-det{background:var(--bg);border:1px solid var(--bdim);padding:1.4rem;margin:0 1.2rem .8rem;display:none;animation:fadeIn .2s;}
-.t-det.open{display:block;}
-.tdet-head{display:flex;justify-content:space-between;margin-bottom:1rem;}
-.tdet-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;}
-.tdet-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem;}
-.tdet-meta-item{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted);}
-.tdet-meta-item strong{color:var(--amber);display:block;margin-bottom:.15rem;}
-.tdet-steps{margin-top:.8rem;}
-.ts{display:flex;gap:.7rem;padding:.55rem 0;border-bottom:1px solid var(--bdim);}
-.ts:last-child{border-bottom:none;}
-.ts-num{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--amber);min-width:20px;margin-top:.05rem;}
-.ts-txt{font-size:.81rem;color:var(--muted2);line-height:1.5;}
-.ts-txt code{font-family:'JetBrains Mono',monospace;font-size:.72rem;background:rgba(255,255,255,.04);padding:.1rem .3rem;color:var(--teal);}
-.tdet-actions{margin-top:1rem;display:flex;gap:.7rem;flex-wrap:wrap;}
-.tq-foot{padding:.7rem 1.2rem;background:var(--bg4);border-top:1px solid var(--bdim);display:flex;gap:2rem;font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--muted);}
-.tq-foot strong{color:var(--white);}
-/* ── API ANALYZER ── */
-#tool-api{background:var(--bg);}
-.api-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:.5rem;}
-.api-pane{background:var(--bg3);border:1px solid var(--bdim);overflow:hidden;}
-.api-pane-head{background:var(--bg4);padding:.65rem 1.2rem;border-bottom:1px solid var(--bdim);font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.08em;color:var(--muted);display:flex;justify-content:space-between;align-items:center;}
-.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 5px var(--green);animation:pulse 2s infinite;display:inline-block;margin-right:.4rem;}
-.log-feed{padding:.7rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;line-height:1.85;height:240px;overflow-y:auto;background:#030608;}
-.ll{display:flex;gap:.7rem;align-items:baseline;}
-.ll.error .lm{color:var(--red);}.ll.warn .lm{color:var(--amber);}.ll.ok .lm{color:var(--green);}.ll.info .lm{color:var(--muted2);}
-.lts{color:#1E2D3D;min-width:76px;}.lc{min-width:32px;text-align:center;font-weight:700;}
-.lc.e{color:var(--red);}.lc.w{color:var(--amber);}.lc.s{color:var(--green);}.lc.i{color:var(--blue);}
-.lm{flex:1;}
-.diag-feed{padding:1rem;min-height:240px;background:#030608;font-family:'JetBrains Mono',monospace;font-size:.7rem;line-height:1.75;height:240px;overflow-y:auto;}
-.diag-head{color:var(--amber);font-weight:700;margin-bottom:.5rem;}
-.di{color:var(--muted2);padding-left:.8rem;}
-.di.ok::before{content:'✓ ';color:var(--green);}
-.di.err::before{content:'✗ ';color:var(--red);}
-.di.warn::before{content:'⚠ ';color:var(--amber);}
-.diag-root{background:rgba(224,80,80,.07);border:1px solid rgba(224,80,80,.18);padding:.7rem .9rem;margin:.6rem 0;color:var(--red);}
-.diag-fix{background:rgba(60,191,160,.06);border:1px solid rgba(60,191,160,.18);padding:.7rem .9rem;color:var(--teal);}
-.diag-lbl{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.2rem;opacity:.7;}
-/* ── SYNC FLOW ── */
-#tool-sync{background:var(--bg2);}
-.sync-wrap{border:1px solid var(--bdim);background:var(--bg3);overflow:hidden;}
-#syncCanvas{display:block;width:100%;height:300px;}
-.sync-legend{display:flex;gap:2rem;padding:.8rem 1.4rem;background:var(--bg4);border-top:1px solid var(--bdim);flex-wrap:wrap;}
-.sl-item{display:flex;align-items:center;gap:.45rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted2);}
-.sl-dot{width:7px;height:7px;border-radius:50%;}
-/* ── CHART ── */
-#tool-chart{background:var(--bg);}
-.chart-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:.5rem;}
-.c-pane{background:var(--bg3);border:1px solid var(--bdim);padding:1.4rem;}
-.c-head{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.12em;color:var(--amber);text-transform:uppercase;margin-bottom:.25rem;}
-.c-sub{font-size:.76rem;color:var(--muted);margin-bottom:1.3rem;}
-.bar-chart{display:flex;flex-direction:column;gap:.65rem;}
-.b-row{display:flex;align-items:center;gap:.8rem;}
-.b-lbl{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted2);width:148px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.b-track{flex:1;background:rgba(255,255,255,.04);height:16px;overflow:hidden;}
-.b-fill{height:100%;transition:width 1.1s cubic-bezier(.16,1,.3,1);width:0;}
-.b-fill.a{background:var(--amber);}.b-fill.t{background:var(--teal);}.b-fill.bl{background:var(--blue);}.b-fill.r{background:var(--red);}
-.b-pct{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted);width:34px;}
-.trend-wrap{position:relative;height:150px;margin-top:.5rem;}
-#trendCanvas{width:100%;height:100%;}
-.c-insight{margin-top:1rem;padding:.75rem .9rem;background:var(--tello);border-left:2px solid var(--teal);font-size:.78rem;color:var(--muted2);line-height:1.6;}
-.c-insight strong{color:var(--teal);}
-/* ── ORIGIN ── */
-#origin{background:var(--bg2);}
-.origin-layout{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:start;}
-.opq{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;line-height:1.35;border-left:3px solid var(--amber);padding-left:1.7rem;margin-bottom:1.8rem;}
-.obody{font-size:.91rem;color:#8A9BAB;line-height:1.85;}
-.obody p+p{margin-top:1rem;}.obody strong{color:var(--white);font-weight:500;}
-.tc-cards{display:flex;flex-direction:column;gap:1.1rem;}
-.tc{background:var(--bg3);border:1px solid var(--bdim);border-left:3px solid var(--teal);padding:1.2rem 1.5rem;transition:border-color .2s;}
-.tc:hover{border-left-color:var(--amber);}
-.tc-lbl{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:.45rem;}
-.tc-title{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:700;margin-bottom:.35rem;}
-.tc-body{font-size:.8rem;color:var(--muted);}
-/* ── MAP ── */
-#mapping{background:var(--bg);}
-.map-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--bdim);border:1px solid var(--bdim);}
-.m-item{background:var(--bg2);padding:1.5rem 1.7rem;transition:background .2s;position:relative;overflow:hidden;}
-.m-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber);transform:scaleY(0);transform-origin:bottom;transition:transform .3s;}
-.m-item:hover::before{transform:scaleY(1);}.m-item:hover{background:var(--bg3);}
-.m-jd{font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;letter-spacing:.1em;color:var(--amber);text-transform:uppercase;margin-bottom:.55rem;}
-.m-my{font-size:.85rem;color:#8A9BAB;line-height:1.6;}.m-my strong{color:var(--white);font-weight:500;}
-/* ── ARCH ── */
-#product{background:var(--bg2);}
-.arch-outer{background:var(--bg3);border:1px solid var(--bdim);padding:2.2rem;margin-bottom:1.8rem;}
-.arch-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.45rem;margin-bottom:.8rem;}
-.arch-row:last-child{margin-bottom:0;}
-.an{background:var(--bg2);border:1px solid var(--bdim);padding:.8rem 1.1rem;text-align:center;min-width:100px;transition:border-color .25s;}
-.an:hover{border-color:var(--teal);}
-.an.me{border-color:var(--amber);background:rgba(232,160,32,.05);}
-.an-l{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);display:block;margin-bottom:.15rem;}
-.an-s{font-size:.6rem;color:var(--muted);}
-.an.me .an-l{color:var(--amber);}
-.arch-arr{color:var(--muted);font-size:.9rem;}
-.arch-leg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
-.al{background:var(--bg3);border:1px solid var(--bdim);padding:1rem 1.2rem;}
-.al-l{font-family:'JetBrains Mono',monospace;font-size:.63rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.35rem;display:flex;align-items:center;gap:.4rem;}
-.al-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);}
-.al-dot.a{background:var(--amber);}
-.al-b{font-size:.77rem;color:var(--muted);line-height:1.5;}
-.hl-box{margin-top:1.8rem;padding:1.8rem 2.2rem;background:var(--bg2);border:1px solid var(--bdim);border-left:3px solid var(--amber);}
-.hl-box p{font-size:.91rem;color:#8A9BAB;line-height:1.8;}.hl-box strong{color:var(--white);font-weight:500;}
-/* ── TIMELINE ── */
-#experience{background:var(--bg);}
-.timeline{display:flex;flex-direction:column;}
-.tl{display:grid;grid-template-columns:185px 1fr;gap:2.2rem;padding:2rem 0;border-bottom:1px solid var(--bdim);}
-.tl:last-child{border-bottom:none;}
-.tl-meta{padding-top:.15rem;}
-.tl-dt{font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;letter-spacing:.1em;color:var(--amber);margin-bottom:.35rem;}
-.tl-org{font-size:.86rem;font-weight:500;margin-bottom:.25rem;}
-.tl-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;padding:.18rem .5rem;background:var(--tello);border:1px solid rgba(60,191,160,.2);color:var(--teal);margin-top:.35rem;}
-.tl-badge.hi{background:var(--amlo);border-color:rgba(232,160,32,.22);color:var(--amber);}
-.tl-role{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:.55rem;}
-.tl-body{font-size:.84rem;color:#7A8BA0;line-height:1.75;margin-bottom:.9rem;}
-.tl-body strong{color:var(--white);font-weight:500;}
-.tl-tags{display:flex;flex-wrap:wrap;gap:.38rem;}
-.ttag{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.06em;padding:.16rem .52rem;background:rgba(255,255,255,.03);border:1px solid var(--bdim);color:var(--muted);text-transform:uppercase;}
-/* ── STACK ── */
-#stack{background:var(--bg2);}
-.stack-g{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5px;background:var(--bdim);border:1px solid var(--bdim);}
-.si{background:var(--bg3);padding:1.5rem 1.1rem;text-align:center;transition:background .2s;}
-.si:hover{background:var(--bg4);}
-.si-icon{font-size:1.6rem;margin-bottom:.55rem;display:block;}
-.si-name{font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.22rem;}
-.si-note{font-size:.68rem;color:var(--muted);line-height:1.4;margin-bottom:.65rem;}
-.si-bar-t{height:2px;background:var(--bdim);overflow:hidden;}
-.si-bar{height:100%;background:var(--amber);transition:width .9s ease;}
-/* ── CONTACT ── */
-#close{background:var(--bg3);text-align:center;padding:7rem 10vw;}
-.c-hl{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4.5vw,3.8rem);font-weight:900;line-height:1.1;letter-spacing:-.02em;max-width:22ch;margin:0 auto 1.8rem;}
-.c-hl em{font-style:italic;color:var(--amber);}
-.c-sub{color:var(--muted2);font-size:.93rem;max-width:52ch;margin:0 auto;line-height:1.8;}
-.c-links{display:flex;justify-content:center;gap:1.8rem;flex-wrap:wrap;margin-top:2.2rem;}
-.c-link{display:flex;flex-direction:column;gap:.22rem;text-decoration:none;padding:1.2rem 2rem;border:1px solid var(--bdim);background:var(--bg2);transition:border-color .2s,transform .2s;}
-.c-link:hover{border-color:var(--amber);transform:translateY(-3px);}
-.c-lbl{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);}
-.c-val{font-size:.88rem;color:var(--white);}
-footer{padding:1.6rem 10vw;border-top:1px solid var(--bdim);display:flex;justify-content:space-between;}
-.f-c{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--muted);}
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
-/* ── INSIGHT BOX ── */
-.insight-box{background:rgba(60,191,160,.04);border:1px solid rgba(60,191,160,.15);border-left:3px solid var(--teal);padding:1rem 1.4rem;margin-bottom:2rem;}
-.insight-box p{font-size:.84rem;color:var(--muted2);line-height:1.75;}
-.insight-box strong{color:var(--white);font-weight:500;}
-/* ── KB BADGE ── */
-.kb-badge{display:inline-flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;padding:.2rem .6rem;background:rgba(60,191,160,.08);border:1px solid rgba(60,191,160,.2);color:var(--teal);margin-left:.5rem;}
-/* ── STUDENT IMPACT ── */
-.impact-bar{display:flex;gap:1.5rem;padding:.7rem 1.4rem;background:var(--bg4);border-top:1px solid var(--bdim);flex-wrap:wrap;}
-.impact-item{display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted2);}
-.impact-item strong{color:var(--white);}
-.impact-item.warn strong{color:var(--amber);}
-.impact-item.crit strong{color:var(--red);}
-@media(max-width:900px){
-  nav{padding:1rem 1.5rem;}.nav-links{display:none;}
-  section{padding:4rem 5vw;}#hero{padding:0 5vw;}.hero-stats{display:none;}
-  .origin-layout,.api-layout,.chart-layout,.map-grid,.arch-leg{grid-template-columns:1fr;}
-  .stack-g{grid-template-columns:repeat(2,1fr);}.tl{grid-template-columns:1fr;gap:.8rem;}
-  .t-row{grid-template-columns:1fr 1fr;grid-template-rows:auto auto;}
+:root {
+  --bg: #FAFAF8; --bg-2: #F4F3F0; --bg-3: #ECEAE5;
+  --surface: #FFFFFF; --surface-2: #F8F7F4;
+  --border: #E4E2DC; --border-2: #D4D1C9; --border-focus: #1A6B50;
+  --text: #1C1917; --text-2: #57534E; --text-3: #A8A29E;
+  --primary: #1A6B50; --primary-light: #E8F5EE; --primary-bd: #B4DBC8;
+  --blue: #2563EB; --blue-light: #EFF6FF; --blue-bd: #93C5FD;
+  --amber: #B45309; --amber-light: #FFFBEB; --amber-bd: #FCD34D;
+  --red: #DC2626; --red-light: #FEF2F2; --red-bd: #FCA5A5;
+  --purple: #7C3AED; --purple-light: #F5F3FF; --purple-bd: #C4B5FD;
+  --teal: #0D9488; --teal-light: #F0FDFA; --teal-bd: #5EEAD4;
+  --display: 'Newsreader', serif;
+  --body: 'Instrument Sans', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+  --r: 8px; --r-lg: 12px; --r-xl: 16px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,.07), 0 2px 6px rgba(0,0,0,.04);
+  --max-w: 1060px;
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:#D1FAE5;color:var(--text)}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:5px}
+.wrap{max-width:var(--max-w);margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 clamp(1.25rem,4vw,2.5rem);height:56px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s}
+nav.scrolled{box-shadow:var(--shadow)}
+.nav-brand{display:flex;align-items:center;gap:.6rem}
+.nav-icon{width:28px;height:28px;border-radius:7px;background:var(--primary);display:flex;align-items:center;justify-content:center}
+.nav-icon svg{width:16px;height:16px}
+.nav-title{font-family:var(--display);font-weight:600;font-size:.95rem;color:var(--text);letter-spacing:-.01em}
+.nav-links{display:flex;gap:.25rem}
+.nav-links a{font-size:.78rem;font-weight:500;color:var(--text-2);text-decoration:none;padding:.4rem .65rem;border-radius:6px;transition:all .15s}
+.nav-links a:hover{color:var(--primary);background:var(--primary-light)}
+@media(max-width:640px){.nav-links{display:none}}
+.header{padding:clamp(5rem,12vw,8rem) 0 clamp(3rem,6vw,5rem);text-align:center;position:relative}
+.header::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(26,107,80,.04) 0%,transparent 70%);pointer-events:none}
+.h-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .85rem;border-radius:100px;border:1px solid var(--primary-bd);background:var(--primary-light);font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--primary);margin-bottom:1.5rem}
+.h-badge .dot{width:5px;height:5px;border-radius:50%;background:var(--primary);animation:pulse 2.5s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-family:var(--display);font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:600;line-height:1.12;letter-spacing:-.02em;color:var(--text);max-width:700px;margin:0 auto 1.25rem}
+h1 em{font-style:italic;color:var(--primary)}
+.h-desc{font-size:1rem;color:var(--text-2);line-height:1.85;max-width:580px;margin:0 auto 2.5rem}
+.h-desc strong{color:var(--text);font-weight:600}
+.h-stats{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap}
+.h-stat{text-align:center}
+.h-stat-num{font-family:var(--display);font-size:1.8rem;font-weight:600;color:var(--primary);line-height:1}
+.h-stat-label{font-size:.72rem;color:var(--text-3);margin-top:.2rem}
+.sec{padding:clamp(3rem,7vw,5rem) 0}
+.sec-alt{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.sec-head{margin-bottom:2.5rem}
+.eyebrow{font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);margin-bottom:.5rem}
+h2{font-family:var(--display);font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:600;line-height:1.15;letter-spacing:-.015em;color:var(--text);margin-bottom:.75rem}
+h2 em{font-style:italic;color:var(--primary)}
+.sec-desc{font-size:.92rem;color:var(--text-2);max-width:560px;line-height:1.8}
+.sec-desc strong{color:var(--text);font-weight:600}
+.tool-section{margin-bottom:3.5rem}
+.tool-frame{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);box-shadow:var(--shadow-md);overflow:hidden}
+.tool-bar{display:flex;align-items:center;justify-content:space-between;padding:.65rem 1.25rem;background:var(--surface-2);border-bottom:1px solid var(--border);gap:.75rem}
+.tool-bar-left{display:flex;align-items:center;gap:.6rem}
+.tool-dots{display:flex;gap:5px}
+.tool-dots span{width:8px;height:8px;border-radius:50%;background:var(--border-2)}
+.tool-label{font-family:var(--mono);font-size:.62rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:.2rem .55rem;border-radius:4px}
+.tl-green{background:var(--primary-light);color:var(--primary)}
+.tl-blue{background:var(--blue-light);color:var(--blue)}
+.tl-amber{background:var(--amber-light);color:var(--amber)}
+.tl-purple{background:var(--purple-light);color:var(--purple)}
+.tool-bar-title{font-family:var(--mono);font-size:.68rem;color:var(--text-2);font-weight:500}
+.tool-body{padding:clamp(1.25rem,3vw,2rem)}
+.monitor-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+@media(max-width:700px){.monitor-grid{grid-template-columns:1fr}}
+.status-panel{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.sp-header{padding:.75rem 1rem;background:var(--surface-2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.sp-title{font-weight:600;font-size:.82rem;color:var(--text)}
+.sp-count{font-family:var(--mono);font-size:.6rem;color:var(--text-3)}
+.sp-body{padding:.5rem}
+.status-row{display:flex;align-items:center;gap:.65rem;padding:.6rem .65rem;border-radius:var(--r);transition:background .15s;cursor:default}
+.status-row:hover{background:var(--bg-2)}
+.s-indicator{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.s-ok{background:#22C55E;box-shadow:0 0 6px rgba(34,197,94,.3)}
+.s-warn{background:#F59E0B;box-shadow:0 0 6px rgba(245,158,11,.3);animation:pulse 1.5s ease infinite}
+.s-err{background:#EF4444;box-shadow:0 0 6px rgba(239,68,68,.3);animation:pulse 1s ease infinite}
+.s-info{flex:1;min-width:0}
+.s-name{font-size:.8rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s-detail{font-size:.65rem;color:var(--text-3);font-family:var(--mono)}
+.s-badge{font-family:var(--mono);font-size:.55rem;font-weight:500;padding:.15rem .45rem;border-radius:100px;flex-shrink:0;white-space:nowrap}
+.sb-ok{background:#DCFCE7;color:#15803D}.sb-warn{background:#FEF3C7;color:#92400E}.sb-err{background:#FEE2E2;color:#B91C1C}
+.monitor-summary{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+@media(max-width:500px){.monitor-summary{grid-template-columns:1fr 1fr}}
+.ms-cell{background:var(--surface);padding:1rem 1.1rem;text-align:center}
+.ms-num{font-family:var(--display);font-size:1.6rem;font-weight:600;line-height:1}
+.ms-num-g{color:#15803D}.ms-num-a{color:#B45309}.ms-num-r{color:#DC2626}.ms-num-b{color:var(--blue)}
+.ms-label{font-size:.68rem;color:var(--text-3);margin-top:.15rem}
+.tracer-wrap{display:flex;flex-direction:column;gap:1.5rem}
+.tracer-flow{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding-bottom:.5rem}
+.tf-node{flex:1;min-width:145px;border:1.5px solid var(--border);background:var(--surface);padding:1.1rem 1rem;text-align:center;cursor:pointer;transition:all .2s;position:relative}
+.tf-node:first-child{border-radius:var(--r-lg) 0 0 var(--r-lg)}
+.tf-node:last-child{border-radius:0 var(--r-lg) var(--r-lg) 0}
+.tf-node:not(:last-child){border-right:none}
+.tf-node:not(:last-child)::after{content:'';position:absolute;right:-1px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:8px solid var(--border);z-index:2}
+.tf-node.active{border-color:var(--primary);background:var(--primary-light);z-index:3}
+.tf-node.active::after{border-left-color:var(--primary)}
+.tf-node.error-node{border-color:var(--red);background:var(--red-light);z-index:3}
+.tf-node.error-node::after{border-left-color:var(--red)}
+.tf-node.passed{border-color:var(--primary-bd);background:rgba(232,245,238,.5)}
+.tf-node.passed::after{border-left-color:var(--primary-bd)}
+.tf-num{font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:.3rem}
+.tf-node.active .tf-num{color:var(--primary)}
+.tf-node.error-node .tf-num{color:var(--red)}
+.tf-name{font-weight:600;font-size:.78rem;color:var(--text);margin-bottom:.15rem}
+.tf-sub{font-size:.62rem;color:var(--text-3);line-height:1.4}
+.tracer-detail{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.td-header{padding:.85rem 1.15rem;background:var(--surface-2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem}
+.td-icon{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.7rem}
+.td-icon-info{background:var(--blue-light);color:var(--blue)}
+.td-icon-warn{background:var(--amber-light);color:var(--amber)}
+.td-icon-err{background:var(--red-light);color:var(--red)}
+.td-icon-ok{background:var(--primary-light);color:var(--primary)}
+.td-title{font-weight:600;font-size:.85rem;color:var(--text)}
+.td-body{padding:1.15rem}
+.td-log{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r);padding:1rem;font-family:var(--mono);font-size:.68rem;line-height:1.8;color:var(--text-2);overflow-x:auto;margin-bottom:1rem;white-space:pre;tab-size:2}
+.td-log .log-ts{color:var(--text-3)}.td-log .log-ok{color:#15803D}.td-log .log-warn{color:#B45309}.td-log .log-err{color:#DC2626}.td-log .log-info{color:var(--blue)}
+.td-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+.td-btn{padding:.4rem .85rem;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);font-family:var(--body);font-size:.75rem;font-weight:500;color:var(--text-2);cursor:pointer;transition:all .15s}
+.td-btn:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-light)}
+.td-btn-primary{border-color:var(--primary);background:var(--primary);color:#fff}
+.td-btn-primary:hover{background:#15704F;color:#fff}
+.pattern-grid{display:grid;grid-template-columns:2fr 1fr;gap:1.25rem}
+@media(max-width:700px){.pattern-grid{grid-template-columns:1fr}}
+.chart-area{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.chart-header{padding:.75rem 1rem;background:var(--surface-2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.chart-title{font-weight:600;font-size:.82rem;color:var(--text)}
+.chart-period{font-family:var(--mono);font-size:.58rem;color:var(--text-3)}
+.chart-body{padding:1rem;height:220px;position:relative;display:flex;align-items:flex-end;gap:0}
+.bar-group{flex:1;display:flex;flex-direction:column;align-items:center;gap:.3rem}
+.bar-stack{width:100%;max-width:42px;display:flex;flex-direction:column;gap:1px;align-items:stretch}
+.bar-seg{border-radius:2px;min-height:2px;transition:all .4s ease}
+.bar-seg-auth{background:#7C3AED}.bar-seg-sync{background:#2563EB}.bar-seg-data{background:#F59E0B}.bar-seg-other{background:#D4D1C9}
+.bar-label{font-family:var(--mono);font-size:.52rem;color:var(--text-3);text-align:center;white-space:nowrap}
+.bar-total{font-family:var(--mono);font-size:.55rem;color:var(--text-2);font-weight:500;text-align:center}
+.chart-legend{display:flex;gap:1rem;padding:.75rem 1rem;border-top:1px solid var(--border);flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:.35rem;font-size:.65rem;color:var(--text-2)}
+.legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.insights-panel{display:flex;flex-direction:column;gap:.75rem}
+.insight-card{border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem;background:var(--surface);transition:all .2s}
+.insight-card:hover{box-shadow:var(--shadow);border-color:var(--border-2)}
+.ic-severity{font-family:var(--mono);font-size:.5rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.15rem .4rem;border-radius:3px;display:inline-block;margin-bottom:.35rem}
+.ic-high{background:var(--red-light);color:var(--red)}.ic-med{background:var(--amber-light);color:var(--amber)}.ic-low{background:var(--blue-light);color:var(--blue)}
+.ic-title{font-weight:600;font-size:.82rem;color:var(--text);margin-bottom:.2rem;line-height:1.35}
+.ic-desc{font-size:.72rem;color:var(--text-2);line-height:1.6}
+.ic-meta{display:flex;gap:.6rem;margin-top:.5rem;font-family:var(--mono);font-size:.55rem;color:var(--text-3)}
+.kb-layout{display:grid;grid-template-columns:220px 1fr;gap:0;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;min-height:420px}
+@media(max-width:700px){.kb-layout{grid-template-columns:1fr;min-height:auto}}
+.kb-sidebar{background:var(--surface-2);border-right:1px solid var(--border);padding:.75rem}
+@media(max-width:700px){.kb-sidebar{border-right:none;border-bottom:1px solid var(--border)}}
+.kb-nav-label{font-family:var(--mono);font-size:.5rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);padding:.4rem .65rem;margin-bottom:.25rem}
+.kb-nav-item{display:flex;align-items:center;gap:.5rem;padding:.5rem .65rem;border-radius:var(--r);font-size:.78rem;color:var(--text-2);cursor:pointer;transition:all .15s;font-weight:500}
+.kb-nav-item:hover{background:var(--bg);color:var(--text)}
+.kb-nav-item.active{background:var(--primary-light);color:var(--primary);font-weight:600}
+.kb-nav-icon{font-size:.7rem;width:18px;text-align:center;flex-shrink:0}
+.kb-main{padding:clamp(1rem,3vw,1.75rem);overflow-y:auto}
+.kb-doc-title{font-family:var(--display);font-size:1.3rem;font-weight:600;color:var(--text);margin-bottom:.25rem}
+.kb-doc-meta{display:flex;gap:.75rem;font-family:var(--mono);font-size:.58rem;color:var(--text-3);margin-bottom:1.25rem;flex-wrap:wrap}
+.kb-doc-meta span{display:flex;align-items:center;gap:.3rem}
+.kb-field{margin-bottom:1.25rem}
+.kb-label{font-family:var(--mono);font-size:.58rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2);margin-bottom:.4rem;display:block}
+.kb-input{width:100%;padding:.55rem .75rem;border:1px solid var(--border);border-radius:var(--r);font-family:var(--body);font-size:.82rem;color:var(--text);background:var(--surface);transition:border-color .15s;outline:none;line-height:1.6}
+.kb-steps{display:flex;flex-direction:column;gap:.5rem}
+.kb-step{display:flex;align-items:flex-start;gap:.6rem;padding:.65rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface-2)}
+.kb-step-num{width:22px;height:22px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.55rem;font-weight:600;flex-shrink:0;margin-top:2px}
+.kb-step-text{font-size:.8rem;color:var(--text-2);line-height:1.6}
+.kb-step-text strong{color:var(--text);font-weight:600}
+.kb-escalation{background:var(--amber-light);border:1px solid var(--amber-bd);border-radius:var(--r);padding:.85rem 1rem;margin-top:.5rem}
+.kb-esc-label{font-family:var(--mono);font-size:.52rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:.25rem}
+.kb-esc-text{font-size:.78rem;color:var(--text);line-height:1.6}
+.flow-visual{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:2rem;margin-top:2rem;overflow-x:auto}
+.flow-title{text-align:center;font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--text-3);margin-bottom:1.75rem}
+.flow-row{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:nowrap;min-width:fit-content;margin:0 auto}
+.f-node{padding:.85rem 1.15rem;border-radius:var(--r-lg);border:1.5px solid;text-align:center;min-width:125px;transition:transform .2s,box-shadow .2s}
+.f-node:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.fn-sis{border-color:var(--purple-bd);background:var(--purple-light)}
+.fn-exc{border-color:var(--blue-bd);background:var(--blue-light)}
+.fn-lms{border-color:var(--primary-bd);background:var(--primary-light)}
+.fn-stu{border-color:var(--teal-bd);background:var(--teal-light)}
+.fn-label{font-family:var(--mono);font-size:.7rem;font-weight:600;margin-bottom:.1rem}
+.fn-sis .fn-label{color:var(--purple)}.fn-exc .fn-label{color:var(--blue)}.fn-lms .fn-label{color:var(--primary)}.fn-stu .fn-label{color:var(--teal)}
+.fn-desc{font-size:.58rem;color:var(--text-3);line-height:1.4}
+.f-arrow{display:flex;flex-direction:column;align-items:center;padding:0 .4rem;flex-shrink:0}
+.f-arrow-line{font-family:var(--mono);font-size:.7rem;color:var(--border-2);letter-spacing:-.05em}
+.f-arrow-label{font-family:var(--mono);font-size:.45rem;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.flow-annotations{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem;margin-top:1.5rem}
+.fa-card{padding:.85rem;border-radius:var(--r);border:1px solid var(--border);background:var(--surface-2)}
+.fa-dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:.35rem}
+.fa-title{font-size:.75rem;font-weight:600;color:var(--text);margin-bottom:.15rem}
+.fa-desc{font-size:.66rem;color:var(--text-2);line-height:1.55}
+footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
+.foot-text{font-size:.78rem;color:var(--text-3);line-height:1.7}
+.foot-text strong{color:var(--text-2);font-weight:600}
+.fu{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}.fu.vis{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
-<nav id="mainNav">
-  <span class="nav-name">Henry Fan</span>
-  <ul class="nav-links">
-    <li><a href="#origin">Background</a></li>
-    <li><a href="#tool-tickets">Ticket Queue</a></li>
-    <li><a href="#tool-api">API Analyzer</a></li>
-    <li><a href="#tool-sync">Sync Flow</a></li>
-    <li><a href="#tool-chart">Analytics</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#close">Contact</a></li>
-  </ul>
+
+<nav id="nav">
+  <div class="nav-brand">
+    <div class="nav-icon"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div>
+    <span class="nav-title">CVC-OEI Support Toolkit</span>
+  </div>
+  <div class="nav-links">
+    <a href="#monitor">Monitor</a>
+    <a href="#tracer">Diagnostics</a>
+    <a href="#patterns">Patterns</a>
+    <a href="#kb">Knowledge Base</a>
+  </div>
 </nav>
 
-<section id="hero">
-  <canvas id="heroCanvas"></canvas>
-  <div class="hero-content">
-    <div class="hero-tag">Application Support Analyst I &nbsp;&middot;&nbsp; CVC-OEI at FHDA</div>
-    <h1 class="hero-hl">The system that changed<br>my life is <em>the one I want<br>to keep running.</em></h1>
-    <p class="hero-sub">I'm <strong>Henry Fan</strong>. I started at <strong>Foothill College</strong> because it was what I could access. Seven years since, I've built the technical depth to support the systems that make that access possible for everyone else — from Banner and PeopleSoft SIS integrations to Canvas LMS, API log analysis, and the Python-driven pattern work that turns ticket volume into institutional knowledge.</p>
-    <div class="hero-ctas">
-      <a href="#tool-tickets" class="btn-p">Explore the Work</a>
-      <a href="#origin" class="btn-g">My background &rarr;</a>
+<header class="header">
+  <div class="wrap">
+    <div class="h-badge"><span class="dot"></span> Application Support Analyst Toolkit</div>
+    <h1>Tools for supporting <em>cross-enrollment</em> at statewide scale</h1>
+    <p class="h-desc">Four working prototypes for the daily operations of application support at CVC-OEI — monitoring integrations, diagnosing failures, identifying patterns, and building documentation that works <strong>across 116 campuses.</strong></p>
+    <div class="h-stats">
+      <div class="h-stat"><div class="h-stat-num">116</div><div class="h-stat-label">Connected Colleges</div></div>
+      <div class="h-stat"><div class="h-stat-num">3</div><div class="h-stat-label">SIS Platforms</div></div>
+      <div class="h-stat"><div class="h-stat-num">4</div><div class="h-stat-label">Tool Prototypes</div></div>
     </div>
   </div>
-  <div class="hero-stats">
-    <div class="h-stat"><span class="h-stat-num">7+</span><span class="h-stat-lbl">Years Edu-Tech</span></div>
-    <div class="h-stat"><span class="h-stat-num">5</span><span class="h-stat-lbl">Institutions</span></div>
-    <div class="h-stat"><span class="h-stat-num">B.S.</span><span class="h-stat-lbl">CS &middot; SJSU</span></div>
-  </div>
-  <div class="scroll-ind"><div class="scroll-line"></div><span>Scroll to explore</span></div>
-</section>
+</header>
 
-<div id="statusbar">
-  <div class="sb-item"><span class="sb-dot green"></span><span class="sb-text"><strong>CVC Exchange</strong> &mdash; All systems operational</span></div>
-  <div class="sb-item"><span class="sb-dot red"></span><span class="sb-text"><strong>TKT-0053</strong> &mdash; Trust enrollment broken &middot; Cuyamaca</span></div>
-  <div class="sb-item"><span class="sb-dot green"></span><span class="sb-text"><strong>Canvas LMS</strong> &mdash; 116 colleges connected</span></div>
-  <div class="sb-item"><span class="sb-dot red"></span><span class="sb-text"><strong>TKT-0054</strong> &mdash; LTI auth failure &middot; SDCCD</span></div>
-  <div class="sb-item"><span class="sb-dot amber"></span><span class="sb-text"><strong>TKT-0047</strong> &mdash; SIS feed 422 &middot; De Anza</span></div>
-  <div class="sb-item"><span class="sb-dot green"></span><span class="sb-text">Open Queue &mdash; <strong>5 active</strong></span></div>
-</div>
-
-<section id="tool-tickets">
-  <div class="slbl">Tool 01</div>
-  <h2 class="stitle reveal">CVC Exchange <em>Support Queue</em></h2>
-  <p class="sintro reveal">A working model of a CVC-OEI support queue — the same ticket categories, priority logic, and escalation paths I'd manage in this role. Click any ticket to open the full triage playbook. Inject a new inbound ticket to see how prioritization shifts in real time.</p>
-  <div class="tool-win reveal">
-    <div class="tool-bar">
-      <div class="tool-dots"><span class="td r"></span><span class="td y"></span><span class="td g"></span></div>
-      <span class="tool-lbl">ServiceNow &mdash; CVC-OEI Support Queue &mdash; Active Incidents</span>
+<section class="sec fu">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">System Architecture</div>
+      <h2>How student data moves across the <em>CVC Exchange</em></h2>
+      <p class="sec-desc">Cross-enrollment depends on data flowing accurately between each campus SIS, the Exchange middleware, and the teaching college's LMS. Most support issues trace back to <strong>a break somewhere in this chain.</strong></p>
     </div>
-    <div class="ctrl-row">
-      <button class="cbtn active" onclick="filterQ('all',this)">All <span id="cnt-all">6</span></button>
-      <button class="cbtn" onclick="filterQ('P1',this)">P1 Critical <span id="cnt-p1"></span></button>
-      <button class="cbtn" onclick="filterQ('P2',this)">P2 High <span id="cnt-p2"></span></button>
-      <button class="cbtn" onclick="filterQ('P3',this)">P3 Standard <span id="cnt-p3"></span></button>
-      <button class="cbtn" onclick="filterQ('done',this)">Resolved <span id="cnt-done"></span></button>
-      <button class="cbtn run ml-auto" onclick="injectTicket()">+ Simulate New Ticket</button>
-    </div>
-    <div class="tq-list" id="tqList"></div>
-    <div class="impact-bar" id="impactBar">
-      <div class="impact-item crit">Students blocked from Canvas access: <strong id="imp-blocked">4</strong></div>
-      <div class="impact-item warn">LTI-related failures: <strong id="imp-fa">1</strong></div>
-      <div class="impact-item warn">Pending past SLA window: <strong id="imp-sla">1</strong></div>
-      <div class="impact-item">Active P1 tickets: <strong id="imp-p1">2</strong></div>
-    </div>
-    <div class="tq-foot">
-      <span>SLA Compliance: <strong id="sla-pct">100%</strong></span>
-      <span>Avg Resolution: <strong>47 min</strong></span>
-      <span>Escalated: <strong id="esc-cnt">0</strong></span>
-      <span>Resolved Today: <strong id="res-cnt">0</strong></span>
-    </div>
-  </div>
-</section>
-
-<section id="tool-api">
-  <div class="slbl">Tool 02</div>
-  <h2 class="stitle reveal">API Integration <em>Log Analyzer</em></h2>
-  <p class="sintro reveal">Six real failure scenarios across the SIS &harr; CVC Exchange &harr; Canvas integration stack. Load a scenario, read the log, then run the structured diagnosis — root cause, affected students, and exact remediation steps. This is the layered diagnostic approach I bring from SMCCD and Faraday: characterize the error, isolate the layer, escalate with a full trail.</p>
-  <div class="api-layout reveal">
-    <div class="api-pane">
-      <div class="api-pane-head">
-        <span><span class="live-dot"></span>/api/v2/enrollments &middot; Live Feed</span>
-        <span id="log-status" style="color:var(--green);font-size:.6rem">&#9679; HEALTHY</span>
+    <div class="flow-visual">
+      <div class="flow-title">Cross-Enrollment Data Flow</div>
+      <div class="flow-row">
+        <div class="f-node fn-sis"><div class="fn-label">Home SIS</div><div class="fn-desc">Banner · PeopleSoft<br>Colleague</div></div>
+        <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">Ethos / API</div></div>
+        <div class="f-node fn-exc"><div class="fn-label">CVC Exchange</div><div class="fn-desc">Cross-enrollment<br>hub</div></div>
+        <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">AER Sync</div></div>
+        <div class="f-node fn-lms"><div class="fn-label">Teaching College</div><div class="fn-desc">SIS + Canvas<br>LMS</div></div>
+        <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">Enrollment</div></div>
+        <div class="f-node fn-stu"><div class="fn-label">Student</div><div class="fn-desc">Course access<br>confirmed</div></div>
       </div>
-      <div class="log-feed" id="logFeed"></div>
-      <div class="ctrl-row">
-        <button class="cbtn active" onclick="loadSc('healthy',this)">Healthy Sync</button>
-        <button class="cbtn" onclick="loadSc('auth',this)">Auth Failure</button>
-        <button class="cbtn" onclick="loadSc('payload',this)">Payload Error</button>
-        <button class="cbtn" onclick="loadSc('timeout',this)">Sync Timeout</button>
-        <button class="cbtn" onclick="loadSc('cascade',this)">FA Cascade</button>
-        <button class="cbtn" onclick="loadSc('trust',this)">Trust Enrollment</button>
-        <button class="cbtn run ml-auto" onclick="runDiag()">&#9654; Run Diagnosis</button>
-      </div>
-    </div>
-    <div class="api-pane">
-      <div class="api-pane-head">
-        <span>Diagnosis Output</span>
-        <span id="diag-badge" style="font-size:.6rem;color:var(--muted)">&#8212; Awaiting analysis</span>
-      </div>
-      <div class="diag-feed" id="diagPanel"><span style="color:var(--muted);font-size:.68rem">Select a scenario and click &#9654; Run Diagnosis.</span></div>
-      <div class="ctrl-row">
-        <button class="cbtn" onclick="clearDiag()">Clear</button>
-        <button class="cbtn" onclick="exportDiag()" id="exp-btn" style="display:none">&#8671; Export Report</button>
+      <div class="flow-annotations">
+        <div class="fa-card"><div class="fa-title"><span class="fa-dot" style="background:var(--purple)"></span>SIS Layer</div><div class="fa-desc">System of record. Each college configures enrollment, residency, and aid eligibility differently.</div></div>
+        <div class="fa-card"><div class="fa-title"><span class="fa-dot" style="background:var(--amber)"></span>API / Middleware</div><div class="fa-desc">Ethos for Banner, web services for PeopleSoft. Where most integration failures surface.</div></div>
+        <div class="fa-card"><div class="fa-title"><span class="fa-dot" style="background:var(--blue)"></span>Exchange Hub</div><div class="fa-desc">AER transmission, seat counts, residency validation, financial aid consortium routing.</div></div>
+        <div class="fa-card"><div class="fa-title"><span class="fa-dot" style="background:var(--primary)"></span>Teaching College</div><div class="fa-desc">Roster sync, course visibility, SAML authentication for cross-enrolled student access.</div></div>
+        <div class="fa-card"><div class="fa-title"><span class="fa-dot" style="background:var(--teal)"></span>Student Experience</div><div class="fa-desc">Cross-enrollment works or it doesn't. System reliability here is what makes access real.</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="tool-sync">
-  <div class="slbl">Tool 03</div>
-  <h2 class="stitle reveal">CVC Exchange <em>Enrollment Sync Flow</em></h2>
-  <p class="sintro reveal">The CVC Exchange isn't one system — it's an API-mediated network connecting 116 colleges, each with their own SIS, Canvas environment, and financial aid rules. A single failure at any node cascades downstream. Use the controls below to walk through each failure mode and see where in the chain the break occurs.</p>
-  <div class="sync-wrap reveal">
-    <canvas id="syncCanvas"></canvas>
-    <div class="sync-legend">
-      <div class="sl-item"><span class="sl-dot" style="background:var(--green)"></span>Data flowing normally</div>
-      <div class="sl-item"><span class="sl-dot" style="background:var(--amber)"></span>Degraded / warning</div>
-      <div class="sl-item"><span class="sl-dot" style="background:var(--red)"></span>Integration failure</div>
-      <div class="sl-item"><span class="sl-dot" style="background:var(--blue)"></span>Pending / queued</div>
+<section class="sec sec-alt fu" id="monitor">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Tool 01</div>
+      <h2>Integration Status <em>Monitor</em></h2>
+      <p class="sec-desc">Real-time dashboard tracking connection health across college SIS integrations. Surfaces sync failures, auth issues, and seat count discrepancies <strong>before they become student-facing problems.</strong></p>
     </div>
-    <div class="ctrl-row">
-      <button class="cbtn active" onclick="setSyncMode('normal',this)">Normal Operation</button>
-      <button class="cbtn" onclick="setSyncMode('sis-fail',this)">SIS Auth Failure</button>
-      <button class="cbtn" onclick="setSyncMode('canvas-lag',this)">Canvas Provisioning Lag</button>
-      <button class="cbtn" onclick="setSyncMode('fa-hold',this)">FA Disbursement Hold</button>
-      <button class="cbtn" onclick="setSyncMode('cascade',this)">Full Cascade Failure</button>
-      <button class="cbtn" onclick="setSyncMode('uat',this)">UAT Validation Gate</button>
-    </div>
-    <div id="sync-annotation" style="display:none;padding:.9rem 1.4rem;background:rgba(60,191,160,.04);border-top:1px solid rgba(60,191,160,.12);font-size:.78rem;color:var(--muted2);line-height:1.7;"></div>
-  </div>
-</section>
-
-<section id="tool-chart">
-  <div class="slbl">Tool 04</div>
-  <h2 class="stitle reveal">Ticket Trend <em>Root Cause Analysis</em></h2>
-  <p class="sintro reveal">At Faraday Future I ran quarterly Python/pandas analyses that reduced repeat support volume 15% by identifying systemic failure patterns and targeting each with a KB article. Click any category below to see the specific knowledge base action taken for that root cause.</p>
-  <div class="chart-layout reveal">
-    <div class="c-pane">
-      <div class="c-head">Ticket Volume by Root Cause &mdash; Q1</div>
-      <div class="c-sub">Click any category to see the knowledge base intervention built for it.</div>
-      <div class="bar-chart" id="barChart"></div>
-      <div class="c-insight"><strong>Finding:</strong> Auth failures (SIS token expiry) and enrollment sync window misses account for 52% of volume. Canvas-layer failures &mdash; trust enrollment misconfigs and LTI credential issues &mdash; account for another 34%. Identified via cross-referencing Canvas API error logs with SIS feed ingestion reports and sub-account audit logs.</div>
-    </div>
-    <div class="c-pane">
-      <div class="c-head" id="kb-pane-title">Weekly Volume &mdash; Before vs. After KB Intervention</div>
-      <div class="c-sub" id="kb-pane-sub">Select a category on the left to see what action was taken. Or view the overall trend below.</div>
-      <div class="trend-wrap" id="trendWrap"><canvas id="trendCanvas"></canvas></div>
-      <div id="kb-detail" style="display:none;padding:.9rem;background:var(--bg2);border:1px solid var(--bdim);margin-top:.8rem;font-size:.78rem;line-height:1.65;color:var(--muted2);"></div>
-      <div class="c-insight" style="margin-top:1rem" id="trend-insight"><strong>Result:</strong> &minus;15% repeat ticket volume within 6 weeks of KB deployment. Auth failure category down 38%. Trust enrollment re-opens down 60%. LTI P1s down 44%.</div>
-    </div>
-  </div>
-</section>
-
-<section id="mapping" style="background:var(--bg2)">
-  <div class="slbl">Role Requirements</div>
-  <h2 class="stitle reveal">Every requirement. <em>Matched.</em></h2>
-  <p class="sintro reveal" style="margin-bottom:2rem">Each requirement in the posting maps directly to a real role, a real system, and a real outcome — not aspirational framing.</p>
-  <div class="map-grid reveal">
-    <div class="m-item"><div class="m-jd">Ticketing &middot; SLA &middot; Incident Management</div><div class="m-my"><strong>ServiceNow &amp; Jira at enterprise scale</strong> — Tier 1–2, SLA-bound, multi-department. Built internal KB resources; quarterly pattern analysis reduced repeat support volume 15%.</div></div>
-    <div class="m-item"><div class="m-jd">Higher Ed SIS &middot; Financial Aid &middot; Enrollment</div><div class="m-my">Daily support inside <strong>Banner &amp; PeopleSoft FA and enrollment systems at SMCCD</strong> — data validation, integration failures, Title IV and California compliance. Same CCC district family as FHDA.</div></div>
-    <div class="m-item"><div class="m-jd">API Integrations &middot; Data Exchange &middot; Sync Failures</div><div class="m-my">Traced cross-system failures at SMCCD — <strong>API log analysis, enrollment sync restoration, escalation documentation</strong>. Learned to read error codes, isolate auth vs. payload vs. timing failures.</div></div>
-    <div class="m-item"><div class="m-jd">Canvas LMS &middot; SSO &middot; Instructional Platforms</div><div class="m-my"><strong>Canvas admin at Rice University</strong> — SSO failures, auth issues, faculty and student troubleshooting across academic departments. The same LMS used by all 116 CVC Exchange colleges.</div></div>
-    <div class="m-item"><div class="m-jd">Python &middot; SQL &middot; Bash &middot; Linux &middot; REST APIs</div><div class="m-my"><strong>B.S. Computer Science, SJSU</strong> — scripting, pandas data analysis, application lifecycle. M.S. CS at Georgia Tech in progress. These are working tools, not listed skills.</div></div>
-    <div class="m-item"><div class="m-jd">Documentation &middot; Training &middot; Distributed Work</div><div class="m-my">5+ years <strong>translating regulatory requirements into staff workflows</strong> at SMCCD — Title IV, California FA rules. KB authoring that non-technical staff can actually follow. Fully distributed since 2022.</div></div>
-  </div>
-  <div class="map-grid reveal" style="margin-top:1.5px;grid-template-columns:1fr">
-    <div class="m-item" style="border-left:3px solid var(--teal)"><div class="m-jd" style="color:var(--teal)">On Banner / PeopleSoft / Colleague Specifically</div><div class="m-my">At SMCCD I worked daily within FA and enrollment systems built on these platforms — resolving data discrepancies, tracing integration failures, validating student records under Title IV. I know how a Banner record maps to downstream disbursement, and where schema mismatches surface between SIS exports and API expectations. That's directly applicable to the CVC Exchange integration layer.</div></div>
-  </div>
-</section>
-
-<section id="product">
-  <div class="slbl">Platform Understanding</div>
-  <h2 class="stitle reveal">I understand what <em>I'd be supporting.</em></h2>
-  <div class="arch-outer reveal">
-    <div class="arch-row">
-      <div class="an"><span class="an-l">CVC Exchange</span><span class="an-s">cvc.edu &middot; SaaS</span></div>
-      <span class="arch-arr">&#8596;</span>
-      <div class="an"><span class="an-l">Home College SIS</span><span class="an-s">Banner / PS / Colleague</span></div>
-      <span class="arch-arr">&#8596;</span>
-      <div class="an"><span class="an-l">Canvas LMS</span><span class="an-s">116 CCCs</span></div>
-      <span class="arch-arr">&#8596;</span>
-      <div class="an"><span class="an-l">Teaching SIS</span><span class="an-s">Cross-enroll target</span></div>
-    </div>
-    <div class="arch-row">
-      <div class="an"><span class="an-l">API Exchange</span><span class="an-s">Enrollment / FA / Credits</span></div>
-      <span class="arch-arr">&#8596;</span>
-      <div class="an"><span class="an-l">SSO / Identity</span><span class="an-s">Auth layer</span></div>
-      <span class="arch-arr">&#8596;</span>
-      <div class="an me"><span class="an-l">Henry Fan</span><span class="an-s">Support Analyst I</span></div>
-      <span class="arch-arr">&#8596;</span>
-      <div class="an"><span class="an-l">Financial Aid</span><span class="an-s">FAFSA / CADAA</span></div>
-    </div>
-  </div>
-  <div class="arch-leg reveal">
-    <div class="al"><div class="al-l"><span class="al-dot a"></span>Canvas LMS &middot; Rice Univ.</div><div class="al-b">Hands-on SSO, auth failures, faculty &amp; student troubleshooting. Same LMS across all CVC Exchange colleges.</div></div>
-    <div class="al"><div class="al-l"><span class="al-dot"></span>SIS + FA &middot; SMCCD</div><div class="al-b">Daily Banner/PeopleSoft support. Data validation, integration failures, Title IV compliance.</div></div>
-    <div class="al"><div class="al-l"><span class="al-dot"></span>API + Ticketing &middot; Faraday</div><div class="al-b">Enterprise-scale incident management, API integration troubleshooting, pattern analysis in Python.</div></div>
-  </div>
-  <div class="hl-box reveal"><p>The CVC Exchange isn't one system &mdash; it's an API-mediated network connecting 116 colleges, each with their own SIS config, FA rules, Canvas environment, and compliance calendar. A single enrollment failure can cascade: no SIS record &rarr; no Canvas access &rarr; no FA disbursement &rarr; student loses aid. <strong>I understand this chain because I've worked at multiple points in it.</strong></p></div>
-</section>
-
-<section id="experience">
-  <div class="slbl">Career History</div>
-  <h2 class="stitle reveal">Seven years. Five institutions. <em>One through-line.</em></h2>
-  <div class="timeline">
-    <div class="tl reveal">
-      <div class="tl-meta"><div class="tl-dt">Sep 2024 &ndash; Oct 2025</div><div class="tl-org">SMCCD &amp; FHDA</div><span class="tl-badge hi">Most Relevant</span></div>
-      <div><div class="tl-role">Program Services Coordinator</div><div class="tl-body">Supported enterprise financial aid and enrollment systems at <strong>San Mateo Community College District</strong> &mdash; the same CCC district family as Foothill-De Anza. Translated state and federal regulatory requirements into documented staff workflows that reduced processing errors. Diagnosed system discrepancies across SIS-integrated platforms. Participated in pre-deployment testing for system updates, ensuring compliance before go-live. Conducted root cause analysis on recurring system breakdowns.</div><div class="tl-tags"><span class="ttag">CCC Ecosystem</span><span class="ttag">Banner / PeopleSoft</span><span class="ttag">Title IV</span><span class="ttag">Workflow Docs</span><span class="ttag">SIS Integration</span><span class="ttag">Pre-deploy Testing</span><span class="ttag">Root Cause Analysis</span></div></div>
-    </div>
-    <div class="tl reveal">
-      <div class="tl-meta"><div class="tl-dt">May 2023 &ndash; Aug 2024</div><div class="tl-org">Faraday Future</div><span class="tl-badge">Enterprise Scale</span></div>
-      <div><div class="tl-role">IT Support Specialist</div><div class="tl-body">Managed Tier 1&ndash;2 support at enterprise scale using <strong>ServiceNow and Jira</strong> under SLA requirements. Administered Active Directory and M365 provisioning. Built internal KB resources. <strong>Ran quarterly ticket analysis in Python (pandas)</strong> to identify root cause patterns &mdash; reducing repeat support volume 15%. Collaborated with engineering on incident escalation.</div><div class="tl-tags"><span class="ttag">ServiceNow</span><span class="ttag">Jira</span><span class="ttag">SLA Management</span><span class="ttag">Python Analytics</span><span class="ttag">Active Directory</span><span class="ttag">KB Authoring</span></div></div>
-    </div>
-    <div class="tl reveal">
-      <div class="tl-meta"><div class="tl-dt">Apr 2022 &ndash; Dec 2022</div><div class="tl-org">Rice University</div><span class="tl-badge">Canvas &middot; LMS</span></div>
-      <div><div class="tl-role">Applications Technician</div><div class="tl-body">Provided technical support for <strong>Canvas LMS</strong> and institutional academic systems. Resolved authentication, SSO, and LMS-related issues with detailed incident tracking. Partnered with academic departments on instructional technology deployment &mdash; directly parallel to CVC-OEI support model.</div><div class="tl-tags"><span class="ttag">Canvas LMS</span><span class="ttag">SSO / Auth</span><span class="ttag">Incident Tracking</span><span class="ttag">Faculty Support</span></div></div>
-    </div>
-    <div class="tl reveal">
-      <div class="tl-meta"><div class="tl-dt">Aug 2019 &ndash; Mar 2022</div><div class="tl-org">San Jose State University</div><span class="tl-badge">Multi-Institutional</span></div>
-      <div><div class="tl-role">Technical Product Support</div><div class="tl-body">Applied <strong>learning analytics to identify student-system interaction bottlenecks</strong> and inform platform improvements. Designed data-informed feedback systems bridging student services and instructional technology.</div><div class="tl-tags"><span class="ttag">Learning Analytics</span><span class="ttag">Platform Support</span><span class="ttag">Student Outcomes</span></div></div>
-    </div>
-    <div class="tl reveal">
-      <div class="tl-meta"><div class="tl-dt">Jan 2017 &ndash; Jun 2020</div><div class="tl-org">Foothill College &amp; SJSU</div><span class="tl-badge">Foundation</span></div>
-      <div><div class="tl-role">Curriculum Developer</div><div class="tl-body">Designed peer-learning environments for CS fundamentals at <strong>Foothill College</strong> &mdash; the institution that houses the CVC. Applied learning analytics. This role is where I developed my model of the end user: a community college student navigating technology while managing work, family, and financial stress. That model shapes every KB article and triage flow I write.</div><div class="tl-tags"><span class="ttag">Foothill College</span><span class="ttag">CCC Student UX</span><span class="ttag">Learning Analytics</span><span class="ttag">Technical Training</span></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="stack">
-  <div class="slbl">Technical Skills</div>
-  <h2 class="stitle reveal">Tools I work in. <em>Skills I've built.</em></h2>
-  <div class="stack-g reveal" id="stackGrid"></div>
-</section>
-
-<section id="origin" style="background:var(--bg2)">
-  <div class="slbl">Background</div>
-  <div class="origin-layout reveal">
-    <div>
-      <div class="opq">"I'm a product of the system the CVC exists to protect."</div>
-      <div class="obody">
-        <p>I started at <strong>Foothill College</strong> — the same institution that houses the CVC — because community college was what I could access. My A.S. thesis was on andragogy: why institutional systems fail adult learners. My B.S. thesis at SJSU: <strong>"Critical Computation: Utilizing Technology for Social Good."</strong></p>
-        <p>When a sync failure blocks a student from their course or delays a financial aid disbursement, <strong>that's someone's semester.</strong> I know what that feels like from the other side of the screen. That's why I'm here.</p>
-      </div>
-    </div>
-    <div class="tc-cards">
-      <div class="tc">
-        <div class="tc-lbl">A.S. &middot; Foothill College &nbsp;&middot;&nbsp; B.S. CS &middot; San Jose State</div>
-        <div class="tc-title">From community college to CS degree — same systems, both sides</div>
-        <div class="tc-body">Foothill → SJSU → Rice → SJSU → Faraday Future → SMCCD/FHDA. Seven years. Every role in the CCC or higher ed ecosystem.</div>
-      </div>
-      <div class="tc" style="border-left-color:var(--amber)">
-        <div class="tc-lbl" style="color:var(--amber)">In Progress &middot; Georgia Tech</div>
-        <div class="tc-title">M.S. Computer Science — Machine Learning focus</div>
-        <div class="tc-body">Deepening the analytical foundation already driving the ticket pattern analysis and automation work shown above.</div>
+    <div class="tool-section">
+      <div class="tool-frame">
+        <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="tool-bar-title">cvc-exchange-monitor.fhda.edu</div></div>
+        <div class="tool-body">
+          <div class="monitor-summary">
+            <div class="ms-cell"><div class="ms-num ms-num-g">94</div><div class="ms-label">Healthy</div></div>
+            <div class="ms-cell"><div class="ms-num ms-num-a">14</div><div class="ms-label">Degraded</div></div>
+            <div class="ms-cell"><div class="ms-num ms-num-r">8</div><div class="ms-label">Failing</div></div>
+            <div class="ms-cell"><div class="ms-num ms-num-b">99.2%</div><div class="ms-label">Uptime (30d)</div></div>
+          </div>
+          <div class="monitor-grid" style="margin-top:1.25rem">
+            <div class="status-panel"><div class="sp-header"><div class="sp-title">Banner Integrations</div><div class="sp-count">62 colleges</div></div><div class="sp-body" id="bannerList"></div></div>
+            <div class="status-panel"><div class="sp-header"><div class="sp-title">PeopleSoft Integrations</div><div class="sp-count">38 colleges</div></div><div class="sp-body" id="psoftList"></div></div>
+            <div class="status-panel"><div class="sp-header"><div class="sp-title">Colleague Integrations</div><div class="sp-count">16 colleges</div></div><div class="sp-body" id="colleagueList"></div></div>
+            <div class="status-panel"><div class="sp-header"><div class="sp-title">Recent Alerts</div><div class="sp-count">Last 4 hours</div></div><div class="sp-body" id="alertsList"></div></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="close">
-  <div class="slbl" style="justify-content:center;margin-bottom:2rem">Let's Connect</div>
-  <h2 class="c-hl reveal">The context I bring <em>isn't on a r&eacute;sum&eacute;.</em></h2>
-  <p class="c-sub reveal">Seven years working inside California Community College systems. A CS degree built on top of a Foothill education. A direct, personal stake in the equity mission the CVC was created to advance.</p>
-  <div style="max-width:52ch;margin:1.6rem auto 0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);line-height:1.8;opacity:.85" class="reveal">Resume, references, and writing samples available on request.</div>
-  <div class="c-links reveal">
-    <a href="mailto:fanhenry@fhda.edu" class="c-link"><span class="c-lbl">Email</span><span class="c-val">fanhenry@fhda.edu</span></a>
-    <a href="https://linkedin.com/in/fansofhenry" class="c-link" target="_blank"><span class="c-lbl">LinkedIn</span><span class="c-val">linkedin.com/in/fansofhenry</span></a>
-    <a href="tel:6508235997" class="c-link"><span class="c-lbl">Phone</span><span class="c-val">(650) 823-5997</span></a>
+<section class="sec fu" id="tracer">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Tool 02</div>
+      <h2>Cross-System <em>Diagnostic Tracer</em></h2>
+      <p class="sec-desc">Step through integration layers to isolate where a failure occurs. Click each stage to inspect logs, API responses, and data payloads — <strong>tracing a real cross-enrollment issue end to end.</strong></p>
+    </div>
+    <div class="tool-section">
+      <div class="tool-frame">
+        <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><div class="tool-bar-title">trace-id: CVC-2026-03-4821</div></div>
+        <div class="tool-body">
+          <div class="tracer-wrap">
+            <div class="tracer-flow" id="tracerFlow">
+              <div class="tf-node passed" data-stage="0" onclick="setStage(0)"><div class="tf-num">Layer 01</div><div class="tf-name">User Report</div><div class="tf-sub">Student symptom</div></div>
+              <div class="tf-node passed" data-stage="1" onclick="setStage(1)"><div class="tf-num">Layer 02</div><div class="tf-name">SIS Query</div><div class="tf-sub">Banner enrollment</div></div>
+              <div class="tf-node error-node" data-stage="2" onclick="setStage(2)"><div class="tf-num">Layer 03</div><div class="tf-name">API / Ethos</div><div class="tf-sub">Integration layer</div></div>
+              <div class="tf-node" data-stage="3" onclick="setStage(3)"><div class="tf-num">Layer 04</div><div class="tf-name">Exchange</div><div class="tf-sub">CVC middleware</div></div>
+              <div class="tf-node" data-stage="4" onclick="setStage(4)"><div class="tf-num">Layer 05</div><div class="tf-name">Resolution</div><div class="tf-sub">Root cause + fix</div></div>
+            </div>
+            <div class="tracer-detail" id="tracerDetail"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+<section class="sec sec-alt fu" id="patterns">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Tool 03</div>
+      <h2>Ticket <em>Pattern Analyzer</em></h2>
+      <p class="sec-desc">Visualize support ticket trends across categories and time periods. Surfaces upstream causes hiding behind individual tickets — <strong>three similar errors in a week is a signal worth investigating.</strong></p>
+    </div>
+    <div class="tool-section">
+      <div class="tool-frame">
+        <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><div class="tool-bar-title">Q1 2026 · Ticket Trend Report</div></div>
+        <div class="tool-body">
+          <div class="pattern-grid">
+            <div>
+              <div class="chart-area">
+                <div class="chart-header"><div class="chart-title">Tickets by Category</div><div class="chart-period">Jan – Mar 2026</div></div>
+                <div class="chart-body" id="chartBody"></div>
+                <div class="chart-legend">
+                  <div class="legend-item"><div class="legend-dot" style="background:#7C3AED"></div>Auth / SSO</div>
+                  <div class="legend-item"><div class="legend-dot" style="background:#2563EB"></div>Sync Failures</div>
+                  <div class="legend-item"><div class="legend-dot" style="background:#F59E0B"></div>Data Mismatch</div>
+                  <div class="legend-item"><div class="legend-dot" style="background:#D4D1C9"></div>Other</div>
+                </div>
+              </div>
+            </div>
+            <div class="insights-panel">
+              <div class="insight-card">
+                <div class="ic-severity ic-high">High Priority</div>
+                <div class="ic-title">Auth failures clustered at 7 Banner colleges</div>
+                <div class="ic-desc">OAuth token refresh failing post-patch. Same upstream cause presenting as different symptoms depending on user role.</div>
+                <div class="ic-meta"><span>23 tickets</span><span>7 campuses</span><span>↑ 340%</span></div>
+              </div>
+              <div class="insight-card">
+                <div class="ic-severity ic-med">Trending</div>
+                <div class="ic-title">Seat count sync delays during peak registration</div>
+                <div class="ic-desc">Sync jobs running before enrollment transactions commit. Race condition affecting real-time seat availability.</div>
+                <div class="ic-meta"><span>15 tickets</span><span>12 campuses</span><span>↑ 85%</span></div>
+              </div>
+              <div class="insight-card">
+                <div class="ic-severity ic-low">Monitoring</div>
+                <div class="ic-title">SAML config gaps at newly onboarded colleges</div>
+                <div class="ic-desc">Incomplete identity provider setup blocking cross-enrollment. Documentation gap in onboarding materials.</div>
+                <div class="ic-meta"><span>8 tickets</span><span>4 campuses</span><span>New pattern</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec fu" id="kb">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Tool 04</div>
+      <h2>Knowledge Base <em>Article Builder</em></h2>
+      <p class="sec-desc">Standardized documentation templates for campus-facing resolution guides. Written so a campus IT contact can resolve an Exchange issue <strong>with a guide built by someone they've never met.</strong></p>
+    </div>
+    <div class="tool-section">
+      <div class="tool-frame">
+        <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation</span></div><div class="tool-bar-title">kb.cvc-oei.fhda.edu/articles/new</div></div>
+        <div class="tool-body" style="padding:0">
+          <div class="kb-layout">
+            <div class="kb-sidebar">
+              <div class="kb-nav-label">Article Templates</div>
+              <div class="kb-nav-item active" onclick="setKB(0,this)"><span class="kb-nav-icon">⚡</span>Integration Fix</div>
+              <div class="kb-nav-item" onclick="setKB(1,this)"><span class="kb-nav-icon">🔐</span>Auth / SSO Issue</div>
+              <div class="kb-nav-item" onclick="setKB(2,this)"><span class="kb-nav-icon">🔄</span>Sync Resolution</div>
+              <div class="kb-nav-item" onclick="setKB(3,this)"><span class="kb-nav-icon">📋</span>Onboarding Guide</div>
+              <div class="kb-nav-label" style="margin-top:.75rem">Recent Articles</div>
+              <div class="kb-nav-item"><span class="kb-nav-icon">📄</span>Ethos Token Refresh</div>
+              <div class="kb-nav-item"><span class="kb-nav-icon">📄</span>Seat Count Race Fix</div>
+            </div>
+            <div class="kb-main" id="kbMain"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <span class="f-c">&copy; Henry Fan &middot; Los Altos Hills, CA</span>
-  <span class="f-c">Application Support Analyst I &middot; CVC-OEI &middot; FHDA</span>
+  <div class="wrap">
+    <p class="foot-text"><strong>CVC-OEI Application Support Toolkit</strong> — Prototypes for cross-enrollment support operations<br>Banner · PeopleSoft · Colleague · Canvas LMS · Ethos API · ServiceNow</p>
+  </div>
 </footer>
 
 <script>
-// ── HERO CANVAS ──────────────────────────────────────────────────
-(function(){
-  var c=document.getElementById('heroCanvas'),ctx=c.getContext('2d'),W,H,nodes=[];
-  function resize(){W=c.width=c.parentElement.offsetWidth;H=c.height=c.parentElement.offsetHeight;}
-  resize();window.addEventListener('resize',function(){resize();init();});
-  function init(){nodes=[];for(var i=0;i<55;i++)nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*2+1,p:Math.random()*Math.PI*2});}
-  init();
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    for(var i=0;i<nodes.length;i++){var a=nodes[i];for(var j=i+1;j<nodes.length;j++){var b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);if(d<160){ctx.strokeStyle='rgba(232,160,32,'+(1-d/160)*.22+')';ctx.lineWidth=.6;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}}
-    nodes.forEach(function(n){n.p+=.02;var g=Math.sin(n.p)*.5+.5;ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle='rgba(232,160,32,'+(0.25+g*.4)+')';ctx.fill();n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;});
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>20));
+const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('vis');obs.unobserve(el.target)}}),{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
 
-// ── NAV ──────────────────────────────────────────────────────────
-window.addEventListener('scroll',function(){document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);});
-
-// ── REVEAL ───────────────────────────────────────────────────────
-var obs=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('visible');},i*70);obs.unobserve(e.target);}});},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
-
-// ── TICKET QUEUE ─────────────────────────────────────────────────
-var TICKETS=[
-  {id:'TKT-0053',s:'Trust enrollment broken — cross-enrollment blocked',d:'sub_account_id: null returned for teaching institution; 11 students cannot access course',c:'Cuyamaca → SDCCD',p:'P1',a:'2h 14m',
-   steps:[
-    {t:'Confirm SIS enrollment record at home institution',q:'GET /api/v2/enrollments?student_id=&lt;id&gt; &mdash; verify HTTP 200 and enrollment_status: ACTIVE at Cuyamaca'},
-    {t:'Check Canvas admin for trust relationship between Cuyamaca and SDCCD sub-accounts',q:'Canvas Admin &rsaquo; Settings &rsaquo; Trust Relationships &mdash; confirm institution pair mapping exists'},
-    {t:'Validate sub_account_id mapping in CVC Exchange integration config',q:'Look for TRUST_RELATIONSHIP_NOT_FOUND error and sub_account_id: null in API response body'},
-    {t:'If sub-account hierarchy missing &mdash; coordinate with Canvas CSM for rebuild',q:'Provide Canvas CSM: institution pair, expected sub_account_id, error log excerpt'},
-    {t:'Test fix in sandbox environment (UAT pass required before reprocessing production)',q:'Reproduce trust enrollment in sandbox &mdash; confirm 200 OK with valid canvas_enrollment_id returned'},
-    {t:'Reprocess enrollment batch; confirm all 11 students now have Canvas access',q:'POST /api/v2/sync/trigger { district: "cuyamaca-sdccd", type: "trust-enrollment" }'}
-  ]},
-  {id:'TKT-0054',s:'LTI authentication failure — course materials inaccessible',d:'Consumer key rotation not propagated; 47 students cannot access embedded course materials',c:'San Diego CCD',p:'P1',a:'1h 08m',
-   steps:[
-    {t:'Identify affected LTI tool in Canvas sub-account',q:'Canvas Admin &rsaquo; [Sub-account] &rsaquo; Settings &rsaquo; Apps &mdash; locate tool showing auth errors; confirm consumer key status'},
-    {t:'Request regenerated credentials from LTI tool provider',q:'Contact vendor with: tool name, institution, sub-account, error timestamp. Request new consumer key + shared secret.'},
-    {t:'Update LTI configuration in Canvas',q:'Canvas Admin &rsaquo; Sub-account &rsaquo; External Apps &rsaquo; Edit tool &mdash; paste regenerated consumer key and shared secret'},
-    {t:'Test LTI launch in sandbox &mdash; confirm successful auth handshake',q:'Open sandbox course &rsaquo; launch LTI tool &mdash; verify no 401 or token mismatch in browser console'},
-    {t:'Deploy to production sub-account; notify instructor to validate tool access',q:'After confirmed sandbox pass: deploy to production. Email instructor with resolution and verification steps.'},
-    {t:'Document in LTI maintenance log with key rotation date and next review window',q:'Log: tool name, sub-account, rotation date, next review T+85 days. Update LTI calendar tracker.'}
-  ]},
-  {id:'TKT-0047',s:'SIS feed ingestion failure — 422 Unprocessable Entity',d:'enrollment_type field schema mismatch; 23 records across 4 sections pending ingestion',c:'De Anza College',p:'P2',a:'4h 03m',
-   steps:[
-    {t:'Pull SIS feed error report from Canvas admin',q:'Canvas Admin &rsaquo; SIS Imports &rsaquo; [failed batch] &rsaquo; Download error file &mdash; identify all failing rows'},
-    {t:'Isolate enrollment_type field value in failing records',q:'Error: field value "StudentEnrollment" (legacy) vs. CVC Exchange spec "student" (current). Confirm schema mismatch.'},
-    {t:'Coordinate with De Anza college IT to update SIS export field mapping',q:'Provide: CVC Exchange SIS import spec v2.3, field comparison table. Request corrected export re-submission.'},
-    {t:'Re-run SIS feed batch after college IT corrects field mapping',q:'POST /api/v2/sis/import { district: "deanza", file: corrected_batch } &mdash; validate HTTP 201 response'},
-    {t:'Confirm Canvas course access for 23 affected students',q:'Canvas Admin &rsaquo; Courses &rsaquo; [sections] &rsaquo; Enrollments &mdash; verify all 23 students appear with status: active'}
-  ]},
-  {id:'TKT-0055',s:'Sub-account user provisioning failure — batch import',d:'login_id format error; 14 instructor accounts not provisioned during new college integration',c:'Riverside CCD',p:'P2',a:'3h 45m',
-   steps:[
-    {t:'Review batch import error log in Canvas admin',q:'Canvas Admin &rsaquo; SIS Imports &rsaquo; [batch] &rsaquo; error file &mdash; identify all 14 failed rows and login_id format in each'},
-    {t:'Confirm login_id format mismatch: email format submitted vs. SIS ID format required',q:'CVC Exchange sub-account spec requires SIS ID format login_id (e.g. "rccd-0012847") not email format'},
-    {t:'Share CVC Exchange sub-account user creation CSV spec with college IT',q:'Provide: CSV template, field spec, login_id format examples. Request corrected CSV re-submission.'},
-    {t:'Re-run batch import in sub-account after college IT corrects login_id values',q:'Canvas Admin &rsaquo; Sub-account &rsaquo; SIS Import &rsaquo; upload corrected CSV &mdash; verify 14 accounts created'},
-    {t:'Confirm instructor access to assigned course sections',q:'Have instructors log in and confirm course visibility. Document provisioning complete in ticket.'}
-  ]},
-  {id:'TKT-0051',s:'Sandbox access blocked — UAT enrollees',d:'Sub-account permissions not configured for external UAT participants; no production impact',c:'Cañada College',p:'P3',a:'22m',
-   steps:[
-    {t:'Verify UAT enrollees are assigned to correct sandbox course section',q:'Canvas Admin &rsaquo; Sandbox sub-account &rsaquo; [test course] &rsaquo; Enrollments &mdash; confirm all enrollees appear'},
-    {t:'Check sub-account permissions for sandbox &mdash; confirm external enrollee role allows access',q:'Canvas Admin &rsaquo; Sub-account &rsaquo; Roles &mdash; verify UAT Participant role has course_view permission enabled'},
-    {t:'Adjust sub-account configuration to grant sandbox access to UAT participant role',q:'Enable course_view, content_view permissions for UAT Participant role in sandbox sub-account'},
-    {t:'Coordinate with facilitator to confirm all enrollees can access test environment',q:'Email facilitator with resolution. Request confirmation from enrollees that sandbox access is working.'},
-    {t:'Document sandbox permission config for future UAT setup at this institution',q:'Add to integration runbook: Ca&ntilde;ada College sandbox sub-account permission requirements for UAT.'}
-  ]},
-  {id:'TKT-0049',s:'Duplicate Canvas accounts — account merge required',d:'SIS ID mismatch created parallel accounts; enrollment on one, grade history on the other',c:'College of the Canyons',p:'P2',a:'RESOLVED',resolved:true,
-   steps:[
-    {t:'Identify duplicate accounts via Canvas user search',q:'Canvas Admin &rsaquo; Users &rsaquo; search by name and email &mdash; locate both accounts; note user_id for each'},
-    {t:'Confirm SIS ID mismatch between home and teaching institution records',q:'Compare sis_user_id on both accounts &mdash; home college SIS ID vs. teaching college enrollment path ID'},
-    {t:'Execute Canvas account merge',q:'Canvas Admin &rsaquo; User [primary] &rsaquo; Merge with another user &mdash; select secondary account; confirm grade history transfers'},
-    {t:'Validate enrollment, grade history, and LTI access on merged account',q:'Open merged account &mdash; verify: course enrollments visible, grades intact, LTI tools accessible'},
-    {t:'Update SIS export config at College of the Canyons to prevent recurrence',q:'Coordinate with COC IT: standardize sis_user_id format to prevent dual-path account creation on future enrollments'}
-  ]}
-];
-
-var activeF='all',openId=null,resolvedIds=['TKT-0049'],escalatedIds=[],injCount=0;
-
-function renderQ(){
-  var list=document.getElementById('tqList');list.innerHTML='';
-  var visible=TICKETS.filter(function(t){
-    if(activeF==='all')return true;
-    if(activeF==='done')return resolvedIds.indexOf(t.id)>-1;
-    if(activeF==='P1'||activeF==='P2'||activeF==='P3')return t.p===activeF&&resolvedIds.indexOf(t.id)===-1;
-    return true;
-  });
-  if(!visible.length){list.innerHTML='<div style="padding:2rem;text-align:center;font-family:JetBrains Mono,monospace;font-size:.68rem;color:var(--muted)">No tickets match this filter.</div>';updateCounts();return;}
-  visible.forEach(function(t){
-    var done=resolvedIds.indexOf(t.id)>-1;
-    var row=document.createElement('div');
-    row.className='t-row '+t.p.toLowerCase()+(done?' done':'');
-    row.innerHTML='<span class="t-id">'+t.id+'</span><span class="t-subj">'+t.s+'<small>'+t.d+'</small></span><span class="t-col">'+t.c+'</span><span class="t-pri '+(done?'DONE':t.p)+'">'+(done?'RESOLVED':t.p)+'</span><span class="t-age">'+t.a+'</span>';
-    row.addEventListener('click',function(){toggleDet(t.id);});
-    list.appendChild(row);
-    var det=document.createElement('div');
-    det.className='t-det'+(openId===t.id?' open':'');
-    det.id='det-'+t.id;
-    var stepsHtml=t.steps.map(function(s,i){return '<div class="ts"><span class="ts-num">'+(i<9?'0':'')+(i+1)+'</span><span class="ts-txt">'+s.t+'<br><code>'+s.q+'</code></span></div>';}).join('');
-    var actionsHtml=done?'<div style="margin-top:.8rem;font-family:JetBrains Mono,monospace;font-size:.66rem;color:var(--green)">&#10003; Ticket resolved</div>':'<div class="tdet-actions"><button class="cbtn" style="border-color:rgba(76,175,128,.3);color:var(--green)" onclick="resolveT(\''+t.id+'\',event)">&#10003; Mark Resolved</button><button class="cbtn" onclick="escalateT(\''+t.id+'\',event)">&#8593; Escalate to Analyst II</button><button class="cbtn" onclick="copyT(\''+t.id+'\',event)">&#10034; Copy Triage Notes</button></div>';
-    det.innerHTML='<div class="tdet-head"><div class="tdet-title">'+t.s+'</div><button class="cbtn" onclick="toggleDet(\''+t.id+'\')">&#x2715; Close</button></div><div class="tdet-meta"><div class="tdet-meta-item"><strong>ID</strong>'+t.id+'</div><div class="tdet-meta-item"><strong>College</strong>'+t.c+'</div><div class="tdet-meta-item"><strong>Priority</strong>'+t.p+'</div><div class="tdet-meta-item"><strong>Age</strong>'+t.a+'</div></div><div class="tdet-steps">'+stepsHtml+'</div>'+actionsHtml;
-    list.appendChild(det);
-  });
-  updateCounts();
-}
-
-function toggleDet(id){openId=(openId===id?null:id);renderQ();if(openId){setTimeout(function(){var el=document.getElementById('det-'+openId);if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'});},60);}}
-function resolveT(id,e){e.stopPropagation();if(resolvedIds.indexOf(id)===-1)resolvedIds.push(id);openId=null;renderQ();document.getElementById('res-cnt').textContent=resolvedIds.length-1;updateImpact();}
-function escalateT(id,e){e.stopPropagation();if(escalatedIds.indexOf(id)===-1)escalatedIds.push(id);alert('Ticket '+id+' escalated to Analyst II with full diagnostic trail.');document.getElementById('esc-cnt').textContent=escalatedIds.length;}
-function copyT(id,e){e.stopPropagation();var t=TICKETS.find(function(x){return x.id===id;});var txt=t.steps.map(function(s,i){return (i+1)+'. '+s.t;}).join('\n');navigator.clipboard&&navigator.clipboard.writeText(txt).then(function(){alert('Triage notes copied!');});}
-function filterQ(f,btn){activeF=f;document.querySelectorAll('.ctrl-row .cbtn:not(.run):not(.ml-auto)').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');openId=null;renderQ();}
-function updateCounts(){
-  var p1=TICKETS.filter(function(t){return t.p==='P1'&&resolvedIds.indexOf(t.id)===-1;}).length;
-  var p2=TICKETS.filter(function(t){return t.p==='P2'&&resolvedIds.indexOf(t.id)===-1;}).length;
-  var p3=TICKETS.filter(function(t){return t.p==='P3'&&resolvedIds.indexOf(t.id)===-1;}).length;
-  document.getElementById('cnt-all').textContent=TICKETS.length;
-  document.getElementById('cnt-p1').textContent=p1;
-  document.getElementById('cnt-p2').textContent=p2;
-  document.getElementById('cnt-p3').textContent=p3;
-  document.getElementById('cnt-done').textContent=resolvedIds.length;
-  var openCount=TICKETS.length-resolvedIds.length;
-  document.getElementById('sla-pct').textContent=(openCount===0?100:Math.max(78,100-p1*5))+'%';
-}
-function injectTicket(){
-  injCount++;
-  var colleges=['West Valley College','Merced College','City College of SF','Fresno City College','Chabot College','Ohlone College','Grossmont College','Mt. San Antonio College'];
-  var issues=[
-    {s:'Trust enrollment config missing for new college integration',d:'Teaching institution sub-account not mapped in CVC Exchange; students blocked at Canvas provisioning',p:'P1',
-     steps:[{t:'Check CVC Exchange integration config for teaching institution sub-account mapping',q:'GET /api/v2/institutions/[id]/config &mdash; confirm sub_account_id field is populated'},{t:'If sub_account_id missing: pull institution onboarding checklist',q:'Sub-account mapping is step 7 of 9 in the college integration checklist &mdash; escalate to integration lead'},{t:'Coordinate with Canvas CSM to provision sub-account if hierarchy incomplete',q:'Provide CSM: institution name, expected sub-account scope, CVC Exchange integration ID'},{t:'UAT pass required before reprocessing blocked enrollments',q:'Run trust enrollment test scenario in sandbox &mdash; confirm 200 OK before touching production'}]},
-    {s:'LTI tool returning 403 on launch — consumer key mismatch',d:'New semester; LTI credentials not rotated; students see "tool launch failed" error',p:'P2',
-     steps:[{t:'Check Canvas sub-account LTI configuration for consumer key status',q:'Canvas Admin &rsaquo; Sub-account &rsaquo; Settings &rsaquo; Apps &mdash; note consumer key and shared secret last updated date'},{t:'Contact LTI vendor to regenerate credentials',q:'Provide: sub-account name, tool ID, error timestamp. Request new consumer key + shared secret pair.'},{t:'Update Canvas LTI config and test in sandbox',q:'After receiving new credentials: update in Canvas dev environment &mdash; confirm successful launch before production deploy'},{t:'Add rotation date to LTI maintenance calendar',q:'Log: tool, institution, rotation date, next review T+85 days. Prevents this recurrence.'}]},
-    {s:'SIS import failing on new student batch — schema validation error',d:'422 errors on enrollment_type or sis_user_id field; students not provisioned in Canvas',p:'P2',
-     steps:[{t:'Download SIS import error file from Canvas admin',q:'Canvas Admin &rsaquo; SIS Imports &rsaquo; [batch ID] &rsaquo; Download errors &mdash; identify field names in error rows'},{t:'Cross-reference failing field values against CVC Exchange SIS spec v2.3',q:'Common: enrollment_type "StudentEnrollment" (legacy) vs. "student" (current); sis_user_id leading zero missing'},{t:'Send schema comparison table to college IT with specific correction needed',q:'Attach: CVC Exchange SIS import field spec, example of correct vs. incorrect value for each failing field'},{t:'Re-submit corrected batch and confirm 201 response',q:'POST /api/v2/sis/import &mdash; validate response shows 0 errors; confirm affected students now appear in Canvas'}]}
-  ];
-  var issue=issues[Math.floor(Math.random()*issues.length)];
-  TICKETS.unshift({id:'TKT-0'+(60+injCount),s:issue.s,d:issue.d,c:colleges[Math.floor(Math.random()*colleges.length)],p:issue.p,a:'0m',steps:issue.steps});
-  renderQ();
-  updateImpact();
-}
-renderQ();
-
-function updateImpact(){
-  var open=TICKETS.filter(function(t){return resolvedIds.indexOf(t.id)===-1;});
-  var p1=open.filter(function(t){return t.p==='P1';}).length;
-  var ltiTickets=open.filter(function(t){return t.s.toLowerCase().indexOf('lti')>-1||t.s.toLowerCase().indexOf('tool')>-1;}).length;
-  var blocked=open.filter(function(t){return t.p==='P1';}).length + open.filter(function(t){return t.s.toLowerCase().indexOf('access')>-1&&t.p!=='P3';}).length;
-  var pastSla=open.filter(function(t){return t.a&&(t.a.indexOf('d')>-1||(parseInt(t.a)>4&&t.a.indexOf('h')>-1));}).length;
-  document.getElementById('imp-blocked').textContent=Math.max(blocked,0);
-  document.getElementById('imp-fa').textContent=Math.max(ltiTickets,1);
-  document.getElementById('imp-sla').textContent=pastSla||1;
-  document.getElementById('imp-p1').textContent=p1;
-}
-updateImpact();
-
-// ── API LOG SCENARIOS ────────────────────────────────────────────
-var SCENARIOS={
-  healthy:{label:'&#9679; HEALTHY',color:'var(--green)',logs:[
-    {ts:'08:14:02',c:'200',t:'s',m:'GET /api/v2/enrollments &mdash; 847 records synced'},
-    {ts:'08:14:03',c:'200',t:'s',m:'POST /api/v2/enrollments/batch &mdash; 23 new enrollments committed'},
-    {ts:'08:14:05',c:'200',t:'s',m:'GET /api/v2/students/verify &mdash; identity confirmed &times; 23'},
-    {ts:'08:14:07',c:'200',t:'s',m:'PUT /api/v2/canvas/provision &mdash; LMS seats allocated'},
-    {ts:'08:14:09',c:'200',t:'s',m:'POST /api/v2/fa/notify &mdash; FA disbursement triggered &times; 17'},
-    {ts:'08:14:11',c:'200',t:'s',m:'SYNC COMPLETE &mdash; 0 errors, 0 warnings'},
-  ],d:{title:'HEALTHY SYNC &mdash; No Action Required',color:'var(--green)',checks:[{t:'ok',v:'API token valid and unexpired'},{t:'ok',v:'Enrollment batch accepted (HTTP 200)'},{t:'ok',v:'Student identity verification passed &times; 23'},{t:'ok',v:'Canvas provisioning completed'},{t:'ok',v:'FA disbursement triggered successfully'}],root:'No root cause &mdash; system operating normally.',fix:'Continue monitoring. No action required. Document as successful sync in log.'}},
-
-  auth:{label:'&#9679; AUTH FAILURE',color:'var(--red)',logs:[
-    {ts:'02:01:14',c:'401',t:'e',m:'GET /api/v2/enrollments &mdash; Unauthorized: token expired'},
-    {ts:'02:01:14',c:'401',t:'e',m:'Retry 1/3: GET /api/v2/enrollments &mdash; 401 Unauthorized'},
-    {ts:'02:01:15',c:'401',t:'e',m:'Retry 2/3: GET /api/v2/enrollments &mdash; 401 Unauthorized'},
-    {ts:'02:01:16',c:'401',t:'e',m:'Retry 3/3: GET /api/v2/enrollments &mdash; 401 Unauthorized'},
-    {ts:'02:01:16',c:'503',t:'e',m:'SYNC ABORTED &mdash; Auth failure after 3 retries'},
-    {ts:'02:01:16',c:'ERR',t:'e',m:'16 students pending enrollment &mdash; NOT processed'},
-  ],d:{title:'ROOT CAUSE: API TOKEN EXPIRED',color:'var(--red)',checks:[{t:'err',v:'HTTP 401 on initial request and all 3 retries'},{t:'err',v:'Sync aborted &mdash; 16 students NOT processed'},{t:'warn',v:'Token rotation schedule: last rotated 89 days ago (threshold: 90d)'},{t:'ok',v:'SIS endpoint reachable (connection established before 401)'},{t:'ok',v:'No network or firewall issues detected'}],root:'API token expired or revoked. Token age: 89 days. Rotation threshold exceeded.',fix:'1. Settings &rsaquo; District API Keys &rsaquo; [District] &rsaquo; Rotate token\n2. Update integration config with new value\n3. Re-trigger sync: POST /api/v2/sync/trigger { force: true }\n4. Verify 16 pending enrollments processed\n5. Set token rotation reminder for T+85 days'}},
-
-  payload:{label:'&#9679; PAYLOAD ERROR',color:'var(--amber)',logs:[
-    {ts:'03:15:00',c:'200',t:'s',m:'GET /api/v2/enrollments &mdash; connected'},
-    {ts:'03:15:01',c:'422',t:'e',m:'POST /api/v2/enrollments/batch &mdash; Unprocessable Entity'},
-    {ts:'03:15:01',c:'422',t:'e',m:'Error: field "enrollment_intensity" missing in 4 records'},
-    {ts:'03:15:01',c:'422',t:'e',m:'Error: "student_id" format mismatch &mdash; expected 9-digit, got 8'},
-    {ts:'03:15:02',c:'207',t:'w',m:'Partial commit: 19/23 records accepted, 4 rejected'},
-    {ts:'03:15:02',c:'200',t:'s',m:'Canvas provisioning: 19 students &mdash; 4 students SKIPPED'},
-  ],d:{title:'ROOT CAUSE: SIS EXPORT SCHEMA MISMATCH',color:'var(--amber)',checks:[{t:'ok',v:'API token valid &mdash; authentication passed'},{t:'err',v:'4 records rejected (HTTP 422) &mdash; schema validation failure'},{t:'err',v:'Field "enrollment_intensity" missing in affected records'},{t:'err',v:'student_id: SIS sending 8-digit, CVC expects 9-digit (leading zero missing)'},{t:'warn',v:'Partial commit: 19/23 processed &mdash; 4 students without Canvas or FA access'}],root:'District SIS export schema diverged from CVC v2.3 spec. Likely caused by a SIS version update at district.',fix:'1. Contact district IT: request SIS export spec, confirm recent version update\n2. Identify 4 affected student IDs from 422 error response body\n3. Manually provision those 4 students as immediate workaround\n4. Author schema migration guide for district\n5. Re-process rejected records after district corrects export format'}},
-
-  timeout:{label:'&#9679; SYNC TIMEOUT',color:'var(--amber)',logs:[
-    {ts:'02:00:00',c:'200',t:'s',m:'Sync job initiated &mdash; 1,204 records queued'},
-    {ts:'02:00:01',c:'200',t:'s',m:'Processing batch 1/12 &mdash; 100 records'},
-    {ts:'02:14:22',c:'200',t:'s',m:'Processing batch 6/12 &mdash; 100 records (7&times; slower than baseline)'},
-    {ts:'02:29:58',c:'408',t:'e',m:'Request Timeout &mdash; batch 7/12 exceeded 15min limit'},
-    {ts:'02:30:00',c:'503',t:'w',m:'Sync suspended &mdash; 603 records pending'},
-    {ts:'02:30:01',c:'WRN',t:'w',m:'Sync window closing in 30 minutes (window: 2&ndash;4 AM PST)'},
-  ],d:{title:'ROOT CAUSE: SYNC WINDOW OVERRUN &mdash; DISTRICT SIS PERFORMANCE',color:'var(--amber)',checks:[{t:'ok',v:'API token valid, connection healthy'},{t:'warn',v:'Batch processing rate: 100 records / 14 min (expected: 100 records / 2 min)'},{t:'err',v:'Batch 7 timed out &mdash; 603 records unprocessed'},{t:'warn',v:'Sync window: 2:00&ndash;4:00 AM PST &mdash; only 30 minutes remaining'},{t:'err',v:'603 students NOT enrolled in Canvas or notified to FA'}],root:'District SIS responding 7&times; slower than baseline. Likely: scheduled maintenance task running concurrently with sync window.',fix:'1. Notify district IT of performance degradation during sync window\n2. Request SIS maintenance schedule to avoid 2&ndash;4 AM window\n3. Re-trigger sync: POST /api/v2/sync/trigger { batch: "remaining", priority: "high" }\n4. Monitor: verify 603 records process before next business day\n5. Open improvement ticket: stagger large-district sync jobs'}},
-
-  cascade:{label:'&#9679; CASCADE FAILURE',color:'var(--red)',logs:[
-    {ts:'07:45:00',c:'200',t:'s',m:'Enrollment sync: SUCCESS &mdash; 34 students processed'},
-    {ts:'07:45:02',c:'404',t:'e',m:'Canvas provisioning: course_id 48291 NOT FOUND'},
-    {ts:'07:45:02',c:'503',t:'e',m:'Canvas: 34 students &mdash; enrollment committed but course missing'},
-    {ts:'07:45:03',c:'422',t:'e',m:'FA notify: enrollment_status=PENDING &mdash; disbursement BLOCKED'},
-    {ts:'07:45:03',c:'ERR',t:'e',m:'CASCADE: SIS &#10003; &rarr; Exchange &#10003; &rarr; Canvas &#10007; &rarr; FA &#10007;'},
-    {ts:'07:45:04',c:'ERR',t:'e',m:'34 students enrolled but cannot access course or receive aid'},
-  ],d:{title:'CASCADE FAILURE: CANVAS COURSE DELETED/UNPUBLISHED AFTER SYNC',color:'var(--red)',checks:[{t:'ok',v:'SIS sync completed &mdash; 34 enrollments written to CVC Exchange'},{t:'err',v:'Canvas: course_id 48291 returns 404 &mdash; course not found or unpublished'},{t:'err',v:'34 students enrolled in Exchange but have no Canvas course to access'},{t:'err',v:'FA disbursement BLOCKED &mdash; enrollment_status=PENDING (requires Canvas access confirmation)'},{t:'warn',v:'FERPA note: students have been sent enrollment confirmation emails &mdash; expectation set'}],root:'Downstream cascade from Canvas-layer failure. Likely: instructor deleted or unpublished course after enrollment opened, OR Canvas course ID changed in a platform migration.',fix:'1. IMMEDIATE: Contact teaching college Canvas admin &mdash; locate course 48291 or replacement\n2. If course was unpublished: request re-publish or substitution course ID\n3. Update CVC Exchange course record with correct Canvas course_id\n4. Re-trigger Canvas provisioning for 34 students\n5. Unblock FA disbursement once Canvas access confirmed\n6. Notify 34 students of delay and resolution timeline\n7. Add monitoring alert for Canvas course deletion on active CVC Exchange listings'}},
-
-  trust:{label:'&#9679; TRUST ENROLLMENT FAILURE',color:'var(--red)',logs:[
-    {ts:'09:22:31',c:'POST',t:'i',m:'/api/v2/exchange/trust-enrollments &mdash; home: cuyamaca &rarr; teaching: sdccd'},
-    {ts:'09:22:31',c:'200',t:'s',m:'SIS record confirmed &mdash; enrollment_status: ACTIVE at home institution'},
-    {ts:'09:22:32',c:'403',t:'e',m:'TRUST_RELATIONSHIP_NOT_FOUND &mdash; no active trust for institution pair'},
-    {ts:'09:22:32',c:'403',t:'e',m:'"sub_account_id": null &mdash; teaching institution not mapped'},
-    {ts:'09:22:33',c:'403',t:'e',m:'Retry 1/3 &mdash; 403 same response'},
-    {ts:'09:22:33',c:'ERR',t:'e',m:'Max retries reached &mdash; canvas_csm_escalation: true &mdash; 11 students queued'},
-  ],d:{title:'ROOT CAUSE: CANVAS TRUST RELATIONSHIP NOT CONFIGURED',color:'var(--red)',checks:[
-    {t:'ok',v:'SIS enrollment record valid &mdash; home institution (Cuyamaca) confirmed ACTIVE'},
-    {t:'ok',v:'API token valid &mdash; auth passed, 403 is a permission error, not a credential error'},
-    {t:'ok',v:'Payload correctly formed per CVC Exchange trust enrollment spec'},
-    {t:'err',v:'403 TRUST_RELATIONSHIP_NOT_FOUND &mdash; institution pair not mapped in Canvas'},
-    {t:'err',v:'sub_account_id: null &mdash; teaching institution (SDCCD) has no sub-account mapping'},
-    {t:'err',v:'11 students blocked at Canvas provisioning step &mdash; no enrollment record written'}
-  ],root:'Configuration gap in Canvas trust relationship layer. The teaching institution (SDCCD) does not have a configured sub-account mapping in CVC Exchange. This is not an API failure &mdash; the request reached the endpoint and was correctly rejected due to missing config.',fix:'1. Canvas Admin &rsaquo; SDCCD sub-account hierarchy &mdash; confirm sub-account exists for CVC Exchange trust enrollment scope\n2. Map correct sub_account_id in CVC Exchange integration config for SDCCD\n3. If sub-account hierarchy incomplete &mdash; coordinate with Canvas CSM to provision\n4. UAT pass in sandbox required before touching production enrollments\n5. Reprocess batch &mdash; confirm 200 OK + canvas_enrollment_id returned for all 11 students\n6. Document trust relationship config in integration runbook for SDCCD\n\nEscalation: Canvas CSM if sub-account rebuild required | SDCCD college IT for sub-account ownership confirmation'}}
+const colleges={
+  banner:[
+    {name:'Foothill College',status:'ok',detail:'Last sync: 2m ago',badge:'Healthy'},
+    {name:'De Anza College',status:'ok',detail:'Last sync: 1m ago',badge:'Healthy'},
+    {name:'City College SF',status:'warn',detail:'Seat count delay: 8min',badge:'Degraded'},
+    {name:'Chabot College',status:'ok',detail:'Last sync: 3m ago',badge:'Healthy'},
+    {name:'Sacramento City',status:'err',detail:'Ethos token expired',badge:'Failing'},
+    {name:'Butte College',status:'ok',detail:'Last sync: 1m ago',badge:'Healthy'},
+  ],
+  psoft:[
+    {name:'Mt. San Antonio',status:'ok',detail:'Last sync: 2m ago',badge:'Healthy'},
+    {name:'Pasadena City',status:'ok',detail:'Last sync: 4m ago',badge:'Healthy'},
+    {name:'Long Beach City',status:'warn',detail:'AER queue: 12 pending',badge:'Slow'},
+    {name:'Riverside City',status:'err',detail:'SAML config incomplete',badge:'Blocked'},
+    {name:'Santa Monica',status:'ok',detail:'Last sync: 1m ago',badge:'Healthy'},
+    {name:'El Camino',status:'ok',detail:'Last sync: 3m ago',badge:'Healthy'},
+  ],
+  colleague:[
+    {name:'Yuba College',status:'ok',detail:'Last sync: 5m ago',badge:'Healthy'},
+    {name:'Lake Tahoe CC',status:'warn',detail:'Residency validation slow',badge:'Degraded'},
+    {name:'Lassen College',status:'ok',detail:'Last sync: 2m ago',badge:'Healthy'},
+    {name:'Feather River',status:'err',detail:'API endpoint timeout',badge:'Failing'},
+    {name:'Mendocino College',status:'ok',detail:'Last sync: 4m ago',badge:'Healthy'},
+  ],
+  alerts:[
+    {name:'Ethos token refresh failed',status:'err',detail:'Sacramento City · 14m ago',badge:'Critical'},
+    {name:'SAML assertion rejected',status:'err',detail:'Riverside City · 28m ago',badge:'Critical'},
+    {name:'Seat count sync delay >5m',status:'warn',detail:'City College SF · 43m ago',badge:'Warning'},
+    {name:'AER queue depth >10',status:'warn',detail:'Long Beach City · 1h ago',badge:'Warning'},
+    {name:'API response time >3s',status:'warn',detail:'Lake Tahoe CC · 2h ago',badge:'Warning'},
+    {name:'Enrollment mismatch detected',status:'err',detail:'Feather River · 3h ago',badge:'Critical'},
+  ]
 };
-
-var curSc='healthy';
-function loadSc(name,btn){
-  curSc=name;
-  document.querySelectorAll('#tool-api .ctrl-row .cbtn:not(.run)').forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active');
-  var sc=SCENARIOS[name];
-  var feed=document.getElementById('logFeed');feed.innerHTML='';
-  document.getElementById('log-status').innerHTML=sc.label;
-  document.getElementById('log-status').style.color=sc.color;
-  document.getElementById('diagPanel').innerHTML='<span style="color:var(--muted);font-size:.68rem">Click &#9654; Run Diagnosis to analyze this scenario.</span>';
-  document.getElementById('diag-badge').textContent='- Awaiting analysis';
-  document.getElementById('exp-btn').style.display='none';
-  sc.logs.forEach(function(l,i){
-    setTimeout(function(){
-      var div=document.createElement('div');
-      div.className='ll '+(l.t==='e'?'error':l.t==='w'?'warn':l.t==='i'?'info':'ok');
-      div.innerHTML='<span class="lts">'+l.ts+'</span><span class="lc '+l.t+'">'+l.c+'</span><span class="lm">'+l.m+'</span>';
-      feed.appendChild(div);feed.scrollTop=feed.scrollHeight;
-    },i*190);
-  });
+function renderList(id,items){
+  document.getElementById(id).innerHTML=items.map(i=>`<div class="status-row"><div class="s-indicator s-${i.status}"></div><div class="s-info"><div class="s-name">${i.name}</div><div class="s-detail">${i.detail}</div></div><span class="s-badge sb-${i.status}">${i.badge}</span></div>`).join('');
 }
-function runDiag(){
-  var d=SCENARIOS[curSc].d;
-  var p=document.getElementById('diagPanel');p.innerHTML='';
-  document.getElementById('diag-badge').textContent='Analysis complete';
-  document.getElementById('diag-badge').style.color=d.color;
-  var html='<div class="diag-head" style="color:'+d.color+'">'+d.title+'</div>';
-  d.checks.forEach(function(c){html+='<div class="di '+c.t+'">'+c.v+'</div>';});
-  html+='<div class="diag-root"><div class="diag-lbl">Root Cause</div>'+d.root+'</div>';
-  html+='<div class="diag-fix"><div class="diag-lbl" style="color:var(--teal)">Resolution Steps</div>'+d.fix.replace(/\n/g,'<br>')+'</div>';
-  p.innerHTML=html;
-  document.getElementById('exp-btn').style.display='inline-block';
-}
-function clearDiag(){document.getElementById('diagPanel').innerHTML='<span style="color:var(--muted);font-size:.68rem">Select a scenario and click &#9654; Run Diagnosis.</span>';document.getElementById('diag-badge').textContent='- Awaiting analysis';document.getElementById('exp-btn').style.display='none';}
-function exportDiag(){
-  var d=SCENARIOS[curSc].d;
-  var txt='CVC Exchange - Integration Diagnosis Report\n'+'='.repeat(50)+'\n\n'+d.title+'\n\nChecks:\n'+d.checks.map(function(c){return (c.t==='ok'?'[OK]':c.t==='err'?'[FAIL]':'[WARN]')+' '+c.v.replace(/&mdash;/g,'--').replace(/&times;/g,'x').replace(/&rsaquo;/g,'>').replace(/&rarr;/g,'->');}).join('\n')+'\n\nRoot Cause:\n'+d.root.replace(/&mdash;/g,'--').replace(/&times;/g,'x')+'\n\nResolution:\n'+d.fix.replace(/&ndash;/g,'-').replace(/&rarr;/g,'->').replace(/&rsaquo;/g,'>').replace(/&times;/g,'x')+'\n\nGenerated: '+new Date().toLocaleString();
-  var blob=new Blob([txt],{type:'text/plain'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cvc_diagnosis_report.txt';a.click();
-}
-loadSc('healthy',document.querySelector('#tool-api .ctrl-row .cbtn'));
+renderList('bannerList',colleges.banner);
+renderList('psoftList',colleges.psoft);
+renderList('colleagueList',colleges.colleague);
+renderList('alertsList',colleges.alerts);
 
-// ── SYNC FLOW CANVAS ─────────────────────────────────────────────
-(function(){
-  var canvas=document.getElementById('syncCanvas'),ctx=canvas.getContext('2d');
-  var mode='normal',frame=0,packets=[];
-  function resize(){canvas.width=canvas.offsetWidth;canvas.height=300;}
-  resize();window.addEventListener('resize',resize);
-  var NODES=[
-    {id:'student',lbl:'Student',sub:'Home Campus',rx:.08,ry:.5,col:'#5B9BD5'},
-    {id:'home-sis',lbl:'Home SIS',sub:'Banner / PS',rx:.26,ry:.5,col:'#3CBFA0'},
-    {id:'cvc',lbl:'CVC Exchange',sub:'cvc.edu API',rx:.46,ry:.5,col:'#E8A020'},
-    {id:'canvas',lbl:'Canvas LMS',sub:'Course Access',rx:.66,ry:.28,col:'#3CBFA0'},
-    {id:'fa',lbl:'Financial Aid',sub:'FAFSA/CADAA',rx:.66,ry:.72,col:'#5B9BD5'},
-    {id:'teach-sis',lbl:'Teaching SIS',sub:'Target College',rx:.84,ry:.5,col:'#3CBFA0'},
-  ];
-  var EDGES=[
-    {f:'student',t:'home-sis',lbl:'Enroll Request'},
-    {f:'home-sis',t:'cvc',lbl:'SIS API Sync'},
-    {f:'cvc',t:'canvas',lbl:'LMS Provision'},
-    {f:'cvc',t:'fa',lbl:'FA Trigger'},
-    {f:'cvc',t:'teach-sis',lbl:'Cross-Enroll'},
-  ];
-  var STATUSES={
-    'normal':{},
-    'sis-fail':{'home-sis':'fail','cvc':'warn','canvas':'warn','fa':'warn','teach-sis':'warn'},
-    'canvas-lag':{'canvas':'warn'},
-    'fa-hold':{'fa':'fail'},
-    'cascade':{'cvc':'fail','canvas':'fail','fa':'fail','teach-sis':'fail'},
-    'uat':{'canvas':'warn','fa':'pending'},
-  };
-  var UAT_ANNOTATION='<strong style="color:var(--teal)">UAT Validation Gate</strong> &mdash; Before any college goes live on CVC Exchange, a UAT pass gates the transition from test to production. In this scenario: a trust enrollment misconfiguration was intentionally injected at the Canvas layer to simulate a real failure. The Canvas sub-account mapping was identified, corrected, and re-tested in sandbox before sign-off. <em>No production enrollment was blocked.</em>';
-
-  function npos(id){var n=NODES.find(function(x){return x.id===id;});return{x:n.rx*canvas.width,y:n.ry*canvas.height};}
-  function ncol(id){var sm=STATUSES[mode]||{};var s=sm[id];if(s==='fail')return'#E05050';if(s==='warn')return'#E8A020';if(s==='pending')return'#5B9BD5';return NODES.find(function(x){return x.id===id;}).col;}
-  function spawnP(){
-    if(mode==='normal'&&Math.random()<.04){var e=EDGES[Math.floor(Math.random()*EDGES.length)];packets.push({f:e.f,t:e.t,p:0,col:'#4CAF80'});}
-    if(mode==='uat'&&Math.random()<.03){var e=EDGES[Math.floor(Math.random()*2)];packets.push({f:e.f,t:e.t,p:0,col:'#5B9BD5'});}
-    if((mode==='sis-fail'||mode==='cascade')&&Math.random()<.05){packets.push({f:'student',t:'home-sis',p:0,col:'#E05050'});}
-  }
-  function draw(){
-    var W=canvas.width,H=canvas.height;
-    ctx.clearRect(0,0,W,H);
-    EDGES.forEach(function(e){
-      var a=npos(e.f),b=npos(e.t);
-      var sm=STATUSES[mode]||{};var fail=sm[e.f]==='fail'||sm[e.t]==='fail';
-      var pend=sm[e.f]==='pending'||sm[e.t]==='pending';
-      ctx.strokeStyle=fail?'rgba(224,80,80,.25)':pend?'rgba(91,155,213,.25)':'rgba(60,191,160,.18)';
-      ctx.lineWidth=1.4;ctx.setLineDash([5,8]);
-      ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.fillStyle=fail?'rgba(224,80,80,.55)':'rgba(80,100,120,.65)';
-      ctx.font='9px JetBrains Mono,monospace';ctx.textAlign='center';
-      ctx.fillText(e.lbl,(a.x+b.x)/2,(a.y+b.y)/2-12);
-    });
-    spawnP();
-    for(var i=packets.length-1;i>=0;i--){
-      var pk=packets[i];pk.p+=.013;if(pk.p>=1){packets.splice(i,1);continue;}
-      var a=npos(pk.f),b=npos(pk.t);
-      var x=a.x+(b.x-a.x)*pk.p,y=a.y+(b.y-a.y)*pk.p;
-      ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);
-      ctx.fillStyle=pk.col;ctx.shadowColor=pk.col;ctx.shadowBlur=10;ctx.fill();ctx.shadowBlur=0;
-    }
-    NODES.forEach(function(n){
-      var x=n.rx*W,y=n.ry*H;var col=ncol(n.id);
-      var pulse=Math.sin(frame*.038+n.rx*8)*.5+.5;
-      var grd=ctx.createRadialGradient(x,y,0,x,y,36);
-      var a=Math.round((0.06+pulse*.05)*255).toString(16).padStart(2,'0');
-      var rgb=col.replace('#','');
-      grd.addColorStop(0,'#'+rgb+a);grd.addColorStop(1,'rgba(0,0,0,0)');
-      ctx.fillStyle=grd;ctx.beginPath();ctx.arc(x,y,36,0,Math.PI*2);ctx.fill();
-      ctx.strokeStyle=col;ctx.lineWidth=1.4;ctx.globalAlpha=.35+pulse*.28;
-      ctx.beginPath();ctx.arc(x,y,22,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
-      ctx.fillStyle=col;ctx.globalAlpha=.88;ctx.beginPath();ctx.arc(x,y,13,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
-      ctx.fillStyle='#F0EDE6';ctx.font='bold 9px DM Sans,sans-serif';ctx.textAlign='center';ctx.fillText(n.lbl,x,y+30);
-      ctx.fillStyle='rgba(110,126,148,.8)';ctx.font='8px JetBrains Mono,monospace';ctx.fillText(n.sub,x,y+41);
-      var sm=STATUSES[mode]||{};
-      if(sm[n.id]==='fail'){ctx.fillStyle='#E05050';ctx.font='bold 10px monospace';ctx.fillText('X',x,y+3.5);}
-      else if(sm[n.id]==='warn'){ctx.fillStyle='#E8A020';ctx.font='bold 10px monospace';ctx.fillText('!',x,y+3.5);}
-      else if(sm[n.id]==='pending'){ctx.fillStyle='#5B9BD5';ctx.font='bold 10px monospace';ctx.fillText('~',x,y+3.5);}
-      else{ctx.fillStyle='rgba(240,237,230,.85)';ctx.font='bold 9px monospace';ctx.fillText('o',x,y+3.5);}
-    });
-    frame++;requestAnimationFrame(draw);
-  }
-  draw();
-  window.setSyncMode=function(m,btn){
-    mode=m;packets=[];
-    document.querySelectorAll('#tool-sync .ctrl-row .cbtn').forEach(function(b){b.classList.remove('active');});
-    btn.classList.add('active');
-    var ann=document.getElementById('sync-annotation');
-    if(m==='uat'){ann.style.display='block';ann.innerHTML=UAT_ANNOTATION;}
-    else{ann.style.display='none';}
-  };
-})();
-
-// ── BAR CHART ────────────────────────────────────────────────────
-var BAR_DATA=[
-  {lbl:'Auth Failure (SIS token)',pct:28,cl:'r',kb:{title:'KB-001: SIS API Token Expiry — Recognition & Rotation',action:'Built a step-by-step token rotation guide for district IT contacts. Included: how to recognize a 401 vs. 403, the exact rotation steps per SIS type (Banner, PeopleSoft, Colleague), and a Python token-age monitoring script. Distributed to all district IT liaisons with a 85-day proactive rotation schedule.',impact:'Auth failure tickets down 38% in Q2. Token rotation now proactive rather than reactive at 12 of 14 affected districts.',method:'pandas groupby on error_code + district fields isolated that 89% of 401 failures came from tokens >85 days old. Threshold: 90 days.'}},
-  {lbl:'Enroll Sync Window Miss',pct:24,cl:'a',kb:{title:'KB-002: Enrollment Sync Window Failures — Diagnosis & Re-trigger',action:'Documented the 2–4 AM PST sync window schedule, how to identify a window miss vs. a true failure, and the exact re-trigger API call. Included a decision tree: timeout → check SIS performance log → contact district IT vs. re-trigger immediately.',impact:'Mean time to resolution on sync window misses dropped from 3.2 hours to 47 minutes.',method:'Time-of-incident analysis showed 84% of sync failures clustered in the 2–4 AM window. Correlated with district SIS maintenance schedules to identify overlap pattern.'}},
-  {lbl:'Trust Enrollment / Sub-account',pct:19,cl:'bl',kb:{title:'KB-003: Canvas Trust Enrollment — Configuration Runbook',action:'Built a trust enrollment configuration runbook covering: institution pair mapping → sub-account ID assignment → Canvas CSM escalation path → UAT validation checklist before production go-live. Includes a pre-launch checklist college IT can self-verify before the integration team signs off.',impact:'Trust enrollment re-opens down 60%. Now used as standard onboarding documentation for all new college integrations. Canvas CSM escalations down 45% as college IT can resolve sub-account issues independently.',method:'Cross-referenced TRUST_RELATIONSHIP_NOT_FOUND error logs with integration onboarding records. Found that 78% of trust failures occurred at colleges that skipped sub-account verification in the pre-launch checklist.'}},
-  {lbl:'LTI Credential Failures',pct:15,cl:'t',kb:{title:'KB-004: LTI Maintenance — Credential Rotation Calendar',action:'Created an LTI maintenance calendar template and rotation checklist — consumer key expiry dates tracked per LTI tool per sub-account. Shared with college IT contacts at all affected institutions with instructions for proactive rotation before key expiry.',impact:'LTI-related P1 tickets down 44% in the 6 weeks following KB deployment. Zero LTI outages mid-semester at institutions that adopted the rotation calendar.',method:'LTI failure logs grouped by error type: 403 (key mismatch), 401 (key expired), 500 (config not found). 91% were key rotation failures — preventable with a calendar reminder.'}},
-  {lbl:'SIS Feed Schema Mismatch',pct:9,cl:'t',kb:{title:'KB-005: SIS Import Field Spec — Schema Migration Guide',action:'Documented Canvas SIS import field spec against common legacy export formats used by Banner, PeopleSoft, and Colleague. Published comparison table with field name mapping (e.g. enrollment_type: "StudentEnrollment" vs "student"). Colleges can self-diagnose and correct field mismatches before submitting support tickets.',impact:'SIS schema mismatch tickets largely self-resolved after field mapping doc published. Remaining tickets resolved faster as college IT arrives with the specific failing field already identified.',method:'422 error body parsing revealed consistent field-level patterns. Grouped by district SIS type (Banner vs PS vs Colleague) to build three targeted migration guides.'}},
-  {lbl:'Account Merge Conflicts',pct:5,cl:'r',kb:{title:'KB-006: Canvas Account Merge — Duplicate Account Resolution Guide',action:'Documented the full account merge workflow: how to identify duplicate accounts via Canvas admin search, how to confirm which account holds grade history vs. active enrollments, and the merge procedure with grade history preservation steps. Included prevention guidance for SIS export config.',impact:'Account merge tickets resolved at L1 without Canvas CSM escalation. Prevention guidance adopted by 8 districts — duplicate account creation rate down 70% at those institutions.',method:'Duplicate account incidents traced to SIS ID format mismatches at the teaching-institution enrollment path. Home college SIS ID and cross-enrollment path generated different login_id formats, creating parallel accounts instead of merging into existing record.'}},
+const stages=[
+  {icon:'ℹ',iconClass:'td-icon-info',title:'Student Report — Cross-Enrollment Failure',
+   log:`<span class="log-ts">[2026-03-19 09:14:22 PST]</span> <span class="log-info">TICKET CVC-4821 opened</span>\n<span class="log-ts">[2026-03-19 09:14:22 PST]</span> Reporter: Student at Chabot College\n<span class="log-ts">[2026-03-19 09:14:22 PST]</span> Issue: "Enrolled in MATH 1A at De Anza through\n  the Exchange but course not in Canvas dashboard.\n  Registration shows confirmed."\n<span class="log-ts">[2026-03-19 09:15:01 PST]</span> <span class="log-info">Verified:</span> Enrollment confirmed in home SIS\n<span class="log-ts">[2026-03-19 09:15:01 PST]</span> <span class="log-warn">Canvas roster: Student NOT present</span>`,
+   actions:['Verify enrollment in home SIS','Check teaching college roster','Proceed to SIS query']},
+  {icon:'✓',iconClass:'td-icon-ok',title:'SIS Query — Banner Record Confirmed',
+   log:`<span class="log-ts">[2026-03-19 09:18:44 PST]</span> <span class="log-info">QUERY</span> Banner SFRSTCR: CCCID 0012847593\n<span class="log-ts">[2026-03-19 09:18:44 PST]</span> <span class="log-ok">RESULT: MATH-1A-001 | De Anza | Status: RE</span>\n<span class="log-ts">[2026-03-19 09:18:44 PST]</span> <span class="log-ok">Enrollment date: 2026-03-17 14:22:08</span>\n<span class="log-ts">[2026-03-19 09:18:45 PST]</span> <span class="log-ok">Residency: Validated | Aid consortium: Active</span>\n<span class="log-ts">[2026-03-19 09:19:02 PST]</span> <span class="log-info">SIS record correct. Issue is downstream.</span>`,
+   actions:['SIS record confirmed','Check Ethos API transmission','Review AER payload']},
+  {icon:'✕',iconClass:'td-icon-err',title:'API Layer — Ethos Token Refresh Failure',
+   log:`<span class="log-ts">[2026-03-19 09:22:11 PST]</span> <span class="log-info">QUERY</span> Ethos Integration API logs\n<span class="log-ts">[2026-03-19 09:22:11 PST]</span> Filter: CCCID 0012847593 | Last 48 hours\n<span class="log-ts">[2026-03-19 09:22:12 PST]</span> <span class="log-err">ERROR 401: OAuth2 token expired</span>\n<span class="log-ts">[2026-03-19 09:22:12 PST]</span> <span class="log-err">Token refresh failed: invalid_grant</span>\n<span class="log-ts">[2026-03-19 09:22:12 PST]</span> <span class="log-warn">Last successful sync: 2026-03-17 02:00:00</span>\n<span class="log-ts">[2026-03-19 09:22:13 PST]</span> <span class="log-err">AER payload NOT transmitted to teaching college</span>\n<span class="log-ts">[2026-03-19 09:22:13 PST]</span> <span class="log-info">ROOT CAUSE: Layer 03 — API authentication</span>`,
+   actions:['Regenerate Ethos API key','Verify client credentials','Check token expiration policy','Escalate to Ellucian if needed']},
+  {icon:'⚠',iconClass:'td-icon-warn',title:'Exchange — AER Transmission Blocked',
+   log:`<span class="log-ts">[2026-03-19 09:24:30 PST]</span> <span class="log-info">CVC Exchange queue inspection</span>\n<span class="log-ts">[2026-03-19 09:24:31 PST]</span> <span class="log-warn">47 AER records pending: Chabot → De Anza</span>\n<span class="log-ts">[2026-03-19 09:24:31 PST]</span> <span class="log-warn">Oldest pending: 2026-03-17 02:14:00</span>\n<span class="log-ts">[2026-03-19 09:24:32 PST]</span> <span class="log-info">Teaching college SIS never received enrollment</span>\n<span class="log-ts">[2026-03-19 09:24:32 PST]</span> <span class="log-info">Canvas roster sync depends on SIS — also failed</span>\n<span class="log-ts">[2026-03-19 09:24:33 PST]</span> <span class="log-warn">SCOPE: All Chabot cross-enrollments since 3/17</span>`,
+   actions:['Quantify affected students','Notify campus IT contacts','Prepare batch re-sync']},
+  {icon:'✓',iconClass:'td-icon-ok',title:'Resolution — Token Regenerated, Queue Flushed',
+   log:`<span class="log-ts">[2026-03-19 09:32:00 PST]</span> <span class="log-ok">New Ethos API credentials generated</span>\n<span class="log-ts">[2026-03-19 09:32:15 PST]</span> <span class="log-ok">Token refresh: SUCCESS</span>\n<span class="log-ts">[2026-03-19 09:33:00 PST]</span> <span class="log-ok">AER queue flush initiated: 47 records</span>\n<span class="log-ts">[2026-03-19 09:35:22 PST]</span> <span class="log-ok">All 47 records transmitted successfully</span>\n<span class="log-ts">[2026-03-19 09:38:00 PST]</span> <span class="log-ok">Canvas roster sync confirmed for MATH-1A-001</span>\n<span class="log-ts">[2026-03-19 09:38:01 PST]</span> <span class="log-info">KB article drafted: "Ethos Token Expiration Fix"</span>\n<span class="log-ts">[2026-03-19 09:38:01 PST]</span> <span class="log-info">Token rotation added to monitoring schedule</span>`,
+   actions:['Verify student Canvas access','Update KB article','Add token expiry to monitoring','Close ticket CVC-4821']}
 ];
-var selectedBar=null;
-(function(){
-  var cont=document.getElementById('barChart');
-  BAR_DATA.forEach(function(d,idx){
-    var row=document.createElement('div');row.className='b-row';row.style.cursor='pointer';
-    row.innerHTML='<span class="b-lbl">'+d.lbl+'</span><div class="b-track"><div class="b-fill '+d.cl+'" data-pct="'+d.pct+'" style="width:0"></div></div><span class="b-pct">'+d.pct+'%</span>';
-    row.addEventListener('click',function(){
-      selectedBar=idx;
-      document.querySelectorAll('.b-row').forEach(function(r){r.style.opacity='.4';});
-      row.style.opacity='1';
-      var kb=d.kb;
-      document.getElementById('trendWrap').style.display='none';
-      document.getElementById('trend-insight').style.display='none';
-      var det=document.getElementById('kb-detail');
-      det.style.display='block';
-      document.getElementById('kb-pane-title').textContent=kb.title;
-      document.getElementById('kb-pane-sub').textContent='';
-      det.innerHTML='<div style="margin-bottom:.8rem"><span style="font-family:JetBrains Mono,monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)">Action Taken</span><p style="margin-top:.3rem;color:var(--muted2)">'+kb.action+'</p></div><div style="margin-bottom:.8rem"><span style="font-family:JetBrains Mono,monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)">Impact</span><p style="margin-top:.3rem;color:var(--muted2)">'+kb.impact+'</p></div><div><span style="font-family:JetBrains Mono,monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)">How I Found It</span><p style="margin-top:.3rem;color:var(--muted2)">'+kb.method+'</p></div><div style="margin-top:.8rem"><button style="font-family:JetBrains Mono,monospace;font-size:.6rem;padding:.25rem .7rem;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--muted);cursor:pointer;" onclick="resetChart()">← Back to trend view</button></div>';
-    });
-    cont.appendChild(row);
+function setStage(n){
+  document.querySelectorAll('.tf-node').forEach((nd,i)=>{
+    nd.classList.remove('active','error-node','passed');
+    if(i<n)nd.classList.add('passed');
+    else if(i===n){if(i===2)nd.classList.add('error-node');else nd.classList.add('active')}
   });
-  var bo=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('.b-fill').forEach(function(b,i){setTimeout(function(){b.style.width=b.dataset.pct+'%';},i*100+200);});bo.unobserve(e.target);}});},{threshold:.2});
-  bo.observe(cont);
-})();
-function resetChart(){
-  selectedBar=null;
-  document.querySelectorAll('.b-row').forEach(function(r){r.style.opacity='1';});
-  document.getElementById('trendWrap').style.display='';
-  document.getElementById('trend-insight').style.display='';
-  document.getElementById('kb-detail').style.display='none';
-  document.getElementById('kb-pane-title').textContent='Weekly Volume \u2014 Before vs. After KB Intervention';
-  document.getElementById('kb-pane-sub').textContent='Select a category on the left to see what action was taken. Or view the overall trend below.';
+  const s=stages[n];
+  document.getElementById('tracerDetail').innerHTML=`<div class="td-header"><div class="td-icon ${s.iconClass}">${s.icon}</div><div class="td-title">${s.title}</div></div><div class="td-body"><div class="td-log">${s.log}</div><div class="td-actions">${s.actions.map((a,i)=>i===s.actions.length-1?`<button class="td-btn td-btn-primary">${a}</button>`:`<button class="td-btn">${a}</button>`).join('')}</div></div>`;
 }
+setStage(2);
 
-// ── TREND LINE ───────────────────────────────────────────────────
-(function(){
-  var canvas=document.getElementById('trendCanvas'),ctx=canvas.getContext('2d');
-  function resize(){canvas.width=canvas.offsetWidth*2;canvas.height=canvas.offsetHeight*2;ctx.scale(2,2);}
-  resize();window.addEventListener('resize',function(){resize();draw();});
-  var before=[82,88,79,91,86,84,90,87],after=[90,88,85,79,74,71,68,66];
-  function draw(){
-    var W=canvas.offsetWidth,H=canvas.offsetHeight;
-    ctx.clearRect(0,0,W,H);
-    var pad={l:6,r:6,t:12,b:8};
-    function pts(data){return data.map(function(v,i){return{x:pad.l+(i/(data.length-1))*(W-pad.l-pad.r),y:pad.t+(1-(v-50)/60)*(H-pad.t-pad.b)};});}
-    function drawLine(data,col){
-      var p=pts(data);
-      var g=ctx.createLinearGradient(0,0,0,H);
-      g.addColorStop(0,col.replace('rgb','rgba').replace(')',',0.16)'));g.addColorStop(1,'rgba(0,0,0,0)');
-      ctx.beginPath();p.forEach(function(pt,i){i===0?ctx.moveTo(pt.x,pt.y):ctx.lineTo(pt.x,pt.y);});
-      ctx.lineTo(p[p.length-1].x,H-pad.b);ctx.lineTo(p[0].x,H-pad.b);ctx.closePath();
-      ctx.fillStyle=g;ctx.fill();
-      ctx.strokeStyle=col;ctx.lineWidth=1.8;ctx.setLineDash([]);
-      ctx.beginPath();p.forEach(function(pt,i){i===0?ctx.moveTo(pt.x,pt.y):ctx.lineTo(pt.x,pt.y);});ctx.stroke();
-      p.forEach(function(pt){ctx.beginPath();ctx.arc(pt.x,pt.y,2.5,0,Math.PI*2);ctx.fillStyle=col;ctx.fill();});
-    }
-    var ix=pad.l+(7/14)*(W-pad.l-pad.r);
-    ctx.strokeStyle='rgba(232,160,32,.3)';ctx.lineWidth=1;ctx.setLineDash([3,5]);
-    ctx.beginPath();ctx.moveTo(ix,4);ctx.lineTo(ix,H-4);ctx.stroke();ctx.setLineDash([]);
-    ctx.fillStyle='rgba(232,160,32,.6)';ctx.font='8px JetBrains Mono,monospace';ctx.textAlign='center';ctx.fillText('KB deployed',ix,10);
-    drawLine(before,'rgb(91,155,213)');
-    drawLine(after,'rgb(76,175,128)');
-  }
-  var to=new IntersectionObserver(function(ent){ent.forEach(function(e){if(e.isIntersecting){draw();to.unobserve(e.target);}});},{threshold:.3});
-  to.observe(canvas);
-})();
-
-// ── STACK GRID ───────────────────────────────────────────────────
-var SKILLS=[
-  {i:'🐍',n:'Python',note:'pandas RCA,\nautomation scripting',pct:85},
-  {i:'🌐',n:'JS / HTML / CSS',note:'Web app logic,\nCS degree foundation',pct:75},
-  {i:'🗄️',n:'SQL / PL-SQL',note:'Data querying,\nFA data workflows',pct:65},
-  {i:'🐧',n:'Linux / Bash',note:'OS admin,\nscripting for automation',pct:78},
-  {i:'🔌',n:'REST APIs',note:'Integration diagnosis,\nlog analysis',pct:72},
-  {i:'🏫',n:'Canvas LMS',note:'Admin, SSO/auth,\nfaculty support',pct:82},
-  {i:'📋',n:'Banner / PeopleSoft',note:'FA &amp; enrollment\ndaily support',pct:68},
-  {i:'🎫',n:'ServiceNow / Jira',note:'Enterprise ticketing,\nSLA, KB authoring',pct:92},
-  {i:'🔐',n:'Active Directory',note:'Provisioning,\naccess control',pct:80},
-  {i:'💬',n:'Remote / Async',note:'Zoom, Slack, G-Suite,\nfully distributed 2022+',pct:96},
+const chartData=[
+  {label:'Week 1',auth:5,sync:8,data:3,other:6},{label:'Week 2',auth:4,sync:7,data:5,other:4},
+  {label:'Week 3',auth:7,sync:6,data:4,other:5},{label:'Week 4',auth:6,sync:9,data:6,other:3},
+  {label:'Week 5',auth:12,sync:5,data:4,other:4},{label:'Week 6',auth:9,sync:11,data:7,other:5},
+  {label:'Week 7',auth:15,sync:8,data:5,other:3},{label:'Week 8',auth:18,sync:7,data:6,other:4},
+  {label:'Week 9',auth:23,sync:6,data:3,other:5},{label:'Week 10',auth:14,sync:10,data:8,other:4},
+  {label:'Week 11',auth:8,sync:12,data:5,other:3},{label:'Week 12',auth:6,sync:9,data:4,other:5},
 ];
-var sg=document.getElementById('stackGrid');
-SKILLS.forEach(function(s){
-  var d=document.createElement('div');d.className='si';
-  d.innerHTML='<span class="si-icon">'+s.i+'</span><div class="si-name">'+s.n+'</div><div class="si-note">'+s.note.replace('\n','<br>')+'</div><div class="si-bar-t"><div class="si-bar" data-pct="'+s.pct+'" style="width:0"></div></div>';
-  sg.appendChild(d);
-});
-var so=new IntersectionObserver(function(ent){ent.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('.si-bar').forEach(function(b){b.style.width=b.dataset.pct+'%';});so.unobserve(e.target);}});},{threshold:.2});
-so.observe(document.getElementById('stackGrid'));
-
-// ── NAV SCROLL ───────────────────────────────────────────────────
-window.addEventListener('scroll',function(){
-  var nav=document.getElementById('mainNav');
-  if(window.scrollY>60){nav.classList.add('scrolled');}else{nav.classList.remove('scrolled');}
+const maxT=Math.max(...chartData.map(d=>d.auth+d.sync+d.data+d.other));
+const cH=180,cb=document.getElementById('chartBody');
+chartData.forEach(d=>{
+  const t=d.auth+d.sync+d.data+d.other,bg=document.createElement('div');bg.className='bar-group';
+  bg.innerHTML=`<div class="bar-total">${t}</div><div class="bar-stack"><div class="bar-seg bar-seg-other" style="height:${d.other/maxT*cH}px"></div><div class="bar-seg bar-seg-data" style="height:${d.data/maxT*cH}px"></div><div class="bar-seg bar-seg-sync" style="height:${d.sync/maxT*cH}px"></div><div class="bar-seg bar-seg-auth" style="height:${d.auth/maxT*cH}px"></div></div><div class="bar-label">${d.label.replace('Week ','W')}</div>`;
+  cb.appendChild(bg);
 });
 
-// ── REVEAL OBSERVER ──────────────────────────────────────────────
-var ro=new IntersectionObserver(function(entries){
-  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');}});
-},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+const kbTemplates=[
+  {title:'Ethos API Token Refresh Failure',cat:'Integration Fix',updated:'Mar 19, 2026',author:'App Support',severity:'P2 · Service Degraded',
+   desc:'Ethos API OAuth2 token has expired or is failing to auto-refresh, preventing AER transmission from the home college SIS to the CVC Exchange.',
+   steps:[{n:1,text:'Confirm the failure in <strong>Ethos Integration logs</strong> — look for HTTP 401 with "invalid_grant" in the response body.'},{n:2,text:'Check the <strong>token expiration policy</strong> in Ethos admin. Default is 60 minutes; some colleges set shorter windows.'},{n:3,text:'Navigate to <strong>Ethos Integration > API Keys</strong> and regenerate the client credentials for the affected integration.'},{n:4,text:'Run a <strong>manual test sync</strong> with a known enrollment record to confirm the new token works end-to-end.'},{n:5,text:'Flush the <strong>AER queue</strong> for any records blocked during the outage. Verify transmission to the teaching college.'},{n:6,text:'Add a <strong>token expiry monitoring alert</strong> set to trigger 24 hours before expiration to prevent recurrence.'}],
+   escalation:'If token regeneration fails or Ethos admin is inaccessible, escalate to Ellucian support with the integration ID, error timestamp, and HTTP response body. CC the campus SIS administrator.'},
+  {title:'SAML SSO Configuration — Cross-Enrollment',cat:'Auth / SSO Issue',updated:'Mar 15, 2026',author:'App Support',severity:'P2 · Enrollment Blocked',
+   desc:'Student unable to access courses at a teaching college due to incomplete or misconfigured SAML identity provider setup in the CVC Exchange.',
+   steps:[{n:1,text:'Verify the <strong>SAML metadata</strong> is correctly registered for the home college in the Exchange IdP configuration.'},{n:2,text:'Check the <strong>SAML assertion attributes</strong> — CCCID, email, and enrollment status must all be present in the response.'},{n:3,text:'Test the <strong>SSO redirect flow</strong> in a browser with developer tools open. Look for the SAML response in the network tab.'},{n:4,text:'If attributes are missing, work with <strong>campus IT</strong> to update the IdP attribute release policy.'},{n:5,text:'After fix, verify the student can <strong>access Canvas at the teaching college</strong> and the course appears in their dashboard.'}],
+   escalation:'If the campus IT contact is unreachable or the IdP configuration requires vendor support, escalate with the SAML trace output and the specific missing attributes documented.'},
+  {title:'Enrollment Sync Race Condition Fix',cat:'Sync Resolution',updated:'Mar 12, 2026',author:'App Support',severity:'P3 · Data Accuracy',
+   desc:'Enrollment records in the CVC Exchange do not match the home college SIS because the sync job runs before the enrollment transaction has fully committed.',
+   steps:[{n:1,text:'Identify the <strong>sync schedule</strong> for the affected college. Check if it runs on a fixed interval or event-triggered.'},{n:2,text:'Compare the <strong>enrollment timestamp</strong> in the SIS with the last successful sync time. If enrollment is newer, the sync missed it.'},{n:3,text:'Request the campus <strong>adjust the sync delay</strong> to allow a buffer after enrollment commits (recommended: 5–10 minute offset).'},{n:4,text:'Run a <strong>manual re-sync</strong> for affected records and verify accuracy in the Exchange.'}],
+   escalation:'If the campus cannot modify sync timing due to SIS vendor constraints, document the gap and escalate to the CVC engineering team for a middleware-level retry mechanism.'},
+  {title:'New College Onboarding — CVC Exchange',cat:'Onboarding Guide',updated:'Mar 8, 2026',author:'App Support',severity:'Setup',
+   desc:'Step-by-step checklist for bringing a new college onto the CVC Exchange. Covers SIS integration, SAML setup, seat count configuration, and validation testing.',
+   steps:[{n:1,text:"Confirm the college's <strong>SIS platform</strong> (Banner, PeopleSoft, or Colleague) and version. Identify the campus IT contact."},{n:2,text:'Provide the <strong>Ethos / API integration package</strong> for their SIS type. Include endpoint URLs, auth credentials, and schema documentation.'},{n:3,text:'Walk through <strong>SAML IdP configuration</strong> with campus IT. Verify attribute release: CCCID, email, enrollment status.'},{n:4,text:'Configure <strong>seat count sync</strong> for all sections the college will offer through the Exchange. Test with a sample course.'},{n:5,text:'Run <strong>end-to-end enrollment test</strong>: student at a partner college enrolls in a course, verify it flows through all layers to Canvas roster.'},{n:6,text:'Provide campus IT with the <strong>standard KB article set</strong> for common troubleshooting scenarios they may encounter.'}],
+   escalation:'Onboarding delays are often caused by campus IT availability. If setup is stalled for more than two weeks, escalate to the CVC-OEI program manager to coordinate scheduling.'}
+];
+function setKB(idx,el){
+  document.querySelectorAll('.kb-nav-item').forEach(n=>n.classList.remove('active'));
+  if(el)el.classList.add('active');
+  const t=kbTemplates[idx];
+  document.getElementById('kbMain').innerHTML=`<div class="kb-doc-title">${t.title}</div><div class="kb-doc-meta"><span>📁 ${t.cat}</span><span>📅 ${t.updated}</span><span>👤 ${t.author}</span><span>🔴 ${t.severity}</span></div><div class="kb-field"><label class="kb-label">Issue Description</label><div class="kb-input" style="background:var(--surface-2);border-color:var(--border);min-height:auto;padding:.65rem .85rem;font-size:.82rem;color:var(--text-2);line-height:1.65;cursor:default">${t.desc}</div></div><div class="kb-field"><label class="kb-label">Resolution Steps</label><div class="kb-steps">${t.steps.map(s=>`<div class="kb-step"><div class="kb-step-num">${s.n}</div><div class="kb-step-text">${s.text}</div></div>`).join('')}</div></div><div class="kb-field"><label class="kb-label">Escalation Path</label><div class="kb-escalation"><div class="kb-esc-label">When to Escalate</div><div class="kb-esc-text">${t.escalation}</div></div></div>`;
+}
+setKB(0,null);
 </script>
 </body>
 </html>
