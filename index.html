@@ -13,8 +13,6 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
 ::selection{background:#D1FAE5;color:var(--text)}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:5px}
 .wrap{max-width:var(--max-w);margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
-
-/* NAV */
 nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 clamp(1.25rem,4vw,2.5rem);height:56px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s}
 nav.scrolled{box-shadow:var(--shadow)}
 .nav-brand{display:flex;align-items:center;gap:.6rem}
@@ -22,12 +20,12 @@ nav.scrolled{box-shadow:var(--shadow)}
 .nav-icon svg{width:16px;height:16px}
 .nav-title{font-family:var(--display);font-weight:600;font-size:.95rem;color:var(--text)}
 .nav-links{display:flex;gap:.25rem}
-.nav-links a{font-size:.78rem;font-weight:500;color:var(--text-2);text-decoration:none;padding:.4rem .65rem;border-radius:6px;transition:all .15s}
+.nav-links a{font-size:.72rem;font-weight:500;color:var(--text-2);text-decoration:none;padding:.35rem .55rem;border-radius:6px;transition:all .15s}
 .nav-links a:hover{color:var(--primary);background:var(--primary-light)}
-@media(max-width:640px){.nav-links{display:none}}
-
-/* HEADER */
-.header{padding:clamp(5rem,12vw,8rem) 0 clamp(3rem,6vw,5rem);text-align:center;position:relative}
+.nav-links a.nav-barrier{color:var(--red);border:1px solid var(--red-bd);background:var(--red-light)}
+.nav-links a.nav-barrier:hover{background:var(--red);color:#fff}
+@media(max-width:768px){.nav-links{display:none}}
+.header{padding:clamp(4rem,10vw,7rem) 0 clamp(2.5rem,5vw,4rem);text-align:center;position:relative}
 .header::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(26,107,80,.04) 0%,transparent 70%);pointer-events:none}
 .h-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .85rem;border-radius:100px;border:1px solid var(--primary-bd);background:var(--primary-light);font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--primary);margin-bottom:1.5rem}
 .h-badge .dot{width:5px;height:5px;border-radius:50%;background:var(--primary);animation:pulse 2.5s ease infinite}
@@ -37,22 +35,19 @@ h1 em{font-style:italic;color:var(--primary)}
 .h-desc{font-size:1rem;color:var(--text-2);line-height:1.85;max-width:580px;margin:0 auto 2.5rem}
 .h-desc strong{color:var(--text);font-weight:600}
 .h-stats{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap}
-.h-stat-num{font-family:var(--display);font-size:1.8rem;font-weight:600;color:var(--primary);line-height:1}
+.h-stat-num{font-family:var(--display);font-size:1.8rem;font-weight:600;line-height:1}
+.h-stat-num.green{color:var(--primary)}.h-stat-num.red{color:var(--red)}.h-stat-num.blue{color:var(--blue)}
 .h-stat-label{font-size:.72rem;color:var(--text-3);margin-top:.2rem}
-
-/* SECTIONS */
 .sec{padding:clamp(3rem,7vw,5rem) 0}
 .sec-alt{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.sec-head{margin-bottom:2.5rem}
 .eyebrow{font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);margin-bottom:.5rem}
+.eyebrow-red{color:var(--red)}
 h2{font-family:var(--display);font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:600;line-height:1.15;letter-spacing:-.015em;color:var(--text);margin-bottom:.75rem}
 h2 em{font-style:italic;color:var(--primary)}
-.sec-desc{font-size:.92rem;color:var(--text-2);max-width:560px;line-height:1.8}
+h2 em.red{color:var(--red)}
+.sec-desc{font-size:.92rem;color:var(--text-2);max-width:560px;line-height:1.8;margin-bottom:2rem}
 .sec-desc strong{color:var(--text);font-weight:600}
-
-/* TOOL FRAME */
-.tool-section{margin-bottom:3.5rem}
-.tool-frame{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);box-shadow:var(--shadow-md);overflow:hidden}
+.tool-frame{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);box-shadow:var(--shadow-md);overflow:hidden;margin-bottom:2rem}
 .tool-bar{display:flex;align-items:center;justify-content:space-between;padding:.65rem 1.25rem;background:var(--surface-2);border-bottom:1px solid var(--border);gap:.75rem;flex-wrap:wrap}
 .tool-bar-left{display:flex;align-items:center;gap:.6rem}
 .tool-dots{display:flex;gap:5px}
@@ -62,10 +57,9 @@ h2 em{font-style:italic;color:var(--primary)}
 .tl-blue{background:var(--blue-light);color:var(--blue)}
 .tl-amber{background:var(--amber-light);color:var(--amber)}
 .tl-purple{background:var(--purple-light);color:var(--purple)}
+.tl-red{background:var(--red-light);color:var(--red)}
 .tool-bar-title{font-family:var(--mono);font-size:.68rem;color:var(--text-2);font-weight:500}
 .tool-body{padding:clamp(1.25rem,3vw,2rem)}
-
-/* FLOW DIAGRAM */
 .flow-visual{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:2rem;margin-top:2rem;overflow-x:auto}
 .flow-title{text-align:center;font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--text-3);margin-bottom:1.75rem}
 .flow-row{display:flex;align-items:center;justify-content:center;gap:0;min-width:fit-content;margin:0 auto}
@@ -88,21 +82,17 @@ h2 em{font-style:italic;color:var(--primary)}
 .fip-text strong{color:var(--text);font-weight:600}
 .fip-tags{display:flex;gap:.3rem;margin-top:.6rem;flex-wrap:wrap}
 .fip-tag{font-family:var(--mono);font-size:.52rem;padding:.15rem .5rem;border-radius:100px;border:1px solid var(--border);color:var(--text-3);background:var(--bg)}
-
-/* MONITOR */
 .monitor-controls{display:flex;gap:.5rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap}
 .mon-search{padding:.45rem .75rem;border:1px solid var(--border);border-radius:var(--r);font-family:var(--body);font-size:.8rem;color:var(--text);background:var(--surface);outline:none;flex:1;min-width:180px;transition:border-color .15s}
-.mon-search:focus{border-color:var(--primary)}
-.mon-search::placeholder{color:var(--text-3)}
+.mon-search:focus{border-color:var(--primary)}.mon-search::placeholder{color:var(--text-3)}
 .filter-tabs{display:flex;gap:2px;background:var(--bg-3);border-radius:var(--r);padding:2px}
 .filter-tab{padding:.35rem .7rem;border-radius:6px;border:none;background:transparent;font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.04em;color:var(--text-3);cursor:pointer;transition:all .15s;white-space:nowrap}
 .filter-tab:hover{color:var(--text-2)}
 .filter-tab.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
 .monitor-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:1.25rem}
 @media(max-width:500px){.monitor-summary{grid-template-columns:1fr 1fr}}
-.ms-cell{background:var(--surface);padding:1rem 1.1rem;text-align:center;cursor:pointer;transition:background .15s}
+.ms-cell{background:var(--surface);padding:1rem;text-align:center;cursor:pointer;transition:background .15s}
 .ms-cell:hover{background:var(--surface-2)}
-.ms-cell.ms-active{background:var(--primary-light)}
 .ms-num{font-family:var(--display);font-size:1.6rem;font-weight:600;line-height:1}
 .ms-num-g{color:#15803D}.ms-num-a{color:#B45309}.ms-num-r{color:#DC2626}.ms-num-b{color:var(--blue)}
 .ms-label{font-size:.68rem;color:var(--text-3);margin-top:.15rem}
@@ -134,13 +124,8 @@ h2 em{font-style:italic;color:var(--primary)}
 .rd-value{font-size:.72rem;font-weight:600;color:var(--text)}
 .rd-history{font-family:var(--mono);font-size:.6rem;color:var(--text-3);line-height:1.7}
 .rd-history span{display:block}
-.alert-ack-btn{font-family:var(--mono);font-size:.52rem;padding:.2rem .5rem;border:1px solid var(--border);border-radius:4px;background:var(--surface);color:var(--text-2);cursor:pointer;transition:all .15s}
-.alert-ack-btn:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-light)}
-.alert-ack-btn.acked{background:var(--primary-light);border-color:var(--primary-bd);color:var(--primary);pointer-events:none}
 .refresh-indicator{font-family:var(--mono);font-size:.55rem;color:var(--text-3);display:flex;align-items:center;gap:.35rem}
 .refresh-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);animation:pulse 1s ease infinite}
-
-/* TRACER */
 .tracer-controls{display:flex;gap:.5rem;margin-bottom:1.25rem;align-items:center;flex-wrap:wrap}
 .tracer-btn{padding:.45rem 1rem;border-radius:var(--r);border:1px solid;font-family:var(--mono);font-size:.68rem;font-weight:500;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.4rem}
 .tracer-btn-run{border-color:var(--primary);background:var(--primary);color:#fff}
@@ -177,8 +162,6 @@ h2 em{font-style:italic;color:var(--primary)}
 .td-btn{padding:.4rem .85rem;border-radius:var(--r);border:1px solid var(--border-2);background:var(--surface);font-family:var(--body);font-size:.75rem;font-weight:500;color:var(--text-2);cursor:pointer;transition:all .15s}
 .td-btn:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-light)}
 .td-btn-primary{border-color:var(--primary);background:var(--primary);color:#fff}.td-btn-primary:hover{background:#15704F;color:#fff}
-
-/* PATTERN ANALYZER */
 .pattern-grid{display:grid;grid-template-columns:2fr 1fr;gap:1.25rem}
 @media(max-width:700px){.pattern-grid{grid-template-columns:1fr}}
 .chart-area{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
@@ -211,8 +194,6 @@ h2 em{font-style:italic;color:var(--primary)}
 .ic-title{font-weight:600;font-size:.82rem;color:var(--text);margin-bottom:.2rem;line-height:1.35}
 .ic-desc{font-size:.72rem;color:var(--text-2);line-height:1.6}
 .ic-meta{display:flex;gap:.6rem;margin-top:.5rem;font-family:var(--mono);font-size:.55rem;color:var(--text-3)}
-
-/* KB BUILDER */
 .kb-layout{display:grid;grid-template-columns:220px 1fr;gap:0;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;min-height:480px}
 @media(max-width:700px){.kb-layout{grid-template-columns:1fr;min-height:auto}}
 .kb-sidebar{background:var(--surface-2);border-right:1px solid var(--border);padding:.75rem;display:flex;flex-direction:column}
@@ -258,174 +239,305 @@ h2 em{font-style:italic;color:var(--primary)}
 .kb-btn-publish:hover{background:#15704F}
 .kb-btn-copy{border-color:var(--border);background:var(--surface);color:var(--text-2)}
 .kb-btn-copy:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
-.kb-btn-copy.copied{border-color:var(--primary);color:var(--primary);background:var(--primary-light)}
 .kb-toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:#1C1917;color:#fff;font-family:var(--mono);font-size:.72rem;padding:.6rem 1.2rem;border-radius:var(--r);opacity:0;transition:all .3s ease;pointer-events:none;z-index:200;box-shadow:0 8px 30px rgba(0,0,0,.2)}
 .kb-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* FOOTER */
 footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 .foot-text{font-size:.78rem;color:var(--text-3);line-height:1.7}
 .foot-text strong{color:var(--text-2);font-weight:600}
-
-/* FADE */
 .fu{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}.fu.vis{opacity:1;transform:translateY(0)}
+
+/* BARRIER TOOLS */
+.divider-sec{padding:3rem 0;text-align:center;background:linear-gradient(180deg,var(--bg) 0%,var(--red-light) 50%,var(--bg) 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.divider-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .9rem;border-radius:100px;border:1px solid var(--red-bd);background:var(--red-light);font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--red)}
+.divider-badge .dot{width:5px;height:5px;border-radius:50%;background:var(--red);animation:pulse 2.5s ease infinite}
+.divider-title{font-family:var(--display);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:600;color:var(--text);margin:.75rem 0 .5rem}
+.divider-title em{color:var(--red);font-style:italic}
+.divider-desc{font-size:.92rem;color:var(--text-2);max-width:500px;margin:0 auto}
+.divider-stats{display:flex;justify-content:center;gap:2rem;margin-top:1.5rem}
+.ds-num{font-family:var(--display);font-size:1.5rem;font-weight:600;line-height:1}
+.ds-label{font-size:.65rem;color:var(--text-3);margin-top:.15rem}
+
+.b-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+@media(max-width:700px){.b-grid{grid-template-columns:1fr}}
+.b-card{border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:all .2s}
+.b-card:hover{border-color:var(--border-2);box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.b-card.expanded{border-color:var(--red-bd)}
+.b-head{padding:.6rem .85rem;display:flex;align-items:center;gap:.5rem;background:var(--surface)}
+.b-num{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.6rem;font-weight:600;flex-shrink:0}
+.b-sev-high .b-num{background:var(--red-light);color:var(--red)}
+.b-sev-med .b-num{background:var(--amber-light);color:var(--amber)}
+.b-sev-low .b-num{background:var(--blue-light);color:var(--blue)}
+.b-title{font-weight:600;font-size:.78rem;color:var(--text);flex:1}
+.b-cat{font-family:var(--mono);font-size:.48rem;letter-spacing:.05em;padding:.12rem .4rem;border-radius:100px;border:1px solid var(--border);color:var(--text-3);white-space:nowrap}
+.b-sev-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.b-sev-high .b-sev-dot{background:var(--red)}.b-sev-med .b-sev-dot{background:var(--amber)}.b-sev-low .b-sev-dot{background:var(--blue)}
+.b-detail{display:none;padding:0 .85rem .85rem;background:var(--surface);animation:fadeSlide .25s ease}
+.b-card.expanded .b-detail{display:block}
+.b-detail-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-top:.35rem}
+@media(max-width:600px){.b-detail-grid{grid-template-columns:1fr}}
+.b-d-box{padding:.55rem .65rem;border-radius:var(--r);border:1px solid var(--border)}
+.b-d-label{font-family:var(--mono);font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.2rem}
+.b-d-text{font-size:.72rem;color:var(--text);line-height:1.55}
+.lbl-red{color:var(--red)}.lbl-grey{color:var(--text-3)}.lbl-green{color:var(--primary)}
+
+.lc-flow{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding:.5rem 0}
+.lc-node{flex:1;min-width:105px;border:1.5px solid var(--border);background:var(--surface);padding:.65rem .55rem;text-align:center;position:relative;transition:all .3s;cursor:pointer}
+.lc-node:first-child{border-radius:var(--r-lg) 0 0 var(--r-lg)}.lc-node:last-child{border-radius:0 var(--r-lg) var(--r-lg) 0}
+.lc-node:not(:last-child){border-right:none}
+.lc-node:not(:last-child)::after{content:'';position:absolute;right:-1px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:7px solid var(--border);z-index:2;transition:border-color .3s}
+.lc-node:hover{background:var(--bg-2)}
+.lc-node.lc-warn{border-color:var(--amber-bd);background:var(--amber-light)}.lc-node.lc-warn::after{border-left-color:var(--amber-bd)}
+.lc-node.lc-err{border-color:var(--red-bd);background:var(--red-light)}.lc-node.lc-err::after{border-left-color:var(--red-bd)}
+.lc-node.lc-ok{border-color:var(--primary-bd);background:var(--primary-light)}.lc-node.lc-ok::after{border-left-color:var(--primary-bd)}
+.lc-step{font-family:var(--mono);font-size:.42rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:.15rem}
+.lc-name{font-weight:600;font-size:.68rem;color:var(--text);margin-bottom:.1rem}
+.lc-sub{font-size:.55rem;color:var(--text-3);line-height:1.3}
+.lc-barriers{display:flex;flex-wrap:wrap;gap:2px;justify-content:center;margin-top:.3rem}
+.lc-b-tag{font-family:var(--mono);font-size:.4rem;padding:.08rem .3rem;border-radius:3px;font-weight:500}
+.tag-red{background:var(--red-light);color:var(--red)}.tag-amber{background:var(--amber-light);color:var(--amber)}.tag-blue{background:var(--blue-light);color:var(--blue)}
+
+.m-filters{display:flex;gap:.4rem;margin-bottom:.75rem;flex-wrap:wrap}
+.m-btn{padding:.3rem .6rem;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);font-family:var(--mono);font-size:.58rem;font-weight:500;color:var(--text-3);cursor:pointer;transition:all .15s}
+.m-btn:hover{color:var(--text-2);border-color:var(--border-2)}
+.m-btn.active{background:var(--primary-light);border-color:var(--primary-bd);color:var(--primary)}
+.m-table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;font-size:.75rem}
+.m-table th{background:var(--surface-2);padding:.5rem .65rem;text-align:left;font-family:var(--mono);font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);font-weight:500;border-bottom:1px solid var(--border)}
+.m-table td{padding:.45rem .65rem;border-bottom:1px solid var(--border);vertical-align:middle}
+.m-table tr:last-child td{border-bottom:none}
+.m-table tr:hover td{background:var(--bg-2)}
+.m-sis{font-family:var(--mono);font-size:.6rem;padding:.12rem .35rem;border-radius:4px;font-weight:500}
+.m-sis-b{background:var(--purple-light);color:var(--purple)}.m-sis-p{background:var(--blue-light);color:var(--blue)}.m-sis-c{background:var(--amber-light);color:var(--amber)}
+.m-dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:4px}
+.m-dot-ok{background:#22C55E}.m-dot-partial{background:#F59E0B}.m-dot-pending{background:#EF4444}
+.m-issue{font-family:var(--mono);font-size:.5rem;padding:.08rem .3rem;border-radius:3px;background:var(--red-light);color:var(--red);margin:1px}
+.m-issue.warn{background:var(--amber-light);color:var(--amber)}
+
+.eq-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+@media(max-width:600px){.eq-grid{grid-template-columns:1fr}}
+.eq-card{border:1px solid var(--border);border-radius:var(--r-lg);padding:.85rem 1rem;position:relative;overflow:hidden}
+.eq-score{position:absolute;top:.6rem;right:.85rem;font-family:var(--display);font-size:1.6rem;font-weight:600;line-height:1}
+.eq-high{color:var(--red)}.eq-med{color:var(--amber)}.eq-low{color:var(--blue)}
+.eq-title{font-weight:600;font-size:.8rem;color:var(--text);margin-bottom:.2rem;max-width:70%}
+.eq-pop{font-family:var(--mono);font-size:.55rem;color:var(--text-3);margin-bottom:.4rem}
+.eq-bar-bg{height:5px;background:var(--bg-3);border-radius:3px;overflow:hidden;margin-bottom:.35rem}
+.eq-bar-fill{height:100%;border-radius:3px;transition:width 1s cubic-bezier(.34,1.56,.64,1)}
+.fill-high{background:var(--red)}.fill-med{background:var(--amber)}.fill-low{background:var(--blue)}
+.eq-reason{font-size:.68rem;color:var(--text-2);line-height:1.5}
+
+.corr-row{display:flex;align-items:center;gap:.6rem;padding:.5rem .7rem;border:1px solid var(--border);border-radius:var(--r);margin-bottom:.4rem;transition:all .15s;cursor:pointer}
+.corr-row:hover{background:var(--bg-2);border-color:var(--border-2)}
+.corr-bar-bg{flex:1;height:18px;background:var(--bg-3);border-radius:4px;overflow:hidden}
+.corr-bar{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.34,1.56,.64,1)}
+.cb-red{background:linear-gradient(90deg,var(--red),#F87171)}.cb-amber{background:linear-gradient(90deg,var(--amber),#FBBF24)}.cb-blue{background:linear-gradient(90deg,var(--blue),#60A5FA)}.cb-purple{background:linear-gradient(90deg,var(--purple),#A78BFA)}.cb-teal{background:linear-gradient(90deg,var(--teal),#2DD4BF)}
+.corr-label{font-size:.72rem;font-weight:600;color:var(--text);min-width:155px}
+.corr-count{font-family:var(--mono);font-size:.65rem;color:var(--text-2);min-width:45px;text-align:right}
+.corr-pct{font-family:var(--mono);font-size:.58rem;color:var(--text-3);min-width:35px;text-align:right}
+
 </style>
 </head>
 <body>
 
 <nav id="nav">
   <div class="nav-brand"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">CVC-OEI Support Toolkit</span></div>
-  <div class="nav-links"><a href="#flow">Architecture</a><a href="#monitor">Monitor</a><a href="#tracer">Diagnostics</a><a href="#patterns">Patterns</a><a href="#kb">KB Builder</a></div>
+  <div class="nav-links">
+    <a href="#flow">Architecture</a><a href="#monitor">Monitor</a><a href="#tracer">Diagnostics</a><a href="#patterns">Patterns</a><a href="#kb">KB Builder</a>
+    <a href="#barriers" class="nav-barrier">⚠ Barriers</a>
+  </div>
 </nav>
 
 <header class="header">
   <div class="wrap">
     <div class="h-badge"><span class="dot"></span> Application Support Analyst Toolkit</div>
     <h1>Tools for supporting <em>cross-enrollment</em> at statewide scale</h1>
-    <p class="h-desc">Four interactive prototypes for the daily operations of application support at CVC-OEI — monitoring integrations, diagnosing failures, identifying patterns, and building documentation <strong>across 116 campuses.</strong></p>
+    <p class="h-desc">Nine interactive prototypes for CVC-OEI application support — monitoring integrations, diagnosing failures, identifying patterns, building documentation, and <strong>reducing course-sharing barriers across 116 campuses.</strong></p>
     <div class="h-stats">
-      <div class="h-stat"><div class="h-stat-num">116</div><div class="h-stat-label">Connected Colleges</div></div>
-      <div class="h-stat"><div class="h-stat-num">3</div><div class="h-stat-label">SIS Platforms</div></div>
-      <div class="h-stat"><div class="h-stat-num">4</div><div class="h-stat-label">Interactive Tools</div></div>
+      <div><div class="h-stat-num green">116</div><div class="h-stat-label">Connected Colleges</div></div>
+      <div><div class="h-stat-num blue">9</div><div class="h-stat-label">Interactive Tools</div></div>
+      <div><div class="h-stat-num red">10</div><div class="h-stat-label">Barriers Mapped</div></div>
     </div>
   </div>
 </header>
 
-<!-- FLOW DIAGRAM -->
-<section class="sec fu" id="flow">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">System Architecture</div>
-      <h2>How student data moves across the <em>CVC Exchange</em></h2>
-      <p class="sec-desc">Click any node to explore that layer's role in cross-enrollment. Most support issues trace back to <strong>a break somewhere in this chain.</strong></p>
+<!-- ═══ TOOL 01: ARCHITECTURE ═══ -->
+<section class="sec fu" id="flow"><div class="wrap">
+  <div class="eyebrow">System Architecture</div>
+  <h2>How student data moves across the <em>CVC Exchange</em></h2>
+  <p class="sec-desc">Click any node to explore that layer's role in cross-enrollment. Most support issues trace back to <strong>a break somewhere in this chain.</strong></p>
+  <div class="flow-visual">
+    <div class="flow-title">Cross-Enrollment Data Flow — Click to Explore</div>
+    <div class="flow-row">
+      <div class="f-node fn-sis" onclick="showFlowInfo(0)"><div class="fn-label">Home SIS</div><div class="fn-desc">Banner · PeopleSoft<br>Colleague</div></div>
+      <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">Ethos / API</div></div>
+      <div class="f-node fn-exc" onclick="showFlowInfo(1)"><div class="fn-label">CVC Exchange</div><div class="fn-desc">Cross-enrollment<br>hub</div></div>
+      <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">AER Sync</div></div>
+      <div class="f-node fn-lms" onclick="showFlowInfo(2)"><div class="fn-label">Teaching College</div><div class="fn-desc">SIS + Canvas<br>LMS</div></div>
+      <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">Enrollment</div></div>
+      <div class="f-node fn-stu" onclick="showFlowInfo(3)"><div class="fn-label">Student</div><div class="fn-desc">Course access<br>confirmed</div></div>
     </div>
-    <div class="flow-visual">
-      <div class="flow-title">Cross-Enrollment Data Flow — Click to Explore</div>
-      <div class="flow-row">
-        <div class="f-node fn-sis" onclick="showFlowInfo(0)"><div class="fn-label">Home SIS</div><div class="fn-desc">Banner · PeopleSoft<br>Colleague</div></div>
-        <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">Ethos / API</div></div>
-        <div class="f-node fn-exc" onclick="showFlowInfo(1)"><div class="fn-label">CVC Exchange</div><div class="fn-desc">Cross-enrollment<br>hub</div></div>
-        <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">AER Sync</div></div>
-        <div class="f-node fn-lms" onclick="showFlowInfo(2)"><div class="fn-label">Teaching College</div><div class="fn-desc">SIS + Canvas<br>LMS</div></div>
-        <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">Enrollment</div></div>
-        <div class="f-node fn-stu" onclick="showFlowInfo(3)"><div class="fn-label">Student</div><div class="fn-desc">Course access<br>confirmed</div></div>
-      </div>
-      <div class="flow-info-panel" id="flowInfo"></div>
-    </div>
+    <div class="flow-info-panel" id="flowInfo"></div>
   </div>
-</section>
+</div></section>
 
-<!-- TOOL 1: MONITOR -->
-<section class="sec sec-alt fu" id="monitor">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Tool 01</div>
-      <h2>Integration Status <em>Monitor</em></h2>
-      <p class="sec-desc">Search, filter, and drill into each college's integration health. Click any row to inspect connection details and recent sync history.</p>
-    </div>
-    <div class="tool-section">
-      <div class="tool-frame">
-        <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><div class="tool-bar-title">cvc-exchange-monitor.fhda.edu</div></div>
-        <div class="tool-body">
-          <div class="monitor-controls">
-            <input class="mon-search" id="monSearch" type="text" placeholder="Search colleges..." oninput="filterMonitor()">
-            <div class="filter-tabs" id="filterTabs">
-              <button class="filter-tab active" data-filter="all" onclick="setFilter('all',this)">All</button>
-              <button class="filter-tab" data-filter="ok" onclick="setFilter('ok',this)">Healthy</button>
-              <button class="filter-tab" data-filter="warn" onclick="setFilter('warn',this)">Degraded</button>
-              <button class="filter-tab" data-filter="err" onclick="setFilter('err',this)">Failing</button>
-            </div>
-          </div>
-          <div class="monitor-summary" id="monSummary"></div>
-          <div class="monitor-grid" id="monitorGrid"></div>
+<!-- ═══ TOOL 02: MONITOR ═══ -->
+<section class="sec sec-alt fu" id="monitor"><div class="wrap">
+  <div class="eyebrow">Tool 01</div>
+  <h2>Integration Status <em>Monitor</em></h2>
+  <p class="sec-desc">Search, filter, and drill into each college's integration health. Click any row to inspect connection details and recent sync history.</p>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><div class="tool-bar-title">cvc-exchange-monitor.fhda.edu</div></div>
+    <div class="tool-body">
+      <div class="monitor-controls">
+        <input class="mon-search" id="monSearch" type="text" placeholder="Search colleges..." oninput="filterMonitor()">
+        <div class="filter-tabs" id="filterTabs">
+          <button class="filter-tab active" onclick="setFilter('all',this)">All</button>
+          <button class="filter-tab" onclick="setFilter('ok',this)">Healthy</button>
+          <button class="filter-tab" onclick="setFilter('warn',this)">Degraded</button>
+          <button class="filter-tab" onclick="setFilter('err',this)">Failing</button>
         </div>
       </div>
+      <div class="monitor-summary" id="monSummary"></div>
+      <div class="monitor-grid" id="monitorGrid"></div>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- TOOL 2: TRACER -->
-<section class="sec fu" id="tracer">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Tool 02</div>
-      <h2>Cross-System <em>Diagnostic Tracer</em></h2>
-      <p class="sec-desc">Run an automated trace or click each layer manually. Watch logs appear in real time as the tracer steps through <strong>a live cross-enrollment failure.</strong></p>
+<!-- ═══ TOOL 03: TRACER ═══ -->
+<section class="sec fu" id="tracer"><div class="wrap">
+  <div class="eyebrow">Tool 02</div>
+  <h2>Cross-System <em>Diagnostic Tracer</em></h2>
+  <p class="sec-desc">Run an automated trace or click each layer manually. Watch logs appear in real time as the tracer steps through <strong>a live cross-enrollment failure.</strong></p>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><div class="tool-bar-title">trace-id: CVC-2026-03-4821</div></div>
+    <div class="tool-body">
+      <div class="tracer-controls">
+        <button class="tracer-btn tracer-btn-run" id="autoRunBtn" onclick="autoRunTrace()">▶ Auto-Run Trace</button>
+        <button class="tracer-btn tracer-btn-reset" onclick="resetTrace()">↺ Reset</button>
+        <div class="tracer-status" id="tracerStatus">Ready — click a layer or auto-run</div>
+      </div>
+      <div class="tracer-flow" id="tracerFlow"></div>
+      <div class="tracer-detail" id="tracerDetail" style="margin-top:1.25rem"></div>
     </div>
-    <div class="tool-section">
-      <div class="tool-frame">
-        <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><div class="tool-bar-title">trace-id: CVC-2026-03-4821</div></div>
-        <div class="tool-body">
-          <div class="tracer-controls">
-            <button class="tracer-btn tracer-btn-run" id="autoRunBtn" onclick="autoRunTrace()">▶ Auto-Run Trace</button>
-            <button class="tracer-btn tracer-btn-reset" onclick="resetTrace()">↺ Reset</button>
-            <div class="tracer-status" id="tracerStatus">Ready — click a layer or auto-run</div>
-          </div>
-          <div class="tracer-flow" id="tracerFlow"></div>
-          <div class="tracer-detail" id="tracerDetail" style="margin-top:1.25rem"></div>
-        </div>
+  </div>
+</div></section>
+
+<!-- ═══ TOOL 04: PATTERNS ═══ -->
+<section class="sec sec-alt fu" id="patterns"><div class="wrap">
+  <div class="eyebrow">Tool 03</div>
+  <h2>Ticket <em>Pattern Analyzer</em></h2>
+  <p class="sec-desc">Hover bars for breakdowns, click legend items to toggle categories, and click insight cards to highlight related weeks.</p>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><div class="tool-bar-title">Q1 2026 · Ticket Trend Report</div></div>
+    <div class="tool-body">
+      <div class="pattern-grid">
+        <div><div class="chart-area">
+          <div class="chart-header"><div class="chart-title">Tickets by Category</div><div class="chart-period">Jan – Mar 2026 · <span id="chartTotal">0</span> total</div></div>
+          <div class="chart-body" id="chartBody"></div>
+          <div class="chart-legend" id="chartLegend"></div>
+        </div></div>
+        <div class="insights-panel" id="insightsPanel"></div>
       </div>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- TOOL 3: PATTERNS -->
-<section class="sec sec-alt fu" id="patterns">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Tool 03</div>
-      <h2>Ticket <em>Pattern Analyzer</em></h2>
-      <p class="sec-desc">Hover bars for breakdowns, click legend items to toggle categories, and click insight cards to highlight related weeks in the chart.</p>
-    </div>
-    <div class="tool-section">
-      <div class="tool-frame">
-        <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><div class="tool-bar-title">Q1 2026 · Ticket Trend Report</div></div>
-        <div class="tool-body">
-          <div class="pattern-grid">
-            <div><div class="chart-area">
-              <div class="chart-header"><div class="chart-title">Tickets by Category</div><div class="chart-period">Jan – Mar 2026 · <span id="chartTotal">0</span> total</div></div>
-              <div class="chart-body" id="chartBody"></div>
-              <div class="chart-legend" id="chartLegend"></div>
-            </div></div>
-            <div class="insights-panel" id="insightsPanel"></div>
-          </div>
+<!-- ═══ TOOL 05: KB BUILDER ═══ -->
+<section class="sec fu" id="kb"><div class="wrap">
+  <div class="eyebrow">Tool 04</div>
+  <h2>Knowledge Base <em>Article Builder</em></h2>
+  <p class="sec-desc">Edit titles, descriptions, and steps directly. Add or remove steps, reorder them, and copy the finished article as markdown.</p>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation</span></div><div class="tool-bar-title">kb.cvc-oei.fhda.edu/articles/editor</div></div>
+    <div class="tool-body" style="padding:0">
+      <div class="kb-layout">
+        <div class="kb-sidebar">
+          <div class="kb-nav-label">Templates</div>
+          <div class="kb-nav-item active" onclick="loadKB(0,this)"><span class="kb-nav-icon">⚡</span>Integration Fix</div>
+          <div class="kb-nav-item" onclick="loadKB(1,this)"><span class="kb-nav-icon">🔐</span>Auth / SSO Issue</div>
+          <div class="kb-nav-item" onclick="loadKB(2,this)"><span class="kb-nav-icon">🔄</span>Sync Resolution</div>
+          <div class="kb-nav-item" onclick="loadKB(3,this)"><span class="kb-nav-icon">📋</span>Onboarding Guide</div>
         </div>
+        <div class="kb-main" id="kbMain"></div>
       </div>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- TOOL 4: KB -->
-<section class="sec fu" id="kb">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Tool 04</div>
-      <h2>Knowledge Base <em>Article Builder</em></h2>
-      <p class="sec-desc">Edit titles, descriptions, and steps directly. Add or remove steps, reorder them, and copy the finished article as markdown — <strong>ready for a real knowledge base.</strong></p>
-    </div>
-    <div class="tool-section">
-      <div class="tool-frame">
-        <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation</span></div><div class="tool-bar-title">kb.cvc-oei.fhda.edu/articles/editor</div></div>
-        <div class="tool-body" style="padding:0">
-          <div class="kb-layout">
-            <div class="kb-sidebar">
-              <div class="kb-nav-label">Templates</div>
-              <div class="kb-nav-item active" onclick="loadKB(0,this)"><span class="kb-nav-icon">⚡</span>Integration Fix</div>
-              <div class="kb-nav-item" onclick="loadKB(1,this)"><span class="kb-nav-icon">🔐</span>Auth / SSO Issue</div>
-              <div class="kb-nav-item" onclick="loadKB(2,this)"><span class="kb-nav-icon">🔄</span>Sync Resolution</div>
-              <div class="kb-nav-item" onclick="loadKB(3,this)"><span class="kb-nav-icon">📋</span>Onboarding Guide</div>
-            </div>
-            <div class="kb-main" id="kbMain"></div>
-          </div>
-        </div>
-      </div>
+<!-- ═══════════════════════════════════════════ -->
+<!-- BARRIER INTELLIGENCE SECTION -->
+<!-- ═══════════════════════════════════════════ -->
+
+<div class="divider-sec" id="barriers">
+  <div class="divider-badge"><span class="dot"></span> Barrier Intelligence</div>
+  <div class="divider-title">Reducing <em>friction</em> in course sharing</div>
+  <div class="divider-desc">Ten operational barriers mapped to the support analyst's role in documentation, data, escalation, and campus relationships.</div>
+  <div class="divider-stats">
+    <div><div class="ds-num" style="color:var(--red)">10</div><div class="ds-label">Known Barriers</div></div>
+    <div><div class="ds-num" style="color:var(--amber)">4</div><div class="ds-label">Equity-Critical</div></div>
+    <div><div class="ds-num" style="color:var(--primary)">5</div><div class="ds-label">New Tools</div></div>
+  </div>
+</div>
+
+<!-- TOOL 06: BARRIER OVERVIEW -->
+<section class="sec fu" id="barrierOverview"><div class="wrap">
+  <div class="eyebrow eyebrow-red">Tool 05</div>
+  <h2>Barrier <em class="red">Overview</em></h2>
+  <p class="sec-desc">Click any barrier to expand details: the friction point, who's affected, and the <strong>support analyst's approach.</strong></p>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Barriers</span></div><span class="tool-bar-title">cvc-barrier-intelligence.fhda.edu</span></div>
+    <div class="tool-body"><div class="b-grid" id="bGrid"></div></div>
+  </div>
+</div></section>
+
+<!-- TOOL 07: LIFECYCLE MAP -->
+<section class="sec sec-alt fu" id="lifecycle"><div class="wrap">
+  <div class="eyebrow eyebrow-red">Tool 06</div>
+  <h2>Enrollment <em class="red">Lifecycle</em> Barrier Map</h2>
+  <p class="sec-desc">Each step in cross-enrollment, showing <strong>where barriers surface.</strong> Red = high friction, amber = moderate, green = smooth.</p>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Lifecycle</span></div><span class="tool-bar-title">Cross-enrollment barrier mapping</span></div>
+    <div class="tool-body"><div class="lc-flow" id="lcFlow"></div></div>
+  </div>
+</div></section>
+
+<!-- TOOL 08: CAMPUS MATRIX -->
+<section class="sec fu" id="matrix"><div class="wrap">
+  <div class="eyebrow eyebrow-red">Tool 07</div>
+  <h2>Campus <em class="red">Readiness</em> Matrix</h2>
+  <p class="sec-desc">Filter by SIS type to see <strong>which barriers affect which campus configurations.</strong></p>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Matrix</span></div><span class="tool-bar-title">campus-readiness.cvc-oei.fhda.edu</span></div>
+    <div class="tool-body">
+      <div class="m-filters" id="mFilters"></div>
+      <div style="overflow-x:auto"><table class="m-table"><thead><tr><th>College</th><th>SIS</th><th>FA Dashboard</th><th>SSO</th><th>Known Barriers</th></tr></thead><tbody id="mBody"></tbody></table></div>
     </div>
   </div>
-</section>
+</div></section>
+
+<!-- TOOL 09: EQUITY SCORER -->
+<section class="sec sec-alt fu" id="equity"><div class="wrap">
+  <div class="eyebrow eyebrow-red">Tool 08</div>
+  <h2>Equity <em class="red">Impact</em> Scorer</h2>
+  <p class="sec-desc">Which barriers disproportionately affect <strong>low-income, first-generation, and disabled students?</strong></p>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Equity</span></div><span class="tool-bar-title">equity-impact-analysis</span></div>
+    <div class="tool-body"><div class="eq-grid" id="eqGrid"></div></div>
+  </div>
+</div></section>
+
+<!-- TOOL 10: CORRELATOR -->
+<section class="sec fu" id="correlator"><div class="wrap">
+  <div class="eyebrow eyebrow-red">Tool 09</div>
+  <h2>Barrier-to-Ticket <em class="red">Correlator</em></h2>
+  <p class="sec-desc">Simulated ticket data mapped to barrier categories. Shows <strong>where the queue is driven by systemic friction.</strong></p>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Correlation</span></div><span class="tool-bar-title">Q1 2026 · Ticket-to-Barrier Analysis</span></div>
+    <div class="tool-body" id="corrBody"></div>
+  </div>
+</div></section>
 
 <div class="kb-toast" id="toast"></div>
 
-<footer><div class="wrap"><p class="foot-text"><strong>CVC-OEI Application Support Toolkit</strong> — Interactive prototypes for cross-enrollment support operations<br>Banner · PeopleSoft · Colleague · Canvas LMS · Ethos API · ServiceNow</p></div></footer>
+<footer><div class="wrap"><p class="foot-text"><strong>CVC-OEI Application Support Toolkit</strong> — 9 interactive prototypes for cross-enrollment support + barrier intelligence<br>Banner · PeopleSoft · Colleague · Canvas LMS · Ethos API · CVC Exchange</p></div></footer>
 
 <script>
 // ═══ GLOBALS ═══
@@ -433,299 +545,176 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>20));
 const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('vis');obs.unobserve(el.target)}}),{threshold:.06,rootMargin:'0px 0px -30px 0px'});
 document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
-
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
 
 // ═══ FLOW DIAGRAM ═══
 const flowData=[
-  {title:'Home College SIS',color:'var(--purple)',dot:'var(--purple)',text:'System of record for enrollment, residency, financial aid, and student identity. <strong>Banner, PeopleSoft, and Colleague</strong> each expose data differently — Banner uses Ethos/Ellucian APIs, PeopleSoft uses web services, Colleague uses its own API layer. Each of 116 colleges configures these independently.',tags:['Banner','PeopleSoft','Colleague','CCCID','Enrollment Status','Financial Aid']},
-  {title:'CVC Exchange — Middleware Hub',color:'var(--blue)',dot:'var(--blue)',text:'The central cross-enrollment platform. Receives <strong>AER (Abbreviated Enrollment Records)</strong> from home colleges, validates residency, manages seat counts in real time, routes financial aid consortium data, and transmits enrollment to teaching colleges. <strong>Most integration failures surface here</strong> — expired tokens, schema mismatches, and sync timing issues.',tags:['AER Transmission','Seat Count Sync','Residency Validation','Quottly (Fin Aid)','SX07 Reporting']},
-  {title:'Teaching College — SIS + Canvas',color:'var(--primary)',dot:'var(--primary)',text:'Receives enrollment data from the Exchange and provisions the student in the teaching college SIS and Canvas LMS. <strong>SAML/SSO authentication</strong> must be correctly configured for the student to access Canvas at a college that isn\'t their home institution. Roster sync depends on the SIS receiving the AER first.',tags:['Canvas LMS','SAML / SSO','Roster Sync','Course Sections','Open CCC Proxy']},
-  {title:'Student Experience',color:'var(--teal)',dot:'var(--teal)',text:'The student expects to see the cross-enrolled course in their Canvas dashboard with a working login. When the data flow works, they never think about it. When it doesn\'t — a course missing, a login failing, a seat count showing zero — <strong>it becomes a barrier between them and the course they need.</strong> System reliability at this layer is equity in practice.',tags:['Course Access','Login Experience','Registration Confirmation','Transcript Return']}
+{title:'Home College SIS',dot:'var(--purple)',text:'System of record for enrollment, residency, financial aid, and student identity. <strong>Banner, PeopleSoft, and Colleague</strong> each expose data differently. Each of 116 colleges configures these independently.',tags:['Banner','PeopleSoft','Colleague','CCCID','Financial Aid']},
+{title:'CVC Exchange — Middleware Hub',dot:'var(--blue)',text:'Central cross-enrollment platform. Receives <strong>AER records</strong> from home colleges, validates residency, manages seat counts, routes FA consortium data. <strong>Most integration failures surface here.</strong>',tags:['AER Transmission','Seat Count Sync','Residency Validation','FA Consortium']},
+{title:'Teaching College — SIS + Canvas',dot:'var(--primary)',text:'Receives enrollment data and provisions the student in SIS and Canvas LMS. <strong>SAML/SSO authentication</strong> must be correctly configured for cross-college access.',tags:['Canvas LMS','SAML / SSO','Roster Sync','Course Sections']},
+{title:'Student Experience',dot:'var(--teal)',text:'Student expects the course in their Canvas dashboard. When it works, invisible. When it doesn\'t — <strong>it becomes a barrier between them and the course they need.</strong>',tags:['Course Access','Login','Transcript Return']}
 ];
-function showFlowInfo(idx){
-  const d=flowData[idx],p=document.getElementById('flowInfo');
-  document.querySelectorAll('.f-node').forEach((n,i)=>n.classList.toggle('active-node',i===idx));
-  p.innerHTML=`<div class="fip-title"><span class="fip-dot" style="background:${d.dot}"></span>${d.title}</div><div class="fip-text">${d.text}</div><div class="fip-tags">${d.tags.map(t=>`<span class="fip-tag">${t}</span>`).join('')}</div>`;
-  p.classList.add('show');
-}
+function showFlowInfo(idx){const d=flowData[idx],p=document.getElementById('flowInfo');document.querySelectorAll('.f-node').forEach((n,i)=>n.classList.toggle('active-node',i===idx));p.innerHTML='<div class="fip-title"><span class="fip-dot" style="background:'+d.dot+'"></span>'+d.title+'</div><div class="fip-text">'+d.text+'</div><div class="fip-tags">'+d.tags.map(t=>'<span class="fip-tag">'+t+'</span>').join('')+'</div>';p.classList.add('show')}
 
 // ═══ MONITOR ═══
 const allColleges=[
-  {name:'Foothill College',sis:'Banner',status:'ok',detail:'Last sync: 2m ago',badge:'Healthy',uptime:'99.8%',lastErr:'None (30d)',endpoint:'/ethos/v1/sections',history:['09:14 — Sync OK','09:12 — Sync OK','09:10 — Sync OK','09:08 — Enrollment pushed','09:06 — Sync OK']},
-  {name:'De Anza College',sis:'Banner',status:'ok',detail:'Last sync: 1m ago',badge:'Healthy',uptime:'99.9%',lastErr:'None (30d)',endpoint:'/ethos/v1/sections',history:['09:15 — Sync OK','09:13 — Sync OK','09:11 — AER transmitted','09:09 — Sync OK']},
-  {name:'City College SF',sis:'Banner',status:'warn',detail:'Seat count delay: 8min',badge:'Degraded',uptime:'97.2%',lastErr:'Seat sync timeout (2h ago)',endpoint:'/ethos/v1/section-registrations',history:['09:14 — Seat sync DELAYED','09:06 — Sync OK','09:00 — Seat sync DELAYED','08:54 — Sync OK']},
-  {name:'Chabot College',sis:'Banner',status:'ok',detail:'Last sync: 3m ago',badge:'Healthy',uptime:'99.5%',lastErr:'Token refresh (7d ago)',endpoint:'/ethos/v1/sections',history:['09:13 — Sync OK','09:11 — Sync OK','09:09 — Sync OK']},
-  {name:'Sacramento City',sis:'Banner',status:'err',detail:'Ethos token expired',badge:'Failing',uptime:'94.1%',lastErr:'Token expired (14m ago)',endpoint:'/ethos/v1/sections',history:['09:14 — ERROR 401','09:12 — ERROR 401','09:10 — ERROR 401','09:00 — Last successful sync']},
-  {name:'Butte College',sis:'Banner',status:'ok',detail:'Last sync: 1m ago',badge:'Healthy',uptime:'99.7%',lastErr:'Schema mismatch (14d ago)',endpoint:'/ethos/v1/sections',history:['09:15 — Sync OK','09:13 — Sync OK']},
-  {name:'Mt. San Antonio',sis:'PeopleSoft',status:'ok',detail:'Last sync: 2m ago',badge:'Healthy',uptime:'99.6%',lastErr:'None (30d)',endpoint:'/ps/webservice/enrollment',history:['09:14 — Sync OK','09:12 — AER transmitted','09:10 — Sync OK']},
-  {name:'Pasadena City',sis:'PeopleSoft',status:'ok',detail:'Last sync: 4m ago',badge:'Healthy',uptime:'99.3%',lastErr:'Timeout (5d ago)',endpoint:'/ps/webservice/enrollment',history:['09:12 — Sync OK','09:08 — Sync OK']},
-  {name:'Long Beach City',sis:'PeopleSoft',status:'warn',detail:'AER queue: 12 pending',badge:'Slow',uptime:'96.8%',lastErr:'Queue backup (1h ago)',endpoint:'/ps/webservice/enrollment',history:['09:14 — Queue depth: 12','09:10 — Queue depth: 8','09:06 — Queue depth: 3']},
-  {name:'Riverside City',sis:'PeopleSoft',status:'err',detail:'SAML config incomplete',badge:'Blocked',uptime:'88.4%',lastErr:'SAML assertion fail (28m)',endpoint:'/ps/webservice/enrollment',history:['09:14 — SAML REJECTED','09:12 — SAML REJECTED','09:00 — Onboarding incomplete']},
-  {name:'Santa Monica',sis:'PeopleSoft',status:'ok',detail:'Last sync: 1m ago',badge:'Healthy',uptime:'99.8%',lastErr:'None (30d)',endpoint:'/ps/webservice/enrollment',history:['09:15 — Sync OK','09:13 — Sync OK']},
-  {name:'El Camino',sis:'PeopleSoft',status:'ok',detail:'Last sync: 3m ago',badge:'Healthy',uptime:'99.4%',lastErr:'Data mismatch (10d ago)',endpoint:'/ps/webservice/enrollment',history:['09:13 — Sync OK','09:11 — Sync OK']},
-  {name:'Yuba College',sis:'Colleague',status:'ok',detail:'Last sync: 5m ago',badge:'Healthy',uptime:'99.1%',lastErr:'Timeout (8d ago)',endpoint:'/colleague/api/enrollment',history:['09:11 — Sync OK','09:06 — Sync OK']},
-  {name:'Lake Tahoe CC',sis:'Colleague',status:'warn',detail:'Residency validation slow',badge:'Degraded',uptime:'95.6%',lastErr:'Validation timeout (2h)',endpoint:'/colleague/api/enrollment',history:['09:14 — Validation SLOW (4.2s)','09:10 — Validation SLOW (3.8s)','09:06 — Sync OK']},
-  {name:'Lassen College',sis:'Colleague',status:'ok',detail:'Last sync: 2m ago',badge:'Healthy',uptime:'99.3%',lastErr:'None (30d)',endpoint:'/colleague/api/enrollment',history:['09:14 — Sync OK','09:12 — Sync OK']},
-  {name:'Feather River',sis:'Colleague',status:'err',detail:'API endpoint timeout',badge:'Failing',uptime:'91.2%',lastErr:'Timeout (3h ago)',endpoint:'/colleague/api/enrollment',history:['09:14 — TIMEOUT','09:12 — TIMEOUT','09:08 — TIMEOUT','08:30 — Last successful sync']},
-  {name:'Mendocino College',sis:'Colleague',status:'ok',detail:'Last sync: 4m ago',badge:'Healthy',uptime:'99.0%',lastErr:'Token refresh (12d ago)',endpoint:'/colleague/api/enrollment',history:['09:12 — Sync OK','09:08 — Sync OK']},
+{name:'Foothill College',sis:'Banner',status:'ok',detail:'Last sync: 2m ago',badge:'Healthy',uptime:'99.8%',lastErr:'None (30d)',endpoint:'/ethos/v1/sections',history:['09:14 — Sync OK','09:12 — Sync OK','09:10 — Sync OK']},
+{name:'De Anza College',sis:'Banner',status:'ok',detail:'Last sync: 1m ago',badge:'Healthy',uptime:'99.9%',lastErr:'None (30d)',endpoint:'/ethos/v1/sections',history:['09:15 — Sync OK','09:13 — AER transmitted']},
+{name:'City College SF',sis:'Banner',status:'warn',detail:'Seat count delay: 8min',badge:'Degraded',uptime:'97.2%',lastErr:'Seat sync timeout (2h ago)',endpoint:'/ethos/v1/registrations',history:['09:14 — DELAYED','09:06 — Sync OK']},
+{name:'Sacramento City',sis:'Banner',status:'err',detail:'Ethos token expired',badge:'Failing',uptime:'94.1%',lastErr:'Token expired (14m ago)',endpoint:'/ethos/v1/sections',history:['09:14 — ERROR 401','09:12 — ERROR 401']},
+{name:'Mt. San Antonio',sis:'PeopleSoft',status:'ok',detail:'Last sync: 2m ago',badge:'Healthy',uptime:'99.6%',lastErr:'None (30d)',endpoint:'/ps/webservice/enrollment',history:['09:14 — Sync OK','09:12 — AER transmitted']},
+{name:'Pasadena City',sis:'PeopleSoft',status:'ok',detail:'Last sync: 4m ago',badge:'Healthy',uptime:'99.3%',lastErr:'Timeout (5d ago)',endpoint:'/ps/webservice/enrollment',history:['09:12 — Sync OK']},
+{name:'Long Beach City',sis:'PeopleSoft',status:'warn',detail:'AER queue: 12 pending',badge:'Slow',uptime:'96.8%',lastErr:'Queue backup (1h ago)',endpoint:'/ps/webservice/enrollment',history:['09:14 — Queue depth: 12']},
+{name:'Riverside City',sis:'PeopleSoft',status:'err',detail:'SAML config incomplete',badge:'Blocked',uptime:'88.4%',lastErr:'SAML fail (28m)',endpoint:'/ps/webservice/enrollment',history:['09:14 — SAML REJECTED']},
+{name:'Yuba College',sis:'Colleague',status:'ok',detail:'Last sync: 5m ago',badge:'Healthy',uptime:'99.1%',lastErr:'Timeout (8d ago)',endpoint:'/colleague/api/enrollment',history:['09:11 — Sync OK']},
+{name:'Lake Tahoe CC',sis:'Colleague',status:'warn',detail:'Residency validation slow',badge:'Degraded',uptime:'95.6%',lastErr:'Validation timeout (2h)',endpoint:'/colleague/api/enrollment',history:['09:14 — Validation SLOW']},
+{name:'Feather River',sis:'Colleague',status:'err',detail:'API endpoint timeout',badge:'Failing',uptime:'91.2%',lastErr:'Timeout (3h ago)',endpoint:'/colleague/api/enrollment',history:['09:14 — TIMEOUT','09:12 — TIMEOUT']},
 ];
-
 let monFilter='all',monQuery='',expandedRow=null;
-
-function setFilter(f,el){
-  monFilter=f;document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderMonitor();
-}
+function setFilter(f,el){monFilter=f;document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderMonitor()}
 function filterMonitor(){monQuery=document.getElementById('monSearch').value.toLowerCase();renderMonitor()}
-
 function renderMonitor(){
-  let filtered=allColleges.filter(c=>{
-    if(monFilter!=='all'&&c.status!==monFilter)return false;
-    if(monQuery&&!c.name.toLowerCase().includes(monQuery)&&!c.sis.toLowerCase().includes(monQuery))return false;
-    return true;
-  });
-  const groups={Banner:[],PeopleSoft:[],Colleague:[]};
-  filtered.forEach(c=>groups[c.sis]&&groups[c.sis].push(c));
-  const ok=filtered.filter(c=>c.status==='ok').length,warn=filtered.filter(c=>c.status==='warn').length,err=filtered.filter(c=>c.status==='err').length;
-  document.getElementById('monSummary').innerHTML=`<div class="ms-cell"><div class="ms-num ms-num-g">${ok}</div><div class="ms-label">Healthy</div></div><div class="ms-cell"><div class="ms-num ms-num-a">${warn}</div><div class="ms-label">Degraded</div></div><div class="ms-cell"><div class="ms-num ms-num-r">${err}</div><div class="ms-label">Failing</div></div><div class="ms-cell"><div class="ms-num ms-num-b">${filtered.length}</div><div class="ms-label">Showing</div></div>`;
-  let html='';
-  for(const[sis,items]of Object.entries(groups)){
-    if(!items.length)continue;
-    html+=`<div class="status-panel"><div class="sp-header"><div class="sp-title">${sis}</div><div class="sp-count">${items.length} colleges</div></div><div class="sp-body">`;
-    items.forEach((c,i)=>{
-      const uid=sis+'-'+i;
-      html+=`<div class="status-row" id="sr-${uid}" onclick="toggleRow('${uid}',this)"><div class="s-indicator s-${c.status}"></div><div class="s-info"><div class="s-name">${c.name}</div><div class="s-detail">${c.detail}</div></div><span class="s-badge sb-${c.status}">${c.badge}</span><span class="s-expand-icon">▾</span></div>`;
-      html+=`<div class="row-detail" id="rd-${uid}"><div class="rd-grid"><div class="rd-item"><div class="rd-label">SIS Platform</div><div class="rd-value">${c.sis}</div></div><div class="rd-item"><div class="rd-label">30-Day Uptime</div><div class="rd-value">${c.uptime}</div></div><div class="rd-item"><div class="rd-label">Last Error</div><div class="rd-value">${c.lastErr}</div></div><div class="rd-item"><div class="rd-label">Endpoint</div><div class="rd-value" style="font-family:var(--mono);font-size:.62rem">${c.endpoint}</div></div></div><div class="rd-history"><strong style="font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:.25rem;color:var(--text-2)">Recent Sync History</strong>${c.history.map(h=>`<span>${h}</span>`).join('')}</div></div>`;
-    });
-    html+=`</div></div>`;
-  }
-  document.getElementById('monitorGrid').innerHTML=html;
-}
-function toggleRow(uid,el){
-  const rd=document.getElementById('rd-'+uid);
-  if(expandedRow&&expandedRow!==uid){
-    document.getElementById('rd-'+expandedRow)?.classList.remove('show');
-    document.getElementById('sr-'+expandedRow)?.classList.remove('expanded');
-  }
-  const isOpen=rd.classList.contains('show');
-  rd.classList.toggle('show');el.classList.toggle('expanded');
-  expandedRow=isOpen?null:uid;
-}
-renderMonitor();
-let refreshCount=30;
-setInterval(()=>{refreshCount--;if(refreshCount<=0){refreshCount=30;renderMonitor()}document.getElementById('refreshTimer').textContent=`Auto-refresh: ${refreshCount}s`},1000);
+let filtered=allColleges.filter(c=>{if(monFilter!=='all'&&c.status!==monFilter)return false;if(monQuery&&!c.name.toLowerCase().includes(monQuery)&&!c.sis.toLowerCase().includes(monQuery))return false;return true});
+const groups={Banner:[],PeopleSoft:[],Colleague:[]};filtered.forEach(c=>groups[c.sis]&&groups[c.sis].push(c));
+const ok=filtered.filter(c=>c.status==='ok').length,warn=filtered.filter(c=>c.status==='warn').length,err=filtered.filter(c=>c.status==='err').length;
+document.getElementById('monSummary').innerHTML='<div class="ms-cell"><div class="ms-num ms-num-g">'+ok+'</div><div class="ms-label">Healthy</div></div><div class="ms-cell"><div class="ms-num ms-num-a">'+warn+'</div><div class="ms-label">Degraded</div></div><div class="ms-cell"><div class="ms-num ms-num-r">'+err+'</div><div class="ms-label">Failing</div></div><div class="ms-cell"><div class="ms-num ms-num-b">'+filtered.length+'</div><div class="ms-label">Showing</div></div>';
+let html='';for(const[sis,items]of Object.entries(groups)){if(!items.length)continue;html+='<div class="status-panel"><div class="sp-header"><div class="sp-title">'+sis+'</div><div class="sp-count">'+items.length+' colleges</div></div><div class="sp-body">';items.forEach((c,i)=>{const uid=sis+'-'+i;html+='<div class="status-row" id="sr-'+uid+'" onclick="toggleRow(\''+uid+'\',this)"><div class="s-indicator s-'+c.status+'"></div><div class="s-info"><div class="s-name">'+c.name+'</div><div class="s-detail">'+c.detail+'</div></div><span class="s-badge sb-'+c.status+'">'+c.badge+'</span><span class="s-expand-icon">▾</span></div><div class="row-detail" id="rd-'+uid+'"><div class="rd-grid"><div class="rd-item"><div class="rd-label">Uptime</div><div class="rd-value">'+c.uptime+'</div></div><div class="rd-item"><div class="rd-label">Last Error</div><div class="rd-value">'+c.lastErr+'</div></div></div><div class="rd-history"><strong style="font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:.25rem;color:var(--text-2)">Recent</strong>'+c.history.map(h=>'<span>'+h+'</span>').join('')+'</div></div>'});html+='</div></div>'}
+document.getElementById('monitorGrid').innerHTML=html}
+function toggleRow(uid,el){const rd=document.getElementById('rd-'+uid);if(expandedRow&&expandedRow!==uid){document.getElementById('rd-'+expandedRow)?.classList.remove('show');document.getElementById('sr-'+expandedRow)?.classList.remove('expanded')}const isOpen=rd.classList.contains('show');rd.classList.toggle('show');el.classList.toggle('expanded');expandedRow=isOpen?null:uid}
+renderMonitor();let refreshCount=30;setInterval(()=>{refreshCount--;if(refreshCount<=0){refreshCount=30}document.getElementById('refreshTimer').textContent='Auto-refresh: '+refreshCount+'s'},1000);
 
 // ═══ TRACER ═══
 const stages=[
-  {icon:'ℹ',cls:'td-icon-info',title:'Student Report — Cross-Enrollment Failure',lines:[
-    {ts:'09:14:22',cls:'log-info',text:'TICKET CVC-4821 opened'},
-    {ts:'09:14:22',cls:'',text:'Reporter: Student at Chabot College'},
-    {ts:'09:14:22',cls:'',text:'Issue: "Enrolled in MATH 1A at De Anza through'},
-    {ts:'',cls:'',text:'  the Exchange but course not in Canvas dashboard."'},
-    {ts:'09:15:01',cls:'log-info',text:'Verified: Enrollment confirmed in home SIS'},
-    {ts:'09:15:01',cls:'log-warn',text:'Canvas roster: Student NOT present'}
-  ],actions:['Verify enrollment in home SIS','Check teaching college roster','Proceed to SIS query →']},
-  {icon:'✓',cls:'td-icon-ok',title:'SIS Query — Banner Record Confirmed',lines:[
-    {ts:'09:18:44',cls:'log-info',text:'QUERY Banner SFRSTCR: CCCID 0012847593'},
-    {ts:'09:18:44',cls:'log-ok',text:'RESULT: MATH-1A-001 | De Anza | Status: RE'},
-    {ts:'09:18:44',cls:'log-ok',text:'Enrollment date: 2026-03-17 14:22:08'},
-    {ts:'09:18:45',cls:'log-ok',text:'Residency: Validated | Aid consortium: Active'},
-    {ts:'09:19:02',cls:'log-info',text:'SIS record correct. Issue is downstream.'},
-  ],actions:['SIS record confirmed ✓','Check Ethos API transmission','Review AER payload →']},
-  {icon:'✕',cls:'td-icon-err',title:'API Layer — Ethos Token Refresh Failure',lines:[
-    {ts:'09:22:11',cls:'log-info',text:'QUERY Ethos Integration API logs'},
-    {ts:'09:22:11',cls:'',text:'Filter: CCCID 0012847593 | Last 48 hours'},
-    {ts:'09:22:12',cls:'log-err',text:'ERROR 401: OAuth2 token expired'},
-    {ts:'09:22:12',cls:'log-err',text:'Token refresh failed: invalid_grant'},
-    {ts:'09:22:12',cls:'log-warn',text:'Last successful sync: 2026-03-17 02:00:00'},
-    {ts:'09:22:13',cls:'log-err',text:'AER payload NOT transmitted to teaching college'},
-    {ts:'09:22:13',cls:'log-info',text:'ROOT CAUSE IDENTIFIED: Layer 03 — API auth'},
-  ],actions:['Regenerate Ethos API key','Verify client credentials','Check token expiration policy','Escalate to Ellucian →']},
-  {icon:'⚠',cls:'td-icon-warn',title:'Exchange — AER Transmission Blocked',lines:[
-    {ts:'09:24:30',cls:'log-info',text:'CVC Exchange queue inspection'},
-    {ts:'09:24:31',cls:'log-warn',text:'47 AER records pending: Chabot → De Anza'},
-    {ts:'09:24:31',cls:'log-warn',text:'Oldest pending: 2026-03-17 02:14:00'},
-    {ts:'09:24:32',cls:'log-info',text:'Teaching college SIS never received enrollment'},
-    {ts:'09:24:32',cls:'log-info',text:'Canvas roster sync depends on SIS — also failed'},
-    {ts:'09:24:33',cls:'log-warn',text:'SCOPE: All Chabot cross-enrollments since 3/17'},
-  ],actions:['Quantify affected students','Notify campus IT contacts','Prepare batch re-sync →']},
-  {icon:'✓',cls:'td-icon-ok',title:'Resolution — Token Regenerated, Queue Flushed',lines:[
-    {ts:'09:32:00',cls:'log-ok',text:'New Ethos API credentials generated'},
-    {ts:'09:32:15',cls:'log-ok',text:'Token refresh: SUCCESS'},
-    {ts:'09:33:00',cls:'log-ok',text:'AER queue flush initiated: 47 records'},
-    {ts:'09:35:22',cls:'log-ok',text:'All 47 records transmitted successfully'},
-    {ts:'09:38:00',cls:'log-ok',text:'Canvas roster sync confirmed for MATH-1A-001'},
-    {ts:'09:38:01',cls:'log-info',text:'KB article drafted: "Ethos Token Expiration Fix"'},
-    {ts:'09:38:01',cls:'log-info',text:'Token rotation added to monitoring schedule'},
-  ],actions:['Verify student Canvas access','Update KB article','Add token expiry to monitoring','Close ticket CVC-4821 ✓']}
+{icon:'ℹ',cls:'td-icon-info',title:'Student Report — Cross-Enrollment Failure',lines:[{ts:'09:14:22',cls:'log-info',text:'TICKET CVC-4821 opened'},{ts:'09:14:22',cls:'',text:'Reporter: Student at Chabot College'},{ts:'09:15:01',cls:'log-warn',text:'Canvas roster: Student NOT present'}],actions:['Verify enrollment','Check roster','Proceed →']},
+{icon:'✓',cls:'td-icon-ok',title:'SIS Query — Banner Record Confirmed',lines:[{ts:'09:18:44',cls:'log-ok',text:'RESULT: MATH-1A-001 | De Anza | Status: RE'},{ts:'09:19:02',cls:'log-info',text:'SIS record correct. Issue downstream.'}],actions:['SIS confirmed ✓','Check Ethos →']},
+{icon:'✕',cls:'td-icon-err',title:'API Layer — Ethos Token Refresh Failure',lines:[{ts:'09:22:12',cls:'log-err',text:'ERROR 401: OAuth2 token expired'},{ts:'09:22:12',cls:'log-err',text:'Token refresh failed: invalid_grant'},{ts:'09:22:13',cls:'log-err',text:'AER payload NOT transmitted'}],actions:['Regenerate key','Verify credentials','Escalate →']},
+{icon:'⚠',cls:'td-icon-warn',title:'Exchange — AER Transmission Blocked',lines:[{ts:'09:24:31',cls:'log-warn',text:'47 AER records pending: Chabot → De Anza'},{ts:'09:24:32',cls:'log-info',text:'Teaching college SIS never received enrollment'}],actions:['Quantify affected','Notify campus','Batch re-sync →']},
+{icon:'✓',cls:'td-icon-ok',title:'Resolution — Token Regenerated, Queue Flushed',lines:[{ts:'09:32:15',cls:'log-ok',text:'Token refresh: SUCCESS'},{ts:'09:35:22',cls:'log-ok',text:'All 47 records transmitted'},{ts:'09:38:01',cls:'log-info',text:'KB article drafted'}],actions:['Verify access','Update KB','Close ✓']}
 ];
-
 let currentStage=-1,autoRunning=false;
-
-function buildTracerFlow(){
-  document.getElementById('tracerFlow').innerHTML=stages.map((_,i)=>`<div class="tf-node" data-stage="${i}" onclick="setStage(${i})"><div class="tf-check">✓</div><div class="tf-num">Layer 0${i+1}</div><div class="tf-name">${['User Report','SIS Query','API / Ethos','Exchange','Resolution'][i]}</div><div class="tf-sub">${['Student symptom','Banner enrollment','Integration layer','CVC middleware','Root cause + fix'][i]}</div></div>`).join('');
-}
+function buildTracerFlow(){document.getElementById('tracerFlow').innerHTML=stages.map((_,i)=>'<div class="tf-node" onclick="setStage('+i+')"><div class="tf-check">✓</div><div class="tf-num">Layer 0'+(i+1)+'</div><div class="tf-name">'+['User Report','SIS Query','API / Ethos','Exchange','Resolution'][i]+'</div><div class="tf-sub">'+['Student symptom','Banner record','Integration layer','CVC middleware','Root cause + fix'][i]+'</div></div>').join('')}
 buildTracerFlow();
-
-function setStage(n){
-  currentStage=n;
-  document.querySelectorAll('.tf-node').forEach((nd,i)=>{
-    nd.classList.remove('active','error-node','passed');
-    if(i<n)nd.classList.add('passed');
-    else if(i===n){nd.classList.add(i===2?'error-node':'active')}
-  });
-  const s=stages[n];
-  const logHtml=s.lines.map((l,i)=>{
-    const ts=l.ts?`<span class="log-ts">[2026-03-19 ${l.ts} PST]</span> `:'';
-    const cls=l.cls?` class="${l.cls}"`:'';
-    return `<span class="log-line" style="animation-delay:${i*80}ms">${ts}<span${cls}>${l.text}</span></span>`;
-  }).join('');
-  const actHtml=s.actions.map((a,i)=>{
-    const isPrimary=i===s.actions.length-1;
-    const onclick=isPrimary&&n<4?` onclick="setStage(${n+1})"`:n===4&&isPrimary?` onclick="toast('Ticket CVC-4821 closed successfully')"`:' onclick="toast(\'Action logged\')"';
-    return `<button class="td-btn${isPrimary?' td-btn-primary':''}"${onclick}>${a}</button>`;
-  }).join('');
-  document.getElementById('tracerDetail').innerHTML=`<div class="td-header"><div class="td-icon ${s.cls}">${s.icon}</div><div class="td-title">${s.title}</div></div><div class="td-body"><div class="td-log">${logHtml}</div><div class="td-actions">${actHtml}</div></div>`;
-  document.getElementById('tracerStatus').textContent=`Layer ${n+1} of 5 — ${s.title.split('—')[0].trim()}`;
-}
-
-async function autoRunTrace(){
-  if(autoRunning)return;
-  autoRunning=true;
-  const btn=document.getElementById('autoRunBtn');
-  btn.textContent='⏳ Running...';btn.classList.add('running');
-  resetTrace();await new Promise(r=>setTimeout(r,400));
-  for(let i=0;i<5;i++){
-    setStage(i);await new Promise(r=>setTimeout(r,1800));
-  }
-  btn.textContent='▶ Auto-Run Trace';btn.classList.remove('running');
-  autoRunning=false;
-  document.getElementById('tracerStatus').textContent='Trace complete — root cause: Ethos token expiration';
-}
-function resetTrace(){
-  currentStage=-1;
-  document.querySelectorAll('.tf-node').forEach(n=>n.classList.remove('active','error-node','passed'));
-  document.getElementById('tracerDetail').innerHTML='<div style="padding:2rem;text-align:center;color:var(--text-3);font-size:.85rem">Click a layer to inspect, or click <strong>Auto-Run Trace</strong> to step through all layers automatically.</div>';
-  document.getElementById('tracerStatus').textContent='Ready — click a layer or auto-run';
-}
+function setStage(n){currentStage=n;document.querySelectorAll('.tf-node').forEach((nd,i)=>{nd.classList.remove('active','error-node','passed');if(i<n)nd.classList.add('passed');else if(i===n)nd.classList.add(i===2?'error-node':'active')});const s=stages[n];const logHtml=s.lines.map((l,i)=>'<span class="log-line" style="animation-delay:'+i*80+'ms">'+(l.ts?'<span class="log-ts">['+l.ts+']</span> ':'')+(l.cls?'<span class="'+l.cls+'">'+l.text+'</span>':l.text)+'</span>').join('');const actHtml=s.actions.map((a,i)=>{const isPrimary=i===s.actions.length-1;const oc=isPrimary&&n<4?' onclick="setStage('+(n+1)+')"':n===4&&isPrimary?' onclick="toast(\'Ticket closed\')"':' onclick="toast(\'Logged\')"';return'<button class="td-btn'+(isPrimary?' td-btn-primary':'')+'"'+oc+'>'+a+'</button>'}).join('');document.getElementById('tracerDetail').innerHTML='<div class="td-header"><div class="td-icon '+s.cls+'">'+s.icon+'</div><div class="td-title">'+s.title+'</div></div><div class="td-body"><div class="td-log">'+logHtml+'</div><div class="td-actions">'+actHtml+'</div></div>';document.getElementById('tracerStatus').textContent='Layer '+(n+1)+' of 5'}
+async function autoRunTrace(){if(autoRunning)return;autoRunning=true;const btn=document.getElementById('autoRunBtn');btn.textContent='⏳ Running...';btn.classList.add('running');resetTrace();await new Promise(r=>setTimeout(r,400));for(let i=0;i<5;i++){setStage(i);await new Promise(r=>setTimeout(r,1800))}btn.textContent='▶ Auto-Run Trace';btn.classList.remove('running');autoRunning=false;document.getElementById('tracerStatus').textContent='Trace complete — root cause: Ethos token expiration'}
+function resetTrace(){currentStage=-1;document.querySelectorAll('.tf-node').forEach(n=>n.classList.remove('active','error-node','passed'));document.getElementById('tracerDetail').innerHTML='<div style="padding:2rem;text-align:center;color:var(--text-3);font-size:.85rem">Click a layer or <strong>Auto-Run Trace</strong></div>';document.getElementById('tracerStatus').textContent='Ready'}
 resetTrace();
 
 // ═══ PATTERN ANALYZER ═══
-const chartData=[
-  {label:'W1',auth:5,sync:8,data:3,other:6},{label:'W2',auth:4,sync:7,data:5,other:4},
-  {label:'W3',auth:7,sync:6,data:4,other:5},{label:'W4',auth:6,sync:9,data:6,other:3},
-  {label:'W5',auth:12,sync:5,data:4,other:4},{label:'W6',auth:9,sync:11,data:7,other:5},
-  {label:'W7',auth:15,sync:8,data:5,other:3},{label:'W8',auth:18,sync:7,data:6,other:4},
-  {label:'W9',auth:23,sync:6,data:3,other:5},{label:'W10',auth:14,sync:10,data:8,other:4},
-  {label:'W11',auth:8,sync:12,data:5,other:3},{label:'W12',auth:6,sync:9,data:4,other:5},
-];
-const cats=['auth','sync','data','other'];
-const catColors={auth:'#7C3AED',sync:'#2563EB',data:'#F59E0B',other:'#D4D1C9'};
-const catNames={auth:'Auth / SSO',sync:'Sync Failures',data:'Data Mismatch',other:'Other'};
-let hiddenCats=new Set(),activeInsight=null;
-
-const insights=[
-  {severity:'high',title:'Auth failures clustered at 7 Banner colleges',desc:'OAuth token refresh failing post-patch. Same upstream cause presenting as different symptoms by user role.',meta:['23 tickets','7 campuses','↑ 340%'],weeks:[4,5,6,7,8]},
-  {severity:'med',title:'Seat count sync delays during peak registration',desc:'Sync jobs running before enrollment transactions commit. Race condition affecting seat availability.',meta:['15 tickets','12 campuses','↑ 85%'],weeks:[3,5,9,10]},
-  {severity:'low',title:'SAML config gaps at newly onboarded colleges',desc:'Incomplete identity provider setup blocking cross-enrollment. Documentation gap in onboarding materials.',meta:['8 tickets','4 campuses','New pattern'],weeks:[8,9,10,11]},
-];
-
-function renderChart(){
-  const cb=document.getElementById('chartBody');cb.innerHTML='';
-  const maxT=Math.max(...chartData.map(d=>cats.filter(c=>!hiddenCats.has(c)).reduce((s,c)=>s+d[c],0)));
-  const cH=180;let total=0;
-  chartData.forEach((d,idx)=>{
-    const vis=cats.filter(c=>!hiddenCats.has(c));
-    const t=vis.reduce((s,c)=>s+d[c],0);total+=t;
-    const bg=document.createElement('div');bg.className='bar-group';bg.dataset.week=idx;
-    if(activeInsight!==null&&insights[activeInsight].weeks.includes(idx))bg.classList.add('highlighted');
-    const tooltip=vis.map(c=>`<span style="color:${catColors[c]}">${catNames[c]}: ${d[c]}</span>`).join('<br>');
-    let segs='';
-    ['other','data','sync','auth'].filter(c=>!hiddenCats.has(c)).forEach(c=>{
-      const h=maxT>0?d[c]/maxT*cH:0;
-      segs+=`<div class="bar-seg bar-seg-${c}" style="height:${h}px"></div>`;
-    });
-    bg.innerHTML=`<div class="bar-tooltip">${tooltip}<br><strong style="color:#fff">Total: ${t}</strong></div><div class="bar-total">${t}</div><div class="bar-stack">${segs}</div><div class="bar-label">${d.label}</div>`;
-    cb.appendChild(bg);
-  });
-  document.getElementById('chartTotal').textContent=total;
-}
-function renderLegend(){
-  document.getElementById('chartLegend').innerHTML=cats.map(c=>`<div class="legend-item${hiddenCats.has(c)?' disabled':''}" onclick="toggleCat('${c}')"><div class="legend-dot" style="background:${catColors[c]}"></div>${catNames[c]}</div>`).join('');
-}
-function toggleCat(c){
-  if(hiddenCats.has(c))hiddenCats.delete(c);else if(hiddenCats.size<cats.length-1)hiddenCats.add(c);
-  renderChart();renderLegend();
-}
-function renderInsights(){
-  document.getElementById('insightsPanel').innerHTML=insights.map((ins,i)=>`<div class="insight-card${activeInsight===i?' insight-active':''}" onclick="toggleInsight(${i})"><div class="ic-severity ic-${ins.severity==='high'?'high':ins.severity==='med'?'med':'low'}">${ins.severity==='high'?'High Priority':ins.severity==='med'?'Trending':'Monitoring'}</div><div class="ic-title">${ins.title}</div><div class="ic-desc">${ins.desc}</div><div class="ic-meta">${ins.meta.map(m=>`<span>${m}</span>`).join('')}</div></div>`).join('');
-}
+const chartData=[{label:'W1',auth:5,sync:8,data:3,other:6},{label:'W2',auth:4,sync:7,data:5,other:4},{label:'W3',auth:7,sync:6,data:4,other:5},{label:'W4',auth:6,sync:9,data:6,other:3},{label:'W5',auth:12,sync:5,data:4,other:4},{label:'W6',auth:9,sync:11,data:7,other:5},{label:'W7',auth:15,sync:8,data:5,other:3},{label:'W8',auth:18,sync:7,data:6,other:4},{label:'W9',auth:23,sync:6,data:3,other:5},{label:'W10',auth:14,sync:10,data:8,other:4},{label:'W11',auth:8,sync:12,data:5,other:3},{label:'W12',auth:6,sync:9,data:4,other:5}];
+const cats=['auth','sync','data','other'];const catColors2={auth:'#7C3AED',sync:'#2563EB',data:'#F59E0B',other:'#D4D1C9'};const catNames={auth:'Auth / SSO',sync:'Sync Failures',data:'Data Mismatch',other:'Other'};let hiddenCats=new Set(),activeInsight=null;
+const insights=[{severity:'high',title:'Auth failures at 7 Banner colleges',desc:'OAuth token refresh failing post-patch.',meta:['23 tickets','7 campuses','↑ 340%'],weeks:[4,5,6,7,8]},{severity:'med',title:'Seat count sync delays at peak',desc:'Race condition affecting seat availability.',meta:['15 tickets','12 campuses'],weeks:[3,5,9,10]},{severity:'low',title:'SAML config gaps at new colleges',desc:'Incomplete IdP setup blocking enrollment.',meta:['8 tickets','4 campuses'],weeks:[8,9,10,11]}];
+function renderChart(){const cb=document.getElementById('chartBody');cb.innerHTML='';const maxT=Math.max(...chartData.map(d=>cats.filter(c=>!hiddenCats.has(c)).reduce((s,c)=>s+d[c],0)));const cH=180;let total=0;chartData.forEach((d,idx)=>{const vis=cats.filter(c=>!hiddenCats.has(c));const t=vis.reduce((s,c)=>s+d[c],0);total+=t;const bg=document.createElement('div');bg.className='bar-group';if(activeInsight!==null&&insights[activeInsight].weeks.includes(idx))bg.classList.add('highlighted');const tooltip=vis.map(c=>'<span style="color:'+catColors2[c]+'">'+catNames[c]+': '+d[c]+'</span>').join('<br>');let segs='';['other','data','sync','auth'].filter(c=>!hiddenCats.has(c)).forEach(c=>{const h=maxT>0?d[c]/maxT*cH:0;segs+='<div class="bar-seg bar-seg-'+c+'" style="height:'+h+'px"></div>'});bg.innerHTML='<div class="bar-tooltip">'+tooltip+'<br><strong style="color:#fff">Total: '+t+'</strong></div><div class="bar-total">'+t+'</div><div class="bar-stack">'+segs+'</div><div class="bar-label">'+d.label+'</div>';cb.appendChild(bg)});document.getElementById('chartTotal').textContent=total}
+function renderLegend(){document.getElementById('chartLegend').innerHTML=cats.map(c=>'<div class="legend-item'+(hiddenCats.has(c)?' disabled':'')+'" onclick="toggleCat(\''+c+'\')"><div class="legend-dot" style="background:'+catColors2[c]+'"></div>'+catNames[c]+'</div>').join('')}
+function toggleCat(c){if(hiddenCats.has(c))hiddenCats.delete(c);else if(hiddenCats.size<cats.length-1)hiddenCats.add(c);renderChart();renderLegend()}
+function renderInsights(){document.getElementById('insightsPanel').innerHTML=insights.map((ins,i)=>'<div class="insight-card'+(activeInsight===i?' insight-active':'')+'" onclick="toggleInsight('+i+')"><div class="ic-severity ic-'+(ins.severity==='high'?'high':ins.severity==='med'?'med':'low')+'">'+(ins.severity==='high'?'High Priority':ins.severity==='med'?'Trending':'Monitoring')+'</div><div class="ic-title">'+ins.title+'</div><div class="ic-desc">'+ins.desc+'</div><div class="ic-meta">'+ins.meta.map(m=>'<span>'+m+'</span>').join('')+'</div></div>').join('')}
 function toggleInsight(i){activeInsight=activeInsight===i?null:i;renderChart();renderInsights()}
 renderChart();renderLegend();renderInsights();
 
 // ═══ KB BUILDER ═══
 const kbTemplates=[
-  {title:'Ethos API Token Refresh Failure',cat:'Integration Fix',severity:'P2 · Service Degraded',desc:'Ethos API OAuth2 token has expired or is failing to auto-refresh, preventing AER transmission from the home college SIS to the CVC Exchange.',
-   steps:['Confirm the failure in Ethos Integration logs — look for HTTP 401 with "invalid_grant" in the response body.','Check the token expiration policy in Ethos admin. Default is 60 minutes; some colleges set shorter windows.','Navigate to Ethos Integration > API Keys and regenerate the client credentials for the affected integration.','Run a manual test sync with a known enrollment record to confirm the new token works end-to-end.','Flush the AER queue for any records blocked during the outage. Verify transmission to the teaching college.','Add a token expiry monitoring alert set to trigger 24 hours before expiration to prevent recurrence.'],
-   escalation:'If token regeneration fails or Ethos admin is inaccessible, escalate to Ellucian support with the integration ID, error timestamp, and HTTP response body. CC the campus SIS administrator.'},
-  {title:'SAML SSO Configuration — Cross-Enrollment',cat:'Auth / SSO Issue',severity:'P2 · Enrollment Blocked',desc:'Student unable to access courses at a teaching college due to incomplete or misconfigured SAML identity provider setup in the CVC Exchange.',
-   steps:['Verify the SAML metadata is correctly registered for the home college in the Exchange IdP configuration.','Check the SAML assertion attributes — CCCID, email, and enrollment status must all be present.','Test the SSO redirect flow in a browser with developer tools open. Look for the SAML response in the network tab.','If attributes are missing, work with campus IT to update the IdP attribute release policy.','After fix, verify the student can access Canvas at the teaching college and the course appears in their dashboard.'],
-   escalation:'If the campus IT contact is unreachable or the IdP configuration requires vendor support, escalate with the SAML trace output and the specific missing attributes documented.'},
-  {title:'Enrollment Sync Race Condition Fix',cat:'Sync Resolution',severity:'P3 · Data Accuracy',desc:'Enrollment records in the CVC Exchange do not match the home college SIS because the sync job runs before the enrollment transaction has fully committed.',
-   steps:['Identify the sync schedule for the affected college. Check if it runs on a fixed interval or event-triggered.','Compare the enrollment timestamp in the SIS with the last successful sync time. If enrollment is newer, the sync missed it.','Request the campus adjust the sync delay to allow a buffer after enrollment commits (recommended: 5–10 minute offset).','Run a manual re-sync for affected records and verify accuracy in the Exchange.'],
-   escalation:'If the campus cannot modify sync timing due to SIS vendor constraints, document the gap and escalate to the CVC engineering team for a middleware-level retry mechanism.'},
-  {title:'New College Onboarding — CVC Exchange',cat:'Onboarding Guide',severity:'Setup',desc:'Step-by-step checklist for bringing a new college onto the CVC Exchange. Covers SIS integration, SAML setup, seat count configuration, and validation testing.',
-   steps:['Confirm the college\'s SIS platform (Banner, PeopleSoft, or Colleague) and version. Identify the campus IT contact.','Provide the Ethos / API integration package for their SIS type. Include endpoint URLs, auth credentials, and schema docs.','Walk through SAML IdP configuration with campus IT. Verify attribute release: CCCID, email, enrollment status.','Configure seat count sync for all sections offered through the Exchange. Test with a sample course.','Run end-to-end enrollment test: student at a partner college enrolls, verify flow through all layers to Canvas roster.','Provide campus IT with the standard KB article set for common troubleshooting scenarios.'],
-   escalation:'Onboarding delays are often caused by campus IT availability. If stalled for >2 weeks, escalate to the CVC-OEI program manager.'}
+{title:'Ethos API Token Refresh Failure',cat:'Integration Fix',severity:'P2',desc:'Ethos API OAuth2 token has expired, preventing AER transmission from home college SIS to the CVC Exchange.',steps:['Confirm failure in Ethos logs — look for HTTP 401 with "invalid_grant".','Check token expiration policy in Ethos admin.','Regenerate client credentials for affected integration.','Run manual test sync to confirm new token works.','Flush AER queue for blocked records.','Add token expiry monitoring alert.'],escalation:'If regeneration fails, escalate to Ellucian with integration ID and error timestamp.'},
+{title:'SAML SSO Configuration Issue',cat:'Auth / SSO',severity:'P2',desc:'Student unable to access teaching college courses due to misconfigured SAML IdP.',steps:['Verify SAML metadata registered for home college.','Check assertion attributes: CCCID, email, enrollment status.','Test SSO redirect flow in browser dev tools.','Work with campus IT to update attribute release policy.','Verify student Canvas access after fix.'],escalation:'If campus IT unreachable, escalate with SAML trace and missing attributes.'},
+{title:'Enrollment Sync Race Condition',cat:'Sync Resolution',severity:'P3',desc:'Sync job runs before enrollment transaction commits, causing data mismatch.',steps:['Identify sync schedule for affected college.','Compare enrollment timestamp with last sync time.','Request campus adjust sync delay (5-10 min offset).','Run manual re-sync for affected records.'],escalation:'If campus cannot modify timing, escalate for middleware retry mechanism.'},
+{title:'New College Onboarding',cat:'Onboarding',severity:'Setup',desc:'Step-by-step checklist for bringing a new college onto the CVC Exchange.',steps:['Confirm SIS platform and version. Identify campus IT contact.','Provide Ethos/API integration package for their SIS type.','Walk through SAML IdP configuration with campus IT.','Configure seat count sync. Test with sample course.','Run end-to-end enrollment test through all layers to Canvas.','Provide standard KB article set for troubleshooting.'],escalation:'If stalled >2 weeks, escalate to CVC-OEI program manager.'}
+];
+let currentKB=0,kbStatus='draft',kbEdits={};
+function loadKB(idx,el){currentKB=idx;kbStatus='draft';kbEdits={};document.querySelectorAll('.kb-nav-item').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');renderKB()}
+function renderKB(){const t=kbTemplates[currentKB];const title=kbEdits.title||t.title;const desc=kbEdits.desc||t.desc;const steps=kbEdits.steps||[...t.steps];const esc=kbEdits.escalation||t.escalation;document.getElementById('kbMain').innerHTML='<div class="kb-header-row"><div class="kb-status '+(kbStatus==='published'?'kb-status-published':'kb-status-draft')+'">'+(kbStatus==='published'?'● Published':'◐ Draft')+'</div><div class="kb-doc-meta"><span>📁 '+t.cat+'</span><span>🔴 '+t.severity+'</span></div></div><input class="kb-doc-title-input" value="'+title+'" oninput="kbEdits.title=this.value"><div class="kb-field" style="margin-top:1rem"><label class="kb-label">Description</label><textarea class="kb-textarea" oninput="kbEdits.desc=this.value">'+desc+'</textarea></div><div class="kb-field"><label class="kb-label">Resolution Steps</label><div class="kb-steps">'+steps.map((s,i)=>'<div class="kb-step"><div class="kb-step-num">'+(i+1)+'</div><textarea class="kb-step-input" rows="1" oninput="getSteps()['+i+']=this.value">'+s+'</textarea><div class="kb-step-actions"><button class="kb-step-btn del" onclick="removeStep('+i+')">✕</button></div></div>').join('')+'</div><div class="kb-add-step" onclick="addStep()">+ Add Step</div></div><div class="kb-field"><label class="kb-label">Escalation</label><div class="kb-escalation"><div class="kb-esc-label">When to Escalate</div><textarea class="kb-esc-input" oninput="kbEdits.escalation=this.value">'+esc+'</textarea></div></div><div class="kb-footer"><button class="kb-btn kb-btn-save" onclick="kbStatus=\'draft\';renderKB();toast(\'Draft saved\')">💾 Save</button><button class="kb-btn kb-btn-publish" onclick="kbStatus=\'published\';renderKB();toast(\'Published\')">🚀 Publish</button><button class="kb-btn kb-btn-copy" onclick="copyKB()">📋 Copy MD</button></div>'}
+function getSteps(){if(!kbEdits.steps)kbEdits.steps=[...kbTemplates[currentKB].steps];return kbEdits.steps}
+function addStep(){getSteps().push('');renderKB()}
+function removeStep(i){const s=getSteps();if(s.length>1){s.splice(i,1);renderKB()}}
+function copyKB(){const t=kbTemplates[currentKB];let md='# '+(kbEdits.title||t.title)+'\n\n'+( kbEdits.desc||t.desc)+'\n\n## Steps\n\n';(kbEdits.steps||t.steps).forEach((s,i)=>md+=(i+1)+'. '+s+'\n');md+='\n## Escalation\n\n'+(kbEdits.escalation||t.escalation);navigator.clipboard.writeText(md).then(()=>toast('Copied as Markdown')).catch(()=>toast('Copy failed'))}
+loadKB(0,null);
+
+// ═══════════════════════════════════════════
+// BARRIER INTELLIGENCE TOOLS
+// ═══════════════════════════════════════════
+
+// BARRIER DATA
+const barriers=[
+{n:1,title:'No-Show Students Require Manual Drops',cat:'WORKFLOW',sev:'high',impact:'Teaching Colleges must manually ask A&R to drop CVC students who never attend. No automated drop path. Occupied seats block local waitlisted students.',who:'Teaching College A&R staff, local students on waitlists',approach:'Track ticket volume by college and term. Document manual workaround clearly. Surface pattern data for product automation prioritization.'},
+{n:2,title:"Prerequisites Can't Be Verified Across Colleges",cat:'INTEROP',sev:'high',impact:'Courses with prerequisites excluded from Exchange. Students must upload transcripts for manual review. Many don\'t attempt it.',who:'Students needing upper-level courses, Teaching College staff',approach:'Document prerequisite clearance process. Track abandonment at this step. Flag as barrier to course access.'},
+{n:3,title:"DSPS Accommodations Don't Transfer",cat:'EQUITY',sev:'high',impact:'Students with disabilities must reapply for DSPS at Teaching College. Accommodations not carried over automatically.',who:'Students with disabilities, DSPS offices',approach:'Make DSPS steps impossible to miss in docs. Coordinate with campus DSPS contacts. Flag as equity gap.'},
+{n:4,title:'Drop-for-Nonpayment Timing Mismatch',cat:'TIMING',sev:'high',impact:'Teaching College auto-drop runs before Exchange payment sync or FA processing completes. Students dropped from classes they intend to pay for.',who:'Students relying on financial aid, low-income, first-generation',approach:'Frame as timing gap, not campus fault. Offer both-sides fix. Document for de-escalation.'},
+{n:5,title:"CCPG Fee Waiver Doesn't Auto-Transfer",cat:'COMMS',sev:'med',impact:'California College Promise Grant at Home College doesn\'t carry to Teaching College. Must reapply separately. Many get unexpected bills.',who:'Low-income students eligible for fee waivers',approach:'Ensure prominently documented. Recommend proactive start-of-term communication if tickets cluster.'},
+{n:6,title:'Residency Validation Is Manual',cat:'DATA',sev:'med',impact:'Home College A&R must manually confirm residency. Delays result in incorrect out-of-state fees at Teaching College.',who:'Students with residency data issues, A&R staff',approach:'Track incorrect fee tickets. Correlate with specific Home Colleges. Document workaround.'},
+{n:7,title:'FA Dashboard Incomplete for Ethos SIS',cat:'VENDOR',sev:'med',impact:'New FA dashboard automates for PeopleSoft and Banner Direct. Ethos colleges still pending Ellucian development.',who:'FA offices at Ethos colleges',approach:'Know which colleges are on which SIS tier. Document workarounds. Update campuses on status.'},
+{n:8,title:'MIS Reporting Requires Manual Reconciliation',cat:'FISCAL',sev:'med',impact:"Exchange data doesn't map cleanly to MIS requirements. Manual reconciliation needed. Underreporting = lost funding.",who:'IR and A&R staff at Teaching Colleges',approach:'Treat MIS tickets as high priority — fiscal, not just technical. Escalate patterns.'},
+{n:9,title:'No Waitlist Support on Exchange',cat:'PRODUCT',sev:'low',impact:"Students can't join a waitlist. Some courses show '1 seat' reserved for local waitlist, causing registration errors.",who:'Students searching for high-demand courses',approach:'Document limitation clearly. Flag ticket spikes around specific courses.'},
+{n:10,title:'OpenCCC/SAML Gaps Block Authentication',cat:'AUTH',sev:'low',impact:'Students at colleges with incomplete SAML setup blocked silently — no clear error message.',who:'Students at misconfigured colleges',approach:'Trace auth issues to student/campus/proxy level. Maintain list of known gaps. Coordinate with CCC Tech Center.'}
 ];
 
-let currentKB=0,kbStatus='draft',kbEdits={};
+// RENDER BARRIER CARDS
+const bGrid=document.getElementById('bGrid');
+barriers.forEach(b=>{const card=document.createElement('div');card.className='b-card b-sev-'+b.sev;card.innerHTML='<div class="b-head"><div class="b-num">'+b.n+'</div><div class="b-title">'+b.title+'</div><span class="b-cat">'+b.cat+'</span><div class="b-sev-dot"></div></div><div class="b-detail"><div class="b-detail-grid"><div class="b-d-box"><div class="b-d-label lbl-red">The Barrier</div><div class="b-d-text">'+b.impact+'</div></div><div class="b-d-box"><div class="b-d-label lbl-grey">Who\'s Affected</div><div class="b-d-text">'+b.who+'</div></div><div class="b-d-box" style="background:var(--primary-light);border-color:var(--primary-bd)"><div class="b-d-label lbl-green">Analyst Approach</div><div class="b-d-text">'+b.approach+'</div></div></div></div>';card.addEventListener('click',()=>card.classList.toggle('expanded'));bGrid.appendChild(card)});
 
-function loadKB(idx,el){
-  currentKB=idx;kbStatus='draft';kbEdits={};
-  document.querySelectorAll('.kb-nav-item').forEach(n=>n.classList.remove('active'));
-  if(el)el.classList.add('active');
-  renderKB();
-}
-function renderKB(){
-  const t=kbEdits.title!==undefined?kbEdits:kbTemplates[currentKB];
-  const title=kbEdits.title||kbTemplates[currentKB].title;
-  const desc=kbEdits.desc||kbTemplates[currentKB].desc;
-  const steps=kbEdits.steps||[...kbTemplates[currentKB].steps];
-  const esc=kbEdits.escalation||kbTemplates[currentKB].escalation;
-  const statusCls=kbStatus==='published'?'kb-status-published':'kb-status-draft';
-  const statusTxt=kbStatus==='published'?'● Published':'◐ Draft';
-  document.getElementById('kbMain').innerHTML=`
-    <div class="kb-header-row"><div class="kb-status ${statusCls}">${statusTxt}</div><div class="kb-doc-meta"><span>📁 ${kbTemplates[currentKB].cat}</span><span>🔴 ${kbTemplates[currentKB].severity}</span></div></div>
-    <input class="kb-doc-title-input" value="${title}" oninput="kbEdits.title=this.value" placeholder="Article title...">
-    <div class="kb-field" style="margin-top:1rem"><label class="kb-label">Issue Description <span class="kb-charcount" id="descCount">${desc.length} chars</span></label><textarea class="kb-textarea" oninput="kbEdits.desc=this.value;document.getElementById('descCount').textContent=this.value.length+' chars'">${desc}</textarea></div>
-    <div class="kb-field"><label class="kb-label">Resolution Steps</label><div class="kb-steps" id="kbSteps">${steps.map((s,i)=>`
-      <div class="kb-step"><div class="kb-step-num">${i+1}</div><textarea class="kb-step-input" rows="1" oninput="getSteps()[${i}]=this.value;autoGrow(this)">${s}</textarea><div class="kb-step-actions">${i>0?`<button class="kb-step-btn" onclick="moveStep(${i},-1)" title="Move up">↑</button>`:'<div style="width:20px;height:20px"></div>'}<button class="kb-step-btn del" onclick="removeStep(${i})" title="Remove">✕</button>${i<steps.length-1?`<button class="kb-step-btn" onclick="moveStep(${i},1)" title="Move down">↓</button>`:''}</div></div>
-    `).join('')}</div><div class="kb-add-step" onclick="addStep()">+ Add Step</div></div>
-    <div class="kb-field"><label class="kb-label">Escalation Path</label><div class="kb-escalation"><div class="kb-esc-label">When to Escalate</div><textarea class="kb-esc-input" oninput="kbEdits.escalation=this.value">${esc}</textarea></div></div>
-    <div class="kb-footer"><button class="kb-btn kb-btn-save" onclick="kbStatus='draft';renderKB();toast('Draft saved')">💾 Save Draft</button><button class="kb-btn kb-btn-publish" onclick="kbStatus='published';renderKB();toast('Article published')">🚀 Publish</button><button class="kb-btn kb-btn-copy" onclick="copyKB(this)">📋 Copy as Markdown</button></div>`;
-  document.querySelectorAll('.kb-step-input').forEach(autoGrow);
-}
-function getSteps(){
-  if(!kbEdits.steps)kbEdits.steps=[...kbTemplates[currentKB].steps];
-  return kbEdits.steps;
-}
-function addStep(){getSteps().push('');renderKB();const inputs=document.querySelectorAll('.kb-step-input');inputs[inputs.length-1]?.focus()}
-function removeStep(i){const s=getSteps();if(s.length>1){s.splice(i,1);renderKB()}}
-function moveStep(i,dir){const s=getSteps();const j=i+dir;if(j>=0&&j<s.length){[s[i],s[j]]=[s[j],s[i]];renderKB()}}
-function autoGrow(el){if(el.target)el=el.target;el.style.height='auto';el.style.height=el.scrollHeight+'px'}
+// LIFECYCLE FLOW
+const lcData=[
+{step:'01',name:'Search',sub:'Find course',barriers:[],cls:'lc-ok'},
+{step:'02',name:'Auth',sub:'OpenCCC SSO',barriers:[{t:'#10 SAML',c:'tag-blue'}],cls:'lc-warn'},
+{step:'03',name:'Eligibility',sub:'Prereqs, GPA',barriers:[{t:'#2 Prereqs',c:'tag-red'},{t:'#6 Residency',c:'tag-amber'}],cls:'lc-err'},
+{step:'04',name:'Enroll',sub:'AER → SIS',barriers:[{t:'#9 Waitlist',c:'tag-blue'}],cls:'lc-warn'},
+{step:'05',name:'Payment',sub:'CC / CCPG / FA',barriers:[{t:'#4 Drop',c:'tag-red'},{t:'#5 CCPG',c:'tag-amber'}],cls:'lc-err'},
+{step:'06',name:'FA Process',sub:'Consortium',barriers:[{t:'#7 Dashboard',c:'tag-amber'}],cls:'lc-warn'},
+{step:'07',name:'Canvas',sub:'Provisioned',barriers:[],cls:'lc-ok'},
+{step:'08',name:'Attend',sub:'Show up?',barriers:[{t:'#1 No-show',c:'tag-red'},{t:'#3 DSPS',c:'tag-red'}],cls:'lc-err'},
+{step:'09',name:'MIS',sub:'Reporting',barriers:[{t:'#8 MIS',c:'tag-amber'}],cls:'lc-warn'}
+];
+const lcFlow=document.getElementById('lcFlow');
+lcData.forEach(n=>{const node=document.createElement('div');node.className='lc-node '+n.cls;let tags=n.barriers.map(b=>'<span class="lc-b-tag '+b.c+'">'+b.t+'</span>').join('');node.innerHTML='<div class="lc-step">'+n.step+'</div><div class="lc-name">'+n.name+'</div><div class="lc-sub">'+n.sub+'</div>'+(tags?'<div class="lc-barriers">'+tags+'</div>':'');lcFlow.appendChild(node)});
 
-function copyKB(){
-  const title=kbEdits.title||kbTemplates[currentKB].title;
-  const desc=kbEdits.desc||kbTemplates[currentKB].desc;
-  const steps=kbEdits.steps||kbTemplates[currentKB].steps;
-  const esc=kbEdits.escalation||kbTemplates[currentKB].escalation;
-  let md=`# ${title}\n\n**Category:** ${kbTemplates[currentKB].cat}\n**Severity:** ${kbTemplates[currentKB].severity}\n\n## Description\n\n${desc}\n\n## Resolution Steps\n\n`;
-  steps.forEach((s,i)=>md+=`${i+1}. ${s}\n`);
-  md+=`\n## Escalation\n\n${esc}\n`;
-  navigator.clipboard.writeText(md).then(()=>toast('Copied as Markdown')).catch(()=>toast('Copy failed — try manually'));
-}
-loadKB(0,null);
+// CAMPUS MATRIX
+const colleges=[
+{name:'Foothill College',sis:'Banner Direct',fa:'Full',sso:'Active',issues:[]},
+{name:'De Anza College',sis:'Banner Direct',fa:'Full',sso:'Active',issues:[]},
+{name:'Ohlone College',sis:'Colleague Ethos',fa:'Pending',sso:'Active',issues:['No-show drops','FA manual']},
+{name:'West Valley College',sis:'Banner Ethos',fa:'Pending',sso:'Active',issues:['FA manual']},
+{name:'Mission College',sis:'Banner Ethos',fa:'Pending',sso:'Partial',issues:['FA manual','SAML']},
+{name:'Skyline College',sis:'PeopleSoft',fa:'Full',sso:'Active',issues:[]},
+{name:'Cañada College',sis:'PeopleSoft',fa:'Full',sso:'Active',issues:[]},
+{name:'Chabot College',sis:'PeopleSoft',fa:'Full',sso:'Active',issues:[]},
+{name:'Gavilan College',sis:'Colleague Ethos',fa:'Pending',sso:'Active',issues:['FA manual']},
+{name:'Las Positas',sis:'PeopleSoft',fa:'Full',sso:'Partial',issues:['SAML']},
+{name:'Cabrillo College',sis:'Colleague Ethos',fa:'Pending',sso:'Active',issues:['FA manual','Residency']},
+{name:'Hartnell College',sis:'Banner Direct',fa:'Full',sso:'Active',issues:[]}
+];
+const mFilters=document.getElementById('mFilters');let activeMatrixFilter='All';
+function renderMatrix(f){const mBody=document.getElementById('mBody');mBody.innerHTML='';const filtered=f==='All'?colleges:colleges.filter(c=>c.sis===f);filtered.forEach(c=>{const tr=document.createElement('tr');const sisC=c.sis.includes('PeopleSoft')?'m-sis-p':c.sis.includes('Colleague')?'m-sis-c':'m-sis-b';const faDot=c.fa==='Full'?'m-dot-ok':'m-dot-pending';const ssoDot=c.sso==='Active'?'m-dot-ok':'m-dot-partial';const issues=c.issues.map(i=>'<span class="m-issue'+(i.includes('SAML')||i.includes('Residency')?' warn':'')+'">'+i+'</span>').join('')||'<span style="color:var(--text-3);font-size:.6rem">—</span>';tr.innerHTML='<td style="font-weight:600">'+c.name+'</td><td><span class="m-sis '+sisC+'">'+c.sis+'</span></td><td><span class="m-dot '+faDot+'"></span>'+c.fa+'</td><td><span class="m-dot '+ssoDot+'"></span>'+c.sso+'</td><td>'+issues+'</td>';mBody.appendChild(tr)})}
+['All','Banner Direct','PeopleSoft','Colleague Ethos','Banner Ethos'].forEach(f=>{const btn=document.createElement('button');btn.className='m-btn'+(f==='All'?' active':'');btn.textContent=f;btn.addEventListener('click',()=>{mFilters.querySelectorAll('.m-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderMatrix(f)});mFilters.appendChild(btn)});
+renderMatrix('All');
+
+// EQUITY SCORER
+const eqData=[
+{title:'Drop-for-Nonpayment Timing',score:9,pop:'Low-income, FA-dependent',pct:90,reason:"Can't pay upfront while waiting for FA. Dropped from classes they intend to pay for.",cls:'high'},
+{title:'DSPS Accommodations Gap',score:9,pop:'Students with disabilities',pct:90,reason:'Must navigate second bureaucracy at a college they\'ve never visited.',cls:'high'},
+{title:'CCPG Fee Waiver Gap',score:8,pop:'Low-income, first-generation',pct:80,reason:'Unexpected bills for students who assumed fee waiver carried over.',cls:'high'},
+{title:'Prerequisite Verification',score:7,pop:'Transfer-track students',pct:70,reason:'Manual process deters first-gen students who don\'t know to ask.',cls:'med'},
+{title:'No-Show Manual Drops',score:6,pop:'Teaching College staff + waitlisted students',pct:60,reason:'Seats occupied by no-shows block local students.',cls:'med'},
+{title:'FA Dashboard SIS Gaps',score:6,pop:'Students at Ethos colleges',pct:60,reason:'Manual FA workflow means slower processing.',cls:'med'},
+{title:'Residency Delays',score:5,pop:'Students with address changes',pct:50,reason:'Incorrect fee charges create confusion and financial stress.',cls:'low'},
+{title:'SAML Auth Blocks',score:4,pop:'Students at misconfigured colleges',pct:40,reason:'Silently blocked — no clear error message.',cls:'low'}
+];
+const eqGrid=document.getElementById('eqGrid');
+eqData.forEach((e,i)=>{const card=document.createElement('div');card.className='eq-card';card.innerHTML='<div class="eq-score eq-'+e.cls+'">'+e.score+'</div><div class="eq-title">'+e.title+'</div><div class="eq-pop">'+e.pop+'</div><div class="eq-bar-bg"><div class="eq-bar-fill fill-'+e.cls+'" style="width:0%"></div></div><div class="eq-reason">'+e.reason+'</div>';eqGrid.appendChild(card);setTimeout(()=>{card.querySelector('.eq-bar-fill').style.width=e.pct+'%'},200+i*100)});
+
+// TICKET CORRELATOR
+const corrData=[
+{label:'Payment & FA timing',count:127,pct:24,cls:'cb-red'},
+{label:'No-show / manual drops',count:98,pct:18,cls:'cb-amber'},
+{label:'Prerequisite clearance',count:84,pct:16,cls:'cb-purple'},
+{label:'CCPG / fee confusion',count:71,pct:13,cls:'cb-amber'},
+{label:'Authentication / SSO',count:52,pct:10,cls:'cb-blue'},
+{label:'DSPS accommodation',count:38,pct:7,cls:'cb-red'},
+{label:'Residency validation',count:31,pct:6,cls:'cb-teal'},
+{label:'MIS / reporting',count:18,pct:3,cls:'cb-purple'},
+{label:'Other',count:16,pct:3,cls:'cb-blue'}
+];
+const corrBody=document.getElementById('corrBody');
+const totalT=corrData.reduce((a,c)=>a+c.count,0);
+const sp=document.createElement('p');sp.style.cssText='font-family:var(--mono);font-size:.68rem;color:var(--text-3);margin-bottom:.75rem';
+sp.textContent=totalT+' total tickets · Q1 2026 simulated · '+Math.round((corrData[0].count+corrData[1].count+corrData[2].count)/totalT*100)+'% driven by top 3 barrier categories';
+corrBody.appendChild(sp);
+corrData.forEach((c,i)=>{const row=document.createElement('div');row.className='corr-row';row.innerHTML='<span class="corr-label">'+c.label+'</span><div class="corr-bar-bg"><div class="corr-bar '+c.cls+'" style="width:0%"></div></div><span class="corr-count">'+c.count+'</span><span class="corr-pct">'+c.pct+'%</span>';corrBody.appendChild(row);setTimeout(()=>{row.querySelector('.corr-bar').style.width=(c.count/corrData[0].count*100)+'%'},300+i*80)});
 </script>
 </body>
 </html>
