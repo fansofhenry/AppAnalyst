@@ -747,6 +747,97 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 
 .info-source{font-family:var(--mono);font-size:.52rem;color:var(--text-3);margin-top:.75rem;padding-top:.5rem;border-top:1px solid var(--border);line-height:1.5}
 
+
+/* AI CARD EXPANDED STATE */
+.ai-card{cursor:pointer}
+.ai-card-expand{display:none;margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--border);animation:fadeSlide .25s ease}
+.ai-card.ai-expanded .ai-card-expand{display:block}
+.ai-card.ai-expanded{border-color:var(--teal-bd);background:var(--surface-2)}
+
+.ai-compare{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.5rem}
+@media(max-width:600px){.ai-compare{grid-template-columns:1fr}}
+.ai-compare-col{padding:.5rem .65rem;border-radius:var(--r);font-size:.7rem;line-height:1.6}
+.ai-compare-label{font-family:var(--mono);font-size:.5rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.25rem}
+.ai-today{background:var(--bg-3);border:1px solid var(--border)}.ai-today .ai-compare-label{color:var(--text-3)}
+.ai-after{background:var(--teal-light);border:1px solid var(--teal-bd)}.ai-after .ai-compare-label{color:var(--teal)}
+
+.ai-meta{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-top:.4rem}
+.ai-tool-link{font-family:var(--mono);font-size:.52rem;padding:.15rem .4rem;border-radius:4px;background:var(--primary-light);color:var(--primary);cursor:pointer;transition:all .15s;text-decoration:none}
+.ai-tool-link:hover{background:var(--primary);color:#fff}
+.ai-complexity{font-family:var(--mono);font-size:.52rem;padding:.15rem .4rem;border-radius:4px;border:1px solid var(--border)}
+.cx-quick{color:var(--primary);border-color:var(--primary-bd);background:var(--primary-light)}
+.cx-medium{color:var(--amber);border-color:var(--amber-bd);background:var(--amber-light)}
+.cx-long{color:var(--purple);border-color:var(--purple-bd);background:var(--purple-light)}
+
+/* MATURITY SPECTRUM */
+.ai-spectrum{display:flex;gap:0;margin-bottom:1.25rem;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.ai-spec-stage{flex:1;padding:.5rem .4rem;text-align:center;border-right:1px solid var(--border);transition:all .2s;position:relative}
+.ai-spec-stage:last-child{border-right:none}
+.ai-spec-num{font-family:var(--mono);font-size:.5rem;color:var(--text-3);margin-bottom:.1rem}
+.ai-spec-label{font-weight:600;font-size:.65rem;color:var(--text);margin-bottom:.1rem}
+.ai-spec-desc{font-size:.55rem;color:var(--text-3);line-height:1.35}
+.ai-spec-stage.ai-spec-current{background:var(--primary-light);border-color:var(--primary-bd)}
+.ai-spec-stage.ai-spec-current .ai-spec-label{color:var(--primary)}
+.ai-spec-stage.ai-spec-current::after{content:'CVC is here';position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.45rem;padding:.1rem .3rem;border-radius:3px;background:var(--primary);color:#fff;white-space:nowrap}
+.ai-spec-stage.ai-spec-next{background:var(--teal-light)}
+.ai-spec-stage.ai-spec-next .ai-spec-label{color:var(--teal)}
+
+
+/* COPY BUTTON ON MESSAGES */
+.msg-preview{position:relative}
+.msg-copy{position:absolute;top:.4rem;right:.4rem;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:.2rem .45rem;font-family:var(--mono);font-size:.52rem;color:var(--text-3);cursor:pointer;opacity:0;transition:all .2s;z-index:5}
+.msg-preview:hover .msg-copy{opacity:1}
+.msg-copy:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+.msg-copy.copied{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+/* ESCALATION MATRIX */
+.esc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem}
+@media(max-width:650px){.esc-grid{grid-template-columns:1fr}}
+.esc-card{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:all .2s}
+.esc-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.esc-header{padding:.5rem .65rem;font-weight:600;font-size:.78rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.4rem}
+.esc-p1 .esc-header{background:var(--red-light);color:var(--red)}
+.esc-p2 .esc-header{background:var(--amber-light);color:var(--amber)}
+.esc-p3 .esc-header{background:var(--blue-light);color:var(--blue)}
+.esc-body{padding:.55rem .65rem;font-size:.72rem;color:var(--text-2);line-height:1.6}
+.esc-body strong{color:var(--text);font-weight:600}
+.esc-row{padding:.25rem 0;border-bottom:1px solid var(--border)}
+.esc-row:last-child{border-bottom:none}
+.esc-label{font-family:var(--mono);font-size:.5rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:.1rem}
+
+/* WEEKLY PULSE */
+.pulse-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:.5rem}
+@media(max-width:600px){.pulse-grid{grid-template-columns:1fr 1fr}}
+.pulse-card{border:1px solid var(--border);border-radius:var(--r);padding:.55rem .65rem;text-align:center;transition:all .2s}
+.pulse-card:hover{background:var(--surface-2)}
+.pulse-num{font-family:var(--display);font-size:1.3rem;font-weight:600;line-height:1}
+.pulse-label{font-size:.6rem;color:var(--text-3);margin-top:.2rem}
+.pulse-delta{font-family:var(--mono);font-size:.55rem;margin-top:.15rem}
+.pd-up{color:var(--red)}.pd-down{color:var(--primary)}.pd-flat{color:var(--text-3)}
+
+
+/* ESCALATION ACTIVE STATE */
+.esc-card{cursor:pointer;transition:all .25s}
+.esc-card:hover{transform:translateY(-2px)}
+.esc-card.esc-active{box-shadow:0 0 0 2px var(--amber),0 4px 16px rgba(0,0,0,.06);transform:scale(1.02)}
+.esc-active-tag{display:none;font-family:var(--mono);font-size:.5rem;padding:.1rem .35rem;border-radius:3px;background:var(--amber);color:#fff;margin-left:auto}
+.esc-card.esc-active .esc-active-tag{display:inline-block}
+
+
+/* TRACER LIVE INDICATORS */
+.tracer-live{display:flex;gap:1rem;align-items:center;padding:.4rem .75rem;margin-bottom:.5rem;font-family:var(--mono);font-size:.55rem}
+.tl-item{display:flex;align-items:center;gap:.3rem}
+.tl-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.tl-elapsed{color:var(--text-2)}.tl-elapsed .tl-dot{background:var(--primary)}
+.tl-students{color:var(--red)}.tl-students .tl-dot{background:var(--red);animation:errPulse 1s ease infinite}
+.tl-status{color:var(--text-3);margin-left:auto}
+
+
+/* INCIDENT THREAD — visual connection between related sections */
+#monitor .tool-frame,#tracer .tool-frame{border-left:3px solid var(--amber)}
+#comms .tool-frame{border-left:3px solid var(--blue)}
+#escalation .tool-frame{border-left:3px solid var(--amber)}
+
 </style>
 </head>
 <body>
@@ -756,7 +847,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
   <div class="nav-brand"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">CVC-OEI · Application Support</span></div>
   <div class="nav-links">
     <a href="#why">Background</a><a href="#cvcData">Data</a><a href="#journey">Journey</a><a href="#flow">Architecture</a><a href="#monitor">Monitor</a><a href="#tracer">Diagnostics</a><a href="#patterns">Patterns</a><a href="#kb">KB Builder</a>
-    <a href="#outreach">Outreach</a><a href="#aiVision" style="color:var(--teal)">AI Vision</a>
+    <a href="#escalation">Escalation</a><a href="#outreach">Outreach</a><a href="#aiVision" style="color:var(--teal)">AI Vision</a>
     <a href="#barriers" class="nav-barrier">⚠ Barriers</a>
   </div>
 </nav>
@@ -820,16 +911,16 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
           </div>
         </div>
         <div class="info-panel">
-          <div class="info-panel-header">Highest-Demand GE Areas (Cal-GETC / CSU GE)</div>
+          <div class="info-panel-header">Est. cross-enrollments by Cal-GETC area (2024–25)</div>
           <div class="info-panel-body" id="courseChart">
-            <div class="course-bar-row"><div class="course-name">English Comp</div><div class="course-bar-wrap"><div class="course-bar" style="width:100%;background:var(--primary)"><span class="course-pct">Area 1A</span></div></div></div>
-            <div class="course-bar-row"><div class="course-name">Math / QR</div><div class="course-bar-wrap"><div class="course-bar" style="width:88%;background:var(--primary)"><span class="course-pct">Area 2</span></div></div></div>
-            <div class="course-bar-row"><div class="course-name">Ethnic Studies</div><div class="course-bar-wrap"><div class="course-bar" style="width:82%;background:var(--teal)"><span class="course-pct">Area 6 (new)</span></div></div></div>
-            <div class="course-bar-row"><div class="course-name">Speech / Comm</div><div class="course-bar-wrap"><div class="course-bar" style="width:76%;background:var(--blue)"><span class="course-pct">Area 1C</span></div></div></div>
-            <div class="course-bar-row"><div class="course-name">Psychology</div><div class="course-bar-wrap"><div class="course-bar" style="width:71%;background:var(--blue)"><span class="course-pct">Area 4</span></div></div></div>
-            <div class="course-bar-row"><div class="course-name">Critical Thinking</div><div class="course-bar-wrap"><div class="course-bar" style="width:65%;background:var(--purple)"><span class="course-pct">Area 1B</span></div></div></div>
-            <div class="course-bar-row"><div class="course-name">Biology / Life Sci</div><div class="course-bar-wrap"><div class="course-bar" style="width:58%;background:var(--amber)"><span class="course-pct">Area 5</span></div></div></div>
-            <div class="course-bar-row"><div class="course-name">Humanities</div><div class="course-bar-wrap"><div class="course-bar" style="width:52%;background:var(--amber)"><span class="course-pct">Area 3</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">1A · English Comp</div><div class="course-bar-wrap"><div class="course-bar" style="width:100%;background:var(--primary)"><span class="course-pct">~5,800</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">2 · Math / QR</div><div class="course-bar-wrap"><div class="course-bar" style="width:88%;background:var(--primary)"><span class="course-pct">~5,100</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">4 · Social / Behav Sci</div><div class="course-bar-wrap"><div class="course-bar" style="width:79%;background:var(--blue)"><span class="course-pct">~4,600</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">1C · Oral Comm</div><div class="course-bar-wrap"><div class="course-bar" style="width:66%;background:var(--blue)"><span class="course-pct">~3,800</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">3 · Arts / Humanities</div><div class="course-bar-wrap"><div class="course-bar" style="width:60%;background:var(--purple)"><span class="course-pct">~3,500</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">1B · Critical Thinking</div><div class="course-bar-wrap"><div class="course-bar" style="width:57%;background:var(--purple)"><span class="course-pct">~3,300</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">6 · Ethnic Studies</div><div class="course-bar-wrap"><div class="course-bar" style="width:45%;background:var(--teal)"><span class="course-pct">~2,600 ↑</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">5 · Phys / Bio Sci</div><div class="course-bar-wrap"><div class="course-bar" style="width:36%;background:var(--amber)"><span class="course-pct">~2,100</span></div></div></div>
           </div>
         </div>
       </div>
@@ -841,7 +932,16 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
         <div class="info-stat"><div class="info-stat-num" style="color:var(--purple)">2</div><div class="info-stat-label">Course limit per term</div></div>
       </div>
 
-      <div class="info-source">Sources: Wheelhouse Center for Community College Leadership and Research (Oct 2025) · CVC Exchange search category data · Cal-GETC/IGETC area mapping. Course demand ranked by GE search volume and transfer requirement frequency — not individual enrollment counts (not publicly available). Ethnic Studies (Area 6) demand elevated due to new Cal-GETC requirement effective Fall 2025.</div>
+      <div style="margin-top:1rem;padding:.75rem 1rem;border:1px solid var(--primary-bd);background:var(--primary-light);border-radius:var(--r-lg)">
+        <div style="font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);margin-bottom:.4rem">What 2,100% growth means for the support team</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem">
+          <div style="font-size:.75rem;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">More colleges onboarding.</strong> From 16 to 78 teaching colleges — each with different SIS configurations, payment deadlines, and FA workflows. Every new college is a new integration to monitor.</div>
+          <div style="font-size:.75rem;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">More cross-system failures.</strong> 33K enrollments means 33K data flows through the AER, Ethos/Direct APIs, Canvas provisioning, and FA Consortium pipeline. Failure rate stays constant; volume multiplies.</div>
+          <div style="font-size:.75rem;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">More students at risk.</strong> Every broken enrollment is a student who may miss a transfer deadline or lose financial aid. The support function scales or students fall through the cracks.</div>
+        </div>
+      </div>
+
+      <div class="info-source">Enrollment data: Wheelhouse Center for Community College Leadership &amp; Research, <em>The Geography of California Community College Enrollment</em> (Oct 2025). GE area distribution estimated from CCC systemwide enrollment patterns applied to the 33K total. English and Math are required for all transfer pathways; Area 6 growing due to new Cal-GETC requirement. Per-area breakdowns are not published by CVC — these are informed estimates, not official figures. Area 6 (Ethnic Studies) growing rapidly due to new Cal-GETC requirement effective Fall 2025; ↑ indicates above-trend growth. Common Course Numbering (CCN) Phase 1 in effect since Fall 2025.</div>
     </div>
   </div>
   <div class="demo-caption">Enrollment data from published research · Course demand based on GE transfer requirement patterns</div>
@@ -853,7 +953,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
   <h2>The same enrollment — when it <em>works</em> vs when it <em style="color:var(--red)">breaks</em></h2>
   <p class="sec-desc">Course sharing is invisible when it works. When something breaks, the student doesn’t see an API error — they see <strong>a missing course and a deadline.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Student View</span></div><span class="tool-bar-title">Cross-enrollment: MATH 1A via CVC Exchange</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Student View</span></div><span class="tool-bar-title">Scenario: MATH 1A · Chabot → De Anza · via CVC Exchange</span></div>
     <div class="tool-body" style="padding:0">
       <div style="display:flex;gap:2px;background:var(--bg-3);border-radius:var(--r);padding:2px;margin:.75rem .85rem 0;width:fit-content" id="journeyToggle">
         <button class="jt-btn active" onclick="setJourney('compare',this)">Side by Side</button>
@@ -890,13 +990,25 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec sec-alt fu" id="monitor"><div class="wrap">
   <div class="eyebrow"><span class="sec-num sec-num-green">01</span>Visibility</div>
   <h2>Can the analyst spot a failing college <em>before the tickets arrive?</em></h2>
-  <p class="sec-desc">The daily question: which of 116 colleges is healthy, which is degraded, and which is down? This is what the analyst checks first thing in the morning — before the tickets start coming in.</p>
+  <p class="sec-desc">First thing every morning: which colleges are healthy, which are degraded, and which are down? The weekly pulse shows the trend. The table below shows the details. <strong>This is the view that prevents the 9 AM scramble.</strong></p>
   <div class="tool-frame">
     <div style="position:relative"><div class="live-alert" id="liveAlert"><div class="live-alert-title">New Alert</div><div class="live-alert-body"></div><div class="live-alert-time"></div></div></div>
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><div class="tool-bar-title">cvc-exchange-monitor.fhda.edu</div></div>
     <div class="tool-body">
+      <div style="margin-bottom:1rem;padding:.65rem .85rem;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem">
+          <span style="font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)">Weekly Pulse — Mar 17–23, 2026</span><span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .45rem;border-radius:4px;background:var(--red-light);color:var(--red);border:1px solid var(--red-bd)">Elevated</span>
+          <span style="font-family:var(--mono);font-size:.5rem;color:var(--text-3)">vs prior week</span>
+        </div>
+        <div class="pulse-grid">
+          <div class="pulse-card"><div class="pulse-num" style="color:var(--text)">127</div><div class="pulse-label">Total Tickets</div><div class="pulse-delta pd-up">↑ 12% from 113</div></div>
+          <div class="pulse-card"><div class="pulse-num" style="color:var(--red)">3</div><div class="pulse-label">Colleges Failing</div><div class="pulse-delta pd-up">↑ from 1</div></div>
+          <div class="pulse-card"><div class="pulse-num" style="color:var(--teal)">~4,540</div><div class="pulse-label">Students Affected</div><div class="pulse-delta pd-up">↑ from ~1,850</div></div>
+          <div class="pulse-card"><div class="pulse-num" style="color:var(--primary)">94.2%</div><div class="pulse-label">SLA Met (&lt;4hr)</div><div class="pulse-delta pd-down">↓ from 97.1%</div></div>
+        </div>
+      </div>
       <div class="monitor-controls">
-        <input class="mon-search" id="monSearch" type="text" placeholder="Search colleges..." oninput="filterMonitor()">
+        <input class="mon-search" id="monSearch" type="text" placeholder="Look up a college — type name or SIS type..." oninput="filterMonitor()">
         <div class="filter-tabs" id="filterTabs">
           <button class="filter-tab active" onclick="setFilter('all',this)">All</button>
           <button class="filter-tab" onclick="setFilter('ok',this)">Healthy</button>
@@ -977,15 +1089,78 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
     <div class="eyebrow">Communication</div>
     <h2>The same failure, written <em>four different ways</em></h2>
     <p class="sec-desc">A student needs reassurance. Campus IT needs the CCCID and error code. The registrar needs something to forward to their VP. The internal team needs scope and next steps. <strong>Same incident. Four drafts.</strong></p>
-    <p style="font-size:.82rem;color:var(--text-2);line-height:1.7;margin-bottom:.5rem">Scenario: A student cross-enrolled in MATH 1A via the Exchange, but the enrollment didn’t sync to Canvas.</p>
+    <div style="padding:.55rem .85rem;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:.35rem"><span style="width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0"></span><span style="font-family:var(--mono);font-size:.55rem;font-weight:600;color:var(--amber)">P2 ACTIVE</span></div>
+      <div style="font-size:.78rem;color:var(--text-2)">Sacramento City — Ethos token expired — 47 AER records queued — MATH 1A cross-enrollment not syncing to Canvas</div>
+      <div style="font-family:var(--mono);font-size:.52rem;color:var(--text-3);margin-left:auto">14:22 PST</div>
+    </div>
     <div class="msg-grid">
-      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--teal-light)">🎓</div><div class="msg-to">To the Student</div><div class="msg-channel">Email</div></div><div class="msg-body">We’re aware your MATH 1A section isn’t showing in Canvas yet. This is a sync issue between your home college and the teaching college — <strong>not a problem with your enrollment.</strong> Your seat is secure. We expect this to be resolved within <span class="msg-highlight">2–4 hours</span>. No action needed on your end.</div></div>
+      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--teal-light)">🎓</div><div class="msg-to">To the Student</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Your MATH 1A enrollment — update</div><div class="msg-body">We’re aware your MATH 1A section isn’t showing in Canvas yet. This is a sync issue between your home college and the teaching college — <strong>not a problem with your enrollment.</strong> Your seat is secure. We expect this to be resolved within <span class="msg-highlight">2–4 hours</span>. No action needed on your end.</div></div>
       <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--purple-light)">🖥</div><div class="msg-to">To Campus IT (Teaching College)</div><div class="msg-channel">ServiceNow</div></div><div class="msg-body">AER for CCCID <strong>0012847593</strong> transmitted from Chabot at 14:22 PST but Canvas roster for MATH-1A-001 does not reflect enrollment. Ethos token at home college returned <span class="msg-warn">401 invalid_grant</span>. Can you verify whether the enrollment record exists in your Banner instance?</div></div>
-      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">📋</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div><div class="msg-body">Quick update on the cross-enrollment sync issue. <strong>The student’s enrollment is confirmed</strong> — the delay is in how the data reaches Canvas. If students contact your office, you can confirm their enrollment is valid. Happy to provide a written summary if this needs to go to your VP.</div></div>
+      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">📋</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Cross-enrollment sync — student enrollments confirmed, Canvas delay expected &lt;4hr</div><div class="msg-body">Quick update on the cross-enrollment sync issue. <strong>The student’s enrollment is confirmed</strong> — the delay is in how the data reaches Canvas. If students contact your office, you can confirm their enrollment is valid. Happy to provide a written summary if this needs to go to your VP.</div></div>
       <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--blue-light)">⚙</div><div class="msg-to">To CVC Internal Team</div><div class="msg-channel">Slack</div></div><div class="msg-body"><strong>Scope:</strong> 47 AER records pending in Chabot → De Anza queue since 02:00 PST. Root cause: Ethos OAuth2 token expired, <span class="msg-warn">invalid_grant</span> on refresh. <strong>Action:</strong> Token regenerated. Queue flush in progress. KB article drafted.</div></div>
     </div>
   </div>
 </section>
+
+<!-- INCIDENT BRIDGE -->
+<div class="fu" style="text-align:center;padding:.75rem 0">
+  <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.55rem;color:var(--text-3)">
+    <div style="width:30px;height:1px;background:var(--amber)"></div>
+    <span style="padding:.2rem .5rem;border:1px solid var(--amber-bd);border-radius:4px;background:var(--amber-light);color:var(--amber)">Same incident, next decision</span>
+    <div style="width:30px;height:1px;background:var(--amber)"></div>
+  </div>
+</div>
+
+<!-- ESCALATION MATRIX -->
+<section class="sec sec-alt fu" id="escalation"><div class="wrap">
+  <div class="eyebrow"><span class="sec-num sec-num-green">05</span>Escalation</div>
+  <h2>How do you know when to <em>own it</em> vs <em>escalate it?</em></h2>
+  <p class="sec-desc">Not every issue is the same severity. The difference between a P1 and a P3 determines who you contact, how fast you respond, and what information you need before making the call.</p>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Reference</span></div><span class="tool-bar-title">Escalation Decision Matrix · P1 / P2 / P3</span></div>
+    <div class="tool-body">
+      <div style="padding:.5rem .75rem;border:1px solid var(--amber-bd);background:var(--amber-light);border-radius:var(--r);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:var(--text-2)">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0"></span>
+          <span><strong style="color:var(--text)">Current scenario:</strong> Sacramento City Ethos token expired — 1 college degraded, 47 students affected. Based on the evidence: <strong style="color:var(--amber)">this is a P2.</strong></span>
+        </div>
+        <div class="esc-grid">
+        <div class="esc-card esc-p1">
+          <div class="esc-header">P1 Critical</div>
+          <div class="esc-body">
+            <div class="esc-row"><div class="esc-label">What it looks like</div><strong>Multiple colleges down.</strong> AER queue completely blocked. Students cannot enroll or access Canvas across 2+ institutions.</div>
+            <div class="esc-row"><div class="esc-label">Response time</div>Immediate. Drop everything.</div>
+            <div class="esc-row"><div class="esc-label">Who to contact</div>Senior analyst + supervisor simultaneously. If Ethos/Ellucian: vendor support with case number. Campus IT leads at affected colleges.</div>
+            <div class="esc-row"><div class="esc-label">What you need first</div>Which colleges. How many students (check monitor). Error codes from tracer. When it started (check logs).</div>
+            <div class="esc-row"><div class="esc-label">Comms</div>All 4 audiences within 30 minutes. Student-facing message first.</div>
+          </div>
+        </div>
+        <div class="esc-card esc-p2 esc-active">
+          <div class="esc-header">P2 Degraded<span class="esc-active-tag">Current</span></div>
+          <div class="esc-body">
+            <div class="esc-row"><div class="esc-label">What it looks like</div><strong>One college degraded.</strong> Sync delays, partial failures, seat count mismatches. Students can enroll but may see stale data.</div>
+            <div class="esc-row"><div class="esc-label">Response time</div>Within 2 hours. Triage, diagnose, then escalate if needed.</div>
+            <div class="esc-row"><div class="esc-label">Who to contact</div>Campus IT at the affected college. Senior analyst if root cause is unclear after 30 min of investigation.</div>
+            <div class="esc-row"><div class="esc-label">What you need first</div>SIS type. Specific error from tracer. Whether it affects enrollment, sync, or Canvas only. Approximate student count.</div>
+            <div class="esc-row"><div class="esc-label">Comms</div>Internal Slack update. Campus IT email with diagnostic detail. Student notice only if enrollment is blocked.</div>
+          </div>
+        </div>
+        <div class="esc-card esc-p3">
+          <div class="esc-header">P3 Minor / Known</div>
+          <div class="esc-body">
+            <div class="esc-row"><div class="esc-label">What it looks like</div><strong>Individual student issue</strong> or a known limitation. CCPG not transferring, Canvas roster delay, DSPS accommodation gap.</div>
+            <div class="esc-row"><div class="esc-label">Response time</div>Within 1 business day. Standard queue priority.</div>
+            <div class="esc-row"><div class="esc-label">Who to contact</div>Handle directly. Escalate to supervisor only if the student has a deadline within 48 hours that will be missed.</div>
+            <div class="esc-row"><div class="esc-label">What you need first</div>CCCID. Home college + teaching college. Specific error or symptom. Has the student already contacted either college?</div>
+            <div class="esc-row"><div class="esc-label">Comms</div>Direct student response. KB article link if one exists. Document the resolution for pattern tracking.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="demo-caption">The difference between P1 and P3 isn't just speed — it's who you contact and what information you bring to the call</div>
+</div></section>
+
 
 <!-- ═══════════════════════════════════════════ -->
 <!-- BARRIER INTELLIGENCE SECTION -->
@@ -1003,8 +1178,9 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
       <div class="sc-step" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 2</div><div class="sc-step-tool">Tracer</div><div class="sc-step-action">Walk the data flow</div><div class="sc-step-link">→ Tool 02</div></div>
       <div class="sc-step" onclick="document.getElementById('patterns').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 3</div><div class="sc-step-tool">Patterns</div><div class="sc-step-action">Isolated or systemic?</div><div class="sc-step-link">→ Tool 03</div></div>
       <div class="sc-step" onclick="document.getElementById('kb').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 4</div><div class="sc-step-tool">KB Builder</div><div class="sc-step-action">Document the fix</div><div class="sc-step-link">→ Tool 04</div></div>
-      <div class="sc-step" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 5</div><div class="sc-step-tool">Barriers</div><div class="sc-step-action">Systemic barrier?</div><div class="sc-step-link">→ Tool 05</div></div>
-      <div class="sc-step" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 6</div><div class="sc-step-tool">Outreach</div><div class="sc-step-action">Prevent next term?</div><div class="sc-step-link">→ Tool 10</div></div>
+      <div class="sc-step" onclick="document.getElementById('escalation').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 5</div><div class="sc-step-tool">Escalate?</div><div class="sc-step-action">P1, P2, or P3?</div><div class="sc-step-link">→ Tool 05</div></div>
+      <div class="sc-step" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 6</div><div class="sc-step-tool">Barriers</div><div class="sc-step-action">Systemic barrier?</div><div class="sc-step-link">→ Tool 05</div></div>
+      <div class="sc-step" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 7</div><div class="sc-step-tool">Outreach</div><div class="sc-step-action">Prevent next term?</div><div class="sc-step-link">→ Tool 10</div></div>
     </div>
   </div>
 </div>
@@ -1038,6 +1214,12 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--teal-light);color:var(--teal)">Vision</span></div><span class="tool-bar-title">ai-augmented-support-model.cvc.edu</span></div>
     <div class="tool-body">
+      <div class="ai-spectrum" style="margin-top:.25rem">
+        <div class="ai-spec-stage"><div class="ai-spec-num">01</div><div class="ai-spec-label">Manual</div><div class="ai-spec-desc">Email workflows, spreadsheet tracking</div></div>
+        <div class="ai-spec-stage ai-spec-current"><div class="ai-spec-num">02</div><div class="ai-spec-label">Connected</div><div class="ai-spec-desc">Exchange + FA Dashboard + real-time sync</div></div>
+        <div class="ai-spec-stage ai-spec-next"><div class="ai-spec-num">03</div><div class="ai-spec-label">Predictive</div><div class="ai-spec-desc">AI flags risks before they become tickets</div></div>
+        <div class="ai-spec-stage"><div class="ai-spec-num">04</div><div class="ai-spec-label">Adaptive</div><div class="ai-spec-desc">System learns, recommends, self-corrects</div></div>
+      </div>
       <div class="ai-tabs" id="aiTabs">
         <button class="ai-tab active" onclick="setAiView('ops',this)">AI for Operations</button>
         <button class="ai-tab" onclick="setAiView('student',this)">AI for Students</button>
@@ -1141,7 +1323,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
   <div class="wrap">
     <div style="text-align:center;max-width:640px;margin:0 auto">
       <div style="font-family:var(--display);font-size:clamp(1.4rem,3.5vw,2rem);font-weight:500;font-style:italic;color:var(--text);line-height:1.4;max-width:680px;margin:0 auto 1rem;position:relative;padding-left:1rem">Good support is invisible to students. When it works, they never think about it. When it doesn’t — it’s <em style="color:var(--primary)">someone’s semester.</em></div>
-      <p style="font-size:.88rem;color:var(--text-2);line-height:1.8;margin-bottom:2rem;max-width:560px;margin-left:auto;margin-right:auto">These tools cover the reactive side — monitoring, diagnosis, documentation — and the proactive side: identifying systemic barriers, mapping equity impact, and planning outreach so course sharing reaches students before they’re stuck, not after.</p>
+      <p style="font-size:.88rem;color:var(--text-2);line-height:1.8;margin-bottom:2rem;max-width:560px;margin-left:auto;margin-right:auto">This page is a prototype of how I think about the work — and a sample of what I’d build for the team. Monitoring dashboards that surface problems before students report them. Pattern reports that turn ticket data into actionable intelligence. Communication templates that save 20 minutes per campus interaction. Documentation that means the next analyst doesn’t start from scratch. These aren’t just interview prep — they’re the kind of tools I’d want to deploy in the first 90 days.</p>
       <div style="max-width:600px;margin:0 auto 2.5rem;text-align:left">
         <div style="font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--primary);margin-bottom:.75rem">Questions I’d ask in week one</div>
         <div style="display:flex;flex-direction:column;gap:.4rem">
@@ -1177,7 +1359,7 @@ function showFlowInfo(idx){const d=flowData[idx],p=document.getElementById('flow
 
 // ═══ MONITOR ═══
 const allColleges=[
-{name:'Foothill College',sis:'Banner Direct',status:'ok',detail:'Last sync: 2m ago',badge:'Healthy',uptime:'99.8%',lastErr:'None (30d)',endpoint:'/banner/api/sections',history:['09:14 — AER transmitted','09:12 — Sync OK','09:10 — Sync OK']},
+{name:'Foothill College',sis:'Banner Direct',status:'ok',detail:'Last sync: 2m ago · FA Dashboard: active',badge:'Healthy',uptime:'99.8%',lastErr:'None (30d)',endpoint:'/banner/api/sections',history:['09:14 — AER transmitted','09:12 — Sync OK','09:10 — Sync OK']},
 {name:'De Anza College',sis:'Banner Direct',status:'ok',detail:'Last sync: 1m ago',badge:'Healthy',uptime:'99.9%',lastErr:'None (30d)',endpoint:'/banner/api/sections',history:['09:15 — Sync OK','09:13 — AER transmitted']},
 {name:'City College SF',sis:'Banner Ethos',status:'warn',detail:'Seat count delay: 8min',badge:'Degraded',uptime:'97.2%',lastErr:'Seat sync timeout (2h ago)',endpoint:'/ethos/v1/section-registrations',history:['09:14 — Seat count DELAYED','09:06 — Sync OK']},
 {name:'Sacramento City',sis:'Banner Ethos',status:'err',detail:'Ethos token expired · FA: manual workflow',badge:'Failing',uptime:'94.1%',lastErr:'OAuth2 invalid_grant (14m)',endpoint:'/ethos/v1/sections',history:['09:14 — ERROR 401 invalid_grant','09:12 — AER queue blocked']},
@@ -1457,7 +1639,7 @@ var journeySteps = [
   {
     label: 'Enrollment',
     ok: { icon: '✓', cls: 'j-ok', text: 'Clicks "Add Course." AER transmits from Chabot to De Anza. Seat reserved.', student: 'Done! That was easy. It says I\u2019m enrolled.' },
-    broken: { icon: '✓', cls: 'j-ok', text: 'Clicks "Add Course." AER transmits from Chabot \u2014 but Ethos token at Chabot expired overnight.', student: 'Done! That was easy. It says I\u2019m enrolled.' }
+    broken: { icon: '✓', cls: 'j-ok', text: 'Clicks "Add Course." AER transmits from Chabot \u2014 but Ethos token at Chabot expired overnight.', student: 'Done! That was easy. It says I\u2019m enrolled.', analyst: 'Monitor would show Chabot\u2019s status as Failing before this student ever tried to enroll.' }
   },
   {
     label: 'Payment',
@@ -1501,14 +1683,14 @@ function renderJourney() {
       var analystNote = (s.broken.analyst) ? '<div style="margin-top:.35rem;padding:.3rem .5rem;background:var(--primary-light);border-radius:4px;border-left:2px solid var(--primary);font-size:.68rem;color:var(--primary);line-height:1.5;font-style:normal"><strong style="font-size:.52rem;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:.1rem;opacity:.7">Support response</strong>' + s.broken.analyst + '</div>' : '';
       return '<div class="journey-step ' + s.broken.cls + '"><div class="j-icon">' + s.broken.icon + '</div><div class="j-content"><div class="j-label">' + s.label + '</div><div class="j-text">' + s.broken.text + '</div><div class="j-student">' + s.broken.student + '</div>' + analystNote + '</div></div>';
     }).join('');
-    body.innerHTML = '<div class="journey-cols"><div class="journey-col"><div class="journey-col-header jch-ok">\u2713 Successful Enrollment</div>' + leftSteps + '</div><div class="journey-col"><div class="journey-col-header jch-broken">\u2717 Broken Enrollment (Ethos token expired)</div>' + rightSteps + '</div></div>';
+    body.innerHTML = '<div class="journey-cols"><div class="journey-col"><div class="journey-col-header jch-ok">\u2713 Successful Enrollment</div><div style=\"display:flex;gap:.75rem;justify-content:center;padding:.4rem .75rem;background:rgba(34,197,94,.06);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.55rem\"><span style=\"color:var(--primary)\">0 support interactions</span><span style=\"color:var(--text-3)\">·</span><span style=\"color:var(--primary)\">On-time transfer</span><span style=\"color:var(--text-3)\">·</span><span style=\"color:var(--primary)\">Course complete</span></div>' + leftSteps + '</div><div class="journey-col"><div class="journey-col-header jch-broken">\u2717 Broken Enrollment (Ethos token expired)</div><div style=\"display:flex;gap:.75rem;justify-content:center;padding:.4rem .75rem;background:rgba(220,38,38,.06);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.55rem\"><span style=\"color:var(--red)\">47 students affected</span><span style=\"color:var(--text-3)\">·</span><span style=\"color:var(--amber)\">36hr resolution</span><span style=\"color:var(--text-3)\">·</span><span style=\"color:var(--text-2)\">1 missed assignment deadline</span></div>' + rightSteps + '</div></div>';
   } else {
     var steps = journeySteps.map(function(s) {
       var data = journeyMode === 'ok' ? s.ok : s.broken;
       return '<div class="journey-step ' + data.cls + '" style="max-width:600px;margin:0 auto"><div class="j-icon">' + data.icon + '</div><div class="j-content"><div class="j-label">' + s.label + '</div><div class="j-text">' + data.text + '</div><div class="j-student">' + data.student + '</div></div></div>';
     }).join('');
     var headerCls = journeyMode === 'ok' ? 'jch-ok' : 'jch-broken';
-    var headerText = journeyMode === 'ok' ? '\u2713 Successful Enrollment' : '\u2717 Broken Enrollment (Ethos token expired)';
+    var headerText = journeyMode === 'ok' ? '\u2713 Successful Enrollment' : '\u2717 Broken Enrollment (Ethos token expired)</div><div style=\"display:flex;gap:.75rem;justify-content:center;padding:.4rem .75rem;background:rgba(220,38,38,.06);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.55rem\"><span style=\"color:var(--red)\">47 students affected</span><span style=\"color:var(--text-3)\">·</span><span style=\"color:var(--amber)\">36hr resolution</span><span style=\"color:var(--text-3)\">·</span><span style=\"color:var(--text-2)\">1 missed assignment deadline</span>';
     body.innerHTML = '<div style="border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;max-width:600px;margin:0 auto"><div class="journey-col-header ' + headerCls + '">' + headerText + '</div>' + steps + '</div>';
   }
 }
@@ -1717,96 +1899,121 @@ document.querySelectorAll('div[style*="flex-direction:column"] > div[style*="pad
 });
 
 
-// ═══ AI VISION TOOL ═══
+
+// ═══ AI VISION TOOL (REDESIGNED) ═══
 var aiData = {
   ops: [
     {
-      icon: '\u26a1',
-      title: 'Predictive Integration Monitoring',
-      desc: 'Ethos tokens expire on a schedule. Sync degradation follows patterns. Instead of waiting for failures, a model trained on 12 months of uptime data could flag colleges likely to fail in the next 48 hours \u2014 before a single student is affected.',
-      signal: 'aic-predict',
-      signalText: 'Signal: token age + sync frequency + historical failure rate'
+      icon: '\u26a1', title: 'Predict which colleges will fail next',
+      desc: 'Ethos tokens expire on schedules. Sync frequency degrades before full failure. A model trained on 12 months of uptime data could flag at-risk colleges 48 hours before outage.',
+      today: 'Analyst checks the monitor each morning. Failures are discovered when they happen \u2014 or when a student reports them.',
+      after: 'Dashboard shows a "likely to fail in 48 hours" warning for Sacramento City based on token age (27 days / 30-day cycle) + declining sync frequency. Analyst regenerates the token before any student is affected.',
+      toolLink: 'monitor', toolName: 'Monitor (Tool 01)',
+      complexity: 'quick', complexityLabel: 'Quick win \u2014 rule-based, no ML needed',
+      signal: 'aic-predict'
     },
     {
-      icon: '\ud83d\udcca',
-      title: 'Automated Ticket Triage + Routing',
-      desc: 'When a ticket says "can\u2019t see my course in Canvas," an NLP classifier could identify whether this is an Ethos issue, an IdP Proxy issue, or a teaching college roster delay \u2014 and route it to the right queue without the analyst reading every one.',
-      signal: 'aic-predict',
-      signalText: 'Input: ticket text + CCCID + home college SIS type'
+      icon: '\u2699', title: 'Auto-classify tickets by root cause',
+      desc: 'When 47 tickets say "can\u2019t see my course," a classifier could separate Ethos failures from IdP issues from teaching college roster delays \u2014 before a human reads a single one.',
+      today: 'Analyst reads each ticket, mentally maps symptoms to probable causes, manually tags category. First 30 minutes of every morning.',
+      after: 'NLP model reads incoming ticket text + pulls CCCID + checks home college SIS type. Auto-tags 80% of tickets. Analyst reviews the remaining 20% and corrects misclassifications \u2014 which improves the model.',
+      toolLink: 'patterns', toolName: 'Pattern Analyzer (Tool 03)',
+      complexity: 'medium', complexityLabel: 'Medium \u2014 needs labeled training data from 6+ months of tickets',
+      signal: 'aic-predict'
     },
     {
-      icon: '\ud83d\udd0d',
-      title: 'Seasonal Surge Forecasting',
-      desc: 'Registration spikes, add/drop deadlines, and FA disbursement windows generate predictable ticket surges. A time-series model could forecast volume 2 weeks ahead so the team can pre-write KB articles and staff up before impact.',
-      signal: 'aic-predict',
-      signalText: 'Data: 3 years of ticket volume + CVC academic calendar'
+      icon: '\u23f1', title: 'Forecast ticket surges before they hit',
+      desc: 'Spring registration, add/drop, census, FA disbursement \u2014 each generates a predictable spike. A time-series model could forecast volume 2 weeks out.',
+      today: 'The team knows "registration week is busy" but can\u2019t quantify how busy or which categories will spike. KB articles get written reactively.',
+      after: 'Model predicts: "Week of Feb 3: expect 340% auth ticket increase at Banner colleges based on 3-year pattern." Team pre-publishes KB articles and alerts campus IT contacts the week before.',
+      toolLink: 'patterns', toolName: 'Pattern Analyzer (Tool 03)',
+      complexity: 'quick', complexityLabel: 'Quick win \u2014 3 years of ticket data + academic calendar',
+      signal: 'aic-predict'
     },
     {
-      icon: '\ud83d\udee1',
-      title: 'Anomaly Detection Across 116 Colleges',
-      desc: 'One college suddenly generating 5x normal tickets at 2 AM isn\u2019t visible in a queue. Pattern detection across all 116 colleges surfaces outliers that humans scanning rows of data would miss.',
-      signal: 'aic-predict',
-      signalText: 'Baseline: per-college rolling averages + standard deviations'
+      icon: '⚠', title: 'Detect anomalies across 116 colleges at 2 AM',
+      desc: 'One college generating 5x normal error rate overnight isn\u2019t visible in a morning queue scan. Anomaly detection surfaces it as a single alert, not 47 individual tickets.',
+      today: 'Analyst opens the queue at 8:30 AM, sees 47 new tickets, starts reading. Realizes at 9:15 they\u2019re all from the same college. 45 minutes lost.',
+      after: 'Alert fires at 2:14 AM: "Chabot College \u2014 error rate 5.2x baseline since 01:00. 47 AER records queued. Probable cause: Ethos token." Analyst starts at 8:30 with the diagnosis already done.',
+      toolLink: 'monitor', toolName: 'Monitor (Tool 01)',
+      complexity: 'quick', complexityLabel: 'Quick win \u2014 standard deviation thresholds on existing data',
+      signal: 'aic-predict'
     }
   ],
   student: [
     {
-      icon: '\ud83c\udf93',
-      title: 'Ed-Plan-Aware Course Recommendations',
-      desc: 'When a required course is full, the Exchange could recommend not just "other MATH 1A sections" but sections that satisfy the specific transfer requirement, at colleges where the student\u2019s financial aid transfers cleanly, at times that fit their schedule.',
-      signal: 'aic-equity',
-      signalText: 'Equity check: recommendations must not steer toward easier-to-provision over best-fit'
+      icon: '★', title: 'Recommend courses that fit the student\u2019s actual ed plan',
+      desc: 'Not "here are other MATH 1A sections." Instead: "here are sections that satisfy YOUR specific Cal-GETC Area 2 requirement, at colleges where your CCPG fee waiver transfers, with open seats."',
+      today: 'Student searches by subject keyword. Sees 165 Math sections across 78 colleges. No way to filter by "will my financial aid work here?" or "does this count for my specific transfer requirement?"',
+      after: 'Search knows the student\u2019s home college, GE pattern, and FA status. Results are ranked by: ed plan fit \u2192 FA compatibility \u2192 schedule match \u2192 quality badges. Student sees 8 relevant options instead of 165.',
+      toolLink: 'journey', toolName: 'Student Journey',
+      complexity: 'long', complexityLabel: 'Long-term \u2014 requires ed plan integration + FA status API',
+      signal: 'aic-equity'
     },
     {
-      icon: '\u23f0',
-      title: 'Proactive Drop-for-Nonpayment Alerts',
-      desc: 'The system knows the student\u2019s FA status and the teaching college\u2019s auto-drop deadline. If FA processing is running 48 hours behind the payment window, the student could be alerted before they lose their seat \u2014 not after.',
-      signal: 'aic-equity',
-      signalText: 'Barrier #4 prevention: FA lag + auto-drop timing = predictable risk'
+      icon: '\u23f0', title: 'Alert students before they\u2019re dropped for nonpayment',
+      desc: 'The system already knows: (a) the student requested FA via Consortium Agreement, (b) the home college FA office processes in 5\u20137 business days, (c) the teaching college auto-drops in 3 days. That math doesn\u2019t work. The alert should fire before the drop, not after.',
+      today: 'Student enrolls, requests FA, waits. Teaching college auto-drops them on day 3. Student discovers they lost their seat when Canvas access disappears. Files a ticket.',
+      after: 'Day 1 after enrollment: "Your financial aid is being processed but [Teaching College] drops unpaid enrollments in 3 days. Pay now by credit card to hold your seat \u2014 you\u2019ll be reimbursed when FA processes." Zero tickets. Zero dropped students.',
+      toolLink: 'barrierOverview', toolName: 'Barrier #4',
+      complexity: 'medium', complexityLabel: 'Medium \u2014 needs FA processing time data + teaching college drop policies',
+      signal: 'aic-equity'
     },
     {
-      icon: '\ud83d\udcac',
-      title: 'Personalized Outreach Timing',
-      desc: 'Students who used the Exchange before are more likely to use it again \u2014 if reminded at the right time. A model could identify the optimal point in each student\u2019s registration cycle to surface Exchange options, rather than sending one blast to everyone.',
-      signal: 'aic-equity',
-      signalText: 'Privacy-first: aggregate patterns, not individual tracking'
+      icon: '✉', title: 'Reach students at the right moment \u2014 not just the same blast',
+      desc: 'Students who cross-enrolled before are 3x more likely to do it again. Students on waitlists are ready to act now. Timing the outreach to the student\u2019s context beats a generic email to 50,000.',
+      today: 'Outreach is batch: one email to all students at the start of registration. Open rate: ~12%. Students who need the Exchange most may not be the ones who open generic emails.',
+      after: 'Triggered messages based on signals: waitlisted for a required course \u2192 "this course is available at 4 other colleges right now." Ed plan shows a gap \u2192 "your counselor flagged ENGL 1A as needed \u2014 here are 12 open sections." Past Exchange user \u2192 personalized nudge at their registration date.',
+      toolLink: 'outreach', toolName: 'Outreach Planner (Tool 10)',
+      complexity: 'medium', complexityLabel: 'Medium \u2014 needs event-triggered messaging infrastructure',
+      signal: 'aic-equity'
     },
     {
-      icon: '\u2665',
-      title: 'Equity-Weighted Early Warning',
-      desc: 'First-generation students, CCPG recipients, and students with incomplete FAFSA are disproportionately affected by Exchange friction. An early warning system could weight these factors \u2014 so the students with the least margin for error get the most proactive support.',
-      signal: 'aic-equity',
-      signalText: 'Critical: model must be audited for bias against the populations it\u2019s designed to protect'
+      icon: '\u2665', title: 'Weight early warnings by who has the least margin for error',
+      desc: 'A payment timing issue is an inconvenience for a student with savings. It\u2019s a semester-ending crisis for a first-gen student on CCPG with no backup. The system should know the difference.',
+      today: 'All students get the same alerts (if any). First-gen CCPG students and students with savings accounts receive identical treatment from the system.',
+      after: 'Risk score combines: first-gen status + CCPG recipient + incomplete FAFSA + no prior Exchange use. Higher-risk students get earlier alerts, simpler payment instructions, and direct counselor routing if the alert goes unread for 24 hours.',
+      toolLink: 'equity', toolName: 'Equity Scorer (Tool 08)',
+      complexity: 'long', complexityLabel: 'Long-term \u2014 requires equity data integration + careful bias auditing',
+      signal: 'aic-equity'
     }
   ],
   role: [
     {
-      icon: '\ud83e\uddd1\u200d\ud83d\udcbb',
-      title: 'From Reactive Queue to Proactive Intelligence',
-      desc: 'Today, the analyst waits for tickets. With predictive tools, the analyst acts on signals: a college trending toward failure, a student cohort approaching a payment deadline, a new barrier pattern emerging. The inbox doesn\u2019t go away \u2014 but it gets smaller.',
-      signal: 'aic-role',
-      signalText: 'Shift: ticket-driven \u2192 signal-driven support'
+      icon: '\u2191', title: '8:30 AM looks different',
+      desc: 'The morning shift from "open the queue and start reading" to "open the dashboard and act on what\u2019s already been surfaced."',
+      today: '<strong>8:30</strong> \u2014 Open ticket queue. 47 new tickets overnight. Start reading. By 9:15, realize 38 are from one college. Start investigating.<br><strong>10:00</strong> \u2014 Identify root cause (Ethos token). Draft campus communication.<br><strong>10:30</strong> \u2014 Begin documenting.',
+      after: '<strong>8:30</strong> \u2014 Dashboard shows: 1 anomaly alert (Chabot, Ethos token, fired at 2:14 AM, 47 students affected). Pre-drafted campus email ready for review.<br><strong>8:45</strong> \u2014 Review and send. Begin documenting.<br><strong>9:00</strong> \u2014 Move to the <em>next</em> problem. 90 minutes saved.',
+      toolLink: 'monitor', toolName: 'Monitor + Alerts',
+      complexity: 'quick', complexityLabel: 'Quick win \u2014 alerting rules on existing monitoring data',
+      signal: 'aic-role'
     },
     {
-      icon: '\ud83d\udd0e',
-      title: 'AI Quality Assurance',
-      desc: 'If the Exchange starts recommending courses via AI, someone needs to audit whether those recommendations serve all students equally. Are CCPG students being steered toward fewer colleges? Are part-time students getting deprioritized? That\u2019s an analyst job, not an engineering job.',
-      signal: 'aic-role',
-      signalText: 'New responsibility: equity auditing of automated recommendations'
+      icon: '⌘', title: 'The analyst becomes the AI auditor',
+      desc: 'If the Exchange recommends courses via AI, someone needs to check whether CCPG students are being steered toward fewer colleges. Whether part-time students are deprioritized. That\u2019s an analyst job \u2014 not an engineering job.',
+      today: 'Course search results are sorted by quality badges and distance. No personalization. No one audits the sort order because it\u2019s deterministic.',
+      after: 'AI-ranked results are personalized. The analyst runs a monthly equity report: "Are recommendations for CCPG students systematically different from non-CCPG students? Are rural students seeing fewer options?" Findings go into the next model iteration.',
+      toolLink: 'equity', toolName: 'Equity Scorer (Tool 08)',
+      complexity: 'long', complexityLabel: 'Long-term \u2014 follows AI recommendation deployment',
+      signal: 'aic-role'
     },
     {
-      icon: '\ud83e\udd1d',
-      title: 'Human-in-the-Loop for Campus Relationships',
-      desc: 'AI can classify a ticket. It cannot call a registrar, understand why a college\u2019s FA office is 3 days behind, or negotiate a manual enrollment override for a student about to miss a transfer deadline. The human judgment layer doesn\u2019t shrink \u2014 it focuses on higher-stakes work.',
-      signal: 'aic-role',
-      signalText: 'AI handles pattern; analyst handles context, judgment, and relationships'
+      icon: '↔', title: 'AI handles pattern. The analyst handles the phone call.',
+      desc: 'A classifier can sort 80% of tickets. It cannot call a registrar at 4:45 PM to negotiate a manual enrollment override for a student whose add deadline is tomorrow.',
+      today: 'Analyst spends 60% of time on classification and triage, 40% on actual problem-solving, campus communication, and student follow-up.',
+      after: 'AI handles classification and triage. Analyst spends 80% of time on the work that requires judgment: escalations, campus relationship management, edge cases, and the student on the phone who needs someone to own the problem end to end.',
+      toolLink: 'comms', toolName: 'Communication (Tool 07)',
+      complexity: 'medium', complexityLabel: 'Medium \u2014 requires ticket auto-classification first',
+      signal: 'aic-role'
     },
     {
-      icon: '\ud83d\udcdd',
-      title: 'Training Data Curator',
-      desc: 'Every KB article the analyst writes, every ticket they classify, every pattern they document becomes training data for the next model. The quality of CVC\u2019s AI will be directly proportional to the quality of the documentation the support team produces today.',
-      signal: 'aic-role',
-      signalText: 'Today\u2019s documentation is tomorrow\u2019s training data'
+      icon: '✎', title: 'Every resolution you write today is training data for tomorrow',
+      desc: 'The quality of CVC\u2019s future AI will be directly proportional to the quality of documentation the support team produces now. Every KB article, every ticket tag, every escalation note is a labeled example.',
+      today: 'KB articles are written for the next human analyst. Ticket tags are for reporting. Documentation quality varies.',
+      after: 'KB articles are written for humans AND machines. Consistent tagging schema. Structured resolution notes. The analyst who documents well today is building the foundation that makes AI possible next year \u2014 and that makes their own job more focused on the work that matters.',
+      toolLink: 'kb', toolName: 'KB Builder (Tool 04)',
+      complexity: 'quick', complexityLabel: 'Quick win \u2014 start with documentation standards today',
+      signal: 'aic-role'
     }
   ]
 };
@@ -1825,19 +2032,33 @@ function renderAiView() {
   var el = document.getElementById('aiBody');
   if (!cards || !el) return;
 
-  var html = cards.map(function(card) {
-    return '<div class="ai-card">' +
+  var cxClass = { quick: 'cx-quick', medium: 'cx-medium', long: 'cx-long' };
+
+  var html = cards.map(function(card, idx) {
+    var expand = '<div class="ai-card-expand">' +
+      '<div class="ai-compare">' +
+        '<div class="ai-compare-col ai-today"><div class="ai-compare-label">Today</div>' + card.today + '</div>' +
+        '<div class="ai-compare-col ai-after"><div class="ai-compare-label">With AI</div>' + card.after + '</div>' +
+      '</div>' +
+      '<div class="ai-meta">' +
+        '<a class="ai-tool-link" onclick="event.stopPropagation();document.getElementById(\'' + card.toolLink + '\').scrollIntoView({behavior:\'smooth\'})">\u2192 ' + card.toolName + '</a>' +
+        '<span class="ai-complexity ' + (cxClass[card.complexity] || '') + '">' + card.complexityLabel + '</span>' +
+      '</div>' +
+    '</div>';
+
+    return '<div class="ai-card" onclick="this.classList.toggle(\'ai-expanded\')">' +
       '<div class="ai-card-icon">' + card.icon + '</div>' +
       '<div class="ai-card-title">' + card.title + '</div>' +
       '<div class="ai-card-desc">' + card.desc + '</div>' +
-      '<div class="ai-card-signal ' + card.signal + '">' + card.signalText + '</div>' +
-      '</div>';
+      expand +
+    '</div>';
   }).join('');
 
   el.innerHTML = '<div class="ai-card-grid">' + html + '</div>';
 }
 
 renderAiView();
+
 
 
 // ═══ INFOGRAPHIC BAR ANIMATION ═══
@@ -1880,6 +2101,90 @@ renderAiView();
   }, { threshold: 0.2 });
   dataObs.observe(dataSection);
 })();
+
+
+// ═══ COPY MESSAGE TEXT ═══
+document.querySelectorAll('.msg-preview').forEach(function(preview, idx) {
+  var btn = document.createElement('button');
+  btn.className = 'msg-copy';
+  btn.textContent = 'Copy';
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var body = preview.querySelector('.msg-body');
+    if (!body) return;
+    // Get clean text without HTML
+    var temp = document.createElement('div');
+    temp.innerHTML = body.innerHTML;
+    var text = temp.textContent || temp.innerText;
+    navigator.clipboard.writeText(text).then(function() {
+      btn.textContent = 'Copied';
+      btn.classList.add('copied');
+      setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  });
+  preview.appendChild(btn);
+});
+
+
+// ═══ ESCALATION CARD INTERACTION ═══
+document.querySelectorAll('.esc-card').forEach(function(card) {
+  card.addEventListener('click', function() {
+    document.querySelectorAll('.esc-card').forEach(function(c) { c.classList.remove('esc-active'); });
+    card.classList.add('esc-active');
+  });
+});
+
+
+// ═══ TRACER LIVE INDICATORS ═══
+var tracerElapsed = 0;
+var tracerTimer = null;
+var origAutoRunTrace = autoRunTrace;
+
+// Wrap the auto-run to add timing
+autoRunTrace = async function() {
+  // Add live indicator bar
+  var tracerSection = document.getElementById('tracer');
+  var existingLive = tracerSection.querySelector('.tracer-live');
+  if (!existingLive) {
+    var liveBar = document.createElement('div');
+    liveBar.className = 'tracer-live';
+    liveBar.id = 'tracerLive';
+    liveBar.innerHTML = '<div class="tl-item tl-elapsed"><div class="tl-dot"></div> Elapsed: <span id="traceTime">0s</span></div><div class="tl-item tl-students"><div class="tl-dot"></div> Students waiting: <span id="traceStudents">47</span></div><div class="tl-status" id="tracePhase">Initializing...</div>';
+    var toolBody = tracerSection.querySelector('.tool-body');
+    if (toolBody) toolBody.insertBefore(liveBar, toolBody.firstChild);
+  }
+  
+  // Start elapsed timer
+  tracerElapsed = 0;
+  if (tracerTimer) clearInterval(tracerTimer);
+  tracerTimer = setInterval(function() {
+    tracerElapsed++;
+    var el = document.getElementById('traceTime');
+    if (el) el.textContent = tracerElapsed + 's';
+  }, 1000);
+  
+  // Phase labels for each stage
+  var phases = ['Querying home SIS...', 'Checking Ethos API...', 'Scanning Exchange queue...', 'Verifying Canvas roster...', 'Compiling results...'];
+  
+  // Run the original but with phase updates
+  currentStage = -1;
+  var btn = document.getElementById('autoRunBtn');
+  btn.disabled = true;
+  document.getElementById('tracerStatus').textContent = 'Running...';
+  
+  for (var i = 0; i < 5; i++) {
+    var phaseEl = document.getElementById('tracePhase');
+    if (phaseEl) phaseEl.textContent = phases[i] || 'Processing...';
+    setStage(i);
+    await new Promise(function(r) { setTimeout(r, 1200); });
+  }
+  
+  btn.disabled = false;
+  document.getElementById('tracerStatus').textContent = 'Complete';
+  if (tracerTimer) clearInterval(tracerTimer);
+  var phaseEl2 = document.getElementById('tracePhase');
+  if (phaseEl2) phaseEl2.innerHTML = '<span style="color:var(--primary)">\u2713 Root cause identified</span>';
+};
 
 </script>
 </body>
