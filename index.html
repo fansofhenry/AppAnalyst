@@ -333,6 +333,50 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 .corr-count{font-family:var(--mono);font-size:.65rem;color:var(--text-2);min-width:45px;text-align:right}
 .corr-pct{font-family:var(--mono);font-size:.58rem;color:var(--text-3);min-width:35px;text-align:right}
 
+
+/* ═══ NARRATIVE SECTIONS ═══ */
+.story-sec{padding:clamp(3rem,8vw,5rem) 0}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
+@media(max-width:700px){.story-grid{grid-template-columns:1fr}}
+.story-card{padding:1.5rem;border:1px solid var(--border);border-radius:var(--r-xl);background:var(--surface);position:relative;overflow:hidden;transition:all .3s}
+.story-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.story-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.sc-green::before{background:var(--primary)}.sc-blue::before{background:var(--blue)}.sc-purple::before{background:var(--purple)}.sc-amber::before{background:var(--amber)}.sc-teal::before{background:var(--teal)}
+.sc-label{font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.35rem}
+.sc-label-green{color:var(--primary)}.sc-label-blue{color:var(--blue)}.sc-label-purple{color:var(--purple)}.sc-label-amber{color:var(--amber)}
+.sc-title{font-family:var(--display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+.sc-text{font-size:.85rem;color:var(--text-2);line-height:1.7}
+.sc-text strong{color:var(--text);font-weight:600}
+.sc-metric{display:inline-flex;align-items:center;gap:.3rem;margin-top:.5rem;padding:.25rem .6rem;border-radius:100px;font-family:var(--mono);font-size:.6rem;font-weight:500}
+.sc-metric-green{background:var(--primary-light);color:var(--primary);border:1px solid var(--primary-bd)}
+.sc-metric-blue{background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-bd)}
+.sc-metric-purple{background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-bd)}
+
+.proof-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;margin:2rem 0}
+@media(max-width:600px){.proof-row{grid-template-columns:1fr 1fr}}
+.proof-cell{background:var(--surface);padding:1.25rem 1rem;text-align:center}
+.proof-num{font-family:var(--display);font-size:2rem;font-weight:600;line-height:1;margin-bottom:.15rem}
+.proof-label{font-size:.72rem;color:var(--text-3)}
+
+.quote-section{padding:clamp(2.5rem,6vw,4rem) 0;text-align:center}
+.big-quote{font-family:var(--display);font-size:clamp(1.4rem,3.5vw,2rem);font-weight:500;font-style:italic;color:var(--text);line-height:1.4;max-width:680px;margin:0 auto 1rem;position:relative}
+.big-quote::before{content:'\201C';font-size:4rem;color:var(--primary-bd);position:absolute;top:-.8rem;left:-.6rem;line-height:1;font-family:var(--display)}
+.big-quote em{color:var(--primary);font-style:italic}
+.quote-attr{font-size:.82rem;color:var(--text-2)}
+.quote-attr strong{color:var(--text);font-weight:600}
+
+.stakeholder-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-top:1.5rem}
+@media(max-width:700px){.stakeholder-grid{grid-template-columns:1fr 1fr}}
+.sk-card{border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem;text-align:center;transition:all .2s}
+.sk-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.sk-icon{font-size:1.5rem;margin-bottom:.35rem}
+.sk-title{font-weight:600;font-size:.82rem;color:var(--text);margin-bottom:.2rem}
+.sk-desc{font-size:.7rem;color:var(--text-2);line-height:1.5}
+
+.closing-sec{padding:clamp(3rem,8vw,5rem) 0;background:linear-gradient(180deg,var(--bg) 0%,var(--primary-light) 100%);border-top:1px solid var(--border)}
+.closing-inner{text-align:center;max-width:640px;margin:0 auto}
+.closing-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .85rem;border-radius:100px;border:1px solid var(--primary-bd);background:var(--surface);font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--primary);margin-bottom:1rem}
+
 </style>
 </head>
 <body>
@@ -340,23 +384,62 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 <nav id="nav">
   <div class="nav-brand"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">CVC-OEI Support Toolkit</span></div>
   <div class="nav-links">
-    <a href="#flow">Architecture</a><a href="#monitor">Monitor</a><a href="#tracer">Diagnostics</a><a href="#patterns">Patterns</a><a href="#kb">KB Builder</a>
+    <a href="#why">Background</a><a href="#flow">Architecture</a><a href="#monitor">Monitor</a><a href="#tracer">Diagnostics</a><a href="#patterns">Patterns</a><a href="#kb">KB Builder</a>
     <a href="#barriers" class="nav-barrier">⚠ Barriers</a>
   </div>
 </nav>
 
 <header class="header">
   <div class="wrap">
-    <div class="h-badge"><span class="dot"></span> Application Support Analyst Toolkit</div>
-    <h1>Tools for supporting <em>cross-enrollment</em> at statewide scale</h1>
-    <p class="h-desc">Nine interactive prototypes for CVC-OEI application support — monitoring integrations, diagnosing failures, identifying patterns, building documentation, and <strong>reducing course-sharing barriers across 116 campuses.</strong></p>
+    <div class="h-badge"><span class="dot"></span> CVC-OEI · Foothill–De Anza CCD</div>
+    <h1>When a cross-enrollment endpoint fails, a student <em>can't graduate.</em></h1>
+    <p class="h-desc">Course sharing across 116 colleges means <strong>Banner, PeopleSoft, and Colleague</strong> all have to talk to the Exchange, Canvas has to provision correctly, and financial aid has to follow. These tools explore what that looks like from the support side — and where it breaks.</p>
     <div class="h-stats">
       <div><div class="h-stat-num green">116</div><div class="h-stat-label">Connected Colleges</div></div>
-      <div><div class="h-stat-num blue">9</div><div class="h-stat-label">Interactive Tools</div></div>
-      <div><div class="h-stat-num red">10</div><div class="h-stat-label">Barriers Mapped</div></div>
+      <div><div class="h-stat-num blue">3</div><div class="h-stat-label">SIS Platforms</div></div>
+      <div><div class="h-stat-num red">10</div><div class="h-stat-label">Barriers Identified</div></div>
+      <div><div class="h-stat-num" style="color:var(--purple)">9</div><div class="h-stat-label">Interactive Tools</div></div>
     </div>
   </div>
 </header>
+
+<!-- ═══ WHY CVC ═══ -->
+<section class="story-sec fu" id="why">
+  <div class="wrap">
+    <div class="eyebrow">Background</div>
+    <h2>Direct experience in the systems <em>CVC depends on</em></h2>
+    <p class="sec-desc">The CVC Exchange sits on top of three SIS platforms, Canvas LMS, Ethos APIs, and financial aid workflows. These are the systems I've worked in — not adjacent to, but <strong>directly inside.</strong></p>
+
+    <div class="story-grid">
+      <div class="story-card sc-green">
+        <div class="sc-label sc-label-green">SMCCD · 3 Colleges</div>
+        <div class="sc-title">Banner + PeopleSoft + Financial Aid</div>
+        <div class="sc-text">Multi-college district operations. Enrollment sync and FA workflows across both Banner and PeopleSoft. Found a <strong>race condition</strong> in the FA module — sync jobs pulling data before enrollment transactions committed.</div>
+        <span class="sc-metric sc-metric-green">Banner · PeopleSoft · FA Module</span>
+      </div>
+      <div class="story-card sc-blue">
+        <div class="sc-label sc-label-blue">OpenStax · Rice University</div>
+        <div class="sc-title">Canvas LMS + Ticket Trend Analysis</div>
+        <div class="sc-text">Application support for a national ed-tech platform on Canvas. Quarterly ticket analysis in <strong>Python/pandas</strong> surfaced an OAuth token issue presenting as different symptoms across user roles.</div>
+        <span class="sc-metric sc-metric-blue">Canvas · Python · OAuth Diagnosis</span>
+      </div>
+      <div class="story-card sc-purple">
+        <div class="sc-label sc-label-purple">Braven · San José State</div>
+        <div class="sc-title">Documentation Fix → Ticket Reduction</div>
+        <div class="sc-text">Recurring provisioning failures traced to <strong>outdated documentation</strong>, not a technical bug. Updated the docs; repeat tickets in that category dropped ~15% the following quarter.</div>
+        <span class="sc-metric sc-metric-purple">Root cause: docs, not code</span>
+      </div>
+      <div class="story-card sc-amber">
+        <div class="sc-label sc-label-amber">Foothill College · Student</div>
+        <div class="sc-title">The Student Side of These Systems</div>
+        <div class="sc-text">Started at Foothill. Navigated registration holds and financial aid workflows <strong>as a first-generation student</strong> — without a family who could explain how the system worked. That perspective informs how these tools think about the end user.</div>
+        <span class="sc-metric" style="background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-bd)">Student perspective</span>
+      </div>
+    </div>
+
+    
+  </div>
+</section>
 
 <!-- ═══ TOOL 01: ARCHITECTURE ═══ -->
 <section class="sec fu" id="flow"><div class="wrap">
@@ -462,6 +545,21 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
   </div>
 </div></section>
 
+<!-- ═══ HOW I COMMUNICATE ═══ -->
+<section class="sec fu" id="comms">
+  <div class="wrap">
+    <div class="eyebrow">Communication Framework</div>
+    <h2>One incident, <em>four audiences</em></h2>
+    <p class="sec-desc">The same cross-enrollment failure requires <strong>four different communications</strong> — each calibrated to what that audience needs to act.</p>
+    <div class="stakeholder-grid">
+      <div class="sk-card"><div class="sk-icon">🎓</div><div class="sk-title">The Student</div><div class="sk-desc">Needs clarity, not jargon. Deserves a real timeline and a clear next step. Their deadline is the only clock that matters.</div></div>
+      <div class="sk-card"><div class="sk-icon">🖥️</div><div class="sk-title">Campus IT / SIS Admin</div><div class="sk-desc">Owns the endpoint. Needs specific data — timestamps, error codes, transaction IDs. Collaborative framing, not blame.</div></div>
+      <div class="sk-card"><div class="sk-icon">📋</div><div class="sk-title">Registrar Office</div><div class="sk-desc">Hears from students first. Must stay aligned so they don't send mixed signals. Needs a response they can forward to their VP.</div></div>
+      <div class="sk-card"><div class="sk-icon">⚙️</div><div class="sk-title">CVC Internal Team</div><div class="sk-desc">Needs situation awareness and scope. May need to coordinate a systemic fix upstream across multiple colleges.</div></div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════════════════════════════════ -->
 <!-- BARRIER INTELLIGENCE SECTION -->
 <!-- ═══════════════════════════════════════════ -->
@@ -469,7 +567,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 <div class="divider-sec" id="barriers">
   <div class="divider-badge"><span class="dot"></span> Barrier Intelligence</div>
   <div class="divider-title">Reducing <em>friction</em> in course sharing</div>
-  <div class="divider-desc">Ten operational barriers mapped to the support analyst's role in documentation, data, escalation, and campus relationships.</div>
+  <div class="divider-desc">Operational barriers identified from CVC Exchange documentation, campus feedback, and the Spring 2025 FA dashboard rollout — mapped to what a support analyst can do about each one.</div>
   <div class="divider-stats">
     <div><div class="ds-num" style="color:var(--red)">10</div><div class="ds-label">Known Barriers</div></div>
     <div><div class="ds-num" style="color:var(--amber)">4</div><div class="ds-label">Equity-Critical</div></div>
@@ -537,7 +635,18 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 
 <div class="kb-toast" id="toast"></div>
 
-<footer><div class="wrap"><p class="foot-text"><strong>CVC-OEI Application Support Toolkit</strong> — 9 interactive prototypes for cross-enrollment support + barrier intelligence<br>Banner · PeopleSoft · Colleague · Canvas LMS · Ethos API · CVC Exchange</p></div></footer>
+<!-- ═══ CLOSING ═══ -->
+<section class="closing-sec fu">
+  <div class="wrap">
+    <div class="closing-inner">
+      <div class="big-quote" style="padding-left:1rem">Good support is invisible to students. When it works, they never think about it. When it doesn't — it's <em>someone's semester.</em></div>
+      <p style="font-size:.88rem;color:var(--text-2);line-height:1.8;margin-bottom:2rem;max-width:540px;margin-left:auto;margin-right:auto">These tools are a starting point — a way to think through the daily work of keeping course sharing reliable across 116 colleges, 3 SIS platforms, and the students who depend on all of it connecting.</p>
+      <p style="font-size:.85rem;color:var(--text-2);line-height:1.7;max-width:520px;margin:0 auto"><strong style="color:var(--text)">Henry Fan</strong><br>Application Support Analyst I Candidate · CVC-OEI<br>Foothill–De Anza Community College District</p>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><p class="foot-text"><strong>CVC-OEI Application Support Toolkit</strong> — Henry Fan · Application Support Analyst I Candidate<br>Banner · PeopleSoft · Colleague · Canvas LMS · Ethos API · CVC Exchange</p></div></footer>
 
 <script>
 // ═══ GLOBALS ═══
