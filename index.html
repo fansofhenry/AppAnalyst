@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CVC-OEI Application Support Toolkit</title>
+<title>Henry Fan · CVC-OEI Application Support</title>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#FAFAF8;--bg-2:#F4F3F0;--bg-3:#ECEAE5;--surface:#FFF;--surface-2:#F8F7F4;--border:#E4E2DC;--border-2:#D4D1C9;--text:#1C1917;--text-2:#57534E;--text-3:#A8A29E;--primary:#1A6B50;--primary-light:#E8F5EE;--primary-bd:#B4DBC8;--blue:#2563EB;--blue-light:#EFF6FF;--blue-bd:#93C5FD;--amber:#B45309;--amber-light:#FFFBEB;--amber-bd:#FCD34D;--red:#DC2626;--red-light:#FEF2F2;--red-bd:#FCA5A5;--purple:#7C3AED;--purple-light:#F5F3FF;--purple-bd:#C4B5FD;--teal:#0D9488;--teal-light:#F0FDFA;--teal-bd:#5EEAD4;--display:'Newsreader',serif;--body:'Instrument Sans',sans-serif;--mono:'IBM Plex Mono',monospace;--r:8px;--r-lg:12px;--r-xl:16px;--shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);--shadow-md:0 4px 12px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);--max-w:1060px}
@@ -379,22 +379,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 
 
 /* SCROLL PROGRESS */
-.scroll-progress{position:fixed;top:56px;left:0;height:2px;background:var(--primary);width:0%;z-index:99;transition:width .1s linear}
-
-/* ANIMATED COUNTERS */
-.counter{font-family:var(--display);font-weight:600;line-height:1}
-
-/* DATA PULSE on flow arrows */
-@keyframes dataPulse{0%{opacity:.2;transform:translateX(-4px)}50%{opacity:1;transform:translateX(2px)}100%{opacity:.2;transform:translateX(8px)}}
-.f-arrow-line{animation:dataPulse 2s ease-in-out infinite}
-.f-arrow:nth-child(2) .f-arrow-line{animation-delay:0s}
-.f-arrow:nth-child(4) .f-arrow-line{animation-delay:.4s}
-.f-arrow:nth-child(6) .f-arrow-line{animation-delay:.8s}
-
-/* SECTION NUMBERS */
-.sec-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-family:var(--mono);font-size:.6rem;font-weight:600;margin-right:.5rem;flex-shrink:0}
-.sec-num-green{background:var(--primary-light);color:var(--primary);border:1.5px solid var(--primary-bd)}
-.sec-num-red{background:var(--red-light);color:var(--red);border:1.5px solid var(--red-bd)}
+.scroll-progress{position:fixed;top:56px;left:0;height:3px;background:var(--primary);width:0%;z-index:99;transition:width .1s linear;box-shadow:0 0 8px rgba(26,107,80,.4)}
 
 /* STAKEHOLDER MESSAGE PREVIEWS */
 .msg-preview{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:all .25s;cursor:pointer}
@@ -402,33 +387,365 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 .msg-header{padding:.5rem .75rem;background:var(--surface-2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.5rem}
 .msg-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
 .msg-to{font-weight:600;font-size:.78rem;color:var(--text)}
-.msg-channel{font-family:var(--mono);font-size:.5rem;color:var(--text-3);margin-left:auto;padding:.1rem .4rem;border-radius:100px;border:1px solid var(--border)}
-.msg-body{padding:.65rem .75rem;background:var(--surface);font-size:.75rem;color:var(--text-2);line-height:1.65}
+.msg-channel{font-family:var(--mono);font-size:.52rem;color:var(--text-3);margin-left:auto;padding:.1rem .4rem;border-radius:100px;border:1px solid var(--border)}
+.msg-body{padding:.65rem .75rem;background:var(--surface);font-size:.78rem;color:var(--text-2);line-height:1.65}
 .msg-body strong{color:var(--text);font-weight:600}
 .msg-body .msg-highlight{background:var(--primary-light);color:var(--primary);padding:.05rem .3rem;border-radius:3px;font-weight:500;font-size:.7rem}
 .msg-body .msg-warn{background:var(--amber-light);color:var(--amber);padding:.05rem .3rem;border-radius:3px;font-weight:500;font-size:.7rem}
 .msg-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1.5rem}
 @media(max-width:700px){.msg-grid{grid-template-columns:1fr}}
 
-/* SCENARIO CONNECTOR — ties tools together */
+/* SCENARIO CONNECTOR */
 .scenario-sec{background:linear-gradient(180deg,var(--bg-2) 0%,var(--bg) 100%);border-top:1px solid var(--border);padding:clamp(2.5rem,6vw,4rem) 0}
-.scenario-steps{display:flex;gap:0;overflow-x:auto;margin-top:1.5rem}
-.sc-step{flex:1;min-width:140px;padding:.75rem;border:1px solid var(--border);background:var(--surface);text-align:center;position:relative;transition:all .25s;cursor:pointer}
-.sc-step:first-child{border-radius:var(--r-lg) 0 0 var(--r-lg)}
-.sc-step:last-child{border-radius:0 var(--r-lg) var(--r-lg) 0}
+.sc-step{flex:1;min-width:120px;padding:.75rem;border:1px solid var(--border);background:var(--surface);text-align:center;position:relative;cursor:pointer;transition:all .25s cubic-bezier(.16,1,.3,1)}
+.sc-step:first-child{border-radius:var(--r-lg) 0 0 var(--r-lg)}.sc-step:last-child{border-radius:0 var(--r-lg) var(--r-lg) 0}
 .sc-step:not(:last-child){border-right:none}
 .sc-step:not(:last-child)::after{content:'';position:absolute;right:-1px;top:50%;transform:translateY(-50%);border:6px solid transparent;border-left:6px solid var(--border);z-index:2}
-.sc-step:hover{background:var(--primary-light);border-color:var(--primary-bd)}
+.sc-step:hover{transform:translateY(-3px);box-shadow:0 4px 16px rgba(0,0,0,.06);background:var(--primary-light);border-color:var(--primary-bd)}
 .sc-step:hover::after{border-left-color:var(--primary-bd)}
-.sc-step-num{font-family:var(--mono);font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.15rem}
+.sc-step-num{font-family:var(--mono);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.15rem}
 .sc-step-tool{font-weight:600;font-size:.72rem;color:var(--text);margin-bottom:.1rem}
 .sc-step-action{font-size:.6rem;color:var(--text-2);line-height:1.4}
-.sc-step-link{font-family:var(--mono);font-size:.45rem;color:var(--primary);margin-top:.25rem;display:block}
+.sc-step-link{font-family:var(--mono);font-size:.52rem;color:var(--primary);margin-top:.25rem;display:block}
 
-/* ENHANCED EXPERIENCE CARDS — tech stack visual */
-.tech-stack{display:flex;flex-wrap:wrap;gap:.2rem;margin-top:.5rem}
-.tech-tag{font-family:var(--mono);font-size:.5rem;padding:.12rem .35rem;border-radius:4px;font-weight:500}
-.tt-sis{background:var(--purple-light);color:var(--purple)}.tt-lms{background:var(--primary-light);color:var(--primary)}.tt-lang{background:var(--blue-light);color:var(--blue)}.tt-tool{background:var(--amber-light);color:var(--amber)}.tt-auth{background:var(--teal-light);color:var(--teal)}
+/* SECTION NUMBERS */
+.sec-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-family:var(--mono);font-size:.6rem;font-weight:600;margin-right:.5rem;flex-shrink:0}
+.sec-num-green{background:var(--primary-light);color:var(--primary);border:1.5px solid var(--primary-bd)}
+.sec-num-red{background:var(--red-light);color:var(--red);border:1.5px solid var(--red-bd)}
+
+/* OUTREACH PLANNER */
+.outreach-tabs{display:flex;gap:2px;background:var(--bg-3);border-radius:var(--r);padding:2px;margin-bottom:1.25rem;width:fit-content}
+.outreach-tab{padding:.4rem .85rem;border-radius:6px;border:none;background:transparent;font-family:var(--mono);font-size:.62rem;font-weight:500;letter-spacing:.04em;color:var(--text-3);cursor:pointer;transition:all .15s}
+.outreach-tab:hover{color:var(--text-2)}
+.outreach-tab.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+.cal-timeline{display:flex;gap:0;overflow-x:auto;padding-bottom:.5rem;margin-bottom:1.25rem}
+.cal-month{flex:1;min-width:80px;padding:.5rem .35rem;text-align:center;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:all .2s}
+.cal-month:first-child{border-radius:var(--r-lg) 0 0 var(--r-lg)}.cal-month:last-child{border-radius:0 var(--r-lg) var(--r-lg) 0}
+.cal-month:not(:last-child){border-right:none}
+.cal-month:hover{background:var(--bg-2)}
+.cal-month.cal-active{background:var(--primary-light);border-color:var(--primary-bd);z-index:2;box-shadow:0 0 0 2px var(--primary-bd)}
+.cal-name{font-family:var(--mono);font-size:.55rem;font-weight:600;color:var(--text);margin-bottom:.1rem}
+.cal-label{font-size:.52rem;color:var(--text-3);line-height:1.2}
+.cal-dots{display:flex;gap:2px;justify-content:center;margin-top:.3rem}
+.cal-dot{width:5px;height:5px;border-radius:50%}
+.cd-green{background:var(--primary)}.cd-blue{background:var(--blue)}.cd-amber{background:var(--amber)}.cd-teal{background:var(--teal)}
+.outreach-detail{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.od-header{padding:.75rem 1rem;background:var(--surface-2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem}
+.od-month{font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.2rem .5rem;border-radius:4px;background:var(--primary-light);color:var(--primary)}
+.od-phase{font-weight:600;font-size:.85rem;color:var(--text)}
+.od-body{padding:1rem}
+.trigger-cards{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+@media(max-width:600px){.trigger-cards{grid-template-columns:1fr}}
+.trigger-card{border:1px solid var(--border);border-radius:var(--r);padding:.7rem .8rem;cursor:pointer;transition:all .25s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.trigger-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.tc-inreach::before{background:var(--primary)}.tc-outreach::before{background:var(--blue)}.tc-orientation::before{background:var(--teal)}.tc-intervention::before{background:var(--amber)}
+.trigger-card:hover{box-shadow:var(--shadow);border-color:var(--border-2);transform:translateY(-1px)}
+.trigger-card.tc-expanded{border-color:var(--primary-bd);background:var(--surface-2);transform:scale(1.01);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.tc-type{font-family:var(--mono);font-size:.52rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.15rem}
+.tc-inreach .tc-type{color:var(--primary)}.tc-outreach .tc-type{color:var(--blue)}.tc-orientation .tc-type{color:var(--teal)}.tc-intervention .tc-type{color:var(--amber)}
+.tc-title{font-weight:600;font-size:.78rem;color:var(--text);margin-bottom:.1rem}
+.tc-who{font-size:.65rem;color:var(--text-3)}
+.tc-detail{display:none;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--border)}
+.tc-expanded .tc-detail{display:block;animation:fadeSlide .2s ease}
+.tc-situation{font-size:.72rem;color:var(--text-2);line-height:1.6;margin-bottom:.4rem}
+.tc-msg-label{font-family:var(--mono);font-size:.52rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);margin-bottom:.2rem}
+.tc-msg{font-size:.72rem;color:var(--text);line-height:1.6;padding:.5rem .65rem;background:var(--bg);border-radius:var(--r);border-left:2px solid var(--primary-bd);font-style:italic}
+.tc-impact{display:flex;gap:.3rem;margin-top:.4rem;flex-wrap:wrap}
+.tc-impact-tag{font-family:var(--mono);font-size:.52rem;padding:.1rem .35rem;border-radius:3px;border:1px solid var(--border);color:var(--text-3)}
+
+/* STUDENT JOURNEY */
+.journey-cols{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden}
+@media(max-width:700px){.journey-cols{grid-template-columns:1fr}}
+.journey-col{padding:0}
+.journey-col-header{padding:.65rem 1rem;font-weight:600;font-size:.82rem;text-align:center;border-bottom:1px solid var(--border)}
+.jch-ok{background:var(--primary-light);color:var(--primary)}.jch-broken{background:var(--red-light);color:var(--red)}
+.journey-step{padding:.65rem .85rem;border-bottom:1px solid var(--border);display:flex;gap:.6rem;align-items:flex-start;transition:all .15s;min-height:72px}
+.journey-step:last-child{border-bottom:none}
+.journey-step:hover{background:var(--bg-2)}
+.journey-step.j-err:hover{background:rgba(254,226,226,.5)}
+.journey-col:first-child{border-right:1px solid var(--border)}
+.j-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;margin-top:2px}
+.j-ok .j-icon{background:#DCFCE7;color:#15803D}.j-warn .j-icon{background:#FEF3C7;color:#92400E}.j-err .j-icon{background:#FEE2E2;color:#B91C1C}
+.j-content{flex:1;min-width:0}
+.j-label{font-family:var(--mono);font-size:.52rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:.1rem}
+.j-text{font-size:.78rem;color:var(--text);line-height:1.55}
+.j-student{font-size:.7rem;color:var(--text-2);font-style:italic;margin-top:.2rem;line-height:1.45}
+.jt-btn{padding:.4rem .85rem;border-radius:6px;border:none;background:transparent;font-family:var(--mono);font-size:.62rem;font-weight:500;color:var(--text-3);cursor:pointer;transition:all .15s}
+.jt-btn.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+
+/* KEY HINT + DEMO */
+.key-hint{position:fixed;bottom:1.25rem;right:1.25rem;background:rgba(28,25,23,.88);color:#A8A29E;font-family:var(--mono);font-size:.58rem;padding:.5rem .75rem;border-radius:var(--r);z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;backdrop-filter:blur(8px)}
+.key-hint.show{opacity:1}
+.key-hint kbd{display:inline-block;background:rgba(255,255,255,.12);padding:.1rem .35rem;border-radius:3px;margin:0 .1rem;color:#E5E5E5;border:1px solid rgba(255,255,255,.1)}
+
+/* LIVE ALERT */
+.live-alert{position:absolute;top:60px;right:1rem;background:#1C1917;color:#fff;padding:.55rem .85rem;border-radius:var(--r-lg);font-size:.72rem;box-shadow:0 8px 30px rgba(0,0,0,.2);z-index:50;opacity:0;transform:translateY(-10px) translateX(10px);transition:all .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none;max-width:320px;border-left:3px solid var(--red)}
+.live-alert.show{opacity:1;transform:translateY(0) translateX(0);pointer-events:auto}
+.live-alert-title{font-family:var(--mono);font-size:.52rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--red-bd);margin-bottom:.2rem;display:flex;align-items:center;gap:.3rem}
+.live-alert-title::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--red);animation:pulse 1s ease infinite}
+.live-alert-body{color:#D4D1C9;line-height:1.5}
+.live-alert-body strong{color:#fff}
+.live-alert-time{font-family:var(--mono);font-size:.52rem;color:#6B7280;margin-top:.25rem}
+
+/* NAV ACTIVE */
+.nav-links a.nav-active{color:var(--primary);background:var(--primary-light);font-weight:600}
+.nav-links a.nav-barrier.nav-active{color:#fff;background:var(--red)}
+.nav-links a{position:relative;overflow:hidden}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:50%;width:0;height:2px;background:var(--primary);transition:all .2s;transform:translateX(-50%)}
+.nav-links a:hover::after{width:70%}
+
+/* VISUAL POLISH */
+.tool-frame{transition:box-shadow .3s,transform .3s}
+.tool-frame:hover{box-shadow:0 8px 30px rgba(0,0,0,.08);transform:translateY(-2px)}
+.fu{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+.fu.vis{opacity:1;transform:translateY(0)}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 4px rgba(34,197,94,.3)}50%{box-shadow:0 0 12px rgba(34,197,94,.5)}}
+@keyframes warnPulse{0%,100%{box-shadow:0 0 4px rgba(245,158,11,.3)}50%{box-shadow:0 0 12px rgba(245,158,11,.6)}}
+@keyframes errPulse{0%,100%{box-shadow:0 0 4px rgba(239,68,68,.3)}50%{box-shadow:0 0 12px rgba(239,68,68,.6)}}
+.s-ok{animation:glowPulse 3s ease infinite}.s-warn{animation:warnPulse 1.5s ease infinite}.s-err{animation:errPulse 1s ease infinite}
+@keyframes flowDash{0%{background-position:0 0}100%{background-position:20px 0}}
+.f-arrow-line{font-size:0;width:40px;height:2px;background:repeating-linear-gradient(90deg,var(--primary) 0,var(--primary) 6px,transparent 6px,transparent 10px);background-size:20px 2px;animation:flowDash 1s linear infinite}
+@keyframes lcPulse{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}50%{box-shadow:0 0 0 4px rgba(220,38,38,.12)}}
+.lc-err{animation:lcPulse 2s ease infinite}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.fill-high{background:linear-gradient(90deg,var(--red),#F87171,var(--red));background-size:200% 100%;animation:shimmer 2s ease-in-out 1}
+.fill-med{background:linear-gradient(90deg,var(--amber),#FBBF24,var(--amber));background-size:200% 100%;animation:shimmer 2s ease-in-out 1}
+.fill-low{background:linear-gradient(90deg,var(--blue),#60A5FA,var(--blue));background-size:200% 100%;animation:shimmer 2s ease-in-out 1}
+.corr-bar{background-size:200% 100%;animation:shimmer 1.5s ease-in-out 1}
+.insight-card.insight-active{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light),0 4px 16px rgba(0,0,0,.06)}
+.b-card{transition:all .25s cubic-bezier(.16,1,.3,1)}
+.b-card.expanded{transform:scale(1.01);box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.bar-group:hover .bar-stack{filter:brightness(.93);box-shadow:0 2px 8px rgba(0,0,0,.08);border-radius:3px}
+.ms-cell{transition:all .2s}.ms-cell:hover{background:var(--surface-2);transform:scale(1.02)}
+.msg-preview:nth-child(1):hover{border-color:var(--teal-bd);box-shadow:0 4px 16px rgba(13,148,136,.08)}
+.msg-preview:nth-child(2):hover{border-color:var(--purple-bd);box-shadow:0 4px 16px rgba(124,58,237,.08)}
+.msg-preview:nth-child(3):hover{border-color:var(--amber-bd);box-shadow:0 4px 16px rgba(180,83,9,.08)}
+.msg-preview:nth-child(4):hover{border-color:var(--blue-bd);box-shadow:0 4px 16px rgba(37,99,235,.08)}
+@keyframes floatDown{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(4px);opacity:.7}}
+@keyframes countUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.h-stat-num{animation:countUp .6s cubic-bezier(.16,1,.3,1) both}
+.h-stats > div:nth-child(1) .h-stat-num{animation-delay:.1s}
+.h-stats > div:nth-child(2) .h-stat-num{animation-delay:.2s}
+.h-stats > div:nth-child(3) .h-stat-num{animation-delay:.3s}
+.demo-caption{font-family:var(--mono);font-size:.6rem;color:var(--text-3);padding:.5rem 0 0;display:flex;align-items:center;gap:.4rem;margin-top:.5rem}
+.demo-caption::before{content:'';width:16px;height:1px;background:var(--border-2);flex-shrink:0}
+@media(max-width:768px){.nav-links{flex-wrap:wrap;gap:.15rem}.nav-links a{font-size:.6rem;padding:.25rem .4rem}}
+.header{padding:clamp(3rem,8vw,5.5rem) 0 clamp(2rem,4vw,3rem)}
+
+
+/* ═══ CUSTOM TOOLTIP ═══ */
+.tip{position:fixed;z-index:300;background:#1C1917;color:#E7E5E4;font-size:.72rem;padding:.4rem .65rem;border-radius:6px;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:0 4px 12px rgba(0,0,0,.2);max-width:240px;line-height:1.5;white-space:nowrap}
+.tip.show{opacity:1}
+.tip strong{color:#fff;font-weight:600}
+
+/* ═══ ARCHITECTURE NODE GLOW ═══ */
+.f-node{transition:all .3s cubic-bezier(.16,1,.3,1);cursor:pointer}
+.f-node:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 8px 24px rgba(0,0,0,.1)}
+.fn-sis:hover{box-shadow:0 8px 24px rgba(26,107,80,.15),0 0 0 3px rgba(26,107,80,.1)}
+.fn-exc:hover{box-shadow:0 8px 24px rgba(37,99,235,.15),0 0 0 3px rgba(37,99,235,.1)}
+.fn-lms:hover{box-shadow:0 8px 24px rgba(124,58,237,.15),0 0 0 3px rgba(124,58,237,.1)}
+.fn-stu:hover{box-shadow:0 8px 24px rgba(13,148,136,.15),0 0 0 3px rgba(13,148,136,.1)}
+.f-node.fn-active{transform:translateY(-4px) scale(1.04)}
+.fn-sis.fn-active{box-shadow:0 0 0 3px rgba(26,107,80,.2),0 8px 24px rgba(26,107,80,.12)}
+.fn-exc.fn-active{box-shadow:0 0 0 3px rgba(37,99,235,.2),0 8px 24px rgba(37,99,235,.12)}
+.fn-lms.fn-active{box-shadow:0 0 0 3px rgba(124,58,237,.2),0 8px 24px rgba(124,58,237,.12)}
+.fn-stu.fn-active{box-shadow:0 0 0 3px rgba(13,148,136,.2),0 8px 24px rgba(13,148,136,.12)}
+
+/* ═══ FLOW INFO PANEL TRANSITION ═══ */
+@keyframes panelSlide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.flow-info-panel{animation:panelSlide .35s cubic-bezier(.16,1,.3,1)}
+
+/* ═══ MONITOR ROW IMPROVEMENTS ═══ */
+.status-row{transition:all .2s;border-left:3px solid transparent;cursor:pointer}
+.status-row:hover{background:var(--bg-2);border-left-color:var(--primary)}
+.status-row.expanded{border-left-color:var(--primary);background:var(--primary-light)}
+.status-row .sr-chevron{display:inline-block;transition:transform .25s;font-size:.6rem;margin-left:auto}
+.status-row.expanded .sr-chevron{transform:rotate(90deg)}
+
+/* ═══ CHART BAR ANIMATION ON ENTRY ═══ */
+@keyframes barGrow{from{transform:scaleY(0);transform-origin:bottom}to{transform:scaleY(1);transform-origin:bottom}}
+.bar-stack{animation:barGrow .5s cubic-bezier(.16,1,.3,1) both}
+.bar-group:nth-child(1) .bar-stack{animation-delay:.05s}
+.bar-group:nth-child(2) .bar-stack{animation-delay:.1s}
+.bar-group:nth-child(3) .bar-stack{animation-delay:.15s}
+.bar-group:nth-child(4) .bar-stack{animation-delay:.2s}
+.bar-group:nth-child(5) .bar-stack{animation-delay:.25s}
+.bar-group:nth-child(6) .bar-stack{animation-delay:.3s}
+.bar-group:nth-child(7) .bar-stack{animation-delay:.35s}
+.bar-group:nth-child(8) .bar-stack{animation-delay:.4s}
+.bar-group:nth-child(9) .bar-stack{animation-delay:.45s}
+.bar-group:nth-child(10) .bar-stack{animation-delay:.5s}
+.bar-group:nth-child(11) .bar-stack{animation-delay:.55s}
+.bar-group:nth-child(12) .bar-stack{animation-delay:.6s}
+
+/* ═══ JOURNEY CROSS-HIGHLIGHT ═══ */
+.journey-step{transition:all .2s}
+.journey-step.j-highlight{background:var(--primary-light) !important;border-left:3px solid var(--primary)}
+.journey-step.j-err.j-highlight{background:rgba(254,226,226,.6) !important;border-left:3px solid var(--red)}
+
+/* ═══ HERO SVG BACKGROUND ═══ */
+.header{position:relative;overflow:hidden}
+.hero-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;opacity:.04;pointer-events:none}
+.hero-bg circle{fill:none;stroke:var(--primary);stroke-width:.5}
+.hero-bg line{stroke:var(--primary);stroke-width:.3;opacity:.6}
+@keyframes heroFloat{0%,100%{transform:translate(-50%,-50%) rotate(0deg)}50%{transform:translate(-50%,-50%) rotate(1deg)}}
+.hero-bg{animation:heroFloat 20s ease-in-out infinite}
+
+/* ═══ LIFECYCLE CONNECTING LINES ═══ */
+.lc-node{position:relative;transition:all .2s}
+.lc-node:hover{transform:translateY(-2px)}
+.lc-node:not(:last-child)::after{content:'';position:absolute;right:-12px;top:50%;width:12px;height:2px;background:var(--border-2)}
+.lc-err:not(:last-child)::after{background:var(--red);opacity:.5}
+
+/* ═══ BARRIER CARD ICONS ═══ */
+.b-num{font-size:.8rem;transition:all .2s}
+.b-card:hover .b-num{transform:scale(1.15)}
+
+/* ═══ CORRELATOR HOVER TOOLTIPS ═══ */
+.corr-row{position:relative}
+.corr-row:hover .corr-bar{filter:brightness(.9)}
+.corr-row:hover .corr-pct{font-weight:700;color:var(--text)}
+
+
+/* ═══ PREMIUM POLISH ═══ */
+
+/* Tracer layer node hover + active ring */
+.tf-node{transition:all .25s cubic-bezier(.16,1,.3,1)}
+.tf-node:hover{transform:translateY(-3px);box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.tf-node.active{box-shadow:0 0 0 3px var(--primary-bd),0 6px 20px rgba(26,107,80,.1)}
+.tf-node.error-node{box-shadow:0 0 0 3px var(--red-bd),0 6px 20px rgba(220,38,38,.1)}
+
+/* Smooth page section transitions */
+.sec{border-top:1px solid transparent;background-clip:padding-box}
+.sec + .sec{border-top-color:var(--border)}
+
+/* KB template nav hover */
+.kb-nav-item{transition:all .2s;cursor:pointer}
+.kb-nav-item:hover{background:var(--bg-2);transform:translateX(2px)}
+.kb-nav-item.active{background:var(--primary-light);border-left:3px solid var(--primary)}
+
+/* Equity bar hover expand */
+.eq-bar-fill{transition:all .3s cubic-bezier(.16,1,.3,1)}
+.eq-row:hover .eq-bar-fill{filter:brightness(.95);transform:scaleX(1.01)}
+
+/* Big quote styling */
+.big-quote,.closing-sec em{text-shadow:0 1px 2px rgba(0,0,0,.03)}
+
+/* Divider section counter pop */
+.ds-num{transition:all .3s}
+.divider-sec:hover .ds-num{transform:scale(1.05)}
+
+/* Footer subtle gradient */
+footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
+
+/* Outreach trigger card type indicator dot */
+.tc-type::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:.3rem;vertical-align:middle}
+.tc-inreach .tc-type::before{background:var(--primary)}
+.tc-outreach .tc-type::before{background:var(--blue)}
+.tc-orientation .tc-type::before{background:var(--teal)}
+.tc-intervention .tc-type::before{background:var(--amber)}
+
+/* Calendar dot bounce on month hover */
+@keyframes dotBounce{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
+.cal-month:hover .cal-dot{animation:dotBounce .4s ease}
+
+/* Scenario connector step number badge */
+.sc-step-num{background:var(--bg-3);display:inline-block;padding:.1rem .35rem;border-radius:4px;margin-bottom:.25rem}
+.sc-step:hover .sc-step-num{background:var(--primary-light);color:var(--primary)}
+
+/* Message icon pulse on hover */
+@keyframes iconPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.msg-preview:hover .msg-icon{animation:iconPulse .5s ease}
+
+/* Journey column header subtle shine */
+@keyframes headerShine{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.jch-ok{background:linear-gradient(90deg,var(--primary-light),rgba(255,255,255,.4),var(--primary-light));background-size:200% 100%;animation:headerShine 3s ease 1}
+.jch-broken{background:linear-gradient(90deg,var(--red-light),rgba(255,255,255,.3),var(--red-light));background-size:200% 100%;animation:headerShine 3s ease 1}
+
+/* Background context bar subtle left accent */
+#why > .wrap > div{border-left:4px solid var(--primary);transition:border-color .3s}
+#why > .wrap > div:hover{border-left-color:var(--blue)}
+
+/* Tool label colored dot pulse */
+.tool-label::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:.3rem;vertical-align:middle}
+.tl-green::before{background:var(--primary);animation:pulse 2s ease infinite}
+.tl-purple::before{background:var(--purple);animation:pulse 2.5s ease infinite}
+.tl-red::before{background:var(--red);animation:pulse 1.5s ease infinite}
+
+/* Smooth section fade between alt backgrounds */
+.sec-alt{background:linear-gradient(180deg,var(--bg-2) 0%,var(--bg-2) 85%,var(--bg) 100%)}
+
+/* Week-one question cards hover */
+#why ~ section:last-of-type div[style*="flex-direction:column"] > div{transition:all .2s}
+
+
+/* ═══ DATA PULSE ON FLOW ARROWS ═══ */
+@keyframes travelDot{0%{left:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:calc(100% - 4px);opacity:0}}
+.f-arrow{position:relative}
+.f-arrow::after{content:'';position:absolute;top:50%;transform:translateY(-50%);width:4px;height:4px;border-radius:50%;background:var(--primary);animation:travelDot 2s ease-in-out infinite;left:0}
+.f-arrow:nth-child(2)::after{animation-delay:0s}
+.f-arrow:nth-child(4)::after{animation-delay:.7s}
+.f-arrow:nth-child(6)::after{animation-delay:1.4s}
+
+/* ═══ CLOSING WEEK-1 QUESTION HOVER ═══ */
+.q1-card{transition:all .2s;cursor:default}
+.q1-card:hover{border-color:var(--primary-bd);background:var(--primary-light);transform:translateX(3px)}
+
+
+/* AI VISION SECTION */
+.ai-tabs{display:flex;gap:2px;background:var(--bg-3);border-radius:var(--r);padding:2px;margin-bottom:1.25rem;width:fit-content}
+.ai-tab{padding:.45rem .9rem;border-radius:6px;border:none;background:transparent;font-family:var(--mono);font-size:.62rem;font-weight:500;letter-spacing:.04em;color:var(--text-3);cursor:pointer;transition:all .15s}
+.ai-tab:hover{color:var(--text-2)}.ai-tab.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+
+.ai-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+@media(max-width:650px){.ai-card-grid{grid-template-columns:1fr}}
+
+.ai-card{border:1px solid var(--border);border-radius:var(--r-lg);padding:.85rem 1rem;transition:all .25s cubic-bezier(.16,1,.3,1);cursor:pointer;position:relative;overflow:hidden}
+.ai-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.ai-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.06);transform:translateY(-2px);border-color:var(--primary-bd)}
+.ai-card-icon{font-size:1.1rem;margin-bottom:.4rem}
+.ai-card-title{font-weight:600;font-size:.82rem;color:var(--text);margin-bottom:.25rem;line-height:1.3}
+.ai-card-desc{font-size:.72rem;color:var(--text-2);line-height:1.6}
+.ai-card-signal{margin-top:.4rem;padding-top:.35rem;border-top:1px solid var(--border);font-family:var(--mono);font-size:.55rem;color:var(--text-3);display:flex;align-items:center;gap:.3rem}
+.ai-card-signal::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0}
+
+.aic-predict::before{background:var(--primary)}.aic-predict{border-left:0}.aic-predict::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--primary)}
+.aic-equity::before{background:var(--teal)}.aic-equity{border-left:0}.aic-equity::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--teal)}
+.aic-govern::before{background:var(--amber)}.aic-govern{border-left:0}.aic-govern::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber)}
+.aic-role::before{background:var(--blue)}.aic-role{border-left:0}.aic-role::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue)}
+
+.ai-governance{margin-top:1.25rem;padding:.75rem 1rem;border:1px solid var(--amber-bd);background:var(--amber-light);border-radius:var(--r-lg);display:flex;gap:.6rem;align-items:flex-start}
+.ai-governance-icon{font-size:.9rem;flex-shrink:0;margin-top:2px}
+.ai-governance-text{font-size:.75rem;color:var(--text-2);line-height:1.65}
+.ai-governance-text strong{color:var(--text)}
+
+
+/* CVC EXCHANGE INFOGRAPHIC */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+@media(max-width:650px){.info-grid{grid-template-columns:1fr}}
+.info-panel{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.info-panel-header{padding:.5rem .75rem;background:var(--surface-2);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+.info-panel-body{padding:.75rem}
+
+.growth-row{display:flex;align-items:center;gap:.5rem;padding:.4rem 0;border-bottom:1px solid var(--border)}
+.growth-row:last-child{border-bottom:none}
+.growth-year{font-family:var(--mono);font-size:.6rem;color:var(--text-3);width:55px;flex-shrink:0}
+.growth-bar-wrap{flex:1;height:22px;background:var(--bg-3);border-radius:4px;overflow:hidden;position:relative}
+.growth-bar{height:100%;border-radius:4px;transition:width 1s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;justify-content:flex-end;padding-right:.4rem}
+.growth-num{font-family:var(--mono);font-size:.55rem;font-weight:600;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+
+.course-bar-row{display:flex;align-items:center;gap:.5rem;padding:.3rem 0}
+.course-name{font-size:.72rem;color:var(--text);width:130px;flex-shrink:0;font-weight:500}
+.course-bar-wrap{flex:1;height:18px;background:var(--bg-3);border-radius:3px;overflow:hidden}
+.course-bar{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:.4rem}
+.course-pct{font-family:var(--mono);font-size:.5rem;font-weight:600;color:#fff}
+
+.info-stat-row{display:flex;gap:.5rem;margin-top:.75rem}
+.info-stat{flex:1;text-align:center;padding:.5rem;border:1px solid var(--border);border-radius:var(--r)}
+.info-stat-num{font-family:var(--display);font-size:1.1rem;font-weight:600}
+.info-stat-label{font-size:.55rem;color:var(--text-3);margin-top:.1rem}
+
+.info-source{font-family:var(--mono);font-size:.52rem;color:var(--text-3);margin-top:.75rem;padding-top:.5rem;border-top:1px solid var(--border);line-height:1.5}
 
 </style>
 </head>
@@ -438,75 +755,122 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 <nav id="nav">
   <div class="nav-brand"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">CVC-OEI · Application Support</span></div>
   <div class="nav-links">
-    <a href="#why">Background</a><a href="#flow">Architecture</a><a href="#monitor">Monitor</a><a href="#tracer">Diagnostics</a><a href="#patterns">Patterns</a><a href="#kb">KB Builder</a>
+    <a href="#why">Background</a><a href="#cvcData">Data</a><a href="#journey">Journey</a><a href="#flow">Architecture</a><a href="#monitor">Monitor</a><a href="#tracer">Diagnostics</a><a href="#patterns">Patterns</a><a href="#kb">KB Builder</a>
+    <a href="#outreach">Outreach</a><a href="#aiVision" style="color:var(--teal)">AI Vision</a>
     <a href="#barriers" class="nav-barrier">⚠ Barriers</a>
   </div>
 </nav>
 
 <header class="header">
   <div class="wrap">
-    <div class="h-badge"><span class="dot"></span> Henry Fan · Application Support Analyst I</div>
+    <div class="h-badge"><span class="dot"></span> CVC-OEI · Foothill–De Anza CCD</div>
     <h1>What does application support look like at <em>statewide scale?</em></h1>
-    <p class="h-desc">When 116 colleges share courses through the CVC Exchange, a single enrollment touches <strong>four SIS integration paths, a statewide SSO proxy, Canvas provisioning, and financial aid Consortium Agreements.</strong> Supporting that means knowing where things break, communicating across very different audiences, and documenting well enough that the next person doesn't start from scratch.</p>
+    <p class="h-desc">116 colleges, four SIS integration paths, a statewide SSO proxy, Canvas, and financial aid Consortium Agreements — all connected through the CVC Exchange. <strong>These tools explore where it breaks and how to respond.</strong></p>
+    <p style="font-size:.78rem;color:var(--text-3);max-width:560px;margin:0 auto .75rem;line-height:1.7;text-align:center">The CVC Exchange isn't a course catalog — it's <strong style="color:var(--text-2)">equity infrastructure.</strong> A student at a rural college with 12 course offerings gets access to the same curriculum as a student at a metro college with 200. Supporting that means understanding it's not just about uptime — it's about whether a first-generation student can transfer on time.</p>
     <div class="h-stats">
       <div><div class="h-stat-num green">116</div><div class="h-stat-label">Connected Colleges</div></div>
       <div><div class="h-stat-num blue">3</div><div class="h-stat-label">SIS Platforms</div></div>
       <div><div class="h-stat-num red">10</div><div class="h-stat-label">Barriers Identified</div></div>
       <div><div class="h-stat-num" style="color:var(--purple)">9</div><div class="h-stat-label">Interactive Tools</div></div>
     </div>
-    <div style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:2rem">
-      <span style="font-family:var(--mono);font-size:.55rem;padding:.3rem .65rem;border-radius:100px;border:1px solid var(--border);color:var(--text-2);background:var(--surface)">Troubleshooting methodology</span>
-      <span style="font-family:var(--mono);font-size:.55rem;padding:.3rem .65rem;border-radius:100px;border:1px solid var(--border);color:var(--text-2);background:var(--surface)">Multi-audience communication</span>
-      <span style="font-family:var(--mono);font-size:.55rem;padding:.3rem .65rem;border-radius:100px;border:1px solid var(--border);color:var(--text-2);background:var(--surface)">Pattern recognition</span>
-      <span style="font-family:var(--mono);font-size:.55rem;padding:.3rem .65rem;border-radius:100px;border:1px solid var(--border);color:var(--text-2);background:var(--surface)">Documentation discipline</span>
-      <span style="font-family:var(--mono);font-size:.55rem;padding:.3rem .65rem;border-radius:100px;border:1px solid var(--red-bd);color:var(--red);background:var(--red-light)">Barrier awareness</span>
-    </div>
   </div>
 </header>
 
 <!-- ═══ WHY CVC ═══ -->
-<section class="story-sec fu" id="why">
+<section class="fu" id="why" style="padding:clamp(1.5rem,4vw,2.5rem) 0">
   <div class="wrap">
-    <div class="eyebrow">Background</div>
-    <h2>The systems this role <em>operates inside</em></h2>
-    <p class="sec-desc">Banner, PeopleSoft, Canvas LMS, financial aid workflows, enrollment sync, SSO troubleshooting. Context from four organizations where these were the daily environment — not electives.</p>
-
-    <div class="story-grid">
-      <div class="story-card sc-green">
-        <div class="sc-label sc-label-green">SMCCD · 3 Colleges</div>
-        <div class="sc-title">Banner + PeopleSoft + Financial Aid</div>
-        <div class="sc-text">Multi-college district operations. Enrollment sync and FA workflows across both Banner and PeopleSoft. Found a <strong>race condition</strong> in the FA module — sync jobs pulling data before enrollment transactions committed.</div>
-        <div class="tech-stack"><span class="tech-tag tt-sis">Banner</span><span class="tech-tag tt-sis">PeopleSoft</span><span class="tech-tag tt-tool">Financial Aid</span><span class="tech-tag tt-auth">Enrollment Sync</span></div>
+    <div style="border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden">
+      <div style="padding:.6rem 1rem;background:var(--surface-2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+        <span style="font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)">Background</span>
+        <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--purple-light);color:var(--purple)">SMCCD · Banner + PeopleSoft + FA</span>
+        <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--blue-light);color:var(--blue)">OpenStax · Canvas LMS + Python</span>
+        <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--primary-light);color:var(--primary)">Braven · Ticket Analysis + KB</span>
+        <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--amber-light);color:var(--amber)">Foothill College · Student</span>
       </div>
-      <div class="story-card sc-blue">
-        <div class="sc-label sc-label-blue">OpenStax · Rice University</div>
-        <div class="sc-title">Canvas LMS + Ticket Trend Analysis</div>
-        <div class="sc-text">Application support for a national ed-tech platform on Canvas. Quarterly ticket analysis in <strong>Python/pandas</strong> surfaced an OAuth token issue presenting as different symptoms across user roles.</div>
-        <div class="tech-stack"><span class="tech-tag tt-lms">Canvas LMS</span><span class="tech-tag tt-lang">Python</span><span class="tech-tag tt-lang">pandas</span><span class="tech-tag tt-auth">OAuth 2.0</span><span class="tech-tag tt-tool">Ticket Analysis</span></div>
-      </div>
-      <div class="story-card sc-purple">
-        <div class="sc-label sc-label-purple">Braven · San José State</div>
-        <div class="sc-title">Documentation Fix → Ticket Reduction</div>
-        <div class="sc-text">Recurring provisioning failures traced to <strong>outdated documentation</strong>, not a technical bug. Updated the docs; repeat tickets in that category dropped ~15% the following quarter.</div>
-        <div class="tech-stack"><span class="tech-tag tt-tool">Ticket Triage</span><span class="tech-tag tt-tool">Root Cause Analysis</span><span class="tech-tag tt-lang">Data-Driven</span><span class="tech-tag tt-tool">KB Authoring</span></div>
-      </div>
-      <div class="story-card sc-amber">
-        <div class="sc-label sc-label-amber">Foothill College · Student</div>
-        <div class="sc-title">The Student Side of These Systems</div>
-        <div class="sc-text">Started at Foothill. Navigated registration holds and financial aid workflows <strong>as a first-generation student</strong> — without a family who could explain how the system worked. That perspective informs how these tools think about the end user.</div>
-        <div class="tech-stack"><span class="tech-tag tt-sis">Registration</span><span class="tech-tag tt-tool">Financial Aid</span><span class="tech-tag tt-auth">Student Identity</span><span class="tech-tag" style="background:var(--red-light);color:var(--red)">First-Gen</span></div>
+      <div style="padding:.65rem 1rem;display:flex;gap:1.25rem;flex-wrap:wrap;align-items:baseline">
+        <div style="flex:1;min-width:280px;font-size:.82rem;color:var(--text-2);line-height:1.65">Banner, PeopleSoft, Canvas, financial aid, enrollment sync, OAuth troubleshooting, and ticket pattern analysis across four organizations. Started at <strong style="color:var(--text)">Foothill College</strong> as a first-generation student — the student side of these systems isn’t theoretical.</div>
+        <div style="display:flex;gap:.5rem;flex-shrink:0">
+          <div style="text-align:center;padding:.35rem .6rem"><div style="font-family:var(--display);font-size:1.1rem;font-weight:600;color:var(--primary)">3</div><div style="font-size:.55rem;color:var(--text-3)">SIS Platforms</div></div>
+          <div style="text-align:center;padding:.35rem .6rem"><div style="font-family:var(--display);font-size:1.1rem;font-weight:600;color:var(--blue)">4</div><div style="font-size:.55rem;color:var(--text-3)">Organizations</div></div>
+          <div style="text-align:center;padding:.35rem .6rem"><div style="font-family:var(--display);font-size:1.1rem;font-weight:600;color:var(--purple)">15%</div><div style="font-size:.55rem;color:var(--text-3)">Ticket Reduction</div></div>
+        </div>
       </div>
     </div>
-
-    
   </div>
 </section>
+
+
+
+<!-- CVC EXCHANGE DATA -->
+<section class="sec fu" id="cvcData"><div class="wrap">
+  <div class="eyebrow" style="color:var(--blue)">Exchange Intelligence</div>
+  <h2>The numbers behind <em>course sharing</em></h2>
+  <p class="sec-desc">The CVC Exchange has grown from 1,500 cross-enrollments in 2021–22 to over 33,000 in 2024–25. Teaching colleges grew from 16 to 78. These numbers shape the support workload — and show where students need access most.</p>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Data</span></div><span class="tool-bar-title">CVC Exchange Growth + Course Demand Analysis</span></div>
+    <div class="tool-body">
+      <div class="info-grid">
+        <div class="info-panel">
+          <div class="info-panel-header">Exchange Enrollment Growth (2021–25)</div>
+          <div class="info-panel-body" id="growthChart">
+            <div class="growth-row"><div class="growth-year">2021–22</div><div class="growth-bar-wrap"><div class="growth-bar" style="width:4.5%;background:var(--primary)"><span class="growth-num">1.5K</span></div></div></div>
+            <div class="growth-row"><div class="growth-year">2022–23</div><div class="growth-bar-wrap"><div class="growth-bar" style="width:24%;background:var(--primary)"><span class="growth-num">8K</span></div></div></div>
+            <div class="growth-row"><div class="growth-year">2023–24</div><div class="growth-bar-wrap"><div class="growth-bar" style="width:58%;background:var(--blue)"><span class="growth-num">19K</span></div></div></div>
+            <div class="growth-row"><div class="growth-year">2024–25</div><div class="growth-bar-wrap"><div class="growth-bar" style="width:100%;background:linear-gradient(90deg,var(--blue),var(--teal))"><span class="growth-num">33K+</span></div></div></div>
+          </div>
+        </div>
+        <div class="info-panel">
+          <div class="info-panel-header">Highest-Demand GE Areas (Cal-GETC / CSU GE)</div>
+          <div class="info-panel-body" id="courseChart">
+            <div class="course-bar-row"><div class="course-name">English Comp</div><div class="course-bar-wrap"><div class="course-bar" style="width:100%;background:var(--primary)"><span class="course-pct">Area 1A</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">Math / QR</div><div class="course-bar-wrap"><div class="course-bar" style="width:88%;background:var(--primary)"><span class="course-pct">Area 2</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">Ethnic Studies</div><div class="course-bar-wrap"><div class="course-bar" style="width:82%;background:var(--teal)"><span class="course-pct">Area 6 (new)</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">Speech / Comm</div><div class="course-bar-wrap"><div class="course-bar" style="width:76%;background:var(--blue)"><span class="course-pct">Area 1C</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">Psychology</div><div class="course-bar-wrap"><div class="course-bar" style="width:71%;background:var(--blue)"><span class="course-pct">Area 4</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">Critical Thinking</div><div class="course-bar-wrap"><div class="course-bar" style="width:65%;background:var(--purple)"><span class="course-pct">Area 1B</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">Biology / Life Sci</div><div class="course-bar-wrap"><div class="course-bar" style="width:58%;background:var(--amber)"><span class="course-pct">Area 5</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">Humanities</div><div class="course-bar-wrap"><div class="course-bar" style="width:52%;background:var(--amber)"><span class="course-pct">Area 3</span></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-stat-row">
+        <div class="info-stat"><div class="info-stat-num" style="color:var(--primary)">2,100%</div><div class="info-stat-label">Enrollment growth (3 years)</div></div>
+        <div class="info-stat"><div class="info-stat-num" style="color:var(--blue)">78</div><div class="info-stat-label">Teaching colleges (up from 16)</div></div>
+        <div class="info-stat"><div class="info-stat-num" style="color:var(--teal)">100K+</div><div class="info-stat-label">Course options annually</div></div>
+        <div class="info-stat"><div class="info-stat-num" style="color:var(--purple)">2</div><div class="info-stat-label">Course limit per term</div></div>
+      </div>
+
+      <div class="info-source">Sources: Wheelhouse Center for Community College Leadership and Research (Oct 2025) · CVC Exchange search category data · Cal-GETC/IGETC area mapping. Course demand ranked by GE search volume and transfer requirement frequency — not individual enrollment counts (not publicly available). Ethnic Studies (Area 6) demand elevated due to new Cal-GETC requirement effective Fall 2025.</div>
+    </div>
+  </div>
+  <div class="demo-caption">Enrollment data from published research · Course demand based on GE transfer requirement patterns</div>
+</div></section>
+
+<!-- STUDENT JOURNEY -->
+<section class="sec sec-alt fu" id="journey"><div class="wrap">
+  <div class="eyebrow">Student Experience</div>
+  <h2>The same enrollment — when it <em>works</em> vs when it <em style="color:var(--red)">breaks</em></h2>
+  <p class="sec-desc">Course sharing is invisible when it works. When something breaks, the student doesn’t see an API error — they see <strong>a missing course and a deadline.</strong></p>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Student View</span></div><span class="tool-bar-title">Cross-enrollment: MATH 1A via CVC Exchange</span></div>
+    <div class="tool-body" style="padding:0">
+      <div style="display:flex;gap:2px;background:var(--bg-3);border-radius:var(--r);padding:2px;margin:.75rem .85rem 0;width:fit-content" id="journeyToggle">
+        <button class="jt-btn active" onclick="setJourney('compare',this)">Side by Side</button>
+        <button class="jt-btn" onclick="setJourney('ok',this)">Successful Only</button>
+        <button class="jt-btn" onclick="setJourney('broken',this)">Broken Only</button>
+      </div>
+      <div id="journeyBody"></div>
+    </div>
+  </div>
+  <div class="demo-caption">Same student, same course, same Exchange — the difference is a single integration failure</div>
+</div></section>
 
 <!-- ═══ TOOL 01: ARCHITECTURE ═══ -->
 <section class="sec fu" id="flow"><div class="wrap">
   <div class="eyebrow">System Architecture</div>
   <h2>The cross-enrollment data flow — and <em>where it breaks</em></h2>
-  <p class="sec-desc">Most support issues trace back to a break somewhere in this chain. Click any node to see what that layer does, what can go wrong, and <strong>what the analyst looks for first.</strong></p>
+  <p class="sec-desc">Most support issues trace back to a break somewhere in this chain. Each node represents a layer where data transforms, authenticates, or fails. The analyst’s job is knowing <strong>what to look for at each one.</strong></p>
   <div class="flow-visual">
     <div class="flow-title">Cross-Enrollment Data Flow — Click to Explore</div>
     <div class="flow-row">
@@ -526,8 +890,9 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 <section class="sec sec-alt fu" id="monitor"><div class="wrap">
   <div class="eyebrow"><span class="sec-num sec-num-green">01</span>Visibility</div>
   <h2>Can the analyst spot a failing college <em>before the tickets arrive?</em></h2>
-  <p class="sec-desc">The daily question: which of 116 colleges is healthy, which is degraded, and which is down? Search by name or SIS type, filter by status, and drill into any college for connection history and error detail.</p>
+  <p class="sec-desc">The daily question: which of 116 colleges is healthy, which is degraded, and which is down? This is what the analyst checks first thing in the morning — before the tickets start coming in.</p>
   <div class="tool-frame">
+    <div style="position:relative"><div class="live-alert" id="liveAlert"><div class="live-alert-title">New Alert</div><div class="live-alert-body"></div><div class="live-alert-time"></div></div></div>
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><div class="tool-bar-title">cvc-exchange-monitor.fhda.edu</div></div>
     <div class="tool-body">
       <div class="monitor-controls">
@@ -568,13 +933,13 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 <section class="sec sec-alt fu" id="patterns"><div class="wrap">
   <div class="eyebrow"><span class="sec-num sec-num-green">03</span>Patterns</div>
   <h2>Is this one ticket — or <em>twenty waiting to happen?</em></h2>
-  <p class="sec-desc">12 weeks of ticket data by category. The question isn't "what happened this week" — it's "is this the beginning of a pattern?" Click insight cards to see which weeks correlate with known systemic issues.</p>
+  <p class="sec-desc">12 weeks of ticket data mapped to the CVC academic calendar. The question isn’t “what happened this week” — it’s <strong>“is this the beginning of a pattern?”</strong> The insight cards below flag when ticket spikes correlate with known systemic issues.</p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><div class="tool-bar-title">Q1 2026 · Ticket Trend Report</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><div class="tool-bar-title">Spring 2026 · CVC Exchange Ticket Trends</div></div>
     <div class="tool-body">
       <div class="pattern-grid">
         <div><div class="chart-area">
-          <div class="chart-header"><div class="chart-title">Tickets by Category</div><div class="chart-period">Jan – Mar 2026 · <span id="chartTotal">0</span> total</div></div>
+          <div class="chart-header"><div class="chart-title">Tickets by Category</div><div class="chart-period">Academic Calendar · Registration → Add/Drop → Census → FA Disbursement → Midterm · <span id="chartTotal">0</span> total</div></div>
           <div class="chart-body" id="chartBody"></div>
           <div class="chart-legend" id="chartLegend"></div>
         </div></div>
@@ -587,8 +952,8 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 <!-- ═══ TOOL 05: KB BUILDER ═══ -->
 <section class="sec fu" id="kb"><div class="wrap">
   <div class="eyebrow"><span class="sec-num sec-num-green">04</span>Documentation</div>
-  <h2>If the fix isn't documented, it didn't <em>scale.</em></h2>
-  <p class="sec-desc">Every resolved issue is a potential KB article. Four starter templates for the most common categories: integration failures, auth/SSO, sync issues, and new college onboarding. Edit inline, reorder steps, export as markdown.</p>
+  <h2>If the fix isn’t documented, it didn’t <em>scale.</em></h2>
+  <p class="sec-desc">Every resolved issue is a potential KB article. Four starter templates for the most common categories: integration failures, auth/SSO, sync issues, and new college onboarding. If the next analyst can’t find the fix, the fix didn’t count.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation</span></div><div class="tool-bar-title">kb.cvc-oei.fhda.edu/articles/editor</div></div>
     <div class="tool-body" style="padding:0">
@@ -612,52 +977,86 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
     <div class="eyebrow">Communication</div>
     <h2>The same failure, written <em>four different ways</em></h2>
     <p class="sec-desc">A student needs reassurance. Campus IT needs the CCCID and error code. The registrar needs something to forward to their VP. The internal team needs scope and next steps. <strong>Same incident. Four drafts.</strong></p>
-    <p style="font-size:.82rem;color:var(--text-2);line-height:1.7;margin-bottom:.5rem">Scenario: A student cross-enrolled in MATH 1A via the Exchange, but the enrollment didn't sync to Canvas. They can't access their course. Here's the same incident, four ways:</p>
+    <p style="font-size:.82rem;color:var(--text-2);line-height:1.7;margin-bottom:.5rem">Scenario: A student cross-enrolled in MATH 1A via the Exchange, but the enrollment didn’t sync to Canvas.</p>
     <div class="msg-grid">
-      <div class="msg-preview">
-        <div class="msg-header"><div class="msg-icon" style="background:var(--teal-light)">🎓</div><div class="msg-to">To the Student</div><div class="msg-channel">Email</div></div>
-        <div class="msg-body">We're aware your MATH 1A section isn't showing in Canvas yet. This is a sync issue between your home college and the teaching college — <strong>not a problem with your enrollment.</strong> Your seat is secure. We expect this to be resolved within <span class="msg-highlight">2–4 hours</span>, and you'll receive a confirmation when your course appears. No action needed on your end.</div>
-      </div>
-      <div class="msg-preview">
-        <div class="msg-header"><div class="msg-icon" style="background:var(--purple-light)">🖥️</div><div class="msg-to">To Campus IT (Teaching College)</div><div class="msg-channel">ServiceNow</div></div>
-        <div class="msg-body">AER for CCCID <strong>0012847593</strong> transmitted from Chabot at 14:22 PST but Canvas roster for MATH-1A-001 does not reflect enrollment. Ethos token at home college returned <span class="msg-warn">401 invalid_grant</span> — AER may not have reached your SIS. Can you verify whether the enrollment record exists in your Banner instance? If not, we'll re-push from the Exchange once the token is regenerated.</div>
-      </div>
-      <div class="msg-preview">
-        <div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">📋</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div>
-        <div class="msg-body">Quick update on the cross-enrollment sync issue affecting some Exchange students. <strong>The student's enrollment is confirmed</strong> — the delay is in how the data is reaching Canvas, not in their registration status. If students contact your office, you can confirm their enrollment is valid. We're working with the teaching college IT team and expect resolution today. Happy to provide a written summary if this needs to go to your VP.</div>
-      </div>
-      <div class="msg-preview">
-        <div class="msg-header"><div class="msg-icon" style="background:var(--blue-light)">⚙️</div><div class="msg-to">To CVC Internal Team</div><div class="msg-channel">Slack</div></div>
-        <div class="msg-body"><strong>Scope:</strong> 47 AER records pending in Chabot → De Anza queue since 02:00 PST. Root cause: Ethos OAuth2 token expired, <span class="msg-warn">invalid_grant</span> on refresh. Affects all Chabot cross-enrollments to Banner Ethos colleges since 3/17. <strong>Action:</strong> Token regenerated. Queue flush in progress. Monitoring for full clearance. Will update when all 47 records are confirmed transmitted. KB article drafted.</div>
-      </div>
+      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--teal-light)">🎓</div><div class="msg-to">To the Student</div><div class="msg-channel">Email</div></div><div class="msg-body">We’re aware your MATH 1A section isn’t showing in Canvas yet. This is a sync issue between your home college and the teaching college — <strong>not a problem with your enrollment.</strong> Your seat is secure. We expect this to be resolved within <span class="msg-highlight">2–4 hours</span>. No action needed on your end.</div></div>
+      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--purple-light)">🖥</div><div class="msg-to">To Campus IT (Teaching College)</div><div class="msg-channel">ServiceNow</div></div><div class="msg-body">AER for CCCID <strong>0012847593</strong> transmitted from Chabot at 14:22 PST but Canvas roster for MATH-1A-001 does not reflect enrollment. Ethos token at home college returned <span class="msg-warn">401 invalid_grant</span>. Can you verify whether the enrollment record exists in your Banner instance?</div></div>
+      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">📋</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div><div class="msg-body">Quick update on the cross-enrollment sync issue. <strong>The student’s enrollment is confirmed</strong> — the delay is in how the data reaches Canvas. If students contact your office, you can confirm their enrollment is valid. Happy to provide a written summary if this needs to go to your VP.</div></div>
+      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--blue-light)">⚙</div><div class="msg-to">To CVC Internal Team</div><div class="msg-channel">Slack</div></div><div class="msg-body"><strong>Scope:</strong> 47 AER records pending in Chabot → De Anza queue since 02:00 PST. Root cause: Ethos OAuth2 token expired, <span class="msg-warn">invalid_grant</span> on refresh. <strong>Action:</strong> Token regenerated. Queue flush in progress. KB article drafted.</div></div>
     </div>
   </div>
 </section>
-
-<!-- ═══ SCENARIO: How the tools connect ═══ -->
-<div class="scenario-sec fu">
-  <div class="wrap">
-    <div class="eyebrow">Workflow</div>
-    <h2>What a typical escalation path <em>looks like</em></h2>
-    <p class="sec-desc" style="margin-bottom:1rem">Student can't see their cross-enrolled course in Canvas. From first report to resolution and documentation — the steps an analyst would walk through.</p>
-    <div class="scenario-steps">
-      <div class="sc-step" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 1</div><div class="sc-step-tool">Monitor</div><div class="sc-step-action">Check college health — is the home SIS syncing?</div><div class="sc-step-link">→ Tool 01</div></div>
-      <div class="sc-step" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 2</div><div class="sc-step-tool">Tracer</div><div class="sc-step-action">Walk the data flow — where did the AER break?</div><div class="sc-step-link">→ Tool 02</div></div>
-      <div class="sc-step" onclick="document.getElementById('patterns').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 3</div><div class="sc-step-tool">Patterns</div><div class="sc-step-action">Is this isolated or part of a larger trend?</div><div class="sc-step-link">→ Tool 03</div></div>
-      <div class="sc-step" onclick="document.getElementById('kb').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 4</div><div class="sc-step-tool">KB Builder</div><div class="sc-step-action">Document the fix for the next analyst</div><div class="sc-step-link">→ Tool 04</div></div>
-      <div class="sc-step" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 5</div><div class="sc-step-tool">Barriers</div><div class="sc-step-action">Is this a symptom of a systemic barrier?</div><div class="sc-step-link">→ Tool 05</div></div>
-    </div>
-  </div>
-</div>
 
 <!-- ═══════════════════════════════════════════ -->
 <!-- BARRIER INTELLIGENCE SECTION -->
 <!-- ═══════════════════════════════════════════ -->
 
+
+<!-- WORKFLOW -->
+<div class="scenario-sec fu">
+  <div class="wrap">
+    <div class="eyebrow">Workflow</div>
+    <h2>What a typical escalation path <em>looks like</em></h2>
+    <p class="sec-desc" style="margin-bottom:1rem">Student can’t see their cross-enrolled course in Canvas. From first report to resolution — each step maps to a tool above.</p>
+    <div style="display:flex;gap:0;overflow-x:auto;margin-top:1.5rem">
+      <div class="sc-step" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 1</div><div class="sc-step-tool">Monitor</div><div class="sc-step-action">Check college health</div><div class="sc-step-link">→ Tool 01</div></div>
+      <div class="sc-step" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 2</div><div class="sc-step-tool">Tracer</div><div class="sc-step-action">Walk the data flow</div><div class="sc-step-link">→ Tool 02</div></div>
+      <div class="sc-step" onclick="document.getElementById('patterns').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 3</div><div class="sc-step-tool">Patterns</div><div class="sc-step-action">Isolated or systemic?</div><div class="sc-step-link">→ Tool 03</div></div>
+      <div class="sc-step" onclick="document.getElementById('kb').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 4</div><div class="sc-step-tool">KB Builder</div><div class="sc-step-action">Document the fix</div><div class="sc-step-link">→ Tool 04</div></div>
+      <div class="sc-step" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 5</div><div class="sc-step-tool">Barriers</div><div class="sc-step-action">Systemic barrier?</div><div class="sc-step-link">→ Tool 05</div></div>
+      <div class="sc-step" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 6</div><div class="sc-step-tool">Outreach</div><div class="sc-step-action">Prevent next term?</div><div class="sc-step-link">→ Tool 10</div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- OUTREACH PLANNER -->
+<section class="sec sec-alt fu" id="outreach"><div class="wrap">
+  <div class="eyebrow"><span class="sec-num sec-num-green">10</span>Adoption</div>
+  <h2>What if course sharing wasn’t a <em>last resort?</em></h2>
+  <p class="sec-desc">Counselors describe CVC Exchange as essential for on-time graduation and transfer — but often recommend it only after a student is already stuck. This tool maps <strong>when and how to surface course sharing earlier</strong> in the student journey.</p>
+  <div style="padding:.6rem .85rem;border:1px solid var(--teal-bd);background:var(--teal-light);border-radius:var(--r);margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:.5rem">
+    <span style="font-size:.85rem;flex-shrink:0">💬</span>
+    <div style="font-size:.75rem;color:var(--text-2);line-height:1.6"><strong style="color:var(--teal)">“It’s essential, but it’s usually a last resort.”</strong> — Insight from conversations with two community college counselors about how the CVC Exchange is positioned in advising.</div>
+  </div>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Outreach</span></div><span class="tool-bar-title">course-sharing-outreach-planner.cvc.edu</span></div>
+    <div class="tool-body">
+      <div class="outreach-tabs"><button class="outreach-tab active" onclick="setOutreachTab('all',this)">All</button><button class="outreach-tab" onclick="setOutreachTab('inreach',this)">Inreach</button><button class="outreach-tab" onclick="setOutreachTab('outreach',this)">Outreach</button><button class="outreach-tab" onclick="setOutreachTab('orientation',this)">Orientation</button><button class="outreach-tab" onclick="setOutreachTab('intervention',this)">Intervention</button></div>
+      <div class="cal-timeline" id="calTimeline"></div>
+      <div class="outreach-detail" id="outreachDetail"></div>
+    </div>
+  </div>
+  <div class="demo-caption">13 triggers across 7 months · 4 categories · informed by counselor feedback</div>
+</div></section>
+
+<!-- AI VISION: COURSE SHARING + INTELLIGENT SYSTEMS -->
+<section class="sec fu" id="aiVision"><div class="wrap">
+  <div class="eyebrow" style="color:var(--teal)">Forward Thinking</div>
+  <h2>Course sharing is equity infrastructure. <em style="color:var(--teal)">AI should make it smarter.</em></h2>
+  <p class="sec-desc">The CVC Exchange already has the signals: enrollment timing, FA processing status, SIS health, course demand patterns. The question isn’t whether AI will change this work — it’s whether it’s used to <strong>serve students more equitably or just process tickets faster.</strong></p>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--teal-light);color:var(--teal)">Vision</span></div><span class="tool-bar-title">ai-augmented-support-model.cvc.edu</span></div>
+    <div class="tool-body">
+      <div class="ai-tabs" id="aiTabs">
+        <button class="ai-tab active" onclick="setAiView('ops',this)">AI for Operations</button>
+        <button class="ai-tab" onclick="setAiView('student',this)">AI for Students</button>
+        <button class="ai-tab" onclick="setAiView('role',this)">The Analyst’s Role</button>
+      </div>
+      <div id="aiBody"></div>
+      <div class="ai-governance">
+        <div class="ai-governance-icon">⚠️</div>
+        <div class="ai-governance-text"><strong>Governance consideration:</strong> Every AI application in this system touches FERPA-protected student data. Predictive models can encode existing inequities if not audited. The analyst’s role isn’t replaced by AI — it expands to include <strong>monitoring what the AI recommends and who it underserves.</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="demo-caption">Not a product roadmap — a framework for how AI could serve the course-sharing mission without compromising equity</div>
+</div></section>
+
 <div class="divider-sec" id="barriers">
   <div class="divider-badge"><span class="dot"></span> Barrier Intelligence</div>
   <div class="divider-title">Beyond the ticket queue — <em>systemic friction</em></div>
-  <div class="divider-desc">Some tickets aren't bugs — they're symptoms of structural barriers in how course sharing works today. Identified from CVC documentation, college FAQs, and the Spring 2025 FA dashboard rollout.</div>
+  <div class="divider-desc">Some tickets aren’t bugs — they’re symptoms of structural barriers. Identified from CVC documentation, the Spring 2025 FA Dashboard rollout, and course-sharing patterns recognized by the 2025 WCET WOW Award.</div>
   <div class="divider-stats">
     <div><div class="ds-num" style="color:var(--red)">10</div><div class="ds-label">Known Barriers</div></div>
     <div><div class="ds-num" style="color:var(--amber)">4</div><div class="ds-label">Equity-Critical</div></div>
@@ -680,7 +1079,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 <section class="sec sec-alt fu" id="lifecycle"><div class="wrap">
   <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">06</span>Lifecycle</div>
   <h2>Where in the enrollment process do students <em class="red">hit friction?</em></h2>
-  <p class="sec-desc">Nine steps from course search to MIS reporting. Red nodes are where students get stuck or dropped. Amber is where manual workarounds are required. Green steps flow cleanly.</p>
+  <p class="sec-desc">Nine steps from course search to MIS reporting. Red nodes are where students get stuck or dropped. Amber is where manual workarounds are required. <strong>Green steps flow cleanly.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Lifecycle</span></div><span class="tool-bar-title">Cross-enrollment barrier mapping</span></div>
     <div class="tool-body"><div class="lc-flow" id="lcFlow"></div></div>
@@ -691,7 +1090,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 <section class="sec fu" id="matrix"><div class="wrap">
   <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">07</span>Campus Intel</div>
   <h2>Not every college has the same <em class="red">support profile</em></h2>
-  <p class="sec-desc">A Banner Direct college with full FA automation has different needs than a Colleague Ethos college still on the manual email workflow. Filter by SIS type to see which barriers apply where.</p>
+  <p class="sec-desc">A Banner Direct college with full FA automation has different support needs than a Colleague Ethos college still on the manual email workflow. The same barrier plays out differently depending on what’s underneath.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Matrix</span></div><span class="tool-bar-title">campus-readiness.cvc-oei.fhda.edu</span></div>
     <div class="tool-body">
@@ -705,7 +1104,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 <section class="sec sec-alt fu" id="equity"><div class="wrap">
   <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">08</span>Equity</div>
   <h2>Which barriers hit the most <em class="red">vulnerable students</em> hardest?</h2>
-  <p class="sec-desc">Not all friction is equal. A payment timing issue is an inconvenience for some students and a semester-ending crisis for others. Scored 1–10 by equity impact.</p>
+  <p class="sec-desc">Not all friction is equal. A payment timing issue is an inconvenience for some students and a semester-ending crisis for others. Scored by how much each barrier disproportionately affects <strong>low-income, first-generation, and disabled students.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Equity</span></div><span class="tool-bar-title">equity-impact-analysis</span></div>
     <div class="tool-body"><div class="eq-grid" id="eqGrid"></div></div>
@@ -716,13 +1115,14 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 <section class="sec fu" id="correlator"><div class="wrap">
   <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">09</span>Correlation</div>
   <h2>How much of the ticket queue is <em class="red">preventable?</em></h2>
-  <p class="sec-desc">If the top three barrier categories account for over half the queue, the fastest path to reducing volume isn't faster resolution — it's reducing the friction that creates the tickets.</p>
+  <p class="sec-desc">If the top three barrier categories account for over half the queue, the fastest path to reducing volume isn’t faster resolution — it’s <strong>reducing the friction that creates the tickets.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Correlation</span></div><span class="tool-bar-title">Q1 2026 · Ticket-to-Barrier Analysis</span></div>
     <div class="tool-body" id="corrBody"></div>
   </div>
 </div></section>
 
+<div class="key-hint" id="keyHint"><kbd>1</kbd>–<kbd>0</kbd> jump to tools &nbsp; <kbd>D</kbd> demo mode</div>
 <div class="kb-toast" id="toast"></div>
 
 <!-- ═══ CLOSING ═══ -->
@@ -730,19 +1130,25 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
   <div class="wrap">
     <div class="closing-inner">
       <div class="big-quote" style="padding-left:1rem">Good support is invisible to students. When it works, they never think about it. When it doesn't — it's <em>someone's semester.</em></div>
-      <p style="font-size:.88rem;color:var(--text-2);line-height:1.8;margin-bottom:1.5rem;max-width:560px;margin-left:auto;margin-right:auto">These tools are a starting point — a way to think through what the daily work looks like, where the current pain points are, and how the support function scales when every college has different systems, different staffing, and different needs.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;max-width:640px;margin:0 auto 2rem;text-align:left">
-        <div style="padding:.75rem;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface)">
-          <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:.25rem">Day-one readiness</div>
-          <div style="font-size:.75rem;color:var(--text-2);line-height:1.55">Banner, PeopleSoft, Canvas, FA workflows — these are familiar systems, not a learning curve.</div>
-        </div>
-        <div style="padding:.75rem;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface)">
-          <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:.25rem">Work style</div>
-          <div style="font-size:.75rem;color:var(--text-2);line-height:1.55">Document as you go. Escalate with data, not just a flag. Find the pattern, not just the fix.</div>
-        </div>
-        <div style="padding:.75rem;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface)">
-          <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:.25rem">Perspective</div>
-          <div style="font-size:.75rem;color:var(--text-2);line-height:1.55">Started at Foothill College as a first-generation student. The student side of these systems isn't theoretical.</div>
+      <p style="font-size:.88rem;color:var(--text-2);line-height:1.8;margin-bottom:2rem;max-width:540px;margin-left:auto;margin-right:auto">These tools are a starting point — a way to think through the daily work of keeping course sharing reliable across 116 colleges, 3 SIS platforms, and the students who depend on all of it connecting.</p>
+      <p style="font-size:.85rem;color:var(--text-2);line-height:1.7;max-width:520px;margin:0 auto"><strong style="color:var(--text)">Henry Fan</strong><br>Application Support Analyst I Candidate · CVC-OEI<br>Foothill–De Anza Community College District</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="fu" style="padding:clamp(3rem,8vw,5rem) 0;background:linear-gradient(180deg,var(--bg) 0%,var(--primary-light) 100%);border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div style="text-align:center;max-width:640px;margin:0 auto">
+      <div style="font-family:var(--display);font-size:clamp(1.4rem,3.5vw,2rem);font-weight:500;font-style:italic;color:var(--text);line-height:1.4;max-width:680px;margin:0 auto 1rem;position:relative;padding-left:1rem">Good support is invisible to students. When it works, they never think about it. When it doesn’t — it’s <em style="color:var(--primary)">someone’s semester.</em></div>
+      <p style="font-size:.88rem;color:var(--text-2);line-height:1.8;margin-bottom:2rem;max-width:560px;margin-left:auto;margin-right:auto">These tools cover the reactive side — monitoring, diagnosis, documentation — and the proactive side: identifying systemic barriers, mapping equity impact, and planning outreach so course sharing reaches students before they’re stuck, not after.</p>
+      <div style="max-width:600px;margin:0 auto 2.5rem;text-align:left">
+        <div style="font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--primary);margin-bottom:.75rem">Questions I’d ask in week one</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <div style="padding:.55rem .75rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.78rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To the support team:</strong> What are the 5 most common ticket types right now, and which ones do you wish you saw less of?</div>
+          <div style="padding:.55rem .75rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.78rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To the senior analyst:</strong> Which SIS integrations are the most fragile right now, and what does the escalation path look like when Ellucian is involved?</div>
+          <div style="padding:.55rem .75rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.78rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To my supervisor:</strong> What does a strong first 90 days look like in this role? What should I prioritize learning versus contributing?</div>
+          <div style="padding:.55rem .75rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.78rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To campus partners:</strong> What’s the one thing the CVC support team could do differently that would make your job easier?</div>
         </div>
       </div>
       <p style="font-size:.85rem;color:var(--text-2);line-height:1.7;max-width:520px;margin:0 auto"><strong style="color:var(--text)">Henry Fan</strong><br>Application Support Analyst I Candidate · CVC-OEI<br>Foothill–De Anza Community College District</p>
@@ -750,27 +1156,12 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
   </div>
 </section>
 
-<footer><div class="wrap"><p class="foot-text"><strong>CVC-OEI Application Support Toolkit</strong> — Henry Fan · Application Support Analyst I Candidate<br>Banner · PeopleSoft · Colleague · Canvas LMS · Ethos API · CVC Exchange</p></div></footer>
+<footer><div class="wrap"><p class="foot-text"><strong>CVC-OEI Application Support Toolkit</strong> — Henry Fan · Application Support Analyst I Candidate<br>Banner · PeopleSoft · Colleague · Canvas LMS · Ethos API · CVC Exchange<br><span style="font-size:.65rem;color:var(--text-3)">All data is simulated — no real student records. Built with publicly available CVC documentation.</span></p></div></footer>
 
 <script>
 // ═══ GLOBALS ═══
 const nav=document.getElementById('nav');
-const scrollProg=document.getElementById('scrollProg');
-window.addEventListener('scroll',()=>{
-  nav.classList.toggle('scrolled',window.scrollY>20);
-  const h=document.documentElement.scrollHeight-window.innerHeight;
-  scrollProg.style.width=h>0?(window.scrollY/h*100)+'%':'0%';
-});
-
-// Animated counters
-function animateCounters(){
-  document.querySelectorAll('.h-stat-num').forEach(el=>{
-    const target=parseInt(el.textContent);if(isNaN(target))return;
-    let current=0;const step=Math.max(1,Math.floor(target/30));
-    const timer=setInterval(()=>{current+=step;if(current>=target){current=target;clearInterval(timer)}el.textContent=current},30);
-  });
-}
-setTimeout(animateCounters,600);
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>20));
 const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('vis');obs.unobserve(el.target)}}),{threshold:.06,rootMargin:'0px 0px -30px 0px'});
 document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
@@ -778,7 +1169,7 @@ function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t
 // ═══ FLOW DIAGRAM ═══
 const flowData=[
 {title:'Home College SIS',dot:'var(--purple)',text:'System of record for enrollment, residency, financial aid, and CCCID. <strong>Banner Direct and PeopleSoft</strong> integrate with the Exchange differently than <strong>Banner Ethos and Colleague Ethos</strong> — the Ethos path adds a translation layer via Ellucian APIs. The FA Dashboard currently supports Banner Direct and PeopleSoft; Ethos integration is pending.',tags:['Banner Direct','Banner Ethos','PeopleSoft','Colleague Ethos','CCCID','CCCApply']},
-{title:'CVC Exchange — Middleware + FA Dashboard',dot:'var(--blue)',text:'Central cross-enrollment platform. Receives <strong>AER (Abbreviated Enrollment Record)</strong> from home colleges. The AER contains enrollment data but <strong>not FAFSA data</strong> — financial aid flows separately through the Consortium Agreement. Validates residency, manages seat counts, and since Spring 2025, provides a centralized FA dashboard for counselors and FA offices. Dashboard includes Teaching College census dates for FA determination.',tags:['AER Payload','Seat Count Sync','Residency Validation','FA Dashboard','SX07 MIS','Consortium Agreement']},
+{title:'CVC Exchange — Middleware + FA Dashboard',dot:'var(--blue)',text:'Central cross-enrollment platform. Receives <strong>AER (Abbreviated Enrollment Record)</strong> from home colleges. The AER contains enrollment data but <strong>not FAFSA data</strong> — financial aid flows separately through the Consortium Agreement. Validates residency, manages seat counts, and since Spring 2025, provides a centralized FA dashboard for counselors and FA offices.',tags:['AER Payload','Seat Count Sync','Residency Validation','FA Dashboard','SX07 MIS','Consortium Agreement']},
 {title:'Teaching College — SIS + Canvas + Parchment',dot:'var(--primary)',text:'Receives AER and provisions enrollment in SIS, then Canvas. Authentication runs through the <strong>CCC IdP Proxy</strong> — the student\'s CCCID must be passed as a SAML attribute from their college IdP. If the college can\'t pass the CCCID, the proxy redirects to OpenCCC for account recovery. Transcripts return automatically via <strong>Parchment</strong>.',tags:['Canvas LMS','CCC IdP Proxy','CCCID / EPPN','Roster Sync','Parchment','SX07 Reporting']},
 {title:'Student Experience',dot:'var(--teal)',text:'Student authenticates via their home college IdP, the SSO Proxy resolves their CCCID, and Canvas provisions the course. They can cross-enroll in <strong>up to two courses per term</strong>. Three payment paths: credit card at enrollment, CCPG at Teaching College, or FA via Consortium Agreement from Home College. When it works, invisible. When it doesn\'t — a missing course, a failed login, a surprise bill.',tags:['CCCID Login','2-Course Limit','3 Payment Paths','FA Consortium','CCPG Reapplication']}
 ];
@@ -789,7 +1180,7 @@ const allColleges=[
 {name:'Foothill College',sis:'Banner Direct',status:'ok',detail:'Last sync: 2m ago',badge:'Healthy',uptime:'99.8%',lastErr:'None (30d)',endpoint:'/banner/api/sections',history:['09:14 — AER transmitted','09:12 — Sync OK','09:10 — Sync OK']},
 {name:'De Anza College',sis:'Banner Direct',status:'ok',detail:'Last sync: 1m ago',badge:'Healthy',uptime:'99.9%',lastErr:'None (30d)',endpoint:'/banner/api/sections',history:['09:15 — Sync OK','09:13 — AER transmitted']},
 {name:'City College SF',sis:'Banner Ethos',status:'warn',detail:'Seat count delay: 8min',badge:'Degraded',uptime:'97.2%',lastErr:'Seat sync timeout (2h ago)',endpoint:'/ethos/v1/section-registrations',history:['09:14 — Seat count DELAYED','09:06 — Sync OK']},
-{name:'Sacramento City',sis:'Banner Ethos',status:'err',detail:'Ethos API token expired',badge:'Failing',uptime:'94.1%',lastErr:'OAuth2 invalid_grant (14m)',endpoint:'/ethos/v1/sections',history:['09:14 — ERROR 401 invalid_grant','09:12 — AER queue blocked']},
+{name:'Sacramento City',sis:'Banner Ethos',status:'err',detail:'Ethos token expired · FA: manual workflow',badge:'Failing',uptime:'94.1%',lastErr:'OAuth2 invalid_grant (14m)',endpoint:'/ethos/v1/sections',history:['09:14 — ERROR 401 invalid_grant','09:12 — AER queue blocked']},
 {name:'Mt. San Antonio',sis:'PeopleSoft',status:'ok',detail:'Last sync: 2m ago',badge:'Healthy',uptime:'99.6%',lastErr:'None (30d)',endpoint:'/ps/webservice/enrollment',history:['09:14 — Sync OK','09:12 — AER transmitted']},
 {name:'Pasadena City',sis:'PeopleSoft',status:'ok',detail:'Last sync: 4m ago',badge:'Healthy',uptime:'99.3%',lastErr:'Timeout (5d ago)',endpoint:'/ps/webservice/enrollment',history:['09:12 — Sync OK']},
 {name:'Long Beach City',sis:'PeopleSoft',status:'warn',detail:'AER queue: 12 pending',badge:'Slow',uptime:'96.8%',lastErr:'Queue backup (1h ago)',endpoint:'/ps/webservice/enrollment',history:['09:14 — Queue depth: 12']},
@@ -805,7 +1196,11 @@ function renderMonitor(){
 let filtered=allColleges.filter(c=>{if(monFilter!=='all'&&c.status!==monFilter)return false;if(monQuery&&!c.name.toLowerCase().includes(monQuery)&&!c.sis.toLowerCase().includes(monQuery))return false;return true});
 const groups={'Banner Direct':[],'Banner Ethos':[],'PeopleSoft':[],'Colleague Ethos':[],'Colleague':[]};filtered.forEach(c=>groups[c.sis]&&groups[c.sis].push(c));
 const ok=filtered.filter(c=>c.status==='ok').length,warn=filtered.filter(c=>c.status==='warn').length,err=filtered.filter(c=>c.status==='err').length;
-document.getElementById('monSummary').innerHTML='<div class="ms-cell"><div class="ms-num ms-num-g">'+ok+'</div><div class="ms-label">Healthy</div></div><div class="ms-cell"><div class="ms-num ms-num-a">'+warn+'</div><div class="ms-label">Degraded</div></div><div class="ms-cell"><div class="ms-num ms-num-r">'+err+'</div><div class="ms-label">Failing</div></div><div class="ms-cell"><div class="ms-num ms-num-b">'+filtered.length+'</div><div class="ms-label">Showing</div></div>';
+var atRisk=warn*420+err*1850;
+var spkOk='<svg width="48" height="14" style="margin-top:4px;opacity:.4"><path d="M0,12 L8,10 L16,11 L24,8 L32,6 L40,4 L48,2" fill="none" stroke="#22C55E" stroke-width="1.5" stroke-linecap="round"/></svg>';
+var spkW='<svg width="48" height="14" style="margin-top:4px;opacity:.4"><path d="M0,8 L8,10 L16,6 L24,12 L32,8 L40,10 L48,14" fill="none" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/></svg>';
+var spkE='<svg width="48" height="14" style="margin-top:4px;opacity:.4"><path d="M0,14 L8,10 L16,12 L24,6 L32,4 L40,6 L48,2" fill="none" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/></svg>';
+document.getElementById('monSummary').innerHTML='<div class="ms-cell"><div class="ms-num ms-num-g">'+ok+'</div><div class="ms-label">Healthy</div>'+spkOk+'</div><div class="ms-cell"><div class="ms-num ms-num-a">'+warn+'</div><div class="ms-label">Degraded</div>'+spkW+'</div><div class="ms-cell"><div class="ms-num ms-num-r">'+err+'</div><div class="ms-label">Failing</div>'+spkE+'</div><div class="ms-cell"><div class="ms-num" style="color:var(--teal)">'+(atRisk>0?"~"+atRisk.toLocaleString():"0")+'</div><div class="ms-label">Students at Risk</div></div>';
 let html='';for(const[sis,items]of Object.entries(groups)){if(!items.length)continue;html+='<div class="status-panel"><div class="sp-header"><div class="sp-title">'+sis+'</div><div class="sp-count">'+items.length+' colleges</div></div><div class="sp-body">';items.forEach((c,i)=>{const uid=sis+'-'+i;html+='<div class="status-row" id="sr-'+uid+'" onclick="toggleRow(\''+uid+'\',this)"><div class="s-indicator s-'+c.status+'"></div><div class="s-info"><div class="s-name">'+c.name+'</div><div class="s-detail">'+c.detail+'</div></div><span class="s-badge sb-'+c.status+'">'+c.badge+'</span><span class="s-expand-icon">▾</span></div><div class="row-detail" id="rd-'+uid+'"><div class="rd-grid"><div class="rd-item"><div class="rd-label">Uptime</div><div class="rd-value">'+c.uptime+'</div></div><div class="rd-item"><div class="rd-label">Last Error</div><div class="rd-value">'+c.lastErr+'</div></div></div><div class="rd-history"><strong style="font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:.25rem;color:var(--text-2)">Recent</strong>'+c.history.map(h=>'<span>'+h+'</span>').join('')+'</div></div>'});html+='</div></div>'}
 document.getElementById('monitorGrid').innerHTML=html}
 function toggleRow(uid,el){const rd=document.getElementById('rd-'+uid);if(expandedRow&&expandedRow!==uid){document.getElementById('rd-'+expandedRow)?.classList.remove('show');document.getElementById('sr-'+expandedRow)?.classList.remove('expanded')}const isOpen=rd.classList.contains('show');rd.classList.toggle('show');el.classList.toggle('expanded');expandedRow=isOpen?null:uid}
@@ -823,14 +1218,14 @@ let currentStage=-1,autoRunning=false;
 function buildTracerFlow(){document.getElementById('tracerFlow').innerHTML=stages.map((_,i)=>'<div class="tf-node" onclick="setStage('+i+')"><div class="tf-check">✓</div><div class="tf-num">Layer 0'+(i+1)+'</div><div class="tf-name">'+['User Report','SIS Query','API / Ethos','Exchange','Resolution'][i]+'</div><div class="tf-sub">'+['Student symptom','Banner record','Integration layer','CVC middleware','Root cause + fix'][i]+'</div></div>').join('')}
 buildTracerFlow();
 function setStage(n){currentStage=n;document.querySelectorAll('.tf-node').forEach((nd,i)=>{nd.classList.remove('active','error-node','passed');if(i<n)nd.classList.add('passed');else if(i===n)nd.classList.add(i===2?'error-node':'active')});const s=stages[n];const logHtml=s.lines.map((l,i)=>'<span class="log-line" style="animation-delay:'+i*80+'ms">'+(l.ts?'<span class="log-ts">['+l.ts+']</span> ':'')+(l.cls?'<span class="'+l.cls+'">'+l.text+'</span>':l.text)+'</span>').join('');const actHtml=s.actions.map((a,i)=>{const isPrimary=i===s.actions.length-1;const oc=isPrimary&&n<4?' onclick="setStage('+(n+1)+')"':n===4&&isPrimary?' onclick="toast(\'Ticket closed\')"':' onclick="toast(\'Logged\')"';return'<button class="td-btn'+(isPrimary?' td-btn-primary':'')+'"'+oc+'>'+a+'</button>'}).join('');document.getElementById('tracerDetail').innerHTML='<div class="td-header"><div class="td-icon '+s.cls+'">'+s.icon+'</div><div class="td-title">'+s.title+'</div></div><div class="td-body"><div class="td-log">'+logHtml+'</div><div class="td-actions">'+actHtml+'</div></div>';document.getElementById('tracerStatus').textContent='Layer '+(n+1)+' of 5'}
-async function autoRunTrace(){if(autoRunning)return;autoRunning=true;const btn=document.getElementById('autoRunBtn');btn.textContent='⏳ Running...';btn.classList.add('running');resetTrace();await new Promise(r=>setTimeout(r,400));for(let i=0;i<5;i++){setStage(i);await new Promise(r=>setTimeout(r,1800))}btn.textContent='▶ Auto-Run Trace';btn.classList.remove('running');autoRunning=false;document.getElementById('tracerStatus').textContent='Trace complete — root cause: Ethos token expiration'}
-function resetTrace(){currentStage=-1;document.querySelectorAll('.tf-node').forEach(n=>n.classList.remove('active','error-node','passed'));document.getElementById('tracerDetail').innerHTML='<div style="padding:2rem;text-align:center;color:var(--text-3);font-size:.85rem">Click a layer or <strong>Auto-Run Trace</strong></div>';document.getElementById('tracerStatus').textContent='Ready'}
+async function autoRunTrace(){if(autoRunning)return;autoRunning=true;const btn=document.getElementById('autoRunBtn');btn.textContent='⏳ Running...';btn.classList.add('running');resetTrace();await new Promise(r=>setTimeout(r,400));for(let i=0;i<5;i++){setStage(i);await new Promise(r=>setTimeout(r,1200))}btn.textContent='▶ Auto-Run Trace';btn.classList.remove('running');autoRunning=false;document.getElementById('tracerStatus').textContent='Trace complete — root cause: Ethos token expiration'}
+function resetTrace(){currentStage=-1;document.querySelectorAll('.tf-node').forEach(n=>n.classList.remove('active','error-node','passed'));document.getElementById('tracerDetail').innerHTML='<div style="padding:1.25rem"><div style="display:flex;gap:.75rem;align-items:flex-start"><div style="width:28px;height:28px;border-radius:50%;background:var(--amber-light);border:1.5px solid var(--amber-bd);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.75rem">\ud83d\udccb</div><div><div style="font-weight:600;font-size:.85rem;color:var(--text);margin-bottom:.2rem">Scenario: Student at Chabot can\u2019t see MATH 1A in Canvas</div><div style="font-size:.78rem;color:var(--text-2);line-height:1.6">Cross-enrolled via the CVC Exchange into a section at De Anza. Home SIS shows enrollment. Canvas dashboard does not. The tracer walks through each layer to isolate where the data flow broke.</div><div style="margin-top:.5rem;font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Click any layer above, or press <strong>Auto-Run Trace</strong> to step through all 5.</div></div></div></div>';document.getElementById('tracerStatus').textContent='Ready'}
 resetTrace();
 
 // ═══ PATTERN ANALYZER ═══
-const chartData=[{label:'W1',auth:5,sync:8,data:3,other:6},{label:'W2',auth:4,sync:7,data:5,other:4},{label:'W3',auth:7,sync:6,data:4,other:5},{label:'W4',auth:6,sync:9,data:6,other:3},{label:'W5',auth:12,sync:5,data:4,other:4},{label:'W6',auth:9,sync:11,data:7,other:5},{label:'W7',auth:15,sync:8,data:5,other:3},{label:'W8',auth:18,sync:7,data:6,other:4},{label:'W9',auth:23,sync:6,data:3,other:5},{label:'W10',auth:14,sync:10,data:8,other:4},{label:'W11',auth:8,sync:12,data:5,other:3},{label:'W12',auth:6,sync:9,data:4,other:5}];
+const chartData=[{label:'Jan',auth:5,sync:8,data:3,other:6},{label:'Jan+',auth:4,sync:7,data:5,other:4},{label:'Feb',auth:7,sync:6,data:4,other:5},{label:'Feb+',auth:6,sync:9,data:6,other:3},{label:'Spr Reg',auth:12,sync:5,data:4,other:4},{label:'Add/Drop',auth:9,sync:11,data:7,other:5},{label:'Census',auth:15,sync:8,data:5,other:3},{label:'FA Disb',auth:18,sync:7,data:6,other:4},{label:'Midterm',auth:23,sync:6,data:3,other:5},{label:'Spr+',auth:14,sync:10,data:8,other:4},{label:'Finals',auth:8,sync:12,data:5,other:3},{label:'Inter',auth:6,sync:9,data:4,other:5}];
 const cats=['auth','sync','data','other'];const catColors2={auth:'#7C3AED',sync:'#2563EB',data:'#F59E0B',other:'#D4D1C9'};const catNames={auth:'Auth / SSO',sync:'Sync Failures',data:'Data Mismatch',other:'Other'};let hiddenCats=new Set(),activeInsight=null;
-const insights=[{severity:'high',title:'Auth failures at 7 Banner colleges',desc:'OAuth token refresh failing post-patch.',meta:['23 tickets','7 campuses','↑ 340%'],weeks:[4,5,6,7,8]},{severity:'med',title:'Seat count sync delays at peak',desc:'Race condition affecting seat availability.',meta:['15 tickets','12 campuses'],weeks:[3,5,9,10]},{severity:'low',title:'SAML config gaps at new colleges',desc:'Incomplete IdP setup blocking enrollment.',meta:['8 tickets','4 campuses'],weeks:[8,9,10,11]}];
+const insights=[{severity:'high',title:'Auth failures at 7 Banner colleges',desc:'OAuth token refresh failing post-patch.',meta:['23 tickets','7 campuses','↑ 340%'],weeks:[4,5,6,7,8]},{severity:'med',title:'Seat count sync delays at peak',desc:'Race condition affecting seat availability.',meta:['15 tickets','12 campuses'],weeks:[3,5,9,10]},{severity:'low',title:'FA Dashboard adoption gap at Ethos colleges',desc:'Banner Direct and PeopleSoft on automated dashboard. Ethos colleges still on manual email workflow.',meta:['8 tickets','4 campuses'],weeks:[8,9,10,11]}];
 function renderChart(){const cb=document.getElementById('chartBody');cb.innerHTML='';const maxT=Math.max(...chartData.map(d=>cats.filter(c=>!hiddenCats.has(c)).reduce((s,c)=>s+d[c],0)));const cH=180;let total=0;chartData.forEach((d,idx)=>{const vis=cats.filter(c=>!hiddenCats.has(c));const t=vis.reduce((s,c)=>s+d[c],0);total+=t;const bg=document.createElement('div');bg.className='bar-group';if(activeInsight!==null&&insights[activeInsight].weeks.includes(idx))bg.classList.add('highlighted');const tooltip=vis.map(c=>'<span style="color:'+catColors2[c]+'">'+catNames[c]+': '+d[c]+'</span>').join('<br>');let segs='';['other','data','sync','auth'].filter(c=>!hiddenCats.has(c)).forEach(c=>{const h=maxT>0?d[c]/maxT*cH:0;segs+='<div class="bar-seg bar-seg-'+c+'" style="height:'+h+'px"></div>'});bg.innerHTML='<div class="bar-tooltip">'+tooltip+'<br><strong style="color:#fff">Total: '+t+'</strong></div><div class="bar-total">'+t+'</div><div class="bar-stack">'+segs+'</div><div class="bar-label">'+d.label+'</div>';cb.appendChild(bg)});document.getElementById('chartTotal').textContent=total}
 function renderLegend(){document.getElementById('chartLegend').innerHTML=cats.map(c=>'<div class="legend-item'+(hiddenCats.has(c)?' disabled':'')+'" onclick="toggleCat(\''+c+'\')"><div class="legend-dot" style="background:'+catColors2[c]+'"></div>'+catNames[c]+'</div>').join('')}
 function toggleCat(c){if(hiddenCats.has(c))hiddenCats.delete(c);else if(hiddenCats.size<cats.length-1)hiddenCats.add(c);renderChart();renderLegend()}
@@ -943,6 +1338,549 @@ const sp=document.createElement('p');sp.style.cssText='font-family:var(--mono);f
 sp.textContent=totalT+' total tickets · Q1 2026 simulated · '+Math.round((corrData[0].count+corrData[1].count+corrData[2].count)/totalT*100)+'% driven by top 3 barrier categories';
 corrBody.appendChild(sp);
 corrData.forEach((c,i)=>{const row=document.createElement('div');row.className='corr-row';row.innerHTML='<span class="corr-label">'+c.label+'</span><div class="corr-bar-bg"><div class="corr-bar '+c.cls+'" style="width:0%"></div></div><span class="corr-count">'+c.count+'</span><span class="corr-pct">'+c.pct+'%</span>';corrBody.appendChild(row);setTimeout(()=>{row.querySelector('.corr-bar').style.width=(c.count/corrData[0].count*100)+'%'},300+i*80)});
+
+// ═══ SCROLL PROGRESS ═══
+var scrollProg=document.getElementById('scrollProg');
+window.addEventListener('scroll',function(){
+  var h=document.documentElement.scrollHeight-window.innerHeight;
+  if(scrollProg)scrollProg.style.width=h>0?(window.scrollY/h*100)+'%':'0%';
+});
+
+// ═══ NAV ACTIVE TRACKING ═══
+var navSecs={};document.querySelectorAll('.nav-links a').forEach(function(a){var h=a.getAttribute('href');if(h&&h.startsWith('#')){navSecs[h.substring(1)]=a}});
+var navObs2=new IntersectionObserver(function(entries){entries.forEach(function(entry){var link=navSecs[entry.target.id];if(link&&entry.isIntersecting){Object.values(navSecs).forEach(function(l){l.classList.remove('nav-active')});link.classList.add('nav-active')}})},{threshold:.15,rootMargin:'-56px 0px -50% 0px'});
+Object.keys(navSecs).forEach(function(id){var el=document.getElementById(id);if(el)navObs2.observe(el)});
+
+// ═══ MONITOR LIVE CLOCK ═══
+function updateMonClock(){var now=new Date();var h=now.getHours();var m=now.getMinutes();var s=now.getSeconds();var ap=h>=12?'PM':'AM';h=h%12||12;var ts=h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s+' '+ap;var el=document.getElementById('refreshTimer');if(el)el.textContent='Last check: '+ts}
+setInterval(updateMonClock,1000);updateMonClock();
+
+// ═══ ANIMATED COUNTERS ═══
+function animateCounters(){document.querySelectorAll('.h-stat-num').forEach(function(el){var t=parseInt(el.textContent);if(isNaN(t))return;var c=0;var step=Math.max(1,Math.floor(t/30));var timer=setInterval(function(){c+=step;if(c>=t){c=t;clearInterval(timer)}el.textContent=c},30)})}
+setTimeout(animateCounters,600);
+
+// ═══ LIVE ALERTS ═══
+var alertMsgs=[
+{title:'Integration Alert',body:'<strong>Sacramento City</strong> \u2014 Ethos API token expired. 12 AER records queued.',time:'Just now'},
+{title:'Sync Warning',body:'<strong>City College SF</strong> \u2014 Seat count sync delayed 8 minutes.',time:'2 min ago'},
+{title:'IdP Proxy Alert',body:'<strong>Riverside City</strong> \u2014 CCCID not asserted by college IdP.',time:'5 min ago'},
+{title:'Resolved',body:'<strong>Feather River</strong> \u2014 API timeout resolved. 23 records transmitted.',time:'12 min ago'}
+];
+var alertIdx=0;var alertEl=document.getElementById('liveAlert');
+function showNextAlert(){if(!alertEl)return;var msg=alertMsgs[alertIdx%alertMsgs.length];alertEl.querySelector('.live-alert-title').textContent=msg.title;alertEl.querySelector('.live-alert-body').innerHTML=msg.body;alertEl.querySelector('.live-alert-time').textContent=msg.time;alertEl.classList.add('show');setTimeout(function(){alertEl.classList.remove('show')},5000);alertIdx++}
+setTimeout(showNextAlert,8000);setInterval(showNextAlert,25000);
+
+// ═══ AUTO-LOAD ARCHITECTURE ═══
+setTimeout(function(){showFlowInfo(1)},800);
+
+
+// ═══ OUTREACH PLANNER (Tool 10) ═══
+const calMonths=[
+{id:'jun',name:'Jun',label:'Summer prep',phase:'Pre-registration outreach',dots:['cd-teal','cd-blue'],triggers:[
+  {type:'outreach',title:'New Student Welcome + CVC Intro',who:'Incoming students via CCCApply',situation:'Student just applied through CCCApply. Orientation materials typically focus on home college only. This is the earliest opportunity to normalize cross-enrollment as a standard option.',msg:'Welcome to [College]! Did you know you can access thousands of online courses from other California community colleges through the CVC Exchange? If a class you need is full or not offered this term, the Exchange lets you find it at another college — and it counts toward your degree.',impact:['First impression','Normalizes Exchange','Reduces future confusion']},
+  {type:'orientation',title:'Orientation: Exchange as Standard Tool',who:'Orientation staff, counselors',situation:'During new student orientation, the CVC Exchange is often not mentioned — or mentioned only as a fallback. Embedding it as a routine part of registration prep means students know about it before they need it.',msg:'As part of your registration prep, bookmark cvc.edu. If any required courses are full, you can search for an equivalent section at another college and enroll instantly — no separate application needed.',impact:['Proactive awareness','Reduces waitlist pressure','Counselor talking point']}
+]},
+{id:'jul',name:'Jul',label:'Summer term',phase:'Summer enrollment active',dots:['cd-green'],triggers:[
+  {type:'inreach',title:'Waitlisted Students: Exchange Alternative',who:'Students on home college waitlists',situation:'Student is waitlisted for a required fall course. They may not know the same course is available at another college through the Exchange right now.',msg:'We see you are on the waitlist for [COURSE] this fall. You may be able to take this course at another California community college through the CVC Exchange this summer or fall. Visit cvc.edu to search for available sections.',impact:['Immediate alternative','On-time graduation','Reduces waitlist']}
+]},
+{id:'aug',name:'Aug',label:'Fall registration',phase:'Peak registration window',dots:['cd-green','cd-amber','cd-blue'],triggers:[
+  {type:'inreach',title:'Ed Plan Gap: Missing Required Course',who:'Students behind on educational plan',situation:'Counselor review shows a student is missing a required course not offered at the home college this term. Surface the Exchange option proactively instead of waiting for the student to discover this at registration.',msg:'Based on your ed plan, you still need [COURSE] for [transfer/degree]. It is not offered at [Home College] this fall, but there are sections available at other colleges through the CVC Exchange. Would you like help finding one that fits your schedule?',impact:['Prevents delay','Ed plan aligned','Counselor-initiated']},
+  {type:'intervention',title:'FAFSA Completion Reminder + FA Path',who:'Students with incomplete FAFSA',situation:'With the 25% drop in FAFSA completion for 2025-26, students who cross-enroll without completed aid face payment confusion. Proactive outreach at registration prevents drop-for-nonpayment.',msg:'Planning to take a course through the CVC Exchange? Make sure your FAFSA is complete at your home college first. Your home college determines financial aid eligibility for Exchange courses through the Consortium Agreement.',impact:['Prevents payment crisis','FA awareness','Reduces drops']},
+  {type:'outreach',title:'High-Demand Course Campaign',who:'All enrolled students, social media',situation:'Certain courses fill within hours every term. A proactive campaign before registration opens can redirect students to Exchange sections before frustration sets in.',msg:'[COURSE] sections fill fast. Before you stress about the waitlist, check the CVC Exchange at cvc.edu — there are online sections available from other California community colleges that count toward your requirements.',impact:['Reduces ticket volume','Student satisfaction','Institutional capacity']}
+]},
+{id:'sep',name:'Sep',label:'Fall start',phase:'Add/drop window',dots:['cd-green','cd-amber'],triggers:[
+  {type:'inreach',title:'Dropped-for-Nonpayment Recovery',who:'Students dropped from Exchange courses',situation:'Student was dropped from a teaching college course because payment did not process before the auto-drop deadline. The seat may still be available. Time-sensitive.',msg:'Your enrollment in [COURSE] at [Teaching College] was dropped due to a payment processing delay. The seat may still be available — contact the Teaching College or re-enroll through the Exchange and pay immediately to secure your spot.',impact:['Recovery path','Time-sensitive','Prevents semester loss']},
+  {type:'intervention',title:'CCPG Reapplication Nudge',who:'CCPG-eligible Exchange students',situation:'Students with California College Promise Grant at their home college often do not know it does not automatically transfer. A proactive message at the start of term prevents surprise bills.',msg:'Important: Your CCPG fee waiver from [Home College] does not automatically apply at your Teaching College. To avoid unexpected charges, apply for CCPG separately at [Teaching College] before the payment deadline.',impact:['Prevents surprise bills','Equity-critical','Low-income students']}
+]},
+{id:'oct',name:'Oct',label:'Mid-term',phase:'Midterm check-in',dots:['cd-teal'],triggers:[
+  {type:'orientation',title:'Spring Planning: Pre-Registration Push',who:'Currently enrolled students',situation:'Mid-term is when counselors help students plan spring schedules. Highest-leverage moment to introduce the Exchange as a planning tool — not a panic tool.',msg:'Planning your spring schedule? If any courses you need are unavailable at [Home College], search the CVC Exchange early. Popular sections fill fast, and you have options across 116 colleges. Ask your counselor which Exchange courses fit your ed plan.',impact:['Strategic planning','Reduces spring scramble','Normalizes Exchange']}
+]},
+{id:'nov',name:'Nov',label:'Spring reg',phase:'Spring registration',dots:['cd-green','cd-blue'],triggers:[
+  {type:'inreach',title:'Returning Exchange Users: Personalized Nudge',who:'Students who previously used Exchange',situation:'Student used the Exchange successfully before. Personalized outreach based on their history is more effective than generic campaigns.',msg:'You completed [COURSE] through the CVC Exchange last [term]. As you register for spring, remember you can use the Exchange again for any courses full or unavailable at [Home College].',impact:['Repeat adoption','Personalized','Low effort, high return']},
+  {type:'outreach',title:'Transfer-Track Course Campaign',who:'Transfer-track students, social media',situation:'Transfer students need specific IGETC or CSU GE courses that may not be offered at the right time. A targeted campaign showing Exchange sections that satisfy transfer requirements reaches the students with the most at stake.',msg:'Finishing your IGETC or CSU GE requirements? The CVC Exchange has transfer-applicable courses available this spring from colleges across California. Search by requirement at cvc.edu.',impact:['Transfer completion','High-stakes students','GE/IGETC search']}
+]},
+{id:'dec',name:'Dec',label:'Intersession',phase:'Intersession window',dots:['cd-amber','cd-green'],triggers:[
+  {type:'intervention',title:'Incomplete Grade Recovery Path',who:'Students with incomplete grades',situation:'A student received an incomplete and needs to finish a course requirement. The original course may not be offered in intersession at their home college, but an equivalent may be available through the Exchange.',msg:'If you received an incomplete in [COURSE] and need to fulfill the requirement, check the CVC Exchange for intersession or early spring sections at other colleges. Your counselor can verify the course will count.',impact:['Grade recovery','Time-sensitive','Prevents withdrawal']},
+  {type:'inreach',title:'Winter Session: Accelerate Progress',who:'Students with light spring loads',situation:'Some students have a light spring schedule. A winter session Exchange course keeps them on track without adding to spring load.',msg:'Get ahead this winter! The CVC Exchange has online courses available during intersession. Taking one now means a lighter spring load — or faster progress toward your degree.',impact:['Acceleration','Proactive planning','Student agency']}
+]}
+];
+
+let activeOutreachTab='all',activeCalMonth=0;
+
+function setOutreachTab(tab,el){
+  activeOutreachTab=tab;
+  document.querySelectorAll('.outreach-tab').forEach(function(t){t.classList.remove('active')});
+  el.classList.add('active');
+  renderOutreachDetail();
+}
+
+function renderCalTimeline(){
+  var el=document.getElementById('calTimeline');
+  el.innerHTML=calMonths.map(function(m,i){
+    var dots=m.dots.map(function(d){return '<div class="cal-dot '+d+'"></div>'}).join('');
+    return '<div class="cal-month'+(i===activeCalMonth?' cal-active':'')+'" onclick="selectMonth('+i+')"><div class="cal-name">'+m.name+'</div><div class="cal-label">'+m.label+'</div><div class="cal-dots">'+dots+'</div></div>';
+  }).join('');
+}
+
+function selectMonth(i){
+  activeCalMonth=i;
+  renderCalTimeline();
+  renderOutreachDetail();
+}
+
+function renderOutreachDetail(){
+  var m=calMonths[activeCalMonth];
+  var filtered=activeOutreachTab==='all'?m.triggers:m.triggers.filter(function(t){return t.type===activeOutreachTab});
+  var el=document.getElementById('outreachDetail');
+  if(!filtered.length){
+    el.innerHTML='<div style="padding:2rem;text-align:center;color:var(--text-3);font-size:.85rem">No '+activeOutreachTab+' triggers for '+m.name+'. Try a different month or category.</div>';
+    return;
+  }
+  var cards=filtered.map(function(t){
+    var impactTags=t.impact.map(function(tag){return '<span class="tc-impact-tag">'+tag+'</span>'}).join('');
+    return '<div class="trigger-card tc-'+t.type+'" onclick="this.classList.toggle(\'tc-expanded\')"><div class="tc-type">'+t.type+'</div><div class="tc-title">'+t.title+'</div><div class="tc-who">'+t.who+'</div><div class="tc-detail"><div class="tc-situation">'+t.situation+'</div><div class="tc-msg-label">Sample message</div><div class="tc-msg">'+t.msg+'</div><div class="tc-impact">'+impactTags+'</div></div></div>';
+  }).join('');
+  el.innerHTML='<div class="od-header"><span class="od-month">'+m.name+'</span><span class="od-phase">'+m.phase+'</span></div><div class="od-body"><div class="trigger-cards">'+cards+'</div></div>';
+}
+
+renderCalTimeline();
+renderOutreachDetail();
+
+
+// ═══ STUDENT JOURNEY COMPARISON ═══
+var journeySteps = [
+  {
+    label: 'Course Search',
+    ok: { icon: '✓', cls: 'j-ok', text: 'Finds MATH 1A at De Anza with open seats on cvc.edu.', student: 'There it is. Online section, fits my schedule.' },
+    broken: { icon: '✓', cls: 'j-ok', text: 'Finds MATH 1A at De Anza with open seats on cvc.edu.', student: 'There it is. Online section, fits my schedule.' }
+  },
+  {
+    label: 'Enrollment',
+    ok: { icon: '✓', cls: 'j-ok', text: 'Clicks "Add Course." AER transmits from Chabot to De Anza. Seat reserved.', student: 'Done! That was easy. It says I\u2019m enrolled.' },
+    broken: { icon: '✓', cls: 'j-ok', text: 'Clicks "Add Course." AER transmits from Chabot \u2014 but Ethos token at Chabot expired overnight.', student: 'Done! That was easy. It says I\u2019m enrolled.' }
+  },
+  {
+    label: 'Payment',
+    ok: { icon: '✓', cls: 'j-ok', text: 'Pays $138 (3 units \u00d7 $46) by credit card. Payment confirmed.', student: 'Paid. I\u2019m set.' },
+    broken: { icon: '\u26a0', cls: 'j-warn', text: 'Requests FA through Consortium Agreement. Home college FA office needs to process.', student: 'I requested financial aid. They said it takes a few days.', analyst: 'If FA processing takes longer than the drop-for-nonpayment window, this student is at risk. Barrier #4.' }
+  },
+  {
+    label: 'Canvas Access',
+    ok: { icon: '✓', cls: 'j-ok', text: 'Logs in via home college SSO. IdP Proxy resolves CCCID. Canvas shows MATH 1A.', student: 'I can see the course in Canvas. First assignment is posted.' },
+    broken: { icon: '\u2717', cls: 'j-err', text: 'AER never reached De Anza (Ethos token failure). Canvas roster doesn\u2019t include this student.', student: 'Where\u2019s my course? I enrolled. Canvas shows nothing.', analyst: 'Tracer isolates the break: Layer 3 (Ethos API). AER payload never left the home college. 47 other students affected.' }
+  },
+  {
+    label: 'Week 1',
+    ok: { icon: '✓', cls: 'j-ok', text: 'Attends class. Participates. On track for on-time transfer.', student: 'Class started. I\u2019m keeping up.' },
+    broken: { icon: '\u2717', cls: 'j-err', text: 'Student calls home college \u2014 "it\u2019s a CVC problem." Calls teaching college \u2014 "it\u2019s a home college problem." Add deadline is tomorrow.', student: 'Nobody can help me. The deadline is tomorrow. I need this class to transfer.', analyst: 'Own it end to end. Call the home college with transaction data. Escalate for manual override before deadline.' }
+  },
+  {
+    label: 'Resolution',
+    ok: { icon: '✓', cls: 'j-ok', text: 'No support interaction needed. Student completes the course. Transcript auto-sent via Parchment.', student: 'I passed. Transcript is at my home college. I can transfer on time.' },
+    broken: { icon: '\u26a0', cls: 'j-warn', text: 'CVC support analyst traces the failure (Ethos token), regenerates credentials, flushes the AER queue. Student gets Canvas access 36 hours late.', student: 'I missed the first assignment. I\u2019m already behind. But at least I\u2019m in.', analyst: 'Document root cause. Draft KB article. Add Ethos token expiration to monitoring alerts. This ticket becomes prevention for the next 47.' }
+  }
+];
+
+var journeyMode = 'compare';
+
+function setJourney(mode, el) {
+  journeyMode = mode;
+  document.querySelectorAll('.jt-btn').forEach(function(b) { b.classList.remove('active'); });
+  el.classList.add('active');
+  renderJourney();
+}
+
+function renderJourney() {
+  var body = document.getElementById('journeyBody');
+  
+  if (journeyMode === 'compare') {
+    var leftSteps = journeySteps.map(function(s) {
+      return '<div class="journey-step ' + s.ok.cls + '"><div class="j-icon">' + s.ok.icon + '</div><div class="j-content"><div class="j-label">' + s.label + '</div><div class="j-text">' + s.ok.text + '</div><div class="j-student">' + s.ok.student + '</div></div></div>';
+    }).join('');
+    var rightSteps = journeySteps.map(function(s) {
+      var analystNote = (s.broken.analyst) ? '<div style="margin-top:.35rem;padding:.3rem .5rem;background:var(--primary-light);border-radius:4px;border-left:2px solid var(--primary);font-size:.68rem;color:var(--primary);line-height:1.5;font-style:normal"><strong style="font-size:.52rem;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:.1rem;opacity:.7">Support response</strong>' + s.broken.analyst + '</div>' : '';
+      return '<div class="journey-step ' + s.broken.cls + '"><div class="j-icon">' + s.broken.icon + '</div><div class="j-content"><div class="j-label">' + s.label + '</div><div class="j-text">' + s.broken.text + '</div><div class="j-student">' + s.broken.student + '</div>' + analystNote + '</div></div>';
+    }).join('');
+    body.innerHTML = '<div class="journey-cols"><div class="journey-col"><div class="journey-col-header jch-ok">\u2713 Successful Enrollment</div>' + leftSteps + '</div><div class="journey-col"><div class="journey-col-header jch-broken">\u2717 Broken Enrollment (Ethos token expired)</div>' + rightSteps + '</div></div>';
+  } else {
+    var steps = journeySteps.map(function(s) {
+      var data = journeyMode === 'ok' ? s.ok : s.broken;
+      return '<div class="journey-step ' + data.cls + '" style="max-width:600px;margin:0 auto"><div class="j-icon">' + data.icon + '</div><div class="j-content"><div class="j-label">' + s.label + '</div><div class="j-text">' + data.text + '</div><div class="j-student">' + data.student + '</div></div></div>';
+    }).join('');
+    var headerCls = journeyMode === 'ok' ? 'jch-ok' : 'jch-broken';
+    var headerText = journeyMode === 'ok' ? '\u2713 Successful Enrollment' : '\u2717 Broken Enrollment (Ethos token expired)';
+    body.innerHTML = '<div style="border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;max-width:600px;margin:0 auto"><div class="journey-col-header ' + headerCls + '">' + headerText + '</div>' + steps + '</div>';
+  }
+}
+
+renderJourney();
+
+
+// ═══ DEMO MODE ═══
+
+// Keyboard navigation: 1-9,0 jump to tools
+var toolAnchors = ['flow','monitor','tracer','patterns','kb','comms','barrierOverview','lifecycle','outreach','correlator'];
+document.addEventListener('keydown', function(e) {
+  // Don't capture when typing in inputs
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  
+  var key = e.key;
+  // Number keys 1-9 map to tools 0-8, 0 maps to tool 9
+  var idx = -1;
+  if (key >= '1' && key <= '9') idx = parseInt(key) - 1;
+  if (key === '0') idx = 9;
+  
+  if (idx >= 0 && idx < toolAnchors.length) {
+    e.preventDefault();
+    var el = document.getElementById(toolAnchors[idx]);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  
+  // D key: toggle demo mode (pre-load all interesting states)
+  if (key === 'd' || key === 'D') {
+    e.preventDefault();
+    activateDemoMode();
+  }
+});
+
+// Show keyboard hint briefly on load
+var keyHintEl = document.getElementById('keyHint');
+setTimeout(function() {
+  keyHintEl.classList.add('show');
+  setTimeout(function() { keyHintEl.classList.remove('show'); }, 4000);
+}, 2000);
+
+// Demo mode: pre-load all interesting states simultaneously
+var demoActive = false;
+function activateDemoMode() {
+  if (demoActive) return;
+  demoActive = true;
+  toast('Demo mode activated');
+  
+  // 1. Architecture: show Exchange node (index 1)
+  showFlowInfo(1);
+  
+  // 2. Tracer: load at stage 2 (the Ethos error — most interesting)
+  setStage(2);
+  
+  // 3. Pattern analyzer: select first insight card
+  if (typeof toggleInsight === 'function') toggleInsight(0);
+  
+  // 4. Barrier #4 (drop-for-nonpayment): expand it
+  var barrierCards = document.querySelectorAll('.b-card');
+  if (barrierCards[3]) barrierCards[3].classList.add('expanded');
+  
+  // 5. Outreach: switch to August (index 2)
+  if (typeof selectMonth === 'function') selectMonth(2);
+  
+  // 6. Monitor: expand the failing college (Sacramento City)
+  // Find and click the error-status row
+  setTimeout(function() {
+    var errRows = document.querySelectorAll('.s-indicator.s-err');
+    if (errRows[0]) {
+      var row = errRows[0].closest('.status-row');
+      if (row) row.click();
+    }
+  }, 500);
+  
+  // Show hint
+  keyHintEl.classList.add('show');
+  setTimeout(function() { keyHintEl.classList.remove('show'); }, 3000);
+}
+
+// Auto-set outreach to August on page load (more interesting than June)
+setTimeout(function() {
+  if (typeof selectMonth === 'function') selectMonth(2);
+}, 100);
+
+
+// ═══ TOOLTIP SYSTEM ═══
+var tipEl=document.createElement('div');tipEl.className='tip';document.body.appendChild(tipEl);
+function showTip(e,html){tipEl.innerHTML=html;tipEl.classList.add('show');var r=e.target.getBoundingClientRect();tipEl.style.left=(r.left+r.width/2-tipEl.offsetWidth/2)+'px';tipEl.style.top=(r.top-tipEl.offsetHeight-8)+'px'}
+function hideTip(){tipEl.classList.remove('show')}
+
+// Add tooltips to status indicators
+document.querySelectorAll('.s-indicator').forEach(function(el){
+  var row=el.closest('.status-row');
+  if(!row)return;
+  var name=row.querySelector('.sr-name');
+  var status=el.classList.contains('s-ok')?'Healthy':el.classList.contains('s-warn')?'Degraded':'Failing';
+  el.addEventListener('mouseenter',function(e){showTip(e,'<strong>'+( name?name.textContent:'')+'</strong> — '+status)});
+  el.addEventListener('mouseleave',hideTip);
+});
+
+// ═══ ARCHITECTURE NODE ACTIVE STATE ═══
+var flowNodes=document.querySelectorAll('.f-node');
+var origShowFlowInfo=showFlowInfo;
+showFlowInfo=function(idx){
+  flowNodes.forEach(function(n){n.classList.remove('fn-active')});
+  if(flowNodes[idx])flowNodes[idx].classList.add('fn-active');
+  origShowFlowInfo(idx);
+};
+
+// ═══ JOURNEY CROSS-COLUMN HIGHLIGHT ═══
+(function(){
+  var steps=document.querySelectorAll('.journey-step');
+  steps.forEach(function(step,i){
+    step.addEventListener('mouseenter',function(){
+      // Find the corresponding step in the other column
+      // Steps alternate: left col has even indices, right col has odd (or vice versa)
+      var allSteps=Array.from(document.querySelectorAll('.journey-step'));
+      var myIdx=allSteps.indexOf(step);
+      var totalPerCol=allSteps.length/2;
+      var pairIdx=myIdx<totalPerCol?myIdx+totalPerCol:myIdx-totalPerCol;
+      if(allSteps[pairIdx])allSteps[pairIdx].classList.add('j-highlight');
+    });
+    step.addEventListener('mouseleave',function(){
+      document.querySelectorAll('.journey-step').forEach(function(s){s.classList.remove('j-highlight')});
+    });
+  });
+})();
+
+// ═══ HERO SVG NETWORK BACKGROUND ═══
+(function(){
+  var header=document.querySelector('.header');
+  if(!header)return;
+  var svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('class','hero-bg');
+  svg.setAttribute('viewBox','0 0 600 400');
+  // Create a network of nodes and connections
+  var nodes=[
+    {x:120,y:80},{x:300,y:60},{x:480,y:90},{x:200,y:200},
+    {x:400,y:180},{x:100,y:320},{x:300,y:300},{x:500,y:310},
+    {x:150,y:160},{x:450,y:260},{x:250,y:120},{x:350,y:340}
+  ];
+  var connections=[[0,1],[1,2],[0,3],[1,4],[3,5],[3,6],[4,7],[2,4],[5,6],[6,7],[0,8],[2,9],[8,3],[9,7],[10,1],[10,4],[6,11],[11,7]];
+  connections.forEach(function(c){
+    var line=document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1',nodes[c[0]].x);line.setAttribute('y1',nodes[c[0]].y);
+    line.setAttribute('x2',nodes[c[1]].x);line.setAttribute('y2',nodes[c[1]].y);
+    svg.appendChild(line);
+  });
+  nodes.forEach(function(n){
+    var circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('cx',n.x);circle.setAttribute('cy',n.y);
+    circle.setAttribute('r',3+Math.random()*4);
+    svg.appendChild(circle);
+  });
+  header.insertBefore(svg,header.firstChild);
+})();
+
+// ═══ CHART BAR TOOLTIPS ═══
+document.querySelectorAll('.bar-group').forEach(function(group){
+  group.addEventListener('mouseenter',function(e){
+    var label=group.querySelector('.bar-label');
+    var stack=group.querySelector('.bar-stack');
+    if(!label||!stack)return;
+    var total=0;
+    stack.querySelectorAll('div').forEach(function(d){total+=parseInt(d.style.height)||0});
+    showTip(e,'<strong>'+label.textContent+'</strong>: '+Math.round(total/2.5)+' tickets');
+  });
+  group.addEventListener('mouseleave',hideTip);
+});
+
+// ═══ BARRIER STAT COUNTER ANIMATION ON SCROLL ═══
+var dividerSec=document.querySelector('.divider-sec');
+if(dividerSec){
+  var dsObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.querySelectorAll('.ds-num').forEach(function(el){
+          var target=parseInt(el.textContent);
+          if(isNaN(target))return;
+          var current=0;var step=Math.max(1,Math.floor(target/25));
+          var iv=setInterval(function(){current+=step;if(current>=target){current=target;clearInterval(iv)}el.textContent=current},40);
+        });
+        dsObs.unobserve(entry.target);
+      }
+    });
+  },{threshold:.3});
+  dsObs.observe(dividerSec);
+}
+
+// ═══ MONITOR ROW EXPAND ANIMATION ═══
+var origToggleRow=toggleRow;
+toggleRow=function(uid){
+  origToggleRow(uid);
+  // Toggle expanded class on the row
+  var row=document.getElementById('sr-'+uid);
+  if(row){
+    var isExpanded=document.getElementById('rd-'+uid)&&document.getElementById('rd-'+uid).style.display!=='none';
+    row.classList.toggle('expanded',isExpanded);
+  }
+};
+
+
+// ═══ CLOSING QUESTION HOVER ═══
+document.querySelectorAll('div[style*="flex-direction:column"] > div[style*="padding:.55rem"]').forEach(function(card){
+  card.classList.add('q1-card');
+});
+
+
+// ═══ AI VISION TOOL ═══
+var aiData = {
+  ops: [
+    {
+      icon: '\u26a1',
+      title: 'Predictive Integration Monitoring',
+      desc: 'Ethos tokens expire on a schedule. Sync degradation follows patterns. Instead of waiting for failures, a model trained on 12 months of uptime data could flag colleges likely to fail in the next 48 hours \u2014 before a single student is affected.',
+      signal: 'aic-predict',
+      signalText: 'Signal: token age + sync frequency + historical failure rate'
+    },
+    {
+      icon: '\ud83d\udcca',
+      title: 'Automated Ticket Triage + Routing',
+      desc: 'When a ticket says "can\u2019t see my course in Canvas," an NLP classifier could identify whether this is an Ethos issue, an IdP Proxy issue, or a teaching college roster delay \u2014 and route it to the right queue without the analyst reading every one.',
+      signal: 'aic-predict',
+      signalText: 'Input: ticket text + CCCID + home college SIS type'
+    },
+    {
+      icon: '\ud83d\udd0d',
+      title: 'Seasonal Surge Forecasting',
+      desc: 'Registration spikes, add/drop deadlines, and FA disbursement windows generate predictable ticket surges. A time-series model could forecast volume 2 weeks ahead so the team can pre-write KB articles and staff up before impact.',
+      signal: 'aic-predict',
+      signalText: 'Data: 3 years of ticket volume + CVC academic calendar'
+    },
+    {
+      icon: '\ud83d\udee1',
+      title: 'Anomaly Detection Across 116 Colleges',
+      desc: 'One college suddenly generating 5x normal tickets at 2 AM isn\u2019t visible in a queue. Pattern detection across all 116 colleges surfaces outliers that humans scanning rows of data would miss.',
+      signal: 'aic-predict',
+      signalText: 'Baseline: per-college rolling averages + standard deviations'
+    }
+  ],
+  student: [
+    {
+      icon: '\ud83c\udf93',
+      title: 'Ed-Plan-Aware Course Recommendations',
+      desc: 'When a required course is full, the Exchange could recommend not just "other MATH 1A sections" but sections that satisfy the specific transfer requirement, at colleges where the student\u2019s financial aid transfers cleanly, at times that fit their schedule.',
+      signal: 'aic-equity',
+      signalText: 'Equity check: recommendations must not steer toward easier-to-provision over best-fit'
+    },
+    {
+      icon: '\u23f0',
+      title: 'Proactive Drop-for-Nonpayment Alerts',
+      desc: 'The system knows the student\u2019s FA status and the teaching college\u2019s auto-drop deadline. If FA processing is running 48 hours behind the payment window, the student could be alerted before they lose their seat \u2014 not after.',
+      signal: 'aic-equity',
+      signalText: 'Barrier #4 prevention: FA lag + auto-drop timing = predictable risk'
+    },
+    {
+      icon: '\ud83d\udcac',
+      title: 'Personalized Outreach Timing',
+      desc: 'Students who used the Exchange before are more likely to use it again \u2014 if reminded at the right time. A model could identify the optimal point in each student\u2019s registration cycle to surface Exchange options, rather than sending one blast to everyone.',
+      signal: 'aic-equity',
+      signalText: 'Privacy-first: aggregate patterns, not individual tracking'
+    },
+    {
+      icon: '\u2665',
+      title: 'Equity-Weighted Early Warning',
+      desc: 'First-generation students, CCPG recipients, and students with incomplete FAFSA are disproportionately affected by Exchange friction. An early warning system could weight these factors \u2014 so the students with the least margin for error get the most proactive support.',
+      signal: 'aic-equity',
+      signalText: 'Critical: model must be audited for bias against the populations it\u2019s designed to protect'
+    }
+  ],
+  role: [
+    {
+      icon: '\ud83e\uddd1\u200d\ud83d\udcbb',
+      title: 'From Reactive Queue to Proactive Intelligence',
+      desc: 'Today, the analyst waits for tickets. With predictive tools, the analyst acts on signals: a college trending toward failure, a student cohort approaching a payment deadline, a new barrier pattern emerging. The inbox doesn\u2019t go away \u2014 but it gets smaller.',
+      signal: 'aic-role',
+      signalText: 'Shift: ticket-driven \u2192 signal-driven support'
+    },
+    {
+      icon: '\ud83d\udd0e',
+      title: 'AI Quality Assurance',
+      desc: 'If the Exchange starts recommending courses via AI, someone needs to audit whether those recommendations serve all students equally. Are CCPG students being steered toward fewer colleges? Are part-time students getting deprioritized? That\u2019s an analyst job, not an engineering job.',
+      signal: 'aic-role',
+      signalText: 'New responsibility: equity auditing of automated recommendations'
+    },
+    {
+      icon: '\ud83e\udd1d',
+      title: 'Human-in-the-Loop for Campus Relationships',
+      desc: 'AI can classify a ticket. It cannot call a registrar, understand why a college\u2019s FA office is 3 days behind, or negotiate a manual enrollment override for a student about to miss a transfer deadline. The human judgment layer doesn\u2019t shrink \u2014 it focuses on higher-stakes work.',
+      signal: 'aic-role',
+      signalText: 'AI handles pattern; analyst handles context, judgment, and relationships'
+    },
+    {
+      icon: '\ud83d\udcdd',
+      title: 'Training Data Curator',
+      desc: 'Every KB article the analyst writes, every ticket they classify, every pattern they document becomes training data for the next model. The quality of CVC\u2019s AI will be directly proportional to the quality of the documentation the support team produces today.',
+      signal: 'aic-role',
+      signalText: 'Today\u2019s documentation is tomorrow\u2019s training data'
+    }
+  ]
+};
+
+var activeAiView = 'ops';
+
+function setAiView(view, el) {
+  activeAiView = view;
+  document.querySelectorAll('.ai-tab').forEach(function(t) { t.classList.remove('active'); });
+  el.classList.add('active');
+  renderAiView();
+}
+
+function renderAiView() {
+  var cards = aiData[activeAiView];
+  var el = document.getElementById('aiBody');
+  if (!cards || !el) return;
+
+  var html = cards.map(function(card) {
+    return '<div class="ai-card">' +
+      '<div class="ai-card-icon">' + card.icon + '</div>' +
+      '<div class="ai-card-title">' + card.title + '</div>' +
+      '<div class="ai-card-desc">' + card.desc + '</div>' +
+      '<div class="ai-card-signal ' + card.signal + '">' + card.signalText + '</div>' +
+      '</div>';
+  }).join('');
+
+  el.innerHTML = '<div class="ai-card-grid">' + html + '</div>';
+}
+
+renderAiView();
+
+
+// ═══ INFOGRAPHIC BAR ANIMATION ═══
+(function(){
+  var growthBars = document.querySelectorAll('#growthChart .growth-bar');
+  var courseBars = document.querySelectorAll('#courseChart .course-bar');
+  // Store target widths then set to 0
+  var growthTargets = [];
+  growthBars.forEach(function(bar) {
+    growthTargets.push(bar.style.width);
+    bar.style.width = '0%';
+  });
+  var courseTargets = [];
+  courseBars.forEach(function(bar) {
+    courseTargets.push(bar.style.width);
+    bar.style.width = '0%';
+  });
+
+  var dataSection = document.getElementById('cvcData');
+  if (!dataSection) return;
+
+  var dataObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        // Animate growth bars with stagger
+        growthBars.forEach(function(bar, i) {
+          setTimeout(function() {
+            bar.style.width = growthTargets[i];
+          }, i * 200);
+        });
+        // Animate course bars with stagger
+        courseBars.forEach(function(bar, i) {
+          setTimeout(function() {
+            bar.style.width = courseTargets[i];
+          }, 800 + i * 100);
+        });
+        dataObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  dataObs.observe(dataSection);
+})();
+
 </script>
 </body>
 </html>
