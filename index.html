@@ -1020,6 +1020,15 @@ html{scroll-behavior:smooth !important}
 .demo-start-btn.touring{background:var(--red) !important;box-shadow:0 4px 14px rgba(220,38,38,.3) !important}
 .demo-start-btn.touring:hover{background:#c42020 !important}
 
+
+/* Ensure demo button is clickable */
+.demo-start-btn{position:relative;z-index:100 !important;pointer-events:auto !important}
+
+
+/* Demo active indicator */
+.demo-active-indicator{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;padding:.35rem .85rem;border-radius:100px;font-family:var(--mono);font-size:.6rem;font-weight:600;z-index:200;box-shadow:0 4px 14px rgba(26,107,80,.4);opacity:0;transition:opacity .3s;pointer-events:none}
+.demo-active-indicator.visible{opacity:1}
+
 </style>
 </head>
 <body>
@@ -1049,7 +1058,7 @@ html{scroll-behavior:smooth !important}
     </div>
   </div>
 <div style="text-align:center;padding:1.25rem 0">
-      <button class="demo-start-btn" onclick="activateDemoMode();this.textContent='\u2713 Demo Active';this.style.background='var(--teal)'">
+      <button class="demo-start-btn" id="demoBtn" onclick="handleDemoClick()">
         Start Demo Mode <span class="demo-kbd">D</span>
       </button>
       <div style="font-family:var(--mono);font-size:.5rem;color:var(--text-3);margin-top:.5rem;opacity:.6">Pre-loads all tools with sample data · Keys 1–0 jump to sections</div>
@@ -1979,6 +1988,31 @@ setTimeout(function() {
 
 // Demo mode: pre-load all interesting states simultaneously
 var demoActive = false;
+
+// Demo state
+var demoScrolling = false;
+var demoRaf = null;
+var demoPaused = false;
+var demoKeyHandler = null;
+var demoWheelHandler = null;
+var demoClickHandler = null;
+
+function handleDemoClick() {
+  try {
+    if (demoPaused) {
+      resumeDemo();
+    } else if (demoScrolling) {
+      stopDemo();
+    } else {
+      activateDemoMode();
+    }
+  } catch(err) {
+    console.error('Demo error:', err);
+    alert('Demo mode encountered an error: ' + err.message);
+  }
+}
+
+
 function activateDemoMode() {
   if (demoScrolling) { stopDemo(); return; }
   
@@ -2007,25 +2041,28 @@ function activateDemoMode() {
     btn.classList.add('touring');
   }
   
+  var indicator = document.getElementById('demoIndicator'); if(indicator) indicator.classList.add('visible');
   toast('Auto-scrolling \u2014 press any key or click Stop to pause');
   
-  // Smooth scroll at ~40px/sec (readable pace)
-  var scrollSpeed = 1.2; // pixels per frame
+  // Smooth scroll — starts with a visible kick then settles to reading pace
+  var scrollFrame = 0;
   
-  demoRaf = requestAnimationFrame(function scrollFrame() {
+  demoRaf = requestAnimationFrame(function doScroll() {
     if (!demoScrolling) return;
     
     var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    var current = window.scrollY;
-    
-    if (current >= maxScroll - 5) {
+    if (window.scrollY >= maxScroll - 5) {
       stopDemo();
       toast('Demo complete');
       return;
     }
     
-    window.scrollBy(0, scrollSpeed);
-    demoRaf = requestAnimationFrame(scrollFrame);
+    scrollFrame++;
+    // First 60 frames (~1sec): scroll at 3px/frame to show it's working
+    // Then settle to 1.2px/frame for comfortable reading
+    var speed = scrollFrame < 60 ? 3 : 1.2;
+    window.scrollBy(0, speed);
+    demoRaf = requestAnimationFrame(doScroll);
   });
   
   // Pause on any user interaction (key, click, scroll wheel)
@@ -2050,15 +2087,10 @@ function activateDemoMode() {
   document.addEventListener('mousedown', demoClickHandler, true);
 }
 
-var demoScrolling = false;
-var demoRaf = null;
-var demoPaused = false;
-var demoKeyHandler = null;
-var demoWheelHandler = null;
-var demoClickHandler = null;
 
 function pauseDemo() {
   if (!demoScrolling) return;
+  var indicator = document.getElementById('demoIndicator'); if(indicator) indicator.classList.remove('visible');
   demoPaused = true;
   if (demoRaf) cancelAnimationFrame(demoRaf);
   
@@ -2077,6 +2109,7 @@ function pauseDemo() {
 function resumeDemo() {
   if (!demoScrolling || !demoPaused) return;
   demoPaused = false;
+  var indicator = document.getElementById('demoIndicator'); if(indicator) indicator.classList.add('visible');
   
   var btn = document.querySelector('.demo-start-btn');
   if (btn) {
@@ -2114,6 +2147,7 @@ function resumeDemo() {
 }
 
 function stopDemo() {
+  var indicator = document.getElementById('demoIndicator'); if(indicator) indicator.classList.remove('visible');
   demoScrolling = false;
   demoPaused = false;
   if (demoRaf) cancelAnimationFrame(demoRaf);
@@ -2621,5 +2655,6 @@ setStage = function(i) {
 
 
 
+<div class="demo-active-indicator" id="demoIndicator">Auto-scrolling — scroll or press any key to pause</div>
 </body>
 </html>
