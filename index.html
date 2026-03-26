@@ -838,6 +838,129 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 #comms .tool-frame{border-left:3px solid var(--blue)}
 #escalation .tool-frame{border-left:3px solid var(--amber)}
 
+
+.aic-govern::before{background:var(--red)}.aic-govern{border-left:0}.aic-govern::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red)}
+
+
+/* ═══ SKIMMABILITY OVERHAUL ═══ */
+
+/* Bigger headings — the only thing skimmers read */
+h2{font-size:clamp(1.5rem,3.5vw,2.1rem) !important;line-height:1.25 !important;letter-spacing:-.01em}
+
+/* Shorter, lighter descriptions — fade into background */
+.sec-desc{font-size:.85rem !important;max-width:520px !important;line-height:1.65 !important;opacity:.8}
+
+/* More vertical breathing room between sections */
+.sec{padding:clamp(2.5rem,6vw,4.5rem) 0 !important}
+
+/* Hero stats — bigger, bolder */
+.h-stat-num{font-size:clamp(2rem,5vw,2.8rem) !important;font-weight:700 !important}
+.h-stat-label{font-size:.7rem !important;margin-top:.2rem !important}
+
+/* Tool frames — subtle shadow resting, strong on hover */
+.tool-frame{box-shadow:0 1px 3px rgba(0,0,0,.04),0 1px 2px rgba(0,0,0,.02) !important}
+.tool-frame:hover{box-shadow:0 12px 40px rgba(0,0,0,.08) !important}
+
+/* Section eyebrow — more visible */
+.eyebrow{font-size:.65rem !important;letter-spacing:.2em !important;margin-bottom:.65rem !important}
+
+/* Pulse stats — bigger numbers */
+.pulse-num{font-size:1.5rem !important}
+
+/* Infographic bars — taller for visual weight */
+.growth-bar-wrap{height:28px !important}
+.growth-num{font-size:.62rem !important}
+
+/* Monitor summary — bigger numbers */
+.ms-num{font-size:clamp(1.6rem,4vw,2.2rem) !important}
+
+/* Escalation cards — more visual weight on headers */
+.esc-header{font-size:.88rem !important;padding:.65rem .75rem !important}
+
+/* Journey column headers — bigger */
+.journey-col-header{font-size:.9rem !important;padding:.75rem 1rem !important}
+
+/* Section transitions — smooth gradient fade between sections */
+.sec + .sec{border-top:none !important}
+.sec-alt{background:var(--bg-2) !important}
+
+/* Closing section — bigger quote */
+.big-quote{font-size:clamp(1.5rem,4vw,2.1rem) !important}
+
+
+/* ═══ SKIM READABILITY V2 ═══ */
+
+/* Headings: add a subtle left accent bar for instant section recognition */
+h2{position:relative;padding-left:.75rem !important}
+h2::before{content:'';position:absolute;left:0;top:.15em;bottom:.15em;width:4px;border-radius:2px;background:var(--primary)}
+
+/* Alternate accent colors per section type */
+.sec:nth-child(odd) h2::before{background:var(--primary)}
+.sec:nth-child(even) h2::before{background:var(--teal)}
+#escalation h2::before{background:var(--amber)}
+#aiVision h2::before{background:var(--teal)}
+#comms h2::before{background:var(--blue)}
+
+/* Tool bars — stronger visual identity */
+.tool-bar{background:var(--surface-2) !important;border-bottom:2px solid var(--border) !important}
+.tool-bar-title{font-weight:600 !important;font-size:.62rem !important}
+
+/* Section eyebrow — pill shape, more eye-catching */
+.eyebrow{display:inline-flex !important;align-items:center !important;gap:.4rem !important;padding:.2rem .65rem !important;border-radius:100px !important;background:var(--surface-2) !important;border:1px solid var(--border) !important}
+
+/* Section number — round badge */
+.sec-num{width:22px !important;height:22px !important;border-radius:50% !important;display:inline-flex !important;align-items:center !important;justify-content:center !important;font-size:.55rem !important;font-weight:700 !important;color:#fff !important;flex-shrink:0 !important}
+
+/* Journey — stronger column contrast */
+.jch-ok{background:var(--primary) !important;color:#fff !important;font-size:.82rem !important;font-weight:700 !important}
+.jch-broken{background:var(--red) !important;color:#fff !important;font-size:.82rem !important;font-weight:700 !important}
+
+/* Journey steps — tighter, more scannable */
+.journey-step{padding:.6rem .75rem !important}
+.j-label{font-size:.75rem !important;font-weight:700 !important;color:var(--text) !important}
+
+/* Monitor rows — stripe for scannability */
+.m-row:nth-child(even){background:var(--bg-2)}
+.m-row:hover{background:var(--primary-light) !important}
+
+/* Demo caption — less visible, doesn't compete with tools */
+.demo-caption{opacity:.5 !important;font-size:.6rem !important}
+
+/* Make bold text in tool bodies POP */
+.tool-body strong{color:var(--text) !important}
+
+/* Hover zoom on tool frames — subtle depth */
+.tool-frame{transition:box-shadow .25s,transform .25s !important}
+.tool-frame:hover{transform:translateY(-2px) !important}
+
+/* Smooth scroll behavior */
+html{scroll-behavior:smooth !important}
+
+/* Info stat numbers — bigger, bolder */
+.info-stat-num{font-size:1.35rem !important;font-weight:700 !important}
+
+/* Hero — bolder title */
+.hero-title{font-size:clamp(1.8rem,5vw,2.8rem) !important;letter-spacing:-.02em !important}
+
+/* Keyboard nav hint — more visible */
+.demo-hint{background:var(--surface-2) !important;border:1px solid var(--border) !important;border-radius:var(--r) !important;padding:.4rem .8rem !important}
+
+
+/* Hero stats — colored top accent */
+.h-stat{border-top:3px solid var(--border);padding-top:.6rem}
+.h-stat:nth-child(1){border-color:var(--primary)}
+.h-stat:nth-child(2){border-color:var(--blue)}
+.h-stat:nth-child(3){border-color:var(--teal)}
+.h-stat:nth-child(4){border-color:var(--amber)}
+
+
+/* Nav active & hover refinements */
+.nav a{position:relative}
+.nav a:hover::after{content:'';position:absolute;bottom:-2px;left:25%;right:25%;height:2px;border-radius:1px;background:var(--primary)}
+
+/* Closing section — bigger visual impact */
+#closing .tool-frame{border:2px solid var(--primary-bd) !important;background:var(--primary-light) !important}
+
 </style>
 </head>
 <body>
@@ -856,7 +979,8 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
   <div class="wrap">
     <div class="h-badge"><span class="dot"></span> CVC-OEI · Foothill–De Anza CCD</div>
     <h1>What does application support look like at <em>statewide scale?</em></h1>
-    <p class="h-desc">116 colleges, four SIS integration paths, a statewide SSO proxy, Canvas, and financial aid Consortium Agreements — all connected through the CVC Exchange. <strong>These tools explore where it breaks and how to respond.</strong></p>
+    <div style="height:3px;width:180px;border-radius:2px;background:linear-gradient(90deg,var(--primary),var(--teal));margin-bottom:.75rem"></div>
+    <p class="h-desc">115 community colleges, four Student Information System (SIS) integration paths, a statewide Single Sign-On (SSO) proxy, Canvas, and Financial Aid (FA) Consortium Agreements — all connected through the CVC Exchange. <strong>These tools explore where it breaks and how to respond.</strong></p>
     <p style="font-size:.78rem;color:var(--text-3);max-width:560px;margin:0 auto .75rem;line-height:1.7;text-align:center">The CVC Exchange isn't a course catalog — it's <strong style="color:var(--text-2)">equity infrastructure.</strong> A student at a rural college with 12 course offerings gets access to the same curriculum as a student at a metro college with 200. Supporting that means understanding it's not just about uptime — it's about whether a first-generation student can transfer on time.</p>
     <div class="h-stats">
       <div><div class="h-stat-num green">116</div><div class="h-stat-label">Connected Colleges</div></div>
@@ -864,6 +988,10 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
       <div><div class="h-stat-num red">10</div><div class="h-stat-label">Barriers Identified</div></div>
       <div><div class="h-stat-num" style="color:var(--purple)">9</div><div class="h-stat-label">Interactive Tools</div></div>
     </div>
+  </div>
+<div style="text-align:center;padding:1rem 0;opacity:.4">
+    <div style="font-family:var(--mono);font-size:.55rem;color:var(--text-3);letter-spacing:.1em">SCROLL TO EXPLORE</div>
+    <div style="margin-top:.25rem;font-size:1rem;color:var(--text-3);animation:floatDown 2s ease infinite">&#8595;</div>
   </div>
 </header>
 
@@ -874,7 +1002,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
       <div style="padding:.6rem 1rem;background:var(--surface-2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
         <span style="font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)">Background</span>
         <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--purple-light);color:var(--purple)">SMCCD · Banner + PeopleSoft + FA</span>
-        <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--blue-light);color:var(--blue)">OpenStax · Canvas LMS + Python</span>
+        <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--blue-light);color:var(--blue)">OpenStax · Canvas Learning Management System (LMS) + Python</span>
         <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--primary-light);color:var(--primary)">Braven · Ticket Analysis + KB</span>
         <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--amber-light);color:var(--amber)">Foothill College · Student</span>
       </div>
@@ -896,7 +1024,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec fu" id="cvcData"><div class="wrap">
   <div class="eyebrow" style="color:var(--blue)">Exchange Intelligence</div>
   <h2>The numbers behind <em>course sharing</em></h2>
-  <p class="sec-desc">The CVC Exchange has grown from 1,500 cross-enrollments in 2021–22 to over 33,000 in 2024–25. Teaching colleges grew from 16 to 78. These numbers shape the support workload — and show where students need access most.</p>
+  <p class="sec-desc">From 1,500 to 33,000 cross-enrollments in three years. The support workload is scaling fast.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Data</span></div><span class="tool-bar-title">CVC Exchange Growth + Course Demand Analysis</span></div>
     <div class="tool-body">
@@ -911,7 +1039,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
           </div>
         </div>
         <div class="info-panel">
-          <div class="info-panel-header">Est. cross-enrollments by Cal-GETC area (2024–25)</div>
+          <div class="info-panel-header">Est. cross-enrollments by California General Education Transfer Curriculum (Cal-GETC) area (2024–25)</div>
           <div class="info-panel-body" id="courseChart">
             <div class="course-bar-row"><div class="course-name">1A · English Comp</div><div class="course-bar-wrap"><div class="course-bar" style="width:100%;background:var(--primary)"><span class="course-pct">~5,800</span></div></div></div>
             <div class="course-bar-row"><div class="course-name">2 · Math / QR</div><div class="course-bar-wrap"><div class="course-bar" style="width:88%;background:var(--primary)"><span class="course-pct">~5,100</span></div></div></div>
@@ -936,7 +1064,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
         <div style="font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);margin-bottom:.4rem">What 2,100% growth means for the support team</div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem">
           <div style="font-size:.75rem;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">More colleges onboarding.</strong> From 16 to 78 teaching colleges — each with different SIS configurations, payment deadlines, and FA workflows. Every new college is a new integration to monitor.</div>
-          <div style="font-size:.75rem;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">More cross-system failures.</strong> 33K enrollments means 33K data flows through the AER, Ethos/Direct APIs, Canvas provisioning, and FA Consortium pipeline. Failure rate stays constant; volume multiplies.</div>
+          <div style="font-size:.75rem;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">More cross-system failures.</strong> 33K enrollments means 33K data flows through the AER, Ethos/Direct Application Programming Interfaces (APIs), Canvas provisioning, and FA Consortium pipeline. Failure rate stays constant; volume multiplies.</div>
           <div style="font-size:.75rem;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">More students at risk.</strong> Every broken enrollment is a student who may miss a transfer deadline or lose financial aid. The support function scales or students fall through the cracks.</div>
         </div>
       </div>
@@ -951,7 +1079,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec sec-alt fu" id="journey"><div class="wrap">
   <div class="eyebrow">Student Experience</div>
   <h2>The same enrollment — when it <em>works</em> vs when it <em style="color:var(--red)">breaks</em></h2>
-  <p class="sec-desc">Course sharing is invisible when it works. When something breaks, the student doesn’t see an API error — they see <strong>a missing course and a deadline.</strong></p>
+  <p class="sec-desc">When the system works, students never think about it. When it breaks — <strong>they see a missing course.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Student View</span></div><span class="tool-bar-title">Scenario: MATH 1A · Chabot → De Anza · via CVC Exchange</span></div>
     <div class="tool-body" style="padding:0">
@@ -970,7 +1098,13 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec fu" id="flow"><div class="wrap">
   <div class="eyebrow">System Architecture</div>
   <h2>The cross-enrollment data flow — and <em>where it breaks</em></h2>
-  <p class="sec-desc">Most support issues trace back to a break somewhere in this chain. Each node represents a layer where data transforms, authenticates, or fails. The analyst’s job is knowing <strong>what to look for at each one.</strong></p>
+  <p class="sec-desc"></p>
+  <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;margin-bottom:.25rem">
+    <span style="display:inline-flex;align-items:center;gap:.25rem;font-size:.6rem;color:var(--primary)"><span style="width:8px;height:8px;border-radius:50%;background:var(--primary)"></span>Student-facing</span>
+    <span style="display:inline-flex;align-items:center;gap:.25rem;font-size:.6rem;color:var(--blue)"><span style="width:8px;height:8px;border-radius:50%;background:var(--blue)"></span>Authentication</span>
+    <span style="display:inline-flex;align-items:center;gap:.25rem;font-size:.6rem;color:var(--amber)"><span style="width:8px;height:8px;border-radius:50%;background:var(--amber)"></span>Data exchange</span>
+    <span style="display:inline-flex;align-items:center;gap:.25rem;font-size:.6rem;color:var(--red)"><span style="width:8px;height:8px;border-radius:50%;background:var(--red)"></span>Failure point</span>
+  </div>
   <div class="flow-visual">
     <div class="flow-title">Cross-Enrollment Data Flow — Click to Explore</div>
     <div class="flow-row">
@@ -990,7 +1124,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec sec-alt fu" id="monitor"><div class="wrap">
   <div class="eyebrow"><span class="sec-num sec-num-green">01</span>Visibility</div>
   <h2>Can the analyst spot a failing college <em>before the tickets arrive?</em></h2>
-  <p class="sec-desc">First thing every morning: which colleges are healthy, which are degraded, and which are down? The weekly pulse shows the trend. The table below shows the details. <strong>This is the view that prevents the 9 AM scramble.</strong></p>
+  <p class="sec-desc">The view that prevents the 9 AM scramble. <strong>Which colleges are up, degraded, or down?</strong></p>
   <div class="tool-frame">
     <div style="position:relative"><div class="live-alert" id="liveAlert"><div class="live-alert-title">New Alert</div><div class="live-alert-body"></div><div class="live-alert-time"></div></div></div>
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><div class="tool-bar-title">cvc-exchange-monitor.fhda.edu</div></div>
@@ -1004,7 +1138,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
           <div class="pulse-card"><div class="pulse-num" style="color:var(--text)">127</div><div class="pulse-label">Total Tickets</div><div class="pulse-delta pd-up">↑ 12% from 113</div></div>
           <div class="pulse-card"><div class="pulse-num" style="color:var(--red)">3</div><div class="pulse-label">Colleges Failing</div><div class="pulse-delta pd-up">↑ from 1</div></div>
           <div class="pulse-card"><div class="pulse-num" style="color:var(--teal)">~4,540</div><div class="pulse-label">Students Affected</div><div class="pulse-delta pd-up">↑ from ~1,850</div></div>
-          <div class="pulse-card"><div class="pulse-num" style="color:var(--primary)">94.2%</div><div class="pulse-label">SLA Met (&lt;4hr)</div><div class="pulse-delta pd-down">↓ from 97.1%</div></div>
+          <div class="pulse-card"><div class="pulse-num" style="color:var(--primary)">94.2%</div><div class="pulse-label">Service Level Agreement (SLA) Met (&lt;4hr)</div><div class="pulse-delta pd-down">↓ from 97.1%</div></div>
         </div>
       </div>
       <div class="monitor-controls">
@@ -1026,7 +1160,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec fu" id="tracer"><div class="wrap">
   <div class="eyebrow"><span class="sec-num sec-num-green">02</span>Diagnosis</div>
   <h2>When a student reports a missing course — <em>where do you look?</em></h2>
-  <p class="sec-desc">Walk a real failure scenario layer by layer: student report → SIS query → API check → Exchange queue → resolution. Each layer produces logs. The analyst reads them in sequence to <strong>isolate the break without guessing.</strong></p>
+  <p class="sec-desc">Layer-by-layer diagnosis. Student report → SIS → API → Exchange → Canvas. <strong>Find the break.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><div class="tool-bar-title">trace-id: CVC-2026-03-4821</div></div>
     <div class="tool-body">
@@ -1045,7 +1179,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec sec-alt fu" id="patterns"><div class="wrap">
   <div class="eyebrow"><span class="sec-num sec-num-green">03</span>Patterns</div>
   <h2>Is this one ticket — or <em>twenty waiting to happen?</em></h2>
-  <p class="sec-desc">12 weeks of ticket data mapped to the CVC academic calendar. The question isn’t “what happened this week” — it’s <strong>“is this the beginning of a pattern?”</strong> The insight cards below flag when ticket spikes correlate with known systemic issues.</p>
+  <p class="sec-desc">Ticket data mapped to the CVC academic calendar. <strong>One ticket — or a pattern?</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><div class="tool-bar-title">Spring 2026 · CVC Exchange Ticket Trends</div></div>
     <div class="tool-body">
@@ -1065,7 +1199,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec fu" id="kb"><div class="wrap">
   <div class="eyebrow"><span class="sec-num sec-num-green">04</span>Documentation</div>
   <h2>If the fix isn’t documented, it didn’t <em>scale.</em></h2>
-  <p class="sec-desc">Every resolved issue is a potential KB article. Four starter templates for the most common categories: integration failures, auth/SSO, sync issues, and new college onboarding. If the next analyst can’t find the fix, the fix didn’t count.</p>
+  <p class="sec-desc">Four templates. Integration, auth, sync, onboarding. <strong>If it’s not documented, it didn’t scale.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation</span></div><div class="tool-bar-title">kb.cvc-oei.fhda.edu/articles/editor</div></div>
     <div class="tool-body" style="padding:0">
@@ -1088,7 +1222,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
   <div class="wrap">
     <div class="eyebrow">Communication</div>
     <h2>The same failure, written <em>four different ways</em></h2>
-    <p class="sec-desc">A student needs reassurance. Campus IT needs the CCCID and error code. The registrar needs something to forward to their VP. The internal team needs scope and next steps. <strong>Same incident. Four drafts.</strong></p>
+    <p class="sec-desc">Same incident, four audiences, four different messages. <strong>Each one is copy-ready.</strong></p>
     <div style="padding:.55rem .85rem;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
       <div style="display:flex;align-items:center;gap:.35rem"><span style="width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0"></span><span style="font-family:var(--mono);font-size:.55rem;font-weight:600;color:var(--amber)">P2 ACTIVE</span></div>
       <div style="font-size:.78rem;color:var(--text-2)">Sacramento City — Ethos token expired — 47 AER records queued — MATH 1A cross-enrollment not syncing to Canvas</div>
@@ -1098,7 +1232,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
       <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--teal-light)">🎓</div><div class="msg-to">To the Student</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Your MATH 1A enrollment — update</div><div class="msg-body">We’re aware your MATH 1A section isn’t showing in Canvas yet. This is a sync issue between your home college and the teaching college — <strong>not a problem with your enrollment.</strong> Your seat is secure. We expect this to be resolved within <span class="msg-highlight">2–4 hours</span>. No action needed on your end.</div></div>
       <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--purple-light)">🖥</div><div class="msg-to">To Campus IT (Teaching College)</div><div class="msg-channel">ServiceNow</div></div><div class="msg-body">AER for CCCID <strong>0012847593</strong> transmitted from Chabot at 14:22 PST but Canvas roster for MATH-1A-001 does not reflect enrollment. Ethos token at home college returned <span class="msg-warn">401 invalid_grant</span>. Can you verify whether the enrollment record exists in your Banner instance?</div></div>
       <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">📋</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Cross-enrollment sync — student enrollments confirmed, Canvas delay expected &lt;4hr</div><div class="msg-body">Quick update on the cross-enrollment sync issue. <strong>The student’s enrollment is confirmed</strong> — the delay is in how the data reaches Canvas. If students contact your office, you can confirm their enrollment is valid. Happy to provide a written summary if this needs to go to your VP.</div></div>
-      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--blue-light)">⚙</div><div class="msg-to">To CVC Internal Team</div><div class="msg-channel">Slack</div></div><div class="msg-body"><strong>Scope:</strong> 47 AER records pending in Chabot → De Anza queue since 02:00 PST. Root cause: Ethos OAuth2 token expired, <span class="msg-warn">invalid_grant</span> on refresh. <strong>Action:</strong> Token regenerated. Queue flush in progress. KB article drafted.</div></div>
+      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--blue-light)">⚙</div><div class="msg-to">To CVC Internal Team</div><div class="msg-channel">Slack</div></div><div class="msg-body"><strong>Scope:</strong> 47 AER records pending in Chabot → De Anza queue since 02:00 PST. Root cause: Ethos Open Authorization (OAuth2) token expired, <span class="msg-warn">invalid_grant</span> on refresh. <strong>Action:</strong> Token regenerated. Queue flush in progress. KB article drafted.</div></div>
     </div>
   </div>
 </section>
@@ -1116,7 +1250,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec sec-alt fu" id="escalation"><div class="wrap">
   <div class="eyebrow"><span class="sec-num sec-num-green">05</span>Escalation</div>
   <h2>How do you know when to <em>own it</em> vs <em>escalate it?</em></h2>
-  <p class="sec-desc">Not every issue is the same severity. The difference between a P1 and a P3 determines who you contact, how fast you respond, and what information you need before making the call.</p>
+  <p class="sec-desc">P1, P2, or P3? <strong>Who to contact, how fast, and what to bring.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Reference</span></div><span class="tool-bar-title">Escalation Decision Matrix · P1 / P2 / P3</span></div>
     <div class="tool-body">
@@ -1148,7 +1282,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
         <div class="esc-card esc-p3">
           <div class="esc-header">P3 Minor / Known</div>
           <div class="esc-body">
-            <div class="esc-row"><div class="esc-label">What it looks like</div><strong>Individual student issue</strong> or a known limitation. CCPG not transferring, Canvas roster delay, DSPS accommodation gap.</div>
+            <div class="esc-row"><div class="esc-label">What it looks like</div><strong>Individual student issue</strong> or a known limitation. CCPG not transferring, Canvas roster delay, Disabled Students Programs and Services (DSPS) accommodation gap.</div>
             <div class="esc-row"><div class="esc-label">Response time</div>Within 1 business day. Standard queue priority.</div>
             <div class="esc-row"><div class="esc-label">Who to contact</div>Handle directly. Escalate to supervisor only if the student has a deadline within 48 hours that will be missed.</div>
             <div class="esc-row"><div class="esc-label">What you need first</div>CCCID. Home college + teaching college. Specific error or symptom. Has the student already contacted either college?</div>
@@ -1172,7 +1306,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
   <div class="wrap">
     <div class="eyebrow">Workflow</div>
     <h2>What a typical escalation path <em>looks like</em></h2>
-    <p class="sec-desc" style="margin-bottom:1rem">Student can’t see their cross-enrolled course in Canvas. From first report to resolution — each step maps to a tool above.</p>
+    <p class="sec-desc" style="margin-bottom:1rem">One incident, traced from first report to resolution. <strong>Each step maps to a tool above.</strong></p>
     <div style="display:flex;gap:0;overflow-x:auto;margin-top:1.5rem">
       <div class="sc-step" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 1</div><div class="sc-step-tool">Monitor</div><div class="sc-step-action">Check college health</div><div class="sc-step-link">→ Tool 01</div></div>
       <div class="sc-step" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 2</div><div class="sc-step-tool">Tracer</div><div class="sc-step-action">Walk the data flow</div><div class="sc-step-link">→ Tool 02</div></div>
@@ -1190,7 +1324,8 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec sec-alt fu" id="outreach"><div class="wrap">
   <div class="eyebrow"><span class="sec-num sec-num-green">10</span>Adoption</div>
   <h2>What if course sharing wasn’t a <em>last resort?</em></h2>
-  <p class="sec-desc">Counselors describe CVC Exchange as essential for on-time graduation and transfer — but often recommend it only after a student is already stuck. This tool maps <strong>when and how to surface course sharing earlier</strong> in the student journey.</p>
+  <p class="sec-desc">Essential for graduation, but usually a last resort. <strong>What if students knew earlier?</strong></p>
+  <div style="display:flex;gap:.5rem;margin-top:.5rem"><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--border)"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--border)"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--border)"></span><span style="font-family:var(--mono);font-size:.5rem;color:var(--text-3);white-space:nowrap;align-self:center">4 of 7 months covered</span></div>
   <div style="padding:.6rem .85rem;border:1px solid var(--teal-bd);background:var(--teal-light);border-radius:var(--r);margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:.5rem">
     <span style="font-size:.85rem;flex-shrink:0">💬</span>
     <div style="font-size:.75rem;color:var(--text-2);line-height:1.6"><strong style="color:var(--teal)">“It’s essential, but it’s usually a last resort.”</strong> — Insight from conversations with two community college counselors about how the CVC Exchange is positioned in advising.</div>
@@ -1210,7 +1345,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec fu" id="aiVision"><div class="wrap">
   <div class="eyebrow" style="color:var(--teal)">Forward Thinking</div>
   <h2>Course sharing is equity infrastructure. <em style="color:var(--teal)">AI should make it smarter.</em></h2>
-  <p class="sec-desc">The CVC Exchange already has the signals: enrollment timing, FA processing status, SIS health, course demand patterns. The question isn’t whether AI will change this work — it’s whether it’s used to <strong>serve students more equitably or just process tickets faster.</strong></p>
+  <p class="sec-desc">AI for equity, fraud prevention, and operational intelligence — <strong>not just faster ticket processing.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--teal-light);color:var(--teal)">Vision</span></div><span class="tool-bar-title">ai-augmented-support-model.cvc.edu</span></div>
     <div class="tool-body">
@@ -1223,12 +1358,13 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
       <div class="ai-tabs" id="aiTabs">
         <button class="ai-tab active" onclick="setAiView('ops',this)">AI for Operations</button>
         <button class="ai-tab" onclick="setAiView('student',this)">AI for Students</button>
+        <button class="ai-tab" onclick="setAiView('fraud',this)">Fraud &amp; Integrity</button>
         <button class="ai-tab" onclick="setAiView('role',this)">The Analyst’s Role</button>
       </div>
       <div id="aiBody"></div>
       <div class="ai-governance">
         <div class="ai-governance-icon">⚠️</div>
-        <div class="ai-governance-text"><strong>Governance consideration:</strong> Every AI application in this system touches FERPA-protected student data. Predictive models can encode existing inequities if not audited. The analyst’s role isn’t replaced by AI — it expands to include <strong>monitoring what the AI recommends and who it underserves.</strong></div>
+        <div class="ai-governance-text"><strong>Governance consideration:</strong> Every AI application in this system touches Family Educational Rights and Privacy Act (FERPA) protected student data. Predictive models can encode existing inequities if not audited. Fraud deterrence must not create new barriers for the students the Exchange was built to serve. The analyst’s role isn’t replaced by AI — it expands to include <strong>monitoring what the AI recommends, who it underserves, and what it flags incorrectly.</strong></div>
       </div>
     </div>
   </div>
@@ -1250,7 +1386,22 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec fu" id="barrierOverview"><div class="wrap">
   <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">05</span>Barriers</div>
   <h2>Ten friction points a support analyst <em class="red">can act on</em></h2>
-  <p class="sec-desc">Not product roadmap items. These are barriers where documentation, data, escalation framing, and campus coordination can <strong>reduce the impact now</strong> — even before engineering fixes land.</p>
+  <p class="sec-desc">Barriers the support team can act on <strong>now</strong> — before engineering fixes land.</p>
+  <div style="display:flex;gap:.25rem;margin-top:.6rem;height:8px;border-radius:4px;overflow:hidden">
+    <div style="flex:3;background:var(--red);border-radius:4px 0 0 4px" title="Auth/SSO barriers"></div>
+    <div style="flex:2.5;background:var(--amber)" title="FA/Payment barriers"></div>
+    <div style="flex:2;background:var(--blue)" title="Sync/Data barriers"></div>
+    <div style="flex:1.5;background:var(--purple)" title="Product limitations"></div>
+    <div style="flex:1;background:var(--text-3);border-radius:0 4px 4px 0" title="Process barriers"></div>
+  </div>
+  <div style="display:flex;gap:.75rem;margin-top:.3rem;font-family:var(--mono);font-size:.48rem;color:var(--text-3);flex-wrap:wrap">
+    <span style="color:var(--red)">Auth/SSO</span>
+    <span style="color:var(--amber)">FA/Payment</span>
+    <span style="color:var(--blue)">Sync/Data</span>
+    <span style="color:var(--purple)">Product</span>
+    <span>Process</span>
+  </div>
+
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Barriers</span></div><span class="tool-bar-title">cvc-barrier-intelligence.fhda.edu</span></div>
     <div class="tool-body"><div class="b-grid" id="bGrid"></div></div>
@@ -1261,7 +1412,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec sec-alt fu" id="lifecycle"><div class="wrap">
   <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">06</span>Lifecycle</div>
   <h2>Where in the enrollment process do students <em class="red">hit friction?</em></h2>
-  <p class="sec-desc">Nine steps from course search to MIS reporting. Red nodes are where students get stuck or dropped. Amber is where manual workarounds are required. <strong>Green steps flow cleanly.</strong></p>
+  <p class="sec-desc">Nine steps. Red = students get stuck. Amber = manual workaround. <strong>Green = smooth.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Lifecycle</span></div><span class="tool-bar-title">Cross-enrollment barrier mapping</span></div>
     <div class="tool-body"><div class="lc-flow" id="lcFlow"></div></div>
@@ -1272,7 +1423,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec fu" id="matrix"><div class="wrap">
   <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">07</span>Campus Intel</div>
   <h2>Not every college has the same <em class="red">support profile</em></h2>
-  <p class="sec-desc">A Banner Direct college with full FA automation has different support needs than a Colleague Ethos college still on the manual email workflow. The same barrier plays out differently depending on what’s underneath.</p>
+  <p class="sec-desc">Same barrier, different impact — depending on <strong>which SIS is underneath.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Matrix</span></div><span class="tool-bar-title">campus-readiness.cvc-oei.fhda.edu</span></div>
     <div class="tool-body">
@@ -1286,7 +1437,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec sec-alt fu" id="equity"><div class="wrap">
   <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">08</span>Equity</div>
   <h2>Which barriers hit the most <em class="red">vulnerable students</em> hardest?</h2>
-  <p class="sec-desc">Not all friction is equal. A payment timing issue is an inconvenience for some students and a semester-ending crisis for others. Scored by how much each barrier disproportionately affects <strong>low-income, first-generation, and disabled students.</strong></p>
+  <p class="sec-desc">Not all friction is equal. Scored by impact on <strong>the students with the least margin for error.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Equity</span></div><span class="tool-bar-title">equity-impact-analysis</span></div>
     <div class="tool-body"><div class="eq-grid" id="eqGrid"></div></div>
@@ -1297,7 +1448,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 <section class="sec fu" id="correlator"><div class="wrap">
   <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">09</span>Correlation</div>
   <h2>How much of the ticket queue is <em class="red">preventable?</em></h2>
-  <p class="sec-desc">If the top three barrier categories account for over half the queue, the fastest path to reducing volume isn’t faster resolution — it’s <strong>reducing the friction that creates the tickets.</strong></p>
+  <p class="sec-desc">If most tickets come from the same three barriers — <strong>fix the barriers, not just the tickets.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Correlation</span></div><span class="tool-bar-title">Q1 2026 · Ticket-to-Barrier Analysis</span></div>
     <div class="tool-body" id="corrBody"></div>
@@ -1319,6 +1470,34 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 </section>
 
 <!-- CLOSING -->
+
+<div class="fu" style="padding:1.5rem 0">
+  <div class="wrap">
+    <div style="display:flex;gap:1px;border-radius:var(--r-lg);overflow:hidden">
+      <div style="flex:1;padding:.65rem .5rem;background:var(--primary);text-align:center">
+        <div style="font-family:var(--display);font-size:1.1rem;font-weight:700;color:#fff">17</div>
+        <div style="font-size:.5rem;color:rgba(255,255,255,.8);margin-top:.1rem">Interactive tools</div>
+      </div>
+      <div style="flex:1;padding:.65rem .5rem;background:var(--blue);text-align:center">
+        <div style="font-family:var(--display);font-size:1.1rem;font-weight:700;color:#fff">115</div>
+        <div style="font-size:.5rem;color:rgba(255,255,255,.8);margin-top:.1rem">Colleges covered</div>
+      </div>
+      <div style="flex:1;padding:.65rem .5rem;background:var(--teal);text-align:center">
+        <div style="font-family:var(--display);font-size:1.1rem;font-weight:700;color:#fff">33K+</div>
+        <div style="font-size:.5rem;color:rgba(255,255,255,.8);margin-top:.1rem">Cross-enrollments</div>
+      </div>
+      <div style="flex:1;padding:.65rem .5rem;background:var(--amber);text-align:center">
+        <div style="font-family:var(--display);font-size:1.1rem;font-weight:700;color:#fff">10</div>
+        <div style="font-size:.5rem;color:rgba(255,255,255,.8);margin-top:.1rem">Barriers mapped</div>
+      </div>
+      <div style="flex:1;padding:.65rem .5rem;background:var(--purple);text-align:center">
+        <div style="font-family:var(--display);font-size:1.1rem;font-weight:700;color:#fff">4</div>
+        <div style="font-size:.5rem;color:rgba(255,255,255,.8);margin-top:.1rem">AI vision areas</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <section class="fu" style="padding:clamp(3rem,8vw,5rem) 0;background:linear-gradient(180deg,var(--bg) 0%,var(--primary-light) 100%);border-top:1px solid var(--border)">
   <div class="wrap">
     <div style="text-align:center;max-width:640px;margin:0 auto">
@@ -1352,7 +1531,7 @@ function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t
 const flowData=[
 {title:'Home College SIS',dot:'var(--purple)',text:'System of record for enrollment, residency, financial aid, and CCCID. <strong>Banner Direct and PeopleSoft</strong> integrate with the Exchange differently than <strong>Banner Ethos and Colleague Ethos</strong> — the Ethos path adds a translation layer via Ellucian APIs. The FA Dashboard currently supports Banner Direct and PeopleSoft; Ethos integration is pending.',tags:['Banner Direct','Banner Ethos','PeopleSoft','Colleague Ethos','CCCID','CCCApply']},
 {title:'CVC Exchange — Middleware + FA Dashboard',dot:'var(--blue)',text:'Central cross-enrollment platform. Receives <strong>AER (Abbreviated Enrollment Record)</strong> from home colleges. The AER contains enrollment data but <strong>not FAFSA data</strong> — financial aid flows separately through the Consortium Agreement. Validates residency, manages seat counts, and since Spring 2025, provides a centralized FA dashboard for counselors and FA offices.',tags:['AER Payload','Seat Count Sync','Residency Validation','FA Dashboard','SX07 MIS','Consortium Agreement']},
-{title:'Teaching College — SIS + Canvas + Parchment',dot:'var(--primary)',text:'Receives AER and provisions enrollment in SIS, then Canvas. Authentication runs through the <strong>CCC IdP Proxy</strong> — the student\'s CCCID must be passed as a SAML attribute from their college IdP. If the college can\'t pass the CCCID, the proxy redirects to OpenCCC for account recovery. Transcripts return automatically via <strong>Parchment</strong>.',tags:['Canvas LMS','CCC IdP Proxy','CCCID / EPPN','Roster Sync','Parchment','SX07 Reporting']},
+{title:'Teaching College — SIS + Canvas + Parchment',dot:'var(--primary)',text:'Receives AER and provisions enrollment in SIS, then Canvas. Authentication runs through the <strong>CCC IdP Proxy</strong> — the student\'s CCCID must be passed as a Security Assertion Markup Language (SAML) attribute from their college IdP. If the college can\'t pass the CCCID, the proxy redirects to OpenCCC for account recovery. Transcripts return automatically via <strong>Parchment</strong>.',tags:['Canvas LMS','CCC IdP Proxy','CCCID / EPPN','Roster Sync','Parchment','SX07 Reporting']},
 {title:'Student Experience',dot:'var(--teal)',text:'Student authenticates via their home college IdP, the SSO Proxy resolves their CCCID, and Canvas provisions the course. They can cross-enroll in <strong>up to two courses per term</strong>. Three payment paths: credit card at enrollment, CCPG at Teaching College, or FA via Consortium Agreement from Home College. When it works, invisible. When it doesn\'t — a missing course, a failed login, a surprise bill.',tags:['CCCID Login','2-Course Limit','3 Payment Paths','FA Consortium','CCPG Reapplication']}
 ];
 function showFlowInfo(idx){const d=flowData[idx],p=document.getElementById('flowInfo');document.querySelectorAll('.f-node').forEach((n,i)=>n.classList.toggle('active-node',i===idx));p.innerHTML='<div class="fip-title"><span class="fip-dot" style="background:'+d.dot+'"></span>'+d.title+'</div><div class="fip-text">'+d.text+'</div><div class="fip-tags">'+d.tags.map(t=>'<span class="fip-tag">'+t+'</span>').join('')+'</div>';p.classList.add('show')}
@@ -1446,7 +1625,7 @@ const barriers=[
 {n:7,title:'FA Dashboard Incomplete for Ethos SIS',cat:'VENDOR',sev:'med',impact:'Spring 2025 FA Dashboard automates unit recording for PeopleSoft and Banner Direct colleges. Banner Ethos and Colleague Ethos integration is pending Ellucian development prioritization — those FA offices still use the manual email workflow.',who:'FA offices at Ethos colleges',approach:'Know which colleges are on which SIS tier. Document workarounds. Update campuses on status.'},
 {n:8,title:'MIS Reporting Requires Manual Reconciliation',cat:'FISCAL',sev:'med',impact:"Exchange data doesn't map cleanly to MIS requirements. Manual reconciliation needed. Underreporting = lost funding.",who:'IR and A&R staff at Teaching Colleges',approach:'Treat MIS tickets as high priority — fiscal, not just technical. Escalate patterns.'},
 {n:9,title:'No Waitlist Support on Exchange',cat:'PRODUCT',sev:'low',impact:"Students can't join a waitlist. Some courses show '1 seat' reserved for local waitlist, causing registration errors.",who:'Students searching for high-demand courses',approach:'Document limitation clearly. Flag ticket spikes around specific courses.'},
-{n:10,title:'OpenCCC/SAML Gaps Block Authentication',cat:'AUTH',sev:'low',impact:'CCC IdP Proxy requires CCCID as a SAML attribute from the college IdP. If the college can\'t assert CCCID, the proxy redirects to OpenCCC account recovery — but this often fails silently or confuses students who already have accounts.',who:'Students at misconfigured colleges',approach:'Trace to IdP Proxy layer: is college passing CCCID? Is EPPN-to-CCCID mapping correct? Maintain college-by-college SSO status. Coordinate with CCC Tech Center (staffsupportccctc@openccc.zendesk.com).'}
+{n:10,title:'OpenCCC/SAML Gaps Block Authentication',cat:'AUTH',sev:'low',impact:'CCC IdP Proxy requires CCCID as a SAML attribute from the college IdP. If the college can\'t assert CCCID, the proxy redirects to the Open California Community Colleges (OpenCCC) account recovery — but this often fails silently or confuses students who already have accounts.',who:'Students at misconfigured colleges',approach:'Trace to IdP Proxy layer: is college passing CCCID? Is the eduPerson Principal Name (EPPN) to CCCID mapping correct? Maintain college-by-college SSO status. Coordinate with CCC Tech Center (staffsupportccctc@openccc.zendesk.com).'}
 ];
 
 // RENDER BARRIER CARDS
@@ -1545,6 +1724,7 @@ setTimeout(animateCounters,600);
 var alertMsgs=[
 {title:'Integration Alert',body:'<strong>Sacramento City</strong> \u2014 Ethos API token expired. 12 AER records queued.',time:'Just now'},
 {title:'Sync Warning',body:'<strong>City College SF</strong> \u2014 Seat count sync delayed 8 minutes.',time:'2 min ago'},
+{title:'Enrollment Anomaly',body:'<strong>Flagged:</strong> 6 new CCCIDs from same IP range cross-enrolled into high-unit courses at 2:47 AM. FA requests pending.',time:'3 min ago'},
 {title:'IdP Proxy Alert',body:'<strong>Riverside City</strong> \u2014 CCCID not asserted by college IdP.',time:'5 min ago'},
 {title:'Resolved',body:'<strong>Feather River</strong> \u2014 API timeout resolved. 23 records transmitted.',time:'12 min ago'}
 ];
@@ -1559,7 +1739,7 @@ setTimeout(function(){showFlowInfo(1)},800);
 // ═══ OUTREACH PLANNER (Tool 10) ═══
 const calMonths=[
 {id:'jun',name:'Jun',label:'Summer prep',phase:'Pre-registration outreach',dots:['cd-teal','cd-blue'],triggers:[
-  {type:'outreach',title:'New Student Welcome + CVC Intro',who:'Incoming students via CCCApply',situation:'Student just applied through CCCApply. Orientation materials typically focus on home college only. This is the earliest opportunity to normalize cross-enrollment as a standard option.',msg:'Welcome to [College]! Did you know you can access thousands of online courses from other California community colleges through the CVC Exchange? If a class you need is full or not offered this term, the Exchange lets you find it at another college — and it counts toward your degree.',impact:['First impression','Normalizes Exchange','Reduces future confusion']},
+  {type:'outreach',title:'New Student Welcome + CVC Intro',who:'Incoming students via CCCApply',situation:'Student just applied through the CCC online application system (CCCApply). Orientation materials typically focus on home college only. This is the earliest opportunity to normalize cross-enrollment as a standard option.',msg:'Welcome to [College]! Did you know you can access thousands of online courses from other California community colleges through the CVC Exchange? If a class you need is full or not offered this term, the Exchange lets you find it at another college — and it counts toward your degree.',impact:['First impression','Normalizes Exchange','Reduces future confusion']},
   {type:'orientation',title:'Orientation: Exchange as Standard Tool',who:'Orientation staff, counselors',situation:'During new student orientation, the CVC Exchange is often not mentioned — or mentioned only as a fallback. Embedding it as a routine part of registration prep means students know about it before they need it.',msg:'As part of your registration prep, bookmark cvc.edu. If any required courses are full, you can search for an equivalent section at another college and enroll instantly — no separate application needed.',impact:['Proactive awareness','Reduces waitlist pressure','Counselor talking point']}
 ]},
 {id:'jul',name:'Jul',label:'Summer term',phase:'Summer enrollment active',dots:['cd-green'],triggers:[
@@ -1567,12 +1747,12 @@ const calMonths=[
 ]},
 {id:'aug',name:'Aug',label:'Fall registration',phase:'Peak registration window',dots:['cd-green','cd-amber','cd-blue'],triggers:[
   {type:'inreach',title:'Ed Plan Gap: Missing Required Course',who:'Students behind on educational plan',situation:'Counselor review shows a student is missing a required course not offered at the home college this term. Surface the Exchange option proactively instead of waiting for the student to discover this at registration.',msg:'Based on your ed plan, you still need [COURSE] for [transfer/degree]. It is not offered at [Home College] this fall, but there are sections available at other colleges through the CVC Exchange. Would you like help finding one that fits your schedule?',impact:['Prevents delay','Ed plan aligned','Counselor-initiated']},
-  {type:'intervention',title:'FAFSA Completion Reminder + FA Path',who:'Students with incomplete FAFSA',situation:'With the 25% drop in FAFSA completion for 2025-26, students who cross-enroll without completed aid face payment confusion. Proactive outreach at registration prevents drop-for-nonpayment.',msg:'Planning to take a course through the CVC Exchange? Make sure your FAFSA is complete at your home college first. Your home college determines financial aid eligibility for Exchange courses through the Consortium Agreement.',impact:['Prevents payment crisis','FA awareness','Reduces drops']},
+  {type:'intervention',title:'Free Application for Federal Student Aid (FAFSA) Completion Reminder + FA Path',who:'Students with incomplete FAFSA',situation:'With the 25% drop in FAFSA completion for 2025-26, students who cross-enroll without completed aid face payment confusion. Proactive outreach at registration prevents drop-for-nonpayment.',msg:'Planning to take a course through the CVC Exchange? Make sure your FAFSA is complete at your home college first. Your home college determines financial aid eligibility for Exchange courses through the Consortium Agreement.',impact:['Prevents payment crisis','FA awareness','Reduces drops']},
   {type:'outreach',title:'High-Demand Course Campaign',who:'All enrolled students, social media',situation:'Certain courses fill within hours every term. A proactive campaign before registration opens can redirect students to Exchange sections before frustration sets in.',msg:'[COURSE] sections fill fast. Before you stress about the waitlist, check the CVC Exchange at cvc.edu — there are online sections available from other California community colleges that count toward your requirements.',impact:['Reduces ticket volume','Student satisfaction','Institutional capacity']}
 ]},
 {id:'sep',name:'Sep',label:'Fall start',phase:'Add/drop window',dots:['cd-green','cd-amber'],triggers:[
   {type:'inreach',title:'Dropped-for-Nonpayment Recovery',who:'Students dropped from Exchange courses',situation:'Student was dropped from a teaching college course because payment did not process before the auto-drop deadline. The seat may still be available. Time-sensitive.',msg:'Your enrollment in [COURSE] at [Teaching College] was dropped due to a payment processing delay. The seat may still be available — contact the Teaching College or re-enroll through the Exchange and pay immediately to secure your spot.',impact:['Recovery path','Time-sensitive','Prevents semester loss']},
-  {type:'intervention',title:'CCPG Reapplication Nudge',who:'CCPG-eligible Exchange students',situation:'Students with California College Promise Grant at their home college often do not know it does not automatically transfer. A proactive message at the start of term prevents surprise bills.',msg:'Important: Your CCPG fee waiver from [Home College] does not automatically apply at your Teaching College. To avoid unexpected charges, apply for CCPG separately at [Teaching College] before the payment deadline.',impact:['Prevents surprise bills','Equity-critical','Low-income students']}
+  {type:'intervention',title:'CCPG Reapplication Nudge',who:'CCPG-eligible Exchange students',situation:'Students with California College Promise Grant at their home college often do not know it does not automatically transfer. A proactive message at the start of term prevents surprise bills.',msg:'Important: Your California College Promise Grant (CCPG) fee waiver from [Home College] does not automatically apply at your Teaching College. To avoid unexpected charges, apply for CCPG separately at [Teaching College] before the payment deadline.',impact:['Prevents surprise bills','Equity-critical','Low-income students']}
 ]},
 {id:'oct',name:'Oct',label:'Mid-term',phase:'Midterm check-in',dots:['cd-teal'],triggers:[
   {type:'orientation',title:'Spring Planning: Pre-Registration Push',who:'Currently enrolled students',situation:'Mid-term is when counselors help students plan spring schedules. Highest-leverage moment to introduce the Exchange as a planning tool — not a panic tool.',msg:'Planning your spring schedule? If any courses you need are unavailable at [Home College], search the CVC Exchange early. Popular sections fill fast, and you have options across 116 colleges. Ask your counselor which Exchange courses fit your ed plan.',impact:['Strategic planning','Reduces spring scramble','Normalizes Exchange']}
@@ -1638,7 +1818,7 @@ var journeySteps = [
   },
   {
     label: 'Enrollment',
-    ok: { icon: '✓', cls: 'j-ok', text: 'Clicks "Add Course." AER transmits from Chabot to De Anza. Seat reserved.', student: 'Done! That was easy. It says I\u2019m enrolled.' },
+    ok: { icon: '✓', cls: 'j-ok', text: 'Clicks "Add Course." Academic Enrollment Record (AER) transmits from Chabot to De Anza. Seat reserved.', student: 'Done! That was easy. It says I\u2019m enrolled.' },
     broken: { icon: '✓', cls: 'j-ok', text: 'Clicks "Add Course." AER transmits from Chabot \u2014 but Ethos token at Chabot expired overnight.', student: 'Done! That was easy. It says I\u2019m enrolled.', analyst: 'Monitor would show Chabot\u2019s status as Failing before this student ever tried to enroll.' }
   },
   {
@@ -1648,7 +1828,7 @@ var journeySteps = [
   },
   {
     label: 'Canvas Access',
-    ok: { icon: '✓', cls: 'j-ok', text: 'Logs in via home college SSO. IdP Proxy resolves CCCID. Canvas shows MATH 1A.', student: 'I can see the course in Canvas. First assignment is posted.' },
+    ok: { icon: '✓', cls: 'j-ok', text: 'Logs in via home college SSO. Identity Provider (IdP) Proxy resolves the California Community College ID (CCCID). Canvas shows MATH 1A.', student: 'I can see the course in Canvas. First assignment is posted.' },
     broken: { icon: '\u2717', cls: 'j-err', text: 'AER never reached De Anza (Ethos token failure). Canvas roster doesn\u2019t include this student.', student: 'Where\u2019s my course? I enrolled. Canvas shows nothing.', analyst: 'Tracer isolates the break: Layer 3 (Ethos API). AER payload never left the home college. 47 other students affected.' }
   },
   {
@@ -1914,9 +2094,9 @@ var aiData = {
     },
     {
       icon: '\u2699', title: 'Auto-classify tickets by root cause',
-      desc: 'When 47 tickets say "can\u2019t see my course," a classifier could separate Ethos failures from IdP issues from teaching college roster delays \u2014 before a human reads a single one.',
+      desc: 'When 47 tickets say "can\u2019t see my course," a Natural Language Processing (NLP) classifier could separate Ethos failures from IdP issues from teaching college roster delays \u2014 before a human reads a single one.',
       today: 'Analyst reads each ticket, mentally maps symptoms to probable causes, manually tags category. First 30 minutes of every morning.',
-      after: 'NLP model reads incoming ticket text + pulls CCCID + checks home college SIS type. Auto-tags 80% of tickets. Analyst reviews the remaining 20% and corrects misclassifications \u2014 which improves the model.',
+      after: 'Natural Language Processing model reads incoming ticket text + pulls CCCID + checks home college SIS type. Auto-tags 80% of tickets. Analyst reviews the remaining 20% and corrects misclassifications \u2014 which improves the model.',
       toolLink: 'patterns', toolName: 'Pattern Analyzer (Tool 03)',
       complexity: 'medium', complexityLabel: 'Medium \u2014 needs labeled training data from 6+ months of tickets',
       signal: 'aic-predict'
@@ -1976,6 +2156,44 @@ var aiData = {
       toolLink: 'equity', toolName: 'Equity Scorer (Tool 08)',
       complexity: 'long', complexityLabel: 'Long-term \u2014 requires equity data integration + careful bias auditing',
       signal: 'aic-equity'
+    }
+  ],
+  fraud: [
+    {
+      icon: '\u26d4', title: 'Detect fraudulent enrollment patterns in cross-enrollment',
+      desc: 'Fake CCCIDs created via OpenCCC, used to cross-enroll through the Exchange and claim financial aid through Consortium Agreements. The accounts never attend. The support team sees them as enrollment anomalies.',
+      today: 'Fraudulent enrollments look like normal tickets: "student can\u2019t access Canvas." The analyst resolves the technical issue without knowing the underlying account is fraudulent. FA office processes the Consortium Agreement. Revenue is lost.',
+      after: 'Pattern detection flags: multiple CCCIDs from the same IP enrolling at 3 AM, accounts with no prior enrollment history instantly cross-enrolling into high-unit courses, FA requests submitted within minutes of enrollment. Analyst reviews flagged accounts before FA is disbursed.',
+      toolLink: 'monitor', toolName: 'Monitor (Tool 01)',
+      complexity: 'medium', complexityLabel: 'Medium \u2014 needs enrollment velocity + IP clustering baseline',
+      signal: 'aic-govern'
+    },
+    {
+      icon: '\u2696', title: 'Protect FA revenue without blocking legitimate students',
+      desc: 'The hard part: fraud deterrence that doesn\u2019t create new barriers for the students the Exchange was built to serve. A first-gen student enrolling at 11 PM from a shared family device looks similar to a fraudulent account.',
+      today: 'Colleges set blunt rules: 50-mile enrollment radius, short drop-for-nonpayment deadlines. These deter some fraud but also block legitimate rural and working students who are exactly the population CVC exists to reach.',
+      after: 'Risk scoring that weighs multiple signals: enrollment velocity, prior academic history, FA request timing, device fingerprint clustering. High-risk accounts get a human review hold \u2014 not an auto-reject. Legitimate students pass through. The analyst reviews edge cases.',
+      toolLink: 'equity', toolName: 'Equity Scorer (Tool 08)',
+      complexity: 'long', complexityLabel: 'Long-term \u2014 requires cross-college behavioral data + careful equity auditing',
+      signal: 'aic-equity'
+    },
+    {
+      icon: '\u2699', title: 'Agentic AI for enrollment verification workflows',
+      desc: 'An AI agent that autonomously verifies enrollment legitimacy within institutional policies \u2014 checking CCCID history, cross-referencing OpenCCC creation date with enrollment timing, and flagging anomalies \u2014 while keeping humans in the loop for final decisions.',
+      today: 'Verification is manual and after-the-fact. FA offices discover fraud during reconciliation, sometimes months after disbursement. By then the revenue is gone and the staff hours are spent.',
+      after: 'Agentic workflow: AI agent monitors new cross-enrollments in real time \u2192 checks CCCID age, enrollment history, FA request pattern \u2192 auto-approves low-risk (95% of enrollments) \u2192 queues medium-risk for analyst review \u2192 holds high-risk for FA office verification before disbursement. Humans decide. The agent surfaces.',
+      toolLink: 'aiVision', toolName: 'AI Vision',
+      complexity: 'long', complexityLabel: 'Long-term \u2014 requires real-time enrollment event stream + institutional policy engine',
+      signal: 'aic-predict'
+    },
+    {
+      icon: '\u26a0', title: 'Track the cost: lost revenue, staff effort, student trust',
+      desc: 'Every fraudulent enrollment that reaches FA disbursement costs the system three ways: direct revenue loss, staff hours processing and reversing the award, and erosion of trust that makes colleges tighten policies \u2014 which hurts legitimate students.',
+      today: 'Fraud impact is measured after the fact in aggregate \u2014 "we lost $X this year." No per-incident tracking. No connection between a specific fraudulent enrollment and the downstream staff effort or policy tightening it caused.',
+      after: 'Per-incident fraud cost tracking: this CCCID generated $138 in FA disbursement + 2.5 hours of staff effort across 2 colleges + triggered a policy review. Aggregate dashboard shows fraud trends by college, term, and enrollment channel. The support analyst contributes data that shapes institutional response.',
+      toolLink: 'correlator', toolName: 'Ticket-to-Barrier Correlator',
+      complexity: 'medium', complexityLabel: 'Medium \u2014 needs FA reversal data linked to enrollment records',
+      signal: 'aic-govern'
     }
   ],
   role: [
