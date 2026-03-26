@@ -13,7 +13,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
 ::selection{background:#D1FAE5;color:var(--text)}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:5px}
 .wrap{max-width:var(--max-w);margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
-nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 clamp(1.25rem,4vw,2.5rem);height:56px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s}
+nav{position:sticky;top:0;z-index:200;background:rgba(250,250,248,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 clamp(1.25rem,4vw,2.5rem);height:56px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s}
 nav.scrolled{box-shadow:var(--shadow)}
 .nav-brand{display:flex;align-items:center;gap:.6rem}
 .nav-icon{width:28px;height:28px;border-radius:7px;background:var(--primary);display:flex;align-items:center;justify-content:center}
@@ -24,7 +24,7 @@ nav.scrolled{box-shadow:var(--shadow)}
 .nav-links a:hover{color:var(--primary);background:var(--primary-light)}
 .nav-links a.nav-barrier{color:var(--red);border:1px solid var(--red-bd);background:var(--red-light)}
 .nav-links a.nav-barrier:hover{background:var(--red);color:#fff}
-@media(max-width:768px){.nav-links{display:none}}
+@media(max-width:768px){.nav-links{display:flex;flex-wrap:wrap;gap:.15rem}}
 .header{padding:clamp(4rem,10vw,7rem) 0 clamp(2.5rem,5vw,4rem);text-align:center;position:relative}
 .header::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(26,107,80,.04) 0%,transparent 70%);pointer-events:none}
 .h-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .85rem;border-radius:100px;border:1px solid var(--primary-bd);background:var(--primary-light);font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--primary);margin-bottom:1.5rem}
@@ -379,7 +379,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 
 
 /* SCROLL PROGRESS */
-.scroll-progress{position:fixed;top:56px;left:0;height:3px;background:var(--primary);width:0%;z-index:99;transition:width .1s linear;box-shadow:0 0 8px rgba(26,107,80,.4)}
+
 
 /* STAKEHOLDER MESSAGE PREVIEWS */
 .msg-preview{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:all .25s;cursor:pointer}
@@ -730,8 +730,8 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 .growth-row{display:flex;align-items:center;gap:.5rem;padding:.4rem 0;border-bottom:1px solid var(--border)}
 .growth-row:last-child{border-bottom:none}
 .growth-year{font-family:var(--mono);font-size:.6rem;color:var(--text-3);width:55px;flex-shrink:0}
-.growth-bar-wrap{flex:1;height:22px;background:var(--bg-3);border-radius:4px;overflow:hidden;position:relative}
-.growth-bar{height:100%;border-radius:4px;transition:width 1s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;justify-content:flex-end;padding-right:.4rem}
+.growth-bar-wrap{flex:1;height:22px;background:var(--bg-3);border-radius:4px;position:relative;display:flex;align-items:center}
+.growth-bar{height:100%;border-radius:4px;transition:width 1s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;justify-content:flex-end;padding-right:.4rem;flex-shrink:0}
 .growth-num{font-family:var(--mono);font-size:.55rem;font-weight:600;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
 
 .course-bar-row{display:flex;align-items:center;gap:.5rem;padding:.3rem 0}
@@ -868,7 +868,7 @@ h2{font-size:clamp(1.5rem,3.5vw,2.1rem) !important;line-height:1.25 !important;l
 .pulse-num{font-size:1.5rem !important}
 
 /* Infographic bars — taller for visual weight */
-.growth-bar-wrap{height:28px !important}
+.growth-bar-wrap{height:28px !important;display:flex !important;align-items:center !important}
 .growth-num{font-size:.62rem !important}
 
 /* Monitor summary — bigger numbers */
@@ -962,11 +962,7 @@ html{scroll-behavior:smooth !important}
 #closing .tool-frame{border:2px solid var(--primary-bd) !important;background:var(--primary-light) !important}
 
 
-/* START DEMO BUTTON */
-.demo-start-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.5rem;border-radius:var(--r-lg);background:var(--primary);color:#fff;font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.05em;border:none;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(26,107,80,.3)}
-.demo-start-btn:hover{background:var(--primary-hover);transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,107,80,.4)}
-.demo-start-btn:active{transform:translateY(0)}
-.demo-start-btn .demo-kbd{padding:.1rem .35rem;border-radius:3px;background:rgba(255,255,255,.2);font-size:.6rem}
+
 
 
 /* TRACER SCENARIO HEADLINE */
@@ -1016,28 +1012,88 @@ html{scroll-behavior:smooth !important}
 
 
 
-/* Demo button active states */
-.demo-start-btn.touring{background:var(--red) !important;box-shadow:0 4px 14px rgba(220,38,38,.3) !important}
-.demo-start-btn.touring:hover{background:#c42020 !important}
 
 
-/* Ensure demo button is clickable */
-.demo-start-btn{position:relative;z-index:100 !important;pointer-events:auto !important}
 
 
-/* Demo active indicator */
-.demo-active-indicator{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;padding:.35rem .85rem;border-radius:100px;font-family:var(--mono);font-size:.6rem;font-weight:600;z-index:200;box-shadow:0 4px 14px rgba(26,107,80,.4);opacity:0;transition:opacity .3s;pointer-events:none}
-.demo-active-indicator.visible{opacity:1}
+
+
+
+
+
+/* ═══ COLLEGE QUICK LOOKUP ═══ */
+.lookup-wrap{max-width:680px;margin:0 auto}
+.lookup-input{width:100%;padding:.75rem 1rem .75rem 2.5rem;border:2px solid var(--border);border-radius:var(--r-lg);font-size:.9rem;font-family:var(--mono);background:var(--surface);color:var(--text);transition:border-color .2s;outline:none;box-sizing:border-box}
+.lookup-input:focus{border-color:var(--primary)}
+.lookup-input-wrap{position:relative}
+.lookup-input-wrap::before{content:'';position:absolute;left:.9rem;top:calc(50% - 7px);width:11px;height:11px;border:2px solid var(--text-3);border-radius:50%;pointer-events:none;box-sizing:border-box}.lookup-input-wrap::after{content:'';position:absolute;left:1.5rem;top:calc(50% + 4px);width:2px;height:5px;background:var(--text-3);transform:rotate(-45deg);pointer-events:none}
+.lookup-results{margin-top:.5rem}
+.lookup-empty{text-align:center;padding:1.5rem;color:var(--text-3);font-size:.78rem}
+
+.lookup-card{border:1px solid var(--border);border-radius:var(--r-lg);padding:.85rem 1rem;margin-bottom:.5rem;background:var(--surface);transition:all .2s;cursor:default}
+.lookup-card:hover{border-color:var(--primary-bd);box-shadow:var(--shadow-md)}
+.lookup-card-header{display:flex;align-items:center;gap:.65rem;flex-wrap:wrap;margin-bottom:.5rem}
+.lookup-college-name{font-weight:700;font-size:.95rem;color:var(--text)}
+.lookup-sis-badge{font-family:var(--mono);font-size:.55rem;padding:.15rem .45rem;border-radius:4px;font-weight:600;letter-spacing:.03em}
+.sis-banner-direct{background:#dbeafe;color:#1d4ed8}
+.sis-banner-ethos{background:#fef3c7;color:#92400e}
+.sis-peoplesoft{background:#ede9fe;color:#6d28d9}
+.sis-colleague{background:#fce7f3;color:#9d174d}
+
+.lookup-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem;margin-bottom:.4rem}
+@media(max-width:500px){.lookup-grid{grid-template-columns:1fr}}
+.lookup-field{padding:.35rem .5rem;background:var(--bg-2);border-radius:4px}
+.lookup-field-label{font-family:var(--mono);font-size:.48rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:.1rem}
+.lookup-field-value{font-size:.72rem;color:var(--text);font-weight:500}
+.lf-ok{color:var(--primary)}.lf-warn{color:var(--amber)}.lf-err{color:var(--red)}
+
+.lookup-issues{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.3rem}
+.lookup-issue-tag{font-family:var(--mono);font-size:.52rem;padding:.12rem .35rem;border-radius:3px;background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-bd)}
+.lookup-issue-tag.issue-clear{background:var(--primary-light);color:var(--primary);border-color:var(--primary-bd)}
+
+.lookup-count{font-family:var(--mono);font-size:.55rem;color:var(--text-3);margin-top:.4rem;text-align:right}
+
+
+/* LOOKUP ENHANCEMENTS */
+.lookup-filters{display:flex;gap:.3rem;margin-bottom:.65rem;flex-wrap:wrap}
+.lookup-filter{padding:.3rem .6rem;border-radius:100px;font-family:var(--mono);font-size:.55rem;font-weight:600;border:1px solid var(--border);background:var(--surface);color:var(--text-3);cursor:pointer;transition:all .15s}
+.lookup-filter:hover{background:var(--bg-2);color:var(--text)}
+.lookup-filter.lf-active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+.lookup-stats{display:flex;gap:.3rem;margin-bottom:.65rem;flex-wrap:wrap}
+.lookup-stat{flex:1;min-width:80px;text-align:center;padding:.4rem .3rem;border:1px solid var(--border);border-radius:var(--r)}
+.lookup-stat-num{font-family:var(--display);font-size:1rem;font-weight:700}
+.lookup-stat-label{font-size:.48rem;color:var(--text-3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em}
+
+.lookup-card-expand{display:none;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--border)}
+.lookup-card.lc-expanded .lookup-card-expand{display:block}
+.lookup-card.lc-expanded{border-color:var(--primary-bd);background:var(--surface-2)}
+
+.lookup-action{padding:.35rem .55rem;border-radius:4px;font-size:.68rem;line-height:1.6;background:var(--primary-light);border:1px solid var(--primary-bd);color:var(--text-2);margin-top:.3rem}
+.lookup-action strong{color:var(--primary)}
+
+.lookup-card-click{font-family:var(--mono);font-size:.48rem;color:var(--text-3);margin-top:.3rem;opacity:0;transition:opacity .15s}
+.lookup-card:hover .lookup-card-click{opacity:1}
+
+.lookup-region{font-family:var(--mono);font-size:.5rem;padding:.1rem .3rem;border-radius:3px;background:var(--bg-2);color:var(--text-3)}
+
+
+/* Nav links always visible */
+.nav-links{display:flex !important;flex-wrap:wrap !important;gap:.2rem !important}
+.nav-links a{white-space:nowrap}
+
+
+/* Nav links — force clickable */
+.nav-links a{cursor:pointer !important;user-select:none;-webkit-tap-highlight-color:transparent;min-height:28px;display:inline-flex !important;align-items:center !important}
 
 </style>
 </head>
 <body>
 
-<div class="scroll-progress" id="scrollProg"></div>
 <nav id="nav">
   <div class="nav-brand"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">CVC-OEI · Application Support</span></div>
   <div class="nav-links">
-    <a href="#why">Background</a><a href="#cvcData">Data</a><a href="#journey">Journey</a><a href="#flow">Architecture</a><a href="#monitor">Monitor</a><a href="#tracer">Diagnostics</a><a href="#patterns">Patterns</a><a href="#kb">KB Builder</a>
+    <a href="#why">Background</a><a href="#lookup">Lookup</a><a href="#cvcData">Data</a><a href="#journey">Journey</a><a href="#flow">Architecture</a><a href="#monitor">Monitor</a><a href="#tracer">Diagnostics</a><a href="#patterns">Patterns</a><a href="#kb">KB Builder</a>
     <a href="#escalation">Escalation</a><a href="#outreach">Outreach</a><a href="#aiVision" style="color:var(--teal)">AI Vision</a>
     <a href="#barriers" class="nav-barrier">⚠ Barriers</a>
   </div>
@@ -1057,16 +1113,8 @@ html{scroll-behavior:smooth !important}
       <div><div class="h-stat-num" style="color:var(--purple)">9</div><div class="h-stat-label">Interactive Tools</div></div>
     </div>
   </div>
-<div style="text-align:center;padding:1.25rem 0">
-      <button class="demo-start-btn" id="demoBtn" onclick="handleDemoClick()">
-        Start Demo Mode <span class="demo-kbd">D</span>
-      </button>
-      <div style="font-family:var(--mono);font-size:.5rem;color:var(--text-3);margin-top:.5rem;opacity:.6">Pre-loads all tools with sample data · Keys 1–0 jump to sections</div>
-    </div>
-    <div style="text-align:center;padding:.5rem 0;opacity:.4">
-    <div style="font-family:var(--mono);font-size:.55rem;color:var(--text-3);letter-spacing:.1em">SCROLL TO EXPLORE</div>
-    <div style="margin-top:.25rem;font-size:1rem;color:var(--text-3);animation:floatDown 2s ease infinite">&#8595;</div>
-  </div>
+</div>
+    
 </header>
 
 <!-- ═══ WHY CVC ═══ -->
@@ -1094,6 +1142,36 @@ html{scroll-behavior:smooth !important}
 
 
 
+
+<!-- COLLEGE QUICK LOOKUP -->
+<section class="sec fu" id="lookup"><div class="wrap">
+  <div class="eyebrow" style="color:var(--blue)">Quick Reference</div>
+  <h2>Look up any college in <em>the Exchange</em></h2>
+  <p class="sec-desc">Type a college name, Student Information System type, or keyword. <strong>Instant reference card.</strong></p>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Lookup</span></div><span class="tool-bar-title">college-reference · 115 colleges · 4 SIS platforms</span></div>
+    <div class="tool-body">
+      <div class="lookup-wrap">
+        <div class="lookup-stats" id="lookupStats"></div>
+        <div class="lookup-filters" id="lookupFilters">
+          <button class="lookup-filter lf-active" onclick="filterColleges('all',this)">All</button>
+          <button class="lookup-filter" onclick="filterColleges('Banner Direct',this)" style="border-color:#93c5fd">Banner Direct</button>
+          <button class="lookup-filter" onclick="filterColleges('Banner Ethos',this)" style="border-color:#fcd34d">Banner Ethos</button>
+          <button class="lookup-filter" onclick="filterColleges('PeopleSoft',this)" style="border-color:#c4b5fd">PeopleSoft</button>
+          <button class="lookup-filter" onclick="filterColleges('Colleague',this)" style="border-color:#f9a8d4">Colleague Ethos</button>
+          <button class="lookup-filter" onclick="filterColleges('issues',this)" style="border-color:var(--amber)">Has Issues</button>
+          <button class="lookup-filter" onclick="filterColleges('manual',this)" style="border-color:var(--red)">FA Manual</button>
+        </div>
+        <div class="lookup-input-wrap">
+          <input class="lookup-input" id="collegeLookup" type="text" placeholder="Search by name, district, SIS type, issue, or region..." oninput="searchColleges(this.value)" autocomplete="off">
+        </div>
+        <div class="lookup-results" id="lookupResults"></div>
+        <div class="lookup-count" id="lookupCount"></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
 <!-- CVC EXCHANGE DATA -->
 <section class="sec fu" id="cvcData"><div class="wrap">
   <div class="eyebrow" style="color:var(--blue)">Exchange Intelligence</div>
@@ -1106,7 +1184,7 @@ html{scroll-behavior:smooth !important}
         <div class="info-panel">
           <div class="info-panel-header">Exchange Enrollment Growth (2021–25)</div>
           <div class="info-panel-body" id="growthChart">
-            <div class="growth-row"><div class="growth-year">2021–22</div><div class="growth-bar-wrap"><div class="growth-bar" style="width:4.5%;background:var(--primary)"><span class="growth-num">1.5K</span></div></div></div>
+            <div class="growth-row"><div class="growth-year">2021–22</div><div class="growth-bar-wrap"><div class="growth-bar" style="width:4.5%;background:var(--primary)"></div><span class="growth-num" style="color:var(--text);margin-left:.4rem">1.5K</span></div></div>
             <div class="growth-row"><div class="growth-year">2022–23</div><div class="growth-bar-wrap"><div class="growth-bar" style="width:24%;background:var(--primary)"><span class="growth-num">8K</span></div></div></div>
             <div class="growth-row"><div class="growth-year">2023–24</div><div class="growth-bar-wrap"><div class="growth-bar" style="width:58%;background:var(--blue)"><span class="growth-num">19K</span></div></div></div>
             <div class="growth-row"><div class="growth-year">2024–25</div><div class="growth-bar-wrap"><div class="growth-bar" style="width:100%;background:linear-gradient(90deg,var(--blue),var(--teal))"><span class="growth-num">33K+</span></div></div></div>
@@ -1775,11 +1853,7 @@ corrBody.appendChild(sp);
 corrData.forEach((c,i)=>{const row=document.createElement('div');row.className='corr-row';row.innerHTML='<span class="corr-label">'+c.label+'</span><div class="corr-bar-bg"><div class="corr-bar '+c.cls+'" style="width:0%"></div></div><span class="corr-count">'+c.count+'</span><span class="corr-pct">'+c.pct+'%</span>';corrBody.appendChild(row);setTimeout(()=>{row.querySelector('.corr-bar').style.width=(c.count/corrData[0].count*100)+'%'},300+i*80)});
 
 // ═══ SCROLL PROGRESS ═══
-var scrollProg=document.getElementById('scrollProg');
-window.addEventListener('scroll',function(){
-  var h=document.documentElement.scrollHeight-window.innerHeight;
-  if(scrollProg)scrollProg.style.width=h>0?(window.scrollY/h*100)+'%':'0%';
-});
+
 
 // ═══ NAV ACTIVE TRACKING ═══
 var navSecs={};document.querySelectorAll('.nav-links a').forEach(function(a){var h=a.getAttribute('href');if(h&&h.startsWith('#')){navSecs[h.substring(1)]=a}});
@@ -1981,10 +2055,6 @@ document.addEventListener('keydown', function(e) {
   }
   
   // D key: toggle demo mode (pre-load all interesting states)
-  if (key === 'd' || key === 'D') {
-    e.preventDefault();
-    activateDemoMode();
-  }
 });
 
 // Show keyboard hint briefly on load
@@ -1995,185 +2065,7 @@ setTimeout(function() {
 }, 2000);
 
 // Demo mode: pre-load all interesting states simultaneously
-var demoActive = false;
 
-// Demo state
-var demoScrolling = false;
-var demoRaf = null;
-var demoPaused = false;
-var demoKeyHandler = null;
-var demoWheelHandler = null;
-var demoClickHandler = null;
-
-function handleDemoClick() {
-  try {
-    if (demoPaused) {
-      resumeDemo();
-    } else if (demoScrolling) {
-      stopDemo();
-    } else {
-      activateDemoMode();
-    }
-  } catch(err) {
-    console.error('Demo error:', err);
-    alert('Demo mode encountered an error: ' + err.message);
-  }
-}
-
-
-function activateDemoMode() {
-  if (demoScrolling) { stopDemo(); return; }
-  
-  // Pre-load interesting states
-  if (typeof setJourney === 'function') setJourney('compare');
-  setStage(2);
-  if (typeof toggleInsight === 'function') toggleInsight(0);
-  if (typeof selectMonth === 'function') selectMonth(2);
-  var barrierCards = document.querySelectorAll('.b-card');
-  if (barrierCards[3]) barrierCards[3].classList.add('expanded');
-  setTimeout(function() {
-    try {
-      var errRows = document.querySelectorAll('.s-indicator.s-err');
-      if (errRows && errRows.length > 0 && errRows[0]) {
-        var row = errRows[0].closest('.status-row');
-        if (row && row.click) row.click();
-      }
-    } catch(e) { /* monitor expand optional */ }
-  }, 300);
-  
-  // Start auto-scroll
-  demoScrolling = true;
-  window.scrollTo({ top: 0 });
-  
-  var btn = document.getElementById('demoBtn');
-  if (btn) {
-    btn.innerHTML = '\u25a0 Stop Demo';
-    btn.classList.add('touring');
-  }
-  
-  var indicator = document.getElementById('demoIndicator'); if(indicator) indicator.classList.add('visible');
-  toast('Auto-scrolling \u2014 press any key or click Stop to pause');
-  
-  // Smooth scroll — starts with a visible kick then settles to reading pace
-  var scrollFrame = 0;
-  
-  demoRaf = requestAnimationFrame(function doScroll() {
-    if (!demoScrolling) return;
-    
-    var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    if (window.scrollY >= maxScroll - 5) {
-      stopDemo();
-      toast('Demo complete');
-      return;
-    }
-    
-    scrollFrame++;
-    // First 60 frames (~1sec): scroll at 3px/frame to show it's working
-    // Then settle to 1.2px/frame for comfortable reading
-    var speed = scrollFrame < 60 ? 3 : 1.2;
-    window.scrollBy(0, speed);
-    demoRaf = requestAnimationFrame(doScroll);
-  });
-  
-  // Pause on any user interaction (key, click, scroll wheel)
-  demoKeyHandler = function(e) {
-    // Allow number keys 1-0 to jump (don\u2019t stop demo)
-    var key = e.key;
-    if ('1234567890'.indexOf(key) >= 0) return;
-    // D toggles demo off
-    if (key === 'd' || key === 'D') { e.preventDefault(); stopDemo(); return; }
-    // Any other key pauses
-    pauseDemo();
-  };
-  demoWheelHandler = function() { pauseDemo(); };
-  demoClickHandler = function(e) {
-    // Don\u2019t pause if clicking the stop button itself
-    if (e.target && e.target.closest && e.target.closest('.demo-start-btn')) return;
-    pauseDemo();
-  };
-  
-  document.addEventListener('keydown', demoKeyHandler, true);
-  document.addEventListener('wheel', demoWheelHandler, { passive: true, once: true });
-  document.addEventListener('mousedown', demoClickHandler, true);
-}
-
-
-function pauseDemo() {
-  if (!demoScrolling) return;
-  var indicator = document.getElementById('demoIndicator'); if(indicator) indicator.classList.remove('visible');
-  demoPaused = true;
-  if (demoRaf) cancelAnimationFrame(demoRaf);
-  
-  var btn = document.getElementById('demoBtn');
-  if (btn) btn.innerHTML = '\u25b6 Resume Demo';
-  
-  // Remove old listeners
-  if (demoKeyHandler) document.removeEventListener('keydown', demoKeyHandler, true);
-  if (demoWheelHandler) document.removeEventListener('wheel', demoWheelHandler);
-  if (demoClickHandler) document.removeEventListener('mousedown', demoClickHandler, true);
-  
-  // Click button to resume or stop
-  toast('Paused \u2014 click Resume or press D to stop');
-}
-
-function resumeDemo() {
-  if (!demoScrolling || !demoPaused) return;
-  demoPaused = false;
-  var indicator = document.getElementById('demoIndicator'); if(indicator) indicator.classList.add('visible');
-  
-  var btn = document.getElementById('demoBtn');
-  if (btn) {
-    btn.innerHTML = '\u25a0 Stop Demo';
-  }
-  
-  toast('Resuming auto-scroll');
-  
-  var scrollSpeed = 1.2;
-  demoRaf = requestAnimationFrame(function scrollFrame() {
-    if (!demoScrolling || demoPaused) return;
-    
-    var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    if (window.scrollY >= maxScroll - 5) { stopDemo(); toast('Demo complete'); return; }
-    
-    window.scrollBy(0, scrollSpeed);
-    demoRaf = requestAnimationFrame(scrollFrame);
-  });
-  
-  // Re-attach pause listeners
-  demoKeyHandler = function(e) {
-    var key = e.key;
-    if ('1234567890'.indexOf(key) >= 0) return;
-    if (key === 'd' || key === 'D') { e.preventDefault(); stopDemo(); return; }
-    pauseDemo();
-  };
-  demoWheelHandler = function() { pauseDemo(); };
-  demoClickHandler = function(e) {
-    if (e.target && e.target.closest && e.target.closest('.demo-start-btn')) return;
-    pauseDemo();
-  };
-  document.addEventListener('keydown', demoKeyHandler, true);
-  document.addEventListener('wheel', demoWheelHandler, { passive: true, once: true });
-  document.addEventListener('mousedown', demoClickHandler, true);
-}
-
-function stopDemo() {
-  var indicator = document.getElementById('demoIndicator'); if(indicator) indicator.classList.remove('visible');
-  demoScrolling = false;
-  demoPaused = false;
-  demoPaused = false;
-  if (demoRaf) cancelAnimationFrame(demoRaf);
-  
-  // Remove listeners
-  if (demoKeyHandler) document.removeEventListener('keydown', demoKeyHandler, true);
-  if (demoWheelHandler) document.removeEventListener('wheel', demoWheelHandler);
-  if (demoClickHandler) document.removeEventListener('mousedown', demoClickHandler, true);
-  
-  var btn = document.getElementById('demoBtn');
-  if (btn) {
-    btn.innerHTML = 'Start Demo Mode <span class="demo-kbd">D</span>';
-    btn.classList.remove('touring');
-  }
-}
 
 // Auto-set outreach to August on page load (more interesting than June)
 setTimeout(function() {
@@ -2662,10 +2554,157 @@ setStage = function(i) {
   }
 };
 
+
+// COLLEGE QUICK LOOKUP
+var collegeDB = [
+  {name:'Foothill College',district:'Foothill-De Anza CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'2m ago',issues:[],tip:'Sponsor district for CVC-OEI. Strong integration baseline.'},
+  {name:'De Anza College',district:'Foothill-De Anza CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'2m ago',issues:[],tip:'Sister college to Foothill. Same SIS infrastructure.'},
+  {name:'Sacramento City College',district:'Los Rios CCD',region:'Central Valley',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Teaching',volume:'Medium',lastSync:'Degraded',issues:['FA email workflow','Token refresh cycles','Ethos sync delays'],tip:'Frequent Ethos token expirations. Monitor token age weekly. FA office uses manual email workflow.'},
+  {name:'American River College',district:'Los Rios CCD',region:'Central Valley',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'12m ago',issues:['FA email workflow'],tip:'Largest Los Rios campus. Same Ethos config as Sacramento City.'},
+  {name:'West Valley College',district:'West Valley-Mission CCD',region:'Bay Area',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'8m ago',issues:['FA email workflow'],tip:'Winter intersession + multiple summer dates attract Exchange students.'},
+  {name:'Mission College',district:'West Valley-Mission CCD',region:'Bay Area',sis:'Banner Ethos',fa:'Manual (pending)',sso:'CCCID gap',role:'Home + Teaching',volume:'Medium',lastSync:'15m ago',issues:['FA email workflow','IdP Proxy config','CCCID assertion missing'],tip:'SSO issue: college IdP not asserting CCCID. Students redirected to OpenCCC recovery. Coordinate with CCC Tech Center.'},
+  {name:'Ohlone College',district:'Ohlone CCD',region:'Bay Area',sis:'Colleague Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'Low',lastSync:'20m ago',issues:['No-show drops','FA email workflow'],tip:'Colleague Ethos = Ellucian middleware. FA Dashboard pending vendor development.'},
+  {name:'Skyline College',district:'San Mateo CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'3m ago',issues:[],tip:'PeopleSoft = native API integration. FA Dashboard fully active.'},
+  {name:'College of San Mateo',district:'San Mateo CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'3m ago',issues:[],tip:'Same district infrastructure as Skyline and Canada.'},
+  {name:'Canada College',district:'San Mateo CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Low',lastSync:'3m ago',issues:[],tip:'Smallest San Mateo campus. Clean integration.'},
+  {name:'Chabot College',district:'Chabot-Las Positas CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'4m ago',issues:[],tip:'Clean PeopleSoft integration. Used in tracer scenario examples.'},
+  {name:'Las Positas College',district:'Chabot-Las Positas CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'CCCID gap',role:'Home + Teaching',volume:'Low',lastSync:'4m ago',issues:['EPPN mismatch'],tip:'SSO issue: eduPerson Principal Name to CCCID mapping broken. College IT aware but not yet resolved.'},
+  {name:'Gavilan College',district:'Gavilan Joint CCD',region:'Bay Area',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Low',lastSync:'25m ago',issues:['FA manual workflow'],tip:'Small college, Colleague Ethos. FA office manually processes all Exchange requests.'},
+  {name:'Cabrillo College',district:'Cabrillo CCD',region:'Central Coast',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'18m ago',issues:['FA manual','Residency delays'],tip:'Residency validation delays cause incorrect out-of-state fees for Exchange students.'},
+  {name:'Hartnell College',district:'Hartnell CCD',region:'Central Coast',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Teaching',volume:'Low',lastSync:'5m ago',issues:[],tip:'Banner Direct = clean integration. Teaching college only.'},
+  {name:'Santa Rosa Junior College',district:'Sonoma CCD',region:'North Bay',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'10m ago',issues:['FA email workflow'],tip:'Large North Bay campus. High Exchange volume during summer.'},
+  {name:'Diablo Valley College',district:'Contra Costa CCD',region:'East Bay',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'2m ago',issues:[],tip:'One of the highest-volume Exchange teaching colleges in the Bay Area.'},
+  {name:'City College of San Francisco',district:'SF CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Very High',lastSync:'1m ago',issues:['High volume'],tip:'Highest enrollment in the CCC system. Expect concentrated ticket volume around registration.'},
+  {name:'Pasadena City College',district:'Pasadena Area CCD',region:'Southern CA',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'9m ago',issues:['FA email workflow'],tip:'Major SoCal teaching college. Calendar differences from NorCal colleges cause deadline confusion.'},
+  {name:'Santa Monica College',district:'Santa Monica CCD',region:'Southern CA',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Very High',lastSync:'2m ago',issues:[],tip:'Top transfer college in the state. Very high Exchange demand for GE courses.'},
+  {name:'Mt. San Antonio College',district:'Mt. SAC CCD',region:'Southern CA',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Very High',lastSync:'3m ago',issues:[],tip:'Largest single-campus CCC. Clean Banner Direct integration.'},
+  {name:'Long Beach City College',district:'Long Beach CCD',region:'Southern CA',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'4m ago',issues:[],tip:'Strong PeopleSoft integration. Active Exchange teaching college.'},
+  {name:'Riverside City College',district:'Riverside CCD',region:'Inland Empire',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Teaching (Spring 2026)',volume:'Medium',lastSync:'N/A',issues:['New onboarding','FA email workflow'],tip:'Just launched as teaching college Spring 2026. Monitor onboarding closely.'},
+  {name:'San Diego Mesa College',district:'San Diego CCD',region:'San Diego',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'3m ago',issues:[],tip:'Largest San Diego campus. Clean integration.'},
+  {name:'Fresno City College',district:'State Center CCD',region:'Central Valley',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Teaching',volume:'Medium',lastSync:'14m ago',issues:['FA email workflow'],tip:'Central Valley hub. Banner Ethos middleware with standard sync schedule.'},
+  {name:'Bakersfield College',district:'Kern CCD',region:'Central Valley',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'6m ago',issues:[],tip:'Banner Direct, clean. Important for rural Central Valley student access.'},
+  {name:'Sierra College',district:'Sierra Joint CCD',region:'Northern CA',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'5m ago',issues:[],tip:'Suburban/rural foothill region. Clean PeopleSoft.'},
+  {name:'Feather River College',district:'Feather River CCD',region:'Rural Northern CA',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Very Low',lastSync:'45m ago',issues:['Rural connectivity','FA manual'],tip:'Remote rural college. Sync intervals longer due to bandwidth. Exchange is critical for student course access.'},
+  {name:'Lake Tahoe Community College',district:'Lake Tahoe CCD',region:'Rural Northern CA',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Very Low',lastSync:'40m ago',issues:['Rural connectivity','FA manual'],tip:'Mountain region. Limited local course offerings make Exchange especially important.'},
+  {name:'College of the Siskiyous',district:'Siskiyou Joint CCD',region:'Rural Northern CA',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Very Low',lastSync:'50m ago',issues:['Rural connectivity','FA manual'],tip:'Most remote CCC campus. Students depend on Exchange for courses not offered locally.'},
+  {name:'Golden Gate College',district:'San Francisco CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'5m ago',issues:[],tip:'Part of the SF CCD district. Banner Direct integration with clean sync. Students cross-enroll frequently with other Bay Area colleges.'}
+];
+
+var activeLookupFilter = 'all';
+
+function filterColleges(filter, el) {
+  activeLookupFilter = filter;
+  document.querySelectorAll('.lookup-filter').forEach(function(b) { b.classList.remove('lf-active'); });
+  if (el) el.classList.add('lf-active');
+  document.getElementById('collegeLookup').value = '';
+  renderLookup(getFilteredColleges());
+}
+
+function getFilteredColleges() {
+  if (activeLookupFilter === 'all') return collegeDB;
+  if (activeLookupFilter === 'issues') return collegeDB.filter(function(c) { return c.issues.length > 0; });
+  if (activeLookupFilter === 'manual') return collegeDB.filter(function(c) { return c.fa.indexOf('Manual') >= 0 || c.fa === 'Pending'; });
+  return collegeDB.filter(function(c) { return c.sis.indexOf(activeLookupFilter) >= 0; });
+}
+
+function searchColleges(query) {
+  var q = query.trim().toLowerCase();
+  if (!q) { renderLookup(getFilteredColleges()); return; }
+  var base = getFilteredColleges();
+  var matches = base.filter(function(c) {
+    return c.name.toLowerCase().indexOf(q) >= 0 || c.district.toLowerCase().indexOf(q) >= 0 || c.sis.toLowerCase().indexOf(q) >= 0 || c.region.toLowerCase().indexOf(q) >= 0 || c.fa.toLowerCase().indexOf(q) >= 0 || c.role.toLowerCase().indexOf(q) >= 0 || c.tip.toLowerCase().indexOf(q) >= 0 || c.issues.some(function(issue) { return issue.toLowerCase().indexOf(q) >= 0; });
+  });
+  renderLookup(matches);
+}
+
+function renderLookup(colleges) {
+  var results = document.getElementById('lookupResults');
+  var counter = document.getElementById('lookupCount');
+  var stats = document.getElementById('lookupStats');
+  if (!results) return;
+
+  // Compute stats for current set
+  var automated = colleges.filter(function(c) { return c.fa === 'Automated'; }).length;
+  var manual = colleges.filter(function(c) { return c.fa.indexOf('Manual') >= 0 || c.fa === 'Pending'; }).length;
+  var withIssues = colleges.filter(function(c) { return c.issues.length > 0; }).length;
+  var clean = colleges.filter(function(c) { return c.issues.length === 0; }).length;
+
+  stats.innerHTML = '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--text)">' + colleges.length + '</div><div class="lookup-stat-label">Colleges</div></div>' +
+    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--primary)">' + automated + '</div><div class="lookup-stat-label">FA Automated</div></div>' +
+    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--amber)">' + manual + '</div><div class="lookup-stat-label">FA Manual</div></div>' +
+    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--red)">' + withIssues + '</div><div class="lookup-stat-label">Has Issues</div></div>' +
+    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--teal)">' + clean + '</div><div class="lookup-stat-label">Clean</div></div>';
+
+  if (colleges.length === 0) {
+    results.innerHTML = '<div class="lookup-empty">No matches</div>';
+    counter.textContent = '';
+    return;
+  }
+
+  var sisClass = function(sis) {
+    if (sis.indexOf('PeopleSoft') >= 0) return 'sis-peoplesoft';
+    if (sis.indexOf('Colleague') >= 0) return 'sis-colleague';
+    if (sis.indexOf('Ethos') >= 0) return 'sis-banner-ethos';
+    return 'sis-banner-direct';
+  };
+  var faClass = function(fa) { return fa === 'Automated' ? 'lf-ok' : fa.indexOf('Manual') >= 0 ? 'lf-warn' : 'lf-err'; };
+  var ssoClass = function(sso) { return sso === 'Active' ? 'lf-ok' : 'lf-warn'; };
+  var syncClass = function(sync) {
+    if (sync === 'Degraded' || sync === 'N/A') return 'lf-err';
+    var num = parseInt(sync);
+    if (num > 30) return 'lf-warn';
+    return 'lf-ok';
+  };
+
+  var html = colleges.map(function(c) {
+    var issues = c.issues.length > 0 ? c.issues.map(function(i) { return '<span class="lookup-issue-tag">' + i + '</span>'; }).join('') : '<span class="lookup-issue-tag issue-clear">No known issues</span>';
+
+    return '<div class="lookup-card" onclick="this.classList.toggle(\'lc-expanded\')">' +
+      '<div class="lookup-card-header">' +
+        '<span class="lookup-college-name">' + c.name + '</span>' +
+        '<span class="lookup-sis-badge ' + sisClass(c.sis) + '">' + c.sis + '</span>' +
+        '<span class="lookup-region">' + c.region + '</span>' +
+      '</div>' +
+      '<div style="font-size:.68rem;color:var(--text-3);margin-bottom:.4rem">' + c.district + ' \u00b7 ' + c.role + ' \u00b7 Volume: ' + c.volume + '</div>' +
+      '<div class="lookup-grid">' +
+        '<div class="lookup-field"><div class="lookup-field-label">FA Dashboard</div><div class="lookup-field-value ' + faClass(c.fa) + '">' + c.fa + '</div></div>' +
+        '<div class="lookup-field"><div class="lookup-field-label">SSO Status</div><div class="lookup-field-value ' + ssoClass(c.sso) + '">' + c.sso + '</div></div>' +
+        '<div class="lookup-field"><div class="lookup-field-label">Last Sync</div><div class="lookup-field-value ' + syncClass(c.lastSync) + '">' + c.lastSync + '</div></div>' +
+      '</div>' +
+      '<div class="lookup-issues">' + issues + '</div>' +
+      '<div class="lookup-card-click">Click for analyst notes</div>' +
+      '<div class="lookup-card-expand">' +
+        '<div class="lookup-action"><strong>Analyst note:</strong> ' + c.tip + '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  results.innerHTML = html;
+  counter.textContent = colleges.length + ' of ' + collegeDB.length + ' colleges shown';
+}
+
+renderLookup(collegeDB);
+
+
+
+
+// ═══ NAV LINK CLICK HANDLERS ═══
+document.querySelectorAll('.nav-links a').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    var href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      var target = document.getElementById(href.substring(1));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  });
+});
+
 </script>
 
 
 
-<div class="demo-active-indicator" id="demoIndicator">Auto-scrolling — scroll or press any key to pause</div>
 </body>
 </html>
