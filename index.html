@@ -1245,6 +1245,46 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 .kb-help-key{font-family:var(--mono);font-size:.6rem;padding:.15rem .4rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border);color:var(--text);font-weight:600}
 .kb-help-close{margin-top:.75rem;text-align:center;font-size:.65rem;color:var(--text-3)}
 
+
+/* ═══ COUNSELOR TOOLKIT ═══ */
+.counsel-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+@media(max-width:650px){.counsel-grid{grid-template-columns:1fr}}
+.counsel-card{border:1px solid var(--border);border-radius:10px;padding:1rem;transition:all .2s;cursor:pointer;position:relative}
+.counsel-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.06);transform:translateY(-1px)}
+.counsel-card-icon{font-size:1.2rem;margin-bottom:.4rem}
+.counsel-card-title{font-weight:700;font-size:.88rem;color:var(--text);margin-bottom:.3rem}
+.counsel-card-body{font-size:.75rem;color:var(--text-2);line-height:1.65}
+.counsel-card-body strong{color:var(--text)}
+
+.counsel-expand{display:none;margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--border)}
+.counsel-card.cc-open .counsel-expand{display:block}
+
+.counsel-step{display:flex;gap:.5rem;padding:.4rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.counsel-step:last-child{border:none}
+.counsel-step-num{width:22px;height:22px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.55rem;font-weight:700;flex-shrink:0;margin-top:.1rem}
+.counsel-step-text{font-size:.72rem;color:var(--text-2);line-height:1.6}
+.counsel-step-text strong{color:var(--text)}
+
+.counsel-link{display:inline-flex;align-items:center;gap:.3rem;padding:.2rem .5rem;border-radius:4px;background:var(--primary-light);border:1px solid var(--primary-bd);font-family:var(--mono);font-size:.58rem;color:var(--primary);text-decoration:none;margin:.2rem .15rem;transition:all .15s}
+.counsel-link:hover{background:var(--primary);color:#fff}
+
+.myth-row{display:flex;gap:.6rem;padding:.5rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.myth-row:last-child{border:none}
+.myth-icon{font-size:.8rem;flex-shrink:0;margin-top:.1rem}
+.myth-text{font-size:.72rem;color:var(--text-2);line-height:1.6}
+.myth-text strong{color:var(--text)}
+
+.counsel-card::after{content:'Click to expand';position:absolute;bottom:.4rem;right:.6rem;font-family:var(--mono);font-size:.5rem;color:var(--text-3);opacity:0;transition:opacity .15s;pointer-events:none}
+.counsel-card:hover::after{opacity:.6}
+.counsel-card.cc-open::after{content:'Click to collapse'}
+
+.reg-checklist{counter-reset:regstep}
+.reg-item{display:flex;gap:.6rem;padding:.5rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.reg-item:last-child{border:none}
+.reg-item::before{counter-increment:regstep;content:counter(regstep);width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.55rem;font-weight:700;flex-shrink:0;margin-top:.1rem}
+.reg-warn{padding:.35rem .55rem;border-radius:4px;background:var(--amber-light);border:1px solid var(--amber-bd);font-size:.68rem;color:var(--text-2);margin-top:.3rem;line-height:1.5}
+.reg-warn strong{color:var(--amber)}
+
 </style>
 </head>
 <body>
@@ -1255,7 +1295,7 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Page Guide</button>
     <div class="nav-links">
     <a href="#why">Background</a><a href="#lookup">Lookup</a><a href="#cvcData">Data</a><a href="#journey">Journey</a><a href="#flow">Architecture</a><a href="#monitor">Monitor</a><a href="#tracer">Diagnostics</a><a href="#patterns">Patterns</a><a href="#kb">Knowledge Base Builder</a>
-    <a href="#escalation">Escalation</a><a href="#outreach">Outreach</a><a href="#aiVision" style="color:var(--teal)">AI Vision</a>
+    <a href="#escalation">Escalation</a><a href="#outreach">Outreach</a><a href="#counselorToolkit">Counselors</a><a href="#aiVision" style="color:var(--teal)">AI Vision</a>
     <a href="#barriers" class="nav-barrier">⚠ Barriers</a>
   </div>
 </nav>
@@ -1549,10 +1589,10 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
       <div style="font-family:var(--mono);font-size:.52rem;color:var(--text-3);margin-left:auto">14:22 PST</div>
     </div>
     <div class="msg-grid">
-      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--teal-light)">🎓</div><div class="msg-to">To the Student</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Your MATH 1A enrollment — update</div><div class="msg-body">We’re aware your MATH 1A section isn’t showing in Canvas yet. This is a sync issue between your home college and the teaching college — <strong>not a problem with your enrollment.</strong> Your seat is secure. We expect this to be resolved within <span class="msg-highlight">2–4 hours</span>. No action needed on your end.</div></div>
-      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--purple-light)">🖥</div><div class="msg-to">To Campus IT (Teaching College)</div><div class="msg-channel">ServiceNow</div></div><div class="msg-body">AER for CCCID <strong>0012847593</strong> transmitted from Chabot at 14:22 PST but Canvas roster for MATH-1A-001 does not reflect enrollment. Ethos token at home college returned <span class="msg-warn">401 invalid_grant</span>. Can you verify whether the enrollment record exists in your Banner instance?</div></div>
-      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">📋</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Cross-enrollment sync — student enrollments confirmed, Canvas delay expected &lt;4hr</div><div class="msg-body">Quick update on the cross-enrollment sync issue. <strong>The student’s enrollment is confirmed</strong> — the delay is in how the data reaches Canvas. If students contact your office, you can confirm their enrollment is valid. Happy to provide a written summary if this needs to go to your VP.</div></div>
-      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--blue-light)">⚙</div><div class="msg-to">To CVC Internal Team</div><div class="msg-channel">Slack</div></div><div class="msg-body"><strong>Scope:</strong> 47 AER records pending in Chabot → De Anza queue since 02:00 PST. Root cause: Ethos Open Authorization (OAuth2) token expired, <span class="msg-warn">invalid_grant</span> on refresh. <strong>Action:</strong> Token regenerated. Queue flush in progress. Knowledge Base (KB) article drafted.</div></div>
+      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--teal-light)">🎓</div><div class="msg-to">To the Student</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Your MATH 1A enrollment — update</div><div class="msg-body">We’re aware your MATH 1A section isn’t showing in Canvas yet. This is a sync issue between your home college and the teaching college — <strong>not a problem with your enrollment.</strong> Your seat is secure. We expect this to be resolved within <span class="msg-highlight">2–4 hours</span>. No action needed on your end.</div></div>
+      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--purple-light)">🖥</div><div class="msg-to">To Campus IT (Teaching College)</div><div class="msg-channel">ServiceNow</div></div><div class="msg-body">AER for CCCID <strong>0012847593</strong> transmitted from Chabot at 14:22 PST but Canvas roster for MATH-1A-001 does not reflect enrollment. Ethos token at home college returned <span class="msg-warn">401 invalid_grant</span>. Can you verify whether the enrollment record exists in your Banner instance?</div></div>
+      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">📋</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Cross-enrollment sync — student enrollments confirmed, Canvas delay expected &lt;4hr</div><div class="msg-body">Quick update on the cross-enrollment sync issue. <strong>The student’s enrollment is confirmed</strong> — the delay is in how the data reaches Canvas. If students contact your office, you can confirm their enrollment is valid. Happy to provide a written summary if this needs to go to your VP.</div></div>
+      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--blue-light)">⚙</div><div class="msg-to">To CVC Internal Team</div><div class="msg-channel">Slack</div></div><div class="msg-body"><strong>Scope:</strong> 47 AER records pending in Chabot → De Anza queue since 02:00 PST. Root cause: Ethos Open Authorization (OAuth2) token expired, <span class="msg-warn">invalid_grant</span> on refresh. <strong>Action:</strong> Token regenerated. Queue flush in progress. Knowledge Base (KB) article drafted.</div></div>
     </div>
   </div>
 </section>
@@ -1659,6 +1699,96 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
     </div>
   </div>
   <div class="demo-caption">13 triggers across 7 months · 4 categories · informed by counselor feedback</div>
+</div></section>
+
+
+
+<!-- COUNSELOR CONFIDENCE TOOLKIT -->
+<section class="sec sec-alt fu" id="counselorToolkit" role="region" aria-label="Counselor Toolkit"><div class="wrap">
+  <div class="eyebrow" style="color:var(--teal)"><span class="sec-num" style="background:var(--teal)">11</span>Counselor Toolkit</div>
+  <h2>The Exchange is not just GE — and here's how to <em>verify it</em></h2>
+  <p class="sec-desc">Counselors are the gateway. If they're uncertain about transfer credit, students never hear about the Exchange.</p>
+  <div class="tool-frame">
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--teal-light);color:var(--teal)">Reference</span></div><span class="tool-bar-title">Counselor Confidence Guide · Course Verification · Registration Checklist</span></div>
+    <div class="tool-body">
+
+      <div style="padding:.6rem .75rem;background:var(--teal-light);border:1px solid var(--teal-bd);border-radius:8px;margin-bottom:1rem;font-size:.78rem;color:var(--text-2);line-height:1.6">
+        <strong style="color:var(--teal)">Why this matters:</strong> Some counselors think the CVC Exchange is limited to general education courses. In reality, students can search by CSU GE Breadth, Cal-GETC (replaces IGETC starting Fall 2025), substitute course by home college course name, major preparation courses via C-ID, and keyword. The verification tools already exist — counselors just need a workflow.
+      </div>
+
+      <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.5rem;font-weight:700">▸ Four things counselors need to know</div>
+
+      <div class="counsel-grid">
+
+        <div class="counsel-card" onclick="this.classList.toggle('cc-open')">
+          <div class="counsel-card-icon">🔍</div>
+          <div class="counsel-card-title">It's not just GE</div>
+          <div class="counsel-card-body">The CVC Exchange includes <strong>transfer-applicable courses</strong>, major prep courses, and courses with C-ID designations that are accepted system-wide. Students can search by Cal-GETC area, CSU GE area, or substitute their home college course by name.</div>
+          <div class="counsel-expand">
+            <div class="myth-row"><div class="myth-icon">✗</div><div class="myth-text"><strong>Myth:</strong> "CVC is only for GE breadth courses."</div></div>
+            <div class="myth-row"><div class="myth-icon">✓</div><div class="myth-text"><strong>Reality:</strong> Any fully online course at a participating college can be listed. This includes major prep courses (e.g., Intro to Business, Statistics for Social Sciences, Anatomy), courses with C-ID numbers that map across colleges and into the CSU system, and Cal-GETC Area 6 Ethnic Studies courses added Fall 2025.</div></div>
+            <div class="myth-row"><div class="myth-icon">✗</div><div class="myth-text"><strong>Myth:</strong> "If Foothill doesn't offer PSYCH 1A this term, the student is stuck."</div></div>
+            <div class="myth-row"><div class="myth-icon">✓</div><div class="myth-text"><strong>Reality:</strong> Go to search.cvc.edu, enter "Foothill College" as home college, select "Home College Course Name," type PSYCH 1A. The Exchange will show equivalent sections at other colleges with live seat counts.</div></div>
+          </div>
+        </div>
+
+        <div class="counsel-card" onclick="this.classList.toggle('cc-open')">
+          <div class="counsel-card-icon">✅</div>
+          <div class="counsel-card-title">3-step verification workflow</div>
+          <div class="counsel-card-body">Before recommending an Exchange course, counselors can verify transferability in under 2 minutes using three free tools. This is the workflow that builds confidence.</div>
+          <div class="counsel-expand">
+            <div class="counsel-step"><div class="counsel-step-num">1</div><div class="counsel-step-text"><strong>CVC search</strong> — Go to <span class="counsel-link">search.cvc.edu</span> Select student's home college. Search by Cal-GETC area, CSU GE area, or Home College Course Name. Confirm the course has seats and is marked "Add Class" (instant enrollment).</div></div>
+            <div class="counsel-step"><div class="counsel-step-num">2</div><div class="counsel-step-text"><strong>ASSIST check</strong> — Go to <span class="counsel-link">assist.org</span> Select the teaching college (where the Exchange course is offered) and the student's transfer destination (CSU or UC campus). Verify the course appears in the articulation agreement for the student's major or GE pattern.</div></div>
+            <div class="counsel-step"><div class="counsel-step-num">3</div><div class="counsel-step-text"><strong>C-ID confirm</strong> — If the course has a C-ID number (e.g., C-ID COMM 130), it means California colleges have determined this course is comparable in content and scope. A C-ID match is the strongest equivalency signal. Check <span class="counsel-link">c-id.net</span></div></div>
+            <div style="margin-top:.4rem;padding:.35rem .55rem;border-radius:4px;background:var(--primary-light);border:1px solid var(--primary-bd);font-size:.68rem;color:var(--text-2);line-height:1.5"><strong style="color:var(--primary)">Time to verify:</strong> Under 2 minutes for a counselor who has done it once. Under 30 seconds once the workflow is familiar. The tools are free, public, and already in use by articulation officers statewide.</div>
+          </div>
+        </div>
+
+        <div class="counsel-card" onclick="this.classList.toggle('cc-open')">
+          <div class="counsel-card-icon">📋</div>
+          <div class="counsel-card-title">Student registration checklist</div>
+          <div class="counsel-card-body">Most support tickets come from students who registered wrong. A counselor who walks through these 7 steps prevents the ticket from ever being created.</div>
+          <div class="counsel-expand">
+            <div style="font-family:var(--mono);font-size:.52rem;color:var(--text-3);margin-bottom:.4rem">Print-ready — give this to the student before they register</div>
+            <div class="reg-checklist">
+              <div class="reg-item"><div class="counsel-step-text"><strong>Confirm you're enrolled at your home college this term</strong> in at least one course. You cannot use the Exchange if you're not currently enrolled.</div></div>
+              <div class="reg-item"><div class="counsel-step-text"><strong>Search at search.cvc.edu</strong> — set your home college first. Search by GE area or course name. Only click courses marked "Add Class" for instant enrollment.</div></div>
+              <div class="reg-item"><div class="counsel-step-text"><strong>Verify with your counselor</strong> that this specific course at this specific college satisfies your requirement. Bring the course name, college, and C-ID number if listed.</div></div>
+              <div class="reg-item"><div class="counsel-step-text"><strong>Pay immediately or set up financial aid.</strong> Teaching colleges may drop you for nonpayment. Three payment paths: credit card now, apply for CCPG at the teaching college (it does not transfer from your home college), or coordinate a Consortium Agreement through your home college's financial aid office.</div></div>
+              <div class="reg-item"><div class="counsel-step-text"><strong>Consent to transcript sharing</strong> during enrollment. This allows your grades to automatically transfer back to your home college at end of term.</div></div>
+              <div class="reg-item"><div class="counsel-step-text"><strong>Check Canvas within 24 hours.</strong> Log in using your home college credentials. Your Exchange course should appear alongside your other courses. If it doesn't, contact CVC support.</div></div>
+              <div class="reg-item"><div class="counsel-step-text"><strong>Know the 2-course limit.</strong> You can cross-enroll in a maximum of 2 Exchange courses per term. Winter intersession counts toward the spring term limit.</div></div>
+            </div>
+            <div class="reg-warn"><strong>⚠ Common mistake that creates tickets:</strong> Student enrolls, doesn't pay, gets dropped for nonpayment, then panics. Step 4 prevents this. If the student is using financial aid, the Consortium Agreement can take days — they need to start that process before registration, not after.</div>
+          </div>
+        </div>
+
+        <div class="counsel-card" onclick="this.classList.toggle('cc-open')">
+          <div class="counsel-card-icon">💬</div>
+          <div class="counsel-card-title">What to say to the student</div>
+          <div class="counsel-card-body">Sample counselor language that sets accurate expectations and prevents confusion. Tested against the most common misunderstandings.</div>
+          <div class="counsel-expand">
+            <div style="font-size:.72rem;line-height:1.7;color:var(--text-2)">
+              <div style="padding:.5rem .65rem;background:var(--bg-2);border-radius:6px;margin-bottom:.5rem;border-left:3px solid var(--teal)">
+                <strong style="color:var(--text)">"You need HIST 17A for your CSU transfer, and it's not offered here this term."</strong><br>
+                "I'm going to search the CVC Exchange for an equivalent. Let me check ASSIST to make sure it counts at [target CSU]. Here — Chabot College offers it online, it has a C-ID match, and there are 8 seats left. If you enroll today, pay right away or talk to financial aid about a Consortium Agreement. The course will show up in your Canvas by tomorrow."
+              </div>
+              <div style="padding:.5rem .65rem;background:var(--bg-2);border-radius:6px;margin-bottom:.5rem;border-left:3px solid var(--blue)">
+                <strong style="color:var(--text)">"I want to take an extra class but everything's full."</strong><br>
+                "The Exchange has courses from over 100 colleges. Let me search by your course name so we find an exact equivalent. Remember, you can take up to 2 Exchange courses per term, and they're the same cost — $46 per unit. Your fee waiver doesn't auto-transfer though, so you'd need to apply for CCPG at the teaching college separately."
+              </div>
+              <div style="padding:.5rem .65rem;background:var(--bg-2);border-radius:6px;border-left:3px solid var(--amber)">
+                <strong style="color:var(--text)">"Is this the same as taking a class at another college?"</strong><br>
+                "Yes, but simpler. You don't fill out a new application — the Exchange handles that. You log into Canvas with your same home college credentials and the class appears alongside your other courses. Your transcript transfers automatically at end of term. The main thing to know: pay for the class right away, and if you need accommodations, you'll need to contact the teaching college's disability services separately."
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 </div></section>
 
 <!-- AI VISION: COURSE SHARING + INTELLIGENT SYSTEMS -->
@@ -2875,14 +3005,15 @@ document.querySelectorAll('.nav-links a').forEach(function(link) {
 function toggleToc() {
   var panel = document.getElementById('tocPanel');
   var btn = document.getElementById('tocBtn');
-  if (!panel || !btn) return;
+  if (!panel) return;
   var isOpen = panel.classList.contains('toc-visible');
   if (isOpen) {
     panel.classList.remove('toc-visible');
-    btn.classList.remove('toc-open');
+    if (btn) btn.classList.remove('toc-open');
   } else {
     panel.classList.add('toc-visible');
-    btn.classList.add('toc-open');
+    if (btn) btn.classList.add('toc-open');
+    tocJustOpened = true;
   }
 }
 
@@ -2900,8 +3031,10 @@ function tocGo(sectionId) {
   }
 }
 
-// Close TOC when clicking outside
+// Close TOC when clicking outside (debounced to prevent instant close)
+var tocJustOpened = false;
 document.addEventListener('click', function(e) {
+  if (tocJustOpened) { tocJustOpened = false; return; }
   var panel = document.getElementById('tocPanel');
   var btn = document.getElementById('tocBtn');
   if (!panel || !btn) return;
@@ -2932,7 +3065,7 @@ if (backBtn) {
 }
 
 // ═══ USABILITY: PROGRESS DOTS ═══
-var dotSections = ['lookup','cvcData','journey','monitor','tracer','comms','escalation','outreach','aiVision','barrierOverview'];
+var dotSections = ['lookup','cvcData','journey','monitor','tracer','comms','escalation','outreach','counselorToolkit','aiVision','barrierOverview'];
 var dotEls = document.querySelectorAll('.progress-dot');
 
 var dotObserver = new IntersectionObserver(function(entries) {
@@ -2973,7 +3106,7 @@ document.querySelectorAll('.nav-links a, .toc-item').forEach(function(link) {
 
 
 // ═══ NOTION-STYLE: TOC ACTIVE TRACKING ═══
-var tocSectionIds = ['lookup','cvcData','journey','flow','monitor','tracer','patterns','kb','comms','escalation','outreach','aiVision','barrierOverview','lifecycle','matrix','equity','correlator'];
+var tocSectionIds = ['lookup','cvcData','journey','flow','monitor','tracer','patterns','kb','comms','escalation','outreach','counselorToolkit','aiVision','barrierOverview','lifecycle','matrix','equity','correlator'];
 var tocItems = document.querySelectorAll('.toc-item');
 
 var tocObserver = new IntersectionObserver(function(entries) {
@@ -3065,6 +3198,39 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
+
+// ═══ COPY MESSAGE TEXT ═══
+function copyMsgText(btn) {
+  var preview = btn.closest('.msg-preview');
+  if (!preview) return;
+  var parts = [];
+  // Grab audience
+  var to = preview.querySelector('.msg-to');
+  if (to) parts.push('To: ' + to.textContent);
+  // Grab subject line (div containing "Subject:")
+  var divs = preview.querySelectorAll('div');
+  for (var i = 0; i < divs.length; i++) {
+    if (divs[i].textContent.indexOf('Subject:') === 0) {
+      parts.push(divs[i].textContent);
+      break;
+    }
+  }
+  // Grab body
+  var body = preview.querySelector('.msg-body');
+  if (body) parts.push('\n' + (body.innerText || body.textContent));
+  var text = parts.join('\n');
+  navigator.clipboard.writeText(text.trim()).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1500);
+  }).catch(function() {
+    toast('Copy failed');
+  });
+}
+
 </script>
 
 
@@ -3074,7 +3240,7 @@ document.addEventListener('keydown', function(e) {
 <div class="toc-panel" id="tocPanel">
   <div class="toc-header">
     <div class="toc-title">Page Guide</div>
-    <div class="toc-subtitle">17 sections · Click any row to jump there</div>
+    <div class="toc-subtitle">18 sections · Click any row to jump there</div>
     <input class="toc-search" id="tocSearch" type="text" placeholder="Filter sections..." oninput="filterToc(this.value)" autocomplete="off" style="width:100%;padding:.4rem .6rem;border:1px solid var(--border);border-radius:6px;font-family:var(--mono);font-size:.7rem;margin-top:.5rem;background:var(--surface);color:var(--text);outline:none;box-sizing:border-box">
   </div>
 
@@ -3151,6 +3317,11 @@ document.addEventListener('keydown', function(e) {
       <div class="toc-text"><div class="toc-item-title">Outreach Planner</div><div class="toc-item-desc">13 outreach triggers mapped across 7 months. Moves course sharing from last resort to standard advising workflow.</div></div>
       <span class="toc-item-tag tag-interactive">Interactive</span>
     </div>
+    <div class="toc-item" onclick="tocGo('counselorToolkit')">
+      <div class="toc-num">11</div>
+      <div class="toc-text"><div class="toc-item-title">Counselor Toolkit</div><div class="toc-item-desc">Verification workflow, myth-busting, registration checklist, and ready-to-use counselor language for recommending Exchange courses.</div></div>
+      <span class="toc-item-tag tag-interactive">Interactive</span>
+    </div>
     <div class="toc-item" onclick="tocGo('aiVision')">
       <div class="toc-num">12</div>
       <div class="toc-text"><div class="toc-item-title">AI Vision + Fraud & Integrity</div><div class="toc-item-desc">Where this work is headed. Predictive monitoring, enrollment fraud detection, agentic AI, and the analyst’s evolving role. Click cards for today vs with-AI comparison.</div></div>
@@ -3198,6 +3369,7 @@ document.addEventListener('keydown', function(e) {
   <div class="progress-dot" onclick="document.getElementById('comms').scrollIntoView({behavior:'smooth'})" title="Communication"></div>
   <div class="progress-dot" onclick="document.getElementById('escalation').scrollIntoView({behavior:'smooth'})" title="Escalation"></div>
   <div class="progress-dot" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})" title="Outreach"></div>
+  <div class="progress-dot" onclick="document.getElementById('counselorToolkit').scrollIntoView({behavior:'smooth'})" title="Counselor Toolkit"></div>
   <div class="progress-dot" onclick="document.getElementById('aiVision').scrollIntoView({behavior:'smooth'})" title="AI Vision"></div>
   <div class="progress-dot" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})" title="Barriers"></div>
 </nav>
