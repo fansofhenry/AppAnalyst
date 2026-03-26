@@ -770,7 +770,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 .cx-long{color:var(--purple);border-color:var(--purple-bd);background:var(--purple-light)}
 
 /* MATURITY SPECTRUM */
-.ai-spectrum{display:flex;gap:0;margin-bottom:1.25rem;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.ai-spectrum{display:flex;gap:0;margin-bottom:1.25rem;margin-top:1rem;border:1px solid var(--border);border-radius:var(--r-lg);overflow:visible}
 .ai-spec-stage{flex:1;padding:.5rem .4rem;text-align:center;border-right:1px solid var(--border);transition:all .2s;position:relative}
 .ai-spec-stage:last-child{border-right:none}
 .ai-spec-num{font-family:var(--mono);font-size:.5rem;color:var(--text-3);margin-bottom:.1rem}
@@ -778,7 +778,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 .ai-spec-desc{font-size:.55rem;color:var(--text-3);line-height:1.35}
 .ai-spec-stage.ai-spec-current{background:var(--primary-light);border-color:var(--primary-bd)}
 .ai-spec-stage.ai-spec-current .ai-spec-label{color:var(--primary)}
-.ai-spec-stage.ai-spec-current::after{content:'CVC is here';position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.45rem;padding:.1rem .3rem;border-radius:3px;background:var(--primary);color:#fff;white-space:nowrap}
+.ai-spec-stage.ai-spec-current::after{content:'CVC is here';position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.52rem;padding:.15rem .4rem;border-radius:4px;background:var(--primary);color:#fff;white-space:nowrap;box-shadow:0 2px 6px rgba(26,107,80,.3);z-index:2}
 .ai-spec-stage.ai-spec-next{background:var(--teal-light)}
 .ai-spec-stage.ai-spec-next .ai-spec-label{color:var(--teal)}
 
@@ -1285,6 +1285,56 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 .reg-warn{padding:.35rem .55rem;border-radius:4px;background:var(--amber-light);border:1px solid var(--amber-bd);font-size:.68rem;color:var(--text-2);margin-top:.3rem;line-height:1.5}
 .reg-warn strong{color:var(--amber)}
 
+
+/* Spectrum stage corners (since parent is overflow:visible) */
+.ai-spec-stage:first-child{border-radius:var(--r-lg) 0 0 var(--r-lg)}
+.ai-spec-stage:last-child{border-radius:0 var(--r-lg) var(--r-lg) 0}
+
+
+
+
+
+/* AI Vision tabs — bigger, more inviting */
+.ai-tabs .ai-tab{padding:.5rem 1rem !important;font-size:.7rem !important;font-weight:600 !important}
+.ai-tabs .ai-tab.active{background:var(--purple) !important;color:#fff !important;box-shadow:0 2px 8px rgba(124,58,237,.25) !important}
+.ai-tabs{background:var(--purple-light) !important;border:1px solid var(--purple-bd) !important}
+
+
+
+
+/* ═══ 7-COLOR NAV SYSTEM ═══ */
+.nv{font-weight:700 !important;border-radius:6px !important;border:1.5px solid transparent !important;transition:all .15s !important}
+
+.nv-blue{color:var(--blue) !important;border-color:var(--blue-bd) !important;background:var(--blue-light) !important}
+.nv-blue:hover{background:var(--blue) !important;color:#fff !important}
+
+.nv-green{color:var(--primary) !important;border-color:var(--primary-bd) !important;background:var(--primary-light) !important}
+.nv-green:hover{background:var(--primary) !important;color:#fff !important}
+
+.nv-amber{color:#92400e !important;border-color:var(--amber-bd) !important;background:var(--amber-light) !important}
+.nv-amber:hover{background:var(--amber) !important;color:#fff !important}
+
+.nv-teal{color:var(--teal) !important;border-color:var(--teal-bd) !important;background:var(--teal-light) !important}
+.nv-teal:hover{background:var(--teal) !important;color:#fff !important}
+
+.nv-purple{color:var(--purple) !important;border-color:var(--purple-bd) !important;background:var(--purple-light) !important}
+.nv-purple:hover{background:var(--purple) !important;color:#fff !important}
+
+.nv-rose{color:#be185d !important;border-color:#fbb6ce !important;background:#fdf2f8 !important}
+.nv-rose:hover{background:#be185d !important;color:#fff !important}
+
+.nv-indigo{color:#4338ca !important;border-color:#c7d2fe !important;background:#eef2ff !important}
+.nv-indigo:hover{background:#4338ca !important;color:#fff !important}
+
+/* TOC matching badges */
+.tc-blue .toc-num{background:var(--blue) !important;color:#fff !important;border-color:var(--blue) !important}
+.tc-green .toc-num{background:var(--primary) !important;color:#fff !important;border-color:var(--primary) !important}
+.tc-amber .toc-num{background:var(--amber) !important;color:#fff !important;border-color:var(--amber) !important}
+.tc-teal .toc-num{background:var(--teal) !important;color:#fff !important;border-color:var(--teal) !important}
+.tc-purple .toc-num{background:var(--purple) !important;color:#fff !important;border-color:var(--purple) !important}
+.tc-rose .toc-num{background:#be185d !important;color:#fff !important;border-color:#be185d !important}
+.tc-indigo .toc-num{background:#4338ca !important;color:#fff !important;border-color:#4338ca !important}
+
 </style>
 </head>
 <body>
@@ -1294,31 +1344,30 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
   <div class="nav-brand"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">CVC-OEI · Application Support</span></div>
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Page Guide</button>
     <div class="nav-links">
-    <a href="#why">Background</a><a href="#lookup">Lookup</a><a href="#cvcData">Data</a><a href="#journey">Journey</a><a href="#flow">Architecture</a><a href="#monitor">Monitor</a><a href="#tracer">Diagnostics</a><a href="#patterns">Patterns</a><a href="#kb">Knowledge Base Builder</a>
-    <a href="#escalation">Escalation</a><a href="#outreach">Outreach</a><a href="#counselorToolkit">Counselors</a><a href="#aiVision" style="color:var(--teal)">AI Vision</a>
-    <a href="#barriers" class="nav-barrier">⚠ Barriers</a>
+    <a href="#why">Background</a><a href="#lookup" class="nv nv-blue">Lookup</a><a href="#cvcData">Data</a><a href="#journey" class="nv nv-green">Journey</a><a href="#flow">Architecture</a><a href="#monitor" class="nv nv-amber">Monitor</a><a href="#tracer" class="nv nv-rose">Diagnostics</a><a href="#patterns">Patterns</a><a href="#kb">Knowledge Base Builder</a>
+    <a href="#escalation" class="nv nv-indigo">Escalation</a><a href="#outreach">Outreach</a><a href="#counselorToolkit" class="nv nv-teal">Counselors</a><a href="#aiVision" class="nv nv-purple">AI Vision</a>
+    <a href="#closing" style="font-weight:700">Why Me</a><a href="#barriers" class="nav-barrier">⚠ Barriers</a>
   </div>
 </nav>
 
 <header class="header">
   <div class="wrap">
     <div class="h-badge"><span class="dot"></span> CVC-OEI · Foothill–De Anza CCD</div>
-    <h1>What does application support look like at <em>statewide scale?</em></h1>
-    <div style="height:3px;width:180px;border-radius:2px;background:linear-gradient(90deg,var(--primary),var(--teal));margin-bottom:.75rem"></div>
-    <p class="h-desc">115 community colleges, four Student Information System (SIS) integration paths, a statewide Single Sign-On (SSO) proxy, Canvas, and Financial Aid (FA) Consortium Agreements — all connected through the California Virtual Campus (CVC) Exchange. <strong>These tools explore where it breaks and how to respond.</strong></p>
+    <h1>This is how I’d support <em>the Exchange</em> on day one.</h1>
+    <p class="h-desc">115 colleges, four student information system platforms, 33,000 cross-enrollments per year. When the data flow breaks, a student doesn’t see their course in Canvas. <strong>Below are 19 tools I built to show how I’d find, fix, and prevent that.</strong></p>
     <div class="quick-actions">
-      <a class="qa-card" onclick="document.getElementById('lookup').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">🔍</span><span class="qa-text">Look up a college</span></a>
+      <a class="qa-card" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">⚡</span><span class="qa-text">See what breaks</span></a>
       <a class="qa-card" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">🛠</span><span class="qa-text">Trace an incident</span></a>
-      <a class="qa-card" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">🚧</span><span class="qa-text">Explore barriers</span></a>
-      <a class="qa-card" onclick="toggleToc()"><span class="qa-icon">📖</span><span class="qa-text">Open page guide</span></a>
+      <a class="qa-card" onclick="document.getElementById('counselorToolkit').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">📋</span><span class="qa-text">Help a counselor</span></a>
+      <a class="qa-card" onclick="toggleToc()"><span class="qa-icon">📖</span><span class="qa-text">Browse all 19 tools</span></a>
     </div>
 
-    <p style="font-size:.78rem;color:var(--text-3);max-width:560px;margin:0 auto .75rem;line-height:1.7;text-align:center">The CVC Exchange isn't a course catalog — it's <strong style="color:var(--text-2)">equity infrastructure.</strong> A student at a rural college with 12 course offerings gets access to the same curriculum as a student at a metro college with 200. Supporting that means understanding it's not just about uptime — it's about whether a first-generation student can transfer on time.</p>
+    <p style="font-size:.78rem;color:var(--text-3);max-width:540px;margin:0 auto .75rem;line-height:1.7;text-align:center">The Exchange is <strong style="color:var(--text-2)">equity infrastructure</strong> — a student at a rural college with 12 courses gets the same curriculum as a metro college with 200. I started at <strong style="color:var(--text-2)">Foothill College</strong> as a first-generation student. I know what breaks when it breaks, because I've been on the student side of it.</p>
     <div class="h-stats">
-      <div><div class="h-stat-num green">116</div><div class="h-stat-label">Connected Colleges</div></div>
-      <div><div class="h-stat-num blue">3</div><div class="h-stat-label">SIS Platforms</div></div>
-      <div><div class="h-stat-num red">10</div><div class="h-stat-label">Barriers Identified</div></div>
-      <div><div class="h-stat-num" style="color:var(--purple)">9</div><div class="h-stat-label">Interactive Tools</div></div>
+      <div><div class="h-stat-num green">115</div><div class="h-stat-label">Connected Colleges</div></div>
+      <div><div class="h-stat-num blue">4</div><div class="h-stat-label">System Platforms</div></div>
+      <div><div class="h-stat-num red">33K</div><div class="h-stat-label">Cross-Enrollments</div></div>
+      <div><div class="h-stat-num" style="color:var(--purple)">2,100%</div><div class="h-stat-label">Growth Since 2021</div></div>
     </div>
   </div>
 </div>
@@ -1326,30 +1375,37 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 </header>
 
 <!-- ═══ WHY CVC ═══ -->
-<section class="fu" id="why" style="padding:clamp(1.5rem,4vw,2.5rem) 0">
+<section id="why" style="padding:clamp(1.5rem,4vw,2.5rem) 0">
   <div class="wrap">
-    <div style="border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden">
-      <div style="padding:.6rem 1rem;background:var(--surface-2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
-        <span style="font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)">Background</span>
-        <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--purple-light);color:var(--purple)">SMCCD · Banner + PeopleSoft + FA</span>
-        <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--blue-light);color:var(--blue)">OpenStax · Canvas Learning Management System (LMS) + Python</span>
-        <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--primary-light);color:var(--primary)">Braven · Ticket Analysis + KB</span>
-        <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--amber-light);color:var(--amber)">Foothill College · Student</span>
-      </div>
-      <div style="padding:.65rem 1rem;display:flex;gap:1.25rem;flex-wrap:wrap;align-items:baseline">
-        <div style="flex:1;min-width:280px;font-size:.82rem;color:var(--text-2);line-height:1.65">Banner, PeopleSoft, Canvas, financial aid, enrollment sync, OAuth troubleshooting, and ticket pattern analysis across four organizations. Started at <strong style="color:var(--text)">Foothill College</strong> as a first-generation student — the student side of these systems isn’t theoretical.</div>
-        <div style="display:flex;gap:.5rem;flex-shrink:0">
-          <div style="text-align:center;padding:.35rem .6rem"><div style="font-family:var(--display);font-size:1.1rem;font-weight:600;color:var(--primary)">3</div><div style="font-size:.55rem;color:var(--text-3)">SIS Platforms</div></div>
-          <div style="text-align:center;padding:.35rem .6rem"><div style="font-family:var(--display);font-size:1.1rem;font-weight:600;color:var(--blue)">4</div><div style="font-size:.55rem;color:var(--text-3)">Organizations</div></div>
-          <div style="text-align:center;padding:.35rem .6rem"><div style="font-family:var(--display);font-size:1.1rem;font-weight:600;color:var(--purple)">15%</div><div style="font-size:.55rem;color:var(--text-3)">Ticket Reduction</div></div>
+    <div style="max-width:680px;margin:0 auto">
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem">
+        <div style="flex:1;min-width:200px">
+          <div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);font-weight:700;margin-bottom:.4rem">The Problem</div>
+          <div style="font-size:.82rem;color:var(--text);line-height:1.7">
+            A student at Chabot enrolls in MATH 1A at De Anza through the Exchange. The next morning, the course isn’t in Canvas. She doesn’t know why. She emails her counselor, who doesn’t know either. She considers dropping.
+          </div>
+          <div style="font-size:.78rem;color:var(--text-2);line-height:1.7;margin-top:.5rem">
+            The cause was technical — an expired authentication token between two systems she’s never heard of. The support analyst’s job is to find it, fix it, tell the right people, and make sure it doesn’t happen to the next 46 students in the queue.</div>
+        </div>
+        <div style="flex:1;min-width:200px">
+          <div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:.4rem">Why I Built This</div>
+          <div style="font-size:.82rem;color:var(--text);line-height:1.7">
+            Each section below addresses a real part of the job: monitoring, diagnosis, escalation, documentation, and barrier analysis.
+          </div>
+          <div style="font-size:.72rem;color:var(--text-2);line-height:1.8;margin-top:.6rem">
+            <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+              <span style="padding:.2rem .5rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border)">Banner + PeopleSoft <span style="color:var(--text-3)">· SMCCD</span></span>
+              <span style="padding:.2rem .5rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border)">Canvas + Data Pipelines <span style="color:var(--text-3)">· OpenStax / Rice</span></span>
+              <span style="padding:.2rem .5rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border)">Tickets + Knowledge Base <span style="color:var(--text-3)">· Braven / SJSU</span></span>
+              <span style="padding:.2rem .5rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border)">IT Operations <span style="color:var(--text-3)">· College Corps Fellow</span></span>
+              <span style="padding:.2rem .5rem;border-radius:4px;background:var(--primary-light);border:1px solid var(--primary-bd);color:var(--primary)">First-gen student <span style="color:var(--primary)">· Foothill College</span></span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-
-
 
 <!-- COLLEGE QUICK LOOKUP -->
 <section class="sec fu" id="lookup" role="region" aria-label="College Lookup"><div class="wrap">
@@ -1793,13 +1849,18 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 <!-- AI VISION: COURSE SHARING + INTELLIGENT SYSTEMS -->
 <section class="sec fu" id="aiVision" role="region" aria-label="AI Vision"><div class="wrap">
-  <div class="eyebrow" style="color:var(--teal)">Forward Thinking</div>
-  <h2>Course sharing is equity infrastructure. <em style="color:var(--teal)">AI should make it smarter.</em></h2>
-  <p class="sec-desc">AI for equity, fraud prevention, and operational intelligence — <strong>not just faster ticket processing.</strong></p>
+  <div class="eyebrow" style="color:var(--purple)"><span class="sec-num" style="background:var(--purple)">12</span>Vision</div>
+  <h2>16 cards, 4 tabs, one question: <em style="color:var(--purple)">what could AI actually do here?</em></h2>
+  <p class="sec-desc">Not hypothetical. Each card connects to a tool on this page, shows today vs with-AI, and rates complexity.</p>
+  <div style="display:flex;gap:.5rem;margin:.75rem 0;flex-wrap:wrap">
+    <div style="padding:.4rem .65rem;border-radius:6px;background:var(--primary-light);border:1px solid var(--primary-bd);font-size:.7rem;color:var(--text-2)"><strong style="color:var(--primary)">4 quick wins</strong> you could build with rules, no machine learning</div>
+    <div style="padding:.4rem .65rem;border-radius:6px;background:var(--purple-light);border:1px solid var(--purple-bd);font-size:.7rem;color:var(--text-2)"><strong style="color:var(--purple)">Fraud tab</strong> aligned with CISOA 2026 takeaways on agentic AI</div>
+    <div style="padding:.4rem .65rem;border-radius:6px;background:var(--teal-light);border:1px solid var(--teal-bd);font-size:.7rem;color:var(--text-2)"><strong style="color:var(--teal)">Every card expandable</strong> — click for today vs with-AI comparison</div>
+  </div>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--teal-light);color:var(--teal)">Vision</span></div><span class="tool-bar-title">AI Vision · Operations · Students · Fraud · Analyst Role</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--purple-light);color:var(--purple)">Vision</span></div><span class="tool-bar-title">AI Vision · 16 Proposals · 4 Tabs · Each Linked to a Tool on This Page</span></div>
     <div class="tool-body">
-      <div class="ai-spectrum" style="margin-top:.25rem">
+      <div class="ai-spectrum" style="margin-top:.75rem">
         <div class="ai-spec-stage"><div class="ai-spec-num">01</div><div class="ai-spec-label">Manual</div><div class="ai-spec-desc">Email workflows, spreadsheet tracking</div></div>
         <div class="ai-spec-stage ai-spec-current"><div class="ai-spec-num">02</div><div class="ai-spec-label">Connected</div><div class="ai-spec-desc">Exchange + FA Dashboard + real-time sync</div></div>
         <div class="ai-spec-stage ai-spec-next"><div class="ai-spec-num">03</div><div class="ai-spec-label">Predictive</div><div class="ai-spec-desc">AI flags risks before they become tickets</div></div>
@@ -1905,64 +1966,60 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
   </div>
 </div></section>
 
-<div class="key-hint" id="keyHint"><kbd>1</kbd>–<kbd>0</kbd> jump to tools &nbsp; <kbd>D</kbd> demo mode</div>
+<div class="key-hint" id="keyHint"><kbd>1</kbd>–<kbd>0</kbd> jump to sections &nbsp; <kbd>?</kbd> shortcuts</div>
 <div class="kb-toast" id="toast"></div>
 
-<!-- ═══ CLOSING ═══ -->
-<section class="closing-sec fu">
-  <div class="wrap">
-    <div class="closing-inner">
-      <div class="big-quote" style="padding-left:1rem">Good support is invisible to students. When it works, they never think about it. When it doesn't — it's <em>someone's semester.</em></div>
-      <p style="font-size:.88rem;color:var(--text-2);line-height:1.8;margin-bottom:2rem;max-width:540px;margin-left:auto;margin-right:auto">These tools are a starting point — a way to think through the daily work of keeping course sharing reliable across 116 colleges, 3 SIS platforms, and the students who depend on all of it connecting.</p>
-      <p style="font-size:.85rem;color:var(--text-2);line-height:1.7;max-width:520px;margin:0 auto"><strong style="color:var(--text)">Henry Fan</strong><br>Application Support Analyst I Candidate · CVC-OEI<br>Foothill–De Anza Community College District</p>
-    </div>
-  </div>
-</section>
 
-<!-- CLOSING -->
 
-<div class="fu" style="padding:1.5rem 0">
-  <div class="wrap">
-    <div style="display:flex;gap:1px;border-radius:var(--r-lg);overflow:hidden">
-      <div style="flex:1;padding:.65rem .5rem;background:var(--primary);text-align:center">
-        <div style="font-family:var(--display);font-size:1.1rem;font-weight:700;color:#fff">17</div>
-        <div style="font-size:.5rem;color:rgba(255,255,255,.8);margin-top:.1rem">Interactive tools</div>
+
+
+
+
+<!-- CLOSING PITCH -->
+<section class="sec" id="closing" style="padding:clamp(2.5rem,6vw,4rem) 0;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)">
+  <div class="wrap" style="max-width:640px;text-align:center">
+    <div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);font-weight:700;margin-bottom:.65rem">Why hire me</div>
+    <h2 style="font-size:clamp(1.4rem,3.5vw,1.9rem);line-height:1.3;margin-bottom:1rem">Every technical failure is a student who might miss a transfer deadline. <em>I take that personally.</em></h2>
+    
+    <div style="text-align:left;max-width:520px;margin:0 auto">
+      <div style="display:flex;gap:.6rem;padding:.6rem 0;border-bottom:1px solid var(--border);align-items:flex-start">
+        <div style="width:24px;height:24px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0">1</div>
+        <div style="font-size:.8rem;color:var(--text);line-height:1.6"><strong>I’ve worked in these systems at four organizations.</strong> Banner and PeopleSoft at SMCCD. Canvas at OpenStax. Ticket operations at Braven. This page isn’t research — it’s experience turned into prototypes.</div>
       </div>
-      <div style="flex:1;padding:.65rem .5rem;background:var(--blue);text-align:center">
-        <div style="font-family:var(--display);font-size:1.1rem;font-weight:700;color:#fff">115</div>
-        <div style="font-size:.5rem;color:rgba(255,255,255,.8);margin-top:.1rem">Colleges covered</div>
+      <div style="display:flex;gap:.6rem;padding:.6rem 0;border-bottom:1px solid var(--border);align-items:flex-start">
+        <div style="width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0">2</div>
+        <div style="font-size:.8rem;color:var(--text);line-height:1.6"><strong>I find the upstream fix.</strong> I don’t just close tickets — I look for patterns. If 24% of the queue comes from the same three barriers, I document the barriers, not just the tickets.</div>
       </div>
-      <div style="flex:1;padding:.65rem .5rem;background:var(--teal);text-align:center">
-        <div style="font-family:var(--display);font-size:1.1rem;font-weight:700;color:#fff">33K+</div>
-        <div style="font-size:.5rem;color:rgba(255,255,255,.8);margin-top:.1rem">Cross-enrollments</div>
+      <div style="display:flex;gap:.6rem;padding:.6rem 0;border-bottom:1px solid var(--border);align-items:flex-start">
+        <div style="width:24px;height:24px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0">3</div>
+        <div style="font-size:.8rem;color:var(--text);line-height:1.6"><strong>I know these students.</strong> I was one. First-generation, Foothill College, didn’t know what IGETC meant until a counselor explained it. System reliability is equity work.</div>
       </div>
-      <div style="flex:1;padding:.65rem .5rem;background:var(--amber);text-align:center">
-        <div style="font-family:var(--display);font-size:1.1rem;font-weight:700;color:#fff">10</div>
-        <div style="font-size:.5rem;color:rgba(255,255,255,.8);margin-top:.1rem">Barriers mapped</div>
-      </div>
-      <div style="flex:1;padding:.65rem .5rem;background:var(--purple);text-align:center">
-        <div style="font-family:var(--display);font-size:1.1rem;font-weight:700;color:#fff">4</div>
-        <div style="font-size:.5rem;color:rgba(255,255,255,.8);margin-top:.1rem">AI vision areas</div>
+      <div style="display:flex;gap:.6rem;padding:.6rem 0;align-items:flex-start">
+        <div style="width:24px;height:24px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0">4</div>
+        <div style="font-size:.8rem;color:var(--text);line-height:1.6"><strong>I want to be coached.</strong> I’m not coming in thinking I know everything. I’m coming in with a head start and the questions to match. The first thing I’d ask my supervisor: what does a strong first 90 days look like to you?</div>
       </div>
     </div>
-  </div>
-</div>
 
-<section class="fu" style="padding:clamp(3rem,8vw,5rem) 0;background:linear-gradient(180deg,var(--bg) 0%,var(--primary-light) 100%);border-top:1px solid var(--border)">
-  <div class="wrap">
-    <div style="text-align:center;max-width:640px;margin:0 auto">
-      <div style="font-family:var(--display);font-size:clamp(1.4rem,3.5vw,2rem);font-weight:500;font-style:italic;color:var(--text);line-height:1.4;max-width:680px;margin:0 auto 1rem;position:relative;padding-left:1rem">Good support is invisible to students. When it works, they never think about it. When it doesn’t — it’s <em style="color:var(--primary)">someone’s semester.</em></div>
-      <p style="font-size:.88rem;color:var(--text-2);line-height:1.8;margin-bottom:2rem;max-width:560px;margin-left:auto;margin-right:auto">This page is a prototype of how I think about the work — and a sample of what I’d build for the team. Monitoring dashboards that surface problems before students report them. Pattern reports that turn ticket data into actionable intelligence. Communication templates that save 20 minutes per campus interaction. Documentation that means the next analyst doesn’t start from scratch. These aren’t just interview prep — they’re the kind of tools I’d want to deploy in the first 90 days.</p>
-      <div style="max-width:600px;margin:0 auto 2.5rem;text-align:left">
-        <div style="font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--primary);margin-bottom:.75rem">Questions I’d ask in week one</div>
-        <div style="display:flex;flex-direction:column;gap:.4rem">
-          <div style="padding:.55rem .75rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.78rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To the support team:</strong> What are the 5 most common ticket types right now, and which ones do you wish you saw less of?</div>
-          <div style="padding:.55rem .75rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.78rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To the senior analyst:</strong> Which SIS integrations are the most fragile right now, and what does the escalation path look like when Ellucian is involved?</div>
-          <div style="padding:.55rem .75rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.78rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To my supervisor:</strong> What does a strong first 90 days look like in this role? What should I prioritize learning versus contributing?</div>
-          <div style="padding:.55rem .75rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.78rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To campus partners:</strong> What’s the one thing the CVC support team could do differently that would make your job easier?</div>
-        </div>
+    
+    <div style="max-width:520px;margin:1.5rem auto 0;text-align:left">
+      <div style="font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:.5rem">Questions I’d ask in week one</div>
+      <div style="display:flex;flex-direction:column;gap:.35rem">
+        <div style="padding:.45rem .65rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.75rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To the support team:</strong> What are the 5 most common ticket types right now, and which ones do you wish you saw less of?</div>
+        <div style="padding:.45rem .65rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.75rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To the senior analyst:</strong> Which integrations are the most fragile right now, and what does the escalation path look like when Ellucian is involved?</div>
+        <div style="padding:.45rem .65rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.75rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To my supervisor:</strong> Where has the team been stretched thinnest this year, and where can I take something off someone’s plate fastest?</div>
+        <div style="padding:.45rem .65rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.75rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To campus partners:</strong> What’s the one thing the support team could do differently that would make your job easier?</div>
       </div>
-      <p style="font-size:.85rem;color:var(--text-2);line-height:1.7;max-width:520px;margin:0 auto"><strong style="color:var(--text)">Henry Fan</strong><br>Application Support Analyst I Candidate · CVC-OEI<br>Foothill–De Anza Community College District</p>
+    </div>
+
+<div style="margin-top:1.5rem;padding:1rem;border:2px solid var(--primary-bd);border-radius:10px;background:var(--primary-light)">
+      <div style="font-size:.9rem;font-weight:700;color:var(--primary);margin-bottom:.3rem">What I’d do in my first 90 days</div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-top:.5rem">
+        <span style="padding:.3rem .6rem;border-radius:6px;background:var(--surface);border:1px solid var(--border);font-size:.7rem;color:var(--text-2)">Map the Ethos token lifecycle for all Banner Ethos colleges — the #1 overnight failure source</span>
+        <span style="padding:.3rem .6rem;border-radius:6px;background:var(--surface);border:1px solid var(--border);font-size:.7rem;color:var(--text-2)">Publish a college-by-college SSO and FA status reference (the Lookup tool here is the prototype)</span>
+        <span style="padding:.3rem .6rem;border-radius:6px;background:var(--surface);border:1px solid var(--border);font-size:.7rem;color:var(--text-2)">Tag 3 months of ticket history by barrier category to validate the correlator model</span>
+        <span style="padding:.3rem .6rem;border-radius:6px;background:var(--surface);border:1px solid var(--border);font-size:.7rem;color:var(--text-2)">Sit with each team member for a half-day to learn their escalation instincts and documentation style</span>
+        <span style="padding:.3rem .6rem;border-radius:6px;background:var(--surface);border:1px solid var(--border);font-size:.7rem;color:var(--text-2)">Ship a KB article for the Ethos token refresh fix within my first 2 weeks</span>
+      </div>
     </div>
   </div>
 </section>
@@ -2352,8 +2409,7 @@ document.addEventListener('keydown', function(e) {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   
-  // D key: toggle demo mode (pre-load all interesting states)
-});
+  });
 
 // Show keyboard hint briefly on load
 var keyHintEl = document.getElementById('keyHint');
@@ -3240,13 +3296,13 @@ function copyMsgText(btn) {
 <div class="toc-panel" id="tocPanel">
   <div class="toc-header">
     <div class="toc-title">Page Guide</div>
-    <div class="toc-subtitle">18 sections · Click any row to jump there</div>
+    <div class="toc-subtitle">19 sections · Click any row to jump there</div>
     <input class="toc-search" id="tocSearch" type="text" placeholder="Filter sections..." oninput="filterToc(this.value)" autocomplete="off" style="width:100%;padding:.4rem .6rem;border:1px solid var(--border);border-radius:6px;font-family:var(--mono);font-size:.7rem;margin-top:.5rem;background:var(--surface);color:var(--text);outline:none;box-sizing:border-box">
   </div>
 
   <div class="toc-group">
     <div class="toc-group-label">Reference & Context</div>
-    <div class="toc-item" onclick="tocGo('lookup')">
+    <div class="toc-item tc-blue" onclick="tocGo('lookup')">
       <div class="toc-num">1</div>
       <div class="toc-text"><div class="toc-item-title">College Lookup</div><div class="toc-item-desc">Search any college by name, district, or system type. Instant reference card with financial aid status, sign-on health, and analyst notes.</div></div>
       <span class="toc-item-tag tag-interactive">Interactive</span>
@@ -3260,7 +3316,7 @@ function copyMsgText(btn) {
 
   <div class="toc-group">
     <div class="toc-group-label">The Student Experience</div>
-    <div class="toc-item" onclick="tocGo('journey')">
+    <div class="toc-item tc-green" onclick="tocGo('journey')">
       <div class="toc-num">3</div>
       <div class="toc-text"><div class="toc-item-title">Student Journey Comparison</div><div class="toc-item-desc">Same course, same Exchange — side by side when it works vs when it breaks. Green analyst notes show the support response at each step.</div></div>
       <span class="toc-item-tag tag-interactive">Interactive</span>
@@ -3274,12 +3330,12 @@ function copyMsgText(btn) {
 
   <div class="toc-group">
     <div class="toc-group-label">Daily Support Operations</div>
-    <div class="toc-item" onclick="tocGo('monitor')">
+    <div class="toc-item tc-amber" onclick="tocGo('monitor')">
       <div class="toc-num">5</div>
       <div class="toc-text"><div class="toc-item-title">Morning Monitor + Weekly Pulse</div><div class="toc-item-desc">Which colleges are healthy, degraded, or down? Weekly trend summary at a glance. Live alerts cycle in the corner.</div></div>
       <span class="toc-item-tag tag-interactive">Interactive</span>
     </div>
-    <div class="toc-item" onclick="tocGo('tracer')">
+    <div class="toc-item tc-rose" onclick="tocGo('tracer')">
       <div class="toc-num">6</div>
       <div class="toc-text"><div class="toc-item-title">Incident Tracer</div><div class="toc-item-desc">Walk a real failure layer by layer. Each stage shows what broke and what the analyst does next. Auto-run watches the diagnosis unfold.</div></div>
       <span class="toc-item-tag tag-interactive">Interactive</span>
@@ -3303,7 +3359,7 @@ function copyMsgText(btn) {
       <div class="toc-text"><div class="toc-item-title">Incident Communication</div><div class="toc-item-desc">Same incident written four ways: student, campus IT, registrar, internal team. Each message is copy-ready with one click.</div></div>
       <span class="toc-item-tag tag-interactive">Interactive</span>
     </div>
-    <div class="toc-item" onclick="tocGo('escalation')">
+    <div class="toc-item tc-indigo" onclick="tocGo('escalation')">
       <div class="toc-num">10</div>
       <div class="toc-text"><div class="toc-item-title">Escalation Decision Matrix</div><div class="toc-item-desc">P1, P2, or P3? Who to contact, how fast to respond, and what information to bring. Current scenario highlighted.</div></div>
       <span class="toc-item-tag tag-analysis">Reference</span>
@@ -3317,12 +3373,12 @@ function copyMsgText(btn) {
       <div class="toc-text"><div class="toc-item-title">Outreach Planner</div><div class="toc-item-desc">13 outreach triggers mapped across 7 months. Moves course sharing from last resort to standard advising workflow.</div></div>
       <span class="toc-item-tag tag-interactive">Interactive</span>
     </div>
-    <div class="toc-item" onclick="tocGo('counselorToolkit')">
+    <div class="toc-item tc-teal" onclick="tocGo('counselorToolkit')">
       <div class="toc-num">11</div>
       <div class="toc-text"><div class="toc-item-title">Counselor Toolkit</div><div class="toc-item-desc">Verification workflow, myth-busting, registration checklist, and ready-to-use counselor language for recommending Exchange courses.</div></div>
       <span class="toc-item-tag tag-interactive">Interactive</span>
     </div>
-    <div class="toc-item" onclick="tocGo('aiVision')">
+    <div class="toc-item tc-purple" onclick="tocGo('aiVision')">
       <div class="toc-num">12</div>
       <div class="toc-text"><div class="toc-item-title">AI Vision + Fraud & Integrity</div><div class="toc-item-desc">Where this work is headed. Predictive monitoring, enrollment fraud detection, agentic AI, and the analyst’s evolving role. Click cards for today vs with-AI comparison.</div></div>
       <span class="toc-item-tag tag-vision">Vision</span>
@@ -3357,6 +3413,14 @@ function copyMsgText(btn) {
       <span class="toc-item-tag tag-data">Data</span>
     </div>
   </div>
+  <div class="toc-group">
+    <div class="toc-group-label">The Pitch</div>
+    <div class="toc-item" onclick="tocGo('closing')" style="border-left:3px solid var(--primary)">
+      <div class="toc-num" style="background:var(--primary);color:#fff;border-color:var(--primary)">!</div>
+      <div class="toc-text"><div class="toc-item-title">Why Hire Me</div><div class="toc-item-desc">Four reasons, a 90-day plan, and the personal connection to this work.</div></div>
+    </div>
+  </div>
+
 </div>
 
 <button class="back-to-top" id="backToTop" onclick="(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
