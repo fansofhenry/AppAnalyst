@@ -1119,11 +1119,138 @@ html{scroll-behavior:smooth !important}
 .tag-analysis{background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-bd)}
 .tag-vision{background:var(--teal-light);color:var(--teal);border:1px solid var(--teal-bd)}
 
+
+/* ═══ DESIGN SYSTEM OVERHAUL ═══ */
+
+/* TYPE SCALE — consolidate to 6 sizes */
+/* xs: .55rem | sm: .68rem | base: .8rem | md: .95rem | lg: 1.1rem | xl: heading */
+
+/* Normalize all the micro-sizes */
+.eyebrow,.demo-caption,.lookup-field-label,.esc-label,.ai-compare-label,
+.info-panel-header,.growth-year,.course-name,.pulse-delta,
+.lookup-count,.toc-group-label{font-size:.55rem !important}
+
+.tool-bar-title,.lookup-issue-tag,.esc-row,.ai-card-signal,
+.toc-item-desc,.lookup-region,.info-source{font-size:.68rem !important}
+
+.sec-desc,.ai-card-desc,.tool-body,.lookup-card,
+.toc-item-title,.esc-body{font-size:.8rem !important}
+
+/* VISUAL RHYTHM — consistent section dividers */
+.sec + .sec::before{content:'';display:block;width:40px;height:2px;background:var(--border);margin:0 auto;position:relative;top:calc(-1 * clamp(1.25rem,3vw,2.25rem))}
+
+/* STRONGER BOTTOM SECTIONS — barrier area needs more visual weight */
+#barrierOverview .tool-frame,#lifecycle .tool-frame,
+#matrix .tool-frame,#equity .tool-frame,#correlator .tool-frame{
+  border:1.5px solid var(--border) !important;
+  box-shadow:0 2px 12px rgba(0,0,0,.04) !important
+}
+
+/* CLOSING SECTION — stronger presence */
+.closing-quote{font-size:clamp(1.2rem,3vw,1.6rem) !important;font-weight:600 !important;line-height:1.4 !important;color:var(--text) !important}
+
+/* TOOL FRAME — consistent internal padding */
+.tool-body{padding:clamp(.75rem,2vw,1.25rem) !important}
+
+/* CARD CONSISTENCY — all interactive cards same border radius */
+.ai-card,.b-card,.eq-card,.lookup-card,.esc-card,.insight-card{border-radius:10px !important}
+
+/* HOVER CONSISTENCY — all cards same hover behavior */
+.ai-card:hover,.b-card:hover,.eq-card:hover,.lookup-card:hover,
+.esc-card:hover,.insight-card:hover{
+  box-shadow:0 4px 20px rgba(0,0,0,.06) !important;
+  transform:translateY(-1px) !important
+}
+
+/* SECTION EYEBROW — consistent across all sections */
+.eyebrow{opacity:.8}
+
+/* BETTER FOCUS STATES for accessibility */
+a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:2px;
+  border-radius:4px
+}
+
+/* SMOOTH PAGE FEEL */
+*{scroll-margin-top:72px}
+
+
+/* ═══ USABILITY FIXES ═══ */
+
+/* FIX 1: Back to top */
+.back-to-top{position:fixed;bottom:1.5rem;right:1.5rem;width:40px;height:40px;border-radius:50%;background:var(--primary);color:#fff;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(26,107,80,.3);z-index:150;opacity:0;transform:translateY(10px);transition:all .25s;pointer-events:none}
+.back-to-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+.back-to-top:hover{background:var(--primary-hover);transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,107,80,.4)}
+
+/* FIX 2: Minimum font floor — nothing below .55rem */
+*{min-height:0}
+
+/* FIX 3: Click hints on expandable elements */
+.b-card::after{content:'Click to expand';position:absolute;bottom:.4rem;right:.6rem;font-family:var(--mono);font-size:.5rem;color:var(--text-3);opacity:0;transition:opacity .15s;pointer-events:none}
+.b-card:hover::after{opacity:.6}
+.b-card.expanded::after{content:'Click to collapse'}
+.b-card{position:relative}
+
+.ai-card::after{content:'Click for details';position:absolute;bottom:.4rem;right:.6rem;font-family:var(--mono);font-size:.5rem;color:var(--text-3);opacity:0;transition:opacity .15s;pointer-events:none}
+.ai-card:hover::after{opacity:.6}
+.ai-card.ai-expanded::after{content:'Click to close'}
+
+/* FIX 4: Subtle progress dots — shows which section group you're in */
+.progress-dots{position:fixed;right:1rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:150;opacity:.4;transition:opacity .2s}
+.progress-dots:hover{opacity:.8}
+.progress-dot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:all .2s;cursor:pointer}
+.progress-dot:hover{background:var(--text-3);transform:scale(1.4)}
+.progress-dot.pd-active{background:var(--primary);transform:scale(1.5)}
+@media(max-width:768px){.progress-dots{display:none}}
+
+/* FIX 5: Section arrive flash */
+@keyframes sectionArrive{0%{background:var(--primary-light)}100%{background:transparent}}
+.sec-arrived{animation:sectionArrive .8s ease}
+
+/* FIX 6: Contrast boost on light text */
+:root{--text-3:#78716C}
+/* Bumped from typical #A8A29E to #78716C — passes 4.5:1 on white */
+
+/* FIX 7: Skip to content (screen readers) */
+.skip-link{position:absolute;top:-100px;left:0;background:var(--primary);color:#fff;padding:.5rem 1rem;z-index:9999;font-size:.8rem;transition:top .2s}
+.skip-link:focus{top:0}
+
+/* FIX 8: Section landmark styling */
+[role="region"]{outline:none}
+
+
+/* Notion-style: TOC shows current section */
+.toc-item.toc-current{background:var(--primary-light);border-left-color:var(--primary)}
+.toc-item.toc-current .toc-num{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+
+/* Vercel-style: Quick action cards */
+.quick-actions{display:flex;gap:.5rem;justify-content:center;margin:1.25rem 0;flex-wrap:wrap}
+.qa-card{display:flex;align-items:center;gap:.5rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:100px;background:var(--surface);cursor:pointer;transition:all .2s;text-decoration:none}
+.qa-card:hover{border-color:var(--primary);background:var(--primary-light);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.qa-icon{font-size:.85rem;flex-shrink:0}
+.qa-text{font-size:.72rem;font-weight:600;color:var(--text)}
+.qa-hint{font-size:.6rem;color:var(--text-3);margin-left:.1rem}
+
+
+/* GitHub-style: Keyboard shortcut overlay */
+.kb-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:9998;opacity:0;pointer-events:none;transition:opacity .2s;display:flex;align-items:center;justify-content:center}
+.kb-overlay.kb-show{opacity:1;pointer-events:auto}
+.kb-help{background:var(--bg);border-radius:12px;padding:1.5rem;max-width:360px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.kb-help-title{font-family:var(--display);font-size:1.1rem;font-weight:700;margin-bottom:.75rem;color:var(--text)}
+.kb-help-row{display:flex;justify-content:space-between;align-items:center;padding:.35rem 0;border-bottom:1px solid var(--border)}
+.kb-help-row:last-child{border:none}
+.kb-help-desc{font-size:.75rem;color:var(--text-2)}
+.kb-help-key{font-family:var(--mono);font-size:.6rem;padding:.15rem .4rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border);color:var(--text);font-weight:600}
+.kb-help-close{margin-top:.75rem;text-align:center;font-size:.65rem;color:var(--text-3)}
+
 </style>
 </head>
 <body>
+<a href="#lookup" class="skip-link">Skip to main content</a>
 
-<nav id="nav">
+<nav id="nav" role="navigation" aria-label="Main navigation">
   <div class="nav-brand"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">CVC-OEI · Application Support</span></div>
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Page Guide</button>
     <div class="nav-links">
@@ -1139,6 +1266,13 @@ html{scroll-behavior:smooth !important}
     <h1>What does application support look like at <em>statewide scale?</em></h1>
     <div style="height:3px;width:180px;border-radius:2px;background:linear-gradient(90deg,var(--primary),var(--teal));margin-bottom:.75rem"></div>
     <p class="h-desc">115 community colleges, four Student Information System (SIS) integration paths, a statewide Single Sign-On (SSO) proxy, Canvas, and Financial Aid (FA) Consortium Agreements — all connected through the California Virtual Campus (CVC) Exchange. <strong>These tools explore where it breaks and how to respond.</strong></p>
+    <div class="quick-actions">
+      <a class="qa-card" onclick="document.getElementById('lookup').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">🔍</span><span class="qa-text">Look up a college</span></a>
+      <a class="qa-card" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">🛠</span><span class="qa-text">Trace an incident</span></a>
+      <a class="qa-card" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">🚧</span><span class="qa-text">Explore barriers</span></a>
+      <a class="qa-card" onclick="toggleToc()"><span class="qa-icon">📖</span><span class="qa-text">Open page guide</span></a>
+    </div>
+
     <p style="font-size:.78rem;color:var(--text-3);max-width:560px;margin:0 auto .75rem;line-height:1.7;text-align:center">The CVC Exchange isn't a course catalog — it's <strong style="color:var(--text-2)">equity infrastructure.</strong> A student at a rural college with 12 course offerings gets access to the same curriculum as a student at a metro college with 200. Supporting that means understanding it's not just about uptime — it's about whether a first-generation student can transfer on time.</p>
     <div class="h-stats">
       <div><div class="h-stat-num green">116</div><div class="h-stat-label">Connected Colleges</div></div>
@@ -1178,12 +1312,12 @@ html{scroll-behavior:smooth !important}
 
 
 <!-- COLLEGE QUICK LOOKUP -->
-<section class="sec fu" id="lookup"><div class="wrap">
+<section class="sec fu" id="lookup" role="region" aria-label="College Lookup"><div class="wrap">
   <div class="eyebrow" style="color:var(--blue)">Quick Reference</div>
   <h2>Look up any college in <em>the Exchange</em></h2>
   <p class="sec-desc">Type a college name, Student Information System type, or keyword. <strong>Instant reference card.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Lookup</span></div><span class="tool-bar-title">college-reference · 115 colleges · 4 SIS platforms</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Lookup</span></div><span class="tool-bar-title">College Quick Lookup · 30 Colleges · Searchable by Name, District, or System</span></div>
     <div class="tool-body">
       <div class="lookup-wrap">
         <div class="lookup-stats" id="lookupStats"></div>
@@ -1212,7 +1346,7 @@ html{scroll-behavior:smooth !important}
   <h2>The numbers behind <em>course sharing</em></h2>
   <p class="sec-desc">From 1,500 to 33,000 cross-enrollments in three years. The support workload is scaling fast.</p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Data</span></div><span class="tool-bar-title">CVC Exchange Growth + Course Demand Analysis</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Data</span></div><span class="tool-bar-title">Exchange Growth · 1,500 to 33,000 Enrollments · 2021–25</span></div>
     <div class="tool-body">
       <div class="info-grid">
         <div class="info-panel">
@@ -1262,7 +1396,7 @@ html{scroll-behavior:smooth !important}
 </div></section>
 
 <!-- STUDENT JOURNEY -->
-<section class="sec sec-alt fu" id="journey"><div class="wrap">
+<section class="sec sec-alt fu" id="journey" role="region" aria-label="Student Journey"><div class="wrap">
   <div class="eyebrow">Student Experience</div>
   <h2>The same enrollment — when it <em>works</em> vs when it <em style="color:var(--red)">breaks</em></h2>
   <p class="sec-desc">When the system works, students never think about it. When it breaks — <strong>they see a missing course.</strong></p>
@@ -1307,13 +1441,13 @@ html{scroll-behavior:smooth !important}
 </div></section>
 
 <!-- ═══ TOOL 02: MONITOR ═══ -->
-<section class="sec sec-alt fu" id="monitor"><div class="wrap">
+<section class="sec sec-alt fu" id="monitor" role="region" aria-label="System Monitor"><div class="wrap">
   <div class="eyebrow"><span class="sec-num sec-num-green">01</span>Visibility</div>
   <h2>Can the analyst spot a failing college <em>before the tickets arrive?</em></h2>
   <p class="sec-desc">The view that prevents the 9 AM scramble. <strong>Which colleges are up, degraded, or down?</strong></p>
   <div class="tool-frame">
     <div style="position:relative"><div class="live-alert" id="liveAlert"><div class="live-alert-title">New Alert</div><div class="live-alert-body"></div><div class="live-alert-time"></div></div></div>
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><div class="tool-bar-title">cvc-exchange-monitor.fhda.edu</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><div class="tool-bar-title">Morning Monitor · Weekly Pulse · College Health Status</div></div>
     <div class="tool-body">
       <div style="margin-bottom:1rem;padding:.65rem .85rem;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface)">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem">
@@ -1343,12 +1477,12 @@ html{scroll-behavior:smooth !important}
 </div></section>
 
 <!-- ═══ TOOL 03: TRACER ═══ -->
-<section class="sec fu" id="tracer"><div class="wrap">
+<section class="sec fu" id="tracer" role="region" aria-label="Incident Tracer"><div class="wrap">
   <div class="eyebrow"><span class="sec-num sec-num-green">02</span>Diagnosis</div>
   <h2>When a student reports a missing course — <em>where do you look?</em></h2>
   <p class="sec-desc">Layer-by-layer diagnosis. Student report → SIS → API → Exchange → Canvas. <strong>Find the break.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><div class="tool-bar-title">trace-id: CVC-2026-03-4821</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><div class="tool-bar-title">Incident Trace · Sacramento City · Ethos Token Expiration</div></div>
     <div class="tool-body">
       <div class="tracer-controls">
         <button class="tracer-btn tracer-btn-run" id="autoRunBtn" onclick="autoRunTrace()">▶ Auto-Run Trace</button>
@@ -1367,7 +1501,7 @@ html{scroll-behavior:smooth !important}
   <h2>Is this one ticket — or <em>twenty waiting to happen?</em></h2>
   <p class="sec-desc">Ticket data mapped to the CVC academic calendar. <strong>One ticket — or a pattern?</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><div class="tool-bar-title">Spring 2026 · CVC Exchange Ticket Trends</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><div class="tool-bar-title">Ticket Intelligence · 12 Weeks · Academic Calendar Overlay</div></div>
     <div class="tool-body">
       <div class="pattern-grid">
         <div><div class="chart-area">
@@ -1387,7 +1521,7 @@ html{scroll-behavior:smooth !important}
   <h2>If the fix isn’t documented, it didn’t <em>scale.</em></h2>
   <p class="sec-desc">Four templates. Integration, auth, sync, onboarding. <strong>If it’s not documented, it didn’t scale.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation</span></div><div class="tool-bar-title">kb.cvc-oei.fhda.edu/articles/editor</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation</span></div><div class="tool-bar-title">Knowledge Base Builder · 4 Templates · Editable + Copy-Ready</div></div>
     <div class="tool-body" style="padding:0">
       <div class="kb-layout">
         <div class="kb-sidebar">
@@ -1404,7 +1538,7 @@ html{scroll-behavior:smooth !important}
 </div></section>
 
 <!-- ═══ HOW I COMMUNICATE ═══ -->
-<section class="sec fu" id="comms">
+<section class="sec fu" id="comms" role="region" aria-label="Incident Communication">
   <div class="wrap">
     <div class="eyebrow">Communication</div>
     <h2>The same failure, written <em>four different ways</em></h2>
@@ -1433,7 +1567,7 @@ html{scroll-behavior:smooth !important}
 </div>
 
 <!-- ESCALATION MATRIX -->
-<section class="sec sec-alt fu" id="escalation"><div class="wrap">
+<section class="sec sec-alt fu" id="escalation" role="region" aria-label="Escalation Matrix"><div class="wrap">
   <div class="eyebrow"><span class="sec-num sec-num-green">05</span>Escalation</div>
   <h2>How do you know when to <em>own it</em> vs <em>escalate it?</em></h2>
   <p class="sec-desc">P1, P2, or P3? <strong>Who to contact, how fast, and what to bring.</strong></p>
@@ -1517,7 +1651,7 @@ html{scroll-behavior:smooth !important}
     <div style="font-size:.75rem;color:var(--text-2);line-height:1.6"><strong style="color:var(--teal)">“It’s essential, but it’s usually a last resort.”</strong> — Insight from conversations with two community college counselors about how the CVC Exchange is positioned in advising.</div>
   </div>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Outreach</span></div><span class="tool-bar-title">course-sharing-outreach-planner.cvc.edu</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Outreach</span></div><span class="tool-bar-title">Outreach Planner · 7 Months · 13 Student Triggers</span></div>
     <div class="tool-body">
       <div class="outreach-tabs"><button class="outreach-tab active" onclick="setOutreachTab('all',this)">All</button><button class="outreach-tab" onclick="setOutreachTab('inreach',this)">Inreach</button><button class="outreach-tab" onclick="setOutreachTab('outreach',this)">Outreach</button><button class="outreach-tab" onclick="setOutreachTab('orientation',this)">Orientation</button><button class="outreach-tab" onclick="setOutreachTab('intervention',this)">Intervention</button></div>
       <div class="cal-timeline" id="calTimeline"></div>
@@ -1528,12 +1662,12 @@ html{scroll-behavior:smooth !important}
 </div></section>
 
 <!-- AI VISION: COURSE SHARING + INTELLIGENT SYSTEMS -->
-<section class="sec fu" id="aiVision"><div class="wrap">
+<section class="sec fu" id="aiVision" role="region" aria-label="AI Vision"><div class="wrap">
   <div class="eyebrow" style="color:var(--teal)">Forward Thinking</div>
   <h2>Course sharing is equity infrastructure. <em style="color:var(--teal)">AI should make it smarter.</em></h2>
   <p class="sec-desc">AI for equity, fraud prevention, and operational intelligence — <strong>not just faster ticket processing.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--teal-light);color:var(--teal)">Vision</span></div><span class="tool-bar-title">ai-augmented-support-model.cvc.edu</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--teal-light);color:var(--teal)">Vision</span></div><span class="tool-bar-title">AI Vision · Operations · Students · Fraud · Analyst Role</span></div>
     <div class="tool-body">
       <div class="ai-spectrum" style="margin-top:.25rem">
         <div class="ai-spec-stage"><div class="ai-spec-num">01</div><div class="ai-spec-label">Manual</div><div class="ai-spec-desc">Email workflows, spreadsheet tracking</div></div>
@@ -1569,7 +1703,7 @@ html{scroll-behavior:smooth !important}
 </div>
 
 <!-- TOOL 06: BARRIER OVERVIEW -->
-<section class="sec fu" id="barrierOverview"><div class="wrap">
+<section class="sec fu" id="barrierOverview" role="region" aria-label="Barrier Intelligence"><div class="wrap">
   <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">05</span>Barriers</div>
   <h2>Ten friction points a support analyst <em class="red">can act on</em></h2>
   <p class="sec-desc">Barriers the support team can act on <strong>now</strong> — before engineering fixes land.</p>
@@ -1589,7 +1723,7 @@ html{scroll-behavior:smooth !important}
   </div>
 
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Barriers</span></div><span class="tool-bar-title">cvc-barrier-intelligence.fhda.edu</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Barriers</span></div><span class="tool-bar-title">Barrier Intelligence · 10 Systemic Friction Points</span></div>
     <div class="tool-body"><div class="b-grid" id="bGrid"></div></div>
   </div>
 </div></section>
@@ -1600,7 +1734,7 @@ html{scroll-behavior:smooth !important}
   <h2>Where in the enrollment process do students <em class="red">hit friction?</em></h2>
   <p class="sec-desc">Nine steps. Red = students get stuck. Amber = manual workaround. <strong>Green = smooth.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Lifecycle</span></div><span class="tool-bar-title">Cross-enrollment barrier mapping</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Lifecycle</span></div><span class="tool-bar-title">Enrollment Lifecycle · 9 Steps · Where Students Get Stuck</span></div>
     <div class="tool-body"><div class="lc-flow" id="lcFlow"></div></div>
   </div>
 </div></section>
@@ -1611,7 +1745,7 @@ html{scroll-behavior:smooth !important}
   <h2>Not every college has the same <em class="red">support profile</em></h2>
   <p class="sec-desc">Same barrier, different impact — depending on <strong>which SIS is underneath.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Matrix</span></div><span class="tool-bar-title">campus-readiness.cvc-oei.fhda.edu</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Matrix</span></div><span class="tool-bar-title">Campus Comparison · Filter by SIS Platform</span></div>
     <div class="tool-body">
       <div class="m-filters" id="mFilters"></div>
       <div style="overflow-x:auto"><table class="m-table"><thead><tr><th>College</th><th>SIS</th><th>FA Dashboard</th><th>SSO</th><th>Known Barriers</th></tr></thead><tbody id="mBody"></tbody></table></div>
@@ -1625,7 +1759,7 @@ html{scroll-behavior:smooth !important}
   <h2>Which barriers hit the most <em class="red">vulnerable students</em> hardest?</h2>
   <p class="sec-desc">Not all friction is equal. Scored by impact on <strong>the students with the least margin for error.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Equity</span></div><span class="tool-bar-title">equity-impact-analysis</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Equity</span></div><span class="tool-bar-title">Equity Impact Scorer · 8 Barriers Ranked by Student Vulnerability</span></div>
     <div class="tool-body"><div class="eq-grid" id="eqGrid"></div></div>
   </div>
 </div></section>
@@ -1636,7 +1770,7 @@ html{scroll-behavior:smooth !important}
   <h2>How much of the ticket queue is <em class="red">preventable?</em></h2>
   <p class="sec-desc">If most tickets come from the same three barriers — <strong>fix the barriers, not just the tickets.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Correlation</span></div><span class="tool-bar-title">Q1 2026 · Ticket-to-Barrier Analysis</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Correlation</span></div><span class="tool-bar-title">Ticket-to-Barrier Correlator · Where Prevention Beats Resolution</span></div>
     <div class="tool-body" id="corrBody"></div>
   </div>
 </div></section>
@@ -2777,6 +2911,160 @@ document.addEventListener('click', function(e) {
   }
 });
 
+
+// ═══ USABILITY: BACK TO TOP ═══
+var backBtn = document.getElementById('backToTop');
+if (backBtn) {
+  var scrollEl = document.scrollingElement || document.documentElement;
+  function checkBackBtn() {
+    var scrollPos = window.pageYOffset || scrollEl.scrollTop || 0;
+    if (scrollPos > 400) {
+      backBtn.classList.add('visible');
+    } else {
+      backBtn.classList.remove('visible');
+    }
+  }
+  window.addEventListener('scroll', checkBackBtn, { passive: true });
+  document.addEventListener('scroll', checkBackBtn, { passive: true });
+  // Also check periodically for iframes
+  setInterval(checkBackBtn, 1000);
+  checkBackBtn();
+}
+
+// ═══ USABILITY: PROGRESS DOTS ═══
+var dotSections = ['lookup','cvcData','journey','monitor','tracer','comms','escalation','outreach','aiVision','barrierOverview'];
+var dotEls = document.querySelectorAll('.progress-dot');
+
+var dotObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var idx = dotSections.indexOf(entry.target.id);
+      if (idx >= 0) {
+        dotEls.forEach(function(d) { d.classList.remove('pd-active'); });
+        if (dotEls[idx]) dotEls[idx].classList.add('pd-active');
+      }
+    }
+  });
+}, { threshold: 0.2, rootMargin: '-56px 0px -50% 0px' });
+
+dotSections.forEach(function(id) {
+  var el = document.getElementById(id);
+  if (el) dotObserver.observe(el);
+});
+
+// ═══ USABILITY: SECTION FLASH ON NAV CLICK ═══
+document.querySelectorAll('.nav-links a, .toc-item').forEach(function(link) {
+  link.addEventListener('click', function() {
+    var href = link.getAttribute('href') || '';
+    var targetId = href.startsWith('#') ? href.substring(1) : link.getAttribute('onclick');
+    if (targetId && targetId.indexOf("'") > 0) {
+      targetId = targetId.split("'")[1];
+    }
+    if (targetId) {
+      var target = document.getElementById(targetId);
+      if (target) {
+        // Brief flash to confirm arrival
+        target.classList.add('sec-arrived');
+        setTimeout(function() { target.classList.remove('sec-arrived'); }, 800);
+      }
+    }
+  });
+});
+
+
+// ═══ NOTION-STYLE: TOC ACTIVE TRACKING ═══
+var tocSectionIds = ['lookup','cvcData','journey','flow','monitor','tracer','patterns','kb','comms','escalation','outreach','aiVision','barrierOverview','lifecycle','matrix','equity','correlator'];
+var tocItems = document.querySelectorAll('.toc-item');
+
+var tocObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var idx = tocSectionIds.indexOf(entry.target.id);
+      if (idx >= 0) {
+        tocItems.forEach(function(item) { item.classList.remove('toc-current'); });
+        if (tocItems[idx]) tocItems[idx].classList.add('toc-current');
+      }
+    }
+  });
+}, { threshold: 0.15, rootMargin: '-56px 0px -60% 0px' });
+
+tocSectionIds.forEach(function(id) {
+  var el = document.getElementById(id);
+  if (el) tocObserver.observe(el);
+});
+
+
+// ═══ STRIPE-STYLE: FILTER TOC ═══
+function filterToc(query) {
+  var q = query.trim().toLowerCase();
+  document.querySelectorAll('.toc-item').forEach(function(item) {
+    var title = item.querySelector('.toc-item-title');
+    var desc = item.querySelector('.toc-item-desc');
+    var text = (title ? title.textContent : '') + ' ' + (desc ? desc.textContent : '');
+    if (!q || text.toLowerCase().indexOf(q) >= 0) {
+      item.style.display = 'flex';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+  // Show/hide group labels based on visible items
+  document.querySelectorAll('.toc-group').forEach(function(group) {
+    var visibleItems = group.querySelectorAll('.toc-item[style="display: flex;"],.toc-item:not([style])');
+    var hasVisible = false;
+    group.querySelectorAll('.toc-item').forEach(function(item) {
+      if (item.style.display !== 'none') hasVisible = true;
+    });
+    group.style.display = hasVisible ? 'block' : 'none';
+  });
+}
+
+
+// ═══ GITHUB-STYLE: KEYBOARD SHORTCUTS ═══
+document.addEventListener('keydown', function(e) {
+  // Don't trigger in inputs
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  
+  var overlay = document.getElementById('kbOverlay');
+  
+  if (e.key === '?' || (e.shiftKey && e.key === '/')) {
+    e.preventDefault();
+    if (overlay) overlay.classList.toggle('kb-show');
+    return;
+  }
+  
+  // Close help on any key
+  if (overlay && overlay.classList.contains('kb-show')) {
+    overlay.classList.remove('kb-show');
+    return;
+  }
+  
+  // G = open page guide
+  if (e.key === 'g' || e.key === 'G') {
+    e.preventDefault();
+    toggleToc();
+    return;
+  }
+  
+  // / = focus college search
+  if (e.key === '/') {
+    e.preventDefault();
+    var searchInput = document.getElementById('collegeLookup');
+    if (searchInput) {
+      document.getElementById('lookup').scrollIntoView({behavior:'smooth'});
+      setTimeout(function() { searchInput.focus(); }, 400);
+    }
+    return;
+  }
+  
+  // T = back to top
+  if (e.key === 't' || e.key === 'T') {
+    e.preventDefault();
+    (document.scrollingElement || document.documentElement).scrollTo({top:0, behavior:'smooth'});
+    window.scrollTo({top:0, behavior:'smooth'});
+    return;
+  }
+});
+
 </script>
 
 
@@ -2786,7 +3074,8 @@ document.addEventListener('click', function(e) {
 <div class="toc-panel" id="tocPanel">
   <div class="toc-header">
     <div class="toc-title">Page Guide</div>
-    <div class="toc-subtitle">18 sections · Click any row to jump there</div>
+    <div class="toc-subtitle">17 sections · Click any row to jump there</div>
+    <input class="toc-search" id="tocSearch" type="text" placeholder="Filter sections..." oninput="filterToc(this.value)" autocomplete="off" style="width:100%;padding:.4rem .6rem;border:1px solid var(--border);border-radius:6px;font-family:var(--mono);font-size:.7rem;margin-top:.5rem;background:var(--surface);color:var(--text);outline:none;box-sizing:border-box">
   </div>
 
   <div class="toc-group">
@@ -2896,6 +3185,33 @@ document.addEventListener('click', function(e) {
       <div class="toc-text"><div class="toc-item-title">Ticket-to-Barrier Correlator</div><div class="toc-item-desc">If most tickets come from the same three barriers, fix the barriers — not just the tickets. Proportional breakdown.</div></div>
       <span class="toc-item-tag tag-data">Data</span>
     </div>
+  </div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+<nav class="progress-dots" id="progressDots" aria-label="Page sections">
+  <div class="progress-dot" onclick="document.getElementById('lookup').scrollIntoView({behavior:'smooth'})" title="College Lookup"></div>
+  <div class="progress-dot" onclick="document.getElementById('cvcData').scrollIntoView({behavior:'smooth'})" title="Exchange Data"></div>
+  <div class="progress-dot" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})" title="Student Journey"></div>
+  <div class="progress-dot" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth'})" title="Monitor"></div>
+  <div class="progress-dot" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})" title="Tracer"></div>
+  <div class="progress-dot" onclick="document.getElementById('comms').scrollIntoView({behavior:'smooth'})" title="Communication"></div>
+  <div class="progress-dot" onclick="document.getElementById('escalation').scrollIntoView({behavior:'smooth'})" title="Escalation"></div>
+  <div class="progress-dot" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})" title="Outreach"></div>
+  <div class="progress-dot" onclick="document.getElementById('aiVision').scrollIntoView({behavior:'smooth'})" title="AI Vision"></div>
+  <div class="progress-dot" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})" title="Barriers"></div>
+</nav>
+
+<!-- KEYBOARD SHORTCUTS HELP -->
+<div class="kb-overlay" id="kbOverlay" onclick="this.classList.remove('kb-show')">
+  <div class="kb-help" onclick="event.stopPropagation()">
+    <div class="kb-help-title">Keyboard Shortcuts</div>
+    <div class="kb-help-row"><span class="kb-help-desc">Jump to section</span><span><span class="kb-help-key">1</span> – <span class="kb-help-key">0</span></span></div>
+    <div class="kb-help-row"><span class="kb-help-desc">Open page guide</span><span class="kb-help-key">G</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc">Search colleges</span><span class="kb-help-key">/</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc">Back to top</span><span class="kb-help-key">T</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc">Show this help</span><span class="kb-help-key">?</span></div>
+    <div class="kb-help-close">Press any key or click outside to close</div>
   </div>
 </div>
 
