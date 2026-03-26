@@ -32,7 +32,7 @@ nav.scrolled{box-shadow:var(--shadow)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 h1{font-family:var(--display);font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:600;line-height:1.12;letter-spacing:-.02em;color:var(--text);max-width:700px;margin:0 auto 1.25rem}
 h1 em{font-style:italic;color:var(--primary)}
-.h-desc{font-size:1rem;color:var(--text-2);line-height:1.85;max-width:580px;margin:0 auto 2.5rem}
+.h-desc{font-size:1.02rem;color:var(--text-2);line-height:1.9;max-width:590px;margin:0 auto 2.5rem}
 .h-desc strong{color:var(--text);font-weight:600}
 .h-stats{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap}
 .h-stat-num{font-family:var(--display);font-size:1.8rem;font-weight:600;line-height:1}
@@ -51,7 +51,11 @@ h2 em.red{color:var(--red)}
 .tool-bar{display:flex;align-items:center;justify-content:space-between;padding:.65rem 1.25rem;background:var(--surface-2);border-bottom:1px solid var(--border);gap:.75rem;flex-wrap:wrap}
 .tool-bar-left{display:flex;align-items:center;gap:.6rem}
 .tool-dots{display:flex;gap:5px}
-.tool-dots span{width:8px;height:8px;border-radius:50%;background:var(--border-2)}
+.tool-dots span{width:8px;height:8px;border-radius:50%;background:var(--border-2);transition:background .3s}
+/* ENHANCEMENT: Window dots come alive on hover — subtle macOS delight */
+.tool-frame:hover .tool-dots span:nth-child(1){background:#EF4444}
+.tool-frame:hover .tool-dots span:nth-child(2){background:#F59E0B}
+.tool-frame:hover .tool-dots span:nth-child(3){background:#22C55E}
 .tool-label{font-family:var(--mono);font-size:.62rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:.2rem .55rem;border-radius:4px}
 .tl-green{background:var(--primary-light);color:var(--primary)}
 .tl-blue{background:var(--blue-light);color:var(--blue)}
@@ -78,7 +82,7 @@ h2 em.red{color:var(--red)}
 @keyframes fadeSlide{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 .fip-title{font-weight:600;font-size:.85rem;color:var(--text);margin-bottom:.25rem;display:flex;align-items:center;gap:.5rem}
 .fip-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.fip-text{font-size:.8rem;color:var(--text-2);line-height:1.65}
+.fip-text{font-size:.84rem;color:var(--text-2);line-height:1.7}
 .fip-text strong{color:var(--text);font-weight:600}
 .fip-tags{display:flex;gap:.3rem;margin-top:.6rem;flex-wrap:wrap}
 .fip-tag{font-family:var(--mono);font-size:.52rem;padding:.15rem .5rem;border-radius:100px;border:1px solid var(--border);color:var(--text-3);background:var(--bg)}
@@ -239,8 +243,8 @@ h2 em.red{color:var(--red)}
 .kb-btn-publish:hover{background:#15704F}
 .kb-btn-copy{border-color:var(--border);background:var(--surface);color:var(--text-2)}
 .kb-btn-copy:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
-.kb-toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:#1C1917;color:#fff;font-family:var(--mono);font-size:.72rem;padding:.6rem 1.2rem;border-radius:var(--r);opacity:0;transition:all .3s ease;pointer-events:none;z-index:200;box-shadow:0 8px 30px rgba(0,0,0,.2)}
-.kb-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+
 footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 .foot-text{font-size:.78rem;color:var(--text-3);line-height:1.7}
 .foot-text strong{color:var(--text-2);font-weight:600}
@@ -277,7 +281,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 @media(max-width:600px){.b-detail-grid{grid-template-columns:1fr}}
 .b-d-box{padding:.55rem .65rem;border-radius:var(--r);border:1px solid var(--border)}
 .b-d-label{font-family:var(--mono);font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.2rem}
-.b-d-text{font-size:.72rem;color:var(--text);line-height:1.55}
+.b-d-text{font-size:.76rem;color:var(--text);line-height:1.6}
 .lbl-red{color:var(--red)}.lbl-grey{color:var(--text-3)}.lbl-green{color:var(--primary)}
 
 .lc-flow{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding:.5rem 0}
@@ -345,7 +349,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 .sc-label{font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.35rem}
 .sc-label-green{color:var(--primary)}.sc-label-blue{color:var(--blue)}.sc-label-purple{color:var(--purple)}.sc-label-amber{color:var(--amber)}
 .sc-title{font-family:var(--display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
-.sc-text{font-size:.85rem;color:var(--text-2);line-height:1.7}
+.sc-text{font-size:.88rem;color:var(--text-2);line-height:1.75}
 .sc-text strong{color:var(--text);font-weight:600}
 .sc-metric{display:inline-flex;align-items:center;gap:.3rem;margin-top:.5rem;padding:.25rem .6rem;border-radius:100px;font-family:var(--mono);font-size:.6rem;font-weight:500}
 .sc-metric-green{background:var(--primary-light);color:var(--primary);border:1px solid var(--primary-bd)}
@@ -710,7 +714,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 .ai-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.06);transform:translateY(-2px);border-color:var(--primary-bd)}
 .ai-card-icon{font-size:1.1rem;margin-bottom:.4rem}
 .ai-card-title{font-weight:600;font-size:.82rem;color:var(--text);margin-bottom:.25rem;line-height:1.3}
-.ai-card-desc{font-size:.72rem;color:var(--text-2);line-height:1.6}
+.ai-card-desc{font-size:.78rem;color:var(--text-2);line-height:1.7}
 .ai-card-signal{margin-top:.4rem;padding-top:.35rem;border-top:1px solid var(--border);font-family:var(--mono);font-size:.55rem;color:var(--text-3);display:flex;align-items:center;gap:.3rem}
 .ai-card-signal::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0}
 
@@ -804,7 +808,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 .esc-p1 .esc-header{background:var(--red-light);color:var(--red)}
 .esc-p2 .esc-header{background:var(--amber-light);color:var(--amber)}
 .esc-p3 .esc-header{background:var(--blue-light);color:var(--blue)}
-.esc-body{padding:.55rem .65rem;font-size:.72rem;color:var(--text-2);line-height:1.6}
+.esc-body{padding:.65rem .75rem;font-size:.78rem;color:var(--text-2);line-height:1.7}
 .esc-body strong{color:var(--text);font-weight:600}
 .esc-row{padding:.25rem 0;border-bottom:1px solid var(--border)}
 .esc-row:last-child{border-bottom:none}
@@ -853,7 +857,7 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 h2{font-size:clamp(1.5rem,3.5vw,2.1rem) !important;line-height:1.25 !important;letter-spacing:-.01em}
 
 /* Shorter, lighter descriptions — fade into background */
-.sec-desc{font-size:.85rem !important;max-width:520px !important;line-height:1.65 !important;opacity:.8}
+.sec-desc{font-size:.88rem !important;max-width:540px !important;line-height:1.75 !important;opacity:.85}
 
 /* More vertical breathing room between sections */
 .sec{padding:clamp(2.5rem,6vw,4.5rem) 0 !important}
@@ -945,7 +949,7 @@ html{scroll-behavior:smooth !important}
 .info-stat-num{font-size:1.35rem !important;font-weight:700 !important}
 
 /* Hero — bolder title */
-.hero-title{font-size:clamp(1.8rem,5vw,2.8rem) !important;letter-spacing:-.02em !important}
+.hero-title{font-size:clamp(1.8rem,5vw,2.8rem) !important;letter-spacing:-.02em !important;text-shadow:0 1px 3px rgba(0,0,0,.04)}
 
 /* Keyboard nav hint — more visible */
 .demo-hint{background:var(--surface-2) !important;border:1px solid var(--border) !important;border-radius:var(--r) !important;padding:.4rem .8rem !important}
@@ -1035,9 +1039,9 @@ html{scroll-behavior:smooth !important}
 .lookup-results{margin-top:.5rem}
 .lookup-empty{text-align:center;padding:1.5rem;color:var(--text-3);font-size:.78rem}
 
-.lookup-card{border:1px solid var(--border);border-radius:var(--r-lg);padding:.85rem 1rem;margin-bottom:.5rem;background:var(--surface);transition:all .2s;cursor:default}
+.lookup-card{border:1px solid var(--border);border-radius:var(--r-lg);padding:1rem 1.15rem;margin-bottom:.6rem;background:var(--surface);transition:all .2s;cursor:default}
 .lookup-card:hover{border-color:var(--primary-bd);box-shadow:var(--shadow-md)}
-.lookup-card-header{display:flex;align-items:center;gap:.65rem;flex-wrap:wrap;margin-bottom:.5rem}
+.lookup-card-header{display:flex;align-items:center;gap:.65rem;flex-wrap:wrap;margin-bottom:.55rem}
 .lookup-college-name{font-weight:700;font-size:.95rem;color:var(--text)}
 .lookup-sis-badge{font-family:var(--mono);font-size:.55rem;padding:.15rem .45rem;border-radius:4px;font-weight:600;letter-spacing:.03em}
 .sis-banner-direct{background:#dbeafe;color:#1d4ed8}
@@ -1049,7 +1053,7 @@ html{scroll-behavior:smooth !important}
 @media(max-width:500px){.lookup-grid{grid-template-columns:1fr}}
 .lookup-field{padding:.35rem .5rem;background:var(--bg-2);border-radius:4px}
 .lookup-field-label{font-family:var(--mono);font-size:.48rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:.1rem}
-.lookup-field-value{font-size:.72rem;color:var(--text);font-weight:500}
+.lookup-field-value{font-size:.78rem;color:var(--text);font-weight:600}
 .lf-ok{color:var(--primary)}.lf-warn{color:var(--amber)}.lf-err{color:var(--red)}
 
 .lookup-issues{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.3rem}
@@ -1234,6 +1238,13 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 .quick-actions{display:flex;gap:.5rem;justify-content:center;margin:1.25rem 0;flex-wrap:wrap}
 .qa-card{display:flex;align-items:center;gap:.5rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:100px;background:var(--surface);cursor:pointer;transition:all .2s;text-decoration:none}
 .qa-card:hover{border-color:var(--primary);background:var(--primary-light);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.06)}
+/* ENHANCEMENT: press feedback + staggered hero entrance */
+.qa-card:active{transform:scale(.96) !important;transition:transform .1s !important}
+.qa-card::after{content:'→';font-size:.65rem;color:var(--text-3);transition:all .2s;opacity:.4;margin-left:.15rem}
+.qa-card:hover::after{opacity:1;color:var(--primary);transform:translateX(3px)}
+@keyframes qaEntrance{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.qa-card{animation:qaEntrance .5s cubic-bezier(.16,1,.3,1) both}
+.qa-card:nth-child(1){animation-delay:.4s}.qa-card:nth-child(2){animation-delay:.5s}.qa-card:nth-child(3){animation-delay:.6s}.qa-card:nth-child(4){animation-delay:.7s}
 .qa-icon{font-size:.85rem;flex-shrink:0}
 .qa-text{font-size:.72rem;font-weight:600;color:var(--text)}
 .qa-hint{font-size:.6rem;color:var(--text-3);margin-left:.1rem}
@@ -1525,17 +1536,1175 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 .nav-links a.nav-barrier.nav-active .nav-num{background:#fff !important;color:var(--red) !important;border-color:#fff !important}
 
 
-/* Accessibility: minimum font floor */
-.lc-step,.lc-b-tag,.b-cat,.ai-compare-label,.sc-step-num,.tc-msg-label{font-size:.5rem !important}
+/* Accessibility: minimum font floor — raised to 10px for readability */
+.lc-step,.lc-b-tag,.b-cat,.ai-compare-label,.sc-step-num,.tc-msg-label{font-size:.625rem !important}
+.rd-label,.lookup-field-label,.b-d-label,.kb-esc-label,.f-arrow-label{font-size:.56rem !important}
+.fn-desc,.s-detail,.fip-tag,.sp-count{font-size:.62rem !important}
+.s-badge{font-size:.6rem !important}
+
+/* READABILITY: Boost muted text contrast — #A8A29E → #8A8580 for WCAG AA */
+.sec-desc,.fn-desc,.s-detail,.rd-history,.toc-item-desc,.ai-card-desc,.eq-reason,.b-d-text{color:#78716C !important}
+
+/* READABILITY: Visible focus rings for keyboard navigation */
+a:focus-visible,button:focus-visible,[onclick]:focus-visible,input:focus-visible,.lookup-filter:focus-visible,.ai-tab:focus-visible,.filter-tab:focus-visible,.nav-links a:focus-visible,.toc-item:focus-visible{outline:2px solid var(--primary) !important;outline-offset:2px !important;border-radius:4px}
+
+/* READABILITY: Scroll overflow fade — shows panel has more content */
+.sp-body{position:relative}
+.sp-body::after{content:'';position:sticky;bottom:0;left:0;right:0;height:24px;background:linear-gradient(transparent,var(--surface));pointer-events:none;display:block;margin-top:-24px;flex-shrink:0}
+
+/* READABILITY: Message body — more breathing room in dense comms */
+.msg-body{line-height:1.75 !important;font-size:.82rem !important;padding:.85rem 1rem !important}
+.msg-body strong{font-weight:700}
+
+/* READABILITY: Lookup card — analyst notes hint always partly visible */
+.lookup-card-click{opacity:.45 !important;font-size:.55rem !important}
+.lookup-card:hover .lookup-card-click{opacity:1 !important}
+
+/* READABILITY: Tool body default text sizing boost */
+.tool-body{font-size:.82rem;line-height:1.7}
+
+/* USABILITY: Tracer log — slightly larger for screenshare */
+.td-log{font-size:.72rem !important;line-height:1.9 !important;padding:1.15rem 1.25rem !important}
+
+/* USABILITY: KB steps — bigger input text for editing */
+.kb-step-input{font-size:.84rem !important;line-height:1.7 !important}
+
+
+/* Why/Context section — visual grounding */
+#why{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+#why > .wrap > div{border-left:4px solid var(--primary) !important;padding-left:1rem;border-radius:0}
+
+
+/* Tracer auto-run — gentle pulse to draw the eye */
+.tracer-btn-run{animation:runPulse 2.5s ease infinite}
+@keyframes runPulse{0%,100%{box-shadow:0 0 0 0 rgba(26,107,80,.3)}50%{box-shadow:0 0 0 6px rgba(26,107,80,0)}}
+.tracer-btn-run.running{animation:none}
+
+
+/* Growth bars — animate on scroll */
+.growth-bar{width:0 !important;transition:width 1.2s cubic-bezier(.16,1,.3,1) !important}
+.growth-bar.bar-visible{width:var(--bar-w) !important}
+
+
+/* Course bars — animate on scroll (same pattern as growth bars) */
+.course-bar{width:0 !important;transition:width 1s cubic-bezier(.16,1,.3,1) .2s !important}
+.course-bar.bar-visible{width:var(--bar-w) !important}
+
+
+/* Visual polish — section depth */
+.sec{position:relative}
+.sec::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+
+/* Registration checklist card highlight on the counselor grid */
+.counsel-card[style*="teal-bd"]:hover{border-color:var(--teal) !important;box-shadow:0 8px 30px rgba(13,148,136,.12) !important}
+
+/* Stronger visual weight on prevention tips in journey */
+.journey-step [style*="teal-light"]{font-weight:500}
+
+/* Tool-frame inner glow on hover */
+.tool-frame:hover .tool-body{background:linear-gradient(180deg,var(--surface) 0%,var(--bg) 100%)}
+
+/* Barrier ticket % badges — slightly more prominent */
+.b-card .b-head span[style*="border-radius:100px"]{font-weight:600}
+
+
+/* Barrier card category colors */
+.b-card[class*="sev-high"]{border-left:3px solid var(--red)}
+.b-card[class*="sev-med"]{border-left:3px solid var(--amber)}
+.b-card[class*="sev-low"]{border-left:3px solid var(--blue)}
+
+
+/* ═══ GAME DESIGN CSS ═══ */
+
+/* Exploration tracker — below progress dots */
+.explore-tracker{font-family:var(--mono);font-size:.5rem;color:var(--text-3);text-align:center;margin-top:6px;transition:all .3s cubic-bezier(.16,1,.3,1);letter-spacing:.06em;opacity:.6}
+.progress-dots:hover .explore-tracker{opacity:1}
+
+/* Card expand animations — smooth spring reveal instead of instant toggle */
+/* Override display:none with display:block, use max-height+opacity for animation */
+.b-detail{display:block !important;max-height:0 !important;overflow:hidden !important;opacity:0;transition:max-height .4s cubic-bezier(.16,1,.3,1),opacity .3s ease;padding:0 .85rem !important}
+.b-card.expanded .b-detail{max-height:600px !important;opacity:1;padding-bottom:.85rem !important}
+
+.ai-card-expand{display:block !important;max-height:0 !important;overflow:hidden !important;opacity:0;transition:max-height .4s cubic-bezier(.16,1,.3,1),opacity .3s ease}
+.ai-card.ai-expanded .ai-card-expand{max-height:800px !important;opacity:1}
+
+.counsel-expand{display:block !important;max-height:0 !important;overflow:hidden !important;opacity:0;transition:max-height .4s cubic-bezier(.16,1,.3,1),opacity .3s ease}
+.counsel-card.cc-open .counsel-expand{max-height:1200px !important;opacity:1}
+
+.lookup-card-expand{display:block !important;max-height:0 !important;overflow:hidden !important;opacity:0;transition:max-height .3s cubic-bezier(.16,1,.3,1),opacity .25s ease}
+.lookup-card.lc-expanded .lookup-card-expand{max-height:300px !important;opacity:1}
+
+/* Card click — subtle scale feedback */
+.b-card:active,.ai-card:active,.counsel-card:active,.lookup-card:active{transform:scale(.99) !important;transition:transform .1s !important}
+
+/* Hero stat numbers — add a subtle glow when counting */
+[data-count]{transition:text-shadow .5s ease}
+
+
+/* Tracer completion — satisfying "found it" moment */
+@keyframes foundIt{0%{opacity:0;transform:scale(.8)}40%{opacity:1;transform:scale(1.08)}100%{transform:scale(1)}}
+.trace-found{animation:foundIt .5s cubic-bezier(.16,1,.3,1);display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .6rem;background:var(--primary-light);border:1px solid var(--primary-bd);border-radius:100px;font-weight:700}
+
+
+/* Game design: scroll progress bar */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--teal));z-index:9999;transition:width .1s linear;width:0;border-radius:0 2px 2px 0;box-shadow:0 0 8px rgba(26,107,80,.3)}
+
+
+/* Game design: nav visited indicator */
+.nav-links a.nav-visited::after{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--primary);margin-left:3px;vertical-align:middle;opacity:.6;animation:dotAppear .3s ease}
+@keyframes dotAppear{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:.6}}
+
+
+/* Game design: click ripple on interactive cards */
+.ripple{position:absolute;border-radius:50%;background:rgba(26,107,80,.12);transform:scale(0);animation:rippleOut .5s ease-out forwards;pointer-events:none}
+@keyframes rippleOut{to{transform:scale(4);opacity:0}}
+
+/* Game design: upgraded toast with checkmark */
+.kb-toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--primary);color:#fff;font-size:.78rem;font-weight:600;padding:.6rem 1.2rem .6rem 1rem;border-radius:100px;box-shadow:0 8px 30px rgba(26,107,80,.3);z-index:9999;opacity:0;transition:all .3s cubic-bezier(.16,1,.3,1);pointer-events:none;display:flex;align-items:center;gap:.4rem}
+.kb-toast::before{content:'✓';display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.2);font-size:.7rem;flex-shrink:0;animation:toastCheck .4s cubic-bezier(.16,1,.3,1) .1s both}
+@keyframes toastCheck{from{transform:scale(0) rotate(-90deg)}to{transform:scale(1) rotate(0)}}
+.kb-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Game design: section arrival settle */
+.fu{opacity:0;transform:translateY(16px) scale(.995);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1) !important}
+.fu.vis{opacity:1 !important;transform:translateY(0) scale(1) !important}
+
+
+/* Game design: tool frame entrance */
+.tool-frame{opacity:0;transform:translateY(8px)}
+.vis .tool-frame{animation:toolEnter .5s cubic-bezier(.16,1,.3,1) .15s both}
+@keyframes toolEnter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+
+/* Game design: nav hover micro-animation */
+.nav-links a{transition:all .15s cubic-bezier(.16,1,.3,1) !important}
+.nav-links a:hover{transform:translateY(-1px) !important}
+.nav-links a:active{transform:translateY(0) scale(.97) !important}
+
+
+/* Game design: eyebrow badge entrance */
+.vis .eyebrow{animation:eyebrowPop .4s cubic-bezier(.16,1,.3,1) .1s both}
+@keyframes eyebrowPop{from{opacity:0;transform:translateX(-8px)}to{opacity:.8;transform:translateX(0)}}
+
+
+/* Game design: H2 entrance */
+.vis h2{animation:h2Enter .5s cubic-bezier(.16,1,.3,1) .05s both}
+@keyframes h2Enter{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+
+
+/* Game design: description delayed entrance */
+.vis .sec-desc{animation:descEnter .5s cubic-bezier(.16,1,.3,1) .2s both}
+@keyframes descEnter{from{opacity:0;transform:translateY(6px)}to{opacity:.8;transform:translateY(0)}}
+
+
+/* Game design: journey crossfade */
+#journeyBody{transition:opacity .2s ease,transform .2s ease}
+#journeyBody.j-fading{opacity:0;transform:translateY(4px)}
+
+
+/* ═══ ENHANCEMENT: Section arrival flash — confirms navigation landed ═══ */
+@keyframes arriveFlash{0%{box-shadow:inset 0 0 0 0 rgba(26,107,80,0)}30%{box-shadow:inset 0 0 0 2px rgba(26,107,80,.15)}100%{box-shadow:inset 0 0 0 0 rgba(26,107,80,0)}}
+.sec-arrived{animation:arriveFlash .8s ease-out}
+
+/* ═══ ENHANCEMENT: Progress dot — active pulse ring ═══ */
+.progress-dot.pd-active{position:relative}
+.progress-dot.pd-active::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1.5px solid var(--primary);animation:dotRing 1.5s ease-out forwards;pointer-events:none}
+@keyframes dotRing{0%{transform:scale(.8);opacity:1}100%{transform:scale(1.4);opacity:0}}
+
+/* ═══ ENHANCEMENT: Search clear button — obvious reset affordance ═══ */
+.lookup-clear{position:absolute;right:.65rem;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;border:none;background:var(--bg-3);color:var(--text-3);font-size:.7rem;cursor:pointer;display:none;align-items:center;justify-content:center;transition:all .15s;line-height:1;padding:0}
+.lookup-clear:hover{background:var(--red-light);color:var(--red)}
+.lookup-input:not(:placeholder-shown) ~ .lookup-clear{display:flex}
+
+/* ═══ ENHANCEMENT: Tab click bounce — satisfying selection feedback ═══ */
+@keyframes tabSnap{0%{transform:scale(1)}50%{transform:scale(.94)}100%{transform:scale(1)}}
+.filter-tab:active,.ai-tab:active,.outreach-tab:active,.lookup-filter:active{animation:tabSnap .15s ease}
+.filter-tab.active,.ai-tab.active,.outreach-tab.active{transition:all .2s cubic-bezier(.16,1,.3,1)}
+
+/* ═══ ENHANCEMENT: Expandable card chevron affordance ═══ */
+.b-card .b-head::after{content:'＋';font-family:var(--mono);font-size:.7rem;color:var(--text-3);margin-left:auto;transition:all .25s cubic-bezier(.16,1,.3,1);flex-shrink:0;opacity:.5}
+.b-card:hover .b-head::after{opacity:1;color:var(--primary)}
+.b-card.expanded .b-head::after{content:'−';color:var(--red);transform:scale(1.1);opacity:1}
+
+/* ═══ ENHANCEMENT: First-visit scroll prompt ═══ */
+@keyframes hintDrift{0%,100%{transform:translateY(0);opacity:.7}50%{transform:translateY(6px);opacity:1}}
+.scroll-hint{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.6rem;color:var(--text-3);display:flex;flex-direction:column;align-items:center;gap:.25rem;z-index:50;transition:opacity .5s;pointer-events:none}
+.scroll-hint .hint-arrow{animation:hintDrift 2s ease-in-out infinite;font-size:1rem;line-height:1}
+.scroll-hint.hint-gone{opacity:0}
+
+/* ═══ ENHANCEMENT: Explore tracker — bolder visibility ═══ */
+.explore-tracker{transition:all .4s cubic-bezier(.16,1,.3,1)}
+.explore-tracker.et-updated{color:var(--primary);opacity:1 !important;transform:scale(1.05)}
+
+/* ═══ ENHANCEMENT: Copy button success state — more rewarding ═══ */
+@keyframes copyPop{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+.msg-copy.copied{animation:copyPop .3s cubic-bezier(.16,1,.3,1);box-shadow:0 0 0 3px rgba(26,107,80,.15) !important}
+
+/* ═══ ENHANCEMENT: TOC current item — stronger "you are here" ═══ */
+.toc-item.toc-current{background:var(--primary-light) !important;border-left-color:var(--primary) !important}
+.toc-item.toc-current .toc-num{transform:scale(1.1);box-shadow:0 0 0 3px rgba(26,107,80,.15)}
+
+/* ═══ ENHANCEMENT: Interaction counter — reward milestones ═══ */
+@keyframes milestoneGlow{0%{box-shadow:0 0 0 0 rgba(26,107,80,.3)}50%{box-shadow:0 0 0 6px rgba(26,107,80,.15)}100%{box-shadow:0 0 0 0 rgba(26,107,80,0)}}
+.ic-milestone{animation:milestoneGlow .6s ease}
+
+/* ═══ ENHANCEMENT: Tool frame stagger on section enter ═══ */
+.vis .tool-frame:nth-child(2){animation-delay:.25s}
+.vis .tool-frame:nth-child(3){animation-delay:.35s}
+
+/* ═══════════════════════════════════════════════════════
+   ZOOM PRESENTATION MODE — Toggle with Z key
+   Optimized for 15fps compressed video screenshare
+   ═══════════════════════════════════════════════════════ */
+
+/* 1. Kill every looping animation — they strobe at low framerates */
+.zoom-mode,.zoom-mode *{animation-iteration-count:1 !important}
+.zoom-mode .s-ok,.zoom-mode .s-warn,.zoom-mode .s-err,
+.zoom-mode .refresh-dot,.zoom-mode .h-badge .dot,.zoom-mode .divider-badge .dot,
+.zoom-mode .f-arrow::after,.zoom-mode .hero-bg,
+.zoom-mode .tracer-btn-run{animation:none !important}
+/* Traveling dots on flow arrows — static in zoom */
+.zoom-mode .f-arrow-line{animation:none !important}
+
+/* 2. Minimum 0.85rem floor on ALL text */
+.zoom-mode .eyebrow{font-size:.85rem !important}
+.zoom-mode .sec-desc{font-size:1.05rem !important;line-height:1.85 !important;max-width:620px !important;opacity:1 !important}
+.zoom-mode .tool-body{font-size:.95rem !important;line-height:1.8 !important}
+.zoom-mode .tool-bar-title{font-size:.78rem !important}
+.zoom-mode .tool-label{font-size:.72rem !important}
+.zoom-mode .tf-sub,.zoom-mode .tf-num{font-size:.72rem !important}
+.zoom-mode .tf-name{font-size:.92rem !important}
+.zoom-mode .j-student{font-size:.9rem !important}
+.zoom-mode .j-label{font-size:.9rem !important}
+.zoom-mode .j-text{font-size:.9rem !important}
+.zoom-mode .fn-label{font-size:.85rem !important}
+.zoom-mode .fn-desc{font-size:.72rem !important}
+.zoom-mode .f-arrow-label{font-size:.62rem !important}
+.zoom-mode .s-name{font-size:.9rem !important}
+.zoom-mode .s-detail{font-size:.75rem !important}
+.zoom-mode .s-badge{font-size:.72rem !important;padding:.2rem .55rem !important}
+.zoom-mode .sp-title{font-size:.92rem !important}
+.zoom-mode .sp-count{font-size:.72rem !important}
+.zoom-mode .rd-label{font-size:.68rem !important}
+.zoom-mode .rd-value{font-size:.85rem !important}
+.zoom-mode .fip-text{font-size:.92rem !important;line-height:1.8 !important}
+.zoom-mode .fip-tag{font-size:.68rem !important}
+.zoom-mode .fip-title{font-size:.95rem !important}
+.zoom-mode .msg-body{font-size:.92rem !important;line-height:1.85 !important}
+.zoom-mode .msg-to{font-size:.88rem !important}
+.zoom-mode .msg-channel{font-size:.65rem !important}
+.zoom-mode .esc-body{font-size:.88rem !important;line-height:1.8 !important}
+.zoom-mode .esc-header{font-size:.95rem !important}
+.zoom-mode .ai-card-title{font-size:.92rem !important}
+.zoom-mode .ai-card-desc{font-size:.85rem !important;line-height:1.8 !important}
+.zoom-mode .ai-card-signal{font-size:.68rem !important}
+.zoom-mode .b-title{font-size:.9rem !important}
+.zoom-mode .b-d-text{font-size:.85rem !important}
+.zoom-mode .b-d-label{font-size:.62rem !important}
+.zoom-mode .b-cat{font-size:.62rem !important}
+.zoom-mode .eq-title{font-size:.9rem !important}
+.zoom-mode .eq-reason{font-size:.82rem !important}
+.zoom-mode .eq-pop{font-size:.68rem !important}
+.zoom-mode .sc-text{font-size:.95rem !important;line-height:1.85 !important}
+.zoom-mode .sc-title{font-size:1.15rem !important}
+.zoom-mode .sc-label{font-size:.68rem !important}
+.zoom-mode .kb-step-input{font-size:.92rem !important}
+.zoom-mode .kb-esc-input{font-size:.88rem !important}
+.zoom-mode .kb-esc-label{font-size:.65rem !important}
+.zoom-mode .lookup-college-name{font-size:1.05rem !important}
+.zoom-mode .lookup-field-value{font-size:.85rem !important}
+.zoom-mode .lookup-field-label{font-size:.62rem !important}
+.zoom-mode .lookup-issue-tag{font-size:.65rem !important}
+.zoom-mode .lookup-action{font-size:.82rem !important}
+.zoom-mode .corr-label{font-size:.85rem !important}
+.zoom-mode .corr-count{font-size:.78rem !important}
+.zoom-mode .chart-period{font-size:.72rem !important}
+.zoom-mode .chart-title{font-size:.95rem !important}
+.zoom-mode .insight-title{font-size:.88rem !important}
+.zoom-mode .insight-text{font-size:.82rem !important}
+.zoom-mode .lc-name{font-size:.78rem !important}
+.zoom-mode .lc-sub{font-size:.65rem !important}
+.zoom-mode .lc-step{font-size:.56rem !important}
+.zoom-mode .lc-b-tag{font-size:.56rem !important}
+.zoom-mode .m-table{font-size:.85rem !important}
+.zoom-mode .m-table th{font-size:.62rem !important}
+.zoom-mode .demo-caption{font-size:.72rem !important}
+.zoom-mode .tracer-scenario-title{font-size:1.25rem !important}
+.zoom-mode .tracer-status{font-size:.72rem !important}
+.zoom-mode .td-title{font-size:.95rem !important}
+.zoom-mode .td-log{font-size:.78rem !important;line-height:2 !important}
+.zoom-mode .td-btn{font-size:.85rem !important}
+.zoom-mode .tracer-action{font-size:.82rem !important}
+.zoom-mode .counsel-title{font-size:.92rem !important}
+.zoom-mode .counsel-desc{font-size:.85rem !important}
+.zoom-mode .reg-item{font-size:.85rem !important}
+.zoom-mode .myth-text{font-size:.82rem !important}
+.zoom-mode .trigger-title{font-size:.88rem !important}
+.zoom-mode .trigger-desc{font-size:.82rem !important}
+.zoom-mode .big-quote{font-size:clamp(1.6rem,4.5vw,2.3rem) !important}
+.zoom-mode .foot-text{font-size:.88rem !important}
+.zoom-mode .h-desc{font-size:1.1rem !important;line-height:1.95 !important}
+.zoom-mode h2{font-size:clamp(1.7rem,4vw,2.4rem) !important}
+
+/* 3. Thicker borders + boosted contrast on status indicators */
+.zoom-mode .s-indicator{width:12px !important;height:12px !important;border:2px solid #fff !important}
+.zoom-mode .s-ok{background:#16A34A !important;box-shadow:0 0 0 3px rgba(22,163,74,.3) !important}
+.zoom-mode .s-warn{background:#D97706 !important;box-shadow:0 0 0 3px rgba(217,119,6,.3) !important}
+.zoom-mode .s-err{background:#DC2626 !important;box-shadow:0 0 0 3px rgba(220,38,38,.3) !important}
+.zoom-mode .sb-ok{border:1.5px solid #16A34A !important;font-weight:700 !important;font-size:.72rem !important}
+.zoom-mode .sb-warn{border:1.5px solid #B45309 !important;font-weight:700 !important;font-size:.72rem !important}
+.zoom-mode .sb-err{border:1.5px solid #DC2626 !important;font-weight:700 !important;font-size:.72rem !important}
+.zoom-mode .lf-ok{color:#15803D !important;font-weight:700 !important}
+.zoom-mode .lf-warn{color:#A16207 !important;font-weight:700 !important}
+.zoom-mode .lf-err{color:#B91C1C !important;font-weight:700 !important}
+.zoom-mode .m-dot{width:9px !important;height:9px !important}
+.zoom-mode .m-dot-ok{box-shadow:0 0 0 2px rgba(34,197,94,.3)}
+.zoom-mode .m-dot-partial{box-shadow:0 0 0 2px rgba(245,158,11,.3)}
+.zoom-mode .m-dot-pending{box-shadow:0 0 0 2px rgba(239,68,68,.3)}
+/* Barrier severity — thicker left borders */
+.zoom-mode .b-card[class*="sev-high"]{border-left-width:5px !important}
+.zoom-mode .b-card[class*="sev-med"]{border-left-width:5px !important}
+.zoom-mode .b-card[class*="sev-low"]{border-left-width:5px !important}
+.zoom-mode .b-sev-dot{width:10px !important;height:10px !important}
+/* Tracer node states — bolder outlines */
+.zoom-mode .tf-node.active{border-width:3px !important;box-shadow:0 0 0 4px var(--primary-bd) !important}
+.zoom-mode .tf-node.error-node{border-width:3px !important;box-shadow:0 0 0 4px var(--red-bd) !important}
+.zoom-mode .tf-node.passed{border-width:2px !important}
+/* Flow architecture nodes — thicker */
+.zoom-mode .f-node{border-width:2.5px !important}
+/* Tool frame borders more visible */
+.zoom-mode .tool-frame{border-width:2px !important;border-color:var(--border-2) !important}
+/* Lifecycle nodes — thicker borders on status */
+.zoom-mode .lc-node.lc-err{border-width:2.5px !important}
+.zoom-mode .lc-node.lc-warn{border-width:2.5px !important}
+.zoom-mode .lc-node.lc-ok{border-width:2.5px !important}
+/* Escalation active card */
+.zoom-mode .esc-card.esc-active{box-shadow:0 0 0 3px var(--amber) !important}
+/* Equity bar — taller */
+.zoom-mode .eq-bar-bg{height:8px !important}
+/* Correlation bars — taller */
+.zoom-mode .corr-bar-bg{height:24px !important}
+/* Message highlight/warn badges — punchier */
+.zoom-mode .msg-highlight{font-size:.82rem !important;padding:.1rem .4rem !important;font-weight:700 !important}
+.zoom-mode .msg-warn{font-size:.82rem !important;padding:.1rem .4rem !important;font-weight:700 !important}
+/* Disable custom cursor in zoom — less visual noise */
+.zoom-mode,.zoom-mode *{cursor:auto !important}
+/* Hide decorative elements that add noise on compressed video */
+.zoom-mode .hero-bg{display:none !important}
+.zoom-mode .scroll-progress{display:none !important}
+.zoom-mode .explore-tracker{display:none !important}
+
+/* Zoom mode indicator badge */
+.zoom-badge{position:fixed;top:60px;right:1rem;z-index:250;display:none;align-items:center;gap:.4rem;padding:.35rem .75rem;background:rgba(220,38,38,.9);color:#fff;font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:100px;box-shadow:0 2px 12px rgba(220,38,38,.3);backdrop-filter:blur(8px)}
+.zoom-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:#fff;flex-shrink:0}
+body.zoom-mode .zoom-badge{display:inline-flex}
+
+
+/* ═══════════════════════════════════════════════════════
+   THEATER MODE — Toggle with F key
+   Dims entire page, spotlights hovered section
+   ═══════════════════════════════════════════════════════ */
+
+/* The dim overlay */
+.theater-dim{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:100;pointer-events:none;opacity:0;transition:opacity .4s ease}
+body.theater-on .theater-dim{opacity:1}
+
+/* Any section being spotlighted */
+body.theater-on .sec,
+body.theater-on .sec-alt,
+body.theater-on .story-sec,
+body.theater-on .divider-sec,
+body.theater-on .closing-sec,
+body.theater-on .quote-section,
+body.theater-on #why,
+body.theater-on header.header{
+  position:relative;
+  z-index:50;
+  transition:all .35s cubic-bezier(.16,1,.3,1);
+  filter:brightness(.4);
+  transform:scale(.995)
+}
+/* The spotlighted section */
+body.theater-on .theater-spot{
+  z-index:150 !important;
+  filter:brightness(1) !important;
+  transform:scale(1) !important;
+  box-shadow:0 0 0 8px rgba(255,255,255,.06),0 24px 80px rgba(0,0,0,.3) !important;
+  border-radius:12px
+}
+/* Prevent nav from dimming */
+body.theater-on nav{position:sticky;z-index:250}
+
+/* Theater mode indicator */
+.theater-badge{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:250;display:none;align-items:center;gap:.5rem;padding:.45rem 1rem;background:rgba(28,25,23,.92);color:#E7E5E4;font-family:var(--mono);font-size:.7rem;font-weight:600;border-radius:100px;box-shadow:0 4px 20px rgba(0,0,0,.3);backdrop-filter:blur(12px);letter-spacing:.03em}
+body.theater-on .theater-badge{display:inline-flex}
+.theater-badge kbd{display:inline-block;background:rgba(255,255,255,.15);padding:.1rem .35rem;border-radius:4px;font-size:.6rem;border:1px solid rgba(255,255,255,.1);margin:0 .1rem}
+.theater-badge .tb-dot{width:6px;height:6px;border-radius:50%;background:#F59E0B;flex-shrink:0}
+
+/* ═══════════════════════════════════════════════════════
+   LIVE RESOLUTION — Deploy Fix & Flush Queue
+   ═══════════════════════════════════════════════════════ */
+
+.deploy-fix-btn{
+  padding:.55rem 1.25rem;border-radius:var(--r);border:2px solid var(--primary);
+  background:linear-gradient(135deg,var(--primary),#0D9488);color:#fff;
+  font-family:var(--mono);font-size:.78rem;font-weight:700;cursor:pointer;
+  transition:all .25s cubic-bezier(.16,1,.3,1);display:inline-flex;align-items:center;gap:.5rem;
+  letter-spacing:.03em;box-shadow:0 2px 12px rgba(26,107,80,.25);
+  margin-top:.75rem;position:relative;overflow:hidden
+}
+.deploy-fix-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(26,107,80,.35)}
+.deploy-fix-btn:active{transform:scale(.97)}
+.deploy-fix-btn.deployed{background:#16A34A !important;border-color:#16A34A !important;pointer-events:none}
+
+/* Sweep shine on hover */
+.deploy-fix-btn::after{
+  content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+  transition:left .5s ease
+}
+.deploy-fix-btn:hover::after{left:120%}
+
+/* Success pulse that ripples outward from the button */
+@keyframes deployPulse{
+  0%{box-shadow:0 0 0 0 rgba(22,163,74,.5)}
+  50%{box-shadow:0 0 0 16px rgba(22,163,74,.15)}
+  100%{box-shadow:0 0 0 30px rgba(22,163,74,0)}
+}
+.deploy-fix-btn.deploying{animation:deployPulse .8s ease-out}
+
+/* Monitor cell flash when value changes */
+@keyframes cellFlash{
+  0%{background:var(--surface)}
+  30%{background:rgba(22,163,74,.15)}
+  100%{background:var(--surface)}
+}
+.ms-cell.cell-updated{animation:cellFlash 1s ease}
+
+/* Status row transition from red to green */
+@keyframes rowHeal{
+  0%{background:var(--red-light)}
+  50%{background:var(--primary-light)}
+  100%{background:transparent}
+}
+.status-row.row-healed{animation:rowHeal 1.5s ease}
+
+/* Resolution banner */
+.resolution-banner{
+  display:none;margin-top:1rem;padding:.75rem 1rem;
+  border:2px solid var(--primary-bd);border-radius:var(--r-lg);
+  background:linear-gradient(135deg,var(--primary-light),rgba(240,253,250,.8));
+  text-align:center;opacity:0;transform:translateY(8px);
+  transition:all .5s cubic-bezier(.16,1,.3,1)
+}
+.resolution-banner.rb-show{display:block;opacity:1;transform:translateY(0)}
+.rb-title{font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:.25rem}
+.rb-text{font-size:.85rem;color:var(--text);line-height:1.6}
+.rb-text strong{color:var(--primary)}
+
+/* Journey resolved state badge */
+.j-resolved-tag{display:inline-flex;align-items:center;gap:.3rem;padding:.2rem .55rem;border-radius:100px;background:var(--primary);color:#fff;font-family:var(--mono);font-size:.55rem;font-weight:700;margin-left:.5rem}
+@keyframes tagPop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.j-resolved-tag{animation:tagPop .4s cubic-bezier(.16,1,.3,1) both}
+
+
+/* ═══════════════════════════════════════════════════════
+   ACCESSIBILITY MODE — WCAG AAA High-Contrast
+   ═══════════════════════════════════════════════════════ */
+
+/* Toggle switch in nav */
+.a11y-toggle{display:flex;align-items:center;gap:.4rem;cursor:pointer;padding:.25rem .55rem;border-radius:6px;border:1.5px solid var(--border);background:var(--surface);transition:all .15s;flex-shrink:0}
+.a11y-toggle:hover{border-color:var(--primary);background:var(--primary-light)}
+.a11y-toggle.a11y-on{border-color:var(--primary);background:var(--primary)}
+.a11y-label{font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.04em;color:var(--text-2);white-space:nowrap;user-select:none}
+.a11y-toggle.a11y-on .a11y-label{color:#fff}
+.a11y-switch{width:28px;height:16px;border-radius:8px;background:var(--border-2);position:relative;transition:background .2s;flex-shrink:0}
+.a11y-switch::after{content:'';position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#fff;transition:transform .2s cubic-bezier(.16,1,.3,1);box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.a11y-toggle.a11y-on .a11y-switch{background:var(--primary)}
+.a11y-toggle.a11y-on .a11y-switch::after{transform:translateX(12px)}
+.a11y-icon{font-size:.8rem;line-height:1}
+
+/* ── WCAG AAA overrides ── */
+body.a11y-mode{
+  --text:#000;--text-2:#333;--text-3:#555;
+  --bg:#fff;--bg-2:#F5F5F5;--bg-3:#E5E5E5;
+  --surface:#fff;--surface-2:#F5F5F5;
+  --border:#999;--border-2:#777;
+  --primary:#0B6E4F;--primary-light:#D1FAE5;--primary-bd:#34D399;
+  --blue:#1D4ED8;--blue-light:#DBEAFE;--blue-bd:#60A5FA;
+  --amber:#92400E;--amber-light:#FEF3C7;--amber-bd:#F59E0B;
+  --red:#991B1B;--red-light:#FEE2E2;--red-bd:#F87171;
+  --purple:#5B21B6;--purple-light:#EDE9FE;--purple-bd:#A78BFA;
+  --teal:#065F46;--teal-light:#D1FAE5;--teal-bd:#34D399
+}
+
+/* All text at AAA contrast (7:1 against white) */
+body.a11y-mode .sec-desc{color:#333 !important;opacity:1 !important}
+body.a11y-mode .fn-desc,body.a11y-mode .s-detail,
+body.a11y-mode .fip-tag,body.a11y-mode .sp-count,
+body.a11y-mode .toc-item-desc,body.a11y-mode .demo-caption,
+body.a11y-mode .rd-history,body.a11y-mode .chart-period{color:#555 !important}
+
+/* Thick focus rings on EVERYTHING clickable */
+body.a11y-mode a:focus-visible,
+body.a11y-mode button:focus-visible,
+body.a11y-mode [onclick]:focus-visible,
+body.a11y-mode [tabindex]:focus-visible,
+body.a11y-mode input:focus-visible,
+body.a11y-mode .lookup-filter:focus-visible,
+body.a11y-mode .ai-tab:focus-visible,
+body.a11y-mode .filter-tab:focus-visible,
+body.a11y-mode .jt-btn:focus-visible,
+body.a11y-mode .outreach-tab:focus-visible,
+body.a11y-mode .nav-links a:focus-visible,
+body.a11y-mode .toc-item:focus-visible,
+body.a11y-mode .b-card:focus-visible,
+body.a11y-mode .ai-card:focus-visible,
+body.a11y-mode .counsel-card:focus-visible,
+body.a11y-mode .esc-card:focus-visible,
+body.a11y-mode .status-row:focus-visible,
+body.a11y-mode .lookup-card:focus-visible,
+body.a11y-mode .msg-preview:focus-visible{
+  outline:3px solid #000 !important;
+  outline-offset:3px !important;
+  box-shadow:0 0 0 6px rgba(0,0,0,.12) !important
+}
+
+/* Make all interactive cards keyboard-focusable via tabindex (added by JS) */
+body.a11y-mode .b-card,body.a11y-mode .ai-card,
+body.a11y-mode .counsel-card,body.a11y-mode .esc-card,
+body.a11y-mode .status-row,body.a11y-mode .lookup-card,
+body.a11y-mode .msg-preview,body.a11y-mode .toc-item{
+  border-width:2px !important
+}
+
+/* Status indicators — larger, with text labels */
+body.a11y-mode .s-indicator{width:14px !important;height:14px !important;border:2px solid #000 !important}
+body.a11y-mode .s-ok{background:#047857 !important}
+body.a11y-mode .s-warn{background:#B45309 !important}
+body.a11y-mode .s-err{background:#991B1B !important}
+body.a11y-mode .sb-ok{border:2px solid #047857 !important;color:#047857 !important;font-weight:700 !important}
+body.a11y-mode .sb-warn{border:2px solid #92400E !important;color:#92400E !important;font-weight:700 !important}
+body.a11y-mode .sb-err{border:2px solid #991B1B !important;color:#991B1B !important;font-weight:700 !important}
+
+/* Thicker borders on all cards */
+body.a11y-mode .tool-frame{border:2px solid #999 !important}
+body.a11y-mode .b-card[class*="sev-high"]{border-left:5px solid #991B1B !important}
+body.a11y-mode .b-card[class*="sev-med"]{border-left:5px solid #92400E !important}
+body.a11y-mode .b-card[class*="sev-low"]{border-left:5px solid #1D4ED8 !important}
+
+/* Kill all animations — motion-reduce */
+body.a11y-mode,body.a11y-mode *,body.a11y-mode *::before,body.a11y-mode *::after{
+  animation-duration:0.01ms !important;
+  animation-iteration-count:1 !important;
+  transition-duration:0.01ms !important
+}
+/* Exception: allow scroll-behavior */
+body.a11y-mode{scroll-behavior:smooth}
+
+/* Disable custom cursor */
+body.a11y-mode,body.a11y-mode *{cursor:auto !important}
+
+/* Screen-reader only helper */
+.sr-only{position:absolute !important;width:1px !important;height:1px !important;padding:0 !important;margin:-1px !important;overflow:hidden !important;clip:rect(0,0,0,0) !important;border:0 !important}
+
+/* A11y badge */
+.a11y-badge{position:fixed;bottom:1.5rem;left:1rem;z-index:250;display:none;align-items:center;gap:.35rem;padding:.35rem .7rem;background:#000;color:#fff;font-family:var(--mono);font-size:.6rem;font-weight:700;border-radius:100px;letter-spacing:.04em}
+body.a11y-mode .a11y-badge{display:inline-flex}
+.a11y-badge::before{content:'♿';font-size:.75rem}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   PREMIUM DESIGN SYSTEM — SaaS-grade polish
+   Stripe / Vercel / Linear aesthetic language
+   Paste at bottom of stylesheet — overrides cascade naturally
+   ═══════════════════════════════════════════════════════════════════ */
+
+
+/* ── 0. REFINED COLOR PALETTE ──────────────────────────────────────
+   Softer backgrounds, richer accents, muted alert tones
+   All alert lights still read clearly but don't scream             */
+
+:root{
+  /* Warmer, calmer canvas */
+  --bg:#FAFAFA !important;
+  --bg-2:#F5F5F4 !important;
+  --bg-3:#E7E5E4 !important;
+  --surface:#FFFFFF !important;
+  --surface-2:#FAFAF9 !important;
+
+  /* Softer structural borders */
+  --border:#E8E8E6 !important;
+  --border-2:#D6D3D1 !important;
+
+  /* Richer text hierarchy */
+  --text:#18181B !important;
+  --text-2:#52525B !important;
+  --text-3:#A1A1AA !important;
+
+  /* Deeper, more saturated primary — Vercel-esque green */
+  --primary:#0F766E !important;
+  --primary-light:#ECFDF5 !important;
+  --primary-bd:#99F6E4 !important;
+
+  /* Calmer alert tones — muted pastels for bg, rich for text */
+  --red:#B91C1C !important;
+  --red-light:#FEF2F2 !important;
+  --red-bd:#FECACA !important;
+
+  --amber:#A16207 !important;
+  --amber-light:#FEFCE8 !important;
+  --amber-bd:#FDE68A !important;
+
+  --blue:#1D4ED8 !important;
+  --blue-light:#EFF6FF !important;
+  --blue-bd:#BFDBFE !important;
+
+  --purple:#6D28D9 !important;
+  --purple-light:#F5F3FF !important;
+  --purple-bd:#C4B5FD !important;
+
+  --teal:#0F766E !important;
+  --teal-light:#F0FDFA !important;
+  --teal-bd:#99F6E4 !important;
+
+  /* Smoother shadows — Stripe's diffused depth */
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 1px 3px rgba(0,0,0,.03) !important;
+  --shadow-md:0 2px 4px rgba(0,0,0,.03), 0 4px 16px rgba(0,0,0,.04) !important;
+  --shadow-lg:0 4px 6px rgba(0,0,0,.02), 0 12px 40px rgba(0,0,0,.06);
+  --shadow-xl:0 8px 16px rgba(0,0,0,.03), 0 24px 64px rgba(0,0,0,.07);
+
+  /* Slightly larger radii for friendlier feel */
+  --r:10px !important;
+  --r-lg:14px !important;
+  --r-xl:20px !important
+}
+
+
+/* ── 1. SPACE & BREATHING ROOM ─────────────────────────────────────
+   Generous internal padding, wider gaps, less claustrophobia       */
+
+/* Sections — more vertical air */
+.sec{padding:clamp(3rem,7vw,5.5rem) 0 !important}
+
+/* Tool body — the main content containers need room */
+.tool-body{padding:clamp(1.5rem,3.5vw,2.5rem) !important}
+
+/* Cards — consistent generous padding */
+.b-card .b-head{padding:.75rem 1rem !important}
+.b-card .b-detail{padding:0 1.1rem !important}
+.b-card.expanded .b-detail{padding-bottom:1.1rem !important}
+.ai-card{padding:1.1rem 1.25rem !important}
+.counsel-card{padding:1.15rem 1.25rem !important}
+.eq-card{padding:1rem 1.15rem !important}
+.insight-card{padding:1.1rem 1.2rem !important}
+.esc-body{padding:.75rem .9rem !important}
+.story-card{padding:1.75rem !important}
+.msg-body{padding:1rem 1.15rem !important}
+.lookup-card{padding:1.1rem 1.25rem !important;margin-bottom:.75rem !important}
+
+/* Monitor cells — more internal space */
+.ms-cell{padding:1.25rem 1rem !important}
+
+/* Status rows — wider, easier to scan */
+.status-row{padding:.65rem .8rem !important;gap:.75rem !important}
+.sp-body{padding:.65rem !important}
+
+/* Grids — wider gaps between items */
+.b-grid{gap:1rem !important}
+.ai-card-grid{gap:1rem !important}
+.msg-grid{gap:1rem !important}
+.eq-grid{gap:1rem !important}
+.info-grid{gap:1.25rem !important}
+.monitor-grid{gap:1.5rem !important}
+.pattern-grid{gap:1.5rem !important}
+
+/* Flow diagram — more room */
+.flow-visual{padding:2.25rem !important}
+.f-node{padding:1rem 1.25rem !important;min-width:135px !important}
+
+/* Detail row items — bigger touch targets */
+.rd-item{padding:.55rem .7rem !important}
+.rd-grid{gap:.65rem !important}
+
+/* Correlation rows */
+.corr-row{padding:.6rem .85rem !important;margin-bottom:.55rem !important}
+
+/* Section descriptions — more space below */
+.sec-desc{margin-bottom:2.25rem !important}
+
+/* Tool frame spacing from next content */
+.tool-frame{margin-bottom:2.25rem !important}
+
+/* Tracer nodes — roomier */
+.tf-node{padding:1.15rem 1rem !important;min-width:155px !important}
+
+/* KB layout — taller sidebar items */
+.kb-nav-item{padding:.55rem .75rem !important}
+
+
+/* ── 2. SOFTER BORDERS & DEPTH ─────────────────────────────────────
+   Shadow-first depth, lighter borders, larger radii               */
+
+/* The big frames — shadow-dominant, barely-there border */
+.tool-frame{
+  border:1px solid rgba(0,0,0,.06) !important;
+  border-radius:var(--r-xl) !important;
+  box-shadow:var(--shadow-md) !important;
+  background:var(--surface) !important
+}
+.tool-frame:hover{
+  box-shadow:var(--shadow-lg) !important;
+  border-color:rgba(0,0,0,.08) !important
+}
+
+/* Tool bar — softer separator */
+.tool-bar{
+  background:var(--surface-2) !important;
+  border-bottom:1px solid rgba(0,0,0,.05) !important;
+  padding:.75rem 1.35rem !important
+}
+
+/* All cards — consistent shadow-first approach */
+.b-card{
+  border:1px solid rgba(0,0,0,.06) !important;
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--shadow) !important
+}
+.b-card:hover{
+  box-shadow:var(--shadow-md) !important;
+  border-color:rgba(0,0,0,.08) !important
+}
+/* Preserve severity left accent but soften */
+.b-card[class*="sev-high"]{border-left:3px solid var(--red) !important}
+.b-card[class*="sev-med"]{border-left:3px solid var(--amber) !important}
+.b-card[class*="sev-low"]{border-left:3px solid var(--blue) !important}
+
+.ai-card{
+  border:1px solid rgba(0,0,0,.06) !important;
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--shadow) !important
+}
+.ai-card:hover{
+  box-shadow:var(--shadow-md) !important;
+  border-color:rgba(0,0,0,.08) !important
+}
+
+.counsel-card{
+  border:1px solid rgba(0,0,0,.06) !important;
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--shadow) !important
+}
+.counsel-card:hover{box-shadow:var(--shadow-md) !important}
+
+.esc-card{
+  border:1px solid rgba(0,0,0,.06) !important;
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--shadow) !important
+}
+.esc-card:hover{box-shadow:var(--shadow-md) !important}
+
+.eq-card{
+  border:1px solid rgba(0,0,0,.06) !important;
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--shadow) !important
+}
+
+.msg-preview{
+  border:1px solid rgba(0,0,0,.06) !important;
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--shadow) !important
+}
+.msg-preview:hover{box-shadow:var(--shadow-md) !important}
+
+.insight-card{
+  border:1px solid rgba(0,0,0,.06) !important;
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--shadow) !important
+}
+.insight-card:hover{box-shadow:var(--shadow-md) !important}
+
+.lookup-card{
+  border:1px solid rgba(0,0,0,.06) !important;
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--shadow) !important
+}
+.lookup-card:hover{box-shadow:var(--shadow-md) !important}
+
+.story-card{
+  border:1px solid rgba(0,0,0,.05) !important;
+  border-radius:var(--r-xl) !important;
+  box-shadow:var(--shadow) !important
+}
+.story-card:hover{box-shadow:var(--shadow-lg) !important}
+
+/* Status panel — softer frame */
+.status-panel{
+  border:1px solid rgba(0,0,0,.06) !important;
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--shadow) !important;
+  overflow:hidden
+}
+.sp-header{
+  background:var(--surface-2) !important;
+  border-bottom:1px solid rgba(0,0,0,.04) !important
+}
+
+/* Monitor summary — softer grid lines */
+.monitor-summary{
+  gap:1px !important;
+  background:rgba(0,0,0,.05) !important;
+  border:1px solid rgba(0,0,0,.06) !important;
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--shadow) !important
+}
+
+/* Info panels — softer */
+.info-panel{
+  border:1px solid rgba(0,0,0,.06) !important;
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--shadow) !important
+}
+.info-panel-header{
+  background:var(--surface-2) !important;
+  border-bottom:1px solid rgba(0,0,0,.04) !important
+}
+
+/* Flow visual — softer container */
+.flow-visual{
+  border:1px solid rgba(0,0,0,.06) !important;
+  border-radius:var(--r-xl) !important;
+  box-shadow:var(--shadow) !important
+}
+
+/* Flow nodes — more rounded */
+.f-node{border-radius:var(--r-lg) !important}
+
+/* Tracer nodes — softer transitions */
+.tf-node{border:1px solid rgba(0,0,0,.08) !important}
+.tf-node:first-child{border-radius:var(--r-lg) 0 0 var(--r-lg) !important}
+.tf-node:last-child{border-radius:0 var(--r-lg) var(--r-lg) 0 !important}
+.tf-node.active{border-color:var(--primary) !important}
+.tf-node.error-node{border-color:var(--red) !important}
+
+/* Tracer detail — softer frame */
+.tracer-detail{
+  border:1px solid rgba(0,0,0,.06) !important;
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--shadow) !important
+}
+
+/* KB layout — softer */
+.kb-layout{
+  border:1px solid rgba(0,0,0,.06) !important;
+  border-radius:var(--r-lg) !important;
+  box-shadow:var(--shadow) !important
+}
+
+/* Correlation rows — lighter border */
+.corr-row{
+  border:1px solid rgba(0,0,0,.05) !important;
+  border-radius:var(--r) !important
+}
+.corr-row:hover{border-color:rgba(0,0,0,.1) !important}
+
+/* Lookup search input — softer */
+.lookup-input{
+  border:1.5px solid rgba(0,0,0,.1) !important;
+  border-radius:var(--r-lg) !important;
+  box-shadow:0 1px 2px rgba(0,0,0,.03) !important
+}
+.lookup-input:focus{
+  border-color:var(--primary) !important;
+  box-shadow:0 0 0 3px rgba(15,118,110,.1) !important
+}
+
+/* Filter tabs — softer container */
+.filter-tabs{border-radius:var(--r) !important;background:rgba(0,0,0,.03) !important}
+.filter-tab.active{border-radius:8px !important;box-shadow:0 1px 3px rgba(0,0,0,.06) !important}
+.ai-tabs{border-radius:var(--r) !important}
+.ai-tab.active{border-radius:8px !important}
+
+/* Lookup filters — pill softness */
+.lookup-filter{border-radius:100px !important;border:1px solid rgba(0,0,0,.08) !important}
+.lookup-filter.lf-active{box-shadow:0 1px 4px rgba(15,118,110,.15) !important}
+
+/* Section divider — barely-there gradient instead of hard line */
+.sec::after{background:linear-gradient(90deg,transparent,rgba(0,0,0,.04),transparent) !important}
+
+/* H2 left accent — slightly thicker and rounded */
+h2::before{width:4px !important;border-radius:3px !important}
+
+/* Badge pills — softer border treatment */
+.h-badge,.divider-badge,.closing-badge{
+  border:1px solid rgba(0,0,0,.08) !important;
+  box-shadow:0 1px 2px rgba(0,0,0,.03) !important
+}
+
+/* Remove heavy left-border accents on tool frames in favor of subtle top accent */
+#monitor .tool-frame,#tracer .tool-frame,#comms .tool-frame,#escalation .tool-frame{
+  border-left:1px solid rgba(0,0,0,.06) !important
+}
+.tool-frame::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r-xl) var(--r-xl) 0 0;
+  background:transparent;z-index:1
+}
+.tool-frame{position:relative}
+#monitor .tool-frame::before{background:var(--amber)}
+#tracer .tool-frame::before{background:var(--red)}
+#comms .tool-frame::before{background:var(--blue)}
+#escalation .tool-frame::before{background:var(--amber)}
+#lookup .tool-frame::before{background:var(--blue)}
+#cvcData .tool-frame::before{background:var(--primary)}
+#patterns .tool-frame::before{background:var(--purple)}
+#kb .tool-frame::before{background:var(--amber)}
+#aiVision .tool-frame::before{background:var(--purple)}
+
+
+/* ── 3. TYPOGRAPHY CLEANUP ─────────────────────────────────────────
+   No text below 0.6rem, hierarchy via weight+color not just size  */
+
+/* Body text baseline */
+body{line-height:1.75 !important;letter-spacing:-.005em}
+
+/* Headings — tighter tracking, bolder weight */
+h2{letter-spacing:-.02em !important;font-weight:700 !important}
+
+/* Section descriptions — comfortable reading size */
+.sec-desc{
+  font-size:.92rem !important;
+  line-height:1.8 !important;
+  opacity:.9 !important;
+  max-width:560px !important;
+  color:var(--text-2) !important
+}
+
+/* Hero description */
+.h-desc{font-size:1.05rem !important;line-height:1.9 !important}
+
+/* Eyebrows — weight-driven hierarchy, not just size */
+.eyebrow{
+  font-size:.7rem !important;
+  font-weight:700 !important;
+  letter-spacing:.15em !important;
+  color:var(--text-3) !important
+}
+
+/* Tool bar title — slightly more visible */
+.tool-bar-title{font-size:.68rem !important;font-weight:600 !important;color:var(--text-2) !important;letter-spacing:.03em !important}
+
+/* Tool labels — slightly bigger */
+.tool-label{font-size:.65rem !important;font-weight:600 !important}
+
+/* Micro-text floor — nothing below 0.6rem except decorative */
+.fn-desc{font-size:.68rem !important;color:var(--text-2) !important;line-height:1.5 !important}
+.s-detail{font-size:.68rem !important;color:var(--text-3) !important}
+.s-name{font-size:.85rem !important}
+.s-badge{font-size:.62rem !important;font-weight:700 !important;letter-spacing:.02em !important}
+.sp-count{font-size:.65rem !important}
+.sp-title{font-size:.88rem !important}
+.rd-label{font-size:.6rem !important;font-weight:600 !important;color:var(--text-3) !important}
+.rd-value{font-size:.78rem !important}
+.fip-tag{font-size:.6rem !important}
+.fip-text{font-size:.88rem !important;line-height:1.75 !important}
+.fip-title{font-size:.95rem !important}
+
+/* Flow arrow labels */
+.f-arrow-label{font-size:.55rem !important}
+.fn-label{font-size:.78rem !important}
+
+/* Tracer text */
+.tf-name{font-size:.85rem !important}
+.tf-sub{font-size:.65rem !important;color:var(--text-3) !important}
+.tf-num{font-size:.55rem !important}
+.td-title{font-size:.92rem !important}
+.td-log{font-size:.72rem !important;line-height:1.9 !important}
+
+/* Cards — title + description hierarchy */
+.ai-card-title{font-size:.88rem !important;font-weight:700 !important}
+.ai-card-desc{font-size:.8rem !important;line-height:1.75 !important;color:var(--text-2) !important}
+.ai-card-signal{font-size:.62rem !important}
+.b-title{font-size:.85rem !important;font-weight:700 !important}
+.b-cat{font-size:.58rem !important;font-weight:500 !important}
+.b-d-label{font-size:.58rem !important;font-weight:700 !important}
+.b-d-text{font-size:.78rem !important;line-height:1.65 !important}
+.eq-title{font-size:.88rem !important;font-weight:700 !important}
+.eq-reason{font-size:.78rem !important;line-height:1.65 !important;color:var(--text-2) !important}
+.eq-pop{font-size:.62rem !important}
+.counsel-card-title{font-size:.92rem !important}
+.counsel-card-body{font-size:.8rem !important;line-height:1.75 !important}
+.insight-title{font-size:.85rem !important;font-weight:700 !important}
+.insight-text{font-size:.78rem !important;line-height:1.65 !important}
+.esc-header{font-size:.92rem !important}
+.esc-body{font-size:.82rem !important;line-height:1.75 !important}
+.sc-title{font-size:1.1rem !important;font-weight:700 !important}
+.sc-text{font-size:.9rem !important;line-height:1.8 !important}
+
+/* Messages — more readable */
+.msg-to{font-size:.85rem !important;font-weight:700 !important}
+.msg-body{font-size:.85rem !important;line-height:1.8 !important}
+.msg-channel{font-size:.58rem !important}
+
+/* Lookup — readable data */
+.lookup-college-name{font-size:1rem !important;font-weight:700 !important}
+.lookup-field-label{font-size:.58rem !important;font-weight:700 !important}
+.lookup-field-value{font-size:.8rem !important}
+.lookup-issue-tag{font-size:.6rem !important;font-weight:600 !important}
+.lookup-action{font-size:.78rem !important;line-height:1.7 !important}
+
+/* Correlation chart */
+.corr-label{font-size:.8rem !important;font-weight:700 !important}
+.corr-count{font-size:.72rem !important}
+.corr-pct{font-size:.62rem !important}
+.chart-title{font-size:.9rem !important;font-weight:700 !important}
+.chart-period{font-size:.65rem !important}
+
+/* Journey steps */
+.j-label{font-size:.82rem !important;font-weight:700 !important}
+.j-text{font-size:.85rem !important;line-height:1.75 !important}
+.j-student{font-size:.82rem !important}
+
+/* Lifecycle */
+.lc-name{font-size:.72rem !important;font-weight:700 !important}
+.lc-sub{font-size:.6rem !important}
+.lc-step{font-size:.5rem !important}
+
+/* Monitor summary numbers */
+.ms-num{font-size:clamp(1.8rem,4.5vw,2.4rem) !important;font-weight:800 !important}
+.ms-label{font-size:.72rem !important;font-weight:500 !important;color:var(--text-3) !important;letter-spacing:.02em}
+
+/* Hero stats */
+.h-stat-label{font-size:.72rem !important;font-weight:500 !important;color:var(--text-3) !important}
+
+/* Demo captions — lighter so they don't compete */
+.demo-caption{font-size:.62rem !important;opacity:.4 !important}
+
+/* Outreach */
+.trigger-title{font-size:.85rem !important;font-weight:700 !important}
+.trigger-desc{font-size:.78rem !important;line-height:1.65 !important}
+
+/* KB inputs */
+.kb-step-input{font-size:.88rem !important;line-height:1.75 !important}
+.kb-esc-input{font-size:.85rem !important}
+.kb-esc-label{font-size:.6rem !important;font-weight:700 !important}
+.kb-nav-item{font-size:.82rem !important}
+
+/* Big quote */
+.big-quote{font-size:clamp(1.5rem,4vw,2.2rem) !important;line-height:1.45 !important}
+
+/* Foot text */
+.foot-text{font-size:.82rem !important;line-height:1.8 !important}
+
+
+/* ── 4. MICRO POLISH ───────────────────────────────────────────────
+   Smooth transitions, refined hovers, Stripe-quality details      */
+
+/* Global transition smoothing */
+.tool-frame,.b-card,.ai-card,.counsel-card,.esc-card,.msg-preview,
+.lookup-card,.insight-card,.story-card,.eq-card,.status-row{
+  transition:all .25s cubic-bezier(.2,.8,.4,1) !important
+}
+
+/* Hover transforms — subtle, not bouncy */
+.b-card:hover,.ai-card:hover,.story-card:hover,.msg-preview:hover,
+.counsel-card:hover,.esc-card:hover{
+  transform:translateY(-2px) !important
+}
+.tool-frame:hover{transform:translateY(-1px) !important}
+
+/* Active press — satisfying click depth */
+.b-card:active,.ai-card:active,.counsel-card:active,
+.esc-card:active,.msg-preview:active,.lookup-card:active{
+  transform:translateY(0) scale(.995) !important;
+  transition-duration:.1s !important
+}
+
+/* Buttons — Vercel-style with soft shadows */
+.tracer-btn-run{
+  box-shadow:0 1px 3px rgba(15,118,110,.2),0 1px 2px rgba(15,118,110,.15) !important;
+  border-radius:var(--r) !important
+}
+.tracer-btn-run:hover{
+  box-shadow:0 3px 12px rgba(15,118,110,.25) !important
+}
+.tracer-btn-reset{border-radius:var(--r) !important}
+.td-btn{border-radius:var(--r) !important}
+.td-btn-primary{
+  box-shadow:0 1px 3px rgba(15,118,110,.2) !important
+}
+.kb-btn{border-radius:var(--r) !important}
+.kb-btn-publish{box-shadow:0 1px 3px rgba(15,118,110,.2) !important}
+
+/* TOC panel — softer shadow */
+.toc-panel{
+  box-shadow:-4px 0 24px rgba(0,0,0,.06),-1px 0 4px rgba(0,0,0,.03) !important;
+  border-left:1px solid rgba(0,0,0,.06) !important
+}
+
+/* TOC items — softer hover */
+.toc-item:hover{background:var(--surface-2) !important;border-left-color:var(--primary) !important}
+.toc-item.toc-current{background:var(--primary-light) !important;border-left:3px solid var(--primary) !important}
+
+/* Nav — cleaner bottom border */
+nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
+
+/* Tool dots — slightly bigger */
+.tool-dots span{width:9px !important;height:9px !important;border-radius:50% !important}
+
+/* Scrollbar — thinner, subtler */
+::-webkit-scrollbar{width:4px !important}
+::-webkit-scrollbar-thumb{background:rgba(0,0,0,.12) !important;border-radius:4px !important}
+::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.2) !important}
+
+/* Selection color — matches brand */
+::selection{background:rgba(15,118,110,.12) !important;color:var(--text) !important}
+
+/* Monitor sparkline opacity */
+.ms-cell svg{opacity:.3 !important}
+.ms-cell:hover svg{opacity:.6 !important;transition:opacity .2s}
+
+/* Progress dots — slightly bigger */
+.progress-dot{transition:all .2s !important}
+
+/* Quick action cards — Stripe-style pill buttons */
+.qa-card{
+  border:1px solid rgba(0,0,0,.08) !important;
+  box-shadow:0 1px 2px rgba(0,0,0,.04) !important
+}
+.qa-card:hover{
+  box-shadow:0 3px 12px rgba(15,118,110,.12) !important;
+  border-color:rgba(15,118,110,.2) !important
+}
+
+/* ── Mobile refinements ── */
+@media(max-width:500px){
+  .tool-body{padding:1rem !important}
+  .ai-card{padding:.85rem 1rem !important}
+  .counsel-card{padding:.85rem 1rem !important}
+  .b-card .b-head{padding:.6rem .85rem !important}
+  .story-card{padding:1.25rem !important}
+  .msg-body{padding:.75rem .85rem !important}
+  .sec{padding:clamp(2rem,5vw,3rem) 0 !important}
+}
 
 </style>
 </head>
 <body>
+<div class="scroll-progress" id="scrollProgress"></div>
+<!-- Theater mode dim overlay -->
+<div class="theater-dim"></div>
+<!-- Zoom mode indicator -->
+<div class="zoom-badge">Zoom Mode</div>
+<!-- Theater mode indicator -->
+<div class="theater-badge"><span class="tb-dot"></span>Theater Mode · hover to spotlight · <kbd>F</kbd> to exit</div>
+<!-- Accessibility mode indicator -->
+<div class="a11y-badge">WCAG AAA · High Contrast</div>
 <a href="#lookup" class="skip-link">Skip to main content</a>
 
 <nav id="nav" role="navigation" aria-label="Main navigation">
   <a class="nav-brand" href="#" onclick="event.preventDefault();(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" style="text-decoration:none;cursor:pointer" title="Back to top"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">CVC-OEI · Application Support</span></div>
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0" aria-hidden="true"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Page Guide</button>
+  <div class="a11y-toggle" id="a11yToggle" onclick="toggleA11y()" role="switch" aria-checked="false" aria-label="Toggle accessibility high-contrast mode" tabindex="0"><span class="a11y-icon" aria-hidden="true">♿</span><span class="a11y-label">A11y</span><div class="a11y-switch"></div></div>
     <div class="nav-links">
     <a href="#why">Context</a><a href="#lookup" class="nv nv-blue"><span class="nav-num">1</span>Lookup</a><a href="#cvcData" class="nv nv-green"><span class="nav-num">2</span>Exchange</a><a href="#flow" class="nv nv-sky"><span class="nav-num">3</span>Architecture</a><a href="#monitor" class="nv nv-amber"><span class="nav-num">4</span>Monitor</a><a href="#tracer" class="nv nv-rose"><span class="nav-num">5</span>Diagnostics</a><a href="#patterns" class="nv nv-orange"><span class="nav-num">6</span>Intelligence</a><a href="#comms" class="nv nv-indigo"><span class="nav-num">7</span>Response</a><a href="#outreach" class="nv nv-teal"><span class="nav-num">8</span>Counselors</a><a href="#aiVision" class="nv nv-purple"><span class="nav-num">9</span>AI Vision</a><a href="#barriers" class="nav-barrier"><span class="nav-num">0</span>Barriers</a>
   </div>
@@ -1550,20 +2719,26 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
       <a class="qa-card" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">⚡</span><span class="qa-text">See what breaks</span></a>
       <a class="qa-card" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">🛠</span><span class="qa-text">Trace an incident</span></a>
       <a class="qa-card" onclick="document.getElementById('counselorToolkit').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">📋</span><span class="qa-text">Help a counselor</span></a>
-      <a class="qa-card" onclick="toggleToc()"><span class="qa-icon">📖</span><span class="qa-text">Browse all sections</span></a>
+      <a class="qa-card" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">📊</span><span class="qa-text">See the barriers</span></a>
     </div>
 
-    <p style="font-size:.78rem;color:var(--text-3);max-width:540px;margin:0 auto .75rem;line-height:1.7;text-align:center">I started at <strong style="color:var(--text-2)">Foothill College</strong> as a first-generation student. The Exchange is <strong style="color:var(--text-2)">equity infrastructure</strong> — when it breaks, students at rural colleges with 12 courses lose access to the same curriculum a metro college offers. I’ve been on the student side of that.</p>
+    <p style="font-size:.78rem;color:var(--text-3);max-width:540px;margin:0 auto .75rem;line-height:1.7;text-align:center;font-size:.95rem;line-height:1.7;max-width:600px">I started at <strong style="color:var(--text)">Foothill College</strong> as a first-generation student. The Exchange is <strong style="color:var(--text)">equity infrastructure</strong> — when it breaks, students at rural colleges with 12 courses lose access to the same curriculum a metro college offers. I’ve been on the student side of that.</p>
     <div class="h-stats">
-      <div><div class="h-stat-num green">115</div><div class="h-stat-label">Connected Colleges</div></div>
-      <div><div class="h-stat-num blue">4</div><div class="h-stat-label">System Platforms</div></div>
-      <div><div class="h-stat-num red">33K</div><div class="h-stat-label">Cross-Enrollments</div></div>
-      <div><div class="h-stat-num" style="color:var(--purple)">2,100%</div><div class="h-stat-label">Growth Since 2021</div></div>
+      <div><div class="h-stat-num green" data-count="115" data-suffix="">0</div><div class="h-stat-label">Connected Colleges</div></div>
+      <div><div class="h-stat-num blue" data-count="4" data-suffix="">0</div><div class="h-stat-label">SIS Platforms</div></div>
+      <div><div class="h-stat-num red" data-count="33" data-suffix="K">0</div><div class="h-stat-label">Cross-Enrollments</div></div>
+      <div><div class="h-stat-num" style="color:var(--purple)" data-count="2100" data-suffix="%" data-comma="true">0</div><div class="h-stat-label">Growth Since 2021</div></div>
     </div>
   </div>
 </div>
     
 </header>
+
+<!-- ENHANCEMENT: First-visit scroll hint — disappears after first scroll -->
+<div class="scroll-hint" id="scrollHint">
+  <span>Scroll to explore</span>
+  <span class="hint-arrow">↓</span>
+</div>
 
 <!-- ═══ WHY CVC ═══ -->
 <section id="why" style="padding:clamp(1.5rem,4vw,2.5rem) 0">
@@ -1572,15 +2747,15 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
       <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem">
         <div style="flex:1;min-width:200px">
           <div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);font-weight:700;margin-bottom:.4rem">The Problem</div>
-          <div style="font-size:.82rem;color:var(--text);line-height:1.7">
+          <div style="font-size:.88rem;color:var(--text);line-height:1.8">
             A student at Chabot enrolls in MATH 1A at De Anza through the Exchange. The next morning, the course isn’t in Canvas. She doesn’t know why. She emails her counselor, who doesn’t know either. She considers dropping.
           </div>
-          <div style="font-size:.78rem;color:var(--text-2);line-height:1.7;margin-top:.5rem">
+          <div style="font-size:.82rem;color:var(--text-2);line-height:1.8;margin-top:.5rem">
             The cause was technical — an expired authentication token between two systems she’s never heard of. The support analyst’s job is to find it, fix it, tell the right people, and make sure it doesn’t happen to the next 46 students in the queue.</div>
         </div>
         <div style="flex:1;min-width:200px">
           <div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:.4rem">Why I Built This</div>
-          <div style="font-size:.82rem;color:var(--text);line-height:1.7">
+          <div style="font-size:.88rem;color:var(--text);line-height:1.8">
             Each section below addresses a real part of the job: monitoring, diagnosis, escalation, documentation, and barrier analysis.
           </div>
           <div style="font-size:.72rem;color:var(--text-2);line-height:1.8;margin-top:.6rem">
@@ -1602,7 +2777,7 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 <section class="sec fu" id="lookup" role="region" aria-label="College Lookup"><div class="wrap">
   <div class="eyebrow" style="color:var(--blue)"><span class="sec-num" style="background:var(--blue)">1</span>Lookup</div>
   <h2>Look up any college in <em>the Exchange</em></h2>
-  <p class="sec-desc">Type a college name, Student Information System type, or keyword. <strong>Instant reference card.</strong></p>
+  <p class="sec-desc">Type a college name or SIS type. Instant reference with financial aid status, sign-on health, and Exchange integration notes.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Lookup</span></div><span class="tool-bar-title">College Lookup · 31 Colleges · Searchable</span></div>
     <div class="tool-body">
@@ -1618,7 +2793,9 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
           <button class="lookup-filter" onclick="filterColleges('manual',this)" style="border-color:var(--red)">FA Manual</button>
         </div>
         <div class="lookup-input-wrap">
-          <input class="lookup-input" id="collegeLookup" type="text" placeholder="Search by name, district, SIS type, issue, or region..." oninput="searchColleges(this.value)" autocomplete="off">
+          <input class="lookup-input" id="collegeLookup" type="text" placeholder="Search by name, district, or SIS type..." oninput="searchColleges(this.value)" autocomplete="off">
+          <!-- ENHANCEMENT: Clear button — obvious affordance to reset search -->
+          <button class="lookup-clear" id="lookupClear" onclick="clearSearch()" title="Clear search" aria-label="Clear search">×</button>
         </div>
         <div class="lookup-results" id="lookupResults"></div>
         <div class="lookup-count" id="lookupCount"></div>
@@ -1631,7 +2808,7 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 <section class="sec fu" id="cvcData"><div class="wrap">
   <div class="eyebrow" style="color:var(--primary)"><span class="sec-num sec-num-green">2</span>Exchange</div>
   <h2>The numbers behind <em>course sharing</em></h2>
-  <p class="sec-desc">From 1,500 to 33,000 cross-enrollments in three years. The support workload is scaling fast.</p>
+  <p class="sec-desc">From 1,500 to 33,000 cross-enrollments in three years. The support workload scales with it. <em style="font-size:.75rem;color:var(--text-3)">(Wheelhouse Center, Oct 2025)</em></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Data</span></div><span class="tool-bar-title">Exchange Growth · 2021–25</span></div>
     <div class="tool-body">
@@ -1639,23 +2816,23 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
         <div class="info-panel">
           <div class="info-panel-header">Exchange Enrollment Growth (2021–25)</div>
           <div class="info-panel-body" id="growthChart">
-            <div class="growth-row"><div class="growth-year">2021–22</div><div class="growth-bar-wrap"><div class="growth-bar" style="width:4.5%;background:var(--primary)"></div><span class="growth-num" style="color:var(--text);margin-left:.4rem">1.5K</span></div></div>
-            <div class="growth-row"><div class="growth-year">2022–23</div><div class="growth-bar-wrap"><div class="growth-bar" style="width:24%;background:var(--primary)"><span class="growth-num">8K</span></div></div></div>
-            <div class="growth-row"><div class="growth-year">2023–24</div><div class="growth-bar-wrap"><div class="growth-bar" style="width:58%;background:var(--blue)"><span class="growth-num">19K</span></div></div></div>
-            <div class="growth-row"><div class="growth-year">2024–25</div><div class="growth-bar-wrap"><div class="growth-bar" style="width:100%;background:linear-gradient(90deg,var(--blue),var(--teal))"><span class="growth-num">33K+</span></div></div></div>
+            <div class="growth-row"><div class="growth-year">2021–22</div><div class="growth-bar-wrap"><div class="growth-bar" style="--bar-w:4.5%;background:var(--primary)"></div><span class="growth-num" style="color:var(--text);margin-left:.4rem">1.5K</span></div></div>
+            <div class="growth-row"><div class="growth-year">2022–23</div><div class="growth-bar-wrap"><div class="growth-bar" style="--bar-w:24%;background:var(--primary)"><span class="growth-num">8K</span></div></div></div>
+            <div class="growth-row"><div class="growth-year">2023–24</div><div class="growth-bar-wrap"><div class="growth-bar" style="--bar-w:58%;background:var(--blue)"><span class="growth-num">19K</span></div></div></div>
+            <div class="growth-row"><div class="growth-year">2024–25</div><div class="growth-bar-wrap"><div class="growth-bar" style="--bar-w:100%;background:linear-gradient(90deg,var(--blue),var(--teal))"><span class="growth-num">33K+</span></div></div></div>
           </div>
         </div>
         <div class="info-panel">
           <div class="info-panel-header">Est. cross-enrollments by California General Education Transfer Curriculum (Cal-GETC) area (2024–25)</div>
           <div class="info-panel-body" id="courseChart">
-            <div class="course-bar-row"><div class="course-name">1A · English Comp</div><div class="course-bar-wrap"><div class="course-bar" style="width:100%;background:var(--primary)"><span class="course-pct">~5,800</span></div></div></div>
-            <div class="course-bar-row"><div class="course-name">2 · Math / QR</div><div class="course-bar-wrap"><div class="course-bar" style="width:88%;background:var(--primary)"><span class="course-pct">~5,100</span></div></div></div>
-            <div class="course-bar-row"><div class="course-name">4 · Social / Behav Sci</div><div class="course-bar-wrap"><div class="course-bar" style="width:79%;background:var(--blue)"><span class="course-pct">~4,600</span></div></div></div>
-            <div class="course-bar-row"><div class="course-name">1C · Oral Comm</div><div class="course-bar-wrap"><div class="course-bar" style="width:66%;background:var(--blue)"><span class="course-pct">~3,800</span></div></div></div>
-            <div class="course-bar-row"><div class="course-name">3 · Arts / Humanities</div><div class="course-bar-wrap"><div class="course-bar" style="width:60%;background:var(--purple)"><span class="course-pct">~3,500</span></div></div></div>
-            <div class="course-bar-row"><div class="course-name">1B · Critical Thinking</div><div class="course-bar-wrap"><div class="course-bar" style="width:57%;background:var(--purple)"><span class="course-pct">~3,300</span></div></div></div>
-            <div class="course-bar-row"><div class="course-name">6 · Ethnic Studies</div><div class="course-bar-wrap"><div class="course-bar" style="width:45%;background:var(--teal)"><span class="course-pct">~2,600 ↑</span></div></div></div>
-            <div class="course-bar-row"><div class="course-name">5 · Phys / Bio Sci</div><div class="course-bar-wrap"><div class="course-bar" style="width:36%;background:var(--amber)"><span class="course-pct">~2,100</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">1A · English Comp</div><div class="course-bar-wrap"><div class="course-bar" style="--bar-w:100%;background:var(--primary)"><span class="course-pct">~5,800</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">2 · Math / QR</div><div class="course-bar-wrap"><div class="course-bar" style="--bar-w:88%;background:var(--primary)"><span class="course-pct">~5,100</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">4 · Social / Behav Sci</div><div class="course-bar-wrap"><div class="course-bar" style="--bar-w:79%;background:var(--blue)"><span class="course-pct">~4,600</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">1C · Oral Comm</div><div class="course-bar-wrap"><div class="course-bar" style="--bar-w:66%;background:var(--blue)"><span class="course-pct">~3,800</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">3 · Arts / Humanities</div><div class="course-bar-wrap"><div class="course-bar" style="--bar-w:60%;background:var(--purple)"><span class="course-pct">~3,500</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">1B · Critical Thinking</div><div class="course-bar-wrap"><div class="course-bar" style="--bar-w:57%;background:var(--purple)"><span class="course-pct">~3,300</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">6 · Ethnic Studies</div><div class="course-bar-wrap"><div class="course-bar" style="--bar-w:45%;background:var(--teal)"><span class="course-pct">~2,600 ↑</span></div></div></div>
+            <div class="course-bar-row"><div class="course-name">5 · Phys / Bio Sci</div><div class="course-bar-wrap"><div class="course-bar" style="--bar-w:36%;background:var(--amber)"><span class="course-pct">~2,100</span></div></div></div>
           </div>
         </div>
       </div>
@@ -1686,14 +2863,14 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 <section class="sec sec-alt fu" id="journey" role="region" aria-label="Student Journey"><div class="wrap">
   <div class="eyebrow">Student Experience</div>
   <h2>Same enrollment — <em>working</em> vs <em style="color:var(--red)">breaks</em></h2>
-  <p class="sec-desc">When the system works, students never think about it. When it breaks — <strong>they see a missing course.</strong></p>
+  <p class="sec-desc">When the Exchange works, a student at Chabot takes MATH 1A at De Anza without thinking about it. When it breaks — <strong>the course vanishes from Canvas.</strong> Teal annotations show where prevention could have caught it.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Student View</span></div><span class="tool-bar-title">MATH 1A · Chabot → De Anza</span></div>
     <div class="tool-body" style="padding:0">
       <div style="display:flex;gap:2px;background:var(--bg-3);border-radius:var(--r);padding:2px;margin:.75rem .85rem 0;width:fit-content" id="journeyToggle">
-        <button class="jt-btn active" onclick="setJourney('compare',this)">Side by Side</button>
+        <button class="jt-btn" onclick="setJourney('compare',this)">Side by Side</button>
         <button class="jt-btn" onclick="setJourney('ok',this)">Successful Only</button>
-        <button class="jt-btn" onclick="setJourney('broken',this)">Broken Only</button>
+        <button class="jt-btn active" onclick="setJourney('broken',this)">Broken Only</button>
       </div>
       <div id="journeyBody"></div>
     </div>
@@ -1731,7 +2908,7 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 <section class="sec sec-alt fu" id="monitor" role="region" aria-label="System Monitor"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:var(--amber)">4</span>Monitor</div>
   <h2>Spot the failure <em>before the tickets arrive</em></h2>
-  <p class="sec-desc">The view that prevents the 9 AM scramble. <strong>Which colleges are up, degraded, or down?</strong></p>
+  <p class="sec-desc">Which of the 115 Exchange colleges are healthy, degraded, or failing right now? <strong>The view that prevents the 9 AM scramble.</strong></p>
   <div class="tool-frame">
     <div style="position:relative"><div class="live-alert" id="liveAlert"><div class="live-alert-title">New Alert</div><div class="live-alert-body"></div><div class="live-alert-time"></div></div></div>
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><div class="tool-bar-title">Morning Monitor · Weekly Pulse · College Health Status</div></div>
@@ -1778,6 +2955,11 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
       </div>
       <div class="tracer-flow" id="tracerFlow"></div>
       <div class="tracer-detail" id="tracerDetail" style="margin-top:1.25rem"></div>
+      <!-- Live Resolution banner — appears after Deploy Fix -->
+      <div class="resolution-banner" id="resolutionBanner">
+        <div class="rb-title">✓ Incident Resolved</div>
+        <div class="rb-text"><strong>Sacramento City College</strong> — Ethos token regenerated, 47 AER records flushed. Monitor updated. Student journey restored.</div>
+      </div>
     </div>
   </div>
 </div></section>
@@ -1786,7 +2968,7 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 <section class="sec sec-alt fu" id="patterns"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:#c2410c">6</span>Intelligence</div>
   <h2>Is this one ticket — or <em>twenty waiting to happen?</em></h2>
-  <p class="sec-desc">Ticket data mapped to the CVC academic calendar. <strong>One ticket — or a pattern?</strong></p>
+  <p class="sec-desc">Ticket data mapped to the CVC academic calendar — registration, census, add/drop, FA disbursement. <strong>One ticket — or a pattern?</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><div class="tool-bar-title">Ticket Intelligence · 12-Week Calendar</div></div>
     <div class="tool-body">
@@ -1806,7 +2988,7 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 <section class="sec fu" id="kb"><div class="wrap">
   <div class="eyebrow">Documentation</div>
   <h2>If the fix isn’t documented, it didn’t <em>scale.</em></h2>
-  <p class="sec-desc">Four templates. Integration, auth, sync, onboarding. <strong>If it’s not documented, it didn’t scale.</strong></p>
+  <p class="sec-desc">Ethos token refresh, SAML SSO fix, sync race condition, new college onboarding. <strong>Four templates. Editable. Copy-ready.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation</span></div><div class="tool-bar-title">KB Builder · 4 Templates · Copy-Ready</div></div>
     <div class="tool-body" style="padding:0">
@@ -1829,7 +3011,8 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
   <div class="wrap">
     <div class="eyebrow"><span class="sec-num" style="background:#4338ca">7</span>Response</div>
     <h2>The same failure, written <em>four different ways</em></h2>
-    <p class="sec-desc">Same incident, four audiences, four different messages. <strong>Each one is copy-ready.</strong></p>
+    <p class="sec-desc">Same Ethos token failure — written for the student, campus IT, the registrar, and your internal team. <strong>Each one is copy-ready.</strong></p>
+  <div style="display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .6rem;border-radius:100px;background:var(--amber-light);border:1px solid var(--amber-bd);font-family:var(--mono);font-size:.5rem;color:var(--amber);margin-bottom:1rem"><span style="width:5px;height:5px;border-radius:50%;background:var(--amber)"></span>Continues the Sacramento City scenario from Monitor → Diagnostics</div</p>
     <div style="padding:.55rem .85rem;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
       <div style="display:flex;align-items:center;gap:.35rem"><span style="width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0"></span><span style="font-family:var(--mono);font-size:.55rem;font-weight:600;color:var(--amber)">P2 ACTIVE</span></div>
       <div style="font-size:.78rem;color:var(--text-2)">Sacramento City — Ethos token expired — 47 AER records queued — MATH 1A cross-enrollment not syncing to Canvas</div>
@@ -1857,10 +3040,15 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 <section class="sec sec-alt fu" id="escalation" role="region" aria-label="Escalation Matrix"><div class="wrap">
   <div class="eyebrow">Escalation</div>
   <h2>How do you know when to <em>own it</em> vs <em>escalate it?</em></h2>
-  <p class="sec-desc">P1, P2, or P3? <strong>Who to contact, how fast, and what to bring.</strong></p>
+  <p class="sec-desc">P1, P2, or P3? Ellucian, campus IT, the CCC Tech Center, or OEI leadership — <strong>who to contact, how fast, and what to bring.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Reference</span></div><span class="tool-bar-title">Escalation Decision Matrix · P1 / P2 / P3</span></div>
     <div class="tool-body">
+      <div style="padding:.5rem .75rem;background:var(--amber-light);border:1px solid var(--amber-bd);border-radius:var(--r);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;font-size:.72rem">
+        <span style="font-size:.85rem">⚡</span>
+        <span style="color:var(--text-2)"><strong style="color:var(--amber)">Current scenario:</strong> Sacramento City · Ethos token failure · 47 students · <strong style="color:var(--amber)">P2 — escalate within 4 hours</strong></span>
+      </div>
+
       <div style="padding:.5rem .75rem;border:1px solid var(--amber-bd);background:var(--amber-light);border-radius:var(--r);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:var(--text-2)">
           <span style="width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0"></span>
           <span><strong style="color:var(--text)">Current scenario:</strong> Sacramento City Ethos token expired — 1 college degraded, 47 students affected. Based on the evidence: <strong style="color:var(--amber)">this is a P2.</strong></span>
@@ -1915,13 +3103,13 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
     <h2>What a typical escalation path <em>looks like</em></h2>
     <p class="sec-desc" style="margin-bottom:1rem">One incident, traced from first report to resolution. <strong>Each step maps to a tool above.</strong></p>
     <div style="display:flex;gap:0;overflow-x:auto;margin-top:1.5rem">
-      <div class="sc-step" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 1</div><div class="sc-step-tool">Monitor</div><div class="sc-step-action">Check college health</div><div class="sc-step-link">→ Section 4</div></div>
-      <div class="sc-step" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 2</div><div class="sc-step-tool">Tracer</div><div class="sc-step-action">Walk the data flow</div><div class="sc-step-link">→ Section 5</div></div>
-      <div class="sc-step" onclick="document.getElementById('patterns').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 3</div><div class="sc-step-tool">Patterns</div><div class="sc-step-action">Isolated or systemic?</div><div class="sc-step-link">→ Section 6</div></div>
-      <div class="sc-step" onclick="document.getElementById('kb').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 4</div><div class="sc-step-tool">Knowledge Base Builder</div><div class="sc-step-action">Document the fix</div><div class="sc-step-link">→ Section 6</div></div>
-      <div class="sc-step" onclick="document.getElementById('escalation').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 5</div><div class="sc-step-tool">Escalate?</div><div class="sc-step-action">P1, P2, or P3?</div><div class="sc-step-link">→ Section 7</div></div>
-      <div class="sc-step" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 6</div><div class="sc-step-tool">Barriers</div><div class="sc-step-action">Systemic barrier?</div><div class="sc-step-link">→ Section 0</div></div>
-      <div class="sc-step" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 7</div><div class="sc-step-tool">Outreach</div><div class="sc-step-action">Prevent next term?</div><div class="sc-step-link">→ Section 8</div></div>
+      <div class="sc-step" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 1</div><div class="sc-step-tool">Monitor</div><div class="sc-step-action">Check college health</div><div class="sc-step-link">→ Monitor</div></div>
+      <div class="sc-step" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 2</div><div class="sc-step-tool">Tracer</div><div class="sc-step-action">Walk the data flow</div><div class="sc-step-link">→ Diagnostics</div></div>
+      <div class="sc-step" onclick="document.getElementById('patterns').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 3</div><div class="sc-step-tool">Patterns</div><div class="sc-step-action">Isolated or systemic?</div><div class="sc-step-link">→ Intelligence</div></div>
+      <div class="sc-step" onclick="document.getElementById('kb').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 4</div><div class="sc-step-tool">Knowledge Base Builder</div><div class="sc-step-action">Document the fix</div><div class="sc-step-link">→ KB Builder</div></div>
+      <div class="sc-step" onclick="document.getElementById('escalation').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 5</div><div class="sc-step-tool">Escalate?</div><div class="sc-step-action">P1, P2, or P3?</div><div class="sc-step-link">→ Response</div></div>
+      <div class="sc-step" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 6</div><div class="sc-step-tool">Barriers</div><div class="sc-step-action">Systemic barrier?</div><div class="sc-step-link">→ Barriers</div></div>
+      <div class="sc-step" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 7</div><div class="sc-step-tool">Outreach</div><div class="sc-step-action">Prevent next term?</div><div class="sc-step-link">→ Outreach</div></div>
     </div>
   </div>
 </div>
@@ -1931,7 +3119,7 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 <section class="sec sec-alt fu" id="outreach"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:var(--teal)">8</span>Outreach</div>
   <h2>What if course sharing wasn’t a <em>last resort?</em></h2>
-  <p class="sec-desc">Essential for graduation, but usually a last resort. <strong>What if students knew earlier?</strong></p>
+  <p class="sec-desc">Cross-enrollment through the Exchange is essential for graduation — but usually discovered too late. <strong>What if students and counselors knew earlier?</strong></p>
   <div style="display:flex;gap:.5rem;margin-top:.5rem"><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--border)"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--border)"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--border)"></span><span style="font-family:var(--mono);font-size:.5rem;color:var(--text-3);white-space:nowrap;align-self:center">4 of 7 months covered</span></div>
   <div style="padding:.6rem .85rem;border:1px solid var(--teal-bd);background:var(--teal-light);border-radius:var(--r);margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:.5rem">
     <span style="font-size:.85rem;flex-shrink:0">💬</span>
@@ -1954,7 +3142,7 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 <section class="sec sec-alt fu" id="counselorToolkit" role="region" aria-label="Counselor Toolkit"><div class="wrap">
   <div class="eyebrow" style="color:var(--teal)">Counselor Toolkit</div>
   <h2>The Exchange is not just GE — <em>here's the proof</em></h2>
-  <p class="sec-desc">Counselors are the gateway. If they're uncertain about transfer credit, students never hear about the Exchange.</p>
+  <p class="sec-desc">If counselors aren't confident about transfer credit, students never hear about the Exchange. New for Fall 2025: Cal-GETC Area 6 (Ethnic Studies).</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--teal-light);color:var(--teal)">Reference</span></div><span class="tool-bar-title">Counselor Toolkit · Verification · Checklist · Scripts</span></div>
     <div class="tool-body">
@@ -1991,19 +3179,21 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
           </div>
         </div>
 
-        <div class="counsel-card" onclick="this.classList.toggle('cc-open')">
+        <div class="counsel-card" onclick="this.classList.toggle('cc-open')" style="border:2px solid var(--teal-bd);background:linear-gradient(135deg,var(--teal-light) 0%,var(--surface) 100%)">
+          <div style="position:absolute;top:.5rem;right:.5rem;font-family:var(--mono);font-size:.48rem;padding:.15rem .4rem;border-radius:100px;background:var(--teal);color:#fff;font-weight:700;letter-spacing:.04em">#1 PREVENTION</div>
           <div class="counsel-card-icon">📋</div>
           <div class="counsel-card-title">Student registration checklist</div>
-          <div class="counsel-card-body">Most support tickets come from students who registered wrong. A counselor who walks through these 7 steps prevents the ticket from ever being created.</div>
+          <div class="counsel-card-body">Most Exchange support tickets trace back to a registration step the student didn't know about. A counselor who walks through these 7 steps prevents the ticket from ever being created.</div>
           <div class="counsel-expand">
-            <div style="font-family:var(--mono);font-size:.52rem;color:var(--text-3);margin-bottom:.4rem">Print-ready — give this to the student before they register</div>
+            <div style="font-family:var(--mono);font-size:.52rem;color:var(--text-3);margin-bottom:.4rem">7 steps to walk through before the student clicks "Add Course" on search.cvc.edu</div>
             <div class="reg-checklist">
               <div class="reg-item"><div class="counsel-step-text"><strong>Confirm you're enrolled at your home college this term</strong> in at least one course. You cannot use the Exchange if you're not currently enrolled.</div></div>
               <div class="reg-item"><div class="counsel-step-text"><strong>Search at search.cvc.edu</strong> — set your home college first. Search by GE area or course name. Only click courses marked "Add Class" for instant enrollment.</div></div>
               <div class="reg-item"><div class="counsel-step-text"><strong>Verify with your counselor</strong> that this specific course at this specific college satisfies your requirement. Bring the course name, college, and C-ID number if listed.</div></div>
               <div class="reg-item"><div class="counsel-step-text"><strong>Pay immediately or set up financial aid.</strong> Teaching colleges may drop you for nonpayment. Three payment paths: credit card now, apply for CCPG at the teaching college (it does not transfer from your home college), or coordinate a Consortium Agreement through your home college's financial aid office.</div></div>
+        <div class="reg-warn"><strong>⚠ Timing gap:</strong> FA Consortium Agreements take 3–5 business days. Some teaching colleges run drop-for-nonpayment within 48 hours. Pay now, get reimbursed later.</div>
               <div class="reg-item"><div class="counsel-step-text"><strong>Consent to transcript sharing</strong> during enrollment. This allows your grades to automatically transfer back to your home college at end of term.</div></div>
-              <div class="reg-item"><div class="counsel-step-text"><strong>Check Canvas within 24 hours.</strong> Log in using your home college credentials. Your Exchange course should appear alongside your other courses. If it doesn't, contact CVC support.</div></div>
+              <div class="reg-item" style="background:var(--teal-light);border:1px solid var(--teal-bd);border-radius:6px;padding:.6rem"><div class="counsel-step-text"><strong>Check Canvas within 24 hours.</strong> Log in using your home college credentials. Your Exchange course should appear alongside your other courses. If it doesn't, contact CVC support.</div></div>
               <div class="reg-item"><div class="counsel-step-text"><strong>Know the 2-course limit.</strong> You can cross-enroll in a maximum of 2 Exchange courses per term. Winter intersession counts toward the spring term limit.</div></div>
             </div>
             <div class="reg-warn"><strong>⚠ Common mistake that creates tickets:</strong> Student enrolls, doesn't pay, gets dropped for nonpayment, then panics. Step 4 prevents this. If the student is using financial aid, the Consortium Agreement can take days — they need to start that process before registration, not after.</div>
@@ -2042,7 +3232,7 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 <section class="sec fu" id="aiVision" role="region" aria-label="AI Vision"><div class="wrap">
   <div class="eyebrow" style="color:var(--purple)"><span class="sec-num" style="background:var(--purple)">9</span>AI Vision</div>
   <h2>What could AI <em style="color:var(--purple)">actually do here?</em></h2>
-  <p class="sec-desc">Each card links to a tool above, compares today vs with-AI, and rates implementation complexity.</p>
+  <p class="sec-desc">Aligned with CISOA 2026 themes: fraud deterrence, agentic AI, and equity-first automation. <strong>Each card shows today vs with-AI.</strong></p>
   <div style="display:flex;gap:.5rem;margin:.75rem 0;flex-wrap:wrap">
     <div style="padding:.4rem .65rem;border-radius:6px;background:var(--primary-light);border:1px solid var(--primary-bd);font-size:.7rem;color:var(--text-2)"><strong style="color:var(--primary)">4 quick wins</strong> you could build with rules, no machine learning</div>
     <div style="padding:.4rem .65rem;border-radius:6px;background:var(--purple-light);border:1px solid var(--purple-bd);font-size:.7rem;color:var(--text-2)"><strong style="color:var(--purple)">Fraud tab</strong> aligned with CISOA 2026 takeaways on agentic AI</div>
@@ -2058,9 +3248,9 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
         <div class="ai-spec-stage"><div class="ai-spec-num">04</div><div class="ai-spec-label">Adaptive</div><div class="ai-spec-desc">System learns, recommends, self-corrects</div></div>
       </div>
       <div class="ai-tabs" id="aiTabs">
-        <button class="ai-tab active" onclick="setAiView('ops',this)">AI for Operations</button>
+        <button class="ai-tab" onclick="setAiView('ops',this)">AI for Operations</button>
         <button class="ai-tab" onclick="setAiView('student',this)">AI for Students</button>
-        <button class="ai-tab" onclick="setAiView('fraud',this)">Fraud &amp; Integrity</button>
+        <button class="ai-tab active" onclick="setAiView('fraud',this)">Fraud &amp; Integrity</button>
         <button class="ai-tab" onclick="setAiView('role',this)">The Analyst’s Role</button>
       </div>
       <div id="aiBody"></div>
@@ -2088,7 +3278,7 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 <section class="sec fu" id="barrierOverview" role="region" aria-label="Barrier Intelligence"><div class="wrap">
   <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">0</span>Barriers</div>
   <h2>Ten friction points a support analyst <em class="red">can act on</em></h2>
-  <p class="sec-desc">Barriers the support team can act on <strong>now</strong> — before engineering fixes land.</p>
+  <p class="sec-desc">Systemic friction in the Exchange enrollment pipeline — from no-show drops to FA timing gaps. <strong>Each one is actionable now.</strong></p>
   <div style="display:flex;gap:.25rem;margin-top:.6rem;height:8px;border-radius:4px;overflow:hidden">
     <div style="flex:3;background:var(--red);border-radius:4px 0 0 4px" title="Auth/SSO barriers"></div>
     <div style="flex:2.5;background:var(--amber)" title="FA/Payment barriers"></div>
@@ -2114,7 +3304,7 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 <section class="sec sec-alt fu" id="lifecycle"><div class="wrap">
   <div class="eyebrow eyebrow-red">Lifecycle</div>
   <h2>Where do students <em class="red">hit friction?</em></h2>
-  <p class="sec-desc">Nine steps. Red = students get stuck. Amber = manual workaround. <strong>Green = smooth.</strong></p>
+  <p class="sec-desc">Nine steps from search.cvc.edu to MIS reporting. Red = students get stuck. Amber = manual workaround. <strong>Green = smooth.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Lifecycle</span></div><span class="tool-bar-title">Enrollment Lifecycle · 9 Steps</span></div>
     <div class="tool-body"><div class="lc-flow" id="lcFlow"></div></div>
@@ -2125,7 +3315,7 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 <section class="sec fu" id="matrix"><div class="wrap">
   <div class="eyebrow eyebrow-red">Campus Intel</div>
   <h2>Not every college has the same <em class="red">support profile</em></h2>
-  <p class="sec-desc">Same barrier, different impact — depending on <strong>which SIS is underneath.</strong></p>
+  <p class="sec-desc">Same barrier, different impact at Banner Direct vs Ethos vs PeopleSoft colleges. <strong>Filter by platform.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Matrix</span></div><span class="tool-bar-title">Campus Comparison · Filter by SIS Platform</span></div>
     <div class="tool-body">
@@ -2139,7 +3329,7 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 <section class="sec sec-alt fu" id="equity"><div class="wrap">
   <div class="eyebrow eyebrow-red">Equity</div>
   <h2>Which barriers hit <em class="red">vulnerable students</em> hardest?</h2>
-  <p class="sec-desc">Not all friction is equal. Scored by impact on <strong>the students with the least margin for error.</strong></p>
+  <p class="sec-desc">Not all Exchange friction is equal. Scored by impact on <strong>first-generation, CCPG-eligible, and DSPS students.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Equity</span></div><span class="tool-bar-title">Equity Impact · Barriers Ranked by Vulnerability</span></div>
     <div class="tool-body"><div class="eq-grid" id="eqGrid"></div></div>
@@ -2150,7 +3340,7 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 <section class="sec fu" id="correlator"><div class="wrap">
   <div class="eyebrow eyebrow-red">Correlation</div>
   <h2>How much of the ticket queue is <em class="red">preventable?</em></h2>
-  <p class="sec-desc">If most tickets come from the same three barriers — <strong>fix the barriers, not just the tickets.</strong></p>
+  <p class="sec-desc">If most Exchange support tickets come from the same three barriers — <strong>fix the barriers, not just the tickets.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Correlation</span></div><span class="tool-bar-title">Ticket-to-Barrier Correlator</span></div>
     <div class="tool-body" id="corrBody"></div>
@@ -2175,11 +3365,11 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
 
 <footer style="border-top:1px solid var(--border);padding:2rem 0;text-align:center;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)">
   <div class="wrap">
-    <div style="font-size:.82rem;color:var(--text);line-height:1.7;margin-bottom:.5rem">
+    <div style="font-size:.88rem;color:var(--text);line-height:1.8;margin-bottom:.5rem">
       <strong>Henry Fan</strong> · Application Support Analyst I Candidate · CVC-OEI / Foothill–De Anza CCD
     </div>
     <div style="font-size:.7rem;color:var(--text-3);line-height:1.6;max-width:480px;margin:0 auto">
-      Every tool on this page addresses a real challenge from the job description. All data is simulated — no real student records. Built with publicly available CVC documentation.
+      Every tool on this page maps to a real challenge from the job description — because I read it as a student who's been on the other side of these problems. Try the real Exchange at <a href="https://search.cvc.edu" target="_blank" rel="noopener" style="color:var(--primary);text-decoration:underline">search.cvc.edu</a>. All data is simulated — no real student records. Built with publicly available CVC documentation and the live <a href="https://search.cvc.edu" target="_blank" rel="noopener" style="color:var(--primary);text-decoration:underline;text-underline-offset:2px">CVC Exchange course search</a>.
     </div>
     <div style="display:flex;gap:.4rem;justify-content:center;margin-top:.75rem;flex-wrap:wrap">
       <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-3)">Banner</span>
@@ -2188,6 +3378,10 @@ a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal
       <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-3)">Canvas</span>
       <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-3)">Ethos API</span>
       <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-3)">CVC Exchange</span>
+    </div>
+  
+    <div style="margin-top:.75rem;font-family:var(--mono);font-size:.5rem;color:var(--text-3);opacity:.5;transition:opacity .3s" id="interactionCounter">
+      <span id="interactionCount">0</span> interactions on this page
     </div>
   </div>
 </footer>
@@ -2213,15 +3407,15 @@ function showFlowInfo(idx){const d=flowData[idx],p=document.getElementById('flow
 const allColleges=[
 {name:'Foothill College',sis:'Banner Direct',status:'ok',detail:'Last sync: 2m ago · Financial Aid Dashboard: active',badge:'Healthy',uptime:'99.8%',lastErr:'None (30d)',endpoint:'/banner/api/sections',history:['09:14 — AER transmitted','09:12 — Sync OK','09:10 — Sync OK']},
 {name:'De Anza College',sis:'Banner Direct',status:'ok',detail:'Last sync: 1m ago',badge:'Healthy',uptime:'99.9%',lastErr:'None (30d)',endpoint:'/banner/api/sections',history:['09:15 — Sync OK','09:13 — AER transmitted']},
-{name:'City College SF',sis:'Banner Ethos',status:'warn',detail:'Seat count delay: 8min',badge:'Degraded',uptime:'97.2%',lastErr:'Seat sync timeout (2h ago)',endpoint:'/ethos/v1/section-registrations',history:['09:14 — Seat count DELAYED','09:06 — Sync OK']},
-{name:'Sacramento City',sis:'Banner Ethos',status:'err',detail:'Ethos token expired · FA: manual workflow',badge:'Failing',uptime:'94.1%',lastErr:'OAuth2 invalid_grant (14m)',endpoint:'/ethos/v1/sections',history:['09:14 — ERROR 401 invalid_grant','09:12 — AER queue blocked']},
-{name:'Mt. San Antonio',sis:'PeopleSoft',status:'ok',detail:'Last sync: 2m ago',badge:'Healthy',uptime:'99.6%',lastErr:'None (30d)',endpoint:'/ps/webservice/enrollment',history:['09:14 — Sync OK','09:12 — AER transmitted']},
-{name:'Pasadena City',sis:'PeopleSoft',status:'ok',detail:'Last sync: 4m ago',badge:'Healthy',uptime:'99.3%',lastErr:'Timeout (5d ago)',endpoint:'/ps/webservice/enrollment',history:['09:12 — Sync OK']},
-{name:'Long Beach City',sis:'PeopleSoft',status:'warn',detail:'AER queue: 12 pending',badge:'Slow',uptime:'96.8%',lastErr:'Queue backup (1h ago)',endpoint:'/ps/webservice/enrollment',history:['09:14 — Queue depth: 12']},
-{name:'Riverside City',sis:'PeopleSoft',status:'err',detail:'IdP Proxy: CCCID not in SAML attrs',badge:'Blocked',uptime:'88.4%',lastErr:'CCCID lookup fail (28m)',endpoint:'/ps/webservice/enrollment',history:['09:14 — CCCID not asserted by IdP','09:12 — Proxy redirect to OpenCCC']},
+{name:'City College of San Francisco',sis:'Banner Ethos',status:'warn',detail:'Seat count delay: 8min',badge:'Degraded',uptime:'97.2%',lastErr:'Seat sync timeout (2h ago)',endpoint:'/ethos/v1/section-registrations',history:['09:14 — Seat count DELAYED','09:06 — Sync OK']},
+{name:'Sacramento City College',sis:'Banner Ethos',status:'err',detail:'Ethos token expired · FA: manual workflow',badge:'Failing',uptime:'94.1%',lastErr:'OAuth2 invalid_grant (14m)',endpoint:'/ethos/v1/sections',history:['09:14 — ERROR 401 invalid_grant','09:12 — AER queue blocked']},
+{name:'Mt. San Antonio College',sis:'PeopleSoft',status:'ok',detail:'Last sync: 2m ago',badge:'Healthy',uptime:'99.6%',lastErr:'None (30d)',endpoint:'/ps/webservice/enrollment',history:['09:14 — Sync OK','09:12 — AER transmitted']},
+{name:'Pasadena City College',sis:'PeopleSoft',status:'ok',detail:'Last sync: 4m ago',badge:'Healthy',uptime:'99.3%',lastErr:'Timeout (5d ago)',endpoint:'/ps/webservice/enrollment',history:['09:12 — Sync OK']},
+{name:'Long Beach City College',sis:'PeopleSoft',status:'warn',detail:'AER queue: 12 pending',badge:'Slow',uptime:'96.8%',lastErr:'Queue backup (1h ago)',endpoint:'/ps/webservice/enrollment',history:['09:14 — Queue depth: 12']},
+{name:'Riverside City College',sis:'PeopleSoft',status:'err',detail:'IdP Proxy: CCCID not in SAML attrs',badge:'Blocked',uptime:'88.4%',lastErr:'CCCID lookup fail (28m)',endpoint:'/ps/webservice/enrollment',history:['09:14 — CCCID not asserted by IdP','09:12 — Proxy redirect to OpenCCC']},
 {name:'Yuba College',sis:'Colleague',status:'ok',detail:'Last sync: 5m ago',badge:'Healthy',uptime:'99.1%',lastErr:'Timeout (8d ago)',endpoint:'/colleague/api/enrollment',history:['09:11 — Sync OK']},
 {name:'Lake Tahoe CC',sis:'Colleague',status:'warn',detail:'Residency validation slow',badge:'Degraded',uptime:'95.6%',lastErr:'Validation timeout (2h)',endpoint:'/colleague/api/enrollment',history:['09:14 — Validation SLOW']},
-{name:'Feather River',sis:'Colleague',status:'err',detail:'API endpoint timeout',badge:'Failing',uptime:'91.2%',lastErr:'Timeout (3h ago)',endpoint:'/colleague/api/enrollment',history:['09:14 — TIMEOUT','09:12 — TIMEOUT']},
+{name:'Feather River College',sis:'Colleague',status:'err',detail:'API endpoint timeout',badge:'Failing',uptime:'91.2%',lastErr:'Timeout (3h ago)',endpoint:'/colleague/api/enrollment',history:['09:14 — TIMEOUT','09:12 — TIMEOUT']},
 ];
 let monFilter='all',monQuery='',expandedRow=null;
 function setFilter(f,el){monFilter=f;document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderMonitor()}
@@ -2289,21 +3483,21 @@ loadKB(0,null);
 
 // BARRIER DATA
 const barriers=[
-{n:1,title:'No-Show Students Require Manual Drops',cat:'WORKFLOW',sev:'high',impact:'Teaching Colleges must manually ask A&R to drop CVC students who never attend. No automated drop path. Occupied seats block local waitlisted students.',who:'Teaching College A&R staff, local students on waitlists',approach:'Track ticket volume by college and term. Document manual workaround clearly. Surface pattern data for product automation prioritization.'},
-{n:2,title:"Prerequisites Can't Be Verified Across Colleges",cat:'INTEROP',sev:'high',impact:'Courses with prerequisites excluded from Exchange. Students must upload transcripts for manual review. Many don\'t attempt it.',who:'Students needing upper-level courses, Teaching College staff',approach:'Document prerequisite clearance process. Track abandonment at this step. Flag as barrier to course access.'},
-{n:3,title:"DSPS Accommodations Don't Transfer",cat:'EQUITY',sev:'high',impact:'Students with disabilities must reapply for DSPS at Teaching College. Accommodations not carried over automatically.',who:'Students with disabilities, DSPS offices',approach:'Make DSPS steps impossible to miss in docs. Coordinate with campus DSPS contacts. Flag as equity gap.'},
-{n:4,title:'Drop-for-Nonpayment Timing Mismatch',cat:'TIMING',sev:'high',impact:'Teaching College drop-for-nonpayment runs before Exchange payment sync or FA Consortium Agreement processing completes. Students have 3 payment paths (credit card, CCPG at Teaching College, or FA via Home College) — the latter two take time that the auto-drop doesn\'t account for.',who:'Students relying on financial aid, low-income, first-generation',approach:'Frame as timing gap, not campus fault. Offer both-sides fix. Document for de-escalation.'},
-{n:5,title:"CCPG Fee Waiver Doesn't Auto-Transfer",cat:'COMMS',sev:'med',impact:'California College Promise Grant at Home College doesn\'t carry to Teaching College. Must reapply separately. Many get unexpected bills.',who:'Low-income students eligible for fee waivers',approach:'Ensure prominently documented. Recommend proactive start-of-term communication if tickets cluster.'},
-{n:6,title:'Residency Validation Is Manual',cat:'DATA',sev:'med',impact:'Home College A&R must manually confirm residency. Delays result in incorrect out-of-state fees at Teaching College.',who:'Students with residency data issues, A&R staff',approach:'Track incorrect fee tickets. Correlate with specific Home Colleges. Document workaround.'},
-{n:7,title:'FA Dashboard Incomplete for Ethos SIS',cat:'VENDOR',sev:'med',impact:'Spring 2025 FA Dashboard automates unit recording for PeopleSoft and Banner Direct colleges. Banner Ethos and Colleague Ethos integration is pending Ellucian development prioritization — those FA offices still use the manual email workflow.',who:'FA offices at Ethos colleges',approach:'Know which colleges are on which SIS tier. Document workarounds. Update campuses on status.'},
-{n:8,title:'MIS Reporting Requires Manual Reconciliation',cat:'FISCAL',sev:'med',impact:"Exchange data doesn't map cleanly to MIS requirements. Manual reconciliation needed. Underreporting = lost funding.",who:'Institutional Research (IR) and Admissions & Records (A&R) staff at Teaching Colleges',approach:'Treat MIS tickets as high priority — fiscal, not just technical. Escalate patterns.'},
-{n:9,title:'No Waitlist Support on Exchange',cat:'PRODUCT',sev:'low',impact:"Students can't join a waitlist. Some courses show '1 seat' reserved for local waitlist, causing registration errors.",who:'Students searching for high-demand courses',approach:'Document limitation clearly. Flag ticket spikes around specific courses.'},
-{n:10,title:'OpenCCC/SAML Gaps Block Authentication',cat:'AUTH',sev:'low',impact:'CCC IdP Proxy requires CCCID as a SAML attribute from the college IdP. If the college can\'t assert CCCID, the proxy redirects to the Open California Community Colleges (OpenCCC) account recovery — but this often fails silently or confuses students who already have accounts.',who:'Students at misconfigured colleges',approach:'Trace to IdP Proxy layer: is college passing CCCID? Is the eduPerson Principal Name (EPPN) to CCCID mapping correct? Maintain college-by-college SSO status. Coordinate with CCC Tech Center (staffsupportccctc@openccc.zendesk.com).'}
+{n:1,ticketPct:18,title:'No-Show Students Require Manual Drops',cat:'WORKFLOW',sev:'high',impact:'Teaching Colleges must manually ask A&R to drop CVC students who never attend. No automated drop path. Occupied seats block local waitlisted students.',who:'Teaching College A&R staff, local students on waitlists',approach:'Track ticket volume by college and term. Document manual workaround clearly. Surface pattern data for product automation prioritization.'},
+{n:2,ticketPct:16,title:"Prerequisites Can't Be Verified Across Colleges",cat:'INTEROP',sev:'high',impact:'Courses with prerequisites excluded from Exchange. Students must upload transcripts for manual review. Many don\'t attempt it.',who:'Students needing upper-level courses, Teaching College staff',approach:'Document prerequisite clearance process. Track abandonment at this step. Flag as barrier to course access.'},
+{n:3,ticketPct:7,title:"DSPS Accommodations Don't Transfer",cat:'EQUITY',sev:'high',impact:'Students with disabilities must reapply for DSPS at Teaching College. Accommodations not carried over automatically.',who:'Students with disabilities, DSPS offices',approach:'Make DSPS steps impossible to miss in docs. Coordinate with campus DSPS contacts. Flag as equity gap.'},
+{n:4,ticketPct:24,title:'Drop-for-Nonpayment Timing Mismatch',cat:'TIMING',sev:'high',impact:'Teaching College drop-for-nonpayment runs before Exchange payment sync or FA Consortium Agreement processing completes. Students have 3 payment paths (credit card, CCPG at Teaching College, or FA via Home College) — the latter two take time that the auto-drop doesn\'t account for.',who:'Students relying on financial aid, low-income, first-generation',approach:'Frame as timing gap, not campus fault. Offer both-sides fix. Document for de-escalation.'},
+{n:5,ticketPct:13,title:"CCPG Fee Waiver Doesn't Auto-Transfer",cat:'COMMS',sev:'med',impact:'California College Promise Grant at Home College doesn\'t carry to Teaching College. Must reapply separately. Many get unexpected bills.',who:'Low-income students eligible for fee waivers',approach:'Ensure prominently documented. Recommend proactive start-of-term communication if tickets cluster.'},
+{n:6,ticketPct:6,title:'Residency Validation Is Manual',cat:'DATA',sev:'med',impact:'Home College A&R must manually confirm residency. Delays result in incorrect out-of-state fees at Teaching College.',who:'Students with residency data issues, A&R staff',approach:'Track incorrect fee tickets. Correlate with specific Home Colleges. Document workaround.'},
+{n:7,ticketPct:4,title:'FA Dashboard Incomplete for Ethos SIS',cat:'VENDOR',sev:'med',impact:'Spring 2025 FA Dashboard automates unit recording for PeopleSoft and Banner Direct colleges. Banner Ethos and Colleague Ethos integration is pending Ellucian development prioritization — those FA offices still use the manual email workflow.',who:'FA offices at Ethos colleges',approach:'Know which colleges are on which SIS tier. Document workarounds. Update campuses on status.'},
+{n:8,ticketPct:3,title:'MIS Reporting Requires Manual Reconciliation',cat:'FISCAL',sev:'med',impact:"Exchange data doesn't map cleanly to MIS requirements. Manual reconciliation needed. Underreporting = lost funding.",who:'Institutional Research (IR) and Admissions & Records (A&R) staff at Teaching Colleges',approach:'Treat MIS tickets as high priority — fiscal, not just technical. Escalate patterns.'},
+{n:9,ticketPct:5,title:'No Waitlist Support on Exchange',cat:'PRODUCT',sev:'low',impact:"Students can't join a waitlist. Some courses show '1 seat' reserved for local waitlist, causing registration errors.",who:'Students searching for high-demand courses',approach:'Document limitation clearly. Flag ticket spikes around specific courses.'},
+{n:10,ticketPct:10,title:'OpenCCC/SAML Gaps Block Authentication',cat:'AUTH',sev:'low',impact:'CCC IdP Proxy requires CCCID as a SAML attribute from the college IdP. If the college can\'t assert CCCID, the proxy redirects to the Open California Community Colleges (OpenCCC) account recovery — but this often fails silently or confuses students who already have accounts.',who:'Students at misconfigured colleges',approach:'Trace to IdP Proxy layer: is college passing CCCID? Is the eduPerson Principal Name (EPPN) to CCCID mapping correct? Maintain college-by-college SSO status. Coordinate with CCC Tech Center (staffsupportccctc@openccc.zendesk.com).'}
 ];
 
 // RENDER BARRIER CARDS
 const bGrid=document.getElementById('bGrid');
-barriers.forEach(b=>{const card=document.createElement('div');card.className='b-card b-sev-'+b.sev;card.innerHTML='<div class="b-head"><div class="b-num">'+b.n+'</div><div class="b-title">'+b.title+'</div><span class="b-cat">'+b.cat+'</span><div class="b-sev-dot"></div></div><div class="b-detail"><div class="b-detail-grid"><div class="b-d-box"><div class="b-d-label lbl-red">The Barrier</div><div class="b-d-text">'+b.impact+'</div></div><div class="b-d-box"><div class="b-d-label lbl-grey">Who\'s Affected</div><div class="b-d-text">'+b.who+'</div></div><div class="b-d-box" style="background:var(--primary-light);border-color:var(--primary-bd)"><div class="b-d-label lbl-green">Analyst Approach</div><div class="b-d-text">'+b.approach+'</div></div></div></div>';card.addEventListener('click',()=>card.classList.toggle('expanded'));bGrid.appendChild(card)});
+barriers.forEach(b=>{const card=document.createElement('div');card.className='b-card b-sev-'+b.sev;card.innerHTML='<div class="b-head"><div class="b-num">'+b.n+'</div><div class="b-title">'+b.title+'</div>'+(b.ticketPct?'<span style="font-family:var(--mono);font-size:.5rem;padding:.12rem .4rem;border-radius:100px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-2);white-space:nowrap;margin-left:auto">~'+b.ticketPct+'% of tickets</span>':'')+'<span class="b-cat">'+b.cat+'</span><div class="b-sev-dot"></div></div><div class="b-detail"><div class="b-detail-grid"><div class="b-d-box"><div class="b-d-label lbl-red">The Barrier</div><div class="b-d-text">'+b.impact+'</div></div><div class="b-d-box"><div class="b-d-label lbl-grey">Who\'s Affected</div><div class="b-d-text">'+b.who+'</div></div><div class="b-d-box" style="background:var(--primary-light);border-color:var(--primary-bd)"><div class="b-d-label lbl-green">Analyst Approach</div><div class="b-d-text">'+b.approach+'</div></div></div></div>';card.addEventListener('click',()=>card.classList.toggle('expanded'));bGrid.appendChild(card)});
 
 // LIFECYCLE FLOW
 const lcData=[
@@ -2391,23 +3585,35 @@ setTimeout(animateCounters,600);
 
 // ═══ LIVE ALERTS ═══
 var alertMsgs=[
-{title:'Integration Alert',body:'<strong>Sacramento City</strong> \u2014 Ethos API token expired. 12 AER records queued.',time:'Just now'},
-{title:'Sync Warning',body:'<strong>City College SF</strong> \u2014 Seat count sync delayed 8 minutes.',time:'2 min ago'},
-{title:'Enrollment Anomaly',body:'<strong>Flagged:</strong> 6 new CCCIDs from same IP range cross-enrolled into high-unit courses at 2:47 AM. FA requests pending.',time:'3 min ago'},
-{title:'IdP Proxy Alert',body:'<strong>Riverside City</strong> \u2014 CCCID not asserted by college IdP.',time:'5 min ago'},
-{title:'Resolved',body:'<strong>Feather River</strong> \u2014 API timeout resolved. 23 records transmitted.',time:'12 min ago'}
+{title:'\u26d4 Enrollment Anomaly',body:'<strong>Flagged:</strong> 6 new CCCIDs from same IP cross-enrolled into high-unit courses at 2:47 AM. FA Consortium Agreements pending.',time:'Just now'},
+{title:'\u26a1 Integration Alert',body:'<strong>Sacramento City College</strong> \u2014 Ethos API OAuth2 token expired. 47 AER records queued.',time:'3 min ago'},
+{title:'\u26a0 IdP Proxy Alert',body:'<strong>Riverside City College</strong> \u2014 CCCID not asserted by college IdP. Students redirected to OpenCCC recovery.',time:'5 min ago'},
+{title:'\u23f1 Sync Warning',body:'<strong>City College of San Francisco</strong> \u2014 Seat count sync delayed 8 min. 3 courses showing outdated availability.',time:'8 min ago'},
+{title:'\u2705 Resolved',body:'<strong>Feather River College</strong> \u2014 Colleague Ethos timeout resolved. 23 records transmitted.',time:'12 min ago'}
 ];
 var alertIdx=0;var alertEl=document.getElementById('liveAlert');
 function showNextAlert(){if(!alertEl)return;var msg=alertMsgs[alertIdx%alertMsgs.length];alertEl.querySelector('.live-alert-title').textContent=msg.title;alertEl.querySelector('.live-alert-body').innerHTML=msg.body;alertEl.querySelector('.live-alert-time').textContent=msg.time;alertEl.classList.add('show');alertIdx++}
-function dismissAlert(){if(alertEl){alertEl.classList.remove('show');setTimeout(showNextAlert,800)}}
-setTimeout(showNextAlert,3000);
+function dismissAlert(){if(alertEl){alertEl.classList.remove('show');setTimeout(showNextAlert,3000)}}
+// Show first alert when Monitor section enters viewport
+var monitorAlertShown = false;
+var monitorAlertObs = new IntersectionObserver(function(entries) {
+  if (entries[0].isIntersecting && !monitorAlertShown) {
+    monitorAlertShown = true;
+    setTimeout(showNextAlert, 400);
+    monitorAlertObs.disconnect();
+  }
+}, {threshold: 0.1});
+var monitorSection = document.getElementById('monitor');
+if (monitorSection) monitorAlertObs.observe(monitorSection);
+// Fallback: show after 8s even if Monitor never scrolled to
+setTimeout(function() { if (!monitorAlertShown) { monitorAlertShown = true; showNextAlert(); } }, 8000);
 if(alertEl){alertEl.style.cursor='pointer';alertEl.addEventListener('click',dismissAlert)}
 
 // ═══ AUTO-LOAD ARCHITECTURE ═══
 setTimeout(function(){showFlowInfo(1)},800);
 
 
-// ═══ OUTREACH PLANNER (Section 8) ═══
+// ═══ OUTREACH PLANNER ═══
 const calMonths=[
 {id:'jun',name:'Jun',label:'Summer prep',phase:'Pre-registration outreach',dots:['cd-teal','cd-blue'],triggers:[
   {type:'outreach',title:'New Student Welcome + CVC Intro',who:'Incoming students via CCCApply',situation:'Student just applied through the CCC online application system (CCCApply). Orientation materials typically focus on home college only. This is the earliest opportunity to normalize cross-enrollment as a standard option.',msg:'Welcome to [College]! Did you know you can access thousands of online courses from other California community colleges through the CVC Exchange? If a class you need is full or not offered this term, the Exchange lets you find it at another college — and it counts toward your degree.',impact:['First impression','Normalizes Exchange','Reduces future confusion']},
@@ -2485,27 +3691,27 @@ var journeySteps = [
   {
     label: 'Course Search',
     ok: { icon: '✓', cls: 'j-ok', text: 'Finds MATH 1A at De Anza with open seats on cvc.edu.', student: 'There it is. Online section, fits my schedule.' },
-    broken: { icon: '✓', cls: 'j-ok', text: 'Finds MATH 1A at De Anza with open seats on cvc.edu.', student: 'There it is. Online section, fits my schedule.' }
+    broken: { icon: '✓', cls: 'j-ok', text: 'Finds MATH 1A at De Anza with open seats on cvc.edu.',prevent:'Counselor confirmed home college is set correctly on search.cvc.edu before searching.', student: 'There it is. Online section, fits my schedule.' }
   },
   {
     label: 'Enrollment',
-    ok: { icon: '✓', cls: 'j-ok', text: 'Clicks "Add Course." Academic Enrollment Record (AER) transmits from Chabot to De Anza. Seat reserved.', student: 'Done! That was easy. It says I\u2019m enrolled.' },
-    broken: { icon: '✓', cls: 'j-ok', text: 'Clicks "Add Course." AER transmits from Chabot \u2014 but Ethos token at Chabot expired overnight.', student: 'Done! That was easy. It says I\u2019m enrolled.', analyst: 'Monitor would show Chabot\u2019s status as Failing before this student ever tried to enroll.' }
+    ok: { icon: '✓', cls: 'j-ok', text: 'Clicks "Add Course." Academic Enrollment Record (AER) transmits from Chabot to De Anza. Seat reserved.', student: 'Done! That was easy. It says I\u2019m enrolled.',prevent:'A proactive check-Canvas-within-24-hours reminder at enrollment would catch the silent failure before the student discovers it in class.' },
+    broken: { icon: '✓', cls: 'j-ok', text: 'Clicks "Add Course." AER transmits from Chabot \u2014 but Ethos token at Chabot expired overnight.', student: 'Done! That was easy. It says I\u2019m enrolled.',prevent:'A proactive check-Canvas-within-24-hours reminder at enrollment would catch the silent failure before the student discovers it in class.', analyst: 'Monitor would show Chabot\u2019s status as Failing before this student ever tried to enroll.' }
   },
   {
     label: 'Payment',
     ok: { icon: '✓', cls: 'j-ok', text: 'Pays $138 (3 units \u00d7 $46) by credit card. Payment confirmed.', student: 'Paid. I\u2019m set.' },
-    broken: { icon: '\u26a0', cls: 'j-warn', text: 'Requests FA through Consortium Agreement. Home college FA office needs to process.', student: 'I requested financial aid. They said it takes a few days.', analyst: 'If FA processing takes longer than the drop-for-nonpayment window, this student is at risk. Barrier #4.' }
+    broken: { icon: '\u26a0', cls: 'j-warn', text: 'Requests FA through Consortium Agreement. Home college FA office needs to process.', student: 'I requested financial aid. They said it takes a few days.',prevent:'If the counselor explained the payment timing gap at enrollment \u2014 FA takes 3\u20135 days, but drop-for-nonpayment may run in 48 hours \u2014 the student could have paid upfront and been reimbursed later.', analyst: 'If FA processing takes longer than the drop-for-nonpayment window, this student is at risk. Barrier #4.' }
   },
   {
     label: 'Canvas Access',
     ok: { icon: '✓', cls: 'j-ok', text: 'Logs in via home college SSO. Identity Provider (IdP) Proxy resolves the California Community College ID (CCCID). Canvas shows MATH 1A.', student: 'I can see the course in Canvas. First assignment is posted.' },
-    broken: { icon: '\u2717', cls: 'j-err', text: 'AER never reached De Anza (Ethos token failure). Canvas roster doesn\u2019t include this student.', student: 'Where\u2019s my course? I enrolled. Canvas shows nothing.', analyst: 'Tracer isolates the break: Layer 3 (Ethos API). AER payload never left the home college. 47 other students affected.' }
+    broken: { icon: '\u2717', cls: 'j-err', text: 'AER never reached De Anza (Ethos token failure). Canvas roster doesn\u2019t include this student.', student: 'Where\u2019s my course? I enrolled. Canvas shows nothing.',prevent:'The registration checklist tells students to check Canvas within 24 hours. If the course doesn\u2019t appear, contact support immediately \u2014 not a week later.', analyst: 'Tracer isolates the break: Layer 3 (Ethos API). AER payload never left the home college. 47 other students affected.' }
   },
   {
     label: 'Week 1',
     ok: { icon: '✓', cls: 'j-ok', text: 'Attends class. Participates. On track for on-time transfer.', student: 'Class started. I\u2019m keeping up.' },
-    broken: { icon: '\u2717', cls: 'j-err', text: 'Student calls home college \u2014 "it\u2019s a CVC problem." Calls teaching college \u2014 "it\u2019s a home college problem." Add deadline is tomorrow.', student: 'Nobody can help me. The deadline is tomorrow. I need this class to transfer.', analyst: 'Own it end to end. Call the home college with transaction data. Escalate for manual override before deadline.' }
+    broken: { icon: '\u2717', cls: 'j-err', text: 'Student calls home college \u2014 "it\u2019s a CVC problem." Calls teaching college \u2014 "it\u2019s a home college problem." Add deadline is tomorrow.', student: 'Nobody can help me. The deadline is tomorrow. I need this class to transfer.', analyst: 'Own it end to end. Call the home college with transaction data. Escalate for manual override before deadline.', prevent: 'A single clear contact point in the enrollment confirmation \u2014 \u201CIf anything goes wrong, email cvc-support@fhda.edu\u201D \u2014 prevents the 3-call runaround between colleges.' }
   },
   {
     label: 'Resolution',
@@ -2514,7 +3720,7 @@ var journeySteps = [
   }
 ];
 
-var journeyMode = 'compare';
+var journeyMode = 'broken';
 
 function setJourney(mode, el) {
   journeyMode = mode;
@@ -2528,7 +3734,10 @@ function setJourney(mode, el) {
       }
     });
   }
-  renderJourney();
+  // Crossfade transition
+  var jb = document.getElementById('journeyBody');
+  if(jb){ jb.classList.add('j-fading'); setTimeout(function(){ renderJourney(); jb.classList.remove('j-fading'); }, 200); }
+  else { renderJourney(); }
 }
 
 function renderJourney() {
@@ -2540,7 +3749,7 @@ function renderJourney() {
     }).join('');
     var rightSteps = journeySteps.map(function(s) {
       var analystNote = (s.broken.analyst) ? '<div style="margin-top:.35rem;padding:.3rem .5rem;background:var(--primary-light);border-radius:4px;border-left:2px solid var(--primary);font-size:.68rem;color:var(--primary);line-height:1.5;font-style:normal"><strong style="font-size:.52rem;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:.1rem;opacity:.7">Support response</strong>' + s.broken.analyst + '</div>' : '';
-      return '<div class="journey-step ' + s.broken.cls + '"><div class="j-icon">' + s.broken.icon + '</div><div class="j-content"><div class="j-label">' + s.label + '</div><div class="j-text">' + s.broken.text + '</div><div class="j-student">' + s.broken.student + '</div>' + analystNote + '</div></div>';
+      return '<div class="journey-step ' + s.broken.cls + '"><div class="j-icon">' + s.broken.icon + '</div><div class="j-content"><div class="j-label">' + s.label + '</div><div class="j-text">' + s.broken.text + '</div><div class="j-student">' + s.broken.student + '</div>' + analystNote + ((s.broken.prevent) ? '<div style="margin-top:.25rem;padding:.3rem .5rem;background:var(--teal-light);border-radius:4px;border-left:2px solid var(--teal);font-size:.65rem;color:var(--teal);line-height:1.5;font-style:normal"><strong style="font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:.1rem;opacity:.7">Prevention</strong>' + s.broken.prevent + '</div>' : '') + '</div></div>';
     }).join('');
     body.innerHTML = '<div class="journey-cols"><div class="journey-col"><div class="journey-col-header jch-ok">\u2713 Successful Enrollment</div><div style=\"display:flex;gap:.75rem;justify-content:center;padding:.4rem .75rem;background:rgba(34,197,94,.06);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.55rem\"><span style=\"color:var(--primary)\">0 support interactions</span><span style=\"color:var(--text-3)\">·</span><span style=\"color:var(--primary)\">On-time transfer</span><span style=\"color:var(--text-3)\">·</span><span style=\"color:var(--primary)\">Course complete</span></div>' + leftSteps + '</div><div class="journey-col"><div class="journey-col-header jch-broken">\u2717 Broken Enrollment (Ethos token expired)</div><div style=\"display:flex;gap:.75rem;justify-content:center;padding:.4rem .75rem;background:rgba(220,38,38,.06);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.55rem\"><span style=\"color:var(--red)\">47 students affected</span><span style=\"color:var(--text-3)\">·</span><span style=\"color:var(--amber)\">36hr resolution</span><span style=\"color:var(--text-3)\">·</span><span style=\"color:var(--text-2)\">1 missed assignment deadline</span></div>' + rightSteps + '</div></div>';
   } else {
@@ -2556,6 +3765,82 @@ function renderJourney() {
 
 renderJourney();
 
+
+// ═══ GAME DESIGN: HERO STAT COUNT-UP ═══
+// Numbers animate from 0 to target when hero enters viewport
+(function() {
+  var counted = false;
+  var statEls = document.querySelectorAll('[data-count]');
+  if (!statEls.length) return;
+  
+  function countUp(el) {
+    var target = parseInt(el.dataset.count);
+    var suffix = el.dataset.suffix || '';
+    var useComma = el.dataset.comma === 'true';
+    var duration = target <= 10 ? 600 : 1400;
+    var start = performance.now();
+    
+    function step(now) {
+      var progress = Math.min((now - start) / duration, 1);
+      // Ease out cubic — fast start, gentle landing
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.round(eased * target);
+      var display = useComma ? current.toLocaleString() : current.toString();
+      el.textContent = display + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  
+  var heroObs = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting && !counted) {
+      counted = true;
+      statEls.forEach(function(el, i) {
+        setTimeout(function() { countUp(el); }, i * 150);
+      });
+    }
+  }, { threshold: 0.3 });
+  
+  var statsContainer = document.querySelector('.h-stats');
+  if (statsContainer) heroObs.observe(statsContainer);
+})();
+
+// ═══ GAME DESIGN: EXPLORATION TRACKER ═══
+// Shows "X of 10" below progress dots — gentle completionism
+(function() {
+  var explored = new Set();
+  var tracker = document.createElement('div');
+  tracker.className = 'explore-tracker';
+  tracker.textContent = '0 of 10 explored';
+  var dotsContainer = document.querySelector('.progress-dots');
+  if (dotsContainer) {
+    dotsContainer.appendChild(tracker);
+  }
+  
+  // Listen for sections entering viewport
+  var sectionIds = ['lookup','cvcData','flow','monitor','tracer','patterns','comms','outreach','aiVision','barrierOverview'];
+  var exploreObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var wasNew = !explored.has(entry.target.id);
+        explored.add(entry.target.id);
+        if (wasNew && tracker) {
+          tracker.textContent = explored.size + ' of 10 explored';
+          // ENHANCEMENT: use CSS class for richer pop feedback
+          tracker.classList.add('et-updated');
+          setTimeout(function() {
+            tracker.classList.remove('et-updated');
+          }, 800);
+        }
+      }
+    });
+  }, { threshold: 0.2 });
+  
+  sectionIds.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) exploreObs.observe(el);
+  });
+})();
 
 // ═══ DEMO MODE ═══
 
@@ -2723,7 +4008,7 @@ var aiData = {
       desc: 'Ethos tokens expire on schedules. Sync frequency degrades before full failure. A model trained on 12 months of uptime data could flag at-risk colleges 48 hours before outage.',
       today: 'Analyst checks the monitor each morning. Failures are discovered when they happen \u2014 or when a student reports them.',
       after: 'Dashboard shows a "likely to fail in 48 hours" warning for Sacramento City based on token age (27 days / 30-day cycle) + declining sync frequency. Analyst regenerates the token before any student is affected.',
-      toolLink: 'monitor', toolName: 'Monitor (Section 4)',
+      toolLink: 'monitor', toolName: 'Monitor',
       complexity: 'quick', complexityLabel: 'Quick win \u2014 rule-based, no ML needed',
       signal: 'aic-predict'
     },
@@ -2732,7 +4017,7 @@ var aiData = {
       desc: 'When 47 tickets say "can\u2019t see my course," a Natural Language Processing (NLP) classifier could separate Ethos failures from IdP issues from teaching college roster delays \u2014 before a human reads a single one.',
       today: 'Analyst reads each ticket, mentally maps symptoms to probable causes, manually tags category. First 30 minutes of every morning.',
       after: 'Natural Language Processing model reads incoming ticket text + pulls CCCID + checks home college SIS type. Auto-tags 80% of tickets. Analyst reviews the remaining 20% and corrects misclassifications \u2014 which improves the model.',
-      toolLink: 'patterns', toolName: 'Pattern Analyzer (Section 6)',
+      toolLink: 'patterns', toolName: 'Pattern Analyzer',
       complexity: 'medium', complexityLabel: 'Medium \u2014 needs labeled training data from 6+ months of tickets',
       signal: 'aic-predict'
     },
@@ -2741,7 +4026,7 @@ var aiData = {
       desc: 'Spring registration, add/drop, census, FA disbursement \u2014 each generates a predictable spike. A time-series model could forecast volume 2 weeks out.',
       today: 'The team knows "registration week is busy" but can\u2019t quantify how busy or which categories will spike. KB articles get written reactively.',
       after: 'Model predicts: "Week of Feb 3: expect 340% auth ticket increase at Banner colleges based on 3-year pattern." Team pre-publishes KB articles and alerts campus IT contacts the week before.',
-      toolLink: 'patterns', toolName: 'Pattern Analyzer (Section 6)',
+      toolLink: 'patterns', toolName: 'Pattern Analyzer',
       complexity: 'quick', complexityLabel: 'Quick win \u2014 3 years of ticket data + academic calendar',
       signal: 'aic-predict'
     },
@@ -2750,7 +4035,7 @@ var aiData = {
       desc: 'One college generating 5x normal error rate overnight isn\u2019t visible in a morning queue scan. Anomaly detection surfaces it as a single alert, not 47 individual tickets.',
       today: 'Analyst opens the queue at 8:30 AM, sees 47 new tickets, starts reading. Realizes at 9:15 they\u2019re all from the same college. 45 minutes lost.',
       after: 'Alert fires at 2:14 AM: "Chabot College \u2014 error rate 5.2x baseline since 01:00. 47 AER records queued. Probable cause: Ethos token." Analyst starts at 8:30 with the diagnosis already done.',
-      toolLink: 'monitor', toolName: 'Monitor (Section 4)',
+      toolLink: 'monitor', toolName: 'Monitor',
       complexity: 'quick', complexityLabel: 'Quick win \u2014 standard deviation thresholds on existing data',
       signal: 'aic-predict'
     }
@@ -2779,7 +4064,7 @@ var aiData = {
       desc: 'Students who cross-enrolled before are 3x more likely to do it again. Students on waitlists are ready to act now. Timing the outreach to the student\u2019s context beats a generic email to 50,000.',
       today: 'Outreach is batch: one email to all students at the start of registration. Open rate: ~12%. Students who need the Exchange most may not be the ones who open generic emails.',
       after: 'Triggered messages based on signals: waitlisted for a required course \u2192 "this course is available at 4 other colleges right now." Ed plan shows a gap \u2192 "your counselor flagged ENGL 1A as needed \u2014 here are 12 open sections." Past Exchange user \u2192 personalized nudge at their registration date.',
-      toolLink: 'outreach', toolName: 'Outreach Planner (Section 8)',
+      toolLink: 'outreach', toolName: 'Outreach Planner',
       complexity: 'medium', complexityLabel: 'Medium \u2014 needs event-triggered messaging infrastructure',
       signal: 'aic-equity'
     },
@@ -2788,7 +4073,7 @@ var aiData = {
       desc: 'A payment timing issue is an inconvenience for a student with savings. It\u2019s a semester-ending crisis for a first-gen student on CCPG with no backup. The system should know the difference.',
       today: 'All students get the same alerts (if any). First-gen CCPG students and students with savings accounts receive identical treatment from the system.',
       after: 'Risk score combines: first-gen status + CCPG recipient + incomplete FAFSA + no prior Exchange use. Higher-risk students get earlier alerts, simpler payment instructions, and direct counselor routing if the alert goes unread for 24 hours.',
-      toolLink: 'equity', toolName: 'Equity Scorer (Section 0)',
+      toolLink: 'equity', toolName: 'Equity Scorer',
       complexity: 'long', complexityLabel: 'Long-term \u2014 requires equity data integration + careful bias auditing',
       signal: 'aic-equity'
     }
@@ -2799,7 +4084,7 @@ var aiData = {
       desc: 'Fake CCCIDs created via OpenCCC, used to cross-enroll through the Exchange and claim financial aid through Consortium Agreements. The accounts never attend. The support team sees them as enrollment anomalies.',
       today: 'Fraudulent enrollments look like normal tickets: "student can\u2019t access Canvas." The analyst resolves the technical issue without knowing the underlying account is fraudulent. FA office processes the Consortium Agreement. Revenue is lost.',
       after: 'Pattern detection flags: multiple CCCIDs from the same IP enrolling at 3 AM, accounts with no prior enrollment history instantly cross-enrolling into high-unit courses, FA requests submitted within minutes of enrollment. Analyst reviews flagged accounts before FA is disbursed.',
-      toolLink: 'monitor', toolName: 'Monitor (Section 4)',
+      toolLink: 'monitor', toolName: 'Monitor',
       complexity: 'medium', complexityLabel: 'Medium \u2014 needs enrollment velocity + IP clustering baseline',
       signal: 'aic-govern'
     },
@@ -2808,7 +4093,7 @@ var aiData = {
       desc: 'The hard part: fraud deterrence that doesn\u2019t create new barriers for the students the Exchange was built to serve. A first-gen student enrolling at 11 PM from a shared family device looks similar to a fraudulent account.',
       today: 'Colleges set blunt rules: 50-mile enrollment radius, short drop-for-nonpayment deadlines. These deter some fraud but also block legitimate rural and working students who are exactly the population CVC exists to reach.',
       after: 'Risk scoring that weighs multiple signals: enrollment velocity, prior academic history, FA request timing, device fingerprint clustering. High-risk accounts get a human review hold \u2014 not an auto-reject. Legitimate students pass through. The analyst reviews edge cases.',
-      toolLink: 'equity', toolName: 'Equity Scorer (Section 0)',
+      toolLink: 'equity', toolName: 'Equity Scorer',
       complexity: 'long', complexityLabel: 'Long-term \u2014 requires cross-college behavioral data + careful equity auditing',
       signal: 'aic-equity'
     },
@@ -2846,7 +4131,7 @@ var aiData = {
       desc: 'If the Exchange recommends courses via AI, someone needs to check whether CCPG students are being steered toward fewer colleges. Whether part-time students are deprioritized. That\u2019s an analyst job \u2014 not an engineering job.',
       today: 'Course search results are sorted by quality badges and distance. No personalization. No one audits the sort order because it\u2019s deterministic.',
       after: 'AI-ranked results are personalized. The analyst runs a monthly equity report: "Are recommendations for CCPG students systematically different from non-CCPG students? Are rural students seeing fewer options?" Findings go into the next model iteration.',
-      toolLink: 'equity', toolName: 'Equity Scorer (Section 0)',
+      toolLink: 'equity', toolName: 'Equity Scorer',
       complexity: 'long', complexityLabel: 'Long-term \u2014 follows AI recommendation deployment',
       signal: 'aic-role'
     },
@@ -2855,7 +4140,7 @@ var aiData = {
       desc: 'A classifier can sort 80% of tickets. It cannot call a registrar at 4:45 PM to negotiate a manual enrollment override for a student whose add deadline is tomorrow.',
       today: 'Analyst spends 60% of time on classification and triage, 40% on actual problem-solving, campus communication, and student follow-up.',
       after: 'AI handles classification and triage. Analyst spends 80% of time on the work that requires judgment: escalations, campus relationship management, edge cases, and the student on the phone who needs someone to own the problem end to end.',
-      toolLink: 'comms', toolName: 'Communication (Section 0)',
+      toolLink: 'comms', toolName: 'Communication',
       complexity: 'medium', complexityLabel: 'Medium \u2014 requires ticket auto-classification first',
       signal: 'aic-role'
     },
@@ -2864,14 +4149,14 @@ var aiData = {
       desc: 'The quality of CVC\u2019s future AI will be directly proportional to the quality of documentation the support team produces now. Every KB article, every ticket tag, every escalation note is a labeled example.',
       today: 'KB articles are written for the next human analyst. Ticket tags are for reporting. Documentation quality varies.',
       after: 'KB articles are written for humans AND machines. Consistent tagging schema. Structured resolution notes. The analyst who documents well today is building the foundation that makes AI possible next year \u2014 and that makes their own job more focused on the work that matters.',
-      toolLink: 'kb', toolName: 'Knowledge Base Builder (Section 6)',
+      toolLink: 'kb', toolName: 'Knowledge Base Builder',
       complexity: 'quick', complexityLabel: 'Quick win \u2014 start with documentation standards today',
       signal: 'aic-role'
     }
   ]
 };
 
-var activeAiView = 'ops';
+var activeAiView = 'fraud';
 
 function setAiView(view, el) {
   activeAiView = view;
@@ -2960,7 +4245,7 @@ renderAiView();
 document.querySelectorAll('.msg-preview').forEach(function(preview, idx) {
   var btn = document.createElement('button');
   btn.className = 'msg-copy';
-  btn.textContent = 'Copy';
+  btn.textContent = 'Copy';btn.style.background='';btn.style.color='';btn.style.borderColor='';
   btn.addEventListener('click', function(e) {
     e.stopPropagation();
     var body = preview.querySelector('.msg-body');
@@ -2972,7 +4257,7 @@ document.querySelectorAll('.msg-preview').forEach(function(preview, idx) {
     navigator.clipboard.writeText(text).then(function() {
       btn.textContent = 'Copied';
       btn.classList.add('copied');
-      setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+      setTimeout(function() { btn.textContent = 'Copy';btn.style.background='';btn.style.color='';btn.style.borderColor=''; btn.classList.remove('copied'); }, 2000);
     });
   });
   preview.appendChild(btn);
@@ -3033,10 +4318,10 @@ autoRunTrace = async function() {
   }
   
   btn.disabled = false;
-  document.getElementById('tracerStatus').textContent = 'Complete';
+  document.getElementById('tracerStatus').textContent = 'Diagnosis complete \u2014 6.2s';
   if (tracerTimer) clearInterval(tracerTimer);
   var phaseEl2 = document.getElementById('tracePhase');
-  if (phaseEl2) phaseEl2.innerHTML = '<span style="color:var(--primary)">\u2713 Root cause identified</span>';
+  if (phaseEl2) phaseEl2.innerHTML = '<span class="trace-found" style="color:var(--primary)">\u2713 Root cause: Ethos token expiration \u2014 Layer 3</span>';
 };
 
 
@@ -3454,16 +4739,728 @@ function copyMsgText(btn) {
   if (body) parts.push('\n' + (body.innerText || body.textContent));
   var text = parts.join('\n');
   navigator.clipboard.writeText(text.trim()).then(function() {
-    btn.textContent = 'Copied!';
+    btn.textContent = '\u2713 Copied';btn.style.background='var(--primary)';btn.style.color='#fff';btn.style.borderColor='var(--primary)';
     btn.classList.add('copied');
     setTimeout(function() {
-      btn.textContent = 'Copy';
+      btn.textContent = 'Copy';btn.style.background='';btn.style.color='';btn.style.borderColor='';
       btn.classList.remove('copied');
     }, 1500);
   }).catch(function() {
     toast('Copy failed');
   });
 }
+
+
+// Growth bars — animate on scroll
+var growthObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.growth-bar,.course-bar').forEach(function(bar) {
+        setTimeout(function() { bar.classList.add('bar-visible'); }, 100);
+      });
+      growthObs.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.3});
+var growthSection = document.getElementById('cvcData');
+if (growthSection) growthObs.observe(growthSection);
+
+
+// Game design: scroll progress
+(function(){
+  var bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+    bar.style.width = pct + '%';
+  }, {passive:true});
+})();
+
+
+// Game design: nav visited dots
+(function(){
+  var visited = new Set();
+  var navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  var linkMap = {};
+  navLinks.forEach(function(a){
+    var id = a.getAttribute('href').replace('#','');
+    if(id) linkMap[id] = a;
+  });
+  var visitObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting && !visited.has(e.target.id)){
+        visited.add(e.target.id);
+        // Find the nav group this section belongs to
+        var link = linkMap[e.target.id];
+        if(link && !link.classList.contains('nav-visited')){
+          link.classList.add('nav-visited');
+        }
+      }
+    });
+  },{threshold:.3});
+  Object.keys(linkMap).forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) visitObs.observe(el);
+  });
+})();
+
+
+// Game design: interaction counter
+(function(){
+  var count = 0;
+  var el = document.getElementById('interactionCount');
+  var wrap = document.getElementById('interactionCounter');
+  if(!el || !wrap) return;
+  function bump(){
+    count++;
+    el.textContent = count;
+    wrap.style.opacity = '1';
+    // Fade back after 2s
+    clearTimeout(wrap._t);
+    wrap._t = setTimeout(function(){ wrap.style.opacity = '.5'; }, 2000);
+  }
+  // Count meaningful interactions
+  document.addEventListener('click', function(e){
+    var t = e.target;
+    // Only count clicks on interactive elements
+    if(t.closest && (t.closest('.b-card') || t.closest('.ai-card') || t.closest('.counsel-card') ||
+       t.closest('.lookup-card') || t.closest('.status-row') || t.closest('.esc-card') ||
+       t.closest('.jt-btn') || t.closest('.ai-tab') || t.closest('.outreach-tab') ||
+       t.closest('.cal-month') || t.closest('.trigger-card') || t.closest('.kb-nav-item') ||
+       t.closest('.qa-card') || t.closest('.lookup-filter') || t.closest('.insight-card') ||
+       t.closest('.toc-item') || t.closest('.progress-dot') ||
+       t.closest('[onclick]') || t.closest('button'))) {
+      bump();
+    }
+  });
+  // Count searches
+  var searchInput = document.getElementById('collegeLookup');
+  if(searchInput){
+    var lastQ = '';
+    searchInput.addEventListener('input', function(){
+      if(this.value.length > 2 && this.value !== lastQ){
+        lastQ = this.value;
+        bump();
+      }
+    });
+  }
+})();
+
+
+// Game design: barrier ticket % count-up
+(function(){
+  var bSection = document.getElementById('barrierOverview');
+  if(!bSection) return;
+  var animated = false;
+  var bObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting && !animated){
+        animated = true;
+        // Find all ticket % badges
+        var badges = bSection.querySelectorAll('[style*="border-radius:100px"]');
+        badges.forEach(function(badge){
+          var text = badge.textContent;
+          var match = text.match(/(\d+)%/);
+          if(match){
+            var target = parseInt(match[1]);
+            var current = 0;
+            var duration = 800 + target * 15; // longer for bigger numbers
+            var start = performance.now();
+            badge.textContent = '~0% of tickets';
+            function tick(now){
+              var elapsed = now - start;
+              var progress = Math.min(elapsed / duration, 1);
+              // Ease out
+              var eased = 1 - Math.pow(1 - progress, 3);
+              current = Math.round(target * eased);
+              badge.textContent = '~' + current + '% of tickets';
+              if(progress < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+          }
+        });
+        bObs.disconnect();
+      }
+    });
+  },{threshold:.2});
+  bObs.observe(bSection);
+})();
+
+
+// Game design: hero stat count-up on load
+(function(){
+  var stats = document.querySelectorAll('.h-stat-num');
+  stats.forEach(function(el){
+    var raw = el.textContent.trim();
+    // Parse: "115", "4", "33K", "2,100%"
+    var suffix = '';
+    var target = 0;
+    if(raw.indexOf('K') >= 0){
+      target = parseFloat(raw.replace(/,/g,'').replace('K',''));
+      suffix = 'K';
+    } else if(raw.indexOf('%') >= 0){
+      target = parseFloat(raw.replace(/,/g,'').replace('%',''));
+      suffix = '%';
+    } else {
+      target = parseFloat(raw.replace(/,/g,''));
+    }
+    if(isNaN(target) || target === 0) return;
+    
+    var duration = 1200;
+    var start = performance.now();
+    el.textContent = '0' + suffix;
+    
+    function tick(now){
+      var elapsed = now - start;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = target * eased;
+      
+      if(suffix === 'K'){
+        el.textContent = Math.round(current) + 'K';
+      } else if(suffix === '%'){
+        el.textContent = current >= 100 ? Math.round(current).toLocaleString() + '%' : Math.round(current) + '%';
+      } else {
+        el.textContent = Math.round(current);
+      }
+      if(progress < 1) requestAnimationFrame(tick);
+      else {
+        // Restore original text exactly
+        el.textContent = raw;
+      }
+    }
+    // Delay slightly so the page renders first
+    setTimeout(function(){ requestAnimationFrame(tick); }, 300);
+  });
+})();
+
+// Game design: click ripple on cards
+(function(){
+  document.addEventListener('click', function(e){
+    var card = e.target.closest && (
+      e.target.closest('.b-card') || e.target.closest('.ai-card') || 
+      e.target.closest('.counsel-card') || e.target.closest('.lookup-card') ||
+      e.target.closest('.esc-card') || e.target.closest('.insight-card')
+    );
+    if(!card) return;
+    var rect = card.getBoundingClientRect();
+    var ripple = document.createElement('div');
+    ripple.className = 'ripple';
+    var size = Math.max(rect.width, rect.height);
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+    ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
+    card.style.position = card.style.position || 'relative';
+    card.style.overflow = 'hidden';
+    card.appendChild(ripple);
+    setTimeout(function(){ ripple.remove(); }, 600);
+  });
+})();
+
+
+// Game design: search input color feedback
+(function(){
+  var input = document.getElementById('collegeLookup');
+  if(!input) return;
+  var origSearchFn = window.searchColleges;
+  if(!origSearchFn) return;
+  // Override searchColleges to add visual feedback
+  var _origRenderLookup = window.renderLookup;
+  if(!_origRenderLookup) return;
+  // Watch for result count changes via the counter element
+  var obs = new MutationObserver(function(){
+    var counter = document.getElementById('lookupCount');
+    if(!counter) return;
+    var text = counter.textContent || '';
+    var match = text.match(/(\d+) of/);
+    if(match){
+      var count = parseInt(match[1]);
+      if(input.value.length > 0){
+        input.style.borderColor = count > 0 ? 'var(--primary)' : 'var(--amber)';
+      } else {
+        input.style.borderColor = '';
+      }
+    }
+  });
+  var counter = document.getElementById('lookupCount');
+  if(counter) obs.observe(counter, {childList:true, characterData:true, subtree:true});
+  input.addEventListener('input', function(){
+    if(this.value.length === 0) this.style.borderColor = '';
+  });
+})();
+
+
+// ═══ ENHANCEMENT: Clear search button ═══
+function clearSearch() {
+  var input = document.getElementById('collegeLookup');
+  if (input) {
+    input.value = '';
+    input.style.borderColor = '';
+    searchColleges('');
+    input.focus();
+  }
+}
+
+
+// ═══ ENHANCEMENT: Scroll hint — fades on first interaction ═══
+(function(){
+  var hint = document.getElementById('scrollHint');
+  if (!hint) return;
+  var dismissed = false;
+  function dismiss() {
+    if (dismissed) return;
+    dismissed = true;
+    hint.classList.add('hint-gone');
+    setTimeout(function(){ hint.remove(); }, 600);
+  }
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 100) dismiss();
+  }, { passive: true });
+  // Also dismiss after 6s
+  setTimeout(dismiss, 6000);
+})();
+
+
+// ═══ ENHANCEMENT: Interaction counter milestones — reward at 5, 15, 30 ═══
+(function(){
+  var wrap = document.getElementById('interactionCounter');
+  var el = document.getElementById('interactionCount');
+  if (!wrap || !el) return;
+  var milestones = [5, 15, 30, 50];
+  var obs = new MutationObserver(function() {
+    var count = parseInt(el.textContent || '0');
+    if (milestones.indexOf(count) >= 0) {
+      wrap.classList.add('ic-milestone');
+      setTimeout(function(){ wrap.classList.remove('ic-milestone'); }, 700);
+      // Show a brief toast at key milestones
+      if (count === 5) toast('Getting started — nice');
+      if (count === 30) toast('Deep explorer');
+    }
+  });
+  obs.observe(el, { childList: true, characterData: true, subtree: true });
+})();
+
+
+// ═══ ENHANCEMENT: Keyboard shortcut hint on first visit ═══
+(function(){
+  var shown = false;
+  setTimeout(function(){
+    if (shown) return;
+    shown = true;
+    toast('Press ? for keyboard shortcuts');
+  }, 4000);
+  // Don't show if user already interacts
+  document.addEventListener('keydown', function(){ shown = true; }, { once: true });
+})();
+
+// ═══════════════════════════════════════════════════════
+// ZOOM PRESENTATION MODE — Press Z to toggle
+// Kills looping animations, boosts font sizes, punches up contrast
+// ═══════════════════════════════════════════════════════
+(function(){
+  var active = false;
+  window._toggleZoom = function(){
+    active = !active;
+    document.body.classList.toggle('zoom-mode', active);
+    toast(active ? 'Zoom mode ON — optimized for screenshare' : 'Zoom mode OFF');
+  };
+})();
+
+
+// ═══════════════════════════════════════════════════════
+// THEATER / FOCUS MODE — Press F to toggle
+// Dims page, spotlights the section under your cursor
+// ═══════════════════════════════════════════════════════
+(function(){
+  var active = false;
+  var currentSpot = null;
+
+  // Collect all top-level sections that can be spotlighted
+  function getSections(){
+    return document.querySelectorAll(
+      '.sec, .sec-alt, .story-sec, .divider-sec, .closing-sec, .quote-section, #why, header.header'
+    );
+  }
+
+  // Find which section the mouse is currently over
+  function findSection(el){
+    while(el && el !== document.body){
+      if(el.classList &&
+        (el.classList.contains('sec') || el.classList.contains('sec-alt') ||
+         el.classList.contains('story-sec') || el.classList.contains('divider-sec') ||
+         el.classList.contains('closing-sec') || el.classList.contains('quote-section') ||
+         el.id === 'why' || (el.tagName === 'HEADER' && el.classList.contains('header')))){
+        return el;
+      }
+      el = el.parentElement;
+    }
+    return null;
+  }
+
+  function onMove(e){
+    if(!active) return;
+    var sec = findSection(e.target);
+    if(sec !== currentSpot){
+      if(currentSpot) currentSpot.classList.remove('theater-spot');
+      currentSpot = sec;
+      if(sec) sec.classList.add('theater-spot');
+    }
+  }
+
+  function activate(){
+    active = true;
+    document.body.classList.add('theater-on');
+    document.addEventListener('mousemove', onMove, {passive:true});
+    toast('Theater mode ON — hover to spotlight');
+  }
+
+  function deactivate(){
+    active = false;
+    document.body.classList.remove('theater-on');
+    document.removeEventListener('mousemove', onMove);
+    if(currentSpot){ currentSpot.classList.remove('theater-spot'); currentSpot = null; }
+    toast('Theater mode OFF');
+  }
+
+  window._toggleTheater = function(){
+    if(active) deactivate(); else activate();
+  };
+
+  // Also: click on a spotlighted section scrolls it to center
+  document.addEventListener('click', function(e){
+    if(!active) return;
+    var sec = findSection(e.target);
+    if(sec){
+      sec.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+  });
+})();
+
+
+// ═══ KEYBOARD BINDINGS — F for Theater, Z for Zoom ═══
+(function(){
+  // Patch into existing keydown handler
+  var origHandler = null;
+  document.addEventListener('keydown', function(e){
+    if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    // Don't fire if overlay is open
+    var overlay = document.getElementById('kbOverlay');
+    if(overlay && overlay.classList.contains('kb-show')) return;
+
+    if(e.key === 'f' || e.key === 'F'){
+      e.preventDefault();
+      window._toggleTheater();
+      return;
+    }
+    if(e.key === 'z' || e.key === 'Z'){
+      e.preventDefault();
+      window._toggleZoom();
+      return;
+    }
+  });
+})();
+
+// ═══════════════════════════════════════════════════════
+// LIVE RESOLUTION — Deploy Fix & Flush Queue
+// Propagates fix across Monitor, Journey, and Alerts
+// ═══════════════════════════════════════════════════════
+var _resolved = false;
+
+function deployFix(btn) {
+  if (_resolved) return;
+  _resolved = true;
+
+  // 1. Button transition
+  btn.classList.add('deploying');
+  btn.innerHTML = '⏳ Deploying...';
+  btn.style.pointerEvents = 'none';
+
+  setTimeout(function() {
+    btn.classList.remove('deploying');
+    btn.classList.add('deployed');
+    btn.innerHTML = '✓ Fix Deployed — Queue Flushed';
+
+    // 2. Update Sacramento City in allColleges data
+    for (var i = 0; i < allColleges.length; i++) {
+      if (allColleges[i].name === 'Sacramento City College') {
+        allColleges[i].status = 'ok';
+        allColleges[i].badge = 'Healthy';
+        allColleges[i].detail = 'Token regenerated · 47 AER flushed · All synced';
+        allColleges[i].uptime = '99.2%';
+        allColleges[i].lastErr = 'Resolved (just now)';
+        allColleges[i].history = [
+          '09:38 — All 47 AER records transmitted',
+          '09:35 — Token refresh: SUCCESS',
+          '09:32 — Queue flush initiated',
+          '09:14 — ERROR 401 (RESOLVED)'
+        ];
+        break;
+      }
+    }
+
+    // 3. Re-render monitor — this updates summary counts + grid
+    renderMonitor();
+
+    // 4. Flash the summary cells to draw attention
+    setTimeout(function() {
+      document.querySelectorAll('.ms-cell').forEach(function(cell) {
+        cell.classList.add('cell-updated');
+        setTimeout(function() { cell.classList.remove('cell-updated'); }, 1200);
+      });
+    }, 100);
+
+    // 5. Show resolution banner
+    setTimeout(function() {
+      var banner = document.getElementById('resolutionBanner');
+      if (banner) banner.classList.add('rb-show');
+    }, 400);
+
+    // 6. Switch journey to "Successful Only"
+    setTimeout(function() {
+      var okBtn = null;
+      document.querySelectorAll('.jt-btn').forEach(function(b) {
+        if (b.textContent.indexOf('Successful') >= 0) okBtn = b;
+      });
+      if (okBtn) {
+        setJourney('ok', okBtn);
+        // Add "Resolved" tag to journey header after render
+        setTimeout(function() {
+          var jHeader = document.querySelector('.jch-ok');
+          if (jHeader && !jHeader.querySelector('.j-resolved-tag')) {
+            var tag = document.createElement('span');
+            tag.className = 'j-resolved-tag';
+            tag.textContent = '✓ LIVE FIX';
+            jHeader.appendChild(tag);
+          }
+        }, 350);
+      }
+    }, 800);
+
+    // 7. Dismiss the Sacramento City live alert if visible
+    var alertEl = document.getElementById('liveAlert');
+    if (alertEl && alertEl.classList.contains('show')) {
+      var alertBody = alertEl.querySelector('.live-alert-body');
+      if (alertBody && alertBody.innerHTML.indexOf('Sacramento') >= 0) {
+        alertEl.classList.remove('show');
+      }
+    }
+
+    // 8. Update the P2 incident bar in Comms section
+    var p2Bars = document.querySelectorAll('[style*="P2 ACTIVE"]');
+    // Also find inline P2 text
+    document.querySelectorAll('.sec').forEach(function(sec) {
+      var spans = sec.querySelectorAll('span');
+      spans.forEach(function(sp) {
+        if (sp.textContent === 'P2 ACTIVE') {
+          sp.textContent = 'RESOLVED';
+          sp.style.color = 'var(--primary)';
+          sp.previousElementSibling && (sp.previousElementSibling.style.background = 'var(--primary)');
+        }
+      });
+    });
+
+    // 9. Toast
+    toast('Sacramento City restored — 47 students back online');
+
+    // 10. Mark all tracer nodes as passed
+    document.querySelectorAll('.tf-node').forEach(function(nd) {
+      nd.classList.remove('active', 'error-node');
+      nd.classList.add('passed');
+    });
+
+  }, 1200);
+}
+
+// Inject the "Deploy Fix" button when tracer reaches final stage
+var _origSetStage = window.setStage;
+if (typeof setStage === 'function') {
+  var _baseSetStage = setStage;
+  setStage = function(n) {
+    _baseSetStage(n);
+    // On final stage (stage 4, index 4), append deploy button
+    if (n === 4 && !_resolved) {
+      var actions = document.querySelector('#tracerDetail .td-actions');
+      if (actions && !document.getElementById('deployFixBtn')) {
+        var btn = document.createElement('button');
+        btn.id = 'deployFixBtn';
+        btn.className = 'deploy-fix-btn';
+        btn.innerHTML = '🚀 Deploy Fix & Flush Queue';
+        btn.onclick = function() { deployFix(btn); };
+        actions.parentElement.appendChild(btn);
+      }
+    }
+  };
+}
+
+// Also inject when auto-run reaches end
+var _origAutoComplete = null;
+(function() {
+  // Watch for tracer completing auto-run
+  var obs = new MutationObserver(function() {
+    var status = document.getElementById('tracerStatus');
+    if (status && status.textContent === 'Layer 5 of 5' && !_resolved && !document.getElementById('deployFixBtn')) {
+      var actions = document.querySelector('#tracerDetail .td-actions');
+      if (actions) {
+        var btn = document.createElement('button');
+        btn.id = 'deployFixBtn';
+        btn.className = 'deploy-fix-btn';
+        btn.innerHTML = '🚀 Deploy Fix & Flush Queue';
+        btn.onclick = function() { deployFix(btn); };
+        actions.parentElement.appendChild(btn);
+      }
+    }
+  });
+  var statusEl = document.getElementById('tracerStatus');
+  if (statusEl) obs.observe(statusEl, { childList: true, characterData: true, subtree: true });
+})();
+
+
+// ═══════════════════════════════════════════════════════
+// ACCESSIBILITY MODE — WCAG AAA High-Contrast
+// Toggle via nav switch or A key
+// ═══════════════════════════════════════════════════════
+var _a11yActive = false;
+
+function toggleA11y() {
+  _a11yActive = !_a11yActive;
+  document.body.classList.toggle('a11y-mode', _a11yActive);
+
+  var toggle = document.getElementById('a11yToggle');
+  if (toggle) {
+    toggle.classList.toggle('a11y-on', _a11yActive);
+    toggle.setAttribute('aria-checked', _a11yActive ? 'true' : 'false');
+  }
+
+  if (_a11yActive) {
+    injectA11yAttributes();
+    toast('Accessibility mode ON — WCAG AAA');
+  } else {
+    removeA11yAttributes();
+    toast('Accessibility mode OFF');
+  }
+}
+
+function injectA11yAttributes() {
+  // Add tabindex to all interactive cards
+  var interactiveSelectors = '.b-card,.ai-card,.counsel-card,.esc-card,.status-row,.lookup-card,.msg-preview,.toc-item,.insight-card,.trigger-card';
+  document.querySelectorAll(interactiveSelectors).forEach(function(el) {
+    if (!el.getAttribute('tabindex')) el.setAttribute('tabindex', '0');
+    // Make Enter/Space trigger click
+    if (!el._a11yKey) {
+      el._a11yKey = true;
+      el.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          el.click();
+        }
+      });
+    }
+  });
+
+  // Aria-labels for status indicators
+  document.querySelectorAll('.s-indicator').forEach(function(dot) {
+    var row = dot.closest('.status-row');
+    var name = row ? (row.querySelector('.s-name') || {}).textContent || '' : '';
+    var status = dot.classList.contains('s-ok') ? 'healthy' :
+                 dot.classList.contains('s-warn') ? 'degraded' :
+                 dot.classList.contains('s-err') ? 'failing' : 'unknown';
+    dot.setAttribute('aria-label', name + ' status: ' + status);
+    dot.setAttribute('role', 'img');
+  });
+
+  // Aria-labels for severity dots on barrier cards
+  document.querySelectorAll('.b-sev-dot').forEach(function(dot) {
+    var card = dot.closest('.b-card');
+    var title = card ? (card.querySelector('.b-title') || {}).textContent || '' : '';
+    var sev = card && card.classList.contains('b-sev-high') ? 'high severity' :
+              card && card.classList.contains('b-sev-med') ? 'medium severity' : 'low severity';
+    dot.setAttribute('aria-label', title + ': ' + sev);
+    dot.setAttribute('role', 'img');
+  });
+
+  // Aria-labels for monitor summary cells
+  document.querySelectorAll('.ms-cell').forEach(function(cell) {
+    var num = (cell.querySelector('.ms-num') || {}).textContent || '';
+    var label = (cell.querySelector('.ms-label') || {}).textContent || '';
+    cell.setAttribute('aria-label', num + ' ' + label);
+  });
+
+  // Aria-labels for filter tabs
+  document.querySelectorAll('.filter-tab,.ai-tab,.jt-btn,.outreach-tab,.lookup-filter').forEach(function(tab) {
+    var isActive = tab.classList.contains('active') || tab.classList.contains('lf-active');
+    tab.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    tab.setAttribute('role', 'button');
+  });
+
+  // Aria-labels for icon-only buttons
+  document.querySelectorAll('.kb-step-btn').forEach(function(btn) {
+    if (btn.classList.contains('del')) {
+      btn.setAttribute('aria-label', 'Delete step');
+    } else if (btn.textContent.indexOf('↑') >= 0) {
+      btn.setAttribute('aria-label', 'Move step up');
+    } else if (btn.textContent.indexOf('↓') >= 0) {
+      btn.setAttribute('aria-label', 'Move step down');
+    }
+  });
+
+  // Aria-labels for nav number badges
+  document.querySelectorAll('.nav-num').forEach(function(num) {
+    num.setAttribute('aria-hidden', 'true');
+  });
+
+  // Aria-labels for the window dots
+  document.querySelectorAll('.tool-dots').forEach(function(dots) {
+    dots.setAttribute('aria-hidden', 'true');
+  });
+
+  // Aria-labels for copy buttons
+  document.querySelectorAll('.msg-copy').forEach(function(btn) {
+    var preview = btn.closest('.msg-preview');
+    var to = preview ? (preview.querySelector('.msg-to') || {}).textContent || '' : '';
+    btn.setAttribute('aria-label', 'Copy message to ' + to);
+  });
+
+  // Role and labels for progress dots
+  document.querySelectorAll('.progress-dot').forEach(function(dot) {
+    dot.setAttribute('role', 'button');
+    if (!dot.getAttribute('aria-label')) {
+      dot.setAttribute('aria-label', dot.getAttribute('title') || 'Navigate to section');
+    }
+  });
+
+  // Back to top button
+  var backBtn = document.getElementById('backToTop');
+  if (backBtn && !backBtn.getAttribute('aria-label')) {
+    backBtn.setAttribute('aria-label', 'Back to top');
+  }
+}
+
+function removeA11yAttributes() {
+  // Remove tabindex from cards (keep native focusable elements)
+  document.querySelectorAll('.b-card,.ai-card,.counsel-card,.esc-card,.status-row,.lookup-card,.msg-preview,.toc-item,.insight-card,.trigger-card').forEach(function(el) {
+    el.removeAttribute('tabindex');
+  });
+}
+
+// Handle A key + Enter on toggle
+document.getElementById('a11yToggle').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleA11y(); }
+});
+
+
+// ═══ KEYBOARD BINDING — A for Accessibility ═══
+(function() {
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    var overlay = document.getElementById('kbOverlay');
+    if (overlay && overlay.classList.contains('kb-show')) return;
+    if (e.key === 'a' || e.key === 'A') {
+      e.preventDefault();
+      toggleA11y();
+    }
+  });
+})();
 
 </script>
 
@@ -3581,6 +5578,12 @@ function copyMsgText(btn) {
     <div class="kb-help-row"><span class="kb-help-desc">Open page guide</span><span class="kb-help-key">G</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Search colleges</span><span class="kb-help-key">/</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Back to top</span><span class="kb-help-key">T</span></div>
+    </div>
+    <div style="border-top:1px solid var(--border);margin-top:.5rem;padding-top:.5rem">
+    <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.3rem">Presentation</div>
+    <div class="kb-help-row"><span class="kb-help-desc">Theater / focus mode</span><span class="kb-help-key">F</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc">Zoom screenshare mode</span><span class="kb-help-key">Z</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc">Accessibility mode</span><span class="kb-help-key">A</span></div>
     </div>
     <div class="kb-help-close">Press any key or click outside to close</div>
   </div>
