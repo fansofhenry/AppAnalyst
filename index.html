@@ -13,7 +13,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
 ::selection{background:#D1FAE5;color:var(--text)}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:5px}
 .wrap{max-width:var(--max-w);margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
-nav{position:sticky;top:0;z-index:200;background:rgba(250,250,248,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 clamp(1.25rem,4vw,2.5rem);height:56px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s}
+nav{position:sticky;top:0;z-index:200;background:rgba(250,250,248,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:.5rem clamp(1.25rem,4vw,2.5rem);min-height:48px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s;flex-wrap:wrap;gap:.3rem}
 nav.scrolled{box-shadow:var(--shadow)}
 .nav-brand{display:flex;align-items:center;gap:.6rem}
 .nav-icon{width:28px;height:28px;border-radius:7px;background:var(--primary);display:flex;align-items:center;justify-content:center}
@@ -474,9 +474,14 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 .jt-btn.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
 
 /* KEY HINT + DEMO */
-.key-hint{position:fixed;bottom:1.25rem;right:1.25rem;background:rgba(28,25,23,.88);color:#A8A29E;font-family:var(--mono);font-size:.58rem;padding:.5rem .75rem;border-radius:var(--r);z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;backdrop-filter:blur(8px)}
-.key-hint.show{opacity:1}
-.key-hint kbd{display:inline-block;background:rgba(255,255,255,.12);padding:.1rem .35rem;border-radius:3px;margin:0 .1rem;color:#E5E5E5;border:1px solid rgba(255,255,255,.1)}
+/* Keyboard shortcut pill — persistent, clickable */
+.key-pill{position:fixed;bottom:4.5rem;right:1.5rem;z-index:160;display:flex;align-items:center;gap:.35rem;padding:.4rem .65rem;background:rgba(28,25,23,.85);color:#A8A29E;font-family:var(--mono);font-size:.55rem;border-radius:100px;backdrop-filter:blur(8px);cursor:pointer;opacity:.3;transition:all .25s;border:1px solid rgba(255,255,255,.06);user-select:none;-webkit-tap-highlight-color:transparent}
+.key-pill:hover{opacity:1;transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.2);background:rgba(28,25,23,.95)}
+.key-pill:active{transform:scale(.96)}
+.key-pill kbd{display:inline-block;background:rgba(255,255,255,.12);padding:.1rem .3rem;border-radius:3px;color:#E5E5E5;border:1px solid rgba(255,255,255,.08);font-size:.5rem;line-height:1}
+.key-pill svg{width:13px;height:13px;opacity:.6;flex-shrink:0}
+.key-pill-label{color:#D4D1C9;font-weight:500}
+@media(max-width:500px){.key-pill{bottom:3.5rem;right:1rem;padding:.3rem .5rem;font-size:.5rem}}
 
 /* LIVE ALERT */
 .live-alert{position:absolute;top:60px;right:1rem;background:#1C1917;color:#fff;padding:.55rem .85rem;border-radius:var(--r-lg);font-size:.72rem;box-shadow:0 8px 30px rgba(0,0,0,.2);z-index:50;opacity:0;transform:translateY(-10px) translateX(10px);transition:all .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none;max-width:320px;border-left:3px solid var(--red)}
@@ -1335,18 +1340,204 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 .tc-rose .toc-num{background:#be185d !important;color:#fff !important;border-color:#be185d !important}
 .tc-indigo .toc-num{background:#4338ca !important;color:#fff !important;border-color:#4338ca !important}
 
+
+/* ═══ NAV IMPROVEMENTS ═══ */
+/* Nav link numbers */
+.nav-num{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:var(--bg-3);font-family:var(--mono);font-size:.45rem;font-weight:700;color:var(--text-3);margin-right:.2rem;flex-shrink:0;line-height:1}
+.nav-active .nav-num{background:var(--primary) !important;color:#fff !important}
+.nv .nav-num{background:transparent;border:1px solid currentColor;color:inherit}
+.nav-barrier .nav-num{background:transparent;border:1px solid var(--red);color:var(--red)}
+
+/* Nav active underline */
+.nav-links a.nav-active{text-decoration:underline !important;text-underline-offset:4px !important;text-decoration-thickness:2px !important;text-decoration-color:var(--primary) !important;color:var(--primary) !important;font-weight:600 !important}
+.nav-links a.nav-barrier.nav-active{text-decoration-color:var(--red) !important;color:var(--red) !important}
+
+/* Nav brand clickable */
+a.nav-brand{text-decoration:none !important}
+a.nav-brand:hover .nav-icon{transform:scale(1.08);box-shadow:0 2px 8px rgba(26,107,80,.3)}
+a.nav-brand:hover .nav-title{color:var(--primary)}
+.nav-icon{transition:all .2s}
+.nav-title{transition:color .2s}
+
+/* Alert — click to dismiss */
+.live-alert{cursor:pointer !important}
+.live-alert::after{content:'click to dismiss';position:absolute;bottom:-.35rem;right:.5rem;font-family:var(--mono);font-size:.4rem;color:var(--text-3);opacity:0;transition:opacity .15s}
+.live-alert:hover::after{opacity:.7}
+.live-alert:hover{box-shadow:0 4px 16px rgba(0,0,0,.15) !important}
+
+/* Custom cursor — node selector */
+body{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect x='7' y='7' width='18' height='18' rx='4' fill='none' stroke='%231A6B50' stroke-width='1.5' opacity='.6'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%231A6B50' opacity='.75'/%3E%3C/svg%3E") 16 16, default}
+a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal-month,.trigger-card,.status-row,.b-card,.ai-card,.counsel-card,.esc-card,.insight-card,.lookup-card,.toc-item,.progress-dot{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Crect x='7' y='7' width='22' height='22' rx='5' fill='none' stroke='%231A6B50' stroke-width='2' opacity='.7'/%3E%3Ccircle cx='18' cy='18' r='4' fill='%231A6B50' opacity='.85'/%3E%3C/svg%3E") 18 18, pointer}
+
+/* ═══ MOBILE NAV — Page Guide becomes the navigation ═══ */
+@media(max-width:768px){
+  nav{height:auto !important;padding:.5rem clamp(.75rem,3vw,1.25rem) !important;gap:.4rem}
+  .nav-links{display:none !important}
+  .nav-brand{flex:1}
+  .nav-title{font-size:.8rem !important}
+  .nav-icon{width:24px !important;height:24px !important}
+  .toc-btn{font-size:.65rem !important;padding:.35rem .65rem !important}
+  .toc-panel{top:48px !important;max-height:calc(100vh - 48px) !important;width:100vw !important}
+}
+@media(min-width:769px) and (max-width:1100px){
+  .nav-links a{font-size:.55rem !important;padding:.2rem .35rem !important}
+  .nv{border-width:1px !important}
+  nav{height:auto !important;min-height:48px;padding:.4rem clamp(.75rem,3vw,1.5rem) !important}
+}
+
+/* Mobile polish */
+@media(max-width:500px){
+  .h-desc{font-size:.78rem !important}
+  .quick-actions{flex-direction:column !important;align-items:stretch !important}
+  .qa-card{justify-content:center}
+  .h-stats{grid-template-columns:1fr 1fr !important;gap:.4rem !important}
+  .h-stat-num{font-size:clamp(1.4rem,4vw,2rem) !important}
+  .tool-body{padding:.65rem !important}
+  .counsel-grid{grid-template-columns:1fr !important}
+  .lookup-filters{flex-wrap:nowrap !important;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:.3rem}
+  .lookup-filter{flex-shrink:0}
+  .esc-grid{grid-template-columns:1fr !important}
+  .progress-dots{display:none !important}
+  .back-to-top{width:36px !important;height:36px !important;font-size:.9rem !important;bottom:1rem !important;right:1rem !important}
+}
+
+
+/* Keyboard overlay — 2-column section grid */
+.kb-help-row{display:flex;justify-content:space-between;gap:1rem}
+.kb-help-row .kb-help-desc{flex:1;display:flex;align-items:center;gap:.3rem}
+
+
+/* New nav colors */
+.nv-sky{color:#0284c7 !important;border-color:#bae6fd !important;background:#f0f9ff !important}
+.nv-sky:hover{background:#0284c7 !important;color:#fff !important}
+.nv-orange{color:#c2410c !important;border-color:#fed7aa !important;background:#fff7ed !important}
+.nv-orange:hover{background:#c2410c !important;color:#fff !important}
+
+/* TOC matching */
+.tc-sky .toc-num{background:#0284c7 !important;color:#fff !important;border-color:#0284c7 !important}
+.tc-orange .toc-num{background:#c2410c !important;color:#fff !important;border-color:#c2410c !important}
+
+
+/* ═══ SMARTPHONE POLISH (≤500px) ═══ */
+@media(max-width:500px){
+  /* Hero breathes */
+  .header{padding:clamp(2.5rem,8vw,4rem) 0 clamp(1.5rem,4vw,2.5rem) !important}
+  h1{font-size:clamp(1.6rem,7vw,2.2rem) !important;letter-spacing:-.02em !important}
+  .h-desc{font-size:.78rem !important;line-height:1.65 !important;margin-bottom:1.5rem !important}
+  .h-stats{display:grid !important;grid-template-columns:1fr 1fr !important;gap:.5rem !important}
+  .h-stat-num{font-size:clamp(1.3rem,5vw,1.8rem) !important}
+  
+  /* Quick actions stack nicely */
+  .quick-actions{flex-direction:column !important;align-items:stretch !important;gap:.35rem !important}
+  .qa-card{justify-content:center !important;padding:.5rem .7rem !important}
+  
+  /* Sections tighter */
+  .sec{padding:clamp(1.5rem,5vw,2.5rem) 0 !important}
+  h2{font-size:clamp(1.2rem,5vw,1.6rem) !important;padding-left:.6rem !important}
+  .sec-desc{font-size:.76rem !important;margin-bottom:1.25rem !important}
+  .eyebrow{font-size:.5rem !important;padding:.2rem .5rem !important}
+  
+  /* Tool frames */
+  .tool-frame{border-radius:8px !important}
+  .tool-body{padding:.6rem !important}
+  .tool-bar{padding:.45rem .65rem !important}
+  .tool-bar-title{font-size:.48rem !important}
+  .tool-label{font-size:.45rem !important}
+  
+  /* Grids stack */
+  .counsel-grid{grid-template-columns:1fr !important}
+  .esc-grid{grid-template-columns:1fr !important}
+  .ai-card-grid{grid-template-columns:1fr !important}
+  .b-grid{grid-template-columns:1fr !important}
+  .eq-grid{grid-template-columns:1fr !important}
+  .info-grid{grid-template-columns:1fr !important}
+  .pattern-grid{grid-template-columns:1fr !important}
+  .msg-grid{grid-template-columns:1fr !important}
+  .trigger-cards{grid-template-columns:1fr !important}
+  .monitor-grid{grid-template-columns:1fr !important}
+  .journey-cols{grid-template-columns:1fr !important}
+  .pulse-grid{grid-template-columns:1fr 1fr !important}
+  
+  /* Horizontal scrollables */
+  .lookup-filters{flex-wrap:nowrap !important;overflow-x:auto !important;-webkit-overflow-scrolling:touch;padding-bottom:.3rem}
+  .lookup-filter{flex-shrink:0 !important}
+  .ai-tabs,.outreach-tabs,.filter-tabs{overflow-x:auto !important;flex-wrap:nowrap !important;-webkit-overflow-scrolling:touch}
+  .ai-tab,.outreach-tab,.filter-tab{flex-shrink:0 !important;white-space:nowrap !important}
+  .tracer-flow{overflow-x:auto !important;-webkit-overflow-scrolling:touch}
+  .lc-flow{overflow-x:auto !important;-webkit-overflow-scrolling:touch}
+  .flow-row{overflow-x:auto !important;-webkit-overflow-scrolling:touch}
+  .ai-spectrum{overflow-x:auto !important;-webkit-overflow-scrolling:touch}
+  .cal-timeline{overflow-x:auto !important;-webkit-overflow-scrolling:touch}
+  
+  /* KB layout stacks */
+  .kb-layout{grid-template-columns:1fr !important}
+  
+  /* Navigation elements */
+  .progress-dots{display:none !important}
+  .back-to-top{width:36px !important;height:36px !important;font-size:.85rem !important;bottom:.75rem !important;right:.75rem !important}
+  .key-pill{bottom:3.25rem !important;right:.75rem !important;padding:.3rem .5rem !important;font-size:.48rem !important}
+  
+  /* Why section columns stack */
+  #why .wrap > div > div{flex-direction:column !important}
+  
+  /* Footer tighter */
+  footer{padding:1.5rem 0 !important}
+  footer .wrap div[style*="display:flex"]{gap:.25rem !important}
+  
+  /* Hide decorative elements */
+  .hero-bg{display:none !important}
+  h2::before{display:none !important}
+  
+  /* Disable hover transforms on touch */
+  .tool-frame:hover{transform:none !important}
+  .msg-preview:hover{transform:none !important}
+  .b-card:hover{transform:none !important}
+  .ai-card:hover{transform:none !important}
+  
+  /* No custom cursor on touch devices */
+  *{cursor:auto !important}
+}
+
+/* ═══ SMALL-MEDIUM PHONES (≤400px) ═══ */
+@media(max-width:400px){
+  h1{font-size:1.4rem !important}
+  .h-stat-num{font-size:1.2rem !important}
+  .wrap{padding:0 .75rem !important}
+  .tool-body{padding:.5rem !important}
+  .h-stats{gap:.35rem !important}
+}
+
+/* ═══ TABLET TIGHTENING (≤768px) ═══ */
+@media(max-width:768px){
+  .h-stats{display:grid !important;grid-template-columns:1fr 1fr !important}
+  .info-grid{grid-template-columns:1fr !important}
+  .ai-card-grid{grid-template-columns:1fr !important}
+  .pulse-grid{grid-template-columns:1fr 1fr !important}
+  .journey-cols{grid-template-columns:1fr !important}
+  
+  /* Disable custom cursor on tablet too */
+  *{cursor:auto !important}
+}
+
+
+/* Barriers nav — active state readable */
+.nav-links a.nav-barrier.nav-active{background:var(--red) !important;color:#fff !important;text-decoration-color:#fff !important}
+.nav-links a.nav-barrier.nav-active .nav-num{background:#fff !important;color:var(--red) !important;border-color:#fff !important}
+
+
+/* Accessibility: minimum font floor */
+.lc-step,.lc-b-tag,.b-cat,.ai-compare-label,.sc-step-num,.tc-msg-label{font-size:.5rem !important}
+
 </style>
 </head>
 <body>
 <a href="#lookup" class="skip-link">Skip to main content</a>
 
 <nav id="nav" role="navigation" aria-label="Main navigation">
-  <div class="nav-brand"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">CVC-OEI · Application Support</span></div>
-  <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Page Guide</button>
+  <a class="nav-brand" href="#" onclick="event.preventDefault();(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" style="text-decoration:none;cursor:pointer" title="Back to top"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">CVC-OEI · Application Support</span></div>
+  <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0" aria-hidden="true"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Page Guide</button>
     <div class="nav-links">
-    <a href="#why">Background</a><a href="#lookup" class="nv nv-blue">Lookup</a><a href="#cvcData">Data</a><a href="#journey" class="nv nv-green">Journey</a><a href="#flow">Architecture</a><a href="#monitor" class="nv nv-amber">Monitor</a><a href="#tracer" class="nv nv-rose">Diagnostics</a><a href="#patterns">Patterns</a><a href="#kb">Knowledge Base Builder</a>
-    <a href="#escalation" class="nv nv-indigo">Escalation</a><a href="#outreach">Outreach</a><a href="#counselorToolkit" class="nv nv-teal">Counselors</a><a href="#aiVision" class="nv nv-purple">AI Vision</a>
-    <a href="#closing" style="font-weight:700">Why Me</a><a href="#barriers" class="nav-barrier">⚠ Barriers</a>
+    <a href="#why">Context</a><a href="#lookup" class="nv nv-blue"><span class="nav-num">1</span>Lookup</a><a href="#cvcData" class="nv nv-green"><span class="nav-num">2</span>Exchange</a><a href="#flow" class="nv nv-sky"><span class="nav-num">3</span>Architecture</a><a href="#monitor" class="nv nv-amber"><span class="nav-num">4</span>Monitor</a><a href="#tracer" class="nv nv-rose"><span class="nav-num">5</span>Diagnostics</a><a href="#patterns" class="nv nv-orange"><span class="nav-num">6</span>Intelligence</a><a href="#comms" class="nv nv-indigo"><span class="nav-num">7</span>Response</a><a href="#outreach" class="nv nv-teal"><span class="nav-num">8</span>Counselors</a><a href="#aiVision" class="nv nv-purple"><span class="nav-num">9</span>AI Vision</a><a href="#barriers" class="nav-barrier"><span class="nav-num">0</span>Barriers</a>
   </div>
 </nav>
 
@@ -1354,15 +1545,15 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
   <div class="wrap">
     <div class="h-badge"><span class="dot"></span> CVC-OEI · Foothill–De Anza CCD</div>
     <h1>This is how I’d support <em>the Exchange</em> on day one.</h1>
-    <p class="h-desc">115 colleges, four student information system platforms, 33,000 cross-enrollments per year. When the data flow breaks, a student doesn’t see their course in Canvas. <strong>Below are 19 tools I built to show how I’d find, fix, and prevent that.</strong></p>
+    <p class="h-desc">115 colleges, four student information system platforms, 33,000 cross-enrollments per year. When the data flow breaks, a student doesn’t see their course in Canvas. <strong>These tools show how I’d find it, fix it, and prevent it from happening again.</strong></p>
     <div class="quick-actions">
       <a class="qa-card" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">⚡</span><span class="qa-text">See what breaks</span></a>
       <a class="qa-card" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">🛠</span><span class="qa-text">Trace an incident</span></a>
       <a class="qa-card" onclick="document.getElementById('counselorToolkit').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">📋</span><span class="qa-text">Help a counselor</span></a>
-      <a class="qa-card" onclick="toggleToc()"><span class="qa-icon">📖</span><span class="qa-text">Browse all 19 tools</span></a>
+      <a class="qa-card" onclick="toggleToc()"><span class="qa-icon">📖</span><span class="qa-text">Browse all sections</span></a>
     </div>
 
-    <p style="font-size:.78rem;color:var(--text-3);max-width:540px;margin:0 auto .75rem;line-height:1.7;text-align:center">The Exchange is <strong style="color:var(--text-2)">equity infrastructure</strong> — a student at a rural college with 12 courses gets the same curriculum as a metro college with 200. I started at <strong style="color:var(--text-2)">Foothill College</strong> as a first-generation student. I know what breaks when it breaks, because I've been on the student side of it.</p>
+    <p style="font-size:.78rem;color:var(--text-3);max-width:540px;margin:0 auto .75rem;line-height:1.7;text-align:center">I started at <strong style="color:var(--text-2)">Foothill College</strong> as a first-generation student. The Exchange is <strong style="color:var(--text-2)">equity infrastructure</strong> — when it breaks, students at rural colleges with 12 courses lose access to the same curriculum a metro college offers. I’ve been on the student side of that.</p>
     <div class="h-stats">
       <div><div class="h-stat-num green">115</div><div class="h-stat-label">Connected Colleges</div></div>
       <div><div class="h-stat-num blue">4</div><div class="h-stat-label">System Platforms</div></div>
@@ -1409,11 +1600,11 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 <!-- COLLEGE QUICK LOOKUP -->
 <section class="sec fu" id="lookup" role="region" aria-label="College Lookup"><div class="wrap">
-  <div class="eyebrow" style="color:var(--blue)">Quick Reference</div>
+  <div class="eyebrow" style="color:var(--blue)"><span class="sec-num" style="background:var(--blue)">1</span>Lookup</div>
   <h2>Look up any college in <em>the Exchange</em></h2>
   <p class="sec-desc">Type a college name, Student Information System type, or keyword. <strong>Instant reference card.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Lookup</span></div><span class="tool-bar-title">College Quick Lookup · 30 Colleges · Searchable by Name, District, or System</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Lookup</span></div><span class="tool-bar-title">College Lookup · 31 Colleges · Searchable</span></div>
     <div class="tool-body">
       <div class="lookup-wrap">
         <div class="lookup-stats" id="lookupStats"></div>
@@ -1438,11 +1629,11 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 <!-- CVC EXCHANGE DATA -->
 <section class="sec fu" id="cvcData"><div class="wrap">
-  <div class="eyebrow" style="color:var(--blue)">Exchange Intelligence</div>
+  <div class="eyebrow" style="color:var(--primary)"><span class="sec-num sec-num-green">2</span>Exchange</div>
   <h2>The numbers behind <em>course sharing</em></h2>
   <p class="sec-desc">From 1,500 to 33,000 cross-enrollments in three years. The support workload is scaling fast.</p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Data</span></div><span class="tool-bar-title">Exchange Growth · 1,500 to 33,000 Enrollments · 2021–25</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Data</span></div><span class="tool-bar-title">Exchange Growth · 2021–25</span></div>
     <div class="tool-body">
       <div class="info-grid">
         <div class="info-panel">
@@ -1494,10 +1685,10 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 <!-- STUDENT JOURNEY -->
 <section class="sec sec-alt fu" id="journey" role="region" aria-label="Student Journey"><div class="wrap">
   <div class="eyebrow">Student Experience</div>
-  <h2>The same enrollment — when it <em>works</em> vs when it <em style="color:var(--red)">breaks</em></h2>
+  <h2>Same enrollment — <em>working</em> vs <em style="color:var(--red)">breaks</em></h2>
   <p class="sec-desc">When the system works, students never think about it. When it breaks — <strong>they see a missing course.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Student View</span></div><span class="tool-bar-title">Scenario: MATH 1A · Chabot → De Anza · via CVC Exchange</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Student View</span></div><span class="tool-bar-title">MATH 1A · Chabot → De Anza</span></div>
     <div class="tool-body" style="padding:0">
       <div style="display:flex;gap:2px;background:var(--bg-3);border-radius:var(--r);padding:2px;margin:.75rem .85rem 0;width:fit-content" id="journeyToggle">
         <button class="jt-btn active" onclick="setJourney('compare',this)">Side by Side</button>
@@ -1512,9 +1703,9 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 <!-- ═══ TOOL 01: ARCHITECTURE ═══ -->
 <section class="sec fu" id="flow"><div class="wrap">
-  <div class="eyebrow">System Architecture</div>
-  <h2>The cross-enrollment data flow — and <em>where it breaks</em></h2>
-  <p class="sec-desc"></p>
+  <div class="eyebrow"><span class="sec-num" style="background:#0284c7">3</span>Architecture</div>
+  <h2>How student data flows — and <em>where it breaks</em></h2>
+  <p class="sec-desc">Four layers from home college to Canvas. Click any node to see where failures happen.</p>
   <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;margin-bottom:.25rem">
     <span style="display:inline-flex;align-items:center;gap:.25rem;font-size:.6rem;color:var(--primary)"><span style="width:8px;height:8px;border-radius:50%;background:var(--primary)"></span>Student-facing</span>
     <span style="display:inline-flex;align-items:center;gap:.25rem;font-size:.6rem;color:var(--blue)"><span style="width:8px;height:8px;border-radius:50%;background:var(--blue)"></span>Authentication</span>
@@ -1538,8 +1729,8 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 <!-- ═══ TOOL 02: MONITOR ═══ -->
 <section class="sec sec-alt fu" id="monitor" role="region" aria-label="System Monitor"><div class="wrap">
-  <div class="eyebrow"><span class="sec-num sec-num-green">01</span>Visibility</div>
-  <h2>Can the analyst spot a failing college <em>before the tickets arrive?</em></h2>
+  <div class="eyebrow"><span class="sec-num" style="background:var(--amber)">4</span>Monitor</div>
+  <h2>Spot the failure <em>before the tickets arrive</em></h2>
   <p class="sec-desc">The view that prevents the 9 AM scramble. <strong>Which colleges are up, degraded, or down?</strong></p>
   <div class="tool-frame">
     <div style="position:relative"><div class="live-alert" id="liveAlert"><div class="live-alert-title">New Alert</div><div class="live-alert-body"></div><div class="live-alert-time"></div></div></div>
@@ -1574,11 +1765,11 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 <!-- ═══ TOOL 03: TRACER ═══ -->
 <section class="sec fu" id="tracer" role="region" aria-label="Incident Tracer"><div class="wrap">
-  <div class="eyebrow"><span class="sec-num sec-num-green">02</span>Diagnosis</div>
-  <h2>When a student reports a missing course — <em>where do you look?</em></h2>
+  <div class="eyebrow"><span class="sec-num" style="background:#be185d">5</span>Diagnostics</div>
+  <h2>Missing course reported — <em>where do you look?</em></h2>
   <p class="sec-desc">Layer-by-layer diagnosis. Student report → SIS → API → Exchange → Canvas. <strong>Find the break.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><div class="tool-bar-title">Incident Trace · Sacramento City · Ethos Token Expiration</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><div class="tool-bar-title">Incident Trace · Sacramento City · Ethos Token</div></div>
     <div class="tool-body">
       <div class="tracer-controls">
         <button class="tracer-btn tracer-btn-run" id="autoRunBtn" onclick="autoRunTrace()">▶ Auto-Run Trace</button>
@@ -1593,11 +1784,11 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 <!-- ═══ TOOL 04: PATTERNS ═══ -->
 <section class="sec sec-alt fu" id="patterns"><div class="wrap">
-  <div class="eyebrow"><span class="sec-num sec-num-green">03</span>Patterns</div>
+  <div class="eyebrow"><span class="sec-num" style="background:#c2410c">6</span>Intelligence</div>
   <h2>Is this one ticket — or <em>twenty waiting to happen?</em></h2>
   <p class="sec-desc">Ticket data mapped to the CVC academic calendar. <strong>One ticket — or a pattern?</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><div class="tool-bar-title">Ticket Intelligence · 12 Weeks · Academic Calendar Overlay</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><div class="tool-bar-title">Ticket Intelligence · 12-Week Calendar</div></div>
     <div class="tool-body">
       <div class="pattern-grid">
         <div><div class="chart-area">
@@ -1613,11 +1804,11 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 <!-- ═══ TOOL 05: KB BUILDER ═══ -->
 <section class="sec fu" id="kb"><div class="wrap">
-  <div class="eyebrow"><span class="sec-num sec-num-green">04</span>Documentation</div>
+  <div class="eyebrow">Documentation</div>
   <h2>If the fix isn’t documented, it didn’t <em>scale.</em></h2>
   <p class="sec-desc">Four templates. Integration, auth, sync, onboarding. <strong>If it’s not documented, it didn’t scale.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation</span></div><div class="tool-bar-title">Knowledge Base Builder · 4 Templates · Editable + Copy-Ready</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation</span></div><div class="tool-bar-title">KB Builder · 4 Templates · Copy-Ready</div></div>
     <div class="tool-body" style="padding:0">
       <div class="kb-layout">
         <div class="kb-sidebar">
@@ -1636,7 +1827,7 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 <!-- ═══ HOW I COMMUNICATE ═══ -->
 <section class="sec fu" id="comms" role="region" aria-label="Incident Communication">
   <div class="wrap">
-    <div class="eyebrow">Communication</div>
+    <div class="eyebrow"><span class="sec-num" style="background:#4338ca">7</span>Response</div>
     <h2>The same failure, written <em>four different ways</em></h2>
     <p class="sec-desc">Same incident, four audiences, four different messages. <strong>Each one is copy-ready.</strong></p>
     <div style="padding:.55rem .85rem;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
@@ -1645,10 +1836,10 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
       <div style="font-family:var(--mono);font-size:.52rem;color:var(--text-3);margin-left:auto">14:22 PST</div>
     </div>
     <div class="msg-grid">
-      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--teal-light)">🎓</div><div class="msg-to">To the Student</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Your MATH 1A enrollment — update</div><div class="msg-body">We’re aware your MATH 1A section isn’t showing in Canvas yet. This is a sync issue between your home college and the teaching college — <strong>not a problem with your enrollment.</strong> Your seat is secure. We expect this to be resolved within <span class="msg-highlight">2–4 hours</span>. No action needed on your end.</div></div>
-      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--purple-light)">🖥</div><div class="msg-to">To Campus IT (Teaching College)</div><div class="msg-channel">ServiceNow</div></div><div class="msg-body">AER for CCCID <strong>0012847593</strong> transmitted from Chabot at 14:22 PST but Canvas roster for MATH-1A-001 does not reflect enrollment. Ethos token at home college returned <span class="msg-warn">401 invalid_grant</span>. Can you verify whether the enrollment record exists in your Banner instance?</div></div>
-      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">📋</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Cross-enrollment sync — student enrollments confirmed, Canvas delay expected &lt;4hr</div><div class="msg-body">Quick update on the cross-enrollment sync issue. <strong>The student’s enrollment is confirmed</strong> — the delay is in how the data reaches Canvas. If students contact your office, you can confirm their enrollment is valid. Happy to provide a written summary if this needs to go to your VP.</div></div>
-      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--blue-light)">⚙</div><div class="msg-to">To CVC Internal Team</div><div class="msg-channel">Slack</div></div><div class="msg-body"><strong>Scope:</strong> 47 AER records pending in Chabot → De Anza queue since 02:00 PST. Root cause: Ethos Open Authorization (OAuth2) token expired, <span class="msg-warn">invalid_grant</span> on refresh. <strong>Action:</strong> Token regenerated. Queue flush in progress. Knowledge Base (KB) article drafted.</div></div>
+      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--teal-light)">🎓</div><div class="msg-to">To the Student</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Your MATH 1A enrollment — update</div><div class="msg-body">We’re aware your MATH 1A section isn’t showing in Canvas yet. This is a sync issue between your home college and the teaching college — <strong>not a problem with your enrollment.</strong> Your seat is secure. We expect this to be resolved within <span class="msg-highlight">2–4 hours</span>. No action needed on your end.</div></div>
+      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--purple-light)">🖥</div><div class="msg-to">To Campus IT (Teaching College)</div><div class="msg-channel">ServiceNow</div></div><div class="msg-body">AER for CCCID <strong>0012847593</strong> transmitted from Chabot at 14:22 PST but Canvas roster for MATH-1A-001 does not reflect enrollment. Ethos token at home college returned <span class="msg-warn">401 invalid_grant</span>. Can you verify whether the enrollment record exists in your Banner instance?</div></div>
+      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">📋</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Cross-enrollment sync — student enrollments confirmed, Canvas delay expected &lt;4hr</div><div class="msg-body">Quick update on the cross-enrollment sync issue. <strong>The student’s enrollment is confirmed</strong> — the delay is in how the data reaches Canvas. If students contact your office, you can confirm their enrollment is valid. Happy to provide a written summary if this needs to go to your VP.</div></div>
+      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--blue-light)">⚙</div><div class="msg-to">To CVC Internal Team</div><div class="msg-channel">Slack</div></div><div class="msg-body"><strong>Scope:</strong> 47 AER records pending in Chabot → De Anza queue since 02:00 PST. Root cause: Ethos Open Authorization (OAuth2) token expired, <span class="msg-warn">invalid_grant</span> on refresh. <strong>Action:</strong> Token regenerated. Queue flush in progress. Knowledge Base (KB) article drafted.</div></div>
     </div>
   </div>
 </section>
@@ -1664,7 +1855,7 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 <!-- ESCALATION MATRIX -->
 <section class="sec sec-alt fu" id="escalation" role="region" aria-label="Escalation Matrix"><div class="wrap">
-  <div class="eyebrow"><span class="sec-num sec-num-green">05</span>Escalation</div>
+  <div class="eyebrow">Escalation</div>
   <h2>How do you know when to <em>own it</em> vs <em>escalate it?</em></h2>
   <p class="sec-desc">P1, P2, or P3? <strong>Who to contact, how fast, and what to bring.</strong></p>
   <div class="tool-frame">
@@ -1724,13 +1915,13 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
     <h2>What a typical escalation path <em>looks like</em></h2>
     <p class="sec-desc" style="margin-bottom:1rem">One incident, traced from first report to resolution. <strong>Each step maps to a tool above.</strong></p>
     <div style="display:flex;gap:0;overflow-x:auto;margin-top:1.5rem">
-      <div class="sc-step" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 1</div><div class="sc-step-tool">Monitor</div><div class="sc-step-action">Check college health</div><div class="sc-step-link">→ Tool 01</div></div>
-      <div class="sc-step" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 2</div><div class="sc-step-tool">Tracer</div><div class="sc-step-action">Walk the data flow</div><div class="sc-step-link">→ Tool 02</div></div>
-      <div class="sc-step" onclick="document.getElementById('patterns').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 3</div><div class="sc-step-tool">Patterns</div><div class="sc-step-action">Isolated or systemic?</div><div class="sc-step-link">→ Tool 03</div></div>
-      <div class="sc-step" onclick="document.getElementById('kb').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 4</div><div class="sc-step-tool">Knowledge Base Builder</div><div class="sc-step-action">Document the fix</div><div class="sc-step-link">→ Tool 04</div></div>
-      <div class="sc-step" onclick="document.getElementById('escalation').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 5</div><div class="sc-step-tool">Escalate?</div><div class="sc-step-action">P1, P2, or P3?</div><div class="sc-step-link">→ Tool 05</div></div>
-      <div class="sc-step" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 6</div><div class="sc-step-tool">Barriers</div><div class="sc-step-action">Systemic barrier?</div><div class="sc-step-link">→ Tool 05</div></div>
-      <div class="sc-step" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 7</div><div class="sc-step-tool">Outreach</div><div class="sc-step-action">Prevent next term?</div><div class="sc-step-link">→ Tool 10</div></div>
+      <div class="sc-step" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 1</div><div class="sc-step-tool">Monitor</div><div class="sc-step-action">Check college health</div><div class="sc-step-link">→ Section 4</div></div>
+      <div class="sc-step" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 2</div><div class="sc-step-tool">Tracer</div><div class="sc-step-action">Walk the data flow</div><div class="sc-step-link">→ Section 5</div></div>
+      <div class="sc-step" onclick="document.getElementById('patterns').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 3</div><div class="sc-step-tool">Patterns</div><div class="sc-step-action">Isolated or systemic?</div><div class="sc-step-link">→ Section 6</div></div>
+      <div class="sc-step" onclick="document.getElementById('kb').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 4</div><div class="sc-step-tool">Knowledge Base Builder</div><div class="sc-step-action">Document the fix</div><div class="sc-step-link">→ Section 6</div></div>
+      <div class="sc-step" onclick="document.getElementById('escalation').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 5</div><div class="sc-step-tool">Escalate?</div><div class="sc-step-action">P1, P2, or P3?</div><div class="sc-step-link">→ Section 7</div></div>
+      <div class="sc-step" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 6</div><div class="sc-step-tool">Barriers</div><div class="sc-step-action">Systemic barrier?</div><div class="sc-step-link">→ Section 0</div></div>
+      <div class="sc-step" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 7</div><div class="sc-step-tool">Outreach</div><div class="sc-step-action">Prevent next term?</div><div class="sc-step-link">→ Section 8</div></div>
     </div>
   </div>
 </div>
@@ -1738,7 +1929,7 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 <!-- OUTREACH PLANNER -->
 <section class="sec sec-alt fu" id="outreach"><div class="wrap">
-  <div class="eyebrow"><span class="sec-num sec-num-green">10</span>Adoption</div>
+  <div class="eyebrow"><span class="sec-num" style="background:var(--teal)">8</span>Outreach</div>
   <h2>What if course sharing wasn’t a <em>last resort?</em></h2>
   <p class="sec-desc">Essential for graduation, but usually a last resort. <strong>What if students knew earlier?</strong></p>
   <div style="display:flex;gap:.5rem;margin-top:.5rem"><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--border)"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--border)"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--border)"></span><span style="font-family:var(--mono);font-size:.5rem;color:var(--text-3);white-space:nowrap;align-self:center">4 of 7 months covered</span></div>
@@ -1761,11 +1952,11 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 <!-- COUNSELOR CONFIDENCE TOOLKIT -->
 <section class="sec sec-alt fu" id="counselorToolkit" role="region" aria-label="Counselor Toolkit"><div class="wrap">
-  <div class="eyebrow" style="color:var(--teal)"><span class="sec-num" style="background:var(--teal)">11</span>Counselor Toolkit</div>
-  <h2>The Exchange is not just GE — and here's how to <em>verify it</em></h2>
+  <div class="eyebrow" style="color:var(--teal)">Counselor Toolkit</div>
+  <h2>The Exchange is not just GE — <em>here's the proof</em></h2>
   <p class="sec-desc">Counselors are the gateway. If they're uncertain about transfer credit, students never hear about the Exchange.</p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--teal-light);color:var(--teal)">Reference</span></div><span class="tool-bar-title">Counselor Confidence Guide · Course Verification · Registration Checklist</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--teal-light);color:var(--teal)">Reference</span></div><span class="tool-bar-title">Counselor Toolkit · Verification · Checklist · Scripts</span></div>
     <div class="tool-body">
 
       <div style="padding:.6rem .75rem;background:var(--teal-light);border:1px solid var(--teal-bd);border-radius:8px;margin-bottom:1rem;font-size:.78rem;color:var(--text-2);line-height:1.6">
@@ -1849,16 +2040,16 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 <!-- AI VISION: COURSE SHARING + INTELLIGENT SYSTEMS -->
 <section class="sec fu" id="aiVision" role="region" aria-label="AI Vision"><div class="wrap">
-  <div class="eyebrow" style="color:var(--purple)"><span class="sec-num" style="background:var(--purple)">12</span>Vision</div>
-  <h2>16 cards, 4 tabs, one question: <em style="color:var(--purple)">what could AI actually do here?</em></h2>
-  <p class="sec-desc">Not hypothetical. Each card connects to a tool on this page, shows today vs with-AI, and rates complexity.</p>
+  <div class="eyebrow" style="color:var(--purple)"><span class="sec-num" style="background:var(--purple)">9</span>AI Vision</div>
+  <h2>What could AI <em style="color:var(--purple)">actually do here?</em></h2>
+  <p class="sec-desc">Each card links to a tool above, compares today vs with-AI, and rates implementation complexity.</p>
   <div style="display:flex;gap:.5rem;margin:.75rem 0;flex-wrap:wrap">
     <div style="padding:.4rem .65rem;border-radius:6px;background:var(--primary-light);border:1px solid var(--primary-bd);font-size:.7rem;color:var(--text-2)"><strong style="color:var(--primary)">4 quick wins</strong> you could build with rules, no machine learning</div>
     <div style="padding:.4rem .65rem;border-radius:6px;background:var(--purple-light);border:1px solid var(--purple-bd);font-size:.7rem;color:var(--text-2)"><strong style="color:var(--purple)">Fraud tab</strong> aligned with CISOA 2026 takeaways on agentic AI</div>
     <div style="padding:.4rem .65rem;border-radius:6px;background:var(--teal-light);border:1px solid var(--teal-bd);font-size:.7rem;color:var(--text-2)"><strong style="color:var(--teal)">Every card expandable</strong> — click for today vs with-AI comparison</div>
   </div>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--purple-light);color:var(--purple)">Vision</span></div><span class="tool-bar-title">AI Vision · 16 Proposals · 4 Tabs · Each Linked to a Tool on This Page</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--purple-light);color:var(--purple)">Vision</span></div><span class="tool-bar-title">AI Vision · 4 Tabs · Linked to Tools Above</span></div>
     <div class="tool-body">
       <div class="ai-spectrum" style="margin-top:.75rem">
         <div class="ai-spec-stage"><div class="ai-spec-num">01</div><div class="ai-spec-label">Manual</div><div class="ai-spec-desc">Email workflows, spreadsheet tracking</div></div>
@@ -1895,7 +2086,7 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 <!-- TOOL 06: BARRIER OVERVIEW -->
 <section class="sec fu" id="barrierOverview" role="region" aria-label="Barrier Intelligence"><div class="wrap">
-  <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">05</span>Barriers</div>
+  <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">0</span>Barriers</div>
   <h2>Ten friction points a support analyst <em class="red">can act on</em></h2>
   <p class="sec-desc">Barriers the support team can act on <strong>now</strong> — before engineering fixes land.</p>
   <div style="display:flex;gap:.25rem;margin-top:.6rem;height:8px;border-radius:4px;overflow:hidden">
@@ -1921,18 +2112,18 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 <!-- TOOL 07: LIFECYCLE MAP -->
 <section class="sec sec-alt fu" id="lifecycle"><div class="wrap">
-  <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">06</span>Lifecycle</div>
-  <h2>Where in the enrollment process do students <em class="red">hit friction?</em></h2>
+  <div class="eyebrow eyebrow-red">Lifecycle</div>
+  <h2>Where do students <em class="red">hit friction?</em></h2>
   <p class="sec-desc">Nine steps. Red = students get stuck. Amber = manual workaround. <strong>Green = smooth.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Lifecycle</span></div><span class="tool-bar-title">Enrollment Lifecycle · 9 Steps · Where Students Get Stuck</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Lifecycle</span></div><span class="tool-bar-title">Enrollment Lifecycle · 9 Steps</span></div>
     <div class="tool-body"><div class="lc-flow" id="lcFlow"></div></div>
   </div>
 </div></section>
 
 <!-- TOOL 08: CAMPUS MATRIX -->
 <section class="sec fu" id="matrix"><div class="wrap">
-  <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">07</span>Campus Intel</div>
+  <div class="eyebrow eyebrow-red">Campus Intel</div>
   <h2>Not every college has the same <em class="red">support profile</em></h2>
   <p class="sec-desc">Same barrier, different impact — depending on <strong>which SIS is underneath.</strong></p>
   <div class="tool-frame">
@@ -1946,27 +2137,32 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 <!-- TOOL 09: EQUITY SCORER -->
 <section class="sec sec-alt fu" id="equity"><div class="wrap">
-  <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">08</span>Equity</div>
-  <h2>Which barriers hit the most <em class="red">vulnerable students</em> hardest?</h2>
+  <div class="eyebrow eyebrow-red">Equity</div>
+  <h2>Which barriers hit <em class="red">vulnerable students</em> hardest?</h2>
   <p class="sec-desc">Not all friction is equal. Scored by impact on <strong>the students with the least margin for error.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Equity</span></div><span class="tool-bar-title">Equity Impact Scorer · 8 Barriers Ranked by Student Vulnerability</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Equity</span></div><span class="tool-bar-title">Equity Impact · Barriers Ranked by Vulnerability</span></div>
     <div class="tool-body"><div class="eq-grid" id="eqGrid"></div></div>
   </div>
 </div></section>
 
 <!-- TOOL 10: CORRELATOR -->
 <section class="sec fu" id="correlator"><div class="wrap">
-  <div class="eyebrow eyebrow-red"><span class="sec-num sec-num-red">09</span>Correlation</div>
+  <div class="eyebrow eyebrow-red">Correlation</div>
   <h2>How much of the ticket queue is <em class="red">preventable?</em></h2>
   <p class="sec-desc">If most tickets come from the same three barriers — <strong>fix the barriers, not just the tickets.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Correlation</span></div><span class="tool-bar-title">Ticket-to-Barrier Correlator · Where Prevention Beats Resolution</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Correlation</span></div><span class="tool-bar-title">Ticket-to-Barrier Correlator</span></div>
     <div class="tool-body" id="corrBody"></div>
   </div>
 </div></section>
 
-<div class="key-hint" id="keyHint"><kbd>1</kbd>–<kbd>0</kbd> jump to sections &nbsp; <kbd>?</kbd> shortcuts</div>
+<div class="key-pill" id="keyPill" onclick="document.getElementById('kbOverlay').classList.add('kb-show')" title="Keyboard shortcuts (press ?)">
+  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="4" width="14" height="9" rx="1.5" stroke="#A8A29E" stroke-width="1.2"/><rect x="3.5" y="6.5" width="2" height="1.5" rx=".3" fill="#A8A29E"/><rect x="7" y="6.5" width="2" height="1.5" rx=".3" fill="#A8A29E"/><rect x="10.5" y="6.5" width="2" height="1.5" rx=".3" fill="#A8A29E"/><rect x="4.5" y="9.5" width="7" height="1.5" rx=".3" fill="#A8A29E"/></svg>
+  <span class="key-pill-label"><kbd>1</kbd>–<kbd>0</kbd> sections</span>
+  <span style="color:#6B7280">·</span>
+  <span style="color:#6B7280">click for all</span>
+</div>
 <div class="kb-toast" id="toast"></div>
 
 
@@ -1975,56 +2171,26 @@ a:focus-visible,button:focus-visible,.lookup-input:focus-visible{
 
 
 
-<!-- CLOSING PITCH -->
-<section class="sec" id="closing" style="padding:clamp(2.5rem,6vw,4rem) 0;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)">
-  <div class="wrap" style="max-width:640px;text-align:center">
-    <div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);font-weight:700;margin-bottom:.65rem">Why hire me</div>
-    <h2 style="font-size:clamp(1.4rem,3.5vw,1.9rem);line-height:1.3;margin-bottom:1rem">Every technical failure is a student who might miss a transfer deadline. <em>I take that personally.</em></h2>
-    
-    <div style="text-align:left;max-width:520px;margin:0 auto">
-      <div style="display:flex;gap:.6rem;padding:.6rem 0;border-bottom:1px solid var(--border);align-items:flex-start">
-        <div style="width:24px;height:24px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0">1</div>
-        <div style="font-size:.8rem;color:var(--text);line-height:1.6"><strong>I’ve worked in these systems at four organizations.</strong> Banner and PeopleSoft at SMCCD. Canvas at OpenStax. Ticket operations at Braven. This page isn’t research — it’s experience turned into prototypes.</div>
-      </div>
-      <div style="display:flex;gap:.6rem;padding:.6rem 0;border-bottom:1px solid var(--border);align-items:flex-start">
-        <div style="width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0">2</div>
-        <div style="font-size:.8rem;color:var(--text);line-height:1.6"><strong>I find the upstream fix.</strong> I don’t just close tickets — I look for patterns. If 24% of the queue comes from the same three barriers, I document the barriers, not just the tickets.</div>
-      </div>
-      <div style="display:flex;gap:.6rem;padding:.6rem 0;border-bottom:1px solid var(--border);align-items:flex-start">
-        <div style="width:24px;height:24px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0">3</div>
-        <div style="font-size:.8rem;color:var(--text);line-height:1.6"><strong>I know these students.</strong> I was one. First-generation, Foothill College, didn’t know what IGETC meant until a counselor explained it. System reliability is equity work.</div>
-      </div>
-      <div style="display:flex;gap:.6rem;padding:.6rem 0;align-items:flex-start">
-        <div style="width:24px;height:24px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0">4</div>
-        <div style="font-size:.8rem;color:var(--text);line-height:1.6"><strong>I want to be coached.</strong> I’m not coming in thinking I know everything. I’m coming in with a head start and the questions to match. The first thing I’d ask my supervisor: what does a strong first 90 days look like to you?</div>
-      </div>
-    </div>
 
-    
-    <div style="max-width:520px;margin:1.5rem auto 0;text-align:left">
-      <div style="font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:.5rem">Questions I’d ask in week one</div>
-      <div style="display:flex;flex-direction:column;gap:.35rem">
-        <div style="padding:.45rem .65rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.75rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To the support team:</strong> What are the 5 most common ticket types right now, and which ones do you wish you saw less of?</div>
-        <div style="padding:.45rem .65rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.75rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To the senior analyst:</strong> Which integrations are the most fragile right now, and what does the escalation path look like when Ellucian is involved?</div>
-        <div style="padding:.45rem .65rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.75rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To my supervisor:</strong> Where has the team been stretched thinnest this year, and where can I take something off someone’s plate fastest?</div>
-        <div style="padding:.45rem .65rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-size:.75rem;color:var(--text-2);line-height:1.55"><strong style="color:var(--text)">To campus partners:</strong> What’s the one thing the support team could do differently that would make your job easier?</div>
-      </div>
-    </div>
 
-<div style="margin-top:1.5rem;padding:1rem;border:2px solid var(--primary-bd);border-radius:10px;background:var(--primary-light)">
-      <div style="font-size:.9rem;font-weight:700;color:var(--primary);margin-bottom:.3rem">What I’d do in my first 90 days</div>
-      <div style="display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-top:.5rem">
-        <span style="padding:.3rem .6rem;border-radius:6px;background:var(--surface);border:1px solid var(--border);font-size:.7rem;color:var(--text-2)">Map the Ethos token lifecycle for all Banner Ethos colleges — the #1 overnight failure source</span>
-        <span style="padding:.3rem .6rem;border-radius:6px;background:var(--surface);border:1px solid var(--border);font-size:.7rem;color:var(--text-2)">Publish a college-by-college SSO and FA status reference (the Lookup tool here is the prototype)</span>
-        <span style="padding:.3rem .6rem;border-radius:6px;background:var(--surface);border:1px solid var(--border);font-size:.7rem;color:var(--text-2)">Tag 3 months of ticket history by barrier category to validate the correlator model</span>
-        <span style="padding:.3rem .6rem;border-radius:6px;background:var(--surface);border:1px solid var(--border);font-size:.7rem;color:var(--text-2)">Sit with each team member for a half-day to learn their escalation instincts and documentation style</span>
-        <span style="padding:.3rem .6rem;border-radius:6px;background:var(--surface);border:1px solid var(--border);font-size:.7rem;color:var(--text-2)">Ship a KB article for the Ethos token refresh fix within my first 2 weeks</span>
-      </div>
+<footer style="border-top:1px solid var(--border);padding:2rem 0;text-align:center;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)">
+  <div class="wrap">
+    <div style="font-size:.82rem;color:var(--text);line-height:1.7;margin-bottom:.5rem">
+      <strong>Henry Fan</strong> · Application Support Analyst I Candidate · CVC-OEI / Foothill–De Anza CCD
+    </div>
+    <div style="font-size:.7rem;color:var(--text-3);line-height:1.6;max-width:480px;margin:0 auto">
+      Every tool on this page addresses a real challenge from the job description. All data is simulated — no real student records. Built with publicly available CVC documentation.
+    </div>
+    <div style="display:flex;gap:.4rem;justify-content:center;margin-top:.75rem;flex-wrap:wrap">
+      <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-3)">Banner</span>
+      <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-3)">PeopleSoft</span>
+      <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-3)">Colleague</span>
+      <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-3)">Canvas</span>
+      <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-3)">Ethos API</span>
+      <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-3)">CVC Exchange</span>
     </div>
   </div>
-</section>
-
-<footer><div class="wrap"><p class="foot-text"><strong>CVC-OEI Application Support Toolkit</strong> — Henry Fan · Application Support Analyst I Candidate<br>Banner · PeopleSoft · Colleague · Canvas LMS · Ethos API · CVC Exchange<br><span style="font-size:.65rem;color:var(--text-3)">All data is simulated — no real student records. Built with publicly available CVC documentation.</span></p></div></footer>
+</footer>
 
 <script>
 // ═══ GLOBALS ═══
@@ -2232,14 +2398,16 @@ var alertMsgs=[
 {title:'Resolved',body:'<strong>Feather River</strong> \u2014 API timeout resolved. 23 records transmitted.',time:'12 min ago'}
 ];
 var alertIdx=0;var alertEl=document.getElementById('liveAlert');
-function showNextAlert(){if(!alertEl)return;var msg=alertMsgs[alertIdx%alertMsgs.length];alertEl.querySelector('.live-alert-title').textContent=msg.title;alertEl.querySelector('.live-alert-body').innerHTML=msg.body;alertEl.querySelector('.live-alert-time').textContent=msg.time;alertEl.classList.add('show');setTimeout(function(){alertEl.classList.remove('show')},5000);alertIdx++}
-setTimeout(showNextAlert,8000);setInterval(showNextAlert,25000);
+function showNextAlert(){if(!alertEl)return;var msg=alertMsgs[alertIdx%alertMsgs.length];alertEl.querySelector('.live-alert-title').textContent=msg.title;alertEl.querySelector('.live-alert-body').innerHTML=msg.body;alertEl.querySelector('.live-alert-time').textContent=msg.time;alertEl.classList.add('show');alertIdx++}
+function dismissAlert(){if(alertEl){alertEl.classList.remove('show');setTimeout(showNextAlert,800)}}
+setTimeout(showNextAlert,3000);
+if(alertEl){alertEl.style.cursor='pointer';alertEl.addEventListener('click',dismissAlert)}
 
 // ═══ AUTO-LOAD ARCHITECTURE ═══
 setTimeout(function(){showFlowInfo(1)},800);
 
 
-// ═══ OUTREACH PLANNER (Tool 10) ═══
+// ═══ OUTREACH PLANNER (Section 8) ═══
 const calMonths=[
 {id:'jun',name:'Jun',label:'Summer prep',phase:'Pre-registration outreach',dots:['cd-teal','cd-blue'],triggers:[
   {type:'outreach',title:'New Student Welcome + CVC Intro',who:'Incoming students via CCCApply',situation:'Student just applied through the CCC online application system (CCCApply). Orientation materials typically focus on home college only. This is the earliest opportunity to normalize cross-enrollment as a standard option.',msg:'Welcome to [College]! Did you know you can access thousands of online courses from other California community colleges through the CVC Exchange? If a class you need is full or not offered this term, the Exchange lets you find it at another college — and it counts toward your degree.',impact:['First impression','Normalizes Exchange','Reduces future confusion']},
@@ -2392,7 +2560,7 @@ renderJourney();
 // ═══ DEMO MODE ═══
 
 // Keyboard navigation: 1-9,0 jump to tools
-var toolAnchors = ['flow','monitor','tracer','patterns','kb','comms','barrierOverview','lifecycle','outreach','correlator'];
+var toolAnchors = ['lookup','cvcData','flow','monitor','tracer','patterns','comms','outreach','aiVision','barriers'];
 document.addEventListener('keydown', function(e) {
   // Don't capture when typing in inputs
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
@@ -2411,12 +2579,8 @@ document.addEventListener('keydown', function(e) {
   
   });
 
-// Show keyboard hint briefly on load
-var keyHintEl = document.getElementById('keyHint');
-setTimeout(function() {
-  keyHintEl.classList.add('show');
-  setTimeout(function() { keyHintEl.classList.remove('show'); }, 4000);
-}, 2000);
+// Keyboard pill — always visible, no timer needed
+// Clicking opens the shortcuts overlay (handled in HTML onclick)
 
 // Demo mode: pre-load all interesting states simultaneously
 
@@ -2559,7 +2723,7 @@ var aiData = {
       desc: 'Ethos tokens expire on schedules. Sync frequency degrades before full failure. A model trained on 12 months of uptime data could flag at-risk colleges 48 hours before outage.',
       today: 'Analyst checks the monitor each morning. Failures are discovered when they happen \u2014 or when a student reports them.',
       after: 'Dashboard shows a "likely to fail in 48 hours" warning for Sacramento City based on token age (27 days / 30-day cycle) + declining sync frequency. Analyst regenerates the token before any student is affected.',
-      toolLink: 'monitor', toolName: 'Monitor (Tool 01)',
+      toolLink: 'monitor', toolName: 'Monitor (Section 4)',
       complexity: 'quick', complexityLabel: 'Quick win \u2014 rule-based, no ML needed',
       signal: 'aic-predict'
     },
@@ -2568,7 +2732,7 @@ var aiData = {
       desc: 'When 47 tickets say "can\u2019t see my course," a Natural Language Processing (NLP) classifier could separate Ethos failures from IdP issues from teaching college roster delays \u2014 before a human reads a single one.',
       today: 'Analyst reads each ticket, mentally maps symptoms to probable causes, manually tags category. First 30 minutes of every morning.',
       after: 'Natural Language Processing model reads incoming ticket text + pulls CCCID + checks home college SIS type. Auto-tags 80% of tickets. Analyst reviews the remaining 20% and corrects misclassifications \u2014 which improves the model.',
-      toolLink: 'patterns', toolName: 'Pattern Analyzer (Tool 03)',
+      toolLink: 'patterns', toolName: 'Pattern Analyzer (Section 6)',
       complexity: 'medium', complexityLabel: 'Medium \u2014 needs labeled training data from 6+ months of tickets',
       signal: 'aic-predict'
     },
@@ -2577,7 +2741,7 @@ var aiData = {
       desc: 'Spring registration, add/drop, census, FA disbursement \u2014 each generates a predictable spike. A time-series model could forecast volume 2 weeks out.',
       today: 'The team knows "registration week is busy" but can\u2019t quantify how busy or which categories will spike. KB articles get written reactively.',
       after: 'Model predicts: "Week of Feb 3: expect 340% auth ticket increase at Banner colleges based on 3-year pattern." Team pre-publishes KB articles and alerts campus IT contacts the week before.',
-      toolLink: 'patterns', toolName: 'Pattern Analyzer (Tool 03)',
+      toolLink: 'patterns', toolName: 'Pattern Analyzer (Section 6)',
       complexity: 'quick', complexityLabel: 'Quick win \u2014 3 years of ticket data + academic calendar',
       signal: 'aic-predict'
     },
@@ -2586,7 +2750,7 @@ var aiData = {
       desc: 'One college generating 5x normal error rate overnight isn\u2019t visible in a morning queue scan. Anomaly detection surfaces it as a single alert, not 47 individual tickets.',
       today: 'Analyst opens the queue at 8:30 AM, sees 47 new tickets, starts reading. Realizes at 9:15 they\u2019re all from the same college. 45 minutes lost.',
       after: 'Alert fires at 2:14 AM: "Chabot College \u2014 error rate 5.2x baseline since 01:00. 47 AER records queued. Probable cause: Ethos token." Analyst starts at 8:30 with the diagnosis already done.',
-      toolLink: 'monitor', toolName: 'Monitor (Tool 01)',
+      toolLink: 'monitor', toolName: 'Monitor (Section 4)',
       complexity: 'quick', complexityLabel: 'Quick win \u2014 standard deviation thresholds on existing data',
       signal: 'aic-predict'
     }
@@ -2615,7 +2779,7 @@ var aiData = {
       desc: 'Students who cross-enrolled before are 3x more likely to do it again. Students on waitlists are ready to act now. Timing the outreach to the student\u2019s context beats a generic email to 50,000.',
       today: 'Outreach is batch: one email to all students at the start of registration. Open rate: ~12%. Students who need the Exchange most may not be the ones who open generic emails.',
       after: 'Triggered messages based on signals: waitlisted for a required course \u2192 "this course is available at 4 other colleges right now." Ed plan shows a gap \u2192 "your counselor flagged ENGL 1A as needed \u2014 here are 12 open sections." Past Exchange user \u2192 personalized nudge at their registration date.',
-      toolLink: 'outreach', toolName: 'Outreach Planner (Tool 10)',
+      toolLink: 'outreach', toolName: 'Outreach Planner (Section 8)',
       complexity: 'medium', complexityLabel: 'Medium \u2014 needs event-triggered messaging infrastructure',
       signal: 'aic-equity'
     },
@@ -2624,7 +2788,7 @@ var aiData = {
       desc: 'A payment timing issue is an inconvenience for a student with savings. It\u2019s a semester-ending crisis for a first-gen student on CCPG with no backup. The system should know the difference.',
       today: 'All students get the same alerts (if any). First-gen CCPG students and students with savings accounts receive identical treatment from the system.',
       after: 'Risk score combines: first-gen status + CCPG recipient + incomplete FAFSA + no prior Exchange use. Higher-risk students get earlier alerts, simpler payment instructions, and direct counselor routing if the alert goes unread for 24 hours.',
-      toolLink: 'equity', toolName: 'Equity Scorer (Tool 08)',
+      toolLink: 'equity', toolName: 'Equity Scorer (Section 0)',
       complexity: 'long', complexityLabel: 'Long-term \u2014 requires equity data integration + careful bias auditing',
       signal: 'aic-equity'
     }
@@ -2635,7 +2799,7 @@ var aiData = {
       desc: 'Fake CCCIDs created via OpenCCC, used to cross-enroll through the Exchange and claim financial aid through Consortium Agreements. The accounts never attend. The support team sees them as enrollment anomalies.',
       today: 'Fraudulent enrollments look like normal tickets: "student can\u2019t access Canvas." The analyst resolves the technical issue without knowing the underlying account is fraudulent. FA office processes the Consortium Agreement. Revenue is lost.',
       after: 'Pattern detection flags: multiple CCCIDs from the same IP enrolling at 3 AM, accounts with no prior enrollment history instantly cross-enrolling into high-unit courses, FA requests submitted within minutes of enrollment. Analyst reviews flagged accounts before FA is disbursed.',
-      toolLink: 'monitor', toolName: 'Monitor (Tool 01)',
+      toolLink: 'monitor', toolName: 'Monitor (Section 4)',
       complexity: 'medium', complexityLabel: 'Medium \u2014 needs enrollment velocity + IP clustering baseline',
       signal: 'aic-govern'
     },
@@ -2644,7 +2808,7 @@ var aiData = {
       desc: 'The hard part: fraud deterrence that doesn\u2019t create new barriers for the students the Exchange was built to serve. A first-gen student enrolling at 11 PM from a shared family device looks similar to a fraudulent account.',
       today: 'Colleges set blunt rules: 50-mile enrollment radius, short drop-for-nonpayment deadlines. These deter some fraud but also block legitimate rural and working students who are exactly the population CVC exists to reach.',
       after: 'Risk scoring that weighs multiple signals: enrollment velocity, prior academic history, FA request timing, device fingerprint clustering. High-risk accounts get a human review hold \u2014 not an auto-reject. Legitimate students pass through. The analyst reviews edge cases.',
-      toolLink: 'equity', toolName: 'Equity Scorer (Tool 08)',
+      toolLink: 'equity', toolName: 'Equity Scorer (Section 0)',
       complexity: 'long', complexityLabel: 'Long-term \u2014 requires cross-college behavioral data + careful equity auditing',
       signal: 'aic-equity'
     },
@@ -2682,7 +2846,7 @@ var aiData = {
       desc: 'If the Exchange recommends courses via AI, someone needs to check whether CCPG students are being steered toward fewer colleges. Whether part-time students are deprioritized. That\u2019s an analyst job \u2014 not an engineering job.',
       today: 'Course search results are sorted by quality badges and distance. No personalization. No one audits the sort order because it\u2019s deterministic.',
       after: 'AI-ranked results are personalized. The analyst runs a monthly equity report: "Are recommendations for CCPG students systematically different from non-CCPG students? Are rural students seeing fewer options?" Findings go into the next model iteration.',
-      toolLink: 'equity', toolName: 'Equity Scorer (Tool 08)',
+      toolLink: 'equity', toolName: 'Equity Scorer (Section 0)',
       complexity: 'long', complexityLabel: 'Long-term \u2014 follows AI recommendation deployment',
       signal: 'aic-role'
     },
@@ -2691,7 +2855,7 @@ var aiData = {
       desc: 'A classifier can sort 80% of tickets. It cannot call a registrar at 4:45 PM to negotiate a manual enrollment override for a student whose add deadline is tomorrow.',
       today: 'Analyst spends 60% of time on classification and triage, 40% on actual problem-solving, campus communication, and student follow-up.',
       after: 'AI handles classification and triage. Analyst spends 80% of time on the work that requires judgment: escalations, campus relationship management, edge cases, and the student on the phone who needs someone to own the problem end to end.',
-      toolLink: 'comms', toolName: 'Communication (Tool 07)',
+      toolLink: 'comms', toolName: 'Communication (Section 0)',
       complexity: 'medium', complexityLabel: 'Medium \u2014 requires ticket auto-classification first',
       signal: 'aic-role'
     },
@@ -2700,7 +2864,7 @@ var aiData = {
       desc: 'The quality of CVC\u2019s future AI will be directly proportional to the quality of documentation the support team produces now. Every KB article, every ticket tag, every escalation note is a labeled example.',
       today: 'KB articles are written for the next human analyst. Ticket tags are for reporting. Documentation quality varies.',
       after: 'KB articles are written for humans AND machines. Consistent tagging schema. Structured resolution notes. The analyst who documents well today is building the foundation that makes AI possible next year \u2014 and that makes their own job more focused on the work that matters.',
-      toolLink: 'kb', toolName: 'Knowledge Base Builder (Tool 04)',
+      toolLink: 'kb', toolName: 'Knowledge Base Builder (Section 6)',
       complexity: 'quick', complexityLabel: 'Quick win \u2014 start with documentation standards today',
       signal: 'aic-role'
     }
@@ -2911,43 +3075,44 @@ setStage = function(i) {
 
 // COLLEGE QUICK LOOKUP
 var collegeDB = [
-  {name:'Foothill College',district:'Foothill-De Anza CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'2m ago',issues:[],tip:'Sponsor district for CVC-OEI. Strong integration baseline.'},
-  {name:'De Anza College',district:'Foothill-De Anza CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'2m ago',issues:[],tip:'Sister college to Foothill. Same SIS infrastructure.'},
-  {name:'Sacramento City College',district:'Los Rios CCD',region:'Central Valley',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Teaching',volume:'Medium',lastSync:'Degraded',issues:['Financial aid uses email workflow','Token refresh cycles','Ethos sync delays'],tip:'Frequent Ethos token expirations. Monitor token age weekly. FA office uses manual email workflow.'},
+  {name:'Foothill College',district:'Foothill-De Anza CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'2m ago',issues:[],tip:'Sponsor district for CVC-OEI. Strong integration baseline. My home college as a student.'},
+  {name:'De Anza College',district:'Foothill-De Anza CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'2m ago',issues:[],tip:'Sister college to Foothill. Same SIS infrastructure, shared district IT team.'},
+  {name:'Sacramento City College',district:'Los Rios CCD',region:'Central Valley',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Teaching',volume:'Medium',lastSync:'Degraded',issues:['Financial aid uses email workflow','Token refresh cycles','Ethos sync delays'],tip:'Frequent Ethos token expirations. Monitor token age weekly.'},
   {name:'American River College',district:'Los Rios CCD',region:'Central Valley',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'12m ago',issues:['Financial aid uses email workflow'],tip:'Largest Los Rios campus. Same Ethos config as Sacramento City.'},
-  {name:'West Valley College',district:'West Valley-Mission CCD',region:'Bay Area',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'8m ago',issues:['Financial aid uses email workflow'],tip:'Winter intersession + multiple summer dates attract Exchange students.'},
-  {name:'Mission College',district:'West Valley-Mission CCD',region:'Bay Area',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Student ID gap',role:'Home + Teaching',volume:'Medium',lastSync:'15m ago',issues:['Financial aid uses email workflow','IdP Proxy config','CCCID assertion missing'],tip:'SSO issue: college IdP not asserting CCCID. Students redirected to OpenCCC recovery. Coordinate with CCC Tech Center.'},
+  {name:'West Valley College',district:'West Valley-Mission CCD',region:'Bay Area',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'8m ago',issues:['Financial aid uses email workflow'],tip:'Banner Ethos middleware. FA office still on manual email workflow.'},
+  {name:'Mission College',district:'West Valley-Mission CCD',region:'Bay Area',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Student ID gap',role:'Home + Teaching',volume:'Medium',lastSync:'15m ago',issues:['Financial aid uses email workflow','IdP Proxy config','CCCID assertion missing'],tip:'SSO issue: college IdP not asserting CCCID. Students redirected to OpenCCC recovery.'},
   {name:'Ohlone College',district:'Ohlone CCD',region:'Bay Area',sis:'Colleague Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'Low',lastSync:'20m ago',issues:['No-show drops','Financial aid email workflow'],tip:'Colleague Ethos = Ellucian middleware. FA Dashboard pending vendor development.'},
   {name:'Skyline College',district:'San Mateo CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'3m ago',issues:[],tip:'PeopleSoft = native API integration. FA Dashboard fully active.'},
-  {name:'College of San Mateo',district:'San Mateo CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'3m ago',issues:[],tip:'Same district infrastructure as Skyline and Canada.'},
-  {name:'Canada College',district:'San Mateo CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Low',lastSync:'3m ago',issues:[],tip:'Smallest San Mateo campus. Clean integration.'},
-  {name:'Chabot College',district:'Chabot-Las Positas CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'4m ago',issues:[],tip:'Clean PeopleSoft integration. Used in tracer scenario examples.'},
-  {name:'Las Positas College',district:'Chabot-Las Positas CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Student ID gap',role:'Home + Teaching',volume:'Low',lastSync:'4m ago',issues:['Student ID mapping mismatch'],tip:'SSO issue: eduPerson Principal Name to CCCID mapping broken. College IT aware but not yet resolved.'},
-  {name:'Gavilan College',district:'Gavilan Joint CCD',region:'Bay Area',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Low',lastSync:'25m ago',issues:['Financial aid manual workflow'],tip:'Small college, Colleague Ethos. FA office manually processes all Exchange requests.'},
-  {name:'Cabrillo College',district:'Cabrillo CCD',region:'Central Coast',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'18m ago',issues:['Financial aid manual','Residency delays'],tip:'Residency validation delays cause incorrect out-of-state fees for Exchange students.'},
+  {name:'College of San Mateo',district:'San Mateo CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'3m ago',issues:[],tip:'Same district as Skyline and Ca\u00f1ada. Clean integration.'},
+  {name:'Ca\u00f1ada College',district:'San Mateo CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Low',lastSync:'3m ago',issues:[],tip:'Smallest San Mateo campus. Clean PeopleSoft integration.'},
+  {name:'Chabot College',district:'Chabot-Las Positas CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'4m ago',issues:[],tip:'Clean PeopleSoft. Used in tracer scenario examples on this page.'},
+  {name:'Las Positas College',district:'Chabot-Las Positas CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Student ID gap',role:'Home + Teaching',volume:'Low',lastSync:'4m ago',issues:['Student ID mapping mismatch'],tip:'SSO issue: eduPersonPrincipalName to CCCID mapping broken.'},
+  {name:'Gavilan College',district:'Gavilan Joint CCD',region:'Bay Area',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Low',lastSync:'25m ago',issues:['Financial aid manual workflow'],tip:'Small college, Colleague Ethos. FA manually processes all Exchange requests.'},
+  {name:'Cabrillo College',district:'Cabrillo CCD',region:'Central Coast',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'18m ago',issues:['Financial aid manual','Residency delays'],tip:'Residency validation delays cause incorrect out-of-state fees.'},
   {name:'Hartnell College',district:'Hartnell CCD',region:'Central Coast',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Teaching',volume:'Low',lastSync:'5m ago',issues:[],tip:'Banner Direct = clean integration. Teaching college only.'},
   {name:'Santa Rosa Junior College',district:'Sonoma CCD',region:'North Bay',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'10m ago',issues:['Financial aid uses email workflow'],tip:'Large North Bay campus. High Exchange volume during summer.'},
   {name:'Diablo Valley College',district:'Contra Costa CCD',region:'East Bay',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'2m ago',issues:[],tip:'One of the highest-volume Exchange teaching colleges in the Bay Area.'},
-  {name:'City College of San Francisco',district:'SF CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Very High',lastSync:'1m ago',issues:['High volume'],tip:'Highest enrollment in the CCC system. Expect concentrated ticket volume around registration.'},
-  {name:'Pasadena City College',district:'Pasadena Area CCD',region:'Southern CA',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'9m ago',issues:['Financial aid uses email workflow'],tip:'Major SoCal teaching college. Calendar differences from NorCal colleges cause deadline confusion.'},
+  {name:'City College of San Francisco',district:'SF CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Very High',lastSync:'1m ago',issues:['High volume'],tip:'Highest enrollment in the CCC system. Concentrated ticket volume at registration.'},
+  {name:'Pasadena City College',district:'Pasadena Area CCD',region:'Southern CA',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'9m ago',issues:['Financial aid uses email workflow'],tip:'Major SoCal teaching college. Calendar differences cause deadline confusion.'},
   {name:'Santa Monica College',district:'Santa Monica CCD',region:'Southern CA',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Very High',lastSync:'2m ago',issues:[],tip:'Top transfer college in the state. Very high Exchange demand for GE courses.'},
   {name:'Mt. San Antonio College',district:'Mt. SAC CCD',region:'Southern CA',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Very High',lastSync:'3m ago',issues:[],tip:'Largest single-campus CCC. Clean Banner Direct integration.'},
   {name:'Long Beach City College',district:'Long Beach CCD',region:'Southern CA',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'4m ago',issues:[],tip:'Strong PeopleSoft integration. Active Exchange teaching college.'},
   {name:'Riverside City College',district:'Riverside CCD',region:'Inland Empire',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Teaching (Spring 2026)',volume:'Medium',lastSync:'N/A',issues:['New onboarding','Financial aid email workflow'],tip:'Just launched as teaching college Spring 2026. Monitor onboarding closely.'},
   {name:'San Diego Mesa College',district:'San Diego CCD',region:'San Diego',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'3m ago',issues:[],tip:'Largest San Diego campus. Clean integration.'},
-  {name:'Fresno City College',district:'State Center CCD',region:'Central Valley',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Teaching',volume:'Medium',lastSync:'14m ago',issues:['Financial aid uses email workflow'],tip:'Central Valley hub. Banner Ethos middleware with standard sync schedule.'},
+  {name:'Fresno City College',district:'State Center CCD',region:'Central Valley',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Teaching',volume:'Medium',lastSync:'14m ago',issues:['Financial aid uses email workflow'],tip:'Central Valley hub. Banner Ethos with standard sync schedule.'},
   {name:'Bakersfield College',district:'Kern CCD',region:'Central Valley',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'6m ago',issues:[],tip:'Banner Direct, clean. Important for rural Central Valley student access.'},
   {name:'Sierra College',district:'Sierra Joint CCD',region:'Northern CA',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'5m ago',issues:[],tip:'Suburban/rural foothill region. Clean PeopleSoft.'},
-  {name:'Feather River College',district:'Feather River CCD',region:'Rural Northern CA',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Very Low',lastSync:'45m ago',issues:['Rural connectivity','Financial aid manual'],tip:'Remote rural college. Sync intervals longer due to bandwidth. Exchange is critical for student course access.'},
-  {name:'Lake Tahoe Community College',district:'Lake Tahoe CCD',region:'Rural Northern CA',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Very Low',lastSync:'40m ago',issues:['Rural connectivity','Financial aid manual'],tip:'Mountain region. Limited local course offerings make Exchange especially important.'},
+  {name:'Feather River College',district:'Feather River CCD',region:'Rural Northern CA',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Very Low',lastSync:'45m ago',issues:['Rural connectivity','Financial aid manual'],tip:'Remote rural college. Exchange is critical for student course access.'},
+  {name:'Lake Tahoe Community College',district:'Lake Tahoe CCD',region:'Rural Northern CA',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Very Low',lastSync:'40m ago',issues:['Rural connectivity','Financial aid manual'],tip:'Mountain region. Limited local offerings make Exchange especially important.'},
   {name:'College of the Siskiyous',district:'Siskiyou Joint CCD',region:'Rural Northern CA',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Very Low',lastSync:'50m ago',issues:['Rural connectivity','Financial aid manual'],tip:'Most remote CCC campus. Students depend on Exchange for courses not offered locally.'},
-  {name:'Golden Gate College',district:'San Francisco CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'5m ago',issues:[],tip:'Part of the SF CCD district. Banner Direct integration with clean sync. Students cross-enroll frequently with other Bay Area colleges.'}
+  {name:'Golden Gate College',district:'San Francisco CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'5m ago',issues:[],tip:'Part of SF CCD district. Banner Direct integration with clean sync.'}
 ];
 
 var activeLookupFilter = 'all';
 
 function filterColleges(filter, el) {
   activeLookupFilter = filter;
+  window._lookupShowAll = false;
   document.querySelectorAll('.lookup-filter').forEach(function(b) { b.classList.remove('lf-active'); });
   if (el) el.classList.add('lf-active');
   document.getElementById('collegeLookup').value = '';
@@ -2962,6 +3127,7 @@ function getFilteredColleges() {
 }
 
 function searchColleges(query) {
+  window._lookupShowAll = false;
   var q = query.trim().toLowerCase();
   if (!q) { renderLookup(getFilteredColleges()); return; }
   var base = getFilteredColleges();
@@ -3010,7 +3176,12 @@ function renderLookup(colleges) {
     return 'lf-ok';
   };
 
-  var html = colleges.map(function(c) {
+  var DISPLAY_LIMIT = 6;
+  var showAll = window._lookupShowAll || false;
+  var displayList = showAll ? colleges : colleges.slice(0, DISPLAY_LIMIT);
+  var hasMore = colleges.length > DISPLAY_LIMIT && !showAll;
+
+  var html = displayList.map(function(c) {
     var issues = c.issues.length > 0 ? c.issues.map(function(i) { return '<span class="lookup-issue-tag">' + i + '</span>'; }).join('') : '<span class="lookup-issue-tag issue-clear">All clear</span>';
 
     return '<div class="lookup-card" onclick="this.classList.toggle(\'lc-expanded\')">' +
@@ -3032,6 +3203,13 @@ function renderLookup(colleges) {
       '</div>' +
     '</div>';
   }).join('');
+
+  if (hasMore) {
+    html += '<button onclick="window._lookupShowAll=true;renderLookup(getFilteredColleges())" style="width:100%;padding:.65rem;border:1.5px dashed var(--border-2);border-radius:var(--r);background:var(--surface);font-family:var(--mono);font-size:.75rem;font-weight:600;color:var(--primary);cursor:pointer;margin-top:.5rem;transition:all .15s" onmouseover="this.style.borderColor=\'var(--primary)\';this.style.background=\'var(--primary-light)\'" onmouseout="this.style.borderColor=\'var(--border-2)\';this.style.background=\'var(--surface)\'">Show all ' + colleges.length + ' colleges</button>';
+  }
+  if (showAll && colleges.length > DISPLAY_LIMIT) {
+    html += '<button onclick="window._lookupShowAll=false;renderLookup(getFilteredColleges())" style="width:100%;padding:.55rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-family:var(--mono);font-size:.68rem;color:var(--text-3);cursor:pointer;margin-top:.35rem;transition:all .15s" onmouseover="this.style.color=\'var(--primary)\'" onmouseout="this.style.color=\'var(--text-3)\'">Show fewer</button>';
+  }
 
   results.innerHTML = html;
   counter.textContent = colleges.length + ' of ' + collegeDB.length + ' colleges shown';
@@ -3121,7 +3299,7 @@ if (backBtn) {
 }
 
 // ═══ USABILITY: PROGRESS DOTS ═══
-var dotSections = ['lookup','cvcData','journey','monitor','tracer','comms','escalation','outreach','counselorToolkit','aiVision','barrierOverview'];
+var dotSections = ['lookup','cvcData','flow','monitor','tracer','patterns','comms','outreach','aiVision','barriers'];
 var dotEls = document.querySelectorAll('.progress-dot');
 
 var dotObserver = new IntersectionObserver(function(entries) {
@@ -3162,7 +3340,7 @@ document.querySelectorAll('.nav-links a, .toc-item').forEach(function(link) {
 
 
 // ═══ NOTION-STYLE: TOC ACTIVE TRACKING ═══
-var tocSectionIds = ['lookup','cvcData','journey','flow','monitor','tracer','patterns','kb','comms','escalation','outreach','counselorToolkit','aiVision','barrierOverview','lifecycle','matrix','equity','correlator'];
+var tocSectionIds = ['lookup','cvcData','flow','monitor','tracer','patterns','comms','outreach','aiVision','barrierOverview'];
 var tocItems = document.querySelectorAll('.toc-item');
 
 var tocObserver = new IntersectionObserver(function(entries) {
@@ -3296,91 +3474,71 @@ function copyMsgText(btn) {
 <div class="toc-panel" id="tocPanel">
   <div class="toc-header">
     <div class="toc-title">Page Guide</div>
-    <div class="toc-subtitle">19 sections · Click any row to jump there</div>
+    <div class="toc-subtitle">10 sections · Keys 1–9, 0 · Click any row to jump</div>
     <input class="toc-search" id="tocSearch" type="text" placeholder="Filter sections..." oninput="filterToc(this.value)" autocomplete="off" style="width:100%;padding:.4rem .6rem;border:1px solid var(--border);border-radius:6px;font-family:var(--mono);font-size:.7rem;margin-top:.5rem;background:var(--surface);color:var(--text);outline:none;box-sizing:border-box">
   </div>
 
   <div class="toc-group">
-    <div class="toc-group-label">Reference & Context</div>
+    <div class="toc-group-label">Reference</div>
     <div class="toc-item tc-blue" onclick="tocGo('lookup')">
       <div class="toc-num">1</div>
-      <div class="toc-text"><div class="toc-item-title">College Lookup</div><div class="toc-item-desc">Search any college by name, district, or system type. Instant reference card with financial aid status, sign-on health, and analyst notes.</div></div>
+      <div class="toc-text"><div class="toc-item-title">College Lookup</div><div class="toc-item-desc">Search any college by name, district, or system type.</div></div>
       <span class="toc-item-tag tag-interactive">Interactive</span>
     </div>
-    <div class="toc-item" onclick="tocGo('cvcData')">
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">The Exchange</div>
+    <div class="toc-item tc-green" onclick="tocGo('cvcData')">
       <div class="toc-num">2</div>
-      <div class="toc-text"><div class="toc-item-title">Exchange Growth Data</div><div class="toc-item-desc">1,500 to 33,000 cross-enrollments in three years. Where students are searching and what it means for support volume.</div></div>
+      <div class="toc-text"><div class="toc-item-title">Growth Data + Student Journey</div><div class="toc-item-desc">33,000 cross-enrollments, growth trends, and a side-by-side comparison of when it works vs when it breaks.</div></div>
       <span class="toc-item-tag tag-data">Data</span>
     </div>
-  </div>
-
-  <div class="toc-group">
-    <div class="toc-group-label">The Student Experience</div>
-    <div class="toc-item tc-green" onclick="tocGo('journey')">
+    <div class="toc-item tc-sky" onclick="tocGo('flow')">
       <div class="toc-num">3</div>
-      <div class="toc-text"><div class="toc-item-title">Student Journey Comparison</div><div class="toc-item-desc">Same course, same Exchange — side by side when it works vs when it breaks. Green analyst notes show the support response at each step.</div></div>
-      <span class="toc-item-tag tag-interactive">Interactive</span>
-    </div>
-    <div class="toc-item" onclick="tocGo('flow')">
-      <div class="toc-num">4</div>
-      <div class="toc-text"><div class="toc-item-title">Data Flow Architecture</div><div class="toc-item-desc">How student data moves from the home college through authentication, the Exchange, and into Canvas. Click any layer to see where breaks happen.</div></div>
+      <div class="toc-text"><div class="toc-item-title">Data Flow Architecture</div><div class="toc-item-desc">Four layers from home college to Canvas. Click any node to see where breaks happen.</div></div>
       <span class="toc-item-tag tag-interactive">Interactive</span>
     </div>
   </div>
 
   <div class="toc-group">
-    <div class="toc-group-label">Daily Support Operations</div>
+    <div class="toc-group-label">Daily Operations</div>
     <div class="toc-item tc-amber" onclick="tocGo('monitor')">
-      <div class="toc-num">5</div>
-      <div class="toc-text"><div class="toc-item-title">Morning Monitor + Weekly Pulse</div><div class="toc-item-desc">Which colleges are healthy, degraded, or down? Weekly trend summary at a glance. Live alerts cycle in the corner.</div></div>
+      <div class="toc-num">4</div>
+      <div class="toc-text"><div class="toc-item-title">Morning Monitor + Weekly Pulse</div><div class="toc-item-desc">College health, live alerts (click to dismiss), and weekly trend summary.</div></div>
       <span class="toc-item-tag tag-interactive">Interactive</span>
     </div>
     <div class="toc-item tc-rose" onclick="tocGo('tracer')">
-      <div class="toc-num">6</div>
-      <div class="toc-text"><div class="toc-item-title">Incident Tracer</div><div class="toc-item-desc">Walk a real failure layer by layer. Each stage shows what broke and what the analyst does next. Auto-run watches the diagnosis unfold.</div></div>
+      <div class="toc-num">5</div>
+      <div class="toc-text"><div class="toc-item-title">Incident Tracer</div><div class="toc-item-desc">Layer-by-layer diagnosis with auto-run. Each stage shows what broke and the analyst response.</div></div>
       <span class="toc-item-tag tag-interactive">Interactive</span>
     </div>
-    <div class="toc-item" onclick="tocGo('patterns')">
-      <div class="toc-num">7</div>
-      <div class="toc-text"><div class="toc-item-title">Ticket Pattern Analysis</div><div class="toc-item-desc">12 weeks of ticket data mapped to the academic calendar. Identifies whether a spike is isolated or the start of a trend.</div></div>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">Intelligence + Response</div>
+    <div class="toc-item tc-orange" onclick="tocGo('patterns')">
+      <div class="toc-num">6</div>
+      <div class="toc-text"><div class="toc-item-title">Patterns + Knowledge Base</div><div class="toc-item-desc">Ticket trend analysis, insight cards, and four editable KB templates for common fix types.</div></div>
       <span class="toc-item-tag tag-data">Data</span>
     </div>
-    <div class="toc-item" onclick="tocGo('kb')">
+    <div class="toc-item tc-indigo" onclick="tocGo('comms')">
+      <div class="toc-num">7</div>
+      <div class="toc-text"><div class="toc-item-title">Comms + Escalation Matrix</div><div class="toc-item-desc">Same incident written for four audiences. P1/P2/P3 decision matrix with escalation contacts.</div></div>
+      <span class="toc-item-tag tag-interactive">Interactive</span>
+    </div>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">Proactive + Strategic</div>
+    <div class="toc-item tc-teal" onclick="tocGo('outreach')">
       <div class="toc-num">8</div>
-      <div class="toc-text"><div class="toc-item-title">Knowledge Base Builder</div><div class="toc-item-desc">Four starter templates for the most common issue types. Editable, publishable, copy-ready as markdown.</div></div>
-      <span class="toc-item-tag tag-interactive">Interactive</span>
-    </div>
-  </div>
-
-  <div class="toc-group">
-    <div class="toc-group-label">Communication & Judgment</div>
-    <div class="toc-item" onclick="tocGo('comms')">
-      <div class="toc-num">9</div>
-      <div class="toc-text"><div class="toc-item-title">Incident Communication</div><div class="toc-item-desc">Same incident written four ways: student, campus IT, registrar, internal team. Each message is copy-ready with one click.</div></div>
-      <span class="toc-item-tag tag-interactive">Interactive</span>
-    </div>
-    <div class="toc-item tc-indigo" onclick="tocGo('escalation')">
-      <div class="toc-num">10</div>
-      <div class="toc-text"><div class="toc-item-title">Escalation Decision Matrix</div><div class="toc-item-desc">P1, P2, or P3? Who to contact, how fast to respond, and what information to bring. Current scenario highlighted.</div></div>
-      <span class="toc-item-tag tag-analysis">Reference</span>
-    </div>
-  </div>
-
-  <div class="toc-group">
-    <div class="toc-group-label">Proactive & Strategic</div>
-    <div class="toc-item" onclick="tocGo('outreach')">
-      <div class="toc-num">11</div>
-      <div class="toc-text"><div class="toc-item-title">Outreach Planner</div><div class="toc-item-desc">13 outreach triggers mapped across 7 months. Moves course sharing from last resort to standard advising workflow.</div></div>
-      <span class="toc-item-tag tag-interactive">Interactive</span>
-    </div>
-    <div class="toc-item tc-teal" onclick="tocGo('counselorToolkit')">
-      <div class="toc-num">11</div>
-      <div class="toc-text"><div class="toc-item-title">Counselor Toolkit</div><div class="toc-item-desc">Verification workflow, myth-busting, registration checklist, and ready-to-use counselor language for recommending Exchange courses.</div></div>
+      <div class="toc-text"><div class="toc-item-title">Counselors + Outreach Planner</div><div class="toc-item-desc">Verification workflow, counselor scripts, registration checklist, and 13 outreach triggers across 7 months.</div></div>
       <span class="toc-item-tag tag-interactive">Interactive</span>
     </div>
     <div class="toc-item tc-purple" onclick="tocGo('aiVision')">
-      <div class="toc-num">12</div>
-      <div class="toc-text"><div class="toc-item-title">AI Vision + Fraud & Integrity</div><div class="toc-item-desc">Where this work is headed. Predictive monitoring, enrollment fraud detection, agentic AI, and the analyst’s evolving role. Click cards for today vs with-AI comparison.</div></div>
+      <div class="toc-num">9</div>
+      <div class="toc-text"><div class="toc-item-title">AI Vision + Fraud & Integrity</div><div class="toc-item-desc">Predictive monitoring, fraud detection, agentic AI, and the analyst’s evolving role.</div></div>
       <span class="toc-item-tag tag-vision">Vision</span>
     </div>
   </div>
@@ -3388,36 +3546,9 @@ function copyMsgText(btn) {
   <div class="toc-group">
     <div class="toc-group-label">Barrier Intelligence</div>
     <div class="toc-item" onclick="tocGo('barrierOverview')">
-      <div class="toc-num">13</div>
-      <div class="toc-text"><div class="toc-item-title">10 Barriers Overview</div><div class="toc-item-desc">Systemic friction points the support team can act on now. Click any card for details, who’s affected, and the analyst approach.</div></div>
+      <div class="toc-num">0</div>
+      <div class="toc-text"><div class="toc-item-title">10 Barriers + Lifecycle + Equity</div><div class="toc-item-desc">Barrier cards, enrollment lifecycle, campus matrix, equity scorer, and ticket-to-barrier correlator.</div></div>
       <span class="toc-item-tag tag-analysis">Analysis</span>
-    </div>
-    <div class="toc-item" onclick="tocGo('lifecycle')">
-      <div class="toc-num">14</div>
-      <div class="toc-text"><div class="toc-item-title">Enrollment Lifecycle</div><div class="toc-item-desc">Nine steps from course search to reporting. Red nodes mark where students get stuck. Amber marks manual workarounds.</div></div>
-      <span class="toc-item-tag tag-data">Data</span>
-    </div>
-    <div class="toc-item" onclick="tocGo('matrix')">
-      <div class="toc-num">15</div>
-      <div class="toc-text"><div class="toc-item-title">Campus Comparison Matrix</div><div class="toc-item-desc">Same barrier, different impact — filtered by which system is underneath. Banner Direct vs Ethos vs PeopleSoft.</div></div>
-      <span class="toc-item-tag tag-interactive">Interactive</span>
-    </div>
-    <div class="toc-item" onclick="tocGo('equity')">
-      <div class="toc-num">16</div>
-      <div class="toc-text"><div class="toc-item-title">Equity Impact Scorer</div><div class="toc-item-desc">Each barrier scored by how much it disproportionately affects low-income, first-generation, and disabled students.</div></div>
-      <span class="toc-item-tag tag-analysis">Analysis</span>
-    </div>
-    <div class="toc-item" onclick="tocGo('correlator')">
-      <div class="toc-num">17</div>
-      <div class="toc-text"><div class="toc-item-title">Ticket-to-Barrier Correlator</div><div class="toc-item-desc">If most tickets come from the same three barriers, fix the barriers — not just the tickets. Proportional breakdown.</div></div>
-      <span class="toc-item-tag tag-data">Data</span>
-    </div>
-  </div>
-  <div class="toc-group">
-    <div class="toc-group-label">The Pitch</div>
-    <div class="toc-item" onclick="tocGo('closing')" style="border-left:3px solid var(--primary)">
-      <div class="toc-num" style="background:var(--primary);color:#fff;border-color:var(--primary)">!</div>
-      <div class="toc-text"><div class="toc-item-title">Why Hire Me</div><div class="toc-item-desc">Four reasons, a 90-day plan, and the personal connection to this work.</div></div>
     </div>
   </div>
 
@@ -3425,28 +3556,32 @@ function copyMsgText(btn) {
 
 <button class="back-to-top" id="backToTop" onclick="(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 <nav class="progress-dots" id="progressDots" aria-label="Page sections">
-  <div class="progress-dot" onclick="document.getElementById('lookup').scrollIntoView({behavior:'smooth'})" title="College Lookup"></div>
-  <div class="progress-dot" onclick="document.getElementById('cvcData').scrollIntoView({behavior:'smooth'})" title="Exchange Data"></div>
-  <div class="progress-dot" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})" title="Student Journey"></div>
-  <div class="progress-dot" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth'})" title="Monitor"></div>
-  <div class="progress-dot" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})" title="Tracer"></div>
-  <div class="progress-dot" onclick="document.getElementById('comms').scrollIntoView({behavior:'smooth'})" title="Communication"></div>
-  <div class="progress-dot" onclick="document.getElementById('escalation').scrollIntoView({behavior:'smooth'})" title="Escalation"></div>
-  <div class="progress-dot" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})" title="Outreach"></div>
-  <div class="progress-dot" onclick="document.getElementById('counselorToolkit').scrollIntoView({behavior:'smooth'})" title="Counselor Toolkit"></div>
-  <div class="progress-dot" onclick="document.getElementById('aiVision').scrollIntoView({behavior:'smooth'})" title="AI Vision"></div>
-  <div class="progress-dot" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})" title="Barriers"></div>
+  <div class="progress-dot" onclick="document.getElementById('lookup').scrollIntoView({behavior:'smooth'})" title="1 · Lookup"></div>
+  <div class="progress-dot" onclick="document.getElementById('cvcData').scrollIntoView({behavior:'smooth'})" title="2 · Exchange"></div>
+  <div class="progress-dot" onclick="document.getElementById('flow').scrollIntoView({behavior:'smooth'})" title="3 · Architecture"></div>
+  <div class="progress-dot" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth'})" title="4 · Monitor"></div>
+  <div class="progress-dot" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})" title="5 · Diagnostics"></div>
+  <div class="progress-dot" onclick="document.getElementById('patterns').scrollIntoView({behavior:'smooth'})" title="6 · Intelligence"></div>
+  <div class="progress-dot" onclick="document.getElementById('comms').scrollIntoView({behavior:'smooth'})" title="7 · Response"></div>
+  <div class="progress-dot" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})" title="8 · Counselors"></div>
+  <div class="progress-dot" onclick="document.getElementById('aiVision').scrollIntoView({behavior:'smooth'})" title="9 · AI Vision"></div>
+  <div class="progress-dot" onclick="document.getElementById('barriers').scrollIntoView({behavior:'smooth'})" title="0 · Barriers"></div>
 </nav>
 
 <!-- KEYBOARD SHORTCUTS HELP -->
 <div class="kb-overlay" id="kbOverlay" onclick="this.classList.remove('kb-show')">
   <div class="kb-help" onclick="event.stopPropagation()">
     <div class="kb-help-title">Keyboard Shortcuts</div>
-    <div class="kb-help-row"><span class="kb-help-desc">Jump to section</span><span><span class="kb-help-key">1</span> – <span class="kb-help-key">0</span></span></div>
+    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">1</span> Lookup</span><span class="kb-help-desc"><span class="kb-help-key">2</span> Exchange</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">3</span> Architecture</span><span class="kb-help-desc"><span class="kb-help-key">4</span> Monitor</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">5</span> Diagnostics</span><span class="kb-help-desc"><span class="kb-help-key">6</span> Intelligence</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">7</span> Response</span><span class="kb-help-desc"><span class="kb-help-key">8</span> Counselors</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">9</span> AI Vision</span><span class="kb-help-desc"><span class="kb-help-key">0</span> Barriers</span></div>
+    <div style="border-top:1px solid var(--border);margin-top:.5rem;padding-top:.5rem">
     <div class="kb-help-row"><span class="kb-help-desc">Open page guide</span><span class="kb-help-key">G</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Search colleges</span><span class="kb-help-key">/</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Back to top</span><span class="kb-help-key">T</span></div>
-    <div class="kb-help-row"><span class="kb-help-desc">Show this help</span><span class="kb-help-key">?</span></div>
+    </div>
     <div class="kb-help-close">Press any key or click outside to close</div>
   </div>
 </div>
