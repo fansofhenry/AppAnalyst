@@ -1086,14 +1086,48 @@ html{scroll-behavior:smooth !important}
 /* Nav links — force clickable */
 .nav-links a{cursor:pointer !important;user-select:none;-webkit-tap-highlight-color:transparent;min-height:28px;display:inline-flex !important;align-items:center !important}
 
+
+/* ═══ TABLE OF CONTENTS ═══ */
+.toc-btn{padding:.45rem .85rem;border-radius:8px;font-family:var(--mono);font-size:.72rem;font-weight:700;border:none;background:var(--primary);color:#fff;cursor:pointer;transition:all .15s;white-space:nowrap;display:inline-flex;align-items:center;gap:.4rem;min-height:32px;letter-spacing:.03em;box-shadow:0 2px 8px rgba(26,107,80,.25)}
+.toc-btn:hover{background:var(--primary-hover);box-shadow:0 4px 12px rgba(26,107,80,.35);transform:translateY(-1px)}
+.toc-btn.toc-open{background:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.2)}
+
+.toc-panel{position:fixed;top:57px;right:0;width:min(440px,92vw);max-height:calc(100vh - 57px);background:var(--bg);border-left:1px solid var(--border);box-shadow:-8px 0 30px rgba(0,0,0,.08);z-index:199;transform:translateX(100%);transition:transform .3s cubic-bezier(.16,1,.3,1);overflow-y:auto;padding:1rem 0}
+.toc-panel.toc-visible{transform:translateX(0)}
+
+.toc-header{padding:0 1.25rem .75rem;border-bottom:1px solid var(--border);margin-bottom:.5rem}
+.toc-title{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--text)}
+.toc-subtitle{font-size:.7rem;color:var(--text-3);margin-top:.15rem}
+
+.toc-group{padding:.25rem 0}
+.toc-group-label{padding:.3rem 1.25rem;font-family:var(--mono);font-size:.5rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
+
+.toc-item{display:flex;align-items:flex-start;gap:.65rem;padding:.5rem 1.25rem;cursor:pointer;transition:background .12s;border-left:3px solid transparent}
+.toc-item:hover{background:var(--surface-2);border-left-color:var(--primary)}
+.toc-item:active{background:var(--primary-light)}
+
+.toc-num{width:24px;height:24px;border-radius:50%;background:var(--bg-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.55rem;font-weight:700;color:var(--text-3);flex-shrink:0;transition:all .15s}
+.toc-item:hover .toc-num{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+.toc-text{flex:1;min-width:0}
+.toc-item-title{font-size:.8rem;font-weight:600;color:var(--text);line-height:1.3}
+.toc-item-desc{font-size:.68rem;color:var(--text-3);line-height:1.5;margin-top:.1rem}
+
+.toc-item-tag{font-family:var(--mono);font-size:.48rem;padding:.1rem .3rem;border-radius:3px;flex-shrink:0;align-self:center}
+.tag-interactive{background:var(--primary-light);color:var(--primary);border:1px solid var(--primary-bd)}
+.tag-data{background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-bd)}
+.tag-analysis{background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-bd)}
+.tag-vision{background:var(--teal-light);color:var(--teal);border:1px solid var(--teal-bd)}
+
 </style>
 </head>
 <body>
 
 <nav id="nav">
   <div class="nav-brand"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">CVC-OEI · Application Support</span></div>
-  <div class="nav-links">
-    <a href="#why">Background</a><a href="#lookup">Lookup</a><a href="#cvcData">Data</a><a href="#journey">Journey</a><a href="#flow">Architecture</a><a href="#monitor">Monitor</a><a href="#tracer">Diagnostics</a><a href="#patterns">Patterns</a><a href="#kb">KB Builder</a>
+  <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Page Guide</button>
+    <div class="nav-links">
+    <a href="#why">Background</a><a href="#lookup">Lookup</a><a href="#cvcData">Data</a><a href="#journey">Journey</a><a href="#flow">Architecture</a><a href="#monitor">Monitor</a><a href="#tracer">Diagnostics</a><a href="#patterns">Patterns</a><a href="#kb">Knowledge Base Builder</a>
     <a href="#escalation">Escalation</a><a href="#outreach">Outreach</a><a href="#aiVision" style="color:var(--teal)">AI Vision</a>
     <a href="#barriers" class="nav-barrier">⚠ Barriers</a>
   </div>
@@ -1463,7 +1497,7 @@ html{scroll-behavior:smooth !important}
       <div class="sc-step" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 1</div><div class="sc-step-tool">Monitor</div><div class="sc-step-action">Check college health</div><div class="sc-step-link">→ Tool 01</div></div>
       <div class="sc-step" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 2</div><div class="sc-step-tool">Tracer</div><div class="sc-step-action">Walk the data flow</div><div class="sc-step-link">→ Tool 02</div></div>
       <div class="sc-step" onclick="document.getElementById('patterns').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 3</div><div class="sc-step-tool">Patterns</div><div class="sc-step-action">Isolated or systemic?</div><div class="sc-step-link">→ Tool 03</div></div>
-      <div class="sc-step" onclick="document.getElementById('kb').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 4</div><div class="sc-step-tool">KB Builder</div><div class="sc-step-action">Document the fix</div><div class="sc-step-link">→ Tool 04</div></div>
+      <div class="sc-step" onclick="document.getElementById('kb').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 4</div><div class="sc-step-tool">Knowledge Base Builder</div><div class="sc-step-action">Document the fix</div><div class="sc-step-link">→ Tool 04</div></div>
       <div class="sc-step" onclick="document.getElementById('escalation').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 5</div><div class="sc-step-tool">Escalate?</div><div class="sc-step-action">P1, P2, or P3?</div><div class="sc-step-link">→ Tool 05</div></div>
       <div class="sc-step" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 6</div><div class="sc-step-tool">Barriers</div><div class="sc-step-action">Systemic barrier?</div><div class="sc-step-link">→ Tool 05</div></div>
       <div class="sc-step" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 7</div><div class="sc-step-tool">Outreach</div><div class="sc-step-action">Prevent next term?</div><div class="sc-step-link">→ Tool 10</div></div>
@@ -1690,7 +1724,7 @@ function showFlowInfo(idx){const d=flowData[idx],p=document.getElementById('flow
 
 // ═══ MONITOR ═══
 const allColleges=[
-{name:'Foothill College',sis:'Banner Direct',status:'ok',detail:'Last sync: 2m ago · FA Dashboard: active',badge:'Healthy',uptime:'99.8%',lastErr:'None (30d)',endpoint:'/banner/api/sections',history:['09:14 — AER transmitted','09:12 — Sync OK','09:10 — Sync OK']},
+{name:'Foothill College',sis:'Banner Direct',status:'ok',detail:'Last sync: 2m ago · Financial Aid Dashboard: active',badge:'Healthy',uptime:'99.8%',lastErr:'None (30d)',endpoint:'/banner/api/sections',history:['09:14 — AER transmitted','09:12 — Sync OK','09:10 — Sync OK']},
 {name:'De Anza College',sis:'Banner Direct',status:'ok',detail:'Last sync: 1m ago',badge:'Healthy',uptime:'99.9%',lastErr:'None (30d)',endpoint:'/banner/api/sections',history:['09:15 — Sync OK','09:13 — AER transmitted']},
 {name:'City College SF',sis:'Banner Ethos',status:'warn',detail:'Seat count delay: 8min',badge:'Degraded',uptime:'97.2%',lastErr:'Seat sync timeout (2h ago)',endpoint:'/ethos/v1/section-registrations',history:['09:14 — Seat count DELAYED','09:06 — Sync OK']},
 {name:'Sacramento City',sis:'Banner Ethos',status:'err',detail:'Ethos token expired · FA: manual workflow',badge:'Failing',uptime:'94.1%',lastErr:'OAuth2 invalid_grant (14m)',endpoint:'/ethos/v1/sections',history:['09:14 — ERROR 401 invalid_grant','09:12 — AER queue blocked']},
@@ -1803,14 +1837,14 @@ lcData.forEach(n=>{const node=document.createElement('div');node.className='lc-n
 const colleges=[
 {name:'Foothill College',sis:'Banner Direct',fa:'Full (automated)',sso:'Active',issues:[]},
 {name:'De Anza College',sis:'Banner Direct',fa:'Full (automated)',sso:'Active',issues:[]},
-{name:'Ohlone College',sis:'Colleague Ethos',fa:'Manual (Ethos pending)',sso:'Active',issues:['No-show drops','FA email workflow']},
-{name:'West Valley College',sis:'Banner Ethos',fa:'Manual (Ethos pending)',sso:'Active',issues:['FA email workflow']},
-{name:'Mission College',sis:'Banner Ethos',fa:'Manual (Ethos pending)',sso:'CCCID gap',issues:['FA email workflow','IdP Proxy']},
+{name:'Ohlone College',sis:'Colleague Ethos',fa:'Manual (Ethos pending)',sso:'Active',issues:['No-show drops','Financial aid email workflow']},
+{name:'West Valley College',sis:'Banner Ethos',fa:'Manual (Ethos pending)',sso:'Active',issues:['Financial aid uses email workflow']},
+{name:'Mission College',sis:'Banner Ethos',fa:'Manual (Ethos pending)',sso:'Student ID gap',issues:['Financial aid uses email workflow','IdP Proxy']},
 {name:'Skyline College',sis:'PeopleSoft',fa:'Full (automated)',sso:'Active',issues:[]},
 {name:'Cañada College',sis:'PeopleSoft',fa:'Full',sso:'Active',issues:[]},
 {name:'Chabot College',sis:'PeopleSoft',fa:'Full',sso:'Active',issues:[]},
-{name:'Gavilan College',sis:'Colleague Ethos',fa:'Pending',sso:'Active',issues:['FA manual']},
-{name:'Las Positas',sis:'PeopleSoft',fa:'Full (automated)',sso:'CCCID gap',issues:['EPPN mismatch']},
+{name:'Gavilan College',sis:'Colleague Ethos',fa:'Pending',sso:'Active',issues:['Financial aid manual']},
+{name:'Las Positas',sis:'PeopleSoft',fa:'Full (automated)',sso:'Student ID gap',issues:['Student ID mapping mismatch']},
 {name:'Cabrillo College',sis:'Colleague Ethos',fa:'Pending',sso:'Active',issues:['FA manual','Residency']},
 {name:'Hartnell College',sis:'Banner Direct',fa:'Full',sso:'Active',issues:[]}
 ];
@@ -2346,7 +2380,7 @@ var aiData = {
       desc: 'The quality of CVC\u2019s future AI will be directly proportional to the quality of documentation the support team produces now. Every KB article, every ticket tag, every escalation note is a labeled example.',
       today: 'KB articles are written for the next human analyst. Ticket tags are for reporting. Documentation quality varies.',
       after: 'KB articles are written for humans AND machines. Consistent tagging schema. Structured resolution notes. The analyst who documents well today is building the foundation that makes AI possible next year \u2014 and that makes their own job more focused on the work that matters.',
-      toolLink: 'kb', toolName: 'KB Builder (Tool 04)',
+      toolLink: 'kb', toolName: 'Knowledge Base Builder (Tool 04)',
       complexity: 'quick', complexityLabel: 'Quick win \u2014 start with documentation standards today',
       signal: 'aic-role'
     }
@@ -2559,34 +2593,34 @@ setStage = function(i) {
 var collegeDB = [
   {name:'Foothill College',district:'Foothill-De Anza CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'2m ago',issues:[],tip:'Sponsor district for CVC-OEI. Strong integration baseline.'},
   {name:'De Anza College',district:'Foothill-De Anza CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'2m ago',issues:[],tip:'Sister college to Foothill. Same SIS infrastructure.'},
-  {name:'Sacramento City College',district:'Los Rios CCD',region:'Central Valley',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Teaching',volume:'Medium',lastSync:'Degraded',issues:['FA email workflow','Token refresh cycles','Ethos sync delays'],tip:'Frequent Ethos token expirations. Monitor token age weekly. FA office uses manual email workflow.'},
-  {name:'American River College',district:'Los Rios CCD',region:'Central Valley',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'12m ago',issues:['FA email workflow'],tip:'Largest Los Rios campus. Same Ethos config as Sacramento City.'},
-  {name:'West Valley College',district:'West Valley-Mission CCD',region:'Bay Area',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'8m ago',issues:['FA email workflow'],tip:'Winter intersession + multiple summer dates attract Exchange students.'},
-  {name:'Mission College',district:'West Valley-Mission CCD',region:'Bay Area',sis:'Banner Ethos',fa:'Manual (pending)',sso:'CCCID gap',role:'Home + Teaching',volume:'Medium',lastSync:'15m ago',issues:['FA email workflow','IdP Proxy config','CCCID assertion missing'],tip:'SSO issue: college IdP not asserting CCCID. Students redirected to OpenCCC recovery. Coordinate with CCC Tech Center.'},
-  {name:'Ohlone College',district:'Ohlone CCD',region:'Bay Area',sis:'Colleague Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'Low',lastSync:'20m ago',issues:['No-show drops','FA email workflow'],tip:'Colleague Ethos = Ellucian middleware. FA Dashboard pending vendor development.'},
+  {name:'Sacramento City College',district:'Los Rios CCD',region:'Central Valley',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Teaching',volume:'Medium',lastSync:'Degraded',issues:['Financial aid uses email workflow','Token refresh cycles','Ethos sync delays'],tip:'Frequent Ethos token expirations. Monitor token age weekly. FA office uses manual email workflow.'},
+  {name:'American River College',district:'Los Rios CCD',region:'Central Valley',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'12m ago',issues:['Financial aid uses email workflow'],tip:'Largest Los Rios campus. Same Ethos config as Sacramento City.'},
+  {name:'West Valley College',district:'West Valley-Mission CCD',region:'Bay Area',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'8m ago',issues:['Financial aid uses email workflow'],tip:'Winter intersession + multiple summer dates attract Exchange students.'},
+  {name:'Mission College',district:'West Valley-Mission CCD',region:'Bay Area',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Student ID gap',role:'Home + Teaching',volume:'Medium',lastSync:'15m ago',issues:['Financial aid uses email workflow','IdP Proxy config','CCCID assertion missing'],tip:'SSO issue: college IdP not asserting CCCID. Students redirected to OpenCCC recovery. Coordinate with CCC Tech Center.'},
+  {name:'Ohlone College',district:'Ohlone CCD',region:'Bay Area',sis:'Colleague Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'Low',lastSync:'20m ago',issues:['No-show drops','Financial aid email workflow'],tip:'Colleague Ethos = Ellucian middleware. FA Dashboard pending vendor development.'},
   {name:'Skyline College',district:'San Mateo CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'3m ago',issues:[],tip:'PeopleSoft = native API integration. FA Dashboard fully active.'},
   {name:'College of San Mateo',district:'San Mateo CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'3m ago',issues:[],tip:'Same district infrastructure as Skyline and Canada.'},
   {name:'Canada College',district:'San Mateo CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Low',lastSync:'3m ago',issues:[],tip:'Smallest San Mateo campus. Clean integration.'},
   {name:'Chabot College',district:'Chabot-Las Positas CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'4m ago',issues:[],tip:'Clean PeopleSoft integration. Used in tracer scenario examples.'},
-  {name:'Las Positas College',district:'Chabot-Las Positas CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'CCCID gap',role:'Home + Teaching',volume:'Low',lastSync:'4m ago',issues:['EPPN mismatch'],tip:'SSO issue: eduPerson Principal Name to CCCID mapping broken. College IT aware but not yet resolved.'},
-  {name:'Gavilan College',district:'Gavilan Joint CCD',region:'Bay Area',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Low',lastSync:'25m ago',issues:['FA manual workflow'],tip:'Small college, Colleague Ethos. FA office manually processes all Exchange requests.'},
-  {name:'Cabrillo College',district:'Cabrillo CCD',region:'Central Coast',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'18m ago',issues:['FA manual','Residency delays'],tip:'Residency validation delays cause incorrect out-of-state fees for Exchange students.'},
+  {name:'Las Positas College',district:'Chabot-Las Positas CCD',region:'Bay Area',sis:'PeopleSoft',fa:'Automated',sso:'Student ID gap',role:'Home + Teaching',volume:'Low',lastSync:'4m ago',issues:['Student ID mapping mismatch'],tip:'SSO issue: eduPerson Principal Name to CCCID mapping broken. College IT aware but not yet resolved.'},
+  {name:'Gavilan College',district:'Gavilan Joint CCD',region:'Bay Area',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Low',lastSync:'25m ago',issues:['Financial aid manual workflow'],tip:'Small college, Colleague Ethos. FA office manually processes all Exchange requests.'},
+  {name:'Cabrillo College',district:'Cabrillo CCD',region:'Central Coast',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'18m ago',issues:['Financial aid manual','Residency delays'],tip:'Residency validation delays cause incorrect out-of-state fees for Exchange students.'},
   {name:'Hartnell College',district:'Hartnell CCD',region:'Central Coast',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Teaching',volume:'Low',lastSync:'5m ago',issues:[],tip:'Banner Direct = clean integration. Teaching college only.'},
-  {name:'Santa Rosa Junior College',district:'Sonoma CCD',region:'North Bay',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'10m ago',issues:['FA email workflow'],tip:'Large North Bay campus. High Exchange volume during summer.'},
+  {name:'Santa Rosa Junior College',district:'Sonoma CCD',region:'North Bay',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'10m ago',issues:['Financial aid uses email workflow'],tip:'Large North Bay campus. High Exchange volume during summer.'},
   {name:'Diablo Valley College',district:'Contra Costa CCD',region:'East Bay',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'2m ago',issues:[],tip:'One of the highest-volume Exchange teaching colleges in the Bay Area.'},
   {name:'City College of San Francisco',district:'SF CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Very High',lastSync:'1m ago',issues:['High volume'],tip:'Highest enrollment in the CCC system. Expect concentrated ticket volume around registration.'},
-  {name:'Pasadena City College',district:'Pasadena Area CCD',region:'Southern CA',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'9m ago',issues:['FA email workflow'],tip:'Major SoCal teaching college. Calendar differences from NorCal colleges cause deadline confusion.'},
+  {name:'Pasadena City College',district:'Pasadena Area CCD',region:'Southern CA',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'9m ago',issues:['Financial aid uses email workflow'],tip:'Major SoCal teaching college. Calendar differences from NorCal colleges cause deadline confusion.'},
   {name:'Santa Monica College',district:'Santa Monica CCD',region:'Southern CA',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Very High',lastSync:'2m ago',issues:[],tip:'Top transfer college in the state. Very high Exchange demand for GE courses.'},
   {name:'Mt. San Antonio College',district:'Mt. SAC CCD',region:'Southern CA',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Very High',lastSync:'3m ago',issues:[],tip:'Largest single-campus CCC. Clean Banner Direct integration.'},
   {name:'Long Beach City College',district:'Long Beach CCD',region:'Southern CA',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'4m ago',issues:[],tip:'Strong PeopleSoft integration. Active Exchange teaching college.'},
-  {name:'Riverside City College',district:'Riverside CCD',region:'Inland Empire',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Teaching (Spring 2026)',volume:'Medium',lastSync:'N/A',issues:['New onboarding','FA email workflow'],tip:'Just launched as teaching college Spring 2026. Monitor onboarding closely.'},
+  {name:'Riverside City College',district:'Riverside CCD',region:'Inland Empire',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Teaching (Spring 2026)',volume:'Medium',lastSync:'N/A',issues:['New onboarding','Financial aid email workflow'],tip:'Just launched as teaching college Spring 2026. Monitor onboarding closely.'},
   {name:'San Diego Mesa College',district:'San Diego CCD',region:'San Diego',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'High',lastSync:'3m ago',issues:[],tip:'Largest San Diego campus. Clean integration.'},
-  {name:'Fresno City College',district:'State Center CCD',region:'Central Valley',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Teaching',volume:'Medium',lastSync:'14m ago',issues:['FA email workflow'],tip:'Central Valley hub. Banner Ethos middleware with standard sync schedule.'},
+  {name:'Fresno City College',district:'State Center CCD',region:'Central Valley',sis:'Banner Ethos',fa:'Manual (pending)',sso:'Active',role:'Teaching',volume:'Medium',lastSync:'14m ago',issues:['Financial aid uses email workflow'],tip:'Central Valley hub. Banner Ethos middleware with standard sync schedule.'},
   {name:'Bakersfield College',district:'Kern CCD',region:'Central Valley',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'6m ago',issues:[],tip:'Banner Direct, clean. Important for rural Central Valley student access.'},
   {name:'Sierra College',district:'Sierra Joint CCD',region:'Northern CA',sis:'PeopleSoft',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'5m ago',issues:[],tip:'Suburban/rural foothill region. Clean PeopleSoft.'},
-  {name:'Feather River College',district:'Feather River CCD',region:'Rural Northern CA',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Very Low',lastSync:'45m ago',issues:['Rural connectivity','FA manual'],tip:'Remote rural college. Sync intervals longer due to bandwidth. Exchange is critical for student course access.'},
-  {name:'Lake Tahoe Community College',district:'Lake Tahoe CCD',region:'Rural Northern CA',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Very Low',lastSync:'40m ago',issues:['Rural connectivity','FA manual'],tip:'Mountain region. Limited local course offerings make Exchange especially important.'},
-  {name:'College of the Siskiyous',district:'Siskiyou Joint CCD',region:'Rural Northern CA',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Very Low',lastSync:'50m ago',issues:['Rural connectivity','FA manual'],tip:'Most remote CCC campus. Students depend on Exchange for courses not offered locally.'},
+  {name:'Feather River College',district:'Feather River CCD',region:'Rural Northern CA',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Very Low',lastSync:'45m ago',issues:['Rural connectivity','Financial aid manual'],tip:'Remote rural college. Sync intervals longer due to bandwidth. Exchange is critical for student course access.'},
+  {name:'Lake Tahoe Community College',district:'Lake Tahoe CCD',region:'Rural Northern CA',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Very Low',lastSync:'40m ago',issues:['Rural connectivity','Financial aid manual'],tip:'Mountain region. Limited local course offerings make Exchange especially important.'},
+  {name:'College of the Siskiyous',district:'Siskiyou Joint CCD',region:'Rural Northern CA',sis:'Colleague Ethos',fa:'Pending',sso:'Active',role:'Teaching',volume:'Very Low',lastSync:'50m ago',issues:['Rural connectivity','Financial aid manual'],tip:'Most remote CCC campus. Students depend on Exchange for courses not offered locally.'},
   {name:'Golden Gate College',district:'San Francisco CCD',region:'Bay Area',sis:'Banner Direct',fa:'Automated',sso:'Active',role:'Home + Teaching',volume:'Medium',lastSync:'5m ago',issues:[],tip:'Part of the SF CCD district. Banner Direct integration with clean sync. Students cross-enroll frequently with other Bay Area colleges.'}
 ];
 
@@ -2630,9 +2664,9 @@ function renderLookup(colleges) {
   var clean = colleges.filter(function(c) { return c.issues.length === 0; }).length;
 
   stats.innerHTML = '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--text)">' + colleges.length + '</div><div class="lookup-stat-label">Colleges</div></div>' +
-    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--primary)">' + automated + '</div><div class="lookup-stat-label">FA Automated</div></div>' +
-    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--amber)">' + manual + '</div><div class="lookup-stat-label">FA Manual</div></div>' +
-    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--red)">' + withIssues + '</div><div class="lookup-stat-label">Has Issues</div></div>' +
+    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--primary)">' + automated + '</div><div class="lookup-stat-label">Aid Automated</div></div>' +
+    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--amber)">' + manual + '</div><div class="lookup-stat-label">Aid Manual</div></div>' +
+    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--amber)">' + withIssues + '</div><div class="lookup-stat-label">Known Issues</div></div>' +
     '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--teal)">' + clean + '</div><div class="lookup-stat-label">Clean</div></div>';
 
   if (colleges.length === 0) {
@@ -2657,7 +2691,7 @@ function renderLookup(colleges) {
   };
 
   var html = colleges.map(function(c) {
-    var issues = c.issues.length > 0 ? c.issues.map(function(i) { return '<span class="lookup-issue-tag">' + i + '</span>'; }).join('') : '<span class="lookup-issue-tag issue-clear">No known issues</span>';
+    var issues = c.issues.length > 0 ? c.issues.map(function(i) { return '<span class="lookup-issue-tag">' + i + '</span>'; }).join('') : '<span class="lookup-issue-tag issue-clear">All clear</span>';
 
     return '<div class="lookup-card" onclick="this.classList.toggle(\'lc-expanded\')">' +
       '<div class="lookup-card-header">' +
@@ -2667,8 +2701,8 @@ function renderLookup(colleges) {
       '</div>' +
       '<div style="font-size:.68rem;color:var(--text-3);margin-bottom:.4rem">' + c.district + ' \u00b7 ' + c.role + ' \u00b7 Volume: ' + c.volume + '</div>' +
       '<div class="lookup-grid">' +
-        '<div class="lookup-field"><div class="lookup-field-label">FA Dashboard</div><div class="lookup-field-value ' + faClass(c.fa) + '">' + c.fa + '</div></div>' +
-        '<div class="lookup-field"><div class="lookup-field-label">SSO Status</div><div class="lookup-field-value ' + ssoClass(c.sso) + '">' + c.sso + '</div></div>' +
+        '<div class="lookup-field"><div class="lookup-field-label">Financial Aid</div><div class="lookup-field-value ' + faClass(c.fa) + '">' + c.fa + '</div></div>' +
+        '<div class="lookup-field"><div class="lookup-field-label">Sign-On</div><div class="lookup-field-value ' + ssoClass(c.sso) + '">' + c.sso + '</div></div>' +
         '<div class="lookup-field"><div class="lookup-field-label">Last Sync</div><div class="lookup-field-value ' + syncClass(c.lastSync) + '">' + c.lastSync + '</div></div>' +
       '</div>' +
       '<div class="lookup-issues">' + issues + '</div>' +
@@ -2702,9 +2736,168 @@ document.querySelectorAll('.nav-links a').forEach(function(link) {
   });
 });
 
+
+// ═══ TABLE OF CONTENTS ═══
+function toggleToc() {
+  var panel = document.getElementById('tocPanel');
+  var btn = document.getElementById('tocBtn');
+  if (!panel || !btn) return;
+  var isOpen = panel.classList.contains('toc-visible');
+  if (isOpen) {
+    panel.classList.remove('toc-visible');
+    btn.classList.remove('toc-open');
+  } else {
+    panel.classList.add('toc-visible');
+    btn.classList.add('toc-open');
+  }
+}
+
+function tocGo(sectionId) {
+  var el = document.getElementById(sectionId);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Close the panel after a short delay
+    setTimeout(function() {
+      var panel = document.getElementById('tocPanel');
+      var btn = document.getElementById('tocBtn');
+      if (panel) panel.classList.remove('toc-visible');
+      if (btn) btn.classList.remove('toc-open');
+    }, 400);
+  }
+}
+
+// Close TOC when clicking outside
+document.addEventListener('click', function(e) {
+  var panel = document.getElementById('tocPanel');
+  var btn = document.getElementById('tocBtn');
+  if (!panel || !btn) return;
+  if (panel.classList.contains('toc-visible') && !panel.contains(e.target) && !btn.contains(e.target)) {
+    panel.classList.remove('toc-visible');
+    btn.classList.remove('toc-open');
+  }
+});
+
 </script>
 
 
+
+
+<!-- TABLE OF CONTENTS PANEL -->
+<div class="toc-panel" id="tocPanel">
+  <div class="toc-header">
+    <div class="toc-title">Page Guide</div>
+    <div class="toc-subtitle">18 sections · Click any row to jump there</div>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">Reference & Context</div>
+    <div class="toc-item" onclick="tocGo('lookup')">
+      <div class="toc-num">1</div>
+      <div class="toc-text"><div class="toc-item-title">College Lookup</div><div class="toc-item-desc">Search any college by name, district, or system type. Instant reference card with financial aid status, sign-on health, and analyst notes.</div></div>
+      <span class="toc-item-tag tag-interactive">Interactive</span>
+    </div>
+    <div class="toc-item" onclick="tocGo('cvcData')">
+      <div class="toc-num">2</div>
+      <div class="toc-text"><div class="toc-item-title">Exchange Growth Data</div><div class="toc-item-desc">1,500 to 33,000 cross-enrollments in three years. Where students are searching and what it means for support volume.</div></div>
+      <span class="toc-item-tag tag-data">Data</span>
+    </div>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">The Student Experience</div>
+    <div class="toc-item" onclick="tocGo('journey')">
+      <div class="toc-num">3</div>
+      <div class="toc-text"><div class="toc-item-title">Student Journey Comparison</div><div class="toc-item-desc">Same course, same Exchange — side by side when it works vs when it breaks. Green analyst notes show the support response at each step.</div></div>
+      <span class="toc-item-tag tag-interactive">Interactive</span>
+    </div>
+    <div class="toc-item" onclick="tocGo('flow')">
+      <div class="toc-num">4</div>
+      <div class="toc-text"><div class="toc-item-title">Data Flow Architecture</div><div class="toc-item-desc">How student data moves from the home college through authentication, the Exchange, and into Canvas. Click any layer to see where breaks happen.</div></div>
+      <span class="toc-item-tag tag-interactive">Interactive</span>
+    </div>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">Daily Support Operations</div>
+    <div class="toc-item" onclick="tocGo('monitor')">
+      <div class="toc-num">5</div>
+      <div class="toc-text"><div class="toc-item-title">Morning Monitor + Weekly Pulse</div><div class="toc-item-desc">Which colleges are healthy, degraded, or down? Weekly trend summary at a glance. Live alerts cycle in the corner.</div></div>
+      <span class="toc-item-tag tag-interactive">Interactive</span>
+    </div>
+    <div class="toc-item" onclick="tocGo('tracer')">
+      <div class="toc-num">6</div>
+      <div class="toc-text"><div class="toc-item-title">Incident Tracer</div><div class="toc-item-desc">Walk a real failure layer by layer. Each stage shows what broke and what the analyst does next. Auto-run watches the diagnosis unfold.</div></div>
+      <span class="toc-item-tag tag-interactive">Interactive</span>
+    </div>
+    <div class="toc-item" onclick="tocGo('patterns')">
+      <div class="toc-num">7</div>
+      <div class="toc-text"><div class="toc-item-title">Ticket Pattern Analysis</div><div class="toc-item-desc">12 weeks of ticket data mapped to the academic calendar. Identifies whether a spike is isolated or the start of a trend.</div></div>
+      <span class="toc-item-tag tag-data">Data</span>
+    </div>
+    <div class="toc-item" onclick="tocGo('kb')">
+      <div class="toc-num">8</div>
+      <div class="toc-text"><div class="toc-item-title">Knowledge Base Builder</div><div class="toc-item-desc">Four starter templates for the most common issue types. Editable, publishable, copy-ready as markdown.</div></div>
+      <span class="toc-item-tag tag-interactive">Interactive</span>
+    </div>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">Communication & Judgment</div>
+    <div class="toc-item" onclick="tocGo('comms')">
+      <div class="toc-num">9</div>
+      <div class="toc-text"><div class="toc-item-title">Incident Communication</div><div class="toc-item-desc">Same incident written four ways: student, campus IT, registrar, internal team. Each message is copy-ready with one click.</div></div>
+      <span class="toc-item-tag tag-interactive">Interactive</span>
+    </div>
+    <div class="toc-item" onclick="tocGo('escalation')">
+      <div class="toc-num">10</div>
+      <div class="toc-text"><div class="toc-item-title">Escalation Decision Matrix</div><div class="toc-item-desc">P1, P2, or P3? Who to contact, how fast to respond, and what information to bring. Current scenario highlighted.</div></div>
+      <span class="toc-item-tag tag-analysis">Reference</span>
+    </div>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">Proactive & Strategic</div>
+    <div class="toc-item" onclick="tocGo('outreach')">
+      <div class="toc-num">11</div>
+      <div class="toc-text"><div class="toc-item-title">Outreach Planner</div><div class="toc-item-desc">13 outreach triggers mapped across 7 months. Moves course sharing from last resort to standard advising workflow.</div></div>
+      <span class="toc-item-tag tag-interactive">Interactive</span>
+    </div>
+    <div class="toc-item" onclick="tocGo('aiVision')">
+      <div class="toc-num">12</div>
+      <div class="toc-text"><div class="toc-item-title">AI Vision + Fraud & Integrity</div><div class="toc-item-desc">Where this work is headed. Predictive monitoring, enrollment fraud detection, agentic AI, and the analyst’s evolving role. Click cards for today vs with-AI comparison.</div></div>
+      <span class="toc-item-tag tag-vision">Vision</span>
+    </div>
+  </div>
+
+  <div class="toc-group">
+    <div class="toc-group-label">Barrier Intelligence</div>
+    <div class="toc-item" onclick="tocGo('barrierOverview')">
+      <div class="toc-num">13</div>
+      <div class="toc-text"><div class="toc-item-title">10 Barriers Overview</div><div class="toc-item-desc">Systemic friction points the support team can act on now. Click any card for details, who’s affected, and the analyst approach.</div></div>
+      <span class="toc-item-tag tag-analysis">Analysis</span>
+    </div>
+    <div class="toc-item" onclick="tocGo('lifecycle')">
+      <div class="toc-num">14</div>
+      <div class="toc-text"><div class="toc-item-title">Enrollment Lifecycle</div><div class="toc-item-desc">Nine steps from course search to reporting. Red nodes mark where students get stuck. Amber marks manual workarounds.</div></div>
+      <span class="toc-item-tag tag-data">Data</span>
+    </div>
+    <div class="toc-item" onclick="tocGo('matrix')">
+      <div class="toc-num">15</div>
+      <div class="toc-text"><div class="toc-item-title">Campus Comparison Matrix</div><div class="toc-item-desc">Same barrier, different impact — filtered by which system is underneath. Banner Direct vs Ethos vs PeopleSoft.</div></div>
+      <span class="toc-item-tag tag-interactive">Interactive</span>
+    </div>
+    <div class="toc-item" onclick="tocGo('equity')">
+      <div class="toc-num">16</div>
+      <div class="toc-text"><div class="toc-item-title">Equity Impact Scorer</div><div class="toc-item-desc">Each barrier scored by how much it disproportionately affects low-income, first-generation, and disabled students.</div></div>
+      <span class="toc-item-tag tag-analysis">Analysis</span>
+    </div>
+    <div class="toc-item" onclick="tocGo('correlator')">
+      <div class="toc-num">17</div>
+      <div class="toc-text"><div class="toc-item-title">Ticket-to-Barrier Correlator</div><div class="toc-item-desc">If most tickets come from the same three barriers, fix the barriers — not just the tickets. Proportional breakdown.</div></div>
+      <span class="toc-item-tag tag-data">Data</span>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
