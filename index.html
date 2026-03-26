@@ -1012,6 +1012,38 @@ html{scroll-behavior:smooth !important}
   font-size:.8rem !important;
 }
 
+
+/* ═══ GUIDED DEMO TOUR ═══ */
+.tour-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.35);z-index:9998;opacity:0;pointer-events:none;transition:opacity .4s}
+.tour-overlay.active{opacity:1;pointer-events:auto}
+
+.tour-card{position:fixed;z-index:9999;background:#fff;border-radius:12px;padding:1.25rem 1.5rem;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.2),0 0 0 1px rgba(0,0,0,.05);opacity:0;transform:translateY(12px);transition:all .4s cubic-bezier(.16,1,.3,1);pointer-events:none}
+.tour-card.active{opacity:1;transform:translateY(0);pointer-events:auto}
+.tour-card::before{content:'';position:absolute;top:-8px;left:32px;width:16px;height:16px;background:#fff;transform:rotate(45deg);box-shadow:-2px -2px 4px rgba(0,0,0,.04)}
+
+.tour-step-badge{display:inline-flex;align-items:center;gap:.35rem;font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:.5rem}
+.tour-step-num{width:22px;height:22px;border-radius:50%;background:var(--primary);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.55rem}
+.tour-title{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:.35rem;line-height:1.3}
+.tour-body{font-size:.82rem;color:var(--text-2);line-height:1.7;margin-bottom:.75rem}
+.tour-body strong{color:var(--text)}
+.tour-controls{display:flex;align-items:center;gap:.5rem;justify-content:space-between}
+.tour-btn{padding:.45rem 1rem;border-radius:6px;font-family:var(--mono);font-size:.65rem;font-weight:600;border:none;cursor:pointer;transition:all .15s}
+.tour-btn-next{background:var(--primary);color:#fff}.tour-btn-next:hover{background:var(--primary-hover)}
+.tour-btn-skip{background:transparent;color:var(--text-3);border:1px solid var(--border)}.tour-btn-skip:hover{background:var(--bg-2)}
+.tour-btn-done{background:var(--teal);color:#fff}.tour-btn-done:hover{opacity:.9}
+.tour-progress{display:flex;gap:4px}
+.tour-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .2s}
+.tour-dot.active{background:var(--primary);transform:scale(1.3)}
+.tour-dot.done{background:var(--teal)}
+
+/* Highlight ring around current section */
+.tour-highlight{position:relative;z-index:9999}
+.tour-highlight .tool-frame{box-shadow:0 0 0 3px var(--primary),0 20px 60px rgba(0,0,0,.15) !important;border-radius:var(--r-xl) !important}
+
+/* Demo button states */
+.demo-start-btn.touring{background:var(--red) !important;box-shadow:0 4px 14px rgba(220,38,38,.3) !important}
+.demo-start-btn.touring:hover{background:#c42020 !important}
+
 </style>
 </head>
 <body>
@@ -1972,45 +2004,193 @@ setTimeout(function() {
 // Demo mode: pre-load all interesting states simultaneously
 var demoActive = false;
 function activateDemoMode() {
-  // Auto-scroll to Journey for 60-second demo
-  setTimeout(function() {
-    var journey = document.getElementById('journey');
-    if (journey) journey.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 400);
+  if (tourActive) { endTour(); return; }
+  startTour();
+}
 
-  if (demoActive) return;
-  demoActive = true;
-  toast('Demo mode activated');
+// ═══ GUIDED TOUR ENGINE ═══
+var tourActive = false;
+var tourStep = 0;
+var tourSteps = [
+  {
+    section: 'journey',
+    num: 1,
+    title: 'The student experience — when it works vs when it breaks',
+    body: 'Two columns, same course (MATH 1A through the California Virtual Campus Exchange). <strong>Left:</strong> everything works — 0 support interactions, student completes the course, transfers on time. <strong>Right:</strong> one Ethos token expires overnight and 47 students wake up to an empty Canvas dashboard. The green analyst notes show what the support team does at each step.',
+    setup: function() {
+      // Set journey to compare mode
+      if (typeof setJourney === 'function') setJourney('compare');
+    }
+  },
+  {
+    section: 'tracer',
+    num: 2,
+    title: 'Layer-by-layer diagnosis — with analyst judgment at each step',
+    body: 'A student reports a missing course. The tracer walks through five layers: student report, Student Information System query, API check, Exchange queue, Canvas. <strong>Layer 3 is where it broke</strong> — an expired OAuth token. Each stage shows what the analyst does next: investigate, escalate, notify, or resolve. Click <strong>Auto-Run Trace</strong> to watch the diagnosis unfold.',
+    setup: function() {
+      setStage(2);
+    }
+  },
+  {
+    section: 'escalation',
+    num: 3,
+    title: 'The judgment call — P1, P2, or P3?',
+    body: 'Same incident, but the response depends on severity. <strong>P1:</strong> multiple colleges down, contact everyone immediately. <strong>P2:</strong> one college degraded, you have 2 hours. <strong>P3:</strong> individual student issue, standard queue. The Sacramento City scenario is highlighted as P2 — showing the analyst already classified the incident and knows who to contact and what information to bring.',
+    setup: function() {
+      // P2 is already highlighted from the HTML
+    }
+  },
+  {
+    section: 'monitor',
+    num: 4,
+    title: 'The morning check — which colleges are up, degraded, or down?',
+    body: 'The <strong>weekly pulse</strong> at the top gives an instant read: 127 tickets, 3 colleges failing, ~4,540 students affected, Service Level Agreement slipping. The table below shows each college\'s status, Student Information System type, and sync health. Sacramento City is red — click to expand for details. Live alerts cycle in the top-right corner, including an enrollment fraud anomaly flag.',
+    setup: function() {
+      // Expand the failing college row
+      setTimeout(function() {
+        var errRows = document.querySelectorAll('.s-indicator.s-err');
+        if (errRows[0]) {
+          var row = errRows[0].closest('.status-row');
+          if (row && !row.classList.contains('expanded')) row.click();
+        }
+      }, 600);
+    }
+  },
+  {
+    section: 'aiVision',
+    num: 5,
+    title: 'Where this work is headed — AI, fraud deterrence, and the analyst\'s evolving role',
+    body: 'The maturity spectrum shows where the California Virtual Campus is now (Stage 2: Connected) and where AI takes it next. Four tabs: <strong>Operations</strong> (predictive monitoring), <strong>Students</strong> (ed-plan-aware recommendations), <strong>Fraud & Integrity</strong> (enrollment fraud detection via agentic AI), and <strong>The Analyst\'s Role</strong> (from ticket queue to proactive intelligence). Click any card to see a today vs with-AI comparison.',
+    setup: function() {
+      if (typeof setAiView === 'function') setAiView('fraud', document.querySelector('.ai-tab:nth-child(3)'));
+    }
+  }
+];
+
+function startTour() {
+  tourActive = true;
+  tourStep = 0;
   
-  // 1. Architecture: show Exchange node (index 1)
-  showFlowInfo(1);
+  // Update button to show "End Tour"
+  var btn = document.querySelector('.demo-start-btn');
+  if (btn) {
+    btn.innerHTML = '\u25a0 End Tour';
+    btn.classList.add('touring');
+  }
   
-  // 2. Tracer: load at stage 2 (the Ethos error — most interesting)
+  // Pre-load states
+  if (typeof setJourney === 'function') setJourney('compare');
   setStage(2);
-  
-  // 3. Pattern analyzer: select first insight card
   if (typeof toggleInsight === 'function') toggleInsight(0);
-  
-  // 4. Barrier #4 (drop-for-nonpayment): expand it
+  if (typeof selectMonth === 'function') selectMonth(2);
   var barrierCards = document.querySelectorAll('.b-card');
   if (barrierCards[3]) barrierCards[3].classList.add('expanded');
   
-  // 5. Outreach: switch to August (index 2)
-  if (typeof selectMonth === 'function') selectMonth(2);
+  // Build progress dots
+  var dots = '';
+  for (var i = 0; i < tourSteps.length; i++) {
+    dots += '<div class="tour-dot" id="tourDot' + i + '"></div>';
+  }
+  document.getElementById('tourProgress').innerHTML = dots;
   
-  // 6. Monitor: expand the failing college (Sacramento City)
-  // Find and click the error-status row
-  setTimeout(function() {
-    var errRows = document.querySelectorAll('.s-indicator.s-err');
-    if (errRows[0]) {
-      var row = errRows[0].closest('.status-row');
-      if (row) row.click();
+  // Show overlay
+  document.getElementById('tourOverlay').classList.add('active');
+  
+  // Start first step
+  showTourStep(0);
+}
+
+function showTourStep(idx) {
+  tourStep = idx;
+  var step = tourSteps[idx];
+  if (!step) { endTour(); return; }
+  
+  // Remove previous highlight
+  document.querySelectorAll('.tour-highlight').forEach(function(el) { el.classList.remove('tour-highlight'); });
+  
+  // Scroll to section
+  var section = document.getElementById(step.section);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    section.classList.add('tour-highlight');
+  }
+  
+  // Run setup
+  if (step.setup) step.setup();
+  
+  // Update card content
+  document.getElementById('tourNum').textContent = step.num;
+  document.getElementById('tourLabel').textContent = 'STEP ' + step.num + ' OF ' + tourSteps.length;
+  document.getElementById('tourTitle').textContent = step.title;
+  document.getElementById('tourBody').innerHTML = step.body;
+  
+  // Update progress dots
+  for (var i = 0; i < tourSteps.length; i++) {
+    var dot = document.getElementById('tourDot' + i);
+    if (dot) {
+      dot.className = 'tour-dot';
+      if (i < idx) dot.classList.add('done');
+      if (i === idx) dot.classList.add('active');
     }
-  }, 500);
+  }
   
-  // Show hint
-  keyHintEl.classList.add('show');
-  setTimeout(function() { keyHintEl.classList.remove('show'); }, 3000);
+  // Update button
+  var nextBtn = document.getElementById('tourNextBtn');
+  if (idx === tourSteps.length - 1) {
+    nextBtn.textContent = 'Finish';
+    nextBtn.className = 'tour-btn tour-btn-done';
+  } else {
+    nextBtn.textContent = 'Next \u2192';
+    nextBtn.className = 'tour-btn tour-btn-next';
+  }
+  
+  // Position card — show after scroll completes
+  setTimeout(function() {
+    var card = document.getElementById('tourCard');
+    if (section) {
+      var rect = section.getBoundingClientRect();
+      // Position card below the section header, right-aligned
+      card.style.top = Math.min(rect.top + 80, window.innerHeight - 320) + 'px';
+      card.style.right = '24px';
+      card.style.left = 'auto';
+    }
+    card.classList.add('active');
+  }, 600);
+}
+
+function nextTourStep() {
+  // Hide current card
+  document.getElementById('tourCard').classList.remove('active');
+  
+  if (tourStep >= tourSteps.length - 1) {
+    endTour();
+    return;
+  }
+  
+  // Show next after brief delay
+  setTimeout(function() {
+    showTourStep(tourStep + 1);
+  }, 300);
+}
+
+function endTour() {
+  tourActive = false;
+  
+  // Hide overlay and card
+  document.getElementById('tourOverlay').classList.remove('active');
+  document.getElementById('tourCard').classList.remove('active');
+  
+  // Remove highlights
+  document.querySelectorAll('.tour-highlight').forEach(function(el) { el.classList.remove('tour-highlight'); });
+  
+  // Reset button
+  var btn = document.querySelector('.demo-start-btn');
+  if (btn) {
+    btn.innerHTML = 'Start Demo Mode <span class="demo-kbd">D</span>';
+    btn.classList.remove('touring');
+  }
+  
+  toast('Tour ended');
 }
 
 // Auto-set outreach to August on page load (more interesting than June)
@@ -2501,5 +2681,18 @@ setStage = function(i) {
 };
 
 </script>
+
+<!-- GUIDED DEMO TOUR -->
+<div class="tour-overlay" id="tourOverlay"></div>
+<div class="tour-card" id="tourCard">
+  <div class="tour-step-badge"><span class="tour-step-num" id="tourNum">1</span> <span id="tourLabel">STEP 1 OF 3</span></div>
+  <div class="tour-title" id="tourTitle"></div>
+  <div class="tour-body" id="tourBody"></div>
+  <div class="tour-controls">
+    <button class="tour-btn tour-btn-skip" onclick="endTour()">End tour</button>
+    <div class="tour-progress" id="tourProgress"></div>
+    <button class="tour-btn tour-btn-next" id="tourNextBtn" onclick="nextTourStep()">Next</button>
+  </div>
+</div>
 </body>
 </html>
