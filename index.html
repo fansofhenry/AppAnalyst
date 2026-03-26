@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Henry Fan · CVC-OEI Application Support</title>
+<title>Henry Fan · CVC-Online Education Initiative (OEI) Application Support</title>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#FAFAF8;--bg-2:#F4F3F0;--bg-3:#ECEAE5;--surface:#FFF;--surface-2:#F8F7F4;--border:#E4E2DC;--border-2:#D4D1C9;--text:#1C1917;--text-2:#57534E;--text-3:#A8A29E;--primary:#1A6B50;--primary-light:#E8F5EE;--primary-bd:#B4DBC8;--blue:#2563EB;--blue-light:#EFF6FF;--blue-bd:#93C5FD;--amber:#B45309;--amber-light:#FFFBEB;--amber-bd:#FCD34D;--red:#DC2626;--red-light:#FEF2F2;--red-bd:#FCA5A5;--purple:#7C3AED;--purple-light:#F5F3FF;--purple-bd:#C4B5FD;--teal:#0D9488;--teal-light:#F0FDFA;--teal-bd:#5EEAD4;--display:'Newsreader',serif;--body:'Instrument Sans',sans-serif;--mono:'IBM Plex Mono',monospace;--r:8px;--r-lg:12px;--r-xl:16px;--shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);--shadow-md:0 4px 12px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);--max-w:1060px}
@@ -961,6 +961,57 @@ html{scroll-behavior:smooth !important}
 /* Closing section — bigger visual impact */
 #closing .tool-frame{border:2px solid var(--primary-bd) !important;background:var(--primary-light) !important}
 
+
+/* START DEMO BUTTON */
+.demo-start-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.5rem;border-radius:var(--r-lg);background:var(--primary);color:#fff;font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.05em;border:none;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(26,107,80,.3)}
+.demo-start-btn:hover{background:var(--primary-hover);transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,107,80,.4)}
+.demo-start-btn:active{transform:translateY(0)}
+.demo-start-btn .demo-kbd{padding:.1rem .35rem;border-radius:3px;background:rgba(255,255,255,.2);font-size:.6rem}
+
+
+/* TRACER SCENARIO HEADLINE */
+.tracer-scenario{padding:.75rem 1rem;background:var(--red-light);border:1px solid var(--red-bd);border-radius:var(--r-lg);margin-bottom:.75rem;text-align:center}
+.tracer-scenario-title{font-size:1rem;font-weight:700;color:var(--red);margin-bottom:.2rem}
+.tracer-scenario-meta{font-family:var(--mono);font-size:.55rem;color:var(--text-3)}
+
+/* ACTION BADGES in tracer stages */
+.tracer-action{margin-top:.4rem;padding:.3rem .55rem;border-radius:4px;font-size:.68rem;font-weight:600;line-height:1.5;display:inline-block}
+.ta-investigate{background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-bd)}
+.ta-escalate{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-bd)}
+.ta-notify{background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-bd)}
+.ta-resolve{background:var(--primary-light);color:var(--primary);border:1px solid var(--primary-bd)}
+
+
+/* ═══ ZOOM READABILITY ═══ */
+
+/* Journey — bigger text for screenshare */
+.journey-step .j-text{font-size:.82rem !important;line-height:1.65 !important}
+.journey-step .j-student{font-size:.78rem !important;font-style:italic !important}
+.journey-step .j-label{font-size:.82rem !important}
+
+/* Analyst response notes — MORE visible on Zoom */
+.journey-step [style*="primary-light"]{font-size:.75rem !important;padding:.4rem .6rem !important;border-left:3px solid var(--primary) !important}
+
+/* Journey column headers — much bigger for Zoom */
+.jch-ok,.jch-broken{font-size:1rem !important;padding:.85rem 1rem !important;letter-spacing:.02em}
+
+/* Impact summary bars under column headers — bigger */
+.journey-cols [style*="font-size:.55rem"]{font-size:.65rem !important}
+
+/* Monitor pulse numbers — even bigger */
+.pulse-num{font-size:1.7rem !important}
+
+/* Tracer scenario headline — bigger */
+.tracer-scenario-title{font-size:1.15rem !important}
+
+
+/* Student quotes — MUST be readable on Zoom screenshare */
+.jch-broken ~ .journey-step .j-student{
+  color:var(--red) !important;
+  font-weight:500 !important;
+  font-size:.8rem !important;
+}
+
 </style>
 </head>
 <body>
@@ -980,7 +1031,7 @@ html{scroll-behavior:smooth !important}
     <div class="h-badge"><span class="dot"></span> CVC-OEI · Foothill–De Anza CCD</div>
     <h1>What does application support look like at <em>statewide scale?</em></h1>
     <div style="height:3px;width:180px;border-radius:2px;background:linear-gradient(90deg,var(--primary),var(--teal));margin-bottom:.75rem"></div>
-    <p class="h-desc">115 community colleges, four Student Information System (SIS) integration paths, a statewide Single Sign-On (SSO) proxy, Canvas, and Financial Aid (FA) Consortium Agreements — all connected through the CVC Exchange. <strong>These tools explore where it breaks and how to respond.</strong></p>
+    <p class="h-desc">115 community colleges, four Student Information System (SIS) integration paths, a statewide Single Sign-On (SSO) proxy, Canvas, and Financial Aid (FA) Consortium Agreements — all connected through the California Virtual Campus (CVC) Exchange. <strong>These tools explore where it breaks and how to respond.</strong></p>
     <p style="font-size:.78rem;color:var(--text-3);max-width:560px;margin:0 auto .75rem;line-height:1.7;text-align:center">The CVC Exchange isn't a course catalog — it's <strong style="color:var(--text-2)">equity infrastructure.</strong> A student at a rural college with 12 course offerings gets access to the same curriculum as a student at a metro college with 200. Supporting that means understanding it's not just about uptime — it's about whether a first-generation student can transfer on time.</p>
     <div class="h-stats">
       <div><div class="h-stat-num green">116</div><div class="h-stat-label">Connected Colleges</div></div>
@@ -989,7 +1040,13 @@ html{scroll-behavior:smooth !important}
       <div><div class="h-stat-num" style="color:var(--purple)">9</div><div class="h-stat-label">Interactive Tools</div></div>
     </div>
   </div>
-<div style="text-align:center;padding:1rem 0;opacity:.4">
+<div style="text-align:center;padding:1.25rem 0">
+      <button class="demo-start-btn" onclick="activateDemoMode();this.textContent='\u2713 Demo Active';this.style.background='var(--teal)'">
+        Start Demo Mode <span class="demo-kbd">D</span>
+      </button>
+      <div style="font-family:var(--mono);font-size:.5rem;color:var(--text-3);margin-top:.5rem;opacity:.6">Pre-loads all tools with sample data · Keys 1–0 jump to sections</div>
+    </div>
+    <div style="text-align:center;padding:.5rem 0;opacity:.4">
     <div style="font-family:var(--mono);font-size:.55rem;color:var(--text-3);letter-spacing:.1em">SCROLL TO EXPLORE</div>
     <div style="margin-top:.25rem;font-size:1rem;color:var(--text-3);animation:floatDown 2s ease infinite">&#8595;</div>
   </div>
@@ -1232,7 +1289,7 @@ html{scroll-behavior:smooth !important}
       <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--teal-light)">🎓</div><div class="msg-to">To the Student</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Your MATH 1A enrollment — update</div><div class="msg-body">We’re aware your MATH 1A section isn’t showing in Canvas yet. This is a sync issue between your home college and the teaching college — <strong>not a problem with your enrollment.</strong> Your seat is secure. We expect this to be resolved within <span class="msg-highlight">2–4 hours</span>. No action needed on your end.</div></div>
       <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--purple-light)">🖥</div><div class="msg-to">To Campus IT (Teaching College)</div><div class="msg-channel">ServiceNow</div></div><div class="msg-body">AER for CCCID <strong>0012847593</strong> transmitted from Chabot at 14:22 PST but Canvas roster for MATH-1A-001 does not reflect enrollment. Ethos token at home college returned <span class="msg-warn">401 invalid_grant</span>. Can you verify whether the enrollment record exists in your Banner instance?</div></div>
       <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">📋</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Cross-enrollment sync — student enrollments confirmed, Canvas delay expected &lt;4hr</div><div class="msg-body">Quick update on the cross-enrollment sync issue. <strong>The student’s enrollment is confirmed</strong> — the delay is in how the data reaches Canvas. If students contact your office, you can confirm their enrollment is valid. Happy to provide a written summary if this needs to go to your VP.</div></div>
-      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--blue-light)">⚙</div><div class="msg-to">To CVC Internal Team</div><div class="msg-channel">Slack</div></div><div class="msg-body"><strong>Scope:</strong> 47 AER records pending in Chabot → De Anza queue since 02:00 PST. Root cause: Ethos Open Authorization (OAuth2) token expired, <span class="msg-warn">invalid_grant</span> on refresh. <strong>Action:</strong> Token regenerated. Queue flush in progress. KB article drafted.</div></div>
+      <div class="msg-preview"><div class="msg-header"><div class="msg-icon" style="background:var(--blue-light)">⚙</div><div class="msg-to">To CVC Internal Team</div><div class="msg-channel">Slack</div></div><div class="msg-body"><strong>Scope:</strong> 47 AER records pending in Chabot → De Anza queue since 02:00 PST. Root cause: Ethos Open Authorization (OAuth2) token expired, <span class="msg-warn">invalid_grant</span> on refresh. <strong>Action:</strong> Token regenerated. Queue flush in progress. Knowledge Base (KB) article drafted.</div></div>
     </div>
   </div>
 </section>
@@ -1530,7 +1587,7 @@ function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t
 // ═══ FLOW DIAGRAM ═══
 const flowData=[
 {title:'Home College SIS',dot:'var(--purple)',text:'System of record for enrollment, residency, financial aid, and CCCID. <strong>Banner Direct and PeopleSoft</strong> integrate with the Exchange differently than <strong>Banner Ethos and Colleague Ethos</strong> — the Ethos path adds a translation layer via Ellucian APIs. The FA Dashboard currently supports Banner Direct and PeopleSoft; Ethos integration is pending.',tags:['Banner Direct','Banner Ethos','PeopleSoft','Colleague Ethos','CCCID','CCCApply']},
-{title:'CVC Exchange — Middleware + FA Dashboard',dot:'var(--blue)',text:'Central cross-enrollment platform. Receives <strong>AER (Abbreviated Enrollment Record)</strong> from home colleges. The AER contains enrollment data but <strong>not FAFSA data</strong> — financial aid flows separately through the Consortium Agreement. Validates residency, manages seat counts, and since Spring 2025, provides a centralized FA dashboard for counselors and FA offices.',tags:['AER Payload','Seat Count Sync','Residency Validation','FA Dashboard','SX07 MIS','Consortium Agreement']},
+{title:'CVC Exchange — Middleware + FA Dashboard',dot:'var(--blue)',text:'Central cross-enrollment platform. Receives <strong>AER (Abbreviated Enrollment Record)</strong> from home colleges. The AER contains enrollment data but <strong>not FAFSA data</strong> — financial aid flows separately through the Consortium Agreement. Validates residency, manages seat counts, and since Spring 2025, provides a centralized FA dashboard for counselors and FA offices.',tags:['AER Payload','Seat Count Sync','Residency Validation','FA Dashboard','SX07 Management Information Systems (MIS)','Consortium Agreement']},
 {title:'Teaching College — SIS + Canvas + Parchment',dot:'var(--primary)',text:'Receives AER and provisions enrollment in SIS, then Canvas. Authentication runs through the <strong>CCC IdP Proxy</strong> — the student\'s CCCID must be passed as a Security Assertion Markup Language (SAML) attribute from their college IdP. If the college can\'t pass the CCCID, the proxy redirects to OpenCCC for account recovery. Transcripts return automatically via <strong>Parchment</strong>.',tags:['Canvas LMS','CCC IdP Proxy','CCCID / EPPN','Roster Sync','Parchment','SX07 Reporting']},
 {title:'Student Experience',dot:'var(--teal)',text:'Student authenticates via their home college IdP, the SSO Proxy resolves their CCCID, and Canvas provisions the course. They can cross-enroll in <strong>up to two courses per term</strong>. Three payment paths: credit card at enrollment, CCPG at Teaching College, or FA via Consortium Agreement from Home College. When it works, invisible. When it doesn\'t — a missing course, a failed login, a surprise bill.',tags:['CCCID Login','2-Course Limit','3 Payment Paths','FA Consortium','CCPG Reapplication']}
 ];
@@ -1569,11 +1626,11 @@ renderMonitor();let refreshCount=30;setInterval(()=>{refreshCount--;if(refreshCo
 
 // ═══ TRACER ═══
 const stages=[
-{icon:'ℹ',cls:'td-icon-info',title:'Student Report — Cross-Enrollment Failure',lines:[{ts:'09:14:22',cls:'log-info',text:'TICKET CVC-4821 opened'},{ts:'09:14:22',cls:'',text:'Reporter: Student at Chabot College'},{ts:'09:15:01',cls:'log-warn',text:'Canvas roster: Student NOT present'}],actions:['Verify enrollment','Check roster','Proceed →']},
-{icon:'✓',cls:'td-icon-ok',title:'SIS Query — Banner Record Confirmed',lines:[{ts:'09:18:44',cls:'log-ok',text:'RESULT: MATH-1A-001 | De Anza | CCCID: 0012847593 | RE'},{ts:'09:19:02',cls:'log-info',text:'SIS record correct. Issue downstream.'}],actions:['SIS confirmed ✓','Check Ethos →']},
-{icon:'✕',cls:'td-icon-err',title:'API Layer — Ethos Token Refresh Failure',lines:[{ts:'09:22:12',cls:'log-err',text:'ERROR 401: OAuth2 token expired'},{ts:'09:22:12',cls:'log-err',text:'Token refresh failed: invalid_grant'},{ts:'09:22:13',cls:'log-err',text:'AER payload NOT transmitted'}],actions:['Regenerate key','Verify credentials','Escalate →']},
-{icon:'⚠',cls:'td-icon-warn',title:'Exchange — AER Transmission Blocked',lines:[{ts:'09:24:31',cls:'log-warn',text:'47 AER records pending: Chabot → De Anza'},{ts:'09:24:32',cls:'log-info',text:'Teaching college SIS never received enrollment'}],actions:['Quantify affected','Notify campus','Batch re-sync →']},
-{icon:'✓',cls:'td-icon-ok',title:'Resolution — Token Regenerated, Queue Flushed',lines:[{ts:'09:32:15',cls:'log-ok',text:'Token refresh: SUCCESS'},{ts:'09:35:22',cls:'log-ok',text:'All 47 records transmitted'},{ts:'09:38:01',cls:'log-info',text:'KB article drafted'}],actions:['Verify access','Update KB','Close ✓']}
+{icon:'ℹ',cls:'td-icon-info',title:'Student Report — Cross-Enrollment Failure',analyst:'Acknowledge ticket. Collect CCCID, home college, teaching college, course name.',analystCls:'ta-investigate',lines:[{ts:'09:14:22',cls:'log-info',text:'TICKET CVC-4821 opened'},{ts:'09:14:22',cls:'',text:'Reporter: Student at Chabot College'},{ts:'09:15:01',cls:'log-warn',text:'Canvas roster: Student NOT present'}],actions:['Verify enrollment','Check roster','Proceed →']},
+{icon:'✓',cls:'td-icon-ok',title:'SIS Query — Banner Record Confirmed',analyst:'Student Information System record exists. Issue is downstream. Check the Ethos integration layer.',analystCls:'ta-investigate',lines:[{ts:'09:18:44',cls:'log-ok',text:'RESULT: MATH-1A-001 | De Anza | CCCID: 0012847593 | RE'},{ts:'09:19:02',cls:'log-info',text:'SIS record correct. Issue downstream.'}],actions:['SIS confirmed ✓','Check Ethos →']},
+{icon:'✕',cls:'td-icon-err',title:'API Layer — Ethos Token Refresh Failure',analyst:'Root cause found. Regenerate OAuth token. Flush queued records. Escalate to vendor if needed.',analystCls:'ta-escalate',lines:[{ts:'09:22:12',cls:'log-err',text:'ERROR 401: OAuth2 token expired'},{ts:'09:22:12',cls:'log-err',text:'Token refresh failed: invalid_grant'},{ts:'09:22:13',cls:'log-err',text:'AER payload NOT transmitted'}],actions:['Regenerate key','Verify credentials','Escalate →']},
+{icon:'⚠',cls:'td-icon-warn',title:'Exchange — AER Transmission Blocked',analyst:'Verify Academic Enrollment Records transmitting after token refresh. Monitor queue drain.',analystCls:'ta-notify',lines:[{ts:'09:24:31',cls:'log-warn',text:'47 AER records pending: Chabot → De Anza'},{ts:'09:24:32',cls:'log-info',text:'Teaching college SIS never received enrollment'}],actions:['Quantify affected','Notify campus','Batch re-sync →']},
+{icon:'✓',cls:'td-icon-ok',title:'Resolution — Token Regenerated, Queue Flushed',analyst:'Confirm student sees course in Canvas. Notify campuses. Draft Knowledge Base article.',analystCls:'ta-resolve',lines:[{ts:'09:32:15',cls:'log-ok',text:'Token refresh: SUCCESS'},{ts:'09:35:22',cls:'log-ok',text:'All 47 records transmitted'},{ts:'09:38:01',cls:'log-info',text:'KB article drafted'}],actions:['Verify access','Update KB','Close ✓']}
 ];
 let currentStage=-1,autoRunning=false;
 function buildTracerFlow(){document.getElementById('tracerFlow').innerHTML=stages.map((_,i)=>'<div class="tf-node" onclick="setStage('+i+')"><div class="tf-check">✓</div><div class="tf-num">Layer 0'+(i+1)+'</div><div class="tf-name">'+['User Report','SIS Query','API / Ethos','Exchange','Resolution'][i]+'</div><div class="tf-sub">'+['Student symptom','Banner record','Integration layer','CVC middleware','Root cause + fix'][i]+'</div></div>').join('')}
@@ -1623,7 +1680,7 @@ const barriers=[
 {n:5,title:"CCPG Fee Waiver Doesn't Auto-Transfer",cat:'COMMS',sev:'med',impact:'California College Promise Grant at Home College doesn\'t carry to Teaching College. Must reapply separately. Many get unexpected bills.',who:'Low-income students eligible for fee waivers',approach:'Ensure prominently documented. Recommend proactive start-of-term communication if tickets cluster.'},
 {n:6,title:'Residency Validation Is Manual',cat:'DATA',sev:'med',impact:'Home College A&R must manually confirm residency. Delays result in incorrect out-of-state fees at Teaching College.',who:'Students with residency data issues, A&R staff',approach:'Track incorrect fee tickets. Correlate with specific Home Colleges. Document workaround.'},
 {n:7,title:'FA Dashboard Incomplete for Ethos SIS',cat:'VENDOR',sev:'med',impact:'Spring 2025 FA Dashboard automates unit recording for PeopleSoft and Banner Direct colleges. Banner Ethos and Colleague Ethos integration is pending Ellucian development prioritization — those FA offices still use the manual email workflow.',who:'FA offices at Ethos colleges',approach:'Know which colleges are on which SIS tier. Document workarounds. Update campuses on status.'},
-{n:8,title:'MIS Reporting Requires Manual Reconciliation',cat:'FISCAL',sev:'med',impact:"Exchange data doesn't map cleanly to MIS requirements. Manual reconciliation needed. Underreporting = lost funding.",who:'IR and A&R staff at Teaching Colleges',approach:'Treat MIS tickets as high priority — fiscal, not just technical. Escalate patterns.'},
+{n:8,title:'MIS Reporting Requires Manual Reconciliation',cat:'FISCAL',sev:'med',impact:"Exchange data doesn't map cleanly to MIS requirements. Manual reconciliation needed. Underreporting = lost funding.",who:'Institutional Research (IR) and Admissions & Records (A&R) staff at Teaching Colleges',approach:'Treat MIS tickets as high priority — fiscal, not just technical. Escalate patterns.'},
 {n:9,title:'No Waitlist Support on Exchange',cat:'PRODUCT',sev:'low',impact:"Students can't join a waitlist. Some courses show '1 seat' reserved for local waitlist, causing registration errors.",who:'Students searching for high-demand courses',approach:'Document limitation clearly. Flag ticket spikes around specific courses.'},
 {n:10,title:'OpenCCC/SAML Gaps Block Authentication',cat:'AUTH',sev:'low',impact:'CCC IdP Proxy requires CCCID as a SAML attribute from the college IdP. If the college can\'t assert CCCID, the proxy redirects to the Open California Community Colleges (OpenCCC) account recovery — but this often fails silently or confuses students who already have accounts.',who:'Students at misconfigured colleges',approach:'Trace to IdP Proxy layer: is college passing CCCID? Is the eduPerson Principal Name (EPPN) to CCCID mapping correct? Maintain college-by-college SSO status. Coordinate with CCC Tech Center (staffsupportccctc@openccc.zendesk.com).'}
 ];
@@ -1759,7 +1816,7 @@ const calMonths=[
 ]},
 {id:'nov',name:'Nov',label:'Spring reg',phase:'Spring registration',dots:['cd-green','cd-blue'],triggers:[
   {type:'inreach',title:'Returning Exchange Users: Personalized Nudge',who:'Students who previously used Exchange',situation:'Student used the Exchange successfully before. Personalized outreach based on their history is more effective than generic campaigns.',msg:'You completed [COURSE] through the CVC Exchange last [term]. As you register for spring, remember you can use the Exchange again for any courses full or unavailable at [Home College].',impact:['Repeat adoption','Personalized','Low effort, high return']},
-  {type:'outreach',title:'Transfer-Track Course Campaign',who:'Transfer-track students, social media',situation:'Transfer students need specific IGETC or CSU GE courses that may not be offered at the right time. A targeted campaign showing Exchange sections that satisfy transfer requirements reaches the students with the most at stake.',msg:'Finishing your IGETC or CSU GE requirements? The CVC Exchange has transfer-applicable courses available this spring from colleges across California. Search by requirement at cvc.edu.',impact:['Transfer completion','High-stakes students','GE/IGETC search']}
+  {type:'outreach',title:'Transfer-Track Course Campaign',who:'Transfer-track students, social media',situation:'Transfer students need specific Intersegmental General Education Transfer Curriculum (IGETC) or California State University (CSU) General Education courses that may not be offered at the right time. A targeted campaign showing Exchange sections that satisfy transfer requirements reaches the students with the most at stake.',msg:'Finishing your IGETC or CSU GE requirements? The CVC Exchange has transfer-applicable courses available this spring from colleges across California. Search by requirement at cvc.edu.',impact:['Transfer completion','High-stakes students','GE/IGETC search']}
 ]},
 {id:'dec',name:'Dec',label:'Intersession',phase:'Intersession window',dots:['cd-amber','cd-green'],triggers:[
   {type:'intervention',title:'Incomplete Grade Recovery Path',who:'Students with incomplete grades',situation:'A student received an incomplete and needs to finish a course requirement. The original course may not be offered in intersession at their home college, but an equivalent may be available through the Exchange.',msg:'If you received an incomplete in [COURSE] and need to fulfill the requirement, check the CVC Exchange for intersession or early spring sections at other colleges. Your counselor can verify the course will count.',impact:['Grade recovery','Time-sensitive','Prevents withdrawal']},
@@ -1915,6 +1972,12 @@ setTimeout(function() {
 // Demo mode: pre-load all interesting states simultaneously
 var demoActive = false;
 function activateDemoMode() {
+  // Auto-scroll to Journey for 60-second demo
+  setTimeout(function() {
+    var journey = document.getElementById('journey');
+    if (journey) journey.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 400);
+
   if (demoActive) return;
   demoActive = true;
   toast('Demo mode activated');
@@ -2402,6 +2465,39 @@ autoRunTrace = async function() {
   if (tracerTimer) clearInterval(tracerTimer);
   var phaseEl2 = document.getElementById('tracePhase');
   if (phaseEl2) phaseEl2.innerHTML = '<span style="color:var(--primary)">\u2713 Root cause identified</span>';
+};
+
+
+// ═══ TRACER SCENARIO HEADLINE ═══
+(function() {
+  var tracerToolBody = document.querySelector('#tracer .tool-body');
+  if (tracerToolBody) {
+    var headline = document.createElement('div');
+    headline.className = 'tracer-scenario';
+    headline.innerHTML = '<div class="tracer-scenario-title">Student cross-enrolled in MATH 1A but missing from Canvas</div><div class="tracer-scenario-meta">Sacramento City (Banner Ethos) \u2192 De Anza (Banner Direct) \xb7 47 students affected \xb7 Reported 8:32 AM</div>';
+    tracerToolBody.insertBefore(headline, tracerToolBody.firstChild);
+  }
+})();
+
+
+// ═══ TRACER ANALYST ACTIONS ═══
+var origSetStage = setStage;
+setStage = function(i) {
+  origSetStage(i);
+  // Add analyst action badge after stage renders
+  var stage = stages[i];
+  if (stage && stage.analyst) {
+    var stageEls = document.querySelectorAll('.td-stage');
+    if (stageEls[i]) {
+      var existing = stageEls[i].querySelector('.tracer-action');
+      if (!existing) {
+        var badge = document.createElement('div');
+        badge.className = 'tracer-action ' + (stage.analystCls || '');
+        badge.innerHTML = '<strong>What I do:</strong> ' + stage.analyst;
+        stageEls[i].appendChild(badge);
+      }
+    }
+  }
 };
 
 </script>
