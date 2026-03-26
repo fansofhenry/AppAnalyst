@@ -1846,7 +1846,7 @@ let activeOutreachTab='all',activeCalMonth=0;
 function setOutreachTab(tab,el){
   activeOutreachTab=tab;
   document.querySelectorAll('.outreach-tab').forEach(function(t){t.classList.remove('active')});
-  el.classList.add('active');
+  if (el) el.classList.add('active');
   renderOutreachDetail();
 }
 
@@ -1922,7 +1922,15 @@ var journeyMode = 'compare';
 function setJourney(mode, el) {
   journeyMode = mode;
   document.querySelectorAll('.jt-btn').forEach(function(b) { b.classList.remove('active'); });
-  el.classList.add('active');
+  if (el) { el.classList.add('active'); } else {
+    // Find the button matching this mode and activate it
+    document.querySelectorAll('.jt-btn').forEach(function(b) {
+      if (b.textContent.toLowerCase().indexOf(mode) >= 0 || 
+          (mode === 'compare' && b.textContent.indexOf('Compare') >= 0)) {
+        b.classList.add('active');
+      }
+    });
+  }
   renderJourney();
 }
 
@@ -2024,18 +2032,20 @@ function activateDemoMode() {
   var barrierCards = document.querySelectorAll('.b-card');
   if (barrierCards[3]) barrierCards[3].classList.add('expanded');
   setTimeout(function() {
-    var errRows = document.querySelectorAll('.s-indicator.s-err');
-    if (errRows[0]) {
-      var row = errRows[0].closest('.status-row');
-      if (row && !row.classList.contains('expanded')) row.click();
-    }
+    try {
+      var errRows = document.querySelectorAll('.s-indicator.s-err');
+      if (errRows && errRows.length > 0 && errRows[0]) {
+        var row = errRows[0].closest('.status-row');
+        if (row && row.click) row.click();
+      }
+    } catch(e) { /* monitor expand optional */ }
   }, 300);
   
   // Start auto-scroll
   demoScrolling = true;
   window.scrollTo({ top: 0 });
   
-  var btn = document.querySelector('.demo-start-btn');
+  var btn = document.getElementById('demoBtn');
   if (btn) {
     btn.innerHTML = '\u25a0 Stop Demo';
     btn.classList.add('touring');
@@ -2078,7 +2088,7 @@ function activateDemoMode() {
   demoWheelHandler = function() { pauseDemo(); };
   demoClickHandler = function(e) {
     // Don\u2019t pause if clicking the stop button itself
-    if (e.target.closest('.demo-start-btn')) return;
+    if (e.target && e.target.closest && e.target.closest('.demo-start-btn')) return;
     pauseDemo();
   };
   
@@ -2094,7 +2104,7 @@ function pauseDemo() {
   demoPaused = true;
   if (demoRaf) cancelAnimationFrame(demoRaf);
   
-  var btn = document.querySelector('.demo-start-btn');
+  var btn = document.getElementById('demoBtn');
   if (btn) btn.innerHTML = '\u25b6 Resume Demo';
   
   // Remove old listeners
@@ -2111,7 +2121,7 @@ function resumeDemo() {
   demoPaused = false;
   var indicator = document.getElementById('demoIndicator'); if(indicator) indicator.classList.add('visible');
   
-  var btn = document.querySelector('.demo-start-btn');
+  var btn = document.getElementById('demoBtn');
   if (btn) {
     btn.innerHTML = '\u25a0 Stop Demo';
   }
@@ -2138,7 +2148,7 @@ function resumeDemo() {
   };
   demoWheelHandler = function() { pauseDemo(); };
   demoClickHandler = function(e) {
-    if (e.target.closest('.demo-start-btn')) return;
+    if (e.target && e.target.closest && e.target.closest('.demo-start-btn')) return;
     pauseDemo();
   };
   document.addEventListener('keydown', demoKeyHandler, true);
@@ -2150,6 +2160,7 @@ function stopDemo() {
   var indicator = document.getElementById('demoIndicator'); if(indicator) indicator.classList.remove('visible');
   demoScrolling = false;
   demoPaused = false;
+  demoPaused = false;
   if (demoRaf) cancelAnimationFrame(demoRaf);
   
   // Remove listeners
@@ -2157,7 +2168,7 @@ function stopDemo() {
   if (demoWheelHandler) document.removeEventListener('wheel', demoWheelHandler);
   if (demoClickHandler) document.removeEventListener('mousedown', demoClickHandler, true);
   
-  var btn = document.querySelector('.demo-start-btn');
+  var btn = document.getElementById('demoBtn');
   if (btn) {
     btn.innerHTML = 'Start Demo Mode <span class="demo-kbd">D</span>';
     btn.classList.remove('touring');
@@ -2455,7 +2466,7 @@ var activeAiView = 'ops';
 function setAiView(view, el) {
   activeAiView = view;
   document.querySelectorAll('.ai-tab').forEach(function(t) { t.classList.remove('active'); });
-  el.classList.add('active');
+  if (el) { el.classList.add('active'); } else { document.querySelectorAll('.ai-tab').forEach(function(t) { if (t.textContent.toLowerCase().indexOf(view) >= 0 || (view === 'fraud' && t.textContent.indexOf('Fraud') >= 0)) t.classList.add('active'); }); }
   renderAiView();
 }
 
