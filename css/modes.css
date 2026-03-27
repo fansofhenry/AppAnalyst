@@ -441,6 +441,9 @@ body.a11y-mode .sp-count,
 body.a11y-mode .toc-item-desc,
 body.a11y-mode .demo-caption,
 body.a11y-mode .rd-history,
+body.a11y-mode .ai-card-desc,
+body.a11y-mode .eq-reason,
+body.a11y-mode .b-d-text,
 body.a11y-mode .chart-period { color: #555; }
 
 /* Thick focus rings on EVERYTHING clickable */

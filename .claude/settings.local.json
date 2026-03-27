@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(grep -rn \"^function \" js/*.js)",
+      "Bash(grep:*)",
+      "Bash(wc:*)",
+      "Bash(do echo:*)",
+      "Bash(perl:*)",
+      "Bash(cat:*)",
+      "Bash(sort -u cat /Users/henryfan/appanalyst/css/*.css)",
+      "Bash(npm update:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh auth:*)",
+      "Bash(git fetch:*)",
+      "Bash(git rebase:*)"
+    ]
+  }
+}

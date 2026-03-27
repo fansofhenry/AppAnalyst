@@ -679,7 +679,6 @@
 }
 
 /* Hover: left-border accent on clickable cards */
-.ai-card:hover { border-left: 3px solid var(--purple); }
 .counsel-card:hover { border-left: 3px solid var(--teal); }
 .esc-card:hover { border-left: 3px solid var(--amber); }
 .trigger-card:hover { border-left: 3px solid var(--teal); }
