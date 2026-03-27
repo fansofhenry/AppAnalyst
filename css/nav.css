@@ -143,7 +143,7 @@ a.nav-brand:hover .nav-title { color: var(--primary); }
 .nv {
   font-weight: 600;
   border-radius: 6px;
-  border: 1.5px solid transparent;
+  border: 1px solid transparent;
   transition: all .2s cubic-bezier(.16,1,.3,1);
   opacity: .75;
   background: transparent;
@@ -152,19 +152,9 @@ a.nav-brand:hover .nav-title { color: var(--primary); }
 .nv:hover {
   opacity: 1;
   border-color: currentColor;
+  transform: translateY(-1px);
 }
-/* 7-color nav system — resting state */
-.nv-blue { color: var(--blue); border-color: var(--blue-bd); background: var(--blue-light); }
-.nv-green { color: var(--primary); border-color: var(--primary-bd); background: var(--primary-light); }
-.nv-amber { color: #92400e; border-color: var(--amber-bd); background: var(--amber-light); }
-.nv-teal { color: var(--teal); border-color: var(--teal-bd); background: var(--teal-light); }
-.nv-purple { color: var(--purple); border-color: var(--purple-bd); background: var(--purple-light); }
-.nv-rose { color: #be185d; border-color: #fbb6ce; background: #fdf2f8; }
-.nv-indigo { color: #4338ca; border-color: #c7d2fe; background: #eef2ff; }
-.nv-sky { color: #0284c7; border-color: #bae6fd; background: #f0f9ff; }
-.nv-orange { color: #c2410c; border-color: #fed7aa; background: #fff7ed; }
-
-/* 7-color nav system — hover state */
+/* 7-color nav system — colors appear on hover only (muted at rest) */
 .nv-blue:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
 .nv-green:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
 .nv-amber:hover { background: var(--amber); color: #fff; border-color: var(--amber); }

@@ -838,6 +838,15 @@
 .j-label { font-family: var(--mono); font-size: .82rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text); margin-bottom: .1rem; }
 .j-text { font-size: .85rem; color: var(--text); line-height: 1.75; }
 .j-student { font-size: .82rem; color: var(--text-2); font-style: italic; margin-top: .2rem; line-height: 1.45; }
+
+/* Journey readability overrides */
+.journey-step .j-text { font-size: .82rem; line-height: 1.65; }
+.journey-step .j-label { font-size: .82rem; }
+.journey-step .j-student { font-size: .78rem; }
+.jch-broken ~ .journey-step .j-student { color: var(--red); font-weight: 500; font-size: .8rem; }
+.journey-step [style*="primary-light"] { font-size: .75rem; padding: .4rem .6rem; border-left: 3px solid var(--primary); }
+.journey-cols [style*="font-size:.55rem"] { font-size: .65rem; }
+
 .jt-btn { padding: .4rem .85rem; border-radius: 6px; border: none; background: transparent; font-family: var(--mono); font-size: .62rem; font-weight: 500; color: var(--text-3); cursor: pointer; transition: all .15s; }
 .jt-btn.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,.08); font-weight: 700; }
 #journeyBody { transition: opacity .2s ease, transform .2s ease; }
