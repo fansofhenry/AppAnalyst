@@ -1,0 +1,75 @@
+/* ═══════════════════════════════════════════════════════
+   TOKENS — Design system custom properties
+   Single canonical :root block (merged from 4 sources)
+   Last-defined value wins, all !important removed
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Warm neutral palette (final canonical values) ── */
+  --bg: #FAFAF8;
+  --bg-2: #F5F4F1;
+  --bg-3: #EDEBE7;
+  --surface: #FFFFFF;
+  --surface-2: #FAF9F7;
+  --border: #E2E0DA;
+  --border-2: #D1CEC6;
+  --text: #1A1815;
+  --text-2: #4E4B46;
+  --text-3: #7A766F;
+
+  /* ── Primary — Teal-green ── */
+  --primary: #0F766E;
+  --primary-light: #ECFDF5;
+  --primary-bd: #99F6E4;
+
+  /* ── Alert: Red ── */
+  --red: #B91C1C;
+  --red-light: #FEF2F2;
+  --red-bd: #FECACA;
+
+  /* ── Alert: Amber ── */
+  --amber: #A16207;
+  --amber-light: #FEFCE8;
+  --amber-bd: #FDE68A;
+
+  /* ── Alert: Blue ── */
+  --blue: #1D4ED8;
+  --blue-light: #EFF6FF;
+  --blue-bd: #BFDBFE;
+
+  /* ── Accent: Purple ── */
+  --purple: #6D28D9;
+  --purple-light: #F5F3FF;
+  --purple-bd: #C4B5FD;
+
+  /* ── Accent: Teal ── */
+  --teal: #0F766E;
+  --teal-light: #F0FDFA;
+  --teal-bd: #99F6E4;
+
+  /* ── Typography ── */
+  --display: 'Newsreader', serif;
+  --body: 'Instrument Sans', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+
+  /* ── Type scale ── */
+  --fs-xs: .65rem;
+  --fs-sm: .75rem;
+  --fs-base: .85rem;
+  --fs-md: .95rem;
+  --fs-lg: 1.1rem;
+
+  /* ── Radii ── */
+  --r: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+
+  /* ── Shadows ── */
+  --shadow: 0 1px 2px rgba(0,0,0,.04), 0 1px 3px rgba(0,0,0,.03);
+  --shadow-md: 0 2px 4px rgba(0,0,0,.03), 0 4px 16px rgba(0,0,0,.04);
+  --shadow-lg: 0 4px 6px rgba(0,0,0,.02), 0 12px 40px rgba(0,0,0,.06);
+  --shadow-xl: 0 8px 16px rgba(0,0,0,.03), 0 24px 64px rgba(0,0,0,.07);
+
+  /* ── Layout ── */
+  --max-w: 1060px;
+}
