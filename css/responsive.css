@@ -152,6 +152,13 @@
   /* KB layout stacks */
   .kb-layout { grid-template-columns: 1fr; }
 
+  /* Enhancement responsive stacking */
+  .pao-strip { grid-template-columns: 1fr; gap: .2rem; }
+  .pao-arrow { display: none; }
+  .tb-row { grid-template-columns: 1fr; }
+  .tb-arrow { padding: .25rem 0; font-size: .8rem; }
+  .tone-note::after { left: 0; transform: translateX(0); width: 180px; }
+
   /* Navigation elements */
   .progress-dots { display: none; }
   .back-to-top { width: 36px; height: 36px; font-size: .85rem; bottom: .75rem; right: .75rem; }

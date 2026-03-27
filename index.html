@@ -217,6 +217,20 @@
         <div class="info-stat"><div class="info-stat-num" style="color:var(--purple)">2</div><div class="info-stat-label">Course limit per term</div></div>
       </div>
 
+      <div class="translation-bridge">
+        <div class="tb-header"><span style="width:6px;height:6px;border-radius:50%;background:var(--purple)"></span> Same data, two audiences</div>
+        <div class="tb-row">
+          <div class="tb-col tb-col-left"><div class="tb-col-label">Internal / Analyst</div>AER queue depth exceeded SLA threshold 14 times. 78% correlated with Ethos token refresh failures at 7 Banner colleges.</div>
+          <div class="tb-arrow">→</div>
+          <div class="tb-col tb-col-right"><div class="tb-col-label">Board / VP</div>Our cross-enrollment system experienced intermittent delays affecting ~340 students. Root cause identified. Automated monitoring now alerts us 72 hours before recurrence.</div>
+        </div>
+        <div class="tb-row">
+          <div class="tb-col tb-col-left"><div class="tb-col-label">Internal / Analyst</div>FA Dashboard integration pending for 23 Ethos/Colleague colleges. Manual email workflow adds ~2.5 hrs/ticket.</div>
+          <div class="tb-arrow">→</div>
+          <div class="tb-col tb-col-right"><div class="tb-col-label">Board / VP</div>Financial aid processing is fully automated at 55 colleges. 23 on next phase, expected Fall 2026. Students at all colleges receive aid — the processing time differs.</div>
+        </div>
+      </div>
+
       <div style="margin-top:1rem;padding:.75rem 1rem;border:1px solid var(--primary-bd);background:var(--primary-light);border-radius:var(--r-lg)">
         <div style="font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);margin-bottom:.4rem">What 2,100% growth means for the support team</div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem">
@@ -333,6 +347,15 @@
         <div class="rb-title">✓ Incident Resolved</div>
         <div class="rb-text"><strong>Sacramento City College</strong> — Campus IT regenerated Ethos token. 47 AER records confirmed transmitted. Student access verified in Canvas. KB article drafted. Ticket CVC-4821 closed.</div>
       </div>
+      <!-- Systemic change banner — appears after resolution -->
+      <div class="systemic-banner" id="systemicBanner">
+        <div class="sb-header">What Changes Systemically</div>
+        <div class="sb-items">
+          <div class="sb-item"><span class="sb-type sb-prevention">Prevention</span><div class="sb-text">Automated token-expiration monitoring alerts CVC team 72 hours before any Ethos token expires.</div></div>
+          <div class="sb-item"><span class="sb-type sb-scale">Scale</span><div class="sb-text">KB article enables all 7 Banner Ethos colleges to self-service token refresh without opening a ticket.</div></div>
+          <div class="sb-item"><span class="sb-type sb-compounding">Compounding</span><div class="sb-text">Pattern data feeds Intelligence section. Next quarter shows auth ticket volume declining — proof the fix worked.</div></div>
+        </div>
+      </div>
     </div>
   </div>
 </div></section>
@@ -392,11 +415,11 @@
       <div style="font-family:var(--mono);font-size:.52rem;color:var(--text-3);margin-left:auto">14:22 PST</div>
     </div>
     <div class="msg-grid">
-      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--teal-light)">🎓</div><div class="msg-to">To the Student</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Your MATH 1A enrollment — update</div><div class="msg-body">We’re aware your MATH 1A section isn’t showing in Canvas yet. This is a sync issue between your home college and the teaching college — <strong>not a problem with your enrollment.</strong> Your seat is secure. We expect this to be resolved within <span class="msg-highlight">2–4 hours</span>. No action needed on your end.</div></div>
-      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--purple-light)">🖥</div><div class="msg-to">To Campus IT (Teaching College)</div><div class="msg-channel">ServiceNow</div></div><div class="msg-body">AER for CCCID <strong>0012847593</strong> transmitted from Chabot at 14:22 PST but Canvas roster for MATH-1A-001 does not reflect enrollment. Ethos token at home college returned <span class="msg-warn">401 invalid_grant</span>. Can you verify whether the enrollment record exists in your Banner instance?</div></div>
-      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">📋</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Cross-enrollment sync — student enrollments confirmed, Canvas delay expected &lt;4hr</div><div class="msg-body">Quick update on the cross-enrollment sync issue. <strong>The student’s enrollment is confirmed</strong> — the delay is in how the data reaches Canvas. If students contact your office, you can confirm their enrollment is valid. Happy to provide a written summary if this needs to go to your VP.</div></div>
+      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--teal-light)">🎓</div><div class="msg-to">To the Student</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Your MATH 1A enrollment — update</div><div class="msg-body">We’re aware your MATH 1A section isn’t showing in Canvas yet. This is a sync issue between your home college and the teaching college — <strong>not a problem with your enrollment.</strong> <span class="tone-note" data-tip="Reassure first. Student doesn't need to understand OAuth — they need to know their seat is safe.">Why this tone</span> Your seat is secure. We expect this to be resolved within <span class="msg-highlight">2–4 hours</span>. No action needed on your end.</div></div>
+      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--purple-light)">🖥</div><div class="msg-to">To Campus IT (Teaching College)</div><div class="msg-channel">ServiceNow</div></div><div class="msg-body">AER for CCCID <strong>0012847593</strong> transmitted from Chabot at 14:22 PST but Canvas roster for MATH-1A-001 does not reflect enrollment. Ethos token at home college returned <span class="msg-warn">401 invalid_grant</span>. Can you verify whether the enrollment record exists in your Banner instance? <span class="tone-note" data-tip="Asks a question, not a demand. Positions CVC as collaborator, not authority.">Why a question</span></div></div>
+      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">📋</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Cross-enrollment sync — student enrollments confirmed, Canvas delay expected &lt;4hr</div><div class="msg-body">Quick update on the cross-enrollment sync issue. <strong>The student’s enrollment is confirmed</strong> — the delay is in how the data reaches Canvas. <span class="tone-note" data-tip="Avoids ‘your system failed.’ Names the problem without assigning blame.">Why this framing</span> If students contact your office, you can confirm their enrollment is valid. Happy to provide a written summary if this needs to go to your VP.</div></div>
       <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--blue-light)">⚙</div><div class="msg-to">To CVC Internal Team</div><div class="msg-channel">Slack</div></div><div class="msg-body"><strong>Scope:</strong> 47 AER records pending in Chabot → De Anza queue since 02:00 PST. Root cause: Ethos Open Authorization (OAuth2) token expired, <span class="msg-warn">invalid_grant</span> on refresh. <strong>Action:</strong> Token regenerated. Queue flush in progress. Knowledge Base (KB) article drafted.</div></div>
-      <div class="msg-preview msg-board"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--red-light)">📊</div><div class="msg-to">Board Brief (via Vice Chancellor)</div><div class="msg-channel">Quarterly ETS Report</div></div><div class="msg-body"><strong>Situation:</strong> During Fall 2025 peak registration, an authentication failure between the CVC Exchange and 7 Banner colleges caused enrollment sync delays affecting approximately <span class="msg-highlight">340 students</span> across 2 consecutive terms.<br><br><strong>Student Impact:</strong> 47 students experienced 4–12 hour delays in Canvas course access. 12 required manual intervention near the add deadline. Zero students lost enrollment; all resolved within SLA.<br><br><strong>Equity note:</strong> Disproportionate impact on FA-dependent students — the sync delay coincided with auto-drop-for-nonpayment windows at 3 colleges. Students relying on Consortium Agreements (3–5 day processing) were at highest risk.<br><br><strong>Root cause (plain language):</strong> An expired security credential between two systems. Analogous to a building key card that stopped working — the door is fine, the person is authorized, but the reader rejects them until IT reissues the credential.<br><br><strong>Remediation:</strong> Credential regenerated. Automated expiration monitoring added (alerts 72 hours before expiration). KB article published.<br><br><strong>Recommendation:</strong> No board action required. Status update recommended in quarterly ETS report under "CVC Exchange Reliability."</div></div>
+      <div class="msg-preview msg-board"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--red-light)">📊</div><div class="msg-to">Board Brief (via Vice Chancellor)</div><div class="msg-channel">Quarterly ETS Report</div></div><div class="msg-body"><strong>Situation:</strong> During Fall 2025 peak registration, an authentication failure between the CVC Exchange and 7 Banner colleges caused enrollment sync delays affecting approximately <span class="msg-highlight">340 students</span> across 2 consecutive terms.<br><br><strong>Student Impact:</strong> 47 students experienced 4–12 hour delays in Canvas course access. 12 required manual intervention near the add deadline. Zero students lost enrollment; all resolved within SLA.<br><br><strong>Equity note:</strong> Disproportionate impact on FA-dependent students — the sync delay coincided with auto-drop-for-nonpayment windows at 3 colleges. Students relying on Consortium Agreements (3–5 day processing) were at highest risk.<br><br><strong>Root cause (plain language):</strong> An expired security credential between two systems. Analogous to a building key card that stopped working — the door is fine, the person is authorized, but the reader rejects them until IT reissues the credential. <span class="tone-note" data-tip="Board members aren't technical. The 'key card' analogy makes the failure legible without jargon.">Why an analogy</span><br><br><strong>Remediation:</strong> Credential regenerated. Automated expiration monitoring added (alerts 72 hours before expiration). KB article published.<br><br><strong>Recommendation:</strong> No board action required. Status update recommended in quarterly ETS report under "CVC Exchange Reliability."</div></div>
     </div>
   </div>
 </section>
@@ -432,6 +455,15 @@
             <div class="esc-row"><div class="esc-label">Who to contact</div>Senior analyst + supervisor simultaneously. If Ethos/Ellucian: vendor support with case number. Campus IT leads at affected colleges.</div>
             <div class="esc-row"><div class="esc-label">What you need first</div>Which colleges. How many students (check monitor). Error codes from tracer. When it started (check logs).</div>
             <div class="esc-row"><div class="esc-label">Comms</div>All 4 audiences within 30 minutes. Student-facing message first.</div>
+            <div class="esc-root-layer">
+              <div class="esc-root-label">Root Layer</div>
+              <div class="esc-root-pills">
+                <span class="esc-root-pill erp-vendor">Vendor</span>
+                <span class="esc-root-pill erp-campus">Campus IT</span>
+                <span class="esc-root-pill erp-cvc">CVC Infrastructure</span>
+              </div>
+              <div class="esc-root-note">Multi-college failures are usually vendor or CVC infrastructure. <strong>Name the layer before assigning blame.</strong></div>
+            </div>
           </div>
         </div>
         <div class="esc-card esc-p2 esc-active">
@@ -442,6 +474,14 @@
             <div class="esc-row"><div class="esc-label">Who to contact</div>Campus IT at the affected college. Senior analyst if root cause is unclear after 30 min of investigation.</div>
             <div class="esc-row"><div class="esc-label">What you need first</div>SIS type. Specific error from tracer. Whether it affects enrollment, sync, or Canvas only. Approximate student count.</div>
             <div class="esc-row"><div class="esc-label">Comms</div>Internal Slack update. Campus IT email with diagnostic detail. Student notice only if enrollment is blocked.</div>
+            <div class="esc-root-layer">
+              <div class="esc-root-label">Root Layer</div>
+              <div class="esc-root-pills">
+                <span class="esc-root-pill erp-campus erp-highlight">Campus IT</span>
+                <span class="esc-root-pill erp-vendor">Vendor (Ethos token)</span>
+              </div>
+              <div class="esc-root-note">CVC's role is to <strong>diagnose and coordinate</strong>, not to own the fix.</div>
+            </div>
           </div>
         </div>
         <div class="esc-card esc-p3">
@@ -452,6 +492,14 @@
             <div class="esc-row"><div class="esc-label">Who to contact</div>Handle directly. Escalate to supervisor only if the student has a deadline within 48 hours that will be missed.</div>
             <div class="esc-row"><div class="esc-label">What you need first</div>CCCID. Home college + teaching college. Specific error or symptom. Has the student already contacted either college?</div>
             <div class="esc-row"><div class="esc-label">Comms</div>Direct student response. KB article link if one exists. Document the resolution for pattern tracking.</div>
+            <div class="esc-root-layer">
+              <div class="esc-root-label">Root Layer</div>
+              <div class="esc-root-pills">
+                <span class="esc-root-pill erp-student">Student Action</span>
+                <span class="esc-root-pill erp-gap">System Gap</span>
+              </div>
+              <div class="esc-root-note">P3 tickets are often not failures — they're design gaps. <strong>Document the pattern; don't apologize for the architecture.</strong></div>
+            </div>
           </div>
         </div>
       </div>
@@ -780,9 +828,9 @@
       <div class="footer-goals">
         <div class="footer-goals-title">What I'd build by month 6</div>
         <div class="footer-goals-list">
-          <span>A repeat-college intervention program that reduces ticket volume from the top 12 colleges by 30%</span>
-          <span>A Board-ready reporting template the team actually uses for quarterly updates</span>
-          <span>A proactive outreach calendar that reaches FA offices before each drop deadline — not after</span>
+          <span>A repeat-college intervention program that reduces ticket volume from the top 12 colleges by 30%<br><a class="evidence-link" onclick="document.getElementById('patterns').scrollIntoView({behavior:'smooth'})">See: Pattern Intelligence, Section 6</a></span>
+          <span>A Board-ready reporting template the team actually uses for quarterly updates<br><a class="evidence-link" onclick="document.getElementById('cvcData').scrollIntoView({behavior:'smooth'})">See: Translation Bridge, Section 2</a> <a class="evidence-link" onclick="document.getElementById('comms').scrollIntoView({behavior:'smooth'})">+ Board Brief, Section 7</a></span>
+          <span>A proactive outreach calendar that reaches FA offices before each drop deadline — not after<br><a class="evidence-link" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})">See: Outreach Planner, Section 8</a></span>
         </div>
       </div>
       <div class="footer-cta-wrap">

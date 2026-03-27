@@ -236,6 +236,12 @@ function deployFix(btn) {
       if (banner) banner.classList.add('rb-show');
     }, 400);
 
+    // Show systemic banner after resolution
+    setTimeout(function() {
+      var sysBanner = document.getElementById('systemicBanner');
+      if (sysBanner) sysBanner.classList.add('sb-show');
+    }, 1600);
+
     // Switch journey to "Successful Only"
     setTimeout(function() {
       var okBtn = null;
