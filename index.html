@@ -62,7 +62,7 @@
     <!-- IMPROVEMENT: Candidate identity above h1 — committee sees WHO before WHAT -->
     <div class="h-candidate">Henry Fan <span class="h-candidate-role">Application Support Analyst I</span></div>
     <div class="h-badge"><span class="dot"></span> CVC-OEI · Foothill–De Anza CCD</div>
-    <h1>This is how I'd support <em>the Exchange</em> from day one at <em>FHDA.</em></h1>
+    <h1>This is how I'd monitor, diagnose, and strengthen <em>the Exchange</em> from day one at <em>FHDA.</em></h1>
     <p class="h-desc">115+ colleges, four student information system (SIS) platforms, 33,000 cross-enrollments per year. When the data flow breaks, a student doesn't see their course in Canvas.</p>
 
     <!-- UX: Stats immediately after description — proof of scale before asking them to act -->
@@ -126,7 +126,7 @@
         <div style="flex:1;min-width:200px">
           <div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:.4rem">Why I Built This</div>
           <div style="font-size:.88rem;color:var(--text);line-height:1.8">
-            Each section below addresses a real part of the job: monitoring, diagnosis, escalation, documentation, and barrier analysis.
+            Each section below addresses a real part of the job: monitoring, diagnosis, escalation, documentation, and barrier analysis. This role sits inside FHDA's ETS department but serves 116 colleges statewide — every decision has to work for both the district that employs the team and the system that depends on it.
           </div>
           <!-- IMPROVEMENT: Credential tags — role-specific experience -->
           <div style="font-size:.78rem;color:var(--text-2);line-height:1.8;margin-top:.75rem">
@@ -149,7 +149,7 @@
 <section class="sec fu" id="lookup" role="region" aria-label="College Lookup"><div class="wrap">
   <div class="eyebrow" style="color:var(--blue)"><span class="sec-num" style="background:var(--blue)">1</span>Lookup</div>
   <h2>Look up any college in <em>the Exchange</em></h2>
-  <p class="sec-desc">Type a college name or system type. <strong>Foothill and De Anza are pinned to the top.</strong> Instant reference with financial aid status, sign-on health, and Exchange integration notes.</p>
+  <p class="sec-desc">Type a college name or system type. <strong>Foothill and De Anza are pinned to the top.</strong> A systemwide feature launch is never actually systemwide — it's 116 individual launches at colleges with different SIS platforms, IT staff levels, and student populations. Filter by FA status to see who needs extra support.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Lookup</span></div><span class="tool-hint">Click any card for analyst notes</span><span class="tool-bar-title">College Lookup · 31 Colleges · Searchable</span></div>
     <div class="tool-body">
@@ -281,7 +281,7 @@
 <section class="sec sec-alt fu" id="monitor" role="region" aria-label="System Monitor"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:var(--amber)">4</span>Monitor</div>
   <h2>Spot the failure <em>before the tickets arrive</em></h2>
-  <p class="sec-desc">Which of the 115+ Exchange colleges are healthy, degraded, or failing right now? <strong>Foothill and De Anza status is highlighted.</strong> The view that prevents the 9 AM scramble.</p>
+  <p class="sec-desc">Which of the 115+ Exchange colleges are healthy, degraded, or failing right now? <strong>Foothill and De Anza status is highlighted.</strong> The most dangerous failures are the ones nobody reports — a college with zero tickets and a degraded SIS isn't a success story, it's a silent failure. This monitor surfaces both.</p>
   <div class="tool-frame">
     <div style="position:relative"><div class="live-alert" id="liveAlert"><div class="live-alert-title">New Alert</div><div class="live-alert-body"></div><div class="live-alert-time"></div></div></div>
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><span class="tool-hint">Click any college for details</span><div class="tool-bar-title">Morning Monitor · Weekly Pulse · College Health Status</div></div>
@@ -317,7 +317,7 @@
 <section class="sec fu" id="tracer" role="region" aria-label="Incident Tracer"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:#be185d">5</span>Diagnostics</div>
   <h2>Missing course reported — <em>where do you look?</em></h2>
-  <p class="sec-desc">Layer-by-layer diagnosis of a Banner Ethos failure. <strong>FHDA runs Banner Direct — a simpler path, but the same debugging method applies.</strong></p>
+  <p class="sec-desc">Layer-by-layer diagnosis of a Banner Ethos failure. <strong>FHDA runs Banner Direct — a simpler path, but the same debugging method applies.</strong> The student doesn't care whose system failed. A student with an add deadline tomorrow needs resolution, not a jurisdiction debate.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><div class="tool-bar-title">Incident Trace · Sacramento City · Ethos Token</div></div>
     <div class="tool-body">
@@ -341,7 +341,7 @@
 <section class="sec sec-alt fu" id="patterns"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:#c2410c">6</span>Intelligence</div>
   <h2>Is this one ticket — or <em>twenty waiting to happen?</em></h2>
-  <p class="sec-desc">Ticket data mapped to the CVC academic calendar — registration, census, add/drop, FA disbursement. <strong>One ticket — or a pattern?</strong></p>
+  <p class="sec-desc">Ticket data mapped to the CVC academic calendar. If the same 10 colleges generate 60% of tickets, <strong>that's not a support problem — it's an onboarding gap, a vendor dependency, or a calendar-driven pattern.</strong> Each one has a different intervention.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><span class="tool-hint">Click insight cards to highlight chart</span><div class="tool-bar-title">Ticket Intelligence · 12-Week Calendar</div></div>
     <div class="tool-body">
@@ -361,7 +361,7 @@
 <section class="sec fu" id="kb"><div class="wrap">
   <div class="eyebrow">Documentation</div>
   <h2>If the fix isn’t documented, it didn’t <em>scale.</em></h2>
-  <p class="sec-desc">Four common fix types — integration, authentication, sync, and onboarding. <strong>Each template is editable and copy-ready.</strong></p>
+  <p class="sec-desc">Four common fix types — integration, authentication, sync, and onboarding. <strong>Each template is editable and copy-ready.</strong> A college with limited IT staff shouldn’t need to call CVC for the same issue twice — the KB article should answer it the first time.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation</span></div><span class="tool-hint">Select a template, then edit</span><div class="tool-bar-title">KB Builder · 4 Templates</div></div>
     <div class="tool-body" style="padding:0">
@@ -383,8 +383,8 @@
 <section class="sec fu" id="comms" role="region" aria-label="Incident Communication">
   <div class="wrap">
     <div class="eyebrow"><span class="sec-num" style="background:#4338ca">7</span>Response</div>
-    <h2>The same failure, written <em>four different ways</em></h2>
-    <p class="sec-desc">Same Ethos token failure — written for the student, campus IT, the registrar, and your internal team. <strong>Each one is copy-ready.</strong></p>
+    <h2>The same failure, written <em>five different ways</em></h2>
+    <p class="sec-desc">The registrar needs reassurance. Campus IT needs the error code. The student needs to know their seat is safe. The internal team needs scope. The Board needs student impact, not jargon. <strong>Getting the audience wrong costs trust. Getting it right costs nothing.</strong></p>
   <div style="display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .6rem;border-radius:100px;background:var(--amber-light);border:1px solid var(--amber-bd);font-family:var(--mono);font-size:.5rem;color:var(--amber);margin-bottom:1rem"><span style="width:5px;height:5px;border-radius:50%;background:var(--amber)"></span>Continues the Sacramento City scenario from Monitor → Diagnostics</div>
     <div style="padding:.55rem .85rem;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
       <div style="display:flex;align-items:center;gap:.35rem"><span style="width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0"></span><span style="font-family:var(--mono);font-size:.55rem;font-weight:600;color:var(--amber)">P2 ACTIVE</span></div>
@@ -396,6 +396,7 @@
       <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--purple-light)">🖥</div><div class="msg-to">To Campus IT (Teaching College)</div><div class="msg-channel">ServiceNow</div></div><div class="msg-body">AER for CCCID <strong>0012847593</strong> transmitted from Chabot at 14:22 PST but Canvas roster for MATH-1A-001 does not reflect enrollment. Ethos token at home college returned <span class="msg-warn">401 invalid_grant</span>. Can you verify whether the enrollment record exists in your Banner instance?</div></div>
       <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">📋</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Cross-enrollment sync — student enrollments confirmed, Canvas delay expected &lt;4hr</div><div class="msg-body">Quick update on the cross-enrollment sync issue. <strong>The student’s enrollment is confirmed</strong> — the delay is in how the data reaches Canvas. If students contact your office, you can confirm their enrollment is valid. Happy to provide a written summary if this needs to go to your VP.</div></div>
       <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--blue-light)">⚙</div><div class="msg-to">To CVC Internal Team</div><div class="msg-channel">Slack</div></div><div class="msg-body"><strong>Scope:</strong> 47 AER records pending in Chabot → De Anza queue since 02:00 PST. Root cause: Ethos Open Authorization (OAuth2) token expired, <span class="msg-warn">invalid_grant</span> on refresh. <strong>Action:</strong> Token regenerated. Queue flush in progress. Knowledge Base (KB) article drafted.</div></div>
+      <div class="msg-preview msg-board"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--red-light)">📊</div><div class="msg-to">Board Brief (via Vice Chancellor)</div><div class="msg-channel">Quarterly ETS Report</div></div><div class="msg-body"><strong>Situation:</strong> During Fall 2025 peak registration, an authentication failure between the CVC Exchange and 7 Banner colleges caused enrollment sync delays affecting approximately <span class="msg-highlight">340 students</span> across 2 consecutive terms.<br><br><strong>Student Impact:</strong> 47 students experienced 4–12 hour delays in Canvas course access. 12 required manual intervention near the add deadline. Zero students lost enrollment; all resolved within SLA.<br><br><strong>Equity note:</strong> Disproportionate impact on FA-dependent students — the sync delay coincided with auto-drop-for-nonpayment windows at 3 colleges. Students relying on Consortium Agreements (3–5 day processing) were at highest risk.<br><br><strong>Root cause (plain language):</strong> An expired security credential between two systems. Analogous to a building key card that stopped working — the door is fine, the person is authorized, but the reader rejects them until IT reissues the credential.<br><br><strong>Remediation:</strong> Credential regenerated. Automated expiration monitoring added (alerts 72 hours before expiration). KB article published.<br><br><strong>Recommendation:</strong> No board action required. Status update recommended in quarterly ETS report under "CVC Exchange Reliability."</div></div>
     </div>
   </div>
 </section>
@@ -413,7 +414,7 @@
 <section class="sec sec-alt fu" id="escalation" role="region" aria-label="Escalation Matrix"><div class="wrap">
   <div class="eyebrow">Escalation</div>
   <h2>How do you know when to <em>own it</em> vs <em>escalate it?</em></h2>
-  <p class="sec-desc">P1, P2, or P3? Ellucian, campus IT, the CCC Tech Center, or OEI leadership — <strong>who to contact, how fast, and what to bring.</strong></p>
+  <p class="sec-desc">P1, P2, or P3? Ellucian, campus IT, the CCC Tech Center, or OEI leadership — <strong>who to contact, how fast, and what to bring.</strong> Sometimes the root cause is the campus's own policy, not the Exchange. The job is to fix the student's problem without making the registrar wrong.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Reference</span></div><span class="tool-hint">Click P1, P2, or P3 to compare</span><span class="tool-bar-title">Escalation Decision Matrix</span></div>
     <div class="tool-body">
@@ -488,7 +489,7 @@
 <section class="sec sec-alt fu" id="outreach"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:var(--teal)">8</span>Outreach</div>
   <h2>What if course sharing wasn’t a <em>last resort?</em></h2>
-  <p class="sec-desc">The Exchange works best when students hear about it <strong>before</strong> they need it — from counselors, peer ambassadors, FA offices, and social media. <strong>17 triggers across the academic year, targeted to the right audience at the right moment.</strong></p>
+  <p class="sec-desc">A small rural college with limited IT staff shouldn’t learn about an onboarding gap from a student complaint. <strong>17 triggers across the academic year</strong> — targeted to the right audience at the right moment — from counselors, peer ambassadors, FA offices, and social media. Proactive outreach without creating unnecessary alarm.</p>
   <div style="display:flex;gap:.5rem;margin-top:.5rem"><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="font-family:var(--mono);font-size:.5rem;color:var(--text-3);white-space:nowrap;align-self:center">7 of 7 months covered</span></div>
   <div style="padding:.6rem .85rem;border:1px solid var(--teal-bd);background:var(--teal-light);border-radius:var(--r);margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:.5rem">
     <span style="font-size:.85rem;flex-shrink:0">💬</span>
@@ -745,7 +746,7 @@
 <section class="sec fu" id="correlator"><div class="wrap">
   <div class="eyebrow eyebrow-red">Correlation</div>
   <h2>How much of the ticket queue is <em class="red">preventable?</em></h2>
-  <p class="sec-desc">If most Exchange support tickets come from the same three barriers — <strong>fix the barriers, not just the tickets.</strong></p>
+  <p class="sec-desc">If most Exchange support tickets come from the same three barriers — <strong>fix the barriers, not just the tickets.</strong> These systems are invisible when they work and devastating when they don't. The students who get hurt first are the ones with the fewest alternatives.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Correlation</span></div><span class="tool-bar-title">Ticket-to-Barrier Correlator</span></div>
     <div class="tool-body" id="corrBody"></div>
@@ -771,11 +772,19 @@
 <footer class="site-footer" role="contentinfo">
   <div class="wrap">
     <div class="footer-inner">
-      <div class="footer-mission">Ready to support the CVC Exchange at FHDA</div>
+      <div class="footer-mission">Ready to monitor, diagnose, and strengthen the CVC Exchange at FHDA</div>
       <div class="footer-role">
         <strong>Henry Fan</strong> &middot; Application Support Analyst I &middot; <em>CVC-OEI / Foothill&ndash;De Anza CCD</em>
       </div>
       <div class="footer-tagline">Every tool on this page maps to a real challenge from the job description. I built them because I've been on the student side of these problems.</div>
+      <div class="footer-goals">
+        <div class="footer-goals-title">What I'd build by month 6</div>
+        <div class="footer-goals-list">
+          <span>A repeat-college intervention program that reduces ticket volume from the top 12 colleges by 30%</span>
+          <span>A Board-ready reporting template the team actually uses for quarterly updates</span>
+          <span>A proactive outreach calendar that reaches FA offices before each drop deadline — not after</span>
+        </div>
+      </div>
       <div class="footer-cta-wrap">
         <a class="footer-cta" href="mailto:fanh@smccd.edu?subject=CVC-OEI Application Support — Henry Fan">Let's walk through this together</a>
       </div>
