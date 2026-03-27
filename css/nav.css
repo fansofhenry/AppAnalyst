@@ -312,6 +312,7 @@ a.nav-brand:hover .nav-title { color: var(--primary); }
 .tc-indigo .toc-num { background: #4338ca; color: #fff; border-color: #4338ca; }
 .tc-sky .toc-num { background: #0284c7; color: #fff; border-color: #0284c7; }
 .tc-orange .toc-num { background: #c2410c; color: #fff; border-color: #c2410c; }
+.tc-red .toc-num { background: var(--red); color: #fff; border-color: var(--red); }
 
 /* ── Progress Dots ── */
 .progress-dots {
