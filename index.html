@@ -17,6 +17,9 @@
 <meta property="og:title" content="Henry Fan · CVC-OEI Application Support Analyst I">
 <meta property="og:description" content="Interactive portfolio: 9 tools demonstrating monitoring, diagnosis, escalation, and barrier analysis for the CVC Exchange at Foothill–De Anza CCD.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://fansofhenry.github.io/AppAnalyst/">
+<link rel="canonical" href="https://fansofhenry.github.io/AppAnalyst/">
+<meta name="author" content="Henry Fan">
 <meta name="theme-color" content="#0F766E">
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
@@ -162,6 +165,7 @@
           <button class="lookup-filter" onclick="filterColleges('manual',this)" style="border-color:var(--red)">FA Manual</button>
         </div>
         <div class="lookup-input-wrap">
+          <label for="collegeLookup" class="sr-only">Search colleges by name, district, or system type</label>
           <input class="lookup-input" id="collegeLookup" type="text" placeholder="Search by name, district, or system type..." oninput="searchColleges(this.value)" autocomplete="off">
           <!-- ENHANCEMENT: Clear button — obvious affordance to reset search -->
           <button class="lookup-clear" id="lookupClear" onclick="clearSearch()" title="Clear search" aria-label="Clear search">×</button>
