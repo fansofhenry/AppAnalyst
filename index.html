@@ -417,12 +417,12 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 .sc-step:first-child{border-radius:var(--r-lg) 0 0 var(--r-lg)}.sc-step:last-child{border-radius:0 var(--r-lg) var(--r-lg) 0}
 .sc-step:not(:last-child){border-right:none}
 .sc-step:not(:last-child)::after{content:'';position:absolute;right:-1px;top:50%;transform:translateY(-50%);border:6px solid transparent;border-left:6px solid var(--border);z-index:2}
-.sc-step:hover{transform:translateY(-3px);box-shadow:0 4px 16px rgba(0,0,0,.06);background:var(--primary-light);border-color:var(--primary-bd)}
-.sc-step:hover::after{border-left-color:var(--primary-bd)}
-.sc-step-num{font-family:var(--mono);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.15rem}
+.sc-step:hover{transform:translateY(-3px);box-shadow:0 4px 16px rgba(0,0,0,.06);border-color:var(--sc-color,var(--primary-bd))}
+.sc-step:hover::after{border-left-color:var(--sc-color,var(--primary-bd))}
+.sc-step-num{font-family:var(--mono);font-size:.62rem;font-weight:700;letter-spacing:.05em;margin-bottom:.25rem;width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1}
 .sc-step-tool{font-weight:600;font-size:.72rem;color:var(--text);margin-bottom:.1rem}
 .sc-step-action{font-size:.6rem;color:var(--text-2);line-height:1.4}
-.sc-step-link{font-family:var(--mono);font-size:.52rem;color:var(--primary);margin-top:.25rem;display:block}
+.sc-step-link{font-family:var(--mono);font-size:.52rem;margin-top:.25rem;display:block;font-weight:600}
 
 /* SECTION NUMBERS */
 .sec-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-family:var(--mono);font-size:.6rem;font-weight:600;margin-right:.5rem;flex-shrink:0}
@@ -444,7 +444,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 .cal-label{font-size:.52rem;color:var(--text-3);line-height:1.2}
 .cal-dots{display:flex;gap:2px;justify-content:center;margin-top:.3rem}
 .cal-dot{width:5px;height:5px;border-radius:50%}
-.cd-green{background:var(--primary)}.cd-blue{background:var(--blue)}.cd-amber{background:var(--amber)}.cd-teal{background:var(--teal)}
+.cd-green{background:var(--primary)}.cd-blue{background:var(--blue)}.cd-amber{background:var(--amber)}.cd-teal{background:var(--teal)}.cd-purple{background:var(--purple)}.cd-rose{background:#be185d}
 .outreach-detail{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
 .od-header{padding:.75rem 1rem;background:var(--surface-2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem}
 .od-month{font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.2rem .5rem;border-radius:4px;background:var(--primary-light);color:var(--primary)}
@@ -454,11 +454,11 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center}
 @media(max-width:600px){.trigger-cards{grid-template-columns:1fr}}
 .trigger-card{border:1px solid var(--border);border-radius:var(--r);padding:.7rem .8rem;cursor:pointer;transition:all .25s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
 .trigger-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
-.tc-inreach::before{background:var(--primary)}.tc-outreach::before{background:var(--blue)}.tc-orientation::before{background:var(--teal)}.tc-intervention::before{background:var(--amber)}
+.tc-inreach::before{background:var(--primary)}.tc-outreach::before{background:var(--blue)}.tc-orientation::before{background:var(--teal)}.tc-intervention::before{background:var(--amber)}.tc-peer::before{background:var(--purple)}.tc-fa::before{background:#be185d}
 .trigger-card:hover{box-shadow:var(--shadow);border-color:var(--border-2);transform:translateY(-1px)}
 .trigger-card.tc-expanded{border-color:var(--primary-bd);background:var(--surface-2);transform:scale(1.01);box-shadow:0 4px 16px rgba(0,0,0,.06)}
 .tc-type{font-family:var(--mono);font-size:.52rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.15rem}
-.tc-inreach .tc-type{color:var(--primary)}.tc-outreach .tc-type{color:var(--blue)}.tc-orientation .tc-type{color:var(--teal)}.tc-intervention .tc-type{color:var(--amber)}
+.tc-inreach .tc-type{color:var(--primary)}.tc-outreach .tc-type{color:var(--blue)}.tc-orientation .tc-type{color:var(--teal)}.tc-intervention .tc-type{color:var(--amber)}.tc-peer .tc-type{color:var(--purple)}.tc-fa .tc-type{color:#be185d}
 .tc-title{font-weight:600;font-size:.78rem;color:var(--text);margin-bottom:.1rem}
 .tc-who{font-size:.65rem;color:var(--text-3)}
 .tc-detail{display:none;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--border)}
@@ -664,6 +664,8 @@ footer{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
 .tc-inreach .tc-type::before{background:var(--primary)}
 .tc-outreach .tc-type::before{background:var(--blue)}
 .tc-orientation .tc-type::before{background:var(--teal)}
+.tc-peer .tc-type::before{background:var(--purple)}
+.tc-fa .tc-type::before{background:#be185d}
 .tc-intervention .tc-type::before{background:var(--amber)}
 
 /* Calendar dot bounce on month hover */
@@ -1954,7 +1956,7 @@ body.theater-on .theater-badge{display:inline-flex}
 .theater-badge .tb-dot{width:6px;height:6px;border-radius:50%;background:#F59E0B;flex-shrink:0}
 
 /* ═══════════════════════════════════════════════════════
-   LIVE RESOLUTION — Deploy Fix & Flush Queue
+   LIVE RESOLUTION — Escalate & Coordinate
    ═══════════════════════════════════════════════════════ */
 
 .deploy-fix-btn{
@@ -2958,6 +2960,102 @@ footer{
 /* Page title update — shows current section in tab */
 /* (handled by JS below) */
 
+/* ═══════════════════════════════════════════════════════
+   INSIGHT CARDS — Category-matched colors
+   ═══════════════════════════════════════════════════════ */
+
+/* Category dot inside severity badge */
+.ic-cat-dot{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  margin-right:.3rem;vertical-align:middle;flex-shrink:0
+}
+
+/* "Click to highlight" action text — visible affordance */
+.ic-action{
+  font-family:var(--mono);font-size:.55rem;color:var(--text-3);
+  margin-top:.4rem;padding-top:.35rem;border-top:1px solid var(--border);
+  transition:all .15s;opacity:.5
+}
+.insight-card:hover .ic-action{opacity:1;color:var(--primary)}
+.insight-card.insight-active .ic-action{opacity:1;color:var(--primary);font-weight:600}
+
+/* Override old severity colors — now driven by inline style from JS */
+.ic-severity{border-radius:4px !important}
+
+
+/* ═══════════════════════════════════════════════════════
+   UNIVERSAL CLICKABLE AFFORDANCES
+   Make interactive elements obviously interactive
+   ═══════════════════════════════════════════════════════ */
+
+/* All expandable cards get a subtle "click" hint on hover */
+.b-card .b-head,
+.ai-card,
+.counsel-card,
+.esc-card,
+.insight-card,
+.lookup-card,
+.status-row,
+.trigger-card{
+  position:relative
+}
+
+/* Hover: left-border accent slides in on ALL clickable cards */
+.b-card:hover{border-left-color:var(--primary) !important}
+.ai-card:hover{border-left:3px solid var(--purple) !important}
+.counsel-card:hover{border-left:3px solid var(--teal) !important}
+.esc-card:hover{border-left:3px solid var(--amber) !important}
+.insight-card:hover{filter:brightness(.98)}
+.trigger-card:hover{border-left:3px solid var(--teal) !important}
+
+/* Expandable cards — "expand" chevron appears on hover */
+.ai-card::after,
+.counsel-card::after{
+  content:'▾';position:absolute;top:.75rem;right:.75rem;
+  font-family:var(--mono);font-size:.65rem;color:var(--text-3);
+  opacity:0;transition:opacity .15s
+}
+.ai-card:hover::after,
+.counsel-card:hover::after{opacity:.6}
+.ai-card.ai-expanded::after,
+.counsel-card.cc-open::after{content:'▴';opacity:.6;color:var(--primary)}
+
+/* Status rows — expand chevron already exists, make it more visible on hover */
+.status-row:hover .s-expand-icon{color:var(--primary) !important;opacity:1}
+.status-row .s-expand-icon{opacity:.4;transition:opacity .15s,color .15s}
+
+/* Copy buttons — more visible resting state */
+.msg-copy{
+  opacity:.6 !important;transition:all .15s !important
+}
+.msg-preview:hover .msg-copy{opacity:1 !important}
+
+/* Legend items — show they're toggleable */
+.legend-item{cursor:pointer;transition:all .15s;border-radius:4px;padding:.15rem .4rem !important}
+.legend-item:hover{background:var(--bg-2)}
+
+/* Filter tabs, journey tabs — active state ring */
+.filter-tab.active,.jt-btn.active,.ai-tab.active,.outreach-tab.active{
+  box-shadow:0 1px 4px rgba(0,0,0,.08) !important;
+  font-weight:700 !important
+}
+
+/* Quick action cards — hover arrow slides further */
+.qa-card:hover::after{transform:translateX(4px) !important}
+
+/* Flow nodes — pointer hand + "explore" shimmer */
+.f-node{cursor:pointer !important}
+.f-node::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  opacity:0;transition:opacity .2s;
+  background:radial-gradient(circle at center,rgba(255,255,255,.15),transparent 70%)
+}
+.f-node:hover::after{opacity:1}
+
+/* Calendar months in outreach — show they're clickable */
+.cal-month{cursor:pointer !important;transition:all .2s !important}
+.cal-month:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.06)}
+
 </style>
 </head>
 <body>
@@ -2979,7 +3077,7 @@ footer{
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0" aria-hidden="true"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Sections</button>
   <div class="a11y-toggle" id="a11yToggle" onclick="toggleA11y()" role="switch" aria-checked="false" aria-label="Toggle accessibility high-contrast mode" tabindex="0"><span class="a11y-icon" aria-hidden="true">♿</span><span class="a11y-label">Accessibility</span><div class="a11y-switch"></div></div>
     <div class="nav-links">
-    <a href="#why">Context</a><a href="#lookup" class="nv nv-blue"><span class="nav-num">1</span>Lookup</a><a href="#cvcData" class="nv nv-green"><span class="nav-num">2</span>Exchange</a><a href="#flow" class="nv nv-sky"><span class="nav-num">3</span>Architecture</a><a href="#monitor" class="nv nv-amber"><span class="nav-num">4</span>Monitor</a><a href="#tracer" class="nv nv-rose"><span class="nav-num">5</span>Diagnostics</a><a href="#patterns" class="nv nv-orange"><span class="nav-num">6</span>Intelligence</a><a href="#comms" class="nv nv-indigo"><span class="nav-num">7</span>Response</a><a href="#outreach" class="nv nv-teal"><span class="nav-num">8</span>Counselors</a><a href="#aiVision" class="nv nv-purple"><span class="nav-num">9</span>AI Vision</a><a href="#barriers" class="nav-barrier"><span class="nav-num">0</span>Barriers</a>
+    <a href="#why">Context</a><a href="#lookup" class="nv nv-blue"><span class="nav-num">1</span>Lookup</a><a href="#cvcData" class="nv nv-green"><span class="nav-num">2</span>Exchange</a><a href="#flow" class="nv nv-sky"><span class="nav-num">3</span>Architecture</a><a href="#monitor" class="nv nv-amber"><span class="nav-num">4</span>Monitor</a><a href="#tracer" class="nv nv-rose"><span class="nav-num">5</span>Diagnostics</a><a href="#patterns" class="nv nv-orange"><span class="nav-num">6</span>Intelligence</a><a href="#comms" class="nv nv-indigo"><span class="nav-num">7</span>Response</a><a href="#outreach" class="nv nv-teal"><span class="nav-num">8</span>Toolkit</a><a href="#aiVision" class="nv nv-purple"><span class="nav-num">9</span>AI Vision</a><a href="#barriers" class="nav-barrier"><span class="nav-num">0</span>Barriers</a>
   </div>
 </nav>
 
@@ -3148,7 +3246,7 @@ footer{
   <h2>Same enrollment — <em>working</em> vs <em style="color:var(--red)">breaks</em></h2>
   <p class="sec-desc">When the Exchange works, a student at Chabot takes MATH 1A at <strong>De Anza</strong> without thinking about it. When it breaks — <strong>the course vanishes from Canvas.</strong> Teal annotations show where prevention could have caught it.</p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Student View</span></div><span class="tool-hint">Toggle: working vs broken</span><span class="tool-bar-title">MATH 1A · Chabot → De Anza</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Student View</span></div><span class="tool-hint">Compare: working vs broken</span><span class="tool-bar-title">MATH 1A · Chabot → De Anza</span></div>
     <div class="tool-body" style="padding:0">
       <div style="display:flex;gap:2px;background:var(--bg-3);border-radius:var(--r);padding:2px;margin:.75rem .85rem 0;width:fit-content" id="journeyToggle">
         <button class="jt-btn" onclick="setJourney('compare',this)">Side by Side</button>
@@ -3165,7 +3263,7 @@ footer{
 <section class="sec fu" id="flow"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:#0284c7">3</span>Architecture</div>
   <h2>How student data flows — and <em>where it breaks</em></h2>
-  <p class="sec-desc">Four layers from home college to Canvas. <strong>FHDA uses Banner Direct</strong> — the most reliable integration path. Click any node to see where failures happen.</p>
+  <p class="sec-desc">Four layers from home college to Canvas. <strong>FHDA uses Banner Direct</strong> — the most reliable integration path.</p>
   <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;margin-bottom:.25rem">
     <span style="display:inline-flex;align-items:center;gap:.25rem;font-size:.6rem;color:var(--primary)"><span style="width:8px;height:8px;border-radius:50%;background:var(--primary)"></span>Student-facing</span>
     <span style="display:inline-flex;align-items:center;gap:.25rem;font-size:.6rem;color:var(--blue)"><span style="width:8px;height:8px;border-radius:50%;background:var(--blue)"></span>Authentication</span>
@@ -3173,15 +3271,15 @@ footer{
     <span style="display:inline-flex;align-items:center;gap:.25rem;font-size:.6rem;color:var(--red)"><span style="width:8px;height:8px;border-radius:50%;background:var(--red)"></span>Failure point</span>
   </div>
   <div class="flow-visual">
-    <div class="flow-title">Cross-Enrollment Data Flow — click any node to explore</div>
+    <div class="flow-title">Cross-Enrollment Data Flow<div style="font-size:.5rem;color:var(--primary);margin-top:.3rem;font-weight:600;letter-spacing:.06em">Click any node to explore</div></div>
     <div class="flow-row">
       <div class="f-node fn-sis" onclick="showFlowInfo(0)"><div class="fn-label">Home SIS</div><div class="fn-desc">Banner Direct · Ethos<br>PeopleSoft · Colleague</div></div>
-      <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">AER Payload</div></div>
+      <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">Enrollment Data</div></div>
       <div class="f-node fn-exc" onclick="showFlowInfo(1)"><div class="fn-label">CVC Exchange</div><div class="fn-desc">Cross-enrollment<br>+ FA Dashboard</div></div>
-      <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">SIS + Canvas</div></div>
+      <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">Roster Sync</div></div>
       <div class="f-node fn-lms" onclick="showFlowInfo(2)"><div class="fn-label">Teaching College</div><div class="fn-desc">Enrollment · Roster<br>Parchment transcript</div></div>
-      <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">IdP Proxy</div></div>
-      <div class="f-node fn-stu" onclick="showFlowInfo(3)"><div class="fn-label">Student</div><div class="fn-desc">CCCID via SSO<br>Canvas access</div></div>
+      <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">Sign-On</div></div>
+      <div class="f-node fn-stu" onclick="showFlowInfo(3)"><div class="fn-label">Student</div><div class="fn-desc">Student login<br>Canvas access</div></div>
     </div>
     <div class="flow-info-panel" id="flowInfo"></div>
   </div>
@@ -3194,7 +3292,7 @@ footer{
   <p class="sec-desc">Which of the 115+ Exchange colleges are healthy, degraded, or failing right now? <strong>Foothill and De Anza status is highlighted.</strong> The view that prevents the 9 AM scramble.</p>
   <div class="tool-frame">
     <div style="position:relative"><div class="live-alert" id="liveAlert"><div class="live-alert-title">New Alert</div><div class="live-alert-body"></div><div class="live-alert-time"></div></div></div>
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><span class="tool-hint">Click rows to expand</span><div class="tool-bar-title">Morning Monitor · Weekly Pulse · College Health Status</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><span class="tool-hint">Click any college for details</span><div class="tool-bar-title">Morning Monitor · Weekly Pulse · College Health Status</div></div>
     <div class="tool-body">
       <div style="margin-bottom:1rem;padding:.65rem .85rem;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface)">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem">
@@ -3229,7 +3327,7 @@ footer{
   <h2>Missing course reported — <em>where do you look?</em></h2>
   <p class="sec-desc">Layer-by-layer diagnosis of a Banner Ethos failure. <strong>FHDA runs Banner Direct — a simpler path, but the same debugging method applies.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><span class="tool-hint">Press Auto-Run or click layers</span><div class="tool-bar-title">Incident Trace · Sacramento City · Ethos Token</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><div class="tool-bar-title">Incident Trace · Sacramento City · Ethos Token</div></div>
     <div class="tool-body">
       <div class="tracer-controls">
         <button class="tracer-btn tracer-btn-run" id="autoRunBtn" onclick="autoRunTrace()">▶ Auto-Run Trace</button>
@@ -3238,10 +3336,10 @@ footer{
       </div>
       <div class="tracer-flow" id="tracerFlow"></div>
       <div class="tracer-detail" id="tracerDetail" style="margin-top:1.25rem"></div>
-      <!-- Live Resolution banner — appears after Deploy Fix -->
+      <!-- Live Resolution banner — appears after escalation confirms resolution -->
       <div class="resolution-banner" id="resolutionBanner">
         <div class="rb-title">✓ Incident Resolved</div>
-        <div class="rb-text"><strong>Sacramento City College</strong> — Ethos token regenerated, 47 AER records flushed. Monitor updated. Student journey restored.</div>
+        <div class="rb-text"><strong>Sacramento City College</strong> — Campus IT regenerated Ethos token. 47 AER records confirmed transmitted. Student access verified in Canvas. KB article drafted. Ticket CVC-4821 closed.</div>
       </div>
     </div>
   </div>
@@ -3253,7 +3351,7 @@ footer{
   <h2>Is this one ticket — or <em>twenty waiting to happen?</em></h2>
   <p class="sec-desc">Ticket data mapped to the CVC academic calendar — registration, census, add/drop, FA disbursement. <strong>One ticket — or a pattern?</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><div class="tool-bar-title">Ticket Intelligence · 12-Week Calendar</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><span class="tool-hint">Click insight cards to highlight chart</span><div class="tool-bar-title">Ticket Intelligence · 12-Week Calendar</div></div>
     <div class="tool-body">
       <div class="pattern-grid">
         <div><div class="chart-area">
@@ -3271,16 +3369,16 @@ footer{
 <section class="sec fu" id="kb"><div class="wrap">
   <div class="eyebrow">Documentation</div>
   <h2>If the fix isn’t documented, it didn’t <em>scale.</em></h2>
-  <p class="sec-desc">Ethos token refresh, SAML SSO fix, sync race condition, new college onboarding. <strong>Four templates. Editable. Copy-ready.</strong></p>
+  <p class="sec-desc">Four common fix types — integration, authentication, sync, and onboarding. <strong>Each template is editable and copy-ready.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation</span></div><div class="tool-bar-title">KB Builder · 4 Templates · Copy-Ready</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation</span></div><span class="tool-hint">Select a template, then edit</span><div class="tool-bar-title">KB Builder · 4 Templates</div></div>
     <div class="tool-body" style="padding:0">
       <div class="kb-layout">
         <div class="kb-sidebar">
           <div class="kb-nav-label">Templates</div>
           <div class="kb-nav-item active" onclick="loadKB(0,this)"><span class="kb-nav-icon">⚡</span>Integration Fix</div>
-          <div class="kb-nav-item" onclick="loadKB(1,this)"><span class="kb-nav-icon">🔐</span>Auth / SSO Issue</div>
-          <div class="kb-nav-item" onclick="loadKB(2,this)"><span class="kb-nav-icon">🔄</span>Sync Resolution</div>
+          <div class="kb-nav-item" onclick="loadKB(1,this)"><span class="kb-nav-icon">🔐</span>Sign-On Fix</div>
+          <div class="kb-nav-item" onclick="loadKB(2,this)"><span class="kb-nav-icon">🔄</span>Data Sync Fix</div>
           <div class="kb-nav-item" onclick="loadKB(3,this)"><span class="kb-nav-icon">📋</span>Onboarding Guide</div>
         </div>
         <div class="kb-main" id="kbMain"></div>
@@ -3325,7 +3423,7 @@ footer{
   <h2>How do you know when to <em>own it</em> vs <em>escalate it?</em></h2>
   <p class="sec-desc">P1, P2, or P3? Ellucian, campus IT, the CCC Tech Center, or OEI leadership — <strong>who to contact, how fast, and what to bring.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Reference</span></div><span class="tool-bar-title">Escalation Decision Matrix · P1 / P2 / P3</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Reference</span></div><span class="tool-hint">Click P1, P2, or P3 to compare</span><span class="tool-bar-title">Escalation Decision Matrix</span></div>
     <div class="tool-body">
       <div style="padding:.5rem .75rem;background:var(--amber-light);border:1px solid var(--amber-bd);border-radius:var(--r);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;font-size:.72rem">
         <span style="font-size:.85rem">⚡</span>
@@ -3386,13 +3484,13 @@ footer{
     <h2>What a typical escalation path <em>looks like</em></h2>
     <p class="sec-desc" style="margin-bottom:1rem">One incident, traced from first report to resolution. <strong>Each step maps to a tool above.</strong></p>
     <div style="display:flex;gap:0;overflow-x:auto;margin-top:1.5rem">
-      <div class="sc-step" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 1</div><div class="sc-step-tool">Monitor</div><div class="sc-step-action">Check college health</div><div class="sc-step-link">→ Monitor</div></div>
-      <div class="sc-step" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 2</div><div class="sc-step-tool">Tracer</div><div class="sc-step-action">Walk the data flow</div><div class="sc-step-link">→ Diagnostics</div></div>
-      <div class="sc-step" onclick="document.getElementById('patterns').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 3</div><div class="sc-step-tool">Patterns</div><div class="sc-step-action">Isolated or systemic?</div><div class="sc-step-link">→ Intelligence</div></div>
-      <div class="sc-step" onclick="document.getElementById('kb').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 4</div><div class="sc-step-tool">Knowledge Base Builder</div><div class="sc-step-action">Document the fix</div><div class="sc-step-link">→ KB Builder</div></div>
-      <div class="sc-step" onclick="document.getElementById('escalation').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 5</div><div class="sc-step-tool">Escalate?</div><div class="sc-step-action">P1, P2, or P3?</div><div class="sc-step-link">→ Response</div></div>
-      <div class="sc-step" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 6</div><div class="sc-step-tool">Barriers</div><div class="sc-step-action">Systemic barrier?</div><div class="sc-step-link">→ Barriers</div></div>
-      <div class="sc-step" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})"><div class="sc-step-num">Step 7</div><div class="sc-step-tool">Outreach</div><div class="sc-step-action">Prevent next term?</div><div class="sc-step-link">→ Outreach</div></div>
+      <div class="sc-step" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth',block:'start'})" style="--sc-color:#A16207"><div class="sc-step-num" style="background:#A16207;color:#fff">4</div><div class="sc-step-tool">Monitor</div><div class="sc-step-action">Check college health</div><div class="sc-step-link" style="color:#A16207">↑ Section 4</div></div>
+      <div class="sc-step" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth',block:'start'})" style="--sc-color:#be185d"><div class="sc-step-num" style="background:#be185d;color:#fff">5</div><div class="sc-step-tool">Diagnostics</div><div class="sc-step-action">Walk the data flow</div><div class="sc-step-link" style="color:#be185d">↑ Section 5</div></div>
+      <div class="sc-step" onclick="document.getElementById('patterns').scrollIntoView({behavior:'smooth',block:'start'})" style="--sc-color:#c2410c"><div class="sc-step-num" style="background:#c2410c;color:#fff">6</div><div class="sc-step-tool">Intelligence</div><div class="sc-step-action">One ticket or a pattern?</div><div class="sc-step-link" style="color:#c2410c">↑ Section 6</div></div>
+      <div class="sc-step" onclick="document.getElementById('kb').scrollIntoView({behavior:'smooth',block:'start'})" style="--sc-color:#A16207"><div class="sc-step-num" style="background:#A16207;color:#fff">KB</div><div class="sc-step-tool">Document</div><div class="sc-step-action">Write the KB article</div><div class="sc-step-link" style="color:#A16207">↑ KB Builder</div></div>
+      <div class="sc-step" onclick="document.getElementById('escalation').scrollIntoView({behavior:'smooth',block:'start'})" style="--sc-color:#4338ca"><div class="sc-step-num" style="background:#4338ca;color:#fff">7</div><div class="sc-step-tool">Escalate</div><div class="sc-step-action">P1, P2, or P3?</div><div class="sc-step-link" style="color:#4338ca">↑ Section 7</div></div>
+      <div class="sc-step" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth',block:'start'})" style="--sc-color:#B91C1C"><div class="sc-step-num" style="background:#B91C1C;color:#fff">0</div><div class="sc-step-tool">Barriers</div><div class="sc-step-action">Systemic barrier?</div><div class="sc-step-link" style="color:#B91C1C">↑ Section 0</div></div>
+      <div class="sc-step" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth',block:'start'})" style="--sc-color:#0F766E"><div class="sc-step-num" style="background:#0F766E;color:#fff">8</div><div class="sc-step-tool">Outreach</div><div class="sc-step-action">Prevent next term</div><div class="sc-step-link" style="color:#0F766E">↑ Section 8</div></div>
     </div>
   </div>
 </div>
@@ -3402,39 +3500,39 @@ footer{
 <section class="sec sec-alt fu" id="outreach"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:var(--teal)">8</span>Outreach</div>
   <h2>What if course sharing wasn’t a <em>last resort?</em></h2>
-  <p class="sec-desc">Cross-enrollment through the Exchange is essential for on-time graduation — but usually discovered too late. <strong>What if Foothill and De Anza counselors and students knew earlier?</strong></p>
-  <div style="display:flex;gap:.5rem;margin-top:.5rem"><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--border)"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--border)"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--border)"></span><span style="font-family:var(--mono);font-size:.5rem;color:var(--text-3);white-space:nowrap;align-self:center">4 of 7 months covered</span></div>
+  <p class="sec-desc">The Exchange works best when students hear about it <strong>before</strong> they need it — from counselors, peer ambassadors, FA offices, and social media. <strong>17 triggers across the academic year, targeted to the right audience at the right moment.</strong></p>
+  <div style="display:flex;gap:.5rem;margin-top:.5rem"><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="font-family:var(--mono);font-size:.5rem;color:var(--text-3);white-space:nowrap;align-self:center">7 of 7 months covered</span></div>
   <div style="padding:.6rem .85rem;border:1px solid var(--teal-bd);background:var(--teal-light);border-radius:var(--r);margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:.5rem">
     <span style="font-size:.85rem;flex-shrink:0">💬</span>
     <div style="font-size:.75rem;color:var(--text-2);line-height:1.6"><strong style="color:var(--teal)">“It’s essential, but it’s usually a last resort.”</strong> — Insight from conversations with two community college counselors about how the CVC Exchange is positioned in advising.</div>
   </div>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Outreach</span></div><span class="tool-bar-title">Outreach Planner · 7 Months · 13 Student Triggers</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Outreach</span></div><span class="tool-hint">Click any month to see triggers</span><span class="tool-bar-title">Outreach Planner · 7 Months</span></div>
     <div class="tool-body">
-      <div class="outreach-tabs"><button class="outreach-tab active" onclick="setOutreachTab('all',this)">All</button><button class="outreach-tab" onclick="setOutreachTab('inreach',this)">Inreach</button><button class="outreach-tab" onclick="setOutreachTab('outreach',this)">Outreach</button><button class="outreach-tab" onclick="setOutreachTab('orientation',this)">Orientation</button><button class="outreach-tab" onclick="setOutreachTab('intervention',this)">Intervention</button></div>
+      <div class="outreach-tabs"><button class="outreach-tab active" onclick="setOutreachTab('all',this)">All</button><button class="outreach-tab" onclick="setOutreachTab('inreach',this)">Inreach</button><button class="outreach-tab" onclick="setOutreachTab('outreach',this)">Outreach</button><button class="outreach-tab" onclick="setOutreachTab('orientation',this)">Orientation</button><button class="outreach-tab" onclick="setOutreachTab('intervention',this)">Intervention</button><button class="outreach-tab" onclick="setOutreachTab('peer',this)" style="border-left:2px solid var(--border);margin-left:.25rem">Peer-Led</button><button class="outreach-tab" onclick="setOutreachTab('fa',this)">FA Office</button></div>
       <div class="cal-timeline" id="calTimeline"></div>
       <div class="outreach-detail" id="outreachDetail"></div>
     </div>
   </div>
-  <div class="demo-caption">13 triggers across 7 months · 4 categories · informed by counselor feedback</div>
+  <div class="demo-caption">17 triggers across 7 months · 6 categories · Targets: students, counselors, FA offices, and peer ambassadors</div>
 </div></section>
 
 
 
-<!-- COUNSELOR CONFIDENCE TOOLKIT -->
-<section class="sec sec-alt fu" id="counselorToolkit" role="region" aria-label="Counselor Toolkit"><div class="wrap">
-  <div class="eyebrow" style="color:var(--teal)">Counselor Toolkit</div>
-  <h2>The Exchange is not just GE — <em>here's the proof</em></h2>
-  <p class="sec-desc">If counselors aren't confident about transfer credit, students never hear about the Exchange. <strong>This toolkit is what a Foothill or De Anza counselor needs on their desk.</strong> Updated for Fall 2025: Cal-GETC Area 6 (Ethnic Studies).</p>
+<!-- STUDENT & COUNSELOR TOOLKIT -->
+<section class="sec sec-alt fu" id="counselorToolkit" role="region" aria-label="Student and Counselor Toolkit"><div class="wrap">
+  <div class="eyebrow" style="color:var(--teal)">Student & Counselor Toolkit</div>
+  <h2>Transfer confidence — <em>for students and the staff who advise them</em></h2>
+  <p class="sec-desc">Students need to trust that Exchange courses count toward their degree. Counselors need a fast way to verify. FA offices need to know the payment path. <strong>This toolkit serves all three — built for Foothill and De Anza.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--teal-light);color:var(--teal)">Reference</span></div><span class="tool-bar-title">Counselor Toolkit · Verification · Checklist · Scripts</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--teal-light);color:var(--teal)">Reference</span></div><span class="tool-hint">Click each topic to expand</span><span class="tool-bar-title">Student & Counselor Toolkit · Verification · Checklist · Scripts</span></div>
     <div class="tool-body">
 
       <div style="padding:.6rem .75rem;background:var(--teal-light);border:1px solid var(--teal-bd);border-radius:8px;margin-bottom:1rem;font-size:.78rem;color:var(--text-2);line-height:1.6">
         <strong style="color:var(--teal)">Why this matters:</strong> Some counselors think the CVC Exchange is limited to general education courses. In reality, students can search by CSU GE Breadth, Cal-GETC (the new transfer GE pathway effective Fall 2025), substitute course by home college course name, major preparation courses via C-ID, and keyword. The verification tools already exist — counselors just need a workflow.
       </div>
 
-      <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.5rem;font-weight:700">▸ Four things counselors need to know</div>
+      <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.5rem;font-weight:700">▸ For counselors and staff</div>
 
       <div class="counsel-grid">
 
@@ -3507,6 +3605,43 @@ footer{
 
       </div>
 
+      <!-- Student-facing section -->
+      <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:1.5rem 0 .5rem;font-weight:700">▸ For students — verify your courses yourself</div>
+
+      <div class="counsel-grid">
+        <div class="counsel-card" onclick="this.classList.toggle('cc-open')" style="border-left:3px solid var(--blue)">
+          <div class="counsel-card-icon">🎓</div>
+          <div class="counsel-card-title">Will this course count toward my degree?</div>
+          <div class="counsel-card-body">You don't have to take your counselor's word for it — you can verify yourself in under 2 minutes. Here's how to confirm any Exchange course will transfer.</div>
+          <div class="counsel-expand">
+            <div class="counsel-step"><div class="counsel-step-num" style="background:var(--blue)">1</div><div class="counsel-step-text"><strong>Go to <span class="counsel-link">assist.org</span></strong> — This is the official transfer course database for all California colleges and universities. Select the college offering the Exchange course, then select where you want to transfer (e.g., San José State, UC Davis). If the course appears as articulated to your major or GE requirement, it counts.</div></div>
+            <div class="counsel-step"><div class="counsel-step-num" style="background:var(--blue)">2</div><div class="counsel-step-text"><strong>Check for a C-ID number</strong> — On the course listing at search.cvc.edu, look for a C-ID designation (e.g., C-ID COMM 130). If it has one, California colleges have agreed this course is equivalent statewide. This is the strongest signal.</div></div>
+            <div class="counsel-step"><div class="counsel-step-num" style="background:var(--blue)">3</div><div class="counsel-step-text"><strong>Look for badges on search.cvc.edu</strong> — Courses marked "Quality Reviewed" have passed the CVC-OEI peer review rubric. Courses marked "Zero Textbook Cost" use free open educational resources. Both are good signs of a well-supported course.</div></div>
+            <div style="margin-top:.5rem;padding:.4rem .6rem;border-radius:6px;background:var(--blue-light);border:1px solid var(--blue-bd);font-size:.72rem;color:var(--text-2);line-height:1.6"><strong style="color:var(--blue)">Still unsure?</strong> Bring the course name, teaching college, and C-ID number to your counselor. They can confirm in 30 seconds using ASSIST. You don't need to figure this out alone.</div>
+          </div>
+        </div>
+
+        <div class="counsel-card" onclick="this.classList.toggle('cc-open')" style="border-left:3px solid var(--blue)">
+          <div class="counsel-card-icon">💰</div>
+          <div class="counsel-card-title">How do I pay? Will my financial aid cover it?</div>
+          <div class="counsel-card-body">Three payment paths — and the biggest mistake students make is waiting. Here's what you need to know before you enroll.</div>
+          <div class="counsel-expand">
+            <div class="myth-row"><div class="myth-icon" style="color:var(--primary)">💳</div><div class="myth-text"><strong>Credit card (fastest):</strong> Pay at enrollment. If you're later approved for aid, you'll be reimbursed. This is the safest option to avoid being dropped for nonpayment.</div></div>
+            <div class="myth-row"><div class="myth-icon" style="color:var(--teal)">🏷</div><div class="myth-text"><strong>CCPG fee waiver:</strong> If you have a California College Promise Grant at your home college, you must apply for CCPG separately at the teaching college. It does <strong>not</strong> transfer automatically. Apply before the payment deadline.</div></div>
+            <div class="myth-row"><div class="myth-icon" style="color:var(--blue)">📋</div><div class="myth-text"><strong>Federal financial aid (Consortium Agreement):</strong> Contact your home college's FA office to set up a Consortium Agreement. This lets your home college count Exchange units toward your aid package. <strong>Start this before registration — it takes 3–5 business days.</strong></div></div>
+            <div class="reg-warn"><strong>⚠ The #1 mistake:</strong> Enrolling, waiting for FA paperwork, and getting auto-dropped for nonpayment. Some teaching colleges drop within 48 hours. If you're using aid, pay by credit card first, then coordinate reimbursement.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FA Office section -->
+      <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin:1.5rem 0 .5rem;font-weight:700">▸ For financial aid offices</div>
+
+      <div style="padding:.6rem .75rem;background:var(--amber-light);border:1px solid var(--amber-bd);border-radius:8px;font-size:.78rem;color:var(--text-2);line-height:1.7">
+        <strong style="color:var(--amber)">Since April 2025:</strong> The CVC's centralized Financial Aid Dashboard automates unit recording for Banner Direct and PeopleSoft colleges. Ethos colleges are pending. For colleges already on the dashboard, the manual email workflow for Consortium Agreements is being replaced with a systemwide tool. FA offices should confirm their college's integration status and update internal procedures accordingly. The student's home college determines aid eligibility for all Exchange courses.
+      </div>
+      </div>
+
     </div>
   </div>
 </div></section>
@@ -3522,7 +3657,7 @@ footer{
     <div style="padding:.4rem .65rem;border-radius:6px;background:var(--teal-light);border:1px solid var(--teal-bd);font-size:.7rem;color:var(--text-2)"><strong style="color:var(--teal)">Every card expandable</strong> — click for today vs with-AI comparison</div>
   </div>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--purple-light);color:var(--purple)">Vision</span></div><span class="tool-bar-title">AI Vision · 4 Tabs · Linked to Tools Above</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--purple-light);color:var(--purple)">Vision</span></div><span class="tool-hint">Click cards to compare today vs AI</span><span class="tool-bar-title">AI Vision · 4 Tabs</span></div>
     <div class="tool-body">
       <div class="ai-spectrum" style="margin-top:.75rem">
         <div class="ai-spec-stage"><div class="ai-spec-num">01</div><div class="ai-spec-label">Manual</div><div class="ai-spec-desc">Email workflows, spreadsheet tracking</div></div>
@@ -3587,7 +3722,7 @@ footer{
 <section class="sec sec-alt fu" id="lifecycle"><div class="wrap">
   <div class="eyebrow eyebrow-red">Lifecycle</div>
   <h2>Where do students <em class="red">hit friction?</em></h2>
-  <p class="sec-desc">Nine steps from search.cvc.edu to MIS reporting. Red = students get stuck. Amber = manual workaround. <strong>Green = smooth.</strong></p>
+  <p class="sec-desc">Nine steps from search.cvc.edu to state reporting. Red = students get stuck. Amber = manual workaround. <strong>Green = smooth.</strong></p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Lifecycle</span></div><span class="tool-bar-title">Enrollment Lifecycle · 9 Steps</span></div>
     <div class="tool-body"><div class="lc-flow" id="lcFlow"></div></div>
@@ -3724,26 +3859,26 @@ renderMonitor();let refreshCount=30;setInterval(()=>{refreshCount--;if(refreshCo
 const stages=[
 {icon:'ℹ',cls:'td-icon-info',title:'Student Report — Cross-Enrollment Failure',analyst:'Acknowledge ticket. Collect CCCID, home college, teaching college, course name.',analystCls:'ta-investigate',lines:[{ts:'09:14:22',cls:'log-info',text:'TICKET CVC-4821 opened'},{ts:'09:14:22',cls:'',text:'Reporter: Student at Chabot College'},{ts:'09:15:01',cls:'log-warn',text:'Canvas roster: Student NOT present'}],actions:['Verify enrollment','Check roster','Proceed →']},
 {icon:'✓',cls:'td-icon-ok',title:'SIS Query — Banner Record Confirmed',analyst:'Student Information System record exists. Issue is downstream. Check the Ethos integration layer.',analystCls:'ta-investigate',lines:[{ts:'09:18:44',cls:'log-ok',text:'RESULT: MATH-1A-001 | De Anza | CCCID: 0012847593 | RE'},{ts:'09:19:02',cls:'log-info',text:'SIS record correct. Issue downstream.'}],actions:['SIS confirmed ✓','Check Ethos →']},
-{icon:'✕',cls:'td-icon-err',title:'API Layer — Ethos Token Refresh Failure',analyst:'Root cause found. Regenerate OAuth token. Flush queued records. Escalate to vendor if needed.',analystCls:'ta-escalate',lines:[{ts:'09:22:12',cls:'log-err',text:'ERROR 401: OAuth2 token expired'},{ts:'09:22:12',cls:'log-err',text:'Token refresh failed: invalid_grant'},{ts:'09:22:13',cls:'log-err',text:'AER payload NOT transmitted'}],actions:['Regenerate key','Verify credentials','Escalate →']},
-{icon:'⚠',cls:'td-icon-warn',title:'Exchange — AER Transmission Blocked',analyst:'Verify Academic Enrollment Records transmitting after token refresh. Monitor queue drain.',analystCls:'ta-notify',lines:[{ts:'09:24:31',cls:'log-warn',text:'47 AER records pending: Chabot → De Anza'},{ts:'09:24:32',cls:'log-info',text:'Teaching college SIS never received enrollment'}],actions:['Quantify affected','Notify campus','Batch re-sync →']},
-{icon:'✓',cls:'td-icon-ok',title:'Resolution — Token Regenerated, Queue Flushed',analyst:'Confirm student sees course in Canvas. Notify campuses. Draft Knowledge Base article.',analystCls:'ta-resolve',lines:[{ts:'09:32:15',cls:'log-ok',text:'Token refresh: SUCCESS'},{ts:'09:35:22',cls:'log-ok',text:'All 47 records transmitted'},{ts:'09:38:01',cls:'log-info',text:'KB article drafted'}],actions:['Verify access','Update KB','Close ✓']}
+{icon:'✕',cls:'td-icon-err',title:'API Layer — Ethos Token Refresh Failure',analyst:'Root cause isolated. Document the error with timestamp and endpoint. Escalate to Sacramento City IT and copy Ellucian support.',analystCls:'ta-escalate',lines:[{ts:'09:22:12',cls:'log-err',text:'ERROR 401: OAuth2 token expired'},{ts:'09:22:12',cls:'log-err',text:'Token refresh failed: invalid_grant'},{ts:'09:22:13',cls:'log-err',text:'AER payload NOT transmitted'}],actions:['Document finding','Open Ellucian case','Escalate to campus IT →']},
+{icon:'⚠',cls:'td-icon-warn',title:'Exchange — AER Transmission Blocked',analyst:'47 students affected. Notify CVC team of queue backup. Send holding message to affected students. Log scope in ServiceNow.',analystCls:'ta-notify',lines:[{ts:'09:24:31',cls:'log-warn',text:'47 AER records pending: Chabot → De Anza'},{ts:'09:24:32',cls:'log-info',text:'Teaching college SIS never received enrollment'},{ts:'09:25:01',cls:'log-info',text:'Affected student list exported for comms'}],actions:['Quantify scope','Notify CVC team','Send student comms →']},
+{icon:'✓',cls:'td-icon-ok',title:'Resolution — Campus IT Regenerated Token, Queue Draining',analyst:'Sacramento City IT confirmed token regenerated. Verify AER queue is draining. Confirm student sees course in Canvas. Draft KB article for next occurrence.',analystCls:'ta-resolve',lines:[{ts:'09:32:15',cls:'log-ok',text:'Sacramento City IT confirms: Token refreshed'},{ts:'09:35:22',cls:'log-ok',text:'Exchange queue draining — 47/47 AER records transmitting'},{ts:'09:38:01',cls:'log-ok',text:'Student CCCID 0012847593: Canvas roster CONFIRMED'},{ts:'09:42:00',cls:'log-info',text:'KB article CVC-KB-0094 drafted for Ethos token refresh procedure'}],actions:['Verify student access','Update KB','Close ticket ✓']}
 ];
 let currentStage=-1,autoRunning=false;
-function buildTracerFlow(){document.getElementById('tracerFlow').innerHTML=stages.map((_,i)=>'<div class="tf-node" onclick="setStage('+i+')"><div class="tf-check">✓</div><div class="tf-num">Layer 0'+(i+1)+'</div><div class="tf-name">'+['User Report','SIS Query','API / Ethos','Exchange','Resolution'][i]+'</div><div class="tf-sub">'+['Student symptom','Banner record','Integration layer','CVC middleware','Root cause + fix'][i]+'</div></div>').join('')}
+function buildTracerFlow(){document.getElementById('tracerFlow').innerHTML=stages.map((_,i)=>'<div class="tf-node" onclick="setStage('+i+')"><div class="tf-check">✓</div><div class="tf-num">Layer 0'+(i+1)+'</div><div class="tf-name">'+['User Report','SIS Query','API / Ethos','Exchange','Verify + Close'][i]+'</div><div class="tf-sub">'+['Ticket intake','Banner record','Root cause found','Scope + escalate','Confirm resolution'][i]+'</div></div>').join('')}
 buildTracerFlow();
 function setStage(n){currentStage=n;document.querySelectorAll('.tf-node').forEach((nd,i)=>{nd.classList.remove('active','error-node','passed');if(i<n)nd.classList.add('passed');else if(i===n)nd.classList.add(i===2?'error-node':'active')});const s=stages[n];const logHtml=s.lines.map((l,i)=>'<span class="log-line" style="animation-delay:'+i*80+'ms">'+(l.ts?'<span class="log-ts">['+l.ts+']</span> ':'')+(l.cls?'<span class="'+l.cls+'">'+l.text+'</span>':l.text)+'</span>').join('');const actHtml=s.actions.map((a,i)=>{const isPrimary=i===s.actions.length-1;const oc=isPrimary&&n<4?' onclick="setStage('+(n+1)+')"':n===4&&isPrimary?' onclick="toast(\'Ticket closed\')"':' onclick="toast(\'Logged\')"';return'<button class="td-btn'+(isPrimary?' td-btn-primary':'')+'"'+oc+'>'+a+'</button>'}).join('');document.getElementById('tracerDetail').innerHTML='<div class="td-header"><div class="td-icon '+s.cls+'">'+s.icon+'</div><div class="td-title">'+s.title+'</div></div><div class="td-body"><div class="td-log">'+logHtml+'</div><div class="td-actions">'+actHtml+'</div></div>';document.getElementById('tracerStatus').textContent='Layer '+(n+1)+' of 5'}
-async function autoRunTrace(){if(autoRunning)return;autoRunning=true;const btn=document.getElementById('autoRunBtn');btn.textContent='⏳ Running...';btn.classList.add('running');resetTrace();await new Promise(r=>setTimeout(r,400));for(let i=0;i<5;i++){setStage(i);await new Promise(r=>setTimeout(r,1200))}btn.textContent='▶ Auto-Run Trace';btn.classList.remove('running');autoRunning=false;document.getElementById('tracerStatus').textContent='Trace complete — root cause: Ethos token expiration'}
+async function autoRunTrace(){if(autoRunning)return;autoRunning=true;const btn=document.getElementById('autoRunBtn');btn.textContent='⏳ Running...';btn.classList.add('running');resetTrace();await new Promise(r=>setTimeout(r,400));for(let i=0;i<5;i++){setStage(i);await new Promise(r=>setTimeout(r,1200))}btn.textContent='▶ Auto-Run Trace';btn.classList.remove('running');autoRunning=false;document.getElementById('tracerStatus').textContent='Trace complete — root cause isolated. Ready to escalate.'}
 function resetTrace(){currentStage=-1;document.querySelectorAll('.tf-node').forEach(n=>n.classList.remove('active','error-node','passed'));document.getElementById('tracerDetail').innerHTML='<div style="padding:1.25rem"><div style="display:flex;gap:.75rem;align-items:flex-start"><div style="width:28px;height:28px;border-radius:50%;background:var(--amber-light);border:1.5px solid var(--amber-bd);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.75rem">\ud83d\udccb</div><div><div style="font-weight:600;font-size:.85rem;color:var(--text);margin-bottom:.2rem">Scenario: Student at Chabot can\u2019t see MATH 1A in Canvas</div><div style="font-size:.78rem;color:var(--text-2);line-height:1.6">Cross-enrolled via the CVC Exchange into a section at De Anza. Home SIS shows enrollment. Canvas dashboard does not. The tracer walks through each layer to isolate where the data flow broke.</div><div style="margin-top:.5rem;font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Click any layer above, or press <strong>Auto-Run Trace</strong> to step through all 5.</div></div></div></div>';document.getElementById('tracerStatus').textContent='Ready'}
 resetTrace();
 
 // ═══ PATTERN ANALYZER ═══
 const chartData=[{label:'Jan',auth:5,sync:8,data:3,other:6},{label:'Jan+',auth:4,sync:7,data:5,other:4},{label:'Feb',auth:7,sync:6,data:4,other:5},{label:'Feb+',auth:6,sync:9,data:6,other:3},{label:'Spr Reg',auth:12,sync:5,data:4,other:4},{label:'Add/Drop',auth:9,sync:11,data:7,other:5},{label:'Census',auth:15,sync:8,data:5,other:3},{label:'FA Disb',auth:18,sync:7,data:6,other:4},{label:'Midterm',auth:23,sync:6,data:3,other:5},{label:'Spr+',auth:14,sync:10,data:8,other:4},{label:'Finals',auth:8,sync:12,data:5,other:3},{label:'Inter',auth:6,sync:9,data:4,other:5}];
 const cats=['auth','sync','data','other'];const catColors2={auth:'#7C3AED',sync:'#2563EB',data:'#F59E0B',other:'#D4D1C9'};const catNames={auth:'Auth / SSO',sync:'Sync Failures',data:'Data Mismatch',other:'Other'};let hiddenCats=new Set(),activeInsight=null;
-const insights=[{severity:'high',title:'Auth failures at 7 Banner colleges',desc:'OAuth token refresh failing post-patch.',meta:['23 tickets','7 campuses','↑ 340%'],weeks:[4,5,6,7,8]},{severity:'med',title:'Seat count sync delays at peak',desc:'Race condition affecting seat availability.',meta:['15 tickets','12 campuses'],weeks:[3,5,9,10]},{severity:'low',title:'FA Dashboard adoption gap at Ethos colleges',desc:'Banner Direct and PeopleSoft on automated dashboard. Ethos colleges still on manual email workflow.',meta:['8 tickets','4 campuses'],weeks:[8,9,10,11]}];
+const insights=[{severity:'high',cat:'auth',title:'Auth failures at 7 Banner colleges',desc:'OAuth token refresh failing post-patch.',meta:['23 tickets','7 campuses','↑ 340%'],weeks:[4,5,6,7,8]},{severity:'med',cat:'sync',title:'Seat count sync delays at peak',desc:'Race condition affecting seat availability.',meta:['15 tickets','12 campuses'],weeks:[3,5,9,10]},{severity:'low',cat:'data',title:'FA Dashboard adoption gap at Ethos colleges',desc:'Banner Direct and PeopleSoft on automated dashboard. Ethos colleges still on manual email workflow.',meta:['8 tickets','4 campuses'],weeks:[8,9,10,11]}];
 function renderChart(){const cb=document.getElementById('chartBody');cb.innerHTML='';const maxT=Math.max(...chartData.map(d=>cats.filter(c=>!hiddenCats.has(c)).reduce((s,c)=>s+d[c],0)));const cH=180;let total=0;chartData.forEach((d,idx)=>{const vis=cats.filter(c=>!hiddenCats.has(c));const t=vis.reduce((s,c)=>s+d[c],0);total+=t;const bg=document.createElement('div');bg.className='bar-group';if(activeInsight!==null&&insights[activeInsight].weeks.includes(idx))bg.classList.add('highlighted');const tooltip=vis.map(c=>'<span style="color:'+catColors2[c]+'">'+catNames[c]+': '+d[c]+'</span>').join('<br>');let segs='';['other','data','sync','auth'].filter(c=>!hiddenCats.has(c)).forEach(c=>{const h=maxT>0?d[c]/maxT*cH:0;segs+='<div class="bar-seg bar-seg-'+c+'" style="height:'+h+'px"></div>'});bg.innerHTML='<div class="bar-tooltip">'+tooltip+'<br><strong style="color:#fff">Total: '+t+'</strong></div><div class="bar-total">'+t+'</div><div class="bar-stack">'+segs+'</div><div class="bar-label">'+d.label+'</div>';cb.appendChild(bg)});document.getElementById('chartTotal').textContent=total}
 function renderLegend(){document.getElementById('chartLegend').innerHTML=cats.map(c=>'<div class="legend-item'+(hiddenCats.has(c)?' disabled':'')+'" onclick="toggleCat(\''+c+'\')"><div class="legend-dot" style="background:'+catColors2[c]+'"></div>'+catNames[c]+'</div>').join('')}
 function toggleCat(c){if(hiddenCats.has(c))hiddenCats.delete(c);else if(hiddenCats.size<cats.length-1)hiddenCats.add(c);renderChart();renderLegend()}
-function renderInsights(){document.getElementById('insightsPanel').innerHTML=insights.map((ins,i)=>'<div class="insight-card'+(activeInsight===i?' insight-active':'')+'" onclick="toggleInsight('+i+')"><div class="ic-severity ic-'+(ins.severity==='high'?'high':ins.severity==='med'?'med':'low')+'">'+(ins.severity==='high'?'High Priority':ins.severity==='med'?'Trending':'Monitoring')+'</div><div class="ic-title">'+ins.title+'</div><div class="ic-desc">'+ins.desc+'</div><div class="ic-meta">'+ins.meta.map(m=>'<span>'+m+'</span>').join('')+'</div></div>').join('')}
+function renderInsights(){document.getElementById('insightsPanel').innerHTML=insights.map((ins,i)=>{var catColor=catColors2[ins.cat]||'#A1A1AA';var catName=catNames[ins.cat]||'Other';var urgency=ins.severity==='high'?'High Priority':ins.severity==='med'?'Trending':'Monitoring';return'<div class="insight-card'+(activeInsight===i?' insight-active':'')+'" onclick="toggleInsight('+i+')" style="border-left:3px solid '+catColor+'"><div class="ic-severity" style="background:'+catColor+'15;color:'+catColor+'"><span class="ic-cat-dot" style="background:'+catColor+'"></span>'+catName+' \u00b7 '+urgency+'</div><div class="ic-title">'+ins.title+'</div><div class="ic-desc">'+ins.desc+'</div><div class="ic-meta">'+ins.meta.map(m=>'<span>'+m+'</span>').join('')+'</div><div class="ic-action">'+(activeInsight===i?'Highlighted in chart \u2713':'Click to highlight in chart \u2192')+'</div></div>'}).join('')}
 function toggleInsight(i){activeInsight=activeInsight===i?null:i;renderChart();renderInsights()}
 renderChart();renderLegend();renderInsights();
 
@@ -3756,11 +3891,11 @@ const kbTemplates=[
 ];
 let currentKB=0,kbStatus='draft',kbEdits={};
 function loadKB(idx,el){currentKB=idx;kbStatus='draft';kbEdits={};document.querySelectorAll('.kb-nav-item').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');renderKB()}
-function renderKB(){const t=kbTemplates[currentKB];const title=kbEdits.title||t.title;const desc=kbEdits.desc||t.desc;const steps=kbEdits.steps||[...t.steps];const esc=kbEdits.escalation||t.escalation;document.getElementById('kbMain').innerHTML='<div class="kb-header-row"><div class="kb-status '+(kbStatus==='published'?'kb-status-published':'kb-status-draft')+'">'+(kbStatus==='published'?'● Published':'◐ Draft')+'</div><div class="kb-doc-meta"><span>📁 '+t.cat+'</span><span>🔴 '+t.severity+'</span></div></div><input class="kb-doc-title-input" value="'+title+'" oninput="kbEdits.title=this.value"><div class="kb-field" style="margin-top:1rem"><label class="kb-label">Description</label><textarea class="kb-textarea" oninput="kbEdits.desc=this.value">'+desc+'</textarea></div><div class="kb-field"><label class="kb-label">Resolution Steps</label><div class="kb-steps">'+steps.map((s,i)=>'<div class="kb-step"><div class="kb-step-num">'+(i+1)+'</div><textarea class="kb-step-input" rows="1" oninput="getSteps()['+i+']=this.value">'+s+'</textarea><div class="kb-step-actions"><button class="kb-step-btn del" onclick="removeStep('+i+')">✕</button></div></div>').join('')+'</div><div class="kb-add-step" onclick="addStep()">+ Add Step</div></div><div class="kb-field"><label class="kb-label">Escalation</label><div class="kb-escalation"><div class="kb-esc-label">When to Escalate</div><textarea class="kb-esc-input" oninput="kbEdits.escalation=this.value">'+esc+'</textarea></div></div><div class="kb-footer"><button class="kb-btn kb-btn-save" onclick="kbStatus=\'draft\';renderKB();toast(\'Draft saved\')">💾 Save</button><button class="kb-btn kb-btn-publish" onclick="kbStatus=\'published\';renderKB();toast(\'Published\')">🚀 Publish</button><button class="kb-btn kb-btn-copy" onclick="copyKB()">📋 Copy MD</button></div>'}
+function renderKB(){const t=kbTemplates[currentKB];const title=kbEdits.title||t.title;const desc=kbEdits.desc||t.desc;const steps=kbEdits.steps||[...t.steps];const esc=kbEdits.escalation||t.escalation;document.getElementById('kbMain').innerHTML='<div class="kb-header-row"><div class="kb-status '+(kbStatus==='published'?'kb-status-published':'kb-status-draft')+'">'+(kbStatus==='published'?'● Published':'◐ Draft')+'</div><div class="kb-doc-meta"><span>📁 '+t.cat+'</span><span>🔴 '+t.severity+'</span></div></div><input class="kb-doc-title-input" value="'+title+'" oninput="kbEdits.title=this.value"><div class="kb-field" style="margin-top:1rem"><label class="kb-label">Description</label><textarea class="kb-textarea" oninput="kbEdits.desc=this.value">'+desc+'</textarea></div><div class="kb-field"><label class="kb-label">Resolution Steps</label><div class="kb-steps">'+steps.map((s,i)=>'<div class="kb-step"><div class="kb-step-num">'+(i+1)+'</div><textarea class="kb-step-input" rows="1" oninput="getSteps()['+i+']=this.value">'+s+'</textarea><div class="kb-step-actions"><button class="kb-step-btn del" onclick="removeStep('+i+')">✕</button></div></div>').join('')+'</div><div class="kb-add-step" onclick="addStep()">+ Add Step</div></div><div class="kb-field"><label class="kb-label">Escalation</label><div class="kb-escalation"><div class="kb-esc-label">When to Escalate</div><textarea class="kb-esc-input" oninput="kbEdits.escalation=this.value">'+esc+'</textarea></div></div><div class="kb-footer"><button class="kb-btn kb-btn-save" onclick="kbStatus=\'draft\';renderKB();toast(\'Draft saved\')">💾 Save</button><button class="kb-btn kb-btn-publish" onclick="kbStatus=\'published\';renderKB();toast(\'Published\')">🚀 Publish</button><button class="kb-btn kb-btn-copy" onclick="copyKB()">📋 Copy Docs</button></div>'}
 function getSteps(){if(!kbEdits.steps)kbEdits.steps=[...kbTemplates[currentKB].steps];return kbEdits.steps}
 function addStep(){getSteps().push('');renderKB()}
 function removeStep(i){const s=getSteps();if(s.length>1){s.splice(i,1);renderKB()}}
-function copyKB(){const t=kbTemplates[currentKB];let md='# '+(kbEdits.title||t.title)+'\n\n'+( kbEdits.desc||t.desc)+'\n\n## Steps\n\n';(kbEdits.steps||t.steps).forEach((s,i)=>md+=(i+1)+'. '+s+'\n');md+='\n## Escalation\n\n'+(kbEdits.escalation||t.escalation);navigator.clipboard.writeText(md).then(()=>toast('Copied as Markdown')).catch(()=>toast('Copy failed'))}
+function copyKB(){const t=kbTemplates[currentKB];let md='# '+(kbEdits.title||t.title)+'\n\n'+( kbEdits.desc||t.desc)+'\n\n## Steps\n\n';(kbEdits.steps||t.steps).forEach((s,i)=>md+=(i+1)+'. '+s+'\n');md+='\n## Escalation\n\n'+(kbEdits.escalation||t.escalation);navigator.clipboard.writeText(md).then(()=>toast('Copied to clipboard')).catch(()=>toast('Copy failed'))}
 loadKB(0,null);
 
 // ═══════════════════════════════════════════
@@ -3901,21 +4036,25 @@ setTimeout(function(){showFlowInfo(1)},800);
 
 // ═══ OUTREACH PLANNER ═══
 const calMonths=[
-{id:'jun',name:'Jun',label:'Summer prep',phase:'Pre-registration outreach',dots:['cd-teal','cd-blue'],triggers:[
+{id:'jun',name:'Jun',label:'Summer prep',phase:'Pre-registration outreach',dots:['cd-teal','cd-blue','cd-purple'],triggers:[
   {type:'outreach',title:'New Student Welcome + CVC Intro',who:'Incoming students via CCCApply',situation:'Student just applied through the CCC online application system (CCCApply). Orientation materials typically focus on home college only. This is the earliest opportunity to normalize cross-enrollment as a standard option.',msg:'Welcome to [College]! Did you know you can access thousands of online courses from other California community colleges through the CVC Exchange? If a class you need is full or not offered this term, the Exchange lets you find it at another college — and it counts toward your degree.',impact:['First impression','Normalizes Exchange','Reduces future confusion']},
-  {type:'orientation',title:'Orientation: Exchange as Standard Tool',who:'Orientation staff, counselors',situation:'During new student orientation, the CVC Exchange is often not mentioned — or mentioned only as a fallback. Embedding it as a routine part of registration prep means students know about it before they need it.',msg:'As part of your registration prep, bookmark cvc.edu. If any required courses are full, you can search for an equivalent section at another college and enroll instantly — no separate application needed.',impact:['Proactive awareness','Reduces waitlist pressure','Counselor talking point']}
+  {type:'orientation',title:'Orientation: Exchange as Standard Tool',who:'Orientation staff, counselors',situation:'During new student orientation, the CVC Exchange is often not mentioned — or mentioned only as a fallback. Embedding it as a routine part of registration prep means students know about it before they need it.',msg:'As part of your registration prep, bookmark cvc.edu. If any required courses are full, you can search for an equivalent section at another college and enroll instantly — no separate application needed.',impact:['Proactive awareness','Reduces waitlist pressure','Counselor talking point']},
+  {type:'peer',title:'Peer Ambassador: "I Used CVC and It Worked"',who:'Student ambassadors, social media, class presentations',situation:'Students trust other students. A peer ambassador who has successfully used the Exchange carries more credibility than any email blast. Train 2–3 student workers per campus to share their experience during orientations and class visits.',msg:'I was waitlisted for BIO 10 at Foothill last fall. My counselor showed me the CVC Exchange — I found the same course at De Anza, enrolled in 5 minutes, and it transferred automatically. Here is how I did it.',impact:['Peer credibility','Social proof','High engagement']}
 ]},
 {id:'jul',name:'Jul',label:'Summer term',phase:'Summer enrollment active',dots:['cd-green'],triggers:[
   {type:'inreach',title:'Waitlisted Students: Exchange Alternative',who:'Students on home college waitlists',situation:'Student is waitlisted for a required fall course. They may not know the same course is available at another college through the Exchange right now.',msg:'We see you are on the waitlist for [COURSE] this fall. You may be able to take this course at another California community college through the CVC Exchange this summer or fall. Visit cvc.edu to search for available sections.',impact:['Immediate alternative','On-time graduation','Reduces waitlist']}
 ]},
-{id:'aug',name:'Aug',label:'Fall registration',phase:'Peak registration window',dots:['cd-green','cd-amber','cd-blue'],triggers:[
+{id:'aug',name:'Aug',label:'Fall registration',phase:'Peak registration window',dots:['cd-green','cd-amber','cd-blue','cd-purple','cd-rose'],triggers:[
   {type:'inreach',title:'Ed Plan Gap: Missing Required Course',who:'Students behind on educational plan',situation:'Counselor review shows a student is missing a required course not offered at the home college this term. Surface the Exchange option proactively instead of waiting for the student to discover this at registration.',msg:'Based on your ed plan, you still need [COURSE] for [transfer/degree]. It is not offered at [Home College] this fall, but there are sections available at other colleges through the CVC Exchange. Would you like help finding one that fits your schedule?',impact:['Prevents delay','Ed plan aligned','Counselor-initiated']},
   {type:'intervention',title:'Free Application for Federal Student Aid (FAFSA) Completion Reminder + FA Path',who:'Students with incomplete FAFSA',situation:'With the 25% drop in FAFSA completion for 2025-26, students who cross-enroll without completed aid face payment confusion. Proactive outreach at registration prevents drop-for-nonpayment.',msg:'Planning to take a course through the CVC Exchange? Make sure your FAFSA is complete at your home college first. Your home college determines financial aid eligibility for Exchange courses through the Consortium Agreement.',impact:['Prevents payment crisis','FA awareness','Reduces drops']},
-  {type:'outreach',title:'High-Demand Course Campaign',who:'All enrolled students, social media',situation:'Certain courses fill within hours every term. A proactive campaign before registration opens can redirect students to Exchange sections before frustration sets in.',msg:'[COURSE] sections fill fast. Before you stress about the waitlist, check the CVC Exchange at cvc.edu — there are online sections available from other California community colleges that count toward your requirements.',impact:['Reduces ticket volume','Student satisfaction','Institutional capacity']}
+  {type:'outreach',title:'High-Demand Course Campaign',who:'All enrolled students, social media',situation:'Certain courses fill within hours every term. A proactive campaign before registration opens can redirect students to Exchange sections before frustration sets in.',msg:'[COURSE] sections fill fast. Before you stress about the waitlist, check the CVC Exchange at cvc.edu — there are online sections available from other California community colleges that count toward your requirements.',impact:['Reduces ticket volume','Student satisfaction','Institutional capacity']},
+  {type:'peer',title:'Peer Workshop: "Find Your Course in 10 Minutes"',who:'Student club events, welcome week, library pop-ups',situation:'A 10-minute live demo at student club meetings or welcome week. One student shows their phone, walks through search.cvc.edu, finds a course, checks ASSIST, and explains payment. Hands-on builds confidence faster than flyers.',msg:'Come to our CVC Exchange workshop — we will show you how to find courses, check if they transfer, and enroll on the spot. Bring your phone and your class schedule.',impact:['Hands-on confidence','Low cost','Replicable']},
+  {type:'fa',title:'FA Office: Pre-Registration Consortium Alert',who:'Home college financial aid offices',situation:'FA offices process Consortium Agreements after students enroll. A pre-registration alert to students with active FAFSA reminds them to contact FA before enrolling through the Exchange — not after — preventing the #1 payment crisis.',msg:'Planning to take a CVC Exchange course? Contact Financial Aid first to set up your Consortium Agreement. This lets us count your Exchange units toward your aid package. Do this before you register — it takes 3–5 business days.',impact:['Prevents drops','Reduces crisis tickets','FA workload smoothing']}
 ]},
-{id:'sep',name:'Sep',label:'Fall start',phase:'Add/drop window',dots:['cd-green','cd-amber'],triggers:[
+{id:'sep',name:'Sep',label:'Fall start',phase:'Add/drop window',dots:['cd-green','cd-amber','cd-rose'],triggers:[
   {type:'inreach',title:'Dropped-for-Nonpayment Recovery',who:'Students dropped from Exchange courses',situation:'Student was dropped from a teaching college course because payment did not process before the auto-drop deadline. The seat may still be available. Time-sensitive.',msg:'Your enrollment in [COURSE] at [Teaching College] was dropped due to a payment processing delay. The seat may still be available — contact the Teaching College or re-enroll through the Exchange and pay immediately to secure your spot.',impact:['Recovery path','Time-sensitive','Prevents semester loss']},
-  {type:'intervention',title:'CCPG Reapplication Nudge',who:'CCPG-eligible Exchange students',situation:'Students with California College Promise Grant at their home college often do not know it does not automatically transfer. A proactive message at the start of term prevents surprise bills.',msg:'Important: Your California College Promise Grant (CCPG) fee waiver from [Home College] does not automatically apply at your Teaching College. To avoid unexpected charges, apply for CCPG separately at [Teaching College] before the payment deadline.',impact:['Prevents surprise bills','Equity-critical','Low-income students']}
+  {type:'intervention',title:'CCPG Reapplication Nudge',who:'CCPG-eligible Exchange students',situation:'Students with California College Promise Grant at their home college often do not know it does not automatically transfer. A proactive message at the start of term prevents surprise bills.',msg:'Important: Your California College Promise Grant (CCPG) fee waiver from [Home College] does not automatically apply at your Teaching College. To avoid unexpected charges, apply for CCPG separately at [Teaching College] before the payment deadline.',impact:['Prevents surprise bills','Equity-critical','Low-income students']},
+  {type:'fa',title:'FA Office: CCPG Non-Transfer Warning',who:'Students with CCPG at home college',situation:'The California College Promise Grant fee waiver does not transfer automatically between colleges. Students who assume it does get surprise bills. A targeted message to CCPG recipients before Exchange registration prevents this.',msg:'Your CCPG fee waiver at [Home College] does not automatically apply at your Teaching College. If you enroll in a CVC Exchange course, apply for CCPG separately at the teaching college before the payment deadline to avoid unexpected fees.',impact:['Equity-critical','Prevents surprise bills','Low-income students']}
 ]},
 {id:'oct',name:'Oct',label:'Mid-term',phase:'Midterm check-in',dots:['cd-teal'],triggers:[
   {type:'orientation',title:'Spring Planning: Pre-Registration Push',who:'Currently enrolled students',situation:'Mid-term is when counselors help students plan spring schedules. Highest-leverage moment to introduce the Exchange as a planning tool — not a panic tool.',msg:'Planning your spring schedule? If any courses you need are unavailable at [Home College], search the CVC Exchange early. Popular sections fill fast, and you have options across 115+ colleges. Ask your counselor which Exchange courses fit your ed plan.',impact:['Strategic planning','Reduces spring scramble','Normalizes Exchange']}
@@ -5448,8 +5587,8 @@ function clearSearch() {
 })();
 
 // ═══════════════════════════════════════════════════════
-// LIVE RESOLUTION — Deploy Fix & Flush Queue
-// Propagates fix across Monitor, Journey, and Alerts
+// LIVE RESOLUTION — Escalate & Coordinate
+// Shows realistic analyst workflow: escalate, wait, verify, close
 // ═══════════════════════════════════════════════════════
 var _resolved = false;
 
@@ -5457,38 +5596,52 @@ function deployFix(btn) {
   if (_resolved) return;
   _resolved = true;
 
-  // 1. Button transition
+  // Phase 1: Escalation sent
   btn.classList.add('deploying');
-  btn.innerHTML = '⏳ Deploying...';
+  btn.innerHTML = '⏳ Escalating to Sacramento City IT + Ellucian...';
   btn.style.pointerEvents = 'none';
 
   setTimeout(function() {
+    // Phase 2: Waiting for campus IT
+    btn.innerHTML = '⏳ Waiting for campus IT confirmation...';
+    toast('Escalation sent — P2 ServiceNow case opened');
+  }, 1200);
+
+  setTimeout(function() {
+    // Phase 3: Campus IT confirms fix
+    btn.innerHTML = '⏳ Campus IT confirmed — verifying queue drain...';
+    toast('Sacramento City IT: Token regenerated');
+  }, 2800);
+
+  setTimeout(function() {
+    // Phase 4: Resolution confirmed
     btn.classList.remove('deploying');
     btn.classList.add('deployed');
-    btn.innerHTML = '✓ Fix Deployed — Queue Flushed';
+    btn.innerHTML = '✓ Resolved — Verified in Canvas · KB article drafted';
 
-    // 2. Update Sacramento City in allColleges data
+    // Update Sacramento City in allColleges data
     for (var i = 0; i < allColleges.length; i++) {
       if (allColleges[i].name === 'Sacramento City College') {
         allColleges[i].status = 'ok';
         allColleges[i].badge = 'Healthy';
-        allColleges[i].detail = 'Token regenerated · 47 AER flushed · All synced';
+        allColleges[i].detail = 'Token regenerated by campus IT · Queue drained · Verified';
         allColleges[i].uptime = '99.2%';
         allColleges[i].lastErr = 'Resolved (just now)';
         allColleges[i].history = [
-          '09:38 — All 47 AER records transmitted',
-          '09:35 — Token refresh: SUCCESS',
-          '09:32 — Queue flush initiated',
-          '09:14 — ERROR 401 (RESOLVED)'
+          '09:42 — Ticket CVC-4821 closed',
+          '09:38 — Student canvas access CONFIRMED',
+          '09:35 — 47/47 AER records transmitted',
+          '09:32 — Sacramento City IT: Token regenerated',
+          '09:25 — P2 escalation sent to campus IT + Ellucian'
         ];
         break;
       }
     }
 
-    // 3. Re-render monitor — this updates summary counts + grid
+    // Re-render monitor
     renderMonitor();
 
-    // 4. Flash the summary cells to draw attention
+    // Flash summary cells
     setTimeout(function() {
       document.querySelectorAll('.ms-cell').forEach(function(cell) {
         cell.classList.add('cell-updated');
@@ -5496,13 +5649,13 @@ function deployFix(btn) {
       });
     }, 100);
 
-    // 5. Show resolution banner
+    // Show resolution banner
     setTimeout(function() {
       var banner = document.getElementById('resolutionBanner');
       if (banner) banner.classList.add('rb-show');
     }, 400);
 
-    // 6. Switch journey to "Successful Only"
+    // Switch journey to "Successful Only"
     setTimeout(function() {
       var okBtn = null;
       document.querySelectorAll('.jt-btn').forEach(function(b) {
@@ -5510,20 +5663,19 @@ function deployFix(btn) {
       });
       if (okBtn) {
         setJourney('ok', okBtn);
-        // Add "Resolved" tag to journey header after render
         setTimeout(function() {
           var jHeader = document.querySelector('.jch-ok');
           if (jHeader && !jHeader.querySelector('.j-resolved-tag')) {
             var tag = document.createElement('span');
             tag.className = 'j-resolved-tag';
-            tag.textContent = '✓ LIVE FIX';
+            tag.textContent = '✓ RESOLVED';
             jHeader.appendChild(tag);
           }
         }, 350);
       }
     }, 800);
 
-    // 7. Dismiss the Sacramento City live alert if visible
+    // Dismiss live alert
     var alertEl = document.getElementById('liveAlert');
     if (alertEl && alertEl.classList.contains('show')) {
       var alertBody = alertEl.querySelector('.live-alert-body');
@@ -5532,9 +5684,7 @@ function deployFix(btn) {
       }
     }
 
-    // 8. Update the P2 incident bar in Comms section
-    var p2Bars = document.querySelectorAll('[style*="P2 ACTIVE"]');
-    // Also find inline P2 text
+    // Update P2 ACTIVE to RESOLVED
     document.querySelectorAll('.sec').forEach(function(sec) {
       var spans = sec.querySelectorAll('span');
       spans.forEach(function(sp) {
@@ -5546,19 +5696,18 @@ function deployFix(btn) {
       });
     });
 
-    // 9. Toast
-    toast('Sacramento City restored — 47 students back online');
+    toast('Ticket CVC-4821 closed — 47 students confirmed in Canvas');
 
-    // 10. Mark all tracer nodes as passed
+    // Mark tracer nodes
     document.querySelectorAll('.tf-node').forEach(function(nd) {
       nd.classList.remove('active', 'error-node');
       nd.classList.add('passed');
     });
 
-  }, 1200);
+  }, 4200);
 }
 
-// Inject the "Deploy Fix" button when tracer reaches final stage
+// Inject the escalation button when tracer reaches final stage
 var _origSetStage = window.setStage;
 if (typeof setStage === 'function') {
   var _baseSetStage = setStage;
@@ -5571,7 +5720,7 @@ if (typeof setStage === 'function') {
         var btn = document.createElement('button');
         btn.id = 'deployFixBtn';
         btn.className = 'deploy-fix-btn';
-        btn.innerHTML = '🚀 Deploy Fix & Flush Queue';
+        btn.innerHTML = '📋 Escalate & Coordinate Resolution';
         btn.onclick = function() { deployFix(btn); };
         actions.parentElement.appendChild(btn);
       }
@@ -5591,7 +5740,7 @@ var _origAutoComplete = null;
         var btn = document.createElement('button');
         btn.id = 'deployFixBtn';
         btn.className = 'deploy-fix-btn';
-        btn.innerHTML = '🚀 Deploy Fix & Flush Queue';
+        btn.innerHTML = '📋 Escalate & Coordinate Resolution';
         btn.onclick = function() { deployFix(btn); };
         actions.parentElement.appendChild(btn);
       }
