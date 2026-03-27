@@ -89,6 +89,7 @@
       <a class="qa-card" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">🛠</span><span class="qa-text">Trace an incident</span></a>
       <a class="qa-card" onclick="document.getElementById('counselorToolkit').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">📋</span><span class="qa-text">Help a counselor</span></a>
       <a class="qa-card" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">📊</span><span class="qa-text">See the barriers</span></a>
+      <a class="qa-card" onclick="document.getElementById('ivOverlay').classList.toggle('iv-show')"><span class="qa-icon">◆</span><span class="qa-text">Visual reference</span></a>
     </div>
 
     <!-- UX: Personal story as a visually distinct block — emotional anchor AFTER the action layer -->
@@ -801,6 +802,397 @@
   </div>
 </div></section>
 
+<!-- Interview Visual Reference — subtle trigger -->
+<button class="iv-trigger" id="ivTrigger" onclick="document.getElementById('ivOverlay').classList.toggle('iv-show')" title="Visual reference">◆<span class="iv-trigger-label">Visual Ref</span></button>
+
+<!-- Interview Visual Reference Panel -->
+<div class="iv-overlay" id="ivOverlay" onclick="if(event.target===this)this.classList.remove('iv-show')">
+<div class="iv-panel">
+  <div class="iv-head">
+    <div><div class="iv-head-title">Visual Reference</div><div class="iv-head-sub">12 scenarios · Click outside or press V to close</div></div>
+    <button class="iv-close" onclick="document.getElementById('ivOverlay').classList.remove('iv-show')">×</button>
+  </div>
+  <div class="iv-grid">
+
+    <!-- Q1: Feature Adoption -->
+    <div class="iv-card">
+      <div class="iv-card-head"><span class="iv-num iv-num-grn">Q1</span><span class="iv-cat">Strategy</span></div>
+      <div class="iv-q-title">Feature ≠ Adoption</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <defs><linearGradient id="q1g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0F766E"/><stop offset="100%" stop-color="#B91C1C"/></linearGradient></defs>
+            <polygon points="30,10 230,10 220,35 40,35" fill="rgba(15,118,110,.55)" stroke="rgba(94,234,212,.3)" stroke-width=".5"/>
+            <text x="132" y="27" text-anchor="middle" fill="#5EEAD4" font-size="9" font-family="var(--mono)" font-weight="700">Launched — 100%</text>
+            <polygon points="40,38 220,38 205,63 55,63" fill="rgba(15,118,110,.35)" stroke="rgba(94,234,212,.2)" stroke-width=".5"/>
+            <text x="132" y="55" text-anchor="middle" fill="#5EEAD4" font-size="9" font-family="var(--mono)" font-weight="600">Campus Ready — 72%</text>
+            <polygon points="55,66 205,66 190,91 70,91" fill="rgba(161,98,7,.4)" stroke="rgba(251,191,36,.25)" stroke-width=".5"/>
+            <text x="132" y="83" text-anchor="middle" fill="#FBBF24" font-size="9" font-family="var(--mono)" font-weight="600">Using — 45%</text>
+            <polygon points="70,94 190,94 178,115 82,115" fill="rgba(185,28,28,.45)" stroke="rgba(248,113,113,.3)" stroke-width=".5"/>
+            <text x="132" y="109" text-anchor="middle" fill="#F87171" font-size="9" font-family="var(--mono)" font-weight="600">Adopted — 28%</text>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#F87171">72% gap<div class="iv-stat-sub">shipped → adopted</div></div>
+        </div>
+      </div>
+      <div class="iv-insight">My role: readiness assessments per SIS type, targeted onboarding, adoption tracking by college tier</div>
+    </div>
+
+    <!-- Q2: Silent Risk Detection -->
+    <div class="iv-card">
+      <div class="iv-card-head"><span class="iv-num iv-num-amb">Q2</span><span class="iv-cat">Coordination</span></div>
+      <div class="iv-q-title">Silent Risk Detection</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- OK dots (teal) -->
+            <circle cx="25" cy="18" r="7" fill="rgba(15,118,110,.5)" stroke="#5EEAD4" stroke-width=".5"/><circle cx="50" cy="18" r="7" fill="rgba(15,118,110,.5)"/>
+            <circle cx="75" cy="18" r="7" fill="rgba(15,118,110,.5)"/><circle cx="100" cy="18" r="7" fill="rgba(15,118,110,.5)"/>
+            <circle cx="125" cy="18" r="7" fill="rgba(15,118,110,.5)"/><circle cx="150" cy="18" r="7" fill="rgba(15,118,110,.5)"/>
+            <circle cx="175" cy="18" r="7" fill="rgba(15,118,110,.5)"/><circle cx="200" cy="18" r="7" fill="rgba(15,118,110,.5)"/>
+            <circle cx="225" cy="18" r="7" fill="rgba(15,118,110,.5)"/>
+            <!-- Silent risk dots (amber) -->
+            <circle cx="25" cy="43" r="7" fill="rgba(161,98,7,.55)" stroke="#FBBF24" stroke-width="1"/><circle cx="50" cy="43" r="7" fill="rgba(161,98,7,.55)" stroke="#FBBF24" stroke-width="1"/>
+            <circle cx="75" cy="43" r="7" fill="rgba(161,98,7,.55)" stroke="#FBBF24" stroke-width="1"/><circle cx="100" cy="43" r="7" fill="rgba(161,98,7,.55)" stroke="#FBBF24" stroke-width="1"/>
+            <!-- Known affected (red) -->
+            <circle cx="125" cy="43" r="7" fill="rgba(185,28,28,.6)" stroke="#F87171" stroke-width="1.5"/><circle cx="150" cy="43" r="7" fill="rgba(185,28,28,.6)" stroke="#F87171" stroke-width="1.5"/>
+            <circle cx="175" cy="43" r="7" fill="rgba(185,28,28,.6)" stroke="#F87171" stroke-width="1.5"/>
+            <!-- Legend -->
+            <circle cx="30" cy="72" r="5" fill="rgba(185,28,28,.6)"/><text x="42" y="75" fill="#F87171" font-size="8" font-family="var(--mono)">3 Known</text>
+            <circle cx="100" cy="72" r="5" fill="rgba(161,98,7,.55)"/><text x="112" y="75" fill="#FBBF24" font-size="8" font-family="var(--mono)">4 Silent risk</text>
+            <circle cx="185" cy="72" r="5" fill="rgba(15,118,110,.5)"/><text x="197" y="75" fill="#5EEAD4" font-size="8" font-family="var(--mono)">9 OK</text>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#FBBF24">Silent risks<div class="iv-stat-sub">same SIS + token age</div></div>
+          <div class="iv-stat" style="color:#5EEAD4">Soft check<div class="iv-stat-sub">confirm or escalate</div></div>
+        </div>
+      </div>
+      <div class="iv-insight">Balance urgency with sensitivity. 116 colleges = 116 relationships</div>
+    </div>
+
+    <!-- Q3: Multi-College Triage -->
+    <div class="iv-card">
+      <div class="iv-card-head"><span class="iv-num iv-num-red">Q3</span><span class="iv-cat">Triage</span></div>
+      <div class="iv-q-title">First Two Hours</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Clock icon -->
+            <circle cx="16" cy="30" r="10" fill="none" stroke="#F87171" stroke-width="1.2"/><line x1="16" y1="30" x2="16" y2="23" stroke="#F87171" stroke-width="1.2"/><line x1="16" y1="30" x2="21" y2="30" stroke="#F87171" stroke-width="1"/>
+            <!-- Timeline bar segments -->
+            <rect x="32" y="22" width="40" height="16" rx="3" fill="rgba(185,28,28,.45)"/><text x="52" y="33" text-anchor="middle" fill="#F87171" font-size="7" font-family="var(--mono)" font-weight="700">0-15m</text>
+            <rect x="74" y="22" width="45" height="16" rx="3" fill="rgba(161,98,7,.4)"/><text x="96" y="33" text-anchor="middle" fill="#FBBF24" font-size="7" font-family="var(--mono)" font-weight="700">15-30m</text>
+            <rect x="121" y="22" width="50" height="16" rx="3" fill="rgba(29,78,216,.35)"/><text x="146" y="33" text-anchor="middle" fill="#60A5FA" font-size="7" font-family="var(--mono)" font-weight="700">30-60m</text>
+            <rect x="173" y="22" width="60" height="16" rx="3" fill="rgba(15,118,110,.4)"/><text x="203" y="33" text-anchor="middle" fill="#5EEAD4" font-size="7" font-family="var(--mono)" font-weight="700">60-120m</text>
+            <!-- Checkmark -->
+            <circle cx="244" cy="30" r="10" fill="rgba(15,118,110,.3)"/><polyline points="239,30 242,34 250,26" fill="none" stroke="#5EEAD4" stroke-width="1.5"/>
+            <!-- Labels -->
+            <text x="52" y="50" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Scope</text>
+            <text x="96" y="50" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Pattern</text>
+            <text x="146" y="50" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Root cause</text>
+            <text x="203" y="50" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Coordinate</text>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#F87171">14 tickets<div class="iv-stat-sub">8 colleges</div></div>
+          <div class="iv-stat" style="color:#A78BFA">Group A<div class="iv-stat-sub">PeopleSoft → API</div></div>
+          <div class="iv-stat" style="color:#60A5FA">Group B<div class="iv-stat-sub">Banner → Ethos</div></div>
+        </div>
+      </div>
+      <div class="iv-insight">Structure the investigation — don't chase tickets one by one</div>
+    </div>
+
+    <!-- Q4: Altitude Translation -->
+    <div class="iv-card">
+      <div class="iv-card-head"><span class="iv-num iv-num-blu">Q4</span><span class="iv-cat">Communication</span></div>
+      <div class="iv-q-title">Altitude Translation</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Inverted pyramid: Engineer (wide) → Manager (medium) → Board (narrow) -->
+            <polygon points="20,10 240,10 215,45 45,45" fill="rgba(29,78,216,.2)" stroke="rgba(96,165,250,.3)" stroke-width=".5"/>
+            <text x="130" y="24" text-anchor="middle" fill="#60A5FA" font-size="9" font-family="var(--mono)" font-weight="700">ENGINEER</text>
+            <text x="130" y="37" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)">OAuth2 · Ethos tokens · AER queue</text>
+            <!-- Arrow -->
+            <text x="130" y="54" text-anchor="middle" fill="#57534E" font-size="8" font-family="var(--mono)">↓ translate</text>
+            <polygon points="45,58 215,58 195,88 65,88" fill="rgba(161,98,7,.2)" stroke="rgba(251,191,36,.25)" stroke-width=".5"/>
+            <text x="130" y="70" text-anchor="middle" fill="#FBBF24" font-size="9" font-family="var(--mono)" font-weight="700">MANAGER</text>
+            <text x="130" y="82" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)">7 colleges · 340 students · ETA 4h</text>
+            <!-- Arrow -->
+            <text x="130" y="97" text-anchor="middle" fill="#57534E" font-size="8" font-family="var(--mono)">↓ translate</text>
+            <polygon points="65,100 195,100 180,118 80,118" fill="rgba(15,118,110,.2)" stroke="rgba(94,234,212,.25)" stroke-width=".5"/>
+            <text x="130" y="113" text-anchor="middle" fill="#5EEAD4" font-size="9" font-family="var(--mono)" font-weight="700">BOARD — Resolved + prevention</text>
+          </svg>
+        </div>
+      </div>
+      <div class="iv-insight">Detail decreases, impact increases. Board needs scope + resolution + assurance</div>
+    </div>
+
+    <!-- Q5: Equity Comparison -->
+    <div class="iv-card">
+      <div class="iv-card-head"><span class="iv-num iv-num-blu">Q5</span><span class="iv-cat">Equity</span></div>
+      <div class="iv-q-title">Rural College Priority</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Metro building (tall, teal) -->
+            <rect x="30" y="15" width="60" height="75" rx="3" fill="rgba(15,118,110,.2)" stroke="rgba(94,234,212,.3)" stroke-width=".5"/>
+            <rect x="38" y="22" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="52" y="22" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="66" y="22" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/>
+            <rect x="38" y="35" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="52" y="35" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="66" y="35" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/>
+            <rect x="38" y="48" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="52" y="48" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="66" y="48" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/>
+            <rect x="38" y="61" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="52" y="61" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="66" y="61" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/>
+            <text x="60" y="8" text-anchor="middle" fill="#5EEAD4" font-size="8" font-family="var(--mono)" font-weight="700">METRO</text>
+            <text x="60" y="100" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)">12 IT staff</text>
+            <!-- vs divider -->
+            <text x="130" y="55" text-anchor="middle" fill="#57534E" font-size="10" font-family="var(--mono)" font-weight="700">vs</text>
+            <!-- Rural building (small, red) -->
+            <rect x="175" y="55" width="40" height="35" rx="3" fill="rgba(185,28,28,.2)" stroke="rgba(248,113,113,.3)" stroke-width=".5"/>
+            <rect x="182" y="62" width="10" height="8" rx="1" fill="rgba(248,113,113,.15)"/><rect x="198" y="62" width="10" height="8" rx="1" fill="rgba(248,113,113,.15)"/>
+            <rect x="182" y="75" width="10" height="8" rx="1" fill="rgba(248,113,113,.15)"/><rect x="198" y="75" width="10" height="8" rx="1" fill="rgba(248,113,113,.15)"/>
+            <text x="195" y="48" text-anchor="middle" fill="#F87171" font-size="8" font-family="var(--mono)" font-weight="700">RURAL</text>
+            <text x="195" y="100" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)">1 IT staff</text>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#F87171">Lower volume ≠ lower priority<div class="iv-stat-sub">Impact ∝ 1/alternatives</div></div>
+        </div>
+      </div>
+      <div class="iv-insight">Feather River, Siskiyous, Lake Tahoe — the Exchange IS their curriculum</div>
+    </div>
+
+    <!-- Q6: Pareto Pattern -->
+    <div class="iv-card">
+      <div class="iv-card-head"><span class="iv-num iv-num-org">Q6</span><span class="iv-cat">Process</span></div>
+      <div class="iv-q-title">The Pareto Pattern</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 105" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Horizontal bars -->
+            <rect x="55" y="8" width="190" height="16" rx="3" fill="rgba(185,28,28,.45)"/>
+            <text x="50" y="20" text-anchor="end" fill="#F87171" font-size="8" font-family="var(--mono)" font-weight="700">62%</text>
+            <text x="62" y="20" fill="#fff" font-size="7.5" font-family="var(--mono)" font-weight="600">12 colleges</text>
+            <rect x="55" y="28" width="55" height="14" rx="3" fill="rgba(161,98,7,.4)"/>
+            <text x="50" y="39" text-anchor="end" fill="#FBBF24" font-size="8" font-family="var(--mono)" font-weight="700">18%</text>
+            <text x="62" y="38" fill="#fff" font-size="7" font-family="var(--mono)">28 colleges</text>
+            <rect x="55" y="46" width="37" height="14" rx="3" fill="rgba(29,78,216,.3)"/>
+            <text x="50" y="57" text-anchor="end" fill="#60A5FA" font-size="8" font-family="var(--mono)" font-weight="700">12%</text>
+            <rect x="55" y="64" width="24" height="14" rx="3" fill="rgba(255,255,255,.08)"/>
+            <text x="50" y="75" text-anchor="end" fill="#57534E" font-size="8" font-family="var(--mono)" font-weight="700">8%</text>
+            <!-- Pareto line (dashed at 80%) -->
+            <line x1="207" y1="4" x2="207" y2="82" stroke="#FBBF24" stroke-width="1" stroke-dasharray="3,2"/>
+            <text x="207" y="92" text-anchor="middle" fill="#FBBF24" font-size="7" font-family="var(--mono)" font-weight="600">80% line</text>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#F87171">Config audits<div class="iv-stat-sub">Ethos + SSO</div></div>
+          <div class="iv-stat" style="color:#FBBF24">Targeted KB<div class="iv-stat-sub">self-service</div></div>
+          <div class="iv-stat" style="color:#5EEAD4">Check-ins<div class="iv-stat-sub">quarterly</div></div>
+        </div>
+      </div>
+      <div class="iv-insight">Fix 12 colleges, transform the queue. Think in systems, not tickets</div>
+    </div>
+
+    <!-- Q7: Perception vs Reality -->
+    <div class="iv-card">
+      <div class="iv-card-head"><span class="iv-num iv-num-amb">Q7</span><span class="iv-cat">Diplomacy</span></div>
+      <div class="iv-q-title">Perception vs. Reality</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Event icon at top center -->
+            <circle cx="130" cy="16" r="10" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.15)" stroke-width=".5"/>
+            <text x="130" y="20" text-anchor="middle" fill="#A8A29E" font-size="10">⚡</text>
+            <text x="130" y="36" text-anchor="middle" fill="#57534E" font-size="7" font-family="var(--mono)">Single event</text>
+            <!-- Diverging arrow left (perception - red) -->
+            <line x1="120" y1="42" x2="55" y2="72" stroke="#F87171" stroke-width="1.5" opacity=".6"/>
+            <polygon points="52,70 60,70 55,77" fill="#F87171" opacity=".6"/>
+            <rect x="10" y="72" width="90" height="24" rx="5" fill="rgba(185,28,28,.15)" stroke="rgba(248,113,113,.2)" stroke-width=".5"/>
+            <text x="55" y="83" text-anchor="middle" fill="#F87171" font-size="7.5" font-family="var(--mono)" font-weight="700">PERCEPTION</text>
+            <text x="55" y="92" text-anchor="middle" fill="#78716C" font-size="6" font-family="var(--mono)">"Exchange is dropping students"</text>
+            <!-- Diverging arrow right (reality - blue) -->
+            <line x1="140" y1="42" x2="205" y2="72" stroke="#60A5FA" stroke-width="1.5" opacity=".6"/>
+            <polygon points="202,70 210,70 205,77" fill="#60A5FA" opacity=".6"/>
+            <rect x="160" y="72" width="90" height="24" rx="5" fill="rgba(29,78,216,.15)" stroke="rgba(96,165,250,.2)" stroke-width=".5"/>
+            <text x="205" y="83" text-anchor="middle" fill="#60A5FA" font-size="7.5" font-family="var(--mono)" font-weight="700">REALITY</text>
+            <text x="205" y="92" text-anchor="middle" fill="#78716C" font-size="6" font-family="var(--mono)">SIS timing gap</text>
+            <!-- Converge to diplomatic frame -->
+            <line x1="55" y1="98" x2="130" y2="112" stroke="#5EEAD4" stroke-width="1" opacity=".4"/>
+            <line x1="205" y1="98" x2="130" y2="112" stroke="#5EEAD4" stroke-width="1" opacity=".4"/>
+            <rect x="85" y="105" width="90" height="15" rx="4" fill="rgba(15,118,110,.15)" stroke="rgba(94,234,212,.2)" stroke-width=".5"/>
+            <text x="130" y="115" text-anchor="middle" fill="#5EEAD4" font-size="7.5" font-family="var(--mono)" font-weight="700">DIPLOMATIC FRAME</text>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#A78BFA">Name the mechanism, not the blame</div>
+        </div>
+      </div>
+      <div class="iv-insight">Registrar VP is already escalating. Correct the record without making campus feel wrong</div>
+    </div>
+
+    <!-- Q8: Dual Identity -->
+    <div class="iv-card">
+      <div class="iv-card-head"><span class="iv-num iv-num-pur">Q8</span><span class="iv-cat">Navigation</span></div>
+      <div class="iv-q-title">Dual Identity</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- FHDA circle (blue, left) -->
+            <circle cx="95" cy="55" r="42" fill="rgba(29,78,216,.1)" stroke="rgba(96,165,250,.25)" stroke-width="1"/>
+            <text x="65" y="40" fill="#60A5FA" font-size="9" font-family="var(--mono)" font-weight="700">FHDA</text>
+            <text x="65" y="52" fill="#78716C" font-size="6.5" font-family="var(--mono)">Employer</text>
+            <text x="65" y="62" fill="#78716C" font-size="6.5" font-family="var(--mono)">District IT</text>
+            <text x="65" y="72" fill="#78716C" font-size="6.5" font-family="var(--mono)">Budget</text>
+            <!-- CVC circle (teal, right) -->
+            <circle cx="165" cy="55" r="42" fill="rgba(15,118,110,.1)" stroke="rgba(94,234,212,.25)" stroke-width="1"/>
+            <text x="175" y="40" fill="#5EEAD4" font-size="9" font-family="var(--mono)" font-weight="700">CVC-OEI</text>
+            <text x="175" y="52" fill="#78716C" font-size="6.5" font-family="var(--mono)">Mission</text>
+            <text x="175" y="62" fill="#78716C" font-size="6.5" font-family="var(--mono)">116 Colleges</text>
+            <text x="175" y="72" fill="#78716C" font-size="6.5" font-family="var(--mono)">Equity</text>
+            <!-- Overlap zone -->
+            <text x="130" y="52" text-anchor="middle" fill="#A78BFA" font-size="8" font-family="var(--mono)" font-weight="700">Analyst</text>
+            <text x="130" y="63" text-anchor="middle" fill="#A78BFA" font-size="6.5" font-family="var(--mono)">sits here</text>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#A78BFA">Navigate both without creating friction</div>
+        </div>
+      </div>
+      <div class="iv-insight">FHDA is fiscal agent. CVC serves statewide. Respect both chains, serve the students</div>
+    </div>
+
+    <!-- Q9: Five Data Questions -->
+    <div class="iv-card">
+      <div class="iv-card-head"><span class="iv-num iv-num-blu">Q9</span><span class="iv-cat">Analysis</span></div>
+      <div class="iv-q-title">Five Questions for Ticket Data</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Pentagon / radar spoke shape -->
+            <polygon points="130,18 210,58 190,110 70,110 50,58" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+            <polygon points="130,38 185,63 173,98 87,98 75,63" fill="none" stroke="rgba(255,255,255,.04)" stroke-width=".5"/>
+            <!-- Data shape fill -->
+            <polygon points="130,28 200,60 178,105 82,105 60,60" fill="rgba(15,118,110,.08)" stroke="rgba(94,234,212,.2)" stroke-width="1"/>
+            <!-- Center -->
+            <circle cx="130" cy="68" r="3" fill="rgba(255,255,255,.1)"/>
+            <!-- Spokes -->
+            <line x1="130" y1="68" x2="130" y2="18" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
+            <line x1="130" y1="68" x2="210" y2="58" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
+            <line x1="130" y1="68" x2="190" y2="110" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
+            <line x1="130" y1="68" x2="70" y2="110" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
+            <line x1="130" y1="68" x2="50" y2="58" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
+            <!-- Endpoint dots + labels -->
+            <circle cx="130" cy="18" r="4" fill="rgba(185,28,28,.6)"/><text x="130" y="10" text-anchor="middle" fill="#F87171" font-size="7" font-family="var(--mono)" font-weight="600">Repeats?</text>
+            <circle cx="210" cy="58" r="4" fill="rgba(161,98,7,.6)"/><text x="250" y="55" text-anchor="end" fill="#FBBF24" font-size="7" font-family="var(--mono)" font-weight="600">Spikes?</text>
+            <circle cx="190" cy="110" r="4" fill="rgba(29,78,216,.6)"/><text x="220" y="120" text-anchor="end" fill="#60A5FA" font-size="7" font-family="var(--mono)" font-weight="600">SIS type?</text>
+            <circle cx="70" cy="110" r="4" fill="rgba(15,118,110,.6)"/><text x="40" y="120" text-anchor="start" fill="#5EEAD4" font-size="7" font-family="var(--mono)" font-weight="600">Speed?</text>
+            <circle cx="50" cy="58" r="4" fill="rgba(109,40,217,.6)"/><text x="10" y="55" text-anchor="start" fill="#A78BFA" font-size="7" font-family="var(--mono)" font-weight="600">Preventable?</text>
+          </svg>
+        </div>
+      </div>
+      <div class="iv-insight">Right questions > right tools. Python + pandas are useless without the right hypothesis</div>
+    </div>
+
+    <!-- Q10: Student Crisis Timeline -->
+    <div class="iv-card">
+      <div class="iv-card-head"><span class="iv-num iv-num-red">Q10</span><span class="iv-cat">Crisis</span></div>
+      <div class="iv-q-title">24-Hour Countdown</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Gradient timeline bar -->
+            <defs><linearGradient id="q10g" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#B91C1C"/><stop offset="50%" stop-color="#A16207"/><stop offset="100%" stop-color="#0F766E"/></linearGradient></defs>
+            <rect x="30" y="8" width="200" height="12" rx="6" fill="url(#q10g)" opacity=".5"/>
+            <text x="20" y="17" text-anchor="end" fill="#F87171" font-size="8" font-family="var(--mono)" font-weight="700">NOW</text>
+            <text x="240" y="17" text-anchor="start" fill="#F87171" font-size="8" font-family="var(--mono)" font-weight="700">24h</text>
+            <!-- Parallel tracks -->
+            <text x="20" y="38" text-anchor="end" fill="#78716C" font-size="6.5" font-family="var(--mono)"></text>
+            <rect x="30" y="30" width="150" height="13" rx="3" fill="rgba(29,78,216,.15)" stroke="rgba(96,165,250,.2)" stroke-width=".5"/>
+            <text x="36" y="39" fill="#60A5FA" font-size="7" font-family="var(--mono)" font-weight="600">Home SIS — verify enrollment</text>
+            <rect x="30" y="47" width="130" height="13" rx="3" fill="rgba(109,40,217,.12)" stroke="rgba(167,139,250,.2)" stroke-width=".5"/>
+            <text x="36" y="56" fill="#A78BFA" font-size="7" font-family="var(--mono)" font-weight="600">Teaching — manual fallback</text>
+            <rect x="30" y="64" width="170" height="13" rx="3" fill="rgba(161,98,7,.12)" stroke="rgba(251,191,36,.2)" stroke-width=".5"/>
+            <text x="36" y="73" fill="#FBBF24" font-size="7" font-family="var(--mono)" font-weight="600">Exchange — queue flush</text>
+            <!-- Result row -->
+            <rect x="30" y="82" width="200" height="14" rx="4" fill="rgba(15,118,110,.15)" stroke="rgba(94,234,212,.25)" stroke-width=".5"/>
+            <text x="130" y="92" text-anchor="middle" fill="#5EEAD4" font-size="8" font-family="var(--mono)" font-weight="700">Student notified · Seat secured · Deadline met</text>
+          </svg>
+        </div>
+      </div>
+      <div class="iv-insight">Own the coordination. Don't play hot potato between colleges. Student's clock is ticking</div>
+    </div>
+
+    <!-- Q11: Growth Roadmap -->
+    <div class="iv-card">
+      <div class="iv-card-head"><span class="iv-num iv-num-grn">Q11</span><span class="iv-cat">Growth</span></div>
+      <div class="iv-q-title">Analyst I → Analyst II</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Step 1: Learn -->
+            <rect x="15" y="65" width="70" height="25" rx="4" fill="rgba(29,78,216,.2)" stroke="rgba(96,165,250,.25)" stroke-width=".5"/>
+            <text x="50" y="77" text-anchor="middle" fill="#60A5FA" font-size="9" font-family="var(--mono)" font-weight="700">LEARN</text>
+            <text x="50" y="87" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Mo 1-3</text>
+            <!-- Step 2: Build -->
+            <rect x="95" y="40" width="70" height="25" rx="4" fill="rgba(15,118,110,.2)" stroke="rgba(94,234,212,.25)" stroke-width=".5"/>
+            <text x="130" y="52" text-anchor="middle" fill="#5EEAD4" font-size="9" font-family="var(--mono)" font-weight="700">BUILD</text>
+            <text x="130" y="62" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Mo 4-6</text>
+            <!-- Step 3: Lead -->
+            <rect x="175" y="15" width="70" height="25" rx="4" fill="rgba(109,40,217,.2)" stroke="rgba(167,139,250,.25)" stroke-width=".5"/>
+            <text x="210" y="27" text-anchor="middle" fill="#A78BFA" font-size="9" font-family="var(--mono)" font-weight="700">LEAD</text>
+            <text x="210" y="37" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Mo 7-12</text>
+            <!-- Stair lines connecting steps -->
+            <line x1="85" y1="65" x2="95" y2="65" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+            <line x1="95" y1="65" x2="95" y2="65" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+            <line x1="165" y1="40" x2="175" y2="40" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+            <!-- Milestone labels -->
+            <text x="50" y="98" text-anchor="middle" fill="#60A5FA" font-size="6" font-family="var(--mono)">Shadow · Map SIS</text>
+            <text x="130" y="73" text-anchor="middle" fill="#5EEAD4" font-size="6" font-family="var(--mono)">KB · Templates</text>
+            <text x="210" y="48" text-anchor="middle" fill="#A78BFA" font-size="6" font-family="var(--mono)">Playbook · Mentor</text>
+          </svg>
+        </div>
+      </div>
+      <div class="iv-insight">Analyst II thinking from day one. The toolkit on this page is the proof</div>
+    </div>
+
+    <!-- Q12: Invisible Infrastructure -->
+    <div class="iv-card">
+      <div class="iv-card-head"><span class="iv-num iv-num-pur">Q12</span><span class="iv-cat">Mission</span></div>
+      <div class="iv-q-title">Invisible Infrastructure</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Iceberg shape — above waterline -->
+            <polygon points="100,8 160,8 175,48 85,48" fill="rgba(94,234,212,.12)" stroke="rgba(94,234,212,.25)" stroke-width=".5"/>
+            <!-- Students label on top -->
+            <text x="130" y="22" text-anchor="middle" fill="#D6D3D1" font-size="10">☺ ☺ ☺</text>
+            <text x="130" y="36" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)" font-weight="600">STUDENTS</text>
+            <!-- Waterline -->
+            <line x1="20" y1="50" x2="240" y2="50" stroke="rgba(96,165,250,.3)" stroke-width="1" stroke-dasharray="4,3"/>
+            <text x="242" y="46" fill="#60A5FA" font-size="6.5" font-family="var(--mono)" font-weight="600">visibility</text>
+            <text x="242" y="56" fill="#60A5FA" font-size="6.5" font-family="var(--mono)" font-weight="600">line</text>
+            <!-- Below waterline (larger mass) -->
+            <polygon points="85,52 175,52 200,115 60,115" fill="rgba(29,78,216,.08)" stroke="rgba(96,165,250,.12)" stroke-width=".5"/>
+            <!-- Infrastructure labels inside iceberg -->
+            <rect x="88" y="62" width="42" height="14" rx="3" fill="rgba(29,78,216,.15)"/><text x="109" y="72" text-anchor="middle" fill="#60A5FA" font-size="7.5" font-family="var(--mono)" font-weight="600">Canvas</text>
+            <rect x="105" y="80" width="50" height="14" rx="3" fill="rgba(15,118,110,.15)"/><text x="130" y="90" text-anchor="middle" fill="#5EEAD4" font-size="7.5" font-family="var(--mono)" font-weight="600">Exchange</text>
+            <rect x="100" y="98" width="60" height="14" rx="3" fill="rgba(109,40,217,.12)"/><text x="130" y="108" text-anchor="middle" fill="#A78BFA" font-size="7.5" font-family="var(--mono)" font-weight="600">SIS</text>
+            <!-- Lightning bolt -->
+            <text x="130" y="130" text-anchor="middle" fill="#F87171" font-size="12">⚡</text>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#F87171">Breaks → lost seat<div class="iv-stat-sub">I was that student</div></div>
+        </div>
+      </div>
+      <div class="iv-insight">The motivation: I've been on the student side. The honesty: invisible work requires visible accountability</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
 <div class="key-pill" id="keyPill" onclick="document.getElementById('kbOverlay').classList.add('kb-show')" title="Keyboard shortcuts (press ?)">
   <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="4" width="14" height="9" rx="1.5" stroke="#A8A29E" stroke-width="1.2"/><rect x="3.5" y="6.5" width="2" height="1.5" rx=".3" fill="#A8A29E"/><rect x="7" y="6.5" width="2" height="1.5" rx=".3" fill="#A8A29E"/><rect x="10.5" y="6.5" width="2" height="1.5" rx=".3" fill="#A8A29E"/><rect x="4.5" y="9.5" width="7" height="1.5" rx=".3" fill="#A8A29E"/></svg>
   <span class="key-pill-label"><kbd>1</kbd>–<kbd>0</kbd> sections</span>
@@ -966,6 +1358,7 @@
     <div class="kb-help-row"><span class="kb-help-desc">Theater / focus mode</span><span class="kb-help-key">F</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Zoom screenshare mode</span><span class="kb-help-key">Z</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Accessibility mode</span><span class="kb-help-key">A</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc">Visual reference</span><span class="kb-help-key">V</span></div>
     </div>
     <div class="kb-help-close">Press any key or click outside to close</div>
   </div>

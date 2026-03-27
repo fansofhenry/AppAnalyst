@@ -60,6 +60,23 @@ document.addEventListener('keydown', function(e) {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  // Escape = close visual reference panel if open
+  if (e.key === 'Escape') {
+    var ivOv = document.getElementById('ivOverlay');
+    if (ivOv && ivOv.classList.contains('iv-show')) {
+      ivOv.classList.remove('iv-show');
+      return;
+    }
+  }
+
+  // V = toggle visual reference panel
+  if (e.key === 'v' || e.key === 'V') {
+    e.preventDefault();
+    var ivOverlay = document.getElementById('ivOverlay');
+    if (ivOverlay) ivOverlay.classList.toggle('iv-show');
+    return;
+  }
+
   // F = theater mode
   if (e.key === 'f' || e.key === 'F') {
     e.preventDefault();
