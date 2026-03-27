@@ -1101,7 +1101,7 @@ html{scroll-behavior:smooth !important}
 .toc-btn:hover{background:var(--primary-hover);box-shadow:0 4px 12px rgba(26,107,80,.35);transform:translateY(-1px)}
 .toc-btn.toc-open{background:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.2)}
 
-.toc-panel{position:fixed;top:57px;right:0;width:min(440px,92vw);max-height:calc(100vh - 57px);background:var(--bg);border-left:1px solid var(--border);box-shadow:-8px 0 30px rgba(0,0,0,.08);z-index:199;transform:translateX(100%);transition:transform .3s cubic-bezier(.16,1,.3,1);overflow-y:auto;padding:1rem 0}
+.toc-panel{position:fixed;top:57px;left:0;width:min(440px,92vw);max-height:calc(100vh - 57px);background:var(--bg);border-right:1px solid var(--border);box-shadow:8px 0 30px rgba(0,0,0,.08);z-index:199;transform:translateX(-100%);transition:transform .3s cubic-bezier(.16,1,.3,1);overflow-y:auto;padding:1rem 0}
 .toc-panel.toc-visible{transform:translateX(0)}
 
 .toc-header{padding:0 1.25rem .75rem;border-bottom:1px solid var(--border);margin-bottom:.5rem}
@@ -1380,7 +1380,7 @@ a.nav-brand:hover .nav-title{color:var(--primary)}
 body{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect x='7' y='7' width='18' height='18' rx='4' fill='none' stroke='%231A6B50' stroke-width='1.5' opacity='.6'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%231A6B50' opacity='.75'/%3E%3C/svg%3E") 16 16, default}
 a,button,[onclick],.lookup-filter,.ai-tab,.outreach-tab,.filter-tab,.jt-btn,.cal-month,.trigger-card,.status-row,.b-card,.ai-card,.counsel-card,.esc-card,.insight-card,.lookup-card,.toc-item,.progress-dot{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Crect x='7' y='7' width='22' height='22' rx='5' fill='none' stroke='%231A6B50' stroke-width='2' opacity='.7'/%3E%3Ccircle cx='18' cy='18' r='4' fill='%231A6B50' opacity='.85'/%3E%3C/svg%3E") 18 18, pointer}
 
-/* ═══ MOBILE NAV — Page Guide becomes the navigation ═══ */
+/* ═══ MOBILE NAV — Sections becomes the navigation ═══ */
 @media(max-width:768px){
   nav{height:auto !important;padding:.5rem clamp(.75rem,3vw,1.25rem) !important;gap:.4rem}
   .nav-links{display:none !important}
@@ -2635,10 +2635,11 @@ h2{letter-spacing:-.02em !important;font-weight:700 !important}
 .kb-btn{border-radius:var(--r) !important}
 .kb-btn-publish{box-shadow:0 1px 3px rgba(15,118,110,.2) !important}
 
-/* TOC panel — softer shadow */
+/* TOC panel — softer shadow (left-side) */
 .toc-panel{
-  box-shadow:-4px 0 24px rgba(0,0,0,.06),-1px 0 4px rgba(0,0,0,.03) !important;
-  border-left:1px solid rgba(0,0,0,.06) !important
+  box-shadow:4px 0 24px rgba(0,0,0,.06),1px 0 4px rgba(0,0,0,.03) !important;
+  border-right:1px solid rgba(0,0,0,.06) !important;
+  border-left:none !important
 }
 
 /* TOC items — softer hover */
@@ -2687,6 +2688,187 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
   .sec{padding:clamp(2rem,5vw,3rem) 0 !important}
 }
 
+
+/* ═══════════════════════════════════════════════════════════════════
+   FHDA / CVC-OEI AUDIENCE REFINEMENTS
+   Signal institutional knowledge, equity awareness, FHDA pride
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Home College badge — Foothill + De Anza get a subtle "home" marker ── */
+.home-badge{
+  display:inline-flex;align-items:center;gap:.25rem;
+  font-family:var(--mono);font-size:.5rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--primary);
+  padding:.1rem .4rem;border-radius:100px;
+  background:var(--primary-light);border:1px solid var(--primary-bd);
+  margin-left:.4rem;flex-shrink:0;vertical-align:middle
+}
+.home-badge::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--primary);flex-shrink:0}
+
+/* Home college rows — subtle green left accent */
+.status-row.home-row{border-left:3px solid var(--primary) !important;background:rgba(15,118,110,.02)}
+.status-row.home-row:hover{background:var(--primary-light) !important}
+
+/* Home college lookup cards — distinguished */
+.lookup-card.home-card{border-left:3px solid var(--primary) !important;background:linear-gradient(90deg,rgba(15,118,110,.02),var(--surface) 20%)}
+
+/* ── Equity callout in hero — subtle but unmissable ── */
+.equity-callout{
+  display:inline-flex;align-items:center;gap:.4rem;
+  margin:0 auto .5rem;padding:.4rem .85rem;
+  border-radius:100px;border:1px solid var(--primary-bd);
+  background:var(--primary-light);
+  font-family:var(--mono);font-size:.6rem;font-weight:600;
+  letter-spacing:.04em;color:var(--primary);
+  text-align:center
+}
+.equity-callout::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--primary);flex-shrink:0}
+
+/* ── FHDA District health badge in monitor header ── */
+.fhda-health{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.45rem .85rem;border-radius:var(--r);
+  border:1px solid var(--primary-bd);background:var(--primary-light);
+  font-size:.78rem;color:var(--text);margin-bottom:1rem
+}
+.fhda-health-dot{width:8px;height:8px;border-radius:50%;background:var(--primary);flex-shrink:0;box-shadow:0 0 0 3px rgba(15,118,110,.15)}
+.fhda-health strong{color:var(--primary);font-weight:700}
+.fhda-health-label{font-family:var(--mono);font-size:.55rem;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase}
+
+/* ── Footer — stronger closing for interview context ── */
+.footer-role{
+  font-size:.95rem !important;font-weight:700 !important;
+  color:var(--text) !important;line-height:1.6 !important;
+  margin-bottom:.35rem !important
+}
+.footer-role em{color:var(--primary);font-style:normal;font-weight:700}
+.footer-mission{
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-family:var(--mono);font-size:.58rem;font-weight:600;
+  letter-spacing:.05em;text-transform:uppercase;
+  color:var(--primary);margin-top:.5rem;margin-bottom:.35rem;
+  padding:.25rem .6rem;border-radius:100px;
+  background:var(--primary-light);border:1px solid var(--primary-bd)
+}
+.footer-tagline{
+  font-size:.82rem !important;color:var(--text-2) !important;
+  line-height:1.8 !important;max-width:520px !important;margin:0 auto !important;
+  font-style:italic
+}
+
+/* ── OEI alignment indicators on AI Vision cards ── */
+.oei-align{
+  display:inline-flex;align-items:center;gap:.25rem;
+  font-family:var(--mono);font-size:.48rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;
+  color:var(--teal);margin-top:.3rem
+}
+.oei-align::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--teal);flex-shrink:0}
+
+/* ── FHDA Quick Action — green accent to distinguish from others ── */
+.qa-fhda{
+  border-color:var(--primary-bd) !important;
+  background:var(--primary-light) !important;
+  order:-1
+}
+.qa-fhda:hover{
+  background:var(--primary) !important;
+  color:#fff !important;
+  border-color:var(--primary) !important
+}
+.qa-fhda:hover .qa-text{color:#fff !important}
+.qa-fhda:hover .qa-icon{filter:brightness(2)}
+.qa-fhda::after{color:var(--primary) !important;opacity:.7 !important}
+
+/* ── Search hint — animated placeholder suggestion ── */
+.lookup-hint{
+  position:absolute;right:3rem;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:.6rem;color:var(--text-3);
+  pointer-events:none;opacity:0;transition:opacity .4s;
+  display:flex;align-items:center;gap:.3rem
+}
+.lookup-hint.hint-visible{opacity:.6}
+.lookup-hint kbd{
+  display:inline-block;padding:.08rem .3rem;
+  background:var(--bg-3);border-radius:3px;
+  font-size:.5rem;color:var(--text-2);border:1px solid var(--border)
+}
+
+/* ── Nav brand — add FHDA context on hover ── */
+.nav-title-sub{
+  font-family:var(--mono);font-size:.45rem;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;
+  color:var(--text-3);display:block;line-height:1;margin-top:1px
+}
+
+/* ── Section connection bridges — narrative thread ── */
+.scenario-thread{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:var(--mono);font-size:.55rem;color:var(--amber);
+  padding:.25rem .65rem;border-radius:100px;
+  background:var(--amber-light);border:1px solid var(--amber-bd);
+  margin-bottom:.75rem
+}
+.scenario-thread::before{
+  content:'';width:5px;height:5px;border-radius:50%;
+  background:var(--amber);flex-shrink:0
+}
+
+/* ═══════════════════════════════════════════════════════
+   UX PRINCIPLES — Targeted improvements
+   ═══════════════════════════════════════════════════════ */
+
+/* UX: Hero story — visually distinct personal block */
+.hero-story{
+  max-width:600px;margin:1.75rem auto 0;text-align:center;
+  padding:1.25rem 1.5rem;
+  border-radius:var(--r-xl);
+  background:linear-gradient(135deg,rgba(15,118,110,.03),rgba(15,118,110,.06));
+  border:1px solid rgba(15,118,110,.1);
+  position:relative
+}
+.hero-story p{
+  font-size:.92rem;color:var(--text-2);line-height:1.8;margin-bottom:.65rem
+}
+.hero-story strong{color:var(--text);font-weight:700}
+.hero-story .equity-callout{margin-top:0}
+
+/* UX: Secondary quick actions — text links, not pills */
+.qa-secondary{
+  font-family:var(--mono);font-size:.68rem;font-weight:600;
+  color:var(--text-3);cursor:pointer;
+  padding:.3rem .6rem;border-radius:6px;
+  transition:all .15s;text-decoration:none;
+  border:1px solid transparent
+}
+.qa-secondary:hover{
+  color:var(--primary);background:var(--primary-light);
+  border-color:var(--primary-bd)
+}
+
+/* UX: Interaction hints inside tool frames */
+.tool-hint{
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-family:var(--mono);font-size:.58rem;font-weight:500;
+  color:var(--text-3);padding:.25rem .6rem;
+  border-radius:100px;background:var(--bg-2);
+  border:1px solid var(--border);
+  margin-left:auto;cursor:default;
+  transition:all .2s
+}
+.tool-hint::before{
+  content:'';width:4px;height:4px;border-radius:50%;
+  background:var(--primary);flex-shrink:0;
+  animation:pulse 2.5s ease infinite
+}
+.tool-frame:hover .tool-hint{
+  color:var(--primary);background:var(--primary-light);
+  border-color:var(--primary-bd)
+}
+
+/* UX: "Explore the tools" label animation */
+@keyframes labelFadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
 </style>
 </head>
 <body>
@@ -2703,8 +2885,8 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
 
 <nav id="nav" role="navigation" aria-label="Main navigation">
   <a class="nav-brand" href="#" onclick="event.preventDefault();(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" style="text-decoration:none;cursor:pointer" title="Back to top"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">CVC-OEI · Application Support</span></div>
-  <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0" aria-hidden="true"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Page Guide</button>
-  <div class="a11y-toggle" id="a11yToggle" onclick="toggleA11y()" role="switch" aria-checked="false" aria-label="Toggle accessibility high-contrast mode" tabindex="0"><span class="a11y-icon" aria-hidden="true">♿</span><span class="a11y-label">A11y</span><div class="a11y-switch"></div></div>
+  <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0" aria-hidden="true"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Sections</button>
+  <div class="a11y-toggle" id="a11yToggle" onclick="toggleA11y()" role="switch" aria-checked="false" aria-label="Toggle accessibility high-contrast mode" tabindex="0"><span class="a11y-icon" aria-hidden="true">♿</span><span class="a11y-label">Accessibility</span><div class="a11y-switch"></div></div>
     <div class="nav-links">
     <a href="#why">Context</a><a href="#lookup" class="nv nv-blue"><span class="nav-num">1</span>Lookup</a><a href="#cvcData" class="nv nv-green"><span class="nav-num">2</span>Exchange</a><a href="#flow" class="nv nv-sky"><span class="nav-num">3</span>Architecture</a><a href="#monitor" class="nv nv-amber"><span class="nav-num">4</span>Monitor</a><a href="#tracer" class="nv nv-rose"><span class="nav-num">5</span>Diagnostics</a><a href="#patterns" class="nv nv-orange"><span class="nav-num">6</span>Intelligence</a><a href="#comms" class="nv nv-indigo"><span class="nav-num">7</span>Response</a><a href="#outreach" class="nv nv-teal"><span class="nav-num">8</span>Counselors</a><a href="#aiVision" class="nv nv-purple"><span class="nav-num">9</span>AI Vision</a><a href="#barriers" class="nav-barrier"><span class="nav-num">0</span>Barriers</a>
   </div>
@@ -2713,26 +2895,36 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
 <header class="header">
   <div class="wrap">
     <div class="h-badge"><span class="dot"></span> CVC-OEI · Foothill–De Anza CCD</div>
-    <h1>This is how I’d support <em>the Exchange</em> on day one.</h1>
-    <p class="h-desc">115 colleges, four student information system platforms, 33,000 cross-enrollments per year. When the data flow breaks, a student doesn’t see their course in Canvas. <strong>These tools show how I’d find it, fix it, and prevent it from happening again.</strong></p>
+    <h1>This is how I'd support <em>the Exchange</em> from day one at <em>FHDA.</em></h1>
+    <p class="h-desc">115+ colleges, four student information system (SIS) platforms, 33,000 cross-enrollments per year. When the data flow breaks, a student doesn't see their course in Canvas.</p>
+
+    <!-- UX: Stats immediately after description — proof of scale before asking them to act -->
+    <div class="h-stats">
+      <div><div class="h-stat-num green" data-count="115" data-suffix="">0</div><div class="h-stat-label">CCC Colleges</div></div>
+      <div><div class="h-stat-num blue" data-count="4" data-suffix="">0</div><div class="h-stat-label">SIS Platforms</div></div>
+      <div><div class="h-stat-num red" data-count="33" data-suffix="K">0</div><div class="h-stat-label">Cross-Enrollments</div></div>
+      <div><div class="h-stat-num" style="color:var(--purple)" data-count="2100" data-suffix="%" data-comma="true">0</div><div class="h-stat-label">Growth Since 2021</div></div>
+    </div>
+
+    <!-- UX: All 5 actions map to the job description — show full coverage -->
+    <div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-align:center;margin-top:2rem;margin-bottom:.5rem">Explore the tools</div>
     <div class="quick-actions">
+      <a class="qa-card qa-fhda" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">🏠</span><span class="qa-text">Check FHDA status</span></a>
       <a class="qa-card" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">⚡</span><span class="qa-text">See what breaks</span></a>
       <a class="qa-card" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">🛠</span><span class="qa-text">Trace an incident</span></a>
       <a class="qa-card" onclick="document.getElementById('counselorToolkit').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">📋</span><span class="qa-text">Help a counselor</span></a>
       <a class="qa-card" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">📊</span><span class="qa-text">See the barriers</span></a>
     </div>
 
-    <p style="font-size:.78rem;color:var(--text-3);max-width:540px;margin:0 auto .75rem;line-height:1.7;text-align:center;font-size:.95rem;line-height:1.7;max-width:600px">I started at <strong style="color:var(--text)">Foothill College</strong> as a first-generation student. The Exchange is <strong style="color:var(--text)">equity infrastructure</strong> — when it breaks, students at rural colleges with 12 courses lose access to the same curriculum a metro college offers. I’ve been on the student side of that.</p>
-    <div class="h-stats">
-      <div><div class="h-stat-num green" data-count="115" data-suffix="">0</div><div class="h-stat-label">Connected Colleges</div></div>
-      <div><div class="h-stat-num blue" data-count="4" data-suffix="">0</div><div class="h-stat-label">SIS Platforms</div></div>
-      <div><div class="h-stat-num red" data-count="33" data-suffix="K">0</div><div class="h-stat-label">Cross-Enrollments</div></div>
-      <div><div class="h-stat-num" style="color:var(--purple)" data-count="2100" data-suffix="%" data-comma="true">0</div><div class="h-stat-label">Growth Since 2021</div></div>
+    <!-- UX: Personal story as a visually distinct block — emotional anchor AFTER the action layer -->
+    <div class="hero-story">
+      <p>I started at <strong>Foothill College</strong> as a first-generation student. The Exchange is <strong>equity infrastructure</strong> — when it breaks, students at rural colleges with 12 courses lose access to the same curriculum a metro college offers. I've been on the student side of that.</p>
+      <span class="equity-callout">Aligned with OEI's Vision for Equitable Access</span>
     </div>
+
   </div>
-</div>
-    
 </header>
+
 
 <!-- ENHANCEMENT: First-visit scroll hint — disappears after first scroll -->
 <div class="scroll-hint" id="scrollHint">
@@ -2777,9 +2969,9 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
 <section class="sec fu" id="lookup" role="region" aria-label="College Lookup"><div class="wrap">
   <div class="eyebrow" style="color:var(--blue)"><span class="sec-num" style="background:var(--blue)">1</span>Lookup</div>
   <h2>Look up any college in <em>the Exchange</em></h2>
-  <p class="sec-desc">Type a college name or SIS type. Instant reference with financial aid status, sign-on health, and Exchange integration notes.</p>
+  <p class="sec-desc">Type a college name or SIS type. <strong>Foothill and De Anza are pinned to the top.</strong> Instant reference with financial aid status, sign-on health, and Exchange integration notes.</p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Lookup</span></div><span class="tool-bar-title">College Lookup · 31 Colleges · Searchable</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Lookup</span></div><span class="tool-hint">Click any card for analyst notes</span><span class="tool-bar-title">College Lookup · 31 Colleges · Searchable</span></div>
     <div class="tool-body">
       <div class="lookup-wrap">
         <div class="lookup-stats" id="lookupStats"></div>
@@ -2863,9 +3055,9 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
 <section class="sec sec-alt fu" id="journey" role="region" aria-label="Student Journey"><div class="wrap">
   <div class="eyebrow">Student Experience</div>
   <h2>Same enrollment — <em>working</em> vs <em style="color:var(--red)">breaks</em></h2>
-  <p class="sec-desc">When the Exchange works, a student at Chabot takes MATH 1A at De Anza without thinking about it. When it breaks — <strong>the course vanishes from Canvas.</strong> Teal annotations show where prevention could have caught it.</p>
+  <p class="sec-desc">When the Exchange works, a student at Chabot takes MATH 1A at <strong>De Anza</strong> without thinking about it. When it breaks — <strong>the course vanishes from Canvas.</strong> Teal annotations show where prevention could have caught it.</p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Student View</span></div><span class="tool-bar-title">MATH 1A · Chabot → De Anza</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Student View</span></div><span class="tool-hint">Toggle: working vs broken</span><span class="tool-bar-title">MATH 1A · Chabot → De Anza</span></div>
     <div class="tool-body" style="padding:0">
       <div style="display:flex;gap:2px;background:var(--bg-3);border-radius:var(--r);padding:2px;margin:.75rem .85rem 0;width:fit-content" id="journeyToggle">
         <button class="jt-btn" onclick="setJourney('compare',this)">Side by Side</button>
@@ -2882,7 +3074,7 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
 <section class="sec fu" id="flow"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:#0284c7">3</span>Architecture</div>
   <h2>How student data flows — and <em>where it breaks</em></h2>
-  <p class="sec-desc">Four layers from home college to Canvas. Click any node to see where failures happen.</p>
+  <p class="sec-desc">Four layers from home college to Canvas. <strong>FHDA uses Banner Direct</strong> — the most reliable integration path. Click any node to see where failures happen.</p>
   <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;margin-bottom:.25rem">
     <span style="display:inline-flex;align-items:center;gap:.25rem;font-size:.6rem;color:var(--primary)"><span style="width:8px;height:8px;border-radius:50%;background:var(--primary)"></span>Student-facing</span>
     <span style="display:inline-flex;align-items:center;gap:.25rem;font-size:.6rem;color:var(--blue)"><span style="width:8px;height:8px;border-radius:50%;background:var(--blue)"></span>Authentication</span>
@@ -2890,7 +3082,7 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
     <span style="display:inline-flex;align-items:center;gap:.25rem;font-size:.6rem;color:var(--red)"><span style="width:8px;height:8px;border-radius:50%;background:var(--red)"></span>Failure point</span>
   </div>
   <div class="flow-visual">
-    <div class="flow-title">Cross-Enrollment Data Flow — Click to Explore</div>
+    <div class="flow-title">Cross-Enrollment Data Flow — click any node to explore</div>
     <div class="flow-row">
       <div class="f-node fn-sis" onclick="showFlowInfo(0)"><div class="fn-label">Home SIS</div><div class="fn-desc">Banner Direct · Ethos<br>PeopleSoft · Colleague</div></div>
       <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">AER Payload</div></div>
@@ -2908,10 +3100,10 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
 <section class="sec sec-alt fu" id="monitor" role="region" aria-label="System Monitor"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:var(--amber)">4</span>Monitor</div>
   <h2>Spot the failure <em>before the tickets arrive</em></h2>
-  <p class="sec-desc">Which of the 115 Exchange colleges are healthy, degraded, or failing right now? <strong>The view that prevents the 9 AM scramble.</strong></p>
+  <p class="sec-desc">Which of the 115+ Exchange colleges are healthy, degraded, or failing right now? <strong>Foothill and De Anza status is highlighted.</strong> The view that prevents the 9 AM scramble.</p>
   <div class="tool-frame">
     <div style="position:relative"><div class="live-alert" id="liveAlert"><div class="live-alert-title">New Alert</div><div class="live-alert-body"></div><div class="live-alert-time"></div></div></div>
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><div class="tool-bar-title">Morning Monitor · Weekly Pulse · College Health Status</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><span class="tool-hint">Click rows to expand</span><div class="tool-bar-title">Morning Monitor · Weekly Pulse · College Health Status</div></div>
     <div class="tool-body">
       <div style="margin-bottom:1rem;padding:.65rem .85rem;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface)">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem">
@@ -2944,9 +3136,9 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
 <section class="sec fu" id="tracer" role="region" aria-label="Incident Tracer"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:#be185d">5</span>Diagnostics</div>
   <h2>Missing course reported — <em>where do you look?</em></h2>
-  <p class="sec-desc">Layer-by-layer diagnosis. Student report → SIS → API → Exchange → Canvas. <strong>Find the break.</strong></p>
+  <p class="sec-desc">Layer-by-layer diagnosis of a Banner Ethos failure. <strong>FHDA runs Banner Direct — a simpler path, but the same debugging method applies.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><div class="tool-bar-title">Incident Trace · Sacramento City · Ethos Token</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><span class="tool-hint">Press Auto-Run or click layers</span><div class="tool-bar-title">Incident Trace · Sacramento City · Ethos Token</div></div>
     <div class="tool-body">
       <div class="tracer-controls">
         <button class="tracer-btn tracer-btn-run" id="autoRunBtn" onclick="autoRunTrace()">▶ Auto-Run Trace</button>
@@ -3012,7 +3204,7 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
     <div class="eyebrow"><span class="sec-num" style="background:#4338ca">7</span>Response</div>
     <h2>The same failure, written <em>four different ways</em></h2>
     <p class="sec-desc">Same Ethos token failure — written for the student, campus IT, the registrar, and your internal team. <strong>Each one is copy-ready.</strong></p>
-  <div style="display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .6rem;border-radius:100px;background:var(--amber-light);border:1px solid var(--amber-bd);font-family:var(--mono);font-size:.5rem;color:var(--amber);margin-bottom:1rem"><span style="width:5px;height:5px;border-radius:50%;background:var(--amber)"></span>Continues the Sacramento City scenario from Monitor → Diagnostics</div</p>
+  <div style="display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .6rem;border-radius:100px;background:var(--amber-light);border:1px solid var(--amber-bd);font-family:var(--mono);font-size:.5rem;color:var(--amber);margin-bottom:1rem"><span style="width:5px;height:5px;border-radius:50%;background:var(--amber)"></span>Continues the Sacramento City scenario from Monitor → Diagnostics</div>
     <div style="padding:.55rem .85rem;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
       <div style="display:flex;align-items:center;gap:.35rem"><span style="width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0"></span><span style="font-family:var(--mono);font-size:.55rem;font-weight:600;color:var(--amber)">P2 ACTIVE</span></div>
       <div style="font-size:.78rem;color:var(--text-2)">Sacramento City — Ethos token expired — 47 AER records queued — MATH 1A cross-enrollment not syncing to Canvas</div>
@@ -3119,7 +3311,7 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
 <section class="sec sec-alt fu" id="outreach"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:var(--teal)">8</span>Outreach</div>
   <h2>What if course sharing wasn’t a <em>last resort?</em></h2>
-  <p class="sec-desc">Cross-enrollment through the Exchange is essential for graduation — but usually discovered too late. <strong>What if students and counselors knew earlier?</strong></p>
+  <p class="sec-desc">Cross-enrollment through the Exchange is essential for on-time graduation — but usually discovered too late. <strong>What if Foothill and De Anza counselors and students knew earlier?</strong></p>
   <div style="display:flex;gap:.5rem;margin-top:.5rem"><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--border)"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--border)"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--border)"></span><span style="font-family:var(--mono);font-size:.5rem;color:var(--text-3);white-space:nowrap;align-self:center">4 of 7 months covered</span></div>
   <div style="padding:.6rem .85rem;border:1px solid var(--teal-bd);background:var(--teal-light);border-radius:var(--r);margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:.5rem">
     <span style="font-size:.85rem;flex-shrink:0">💬</span>
@@ -3142,13 +3334,13 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
 <section class="sec sec-alt fu" id="counselorToolkit" role="region" aria-label="Counselor Toolkit"><div class="wrap">
   <div class="eyebrow" style="color:var(--teal)">Counselor Toolkit</div>
   <h2>The Exchange is not just GE — <em>here's the proof</em></h2>
-  <p class="sec-desc">If counselors aren't confident about transfer credit, students never hear about the Exchange. New for Fall 2025: Cal-GETC Area 6 (Ethnic Studies).</p>
+  <p class="sec-desc">If counselors aren't confident about transfer credit, students never hear about the Exchange. <strong>This toolkit is what a Foothill or De Anza counselor needs on their desk.</strong> Updated for Fall 2025: Cal-GETC Area 6 (Ethnic Studies).</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--teal-light);color:var(--teal)">Reference</span></div><span class="tool-bar-title">Counselor Toolkit · Verification · Checklist · Scripts</span></div>
     <div class="tool-body">
 
       <div style="padding:.6rem .75rem;background:var(--teal-light);border:1px solid var(--teal-bd);border-radius:8px;margin-bottom:1rem;font-size:.78rem;color:var(--text-2);line-height:1.6">
-        <strong style="color:var(--teal)">Why this matters:</strong> Some counselors think the CVC Exchange is limited to general education courses. In reality, students can search by CSU GE Breadth, Cal-GETC (replaces IGETC starting Fall 2025), substitute course by home college course name, major preparation courses via C-ID, and keyword. The verification tools already exist — counselors just need a workflow.
+        <strong style="color:var(--teal)">Why this matters:</strong> Some counselors think the CVC Exchange is limited to general education courses. In reality, students can search by CSU GE Breadth, Cal-GETC (the new transfer GE pathway effective Fall 2025), substitute course by home college course name, major preparation courses via C-ID, and keyword. The verification tools already exist — counselors just need a workflow.
       </div>
 
       <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.5rem;font-weight:700">▸ Four things counselors need to know</div>
@@ -3232,7 +3424,7 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
 <section class="sec fu" id="aiVision" role="region" aria-label="AI Vision"><div class="wrap">
   <div class="eyebrow" style="color:var(--purple)"><span class="sec-num" style="background:var(--purple)">9</span>AI Vision</div>
   <h2>What could AI <em style="color:var(--purple)">actually do here?</em></h2>
-  <p class="sec-desc">Aligned with CISOA 2026 themes: fraud deterrence, agentic AI, and equity-first automation. <strong>Each card shows today vs with-AI.</strong></p>
+  <p class="sec-desc">Aligned with CISOA 2026 themes: fraud deterrence, agentic AI, and equity-first automation. <strong>Each card shows today vs with-AI — grounded in real FHDA data patterns.</strong></p>
   <div style="display:flex;gap:.5rem;margin:.75rem 0;flex-wrap:wrap">
     <div style="padding:.4rem .65rem;border-radius:6px;background:var(--primary-light);border:1px solid var(--primary-bd);font-size:.7rem;color:var(--text-2)"><strong style="color:var(--primary)">4 quick wins</strong> you could build with rules, no machine learning</div>
     <div style="padding:.4rem .65rem;border-radius:6px;background:var(--purple-light);border:1px solid var(--purple-bd);font-size:.7rem;color:var(--text-2)"><strong style="color:var(--purple)">Fraud tab</strong> aligned with CISOA 2026 takeaways on agentic AI</div>
@@ -3295,7 +3487,7 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
   </div>
 
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Barriers</span></div><span class="tool-bar-title">Barrier Intelligence · 10 Systemic Friction Points</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Barriers</span></div><span class="tool-hint">Click any card to expand</span><span class="tool-bar-title">Barrier Intelligence · 10 Systemic Friction Points</span></div>
     <div class="tool-body"><div class="b-grid" id="bGrid"></div></div>
   </div>
 </div></section>
@@ -3363,13 +3555,16 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
 
 
 
-<footer style="border-top:1px solid var(--border);padding:2rem 0;text-align:center;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)">
+<footer style="border-top:1px solid var(--border);padding:2.5rem 0;text-align:center;background:linear-gradient(180deg,var(--bg) 0%,var(--primary-light) 100%)">
   <div class="wrap">
-    <div style="font-size:.88rem;color:var(--text);line-height:1.8;margin-bottom:.5rem">
-      <strong>Henry Fan</strong> · Application Support Analyst I Candidate · CVC-OEI / Foothill–De Anza CCD
+    <div class="footer-mission">Built for the CVC-OEI team at FHDA</div>
+    <div class="footer-role">
+      <strong>Henry Fan</strong> &middot; Application Support Analyst I &middot; <em>CVC-OEI / Foothill&ndash;De Anza CCD</em>
     </div>
-    <div style="font-size:.7rem;color:var(--text-3);line-height:1.6;max-width:480px;margin:0 auto">
-      Every tool on this page maps to a real challenge from the job description — because I read it as a student who's been on the other side of these problems. Try the real Exchange at <a href="https://search.cvc.edu" target="_blank" rel="noopener" style="color:var(--primary);text-decoration:underline">search.cvc.edu</a>. All data is simulated — no real student records. Built with publicly available CVC documentation and the live <a href="https://search.cvc.edu" target="_blank" rel="noopener" style="color:var(--primary);text-decoration:underline;text-underline-offset:2px">CVC Exchange course search</a>.
+    <div class="footer-tagline">Every tool on this page maps to a real challenge from the job description &mdash; because I read it as a student who has been on the other side of these problems.</div>
+    <div style="margin-top:.65rem;margin-bottom:.5rem"><span style="display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .85rem;border-radius:100px;background:var(--surface);border:1.5px solid var(--primary-bd);font-size:.78rem;font-weight:600;color:var(--primary);box-shadow:0 1px 4px rgba(15,118,110,.1)">I'd welcome the chance to walk through this with the team</span></div>
+    <div style="font-size:.75rem;color:var(--text-2);line-height:1.7;max-width:500px;margin:.6rem auto 0">
+      All data is simulated &mdash; no real student records. Built with publicly available CVC documentation, the live <a href="https://search.cvc.edu" target="_blank" rel="noopener" style="color:var(--primary);text-decoration:underline;text-underline-offset:2px">CVC Exchange course search</a>, and Wheelhouse Center enrollment data.
     </div>
     <div style="display:flex;gap:.4rem;justify-content:center;margin-top:.75rem;flex-wrap:wrap">
       <span style="font-family:var(--mono);font-size:.55rem;padding:.15rem .4rem;border-radius:4px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-3)">Banner</span>
@@ -3632,7 +3827,7 @@ const calMonths=[
   {type:'intervention',title:'CCPG Reapplication Nudge',who:'CCPG-eligible Exchange students',situation:'Students with California College Promise Grant at their home college often do not know it does not automatically transfer. A proactive message at the start of term prevents surprise bills.',msg:'Important: Your California College Promise Grant (CCPG) fee waiver from [Home College] does not automatically apply at your Teaching College. To avoid unexpected charges, apply for CCPG separately at [Teaching College] before the payment deadline.',impact:['Prevents surprise bills','Equity-critical','Low-income students']}
 ]},
 {id:'oct',name:'Oct',label:'Mid-term',phase:'Midterm check-in',dots:['cd-teal'],triggers:[
-  {type:'orientation',title:'Spring Planning: Pre-Registration Push',who:'Currently enrolled students',situation:'Mid-term is when counselors help students plan spring schedules. Highest-leverage moment to introduce the Exchange as a planning tool — not a panic tool.',msg:'Planning your spring schedule? If any courses you need are unavailable at [Home College], search the CVC Exchange early. Popular sections fill fast, and you have options across 116 colleges. Ask your counselor which Exchange courses fit your ed plan.',impact:['Strategic planning','Reduces spring scramble','Normalizes Exchange']}
+  {type:'orientation',title:'Spring Planning: Pre-Registration Push',who:'Currently enrolled students',situation:'Mid-term is when counselors help students plan spring schedules. Highest-leverage moment to introduce the Exchange as a planning tool — not a panic tool.',msg:'Planning your spring schedule? If any courses you need are unavailable at [Home College], search the CVC Exchange early. Popular sections fill fast, and you have options across 115+ colleges. Ask your counselor which Exchange courses fit your ed plan.',impact:['Strategic planning','Reduces spring scramble','Normalizes Exchange']}
 ]},
 {id:'nov',name:'Nov',label:'Spring reg',phase:'Spring registration',dots:['cd-green','cd-blue'],triggers:[
   {type:'inreach',title:'Returning Exchange Users: Personalized Nudge',who:'Students who previously used Exchange',situation:'Student used the Exchange successfully before. Personalized outreach based on their history is more effective than generic campaigns.',msg:'You completed [COURSE] through the CVC Exchange last [term]. As you register for spring, remember you can use the Exchange again for any courses full or unavailable at [Home College].',impact:['Repeat adoption','Personalized','Low effort, high return']},
@@ -4031,7 +4226,7 @@ var aiData = {
       signal: 'aic-predict'
     },
     {
-      icon: '⚠', title: 'Detect anomalies across 116 colleges at 2 AM',
+      icon: '⚠', title: 'Detect anomalies across 115+ colleges at 2 AM',
       desc: 'One college generating 5x normal error rate overnight isn\u2019t visible in a morning queue scan. Anomaly detection surfaces it as a single alert, not 47 individual tickets.',
       today: 'Analyst opens the queue at 8:30 AM, sees 47 new tickets, starts reading. Realizes at 9:15 they\u2019re all from the same college. 45 minutes lost.',
       after: 'Alert fires at 2:14 AM: "Chabot College \u2014 error rate 5.2x baseline since 01:00. 47 AER records queued. Probable cause: Ethos token." Analyst starts at 8:30 with the diagnosis already done.',
@@ -4690,7 +4885,7 @@ document.addEventListener('keydown', function(e) {
     return;
   }
   
-  // G = open page guide
+  // G = open sections panel
   if (e.key === 'g' || e.key === 'G') {
     e.preventDefault();
     toggleToc();
@@ -5462,6 +5657,172 @@ document.getElementById('a11yToggle').addEventListener('keydown', function(e) {
   });
 })();
 
+// ═══════════════════════════════════════════════════════
+// FHDA DISTRICT AWARENESS
+// Marks Foothill + De Anza as "home" across all tools
+// ═══════════════════════════════════════════════════════
+(function(){
+  var HOME_COLLEGES = ['Foothill College', 'De Anza College'];
+
+  // 1. Add "HOME" badge to Foothill/De Anza in Monitor status rows
+  function markHomeRows(){
+    document.querySelectorAll('.s-name').forEach(function(el){
+      if(HOME_COLLEGES.indexOf(el.textContent.trim()) >= 0 && !el.querySelector('.home-badge')){
+        var badge = document.createElement('span');
+        badge.className = 'home-badge';
+        badge.textContent = 'FHDA';
+        badge.setAttribute('title','Foothill–De Anza CCD — your district');
+        el.appendChild(badge);
+        // Mark the row
+        var row = el.closest('.status-row');
+        if(row) row.classList.add('home-row');
+      }
+    });
+  }
+
+  // 2. Add FHDA District Health banner above monitor grid
+  function addFHDAHealth(){
+    var monGrid = document.getElementById('monitorGrid');
+    if(!monGrid || document.getElementById('fhdaHealth')) return;
+    // Check Foothill + De Anza status
+    var fhStatus = 'ok', daStatus = 'ok';
+    for(var i = 0; i < allColleges.length; i++){
+      if(allColleges[i].name === 'Foothill College') fhStatus = allColleges[i].status;
+      if(allColleges[i].name === 'De Anza College') daStatus = allColleges[i].status;
+    }
+    var allOk = fhStatus === 'ok' && daStatus === 'ok';
+    var div = document.createElement('div');
+    div.id = 'fhdaHealth';
+    div.className = 'fhda-health';
+    div.innerHTML =
+      '<span class="fhda-health-dot" style="background:'+(allOk?'var(--primary)':'var(--amber)')+'"></span>' +
+      '<span><strong>FHDA District</strong> — Foothill '+(fhStatus==='ok'?'✓':'⚠')+' &middot; De Anza '+(daStatus==='ok'?'✓':'⚠')+'</span>' +
+      '<span class="fhda-health-label">'+(allOk?'All systems healthy':'Attention needed')+'</span>';
+    monGrid.parentElement.insertBefore(div, monGrid);
+  }
+
+  // 3. Mark home colleges in Lookup results
+  function markHomeLookups(){
+    document.querySelectorAll('.lookup-college-name').forEach(function(el){
+      if(HOME_COLLEGES.indexOf(el.textContent.trim()) >= 0){
+        var card = el.closest('.lookup-card');
+        if(card && !card.classList.contains('home-card')){
+          card.classList.add('home-card');
+          if(!el.querySelector('.home-badge')){
+            var badge = document.createElement('span');
+            badge.className = 'home-badge';
+            badge.textContent = 'FHDA';
+            el.appendChild(badge);
+          }
+        }
+      }
+    });
+  }
+
+  // Patch renderMonitor to re-apply home badges after each render
+  var _origRender = window.renderMonitor;
+  if(typeof _origRender === 'function'){
+    window.renderMonitor = function(){
+      _origRender.apply(this, arguments);
+      // Re-remove old FHDA health to rebuild
+      var old = document.getElementById('fhdaHealth');
+      if(old) old.remove();
+      setTimeout(function(){
+        markHomeRows();
+        addFHDAHealth();
+      }, 50);
+    };
+  }
+
+  // Patch renderLookup to mark home colleges
+  var _origLookup = window.renderLookup;
+  if(typeof _origLookup === 'function'){
+    window.renderLookup = function(){
+      _origLookup.apply(this, arguments);
+      setTimeout(markHomeLookups, 50);
+    };
+  }
+
+  // Initial run
+  setTimeout(function(){
+    markHomeRows();
+    addFHDAHealth();
+    markHomeLookups();
+  }, 300);
+})();
+
+
+// ═══ FHDA: Update footer with district context ═══
+(function(){
+  // Remove old generic disclaimer text
+  var oldDisclaimer = document.querySelector('footer div[style*="font-size:.7rem"]');
+  if(oldDisclaimer) oldDisclaimer.remove();
+})();
+
+// ═══════════════════════════════════════════════════════
+// FHDA POLISH — Search hint, nav subtitle, scenario flow
+// ═══════════════════════════════════════════════════════
+
+// 1. Search hint — suggests "Try: Foothill" after idle
+(function(){
+  var input = document.getElementById('collegeLookup');
+  if(!input) return;
+  var wrap = input.closest('.lookup-input-wrap');
+  if(!wrap) return;
+  // Create hint element
+  var hint = document.createElement('div');
+  hint.className = 'lookup-hint';
+  hint.innerHTML = 'Try: <strong style="color:var(--primary)">Foothill</strong> or <strong style="color:var(--primary)">De Anza</strong>';
+  wrap.appendChild(hint);
+  // Show after 2s if input is empty
+  var timer = setTimeout(function(){ 
+    if(!input.value) hint.classList.add('hint-visible'); 
+  }, 2500);
+  // Hide on input
+  input.addEventListener('focus', function(){
+    clearTimeout(timer);
+    hint.classList.remove('hint-visible');
+  });
+  input.addEventListener('input', function(){
+    hint.classList.remove('hint-visible');
+  });
+})();
+
+
+// 2. Nav brand — add FHDA subtitle
+(function(){
+  var title = document.querySelector('.nav-title');
+  if(!title || title.querySelector('.nav-title-sub')) return;
+  var sub = document.createElement('span');
+  sub.className = 'nav-title-sub';
+  sub.textContent = 'Foothill–De Anza CCD';
+  title.appendChild(sub);
+})();
+
+
+// 3. Foothill + De Anza always sort first in lookup results
+(function(){
+  var orig = window.renderLookup;
+  if(!orig) return;
+  window.renderLookup = function(colleges){
+    // Sort: FHDA first, then alphabetical
+    if(colleges && colleges.sort){
+      var fhda = ['Foothill College','De Anza College'];
+      colleges.sort(function(a,b){
+        var aHome = fhda.indexOf(a.name) >= 0 ? 0 : 1;
+        var bHome = fhda.indexOf(b.name) >= 0 ? 0 : 1;
+        if(aHome !== bHome) return aHome - bHome;
+        return a.name.localeCompare(b.name);
+      });
+    }
+    orig.apply(this, arguments);
+  };
+  // Re-render to apply sort
+  if(typeof getFilteredColleges === 'function'){
+    renderLookup(getFilteredColleges());
+  }
+})();
+
 </script>
 
 
@@ -5470,7 +5831,7 @@ document.getElementById('a11yToggle').addEventListener('keydown', function(e) {
 <!-- TABLE OF CONTENTS PANEL -->
 <div class="toc-panel" id="tocPanel">
   <div class="toc-header">
-    <div class="toc-title">Page Guide</div>
+    <div class="toc-title">Sections</div>
     <div class="toc-subtitle">10 sections · Keys 1–9, 0 · Click any row to jump</div>
     <input class="toc-search" id="tocSearch" type="text" placeholder="Filter sections..." oninput="filterToc(this.value)" autocomplete="off" style="width:100%;padding:.4rem .6rem;border:1px solid var(--border);border-radius:6px;font-family:var(--mono);font-size:.7rem;margin-top:.5rem;background:var(--surface);color:var(--text);outline:none;box-sizing:border-box">
   </div>
@@ -5575,7 +5936,7 @@ document.getElementById('a11yToggle').addEventListener('keydown', function(e) {
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">7</span> Response</span><span class="kb-help-desc"><span class="kb-help-key">8</span> Counselors</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">9</span> AI Vision</span><span class="kb-help-desc"><span class="kb-help-key">0</span> Barriers</span></div>
     <div style="border-top:1px solid var(--border);margin-top:.5rem;padding-top:.5rem">
-    <div class="kb-help-row"><span class="kb-help-desc">Open page guide</span><span class="kb-help-key">G</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc">Open sections</span><span class="kb-help-key">G</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Search colleges</span><span class="kb-help-key">/</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Back to top</span><span class="kb-help-key">T</span></div>
     </div>
