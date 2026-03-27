@@ -202,3 +202,19 @@
   .tool-body { padding: .5rem; }
   .h-stats { gap: .35rem; }
 }
+
+
+/* ═══ PRINT ═══ */
+
+@media print {
+  nav, .back-to-top, .progress-dots, .scroll-progress,
+  .scroll-hint, .key-pill, .theater-dim, .zoom-badge,
+  .theater-badge, .a11y-badge, .kb-overlay, .greeting-toast,
+  .explore-tracker { display: none; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .sec { page-break-inside: avoid; padding: 1.5rem 0; }
+  .tool-frame { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+  .tool-frame:hover { transform: none; box-shadow: none; }
+  a { color: inherit; text-decoration: underline; }
+  .fu { opacity: 1; transform: none; }
+}

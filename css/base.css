@@ -22,6 +22,7 @@ body {
   font-family: var(--body);
   background: var(--bg);
   color: var(--text);
+  font-size: .92rem;
   line-height: 1.75;
   letter-spacing: -.005em;
   -webkit-font-smoothing: antialiased;
@@ -116,10 +117,30 @@ h2 em.red { color: var(--red); }
 
 h3 {
   font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
 }
 
 p {
   line-height: 1.7;
+}
+
+/* Content links — scoped to tool body and section prose */
+.tool-body a,
+.sec-desc a,
+.hero-story a {
+  color: var(--primary);
+  text-decoration-color: var(--primary-bd);
+  text-underline-offset: 2px;
+  transition: color .15s, text-decoration-color .15s;
+}
+.tool-body a:hover,
+.sec-desc a:hover,
+.hero-story a:hover {
+  color: var(--text);
+  text-decoration-color: var(--primary);
 }
 
 /* ── Sections ── */
@@ -176,7 +197,6 @@ p {
   background: var(--surface);
   border: 1px solid var(--border);
   box-shadow: 0 1px 4px rgba(0,0,0,.03);
-  opacity: .8;
 }
 .eyebrow-red { color: var(--red); }
 
@@ -187,7 +207,6 @@ p {
   max-width: 580px;
   line-height: 1.85;
   margin-bottom: 2.25rem;
-  opacity: .9;
 }
 .sec-desc strong {
   color: var(--text);
@@ -251,7 +270,7 @@ input:focus-visible,
 .lookup-card:focus-visible,
 .msg-preview:focus-visible {
   outline: 2px solid var(--primary);
-  outline-offset: 2px;
+  outline-offset: 3px;
   border-radius: 4px;
 }
 
@@ -283,7 +302,7 @@ input:focus-visible,
 /* ── Muted text contrast boost ── */
 .sec-desc, .fn-desc, .s-detail, .rd-history,
 .toc-item-desc, .ai-card-desc, .eq-reason, .b-d-text {
-  color: #78716C;
+  color: var(--text-2);
 }
 
 /* ── Demo caption ── */
@@ -297,7 +316,7 @@ input:focus-visible,
   gap: .4rem;
   margin-top: .75rem;
   padding-top: .5rem;
-  opacity: .6;
+  opacity: .75;
   border-top: 1px solid var(--border);
 }
 .demo-caption::before {
