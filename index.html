@@ -3073,7 +3073,7 @@ footer{
 <div class="greeting-toast" id="greetingToast"><span class="gt-wave">👋</span> Welcome — built for the CVC-OEI team at FHDA</div>
 
 <nav id="nav" role="navigation" aria-label="Main navigation">
-  <a class="nav-brand" href="#" onclick="event.preventDefault();(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" style="text-decoration:none;cursor:pointer" title="Back to top"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">CVC-OEI · Application Support</span></div>
+  <a class="nav-brand" href="#" onclick="event.preventDefault();(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" style="text-decoration:none;cursor:pointer" title="Back to top"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">CVC-OEI · Application Support</span></a>
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0" aria-hidden="true"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Sections</button>
   <div class="a11y-toggle" id="a11yToggle" onclick="toggleA11y()" role="switch" aria-checked="false" aria-label="Toggle accessibility high-contrast mode" tabindex="0"><span class="a11y-icon" aria-hidden="true">♿</span><span class="a11y-label">Accessibility</span><div class="a11y-switch"></div></div>
     <div class="nav-links">
@@ -3158,7 +3158,7 @@ footer{
 <section class="sec fu" id="lookup" role="region" aria-label="College Lookup"><div class="wrap">
   <div class="eyebrow" style="color:var(--blue)"><span class="sec-num" style="background:var(--blue)">1</span>Lookup</div>
   <h2>Look up any college in <em>the Exchange</em></h2>
-  <p class="sec-desc">Type a college name or SIS type. <strong>Foothill and De Anza are pinned to the top.</strong> Instant reference with financial aid status, sign-on health, and Exchange integration notes.</p>
+  <p class="sec-desc">Type a college name or system type. <strong>Foothill and De Anza are pinned to the top.</strong> Instant reference with financial aid status, sign-on health, and Exchange integration notes.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Lookup</span></div><span class="tool-hint">Click any card for analyst notes</span><span class="tool-bar-title">College Lookup · 31 Colleges · Searchable</span></div>
     <div class="tool-body">
@@ -3174,7 +3174,7 @@ footer{
           <button class="lookup-filter" onclick="filterColleges('manual',this)" style="border-color:var(--red)">FA Manual</button>
         </div>
         <div class="lookup-input-wrap">
-          <input class="lookup-input" id="collegeLookup" type="text" placeholder="Search by name, district, or SIS type..." oninput="searchColleges(this.value)" autocomplete="off">
+          <input class="lookup-input" id="collegeLookup" type="text" placeholder="Search by name, district, or system type..." oninput="searchColleges(this.value)" autocomplete="off">
           <!-- ENHANCEMENT: Clear button — obvious affordance to reset search -->
           <button class="lookup-clear" id="lookupClear" onclick="clearSearch()" title="Clear search" aria-label="Clear search">×</button>
         </div>
@@ -3307,7 +3307,7 @@ footer{
         </div>
       </div>
       <div class="monitor-controls">
-        <input class="mon-search" id="monSearch" type="text" placeholder="Look up a college — type name or SIS type..." oninput="filterMonitor()">
+        <input class="mon-search" id="monSearch" type="text" placeholder="Look up a college — type name or system type..." oninput="filterMonitor()">
         <div class="filter-tabs" id="filterTabs">
           <button class="filter-tab active" onclick="setFilter('all',this)">All</button>
           <button class="filter-tab" onclick="setFilter('ok',this)">Healthy</button>
@@ -3639,7 +3639,6 @@ footer{
 
       <div style="padding:.6rem .75rem;background:var(--amber-light);border:1px solid var(--amber-bd);border-radius:8px;font-size:.78rem;color:var(--text-2);line-height:1.7">
         <strong style="color:var(--amber)">Since April 2025:</strong> The CVC's centralized Financial Aid Dashboard automates unit recording for Banner Direct and PeopleSoft colleges. Ethos colleges are pending. For colleges already on the dashboard, the manual email workflow for Consortium Agreements is being replaced with a systemwide tool. FA offices should confirm their college's integration status and update internal procedures accordingly. The student's home college determines aid eligibility for all Exchange courses.
-      </div>
       </div>
 
     </div>
@@ -6091,7 +6090,7 @@ document.getElementById('a11yToggle').addEventListener('keydown', function(e) {
     'comms': 'Response',
     'escalation': 'Escalation',
     'outreach': 'Outreach',
-    'counselorToolkit': 'Counselor Toolkit',
+    'counselorToolkit': 'Student & Counselor Toolkit',
     'aiVision': 'AI Vision',
     'barrierOverview': 'Barriers',
     'barriers': 'Barriers'
@@ -6231,7 +6230,7 @@ document.getElementById('a11yToggle').addEventListener('keydown', function(e) {
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">1</span> Lookup</span><span class="kb-help-desc"><span class="kb-help-key">2</span> Exchange</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">3</span> Architecture</span><span class="kb-help-desc"><span class="kb-help-key">4</span> Monitor</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">5</span> Diagnostics</span><span class="kb-help-desc"><span class="kb-help-key">6</span> Intelligence</span></div>
-    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">7</span> Response</span><span class="kb-help-desc"><span class="kb-help-key">8</span> Counselors</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">7</span> Response</span><span class="kb-help-desc"><span class="kb-help-key">8</span> Toolkit</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">9</span> AI Vision</span><span class="kb-help-desc"><span class="kb-help-key">0</span> Barriers</span></div>
     <div style="border-top:1px solid var(--border);margin-top:.5rem;padding-top:.5rem">
     <div class="kb-help-row"><span class="kb-help-desc">Open sections</span><span class="kb-help-key">G</span></div>
