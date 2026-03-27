@@ -3,7 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Henry Fan · CVC-Online Education Initiative (OEI) Application Support</title>
+<title>Henry Fan · CVC-OEI Application Support · FHDA</title>
+
+<!-- Favicon: 4-node Exchange grid — green/blue/purple/teal -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%230F766E'/%3E%3Cstop offset='100%25' stop-color='%231D4ED8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23bg)'/%3E%3Cline x1='10' y1='10' x2='22' y2='10' stroke='%23fff' stroke-width='1.5' opacity='.4'/%3E%3Cline x1='10' y1='22' x2='22' y2='22' stroke='%23fff' stroke-width='1.5' opacity='.4'/%3E%3Cline x1='10' y1='10' x2='10' y2='22' stroke='%23fff' stroke-width='1.5' opacity='.4'/%3E%3Cline x1='22' y1='10' x2='22' y2='22' stroke='%23fff' stroke-width='1.5' opacity='.4'/%3E%3Cline x1='10' y1='10' x2='22' y2='22' stroke='%2399F6E4' stroke-width='1.2' opacity='.5'/%3E%3Ccircle cx='10' cy='10' r='4' fill='%2334D399'/%3E%3Ccircle cx='22' cy='10' r='4' fill='%2360A5FA'/%3E%3Ccircle cx='10' cy='22' r='4' fill='%23A78BFA'/%3E%3Ccircle cx='22' cy='22' r='4' fill='%2399F6E4'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='%23fff'/%3E%3C/svg%3E">
+
+<!-- Apple touch icon: same design -->
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%230F766E'/%3E%3Cstop offset='100%25' stop-color='%231D4ED8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' rx='40' fill='url(%23bg)'/%3E%3Cline x1='56' y1='56' x2='124' y2='56' stroke='%23fff' stroke-width='4' opacity='.3'/%3E%3Cline x1='56' y1='124' x2='124' y2='124' stroke='%23fff' stroke-width='4' opacity='.3'/%3E%3Cline x1='56' y1='56' x2='56' y2='124' stroke='%23fff' stroke-width='4' opacity='.3'/%3E%3Cline x1='124' y1='56' x2='124' y2='124' stroke='%23fff' stroke-width='4' opacity='.3'/%3E%3Cline x1='56' y1='56' x2='124' y2='124' stroke='%2399F6E4' stroke-width='3' opacity='.4'/%3E%3Ccircle cx='56' cy='56' r='18' fill='%2334D399'/%3E%3Ccircle cx='124' cy='56' r='18' fill='%2360A5FA'/%3E%3Ccircle cx='56' cy='124' r='18' fill='%23A78BFA'/%3E%3Ccircle cx='124' cy='124' r='18' fill='%2399F6E4'/%3E%3Ccircle cx='90' cy='90' r='12' fill='%23fff'/%3E%3C/svg%3E">
+
+<!-- Open Graph: for when committee shares the link -->
+<meta property="og:title" content="Henry Fan · CVC-OEI Application Support Dashboard">
+<meta property="og:description" content="Interactive tools for the CVC Exchange at Foothill–De Anza CCD. Monitor, diagnose, escalate, document, and prevent.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0F766E">
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#FAFAF8;--bg-2:#F4F3F0;--bg-3:#ECEAE5;--surface:#FFF;--surface-2:#F8F7F4;--border:#E4E2DC;--border-2:#D4D1C9;--text:#1C1917;--text-2:#57534E;--text-3:#A8A29E;--primary:#1A6B50;--primary-light:#E8F5EE;--primary-bd:#B4DBC8;--blue:#2563EB;--blue-light:#EFF6FF;--blue-bd:#93C5FD;--amber:#B45309;--amber-light:#FFFBEB;--amber-bd:#FCD34D;--red:#DC2626;--red-light:#FEF2F2;--red-bd:#FCA5A5;--purple:#7C3AED;--purple-light:#F5F3FF;--purple-bd:#C4B5FD;--teal:#0D9488;--teal-light:#F0FDFA;--teal-bd:#5EEAD4;--display:'Newsreader',serif;--body:'Instrument Sans',sans-serif;--mono:'IBM Plex Mono',monospace;--r:8px;--r-lg:12px;--r-xl:16px;--shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);--shadow-md:0 4px 12px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);--max-w:1060px}
@@ -2869,6 +2881,83 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
 /* UX: "Explore the tools" label animation */
 @keyframes labelFadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 
+/* ═══════════════════════════════════════════════════════
+   FLAIR — Vibrance, warmth, and life
+   ═══════════════════════════════════════════════════════ */
+
+/* Nav icon — gradient matching the favicon */
+.nav-icon{
+  background:linear-gradient(135deg,#0F766E,#1D4ED8) !important;
+  box-shadow:0 2px 8px rgba(15,118,110,.25)
+}
+
+/* Hero badge pulse — colorful gradient shimmer */
+@keyframes badgeShimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.h-badge{
+  background:linear-gradient(90deg,var(--primary-light),rgba(96,165,250,.1),var(--primary-light)) !important;
+  background-size:200% 100% !important;
+  animation:badgeShimmer 6s ease infinite !important
+}
+
+/* Stats — colorful underline accent */
+.h-stat-num{position:relative}
+.h-stat-num::after{
+  content:'';position:absolute;bottom:-4px;left:15%;right:15%;height:3px;border-radius:2px;opacity:.3
+}
+.h-stat-num.green::after{background:var(--primary)}
+.h-stat-num.blue::after{background:var(--blue)}
+.h-stat-num.red::after{background:var(--red)}
+
+/* Tool frame top accent — rainbow per section (complements tool-frame::before) */
+#outreach .tool-frame::before{background:linear-gradient(90deg,var(--teal),var(--primary)) !important}
+#counselorToolkit .tool-frame::before{background:linear-gradient(90deg,var(--teal),var(--blue)) !important}
+
+/* Barrier section divider — richer gradient */
+.divider-sec{
+  background:linear-gradient(180deg,var(--bg) 0%,rgba(185,28,28,.06) 50%,var(--bg) 100%) !important
+}
+
+/* Footer — warmer closing gradient */
+footer{
+  background:linear-gradient(180deg,var(--bg) 0%,rgba(15,118,110,.06) 40%,rgba(29,78,216,.04) 100%) !important
+}
+
+/* Greeting toast — special first-visit style */
+.greeting-toast{
+  position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-20px);
+  z-index:300;padding:.6rem 1.25rem;
+  background:linear-gradient(135deg,#0F766E,#1D4ED8);color:#fff;
+  font-size:.85rem;font-weight:600;border-radius:100px;
+  box-shadow:0 8px 30px rgba(15,118,110,.3);
+  opacity:0;transition:all .5s cubic-bezier(.16,1,.3,1);
+  pointer-events:none;white-space:nowrap
+}
+.greeting-toast.gt-show{opacity:1;transform:translateX(-50%) translateY(0)}
+.greeting-toast .gt-wave{display:inline-block;animation:wave .5s ease 2;transform-origin:70% 70%}
+@keyframes wave{0%,100%{transform:rotate(0)}25%{transform:rotate(20deg)}75%{transform:rotate(-10deg)}}
+
+/* Section numbers — gradient fills instead of flat color */
+.sec-num[style*="background:var(--blue)"]{background:linear-gradient(135deg,#1D4ED8,#3B82F6) !important}
+.sec-num[style*="background:var(--amber)"]{background:linear-gradient(135deg,#A16207,#D97706) !important}
+.sec-num[style*="background:var(--teal)"]{background:linear-gradient(135deg,#0F766E,#14B8A6) !important}
+.sec-num[style*="background:var(--purple)"]{background:linear-gradient(135deg,#6D28D9,#8B5CF6) !important}
+.sec-num[style*="background:#0284c7"]{background:linear-gradient(135deg,#0284c7,#38BDF8) !important}
+.sec-num[style*="background:#be185d"]{background:linear-gradient(135deg,#be185d,#F472B6) !important}
+.sec-num[style*="background:#c2410c"]{background:linear-gradient(135deg,#c2410c,#FB923C) !important}
+.sec-num[style*="background:#4338ca"]{background:linear-gradient(135deg,#4338ca,#818CF8) !important}
+.sec-num-green{background:linear-gradient(135deg,#0F766E,#34D399) !important}
+.sec-num-red{background:linear-gradient(135deg,#B91C1C,#F87171) !important}
+
+/* Hero story — subtle animated border */
+@keyframes storyBorder{0%,100%{border-color:rgba(15,118,110,.1)}50%{border-color:rgba(15,118,110,.2)}}
+.hero-story{animation:storyBorder 4s ease infinite}
+
+/* Selection highlight — brand gradient */
+::selection{background:rgba(15,118,110,.15) !important;color:var(--text) !important}
+
+/* Page title update — shows current section in tab */
+/* (handled by JS below) */
+
 </style>
 </head>
 <body>
@@ -2882,6 +2971,8 @@ nav{border-bottom:1px solid rgba(0,0,0,.06) !important}
 <!-- Accessibility mode indicator -->
 <div class="a11y-badge">WCAG AAA · High Contrast</div>
 <a href="#lookup" class="skip-link">Skip to main content</a>
+<!-- Greeting toast — shows once on first visit -->
+<div class="greeting-toast" id="greetingToast"><span class="gt-wave">👋</span> Welcome — built for the CVC-OEI team at FHDA</div>
 
 <nav id="nav" role="navigation" aria-label="Main navigation">
   <a class="nav-brand" href="#" onclick="event.preventDefault();(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" style="text-decoration:none;cursor:pointer" title="Back to top"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">CVC-OEI · Application Support</span></div>
@@ -5821,6 +5912,64 @@ document.getElementById('a11yToggle').addEventListener('keydown', function(e) {
   if(typeof getFilteredColleges === 'function'){
     renderLookup(getFilteredColleges());
   }
+})();
+
+// ═══════════════════════════════════════════════════════
+// FLAIR: Greeting toast on first visit
+// ═══════════════════════════════════════════════════════
+(function(){
+  var g = document.getElementById('greetingToast');
+  if (!g) return;
+  setTimeout(function(){ g.classList.add('gt-show'); }, 600);
+  setTimeout(function(){ g.classList.remove('gt-show'); }, 4000);
+})();
+
+
+// ═══════════════════════════════════════════════════════
+// FLAIR: Dynamic page title — shows current section in tab
+// ═══════════════════════════════════════════════════════
+(function(){
+  var base = 'Henry Fan · CVC-OEI';
+  var sectionNames = {
+    'lookup': 'College Lookup',
+    'cvcData': 'Exchange Data',
+    'journey': 'Student Journey',
+    'flow': 'Architecture',
+    'monitor': 'Monitor',
+    'tracer': 'Diagnostics',
+    'patterns': 'Intelligence',
+    'kb': 'Documentation',
+    'comms': 'Response',
+    'escalation': 'Escalation',
+    'outreach': 'Outreach',
+    'counselorToolkit': 'Counselor Toolkit',
+    'aiVision': 'AI Vision',
+    'barrierOverview': 'Barriers',
+    'barriers': 'Barriers'
+  };
+  var current = '';
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        var name = sectionNames[entry.target.id];
+        if(name && name !== current){
+          current = name;
+          document.title = name + ' — ' + base;
+        }
+      }
+    });
+  },{threshold:0.2, rootMargin:'-56px 0px -50% 0px'});
+  Object.keys(sectionNames).forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) obs.observe(el);
+  });
+  // Reset to base when at top
+  window.addEventListener('scroll', function(){
+    if(window.scrollY < 200 && current !== ''){
+      current = '';
+      document.title = base + ' · FHDA';
+    }
+  }, {passive:true});
 })();
 
 </script>
