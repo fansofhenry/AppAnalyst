@@ -50,7 +50,7 @@ function renderLookup(colleges) {
   var withIssues = colleges.filter(function(c) { return c.issues.length > 0; }).length;
   var clean = colleges.filter(function(c) { return c.issues.length === 0; }).length;
 
-  stats.innerHTML =
+  if (stats) stats.innerHTML =
     '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--text)">' + colleges.length + '</div><div class="lookup-stat-label">Colleges</div></div>' +
     '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--primary)">' + automated + '</div><div class="lookup-stat-label">Aid Automated</div></div>' +
     '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--amber)">' + manual + '</div><div class="lookup-stat-label">Aid Manual</div></div>' +
@@ -59,7 +59,7 @@ function renderLookup(colleges) {
 
   if (colleges.length === 0) {
     results.innerHTML = '<div class="lookup-empty">No matches</div>';
-    counter.textContent = '';
+    if (counter) counter.textContent = '';
     return;
   }
 
@@ -113,7 +113,7 @@ function renderLookup(colleges) {
   }
 
   results.innerHTML = html;
-  counter.textContent = colleges.length + ' of ' + collegeDB.length + ' colleges shown';
+  if (counter) counter.textContent = colleges.length + ' of ' + collegeDB.length + ' colleges shown';
 
   // Mark home colleges (from wrapper #1)
   setTimeout(markHomeLookups, 50);

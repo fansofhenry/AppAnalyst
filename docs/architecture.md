@@ -2,7 +2,7 @@
 
 ## System Overview
 
-AppAnalyst is a single-page application with 9+ interactive tools loaded via classic `<script>` tags. No build step, no bundler, no server required.
+AppAnalyst is a single-page application with 13 interactive tools loaded via classic `<script>` tags. No build step, no bundler, no server required.
 
 ```
 Browser (file://)
@@ -114,8 +114,28 @@ Add a `var` declaration in the appropriate `js/data/*.js` file. All data is glob
 
 ### Add a keyboard shortcut
 
-Add a case to the `keydown` handler in `js/keyboard.js`.
+Add a case to the `keydown` handler in `js/keyboard.js`. Follow the existing pattern:
+```js
+case 'KeyX': scrollToSection('newSection'); toast('New Section'); break;
+```
+
+### Utilities available to all modules
+
+- `toast(message)` — Show a brief notification (defined in `app.js`)
+- `trackInteraction(name)` — Increment interaction counter (defined in `app.js`)
+- `showTip(event, html)` / `hideTip()` — Hover tooltips (defined in `journey.js`)
+- `sortFHDAFirst(array)` — Sort Foothill/De Anza to top (defined in `fhda.js`)
+- `markHomeRows()` / `markHomeLookups()` — Add FHDA badges (defined in `fhda.js`)
 
 ### Modify FHDA awareness
 
-`js/fhda.js` controls all FHDA-specific behavior: home badges, sorting, health display. The helper functions are called by `renderMonitor()` and `renderLookup()` at the end of each render cycle.
+`js/fhda.js` controls all FHDA-specific behavior: home badges, sorting, health display. The helper functions are called by `renderMonitor()` and `renderLookup()` at the end of each render cycle. Colleges with `.fhda = true` in the data arrays are treated as home colleges.
+
+### CSS naming conventions
+
+- `.sec` — Section container
+- `.tool-frame` > `.tool-bar` > `.tool-body` — Standard tool wrapper
+- `.tool-label.tl-{color}` — Colored label in tool bar
+- `.eyebrow` — Section type label above h2
+- `.sec-num.sec-num-{color}` — Numbered badge in eyebrow
+- `.[section]-*` — Section-specific classes (e.g., `.lookup-*`, `.tracer-*`)

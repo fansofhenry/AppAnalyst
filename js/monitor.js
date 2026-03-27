@@ -114,7 +114,8 @@ var refreshCount = 30;
 setInterval(function() {
   refreshCount--;
   if (refreshCount <= 0) { refreshCount = 30; }
-  document.getElementById('refreshTimer').textContent = 'Auto-refresh: ' + refreshCount + 's';
+  var timerEl = document.getElementById('refreshTimer');
+  if (timerEl) timerEl.textContent = 'Auto-refresh: ' + refreshCount + 's';
 }, 1000);
 
 // Live clock
