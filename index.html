@@ -112,26 +112,25 @@
 </div>
 
 <!-- ═══ WHY CVC ═══ -->
-<section id="why" class="why-section" style="padding:clamp(1.5rem,4vw,2.5rem) 0">
+<section id="why" class="why-section">
   <div class="wrap">
-    <div style="max-width:680px;margin:0 auto">
-      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem">
-        <div style="flex:1;min-width:200px">
-          <div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);font-weight:700;margin-bottom:.4rem">The Problem</div>
-          <div style="font-size:.88rem;color:var(--text);line-height:1.8">
+    <div class="why-inner">
+      <div class="why-cols">
+        <div class="why-col">
+          <div class="why-label" style="color:var(--primary)">The Problem</div>
+          <div class="why-body">
             A student at Chabot enrolls in MATH 1A at De Anza through the Exchange. The next morning, the course isn’t in Canvas. She doesn’t know why. She emails her counselor, who doesn’t know either. She considers dropping.
           </div>
-          <div style="font-size:.82rem;color:var(--text-2);line-height:1.8;margin-top:.5rem">
+          <div class="why-detail">
             The cause was technical — an expired authentication token between two systems she’s never heard of. The support analyst’s job is to find it, fix it, tell the right people, and make sure it doesn’t happen to the next 46 students in the queue.</div>
         </div>
-        <div style="flex:1;min-width:200px">
-          <div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:.4rem">Why I Built This</div>
-          <div style="font-size:.88rem;color:var(--text);line-height:1.8">
+        <div class="why-col">
+          <div class="why-label" style="color:var(--blue)">Why I Built This</div>
+          <div class="why-body">
             Each section maps to a real part of the job: monitoring, diagnosis, escalation, documentation, and barrier analysis. This role sits inside FHDA but serves 116 colleges statewide.
           </div>
-          <!-- IMPROVEMENT: Credential tags — role-specific experience -->
-          <div style="font-size:.78rem;color:var(--text-2);line-height:1.8;margin-top:.75rem">
-            <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <div class="why-creds">
+            <div class="why-cred-wrap">
               <span class="cred-tag">Banner + PeopleSoft <span class="cred-org">SMCCD</span></span>
               <span class="cred-tag">Canvas + Data Pipelines <span class="cred-org">OpenStax / Rice</span></span>
               <span class="cred-tag">Tickets + Knowledge Base <span class="cred-org">Braven / SJSU</span></span>
@@ -179,12 +178,12 @@
 </div></section>
 
 <!-- CVC EXCHANGE DATA -->
-<section class="sec fu" id="cvcData"><div class="wrap">
+<section class="sec fu" id="cvcData" role="region" aria-label="Exchange Growth Data"><div class="wrap">
   <div class="eyebrow" style="color:var(--primary)"><span class="sec-num sec-num-green">2</span>Exchange</div>
   <h2>The numbers behind <em>course sharing</em></h2>
   <p class="sec-desc">From 1,500 to 33,000 cross-enrollments in three years. The support workload scales with it. <em style="font-size:.75rem;color:var(--text-3)">(Wheelhouse Center, Oct 2025)</em></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Data</span></div><span class="tool-bar-title">Exchange Growth · 2021–25</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Data</span></div><span class="tool-hint">Hover bars for details</span><span class="tool-bar-title">Exchange Growth · 2021–25</span></div>
     <div class="tool-body">
       <div class="info-grid">
         <div class="info-panel">
@@ -267,7 +266,7 @@
 </div></section>
 
 <!-- ═══ TOOL 01: ARCHITECTURE ═══ -->
-<section class="sec fu" id="flow"><div class="wrap">
+<section class="sec fu" id="flow" role="region" aria-label="Architecture Flow"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:#0284c7">3</span>Architecture</div>
   <h2>How student data flows — and <em>where it breaks</em></h2>
   <p class="sec-desc">Four layers from home college to Canvas. <strong>FHDA uses Banner Direct</strong> — the most reliable integration path.</p>
@@ -334,7 +333,7 @@
   <h2>Missing course reported — <em>where do you look?</em></h2>
   <p class="sec-desc">Walk a real incident from symptom to resolution. <strong>FHDA uses Banner Direct — same method, simpler path.</strong> A student with an add deadline tomorrow needs resolution, not a jurisdiction debate.</p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><div class="tool-bar-title">Incident Trace · Sacramento City · Ethos Token</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><span class="tool-hint">Click Run to trace the incident</span><div class="tool-bar-title">Incident Trace · Sacramento City · Ethos Token</div></div>
     <div class="tool-body">
       <div class="tracer-controls">
         <button class="tracer-btn tracer-btn-run" id="autoRunBtn" onclick="autoRunTrace()">▶ Auto-Run Trace</button>
@@ -362,7 +361,7 @@
 </div></section>
 
 <!-- ═══ TOOL 04: PATTERNS ═══ -->
-<section class="sec sec-alt fu" id="patterns"><div class="wrap">
+<section class="sec sec-alt fu" id="patterns" role="region" aria-label="Ticket Intelligence"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:#c2410c">6</span>Intelligence</div>
   <h2>Is this one ticket — or <em>twenty waiting to happen?</em></h2>
   <p class="sec-desc">Ticket volume mapped to the academic calendar. <strong>If 10 colleges generate 60% of tickets, that's not a support problem — it's an onboarding gap.</strong> Each pattern has a different intervention.</p>
@@ -382,7 +381,7 @@
 </div></section>
 
 <!-- ═══ TOOL 05: KB BUILDER ═══ -->
-<section class="sec fu" id="kb"><div class="wrap">
+<section class="sec fu" id="kb" role="region" aria-label="Knowledge Base Builder"><div class="wrap">
   <div class="eyebrow">Documentation</div>
   <h2>If the fix isn’t documented, it didn’t <em>scale.</em></h2>
   <p class="sec-desc">Four fix types — editable, copy-ready templates. <strong>A college shouldn’t call CVC for the same issue twice.</strong> The KB article should answer it the first time.</p>
@@ -761,7 +760,7 @@
   <h2>Where do students <em class="red">hit friction?</em></h2>
   <p class="sec-desc">Nine steps from search.cvc.edu to state reporting. Red = students get stuck. Amber = manual workaround. <strong>Green = smooth.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Lifecycle</span></div><span class="tool-bar-title">Enrollment Lifecycle · 9 Steps</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Lifecycle</span></div><span class="tool-hint">Click each step for detail</span><span class="tool-bar-title">Enrollment Lifecycle · 9 Steps</span></div>
     <div class="tool-body"><div class="lc-flow" id="lcFlow"></div></div>
   </div>
 </div></section>
@@ -1343,12 +1342,14 @@
 <div class="kb-overlay" id="kbOverlay" onclick="this.classList.remove('kb-show')">
   <div class="kb-help" onclick="event.stopPropagation()">
     <div class="kb-help-title">Keyboard Shortcuts</div>
+    <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.3rem">Tools</div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">1</span> Lookup</span><span class="kb-help-desc"><span class="kb-help-key">2</span> Exchange</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">3</span> Architecture</span><span class="kb-help-desc"><span class="kb-help-key">4</span> Monitor</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">5</span> Diagnostics</span><span class="kb-help-desc"><span class="kb-help-key">6</span> Intelligence</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">7</span> Response</span><span class="kb-help-desc"><span class="kb-help-key">8</span> Toolkit</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">9</span> AI Vision</span><span class="kb-help-desc"><span class="kb-help-key">0</span> Barriers</span></div>
     <div style="border-top:1px solid var(--border);margin-top:.5rem;padding-top:.5rem">
+    <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.3rem">Navigation</div>
     <div class="kb-help-row"><span class="kb-help-desc">Open sections</span><span class="kb-help-key">G</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Search colleges</span><span class="kb-help-key">/</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Back to top</span><span class="kb-help-key">T</span></div>

@@ -165,7 +165,7 @@
   .key-pill { bottom: 3.25rem; right: .75rem; padding: .3rem .5rem; font-size: .48rem; }
 
   /* Why section columns stack */
-  #why .wrap > div > div { flex-direction: column; }
+  .why-cols { flex-direction: column; }
 
   /* Footer tighter */
   footer { padding: 1.5rem 0; }
@@ -197,6 +197,14 @@
 
   /* Candidate name */
   .h-candidate { font-size: .95rem; margin-bottom: .5rem; }
+
+  /* IV panel SVGs scale on small screens */
+  .iv-hero svg { max-height: 110px; }
+  .iv-stat-row { gap: .3rem; }
+  .iv-stat { font-size: .48rem; padding: .2rem .4rem; }
+  .iv-graphic { min-height: 100px; }
+  .iv-card { padding: .65rem; }
+  .iv-q-title { font-size: .7rem; margin-bottom: .4rem; }
 }
 
 
@@ -217,7 +225,7 @@
   nav, .back-to-top, .progress-dots, .scroll-progress,
   .scroll-hint, .key-pill, .theater-dim, .zoom-badge,
   .theater-badge, .a11y-badge, .kb-overlay, .greeting-toast,
-  .explore-tracker { display: none; }
+  .explore-tracker, .iv-trigger, .iv-overlay { display: none; }
   body { background: #fff; color: #000; font-size: 11pt; }
   .sec { page-break-inside: avoid; padding: 1.5rem 0; }
   .tool-frame { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }

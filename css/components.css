@@ -593,9 +593,10 @@
   transition: all .15s;
   user-select: none;
 }
-.legend-item:hover { background: var(--bg-2); }
+.legend-item:hover { background: var(--bg-2); color: var(--text); }
+.legend-item:hover .legend-dot { transform: scale(1.3); }
 .legend-item.disabled { opacity: .35; text-decoration: line-through; }
-.legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; transition: opacity .15s; }
+.legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; transition: all .15s; }
 
 /* ── Tooltip ── */
 .tip {

@@ -520,7 +520,7 @@ body.a11y-mode * {
 .a11y-badge {
   position: fixed;
   bottom: 1.5rem;
-  left: 1rem;
+  left: 5rem;
   z-index: 250;
   display: none;
   align-items: center;
