@@ -101,6 +101,15 @@
   .h-stats { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
   .h-stat-num { font-size: clamp(1.3rem, 5vw, 1.8rem); }
 
+  /* Section connectors wrap on small screens */
+  .sc-text { white-space: normal; font-size: .48rem; }
+  .sec-connector { padding: 1rem; }
+
+  /* Exploration tracker repositioned */
+  .explore-tracker { bottom: .75rem; left: .75rem; width: 36px; height: 36px; }
+  .et-ring { width: 36px; height: 36px; }
+  .et-label { font-size: .42rem; }
+
   /* Quick actions stack nicely */
   .quick-actions { flex-direction: column; align-items: stretch; gap: .35rem; }
   .qa-card { justify-content: center; padding: .5rem .7rem; }
@@ -225,7 +234,8 @@
   nav, .back-to-top, .progress-dots, .scroll-progress,
   .scroll-hint, .key-pill, .theater-dim, .zoom-badge,
   .theater-badge, .a11y-badge, .kb-overlay, .greeting-toast,
-  .explore-tracker, .iv-trigger, .iv-overlay { display: none; }
+  .explore-tracker, .iv-trigger, .iv-overlay,
+  .sec-connector { display: none; }
   body { background: #fff; color: #000; font-size: 11pt; }
   .sec { page-break-inside: avoid; padding: 1.5rem 0; }
   .tool-frame { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }

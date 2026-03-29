@@ -322,6 +322,7 @@ a.nav-brand:hover .nav-title { color: var(--primary); }
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 7px;
   z-index: 150;
   opacity: .7;

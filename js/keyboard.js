@@ -98,3 +98,63 @@ document.addEventListener('keydown', function(e) {
     return;
   }
 });
+
+// ═══ EASTER EGG — type "fhda" anywhere ═══
+(function() {
+  var buffer = '';
+  var trigger = 'fhda';
+  var fired = false;
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    buffer += e.key.toLowerCase();
+    if (buffer.length > 10) buffer = buffer.slice(-10);
+    if (!fired && buffer.indexOf(trigger) >= 0) {
+      fired = true;
+      buffer = '';
+      // Brief celebration
+      toast('Go Owls! \ud83e\udd89 Foothill\u2013De Anza forever');
+      document.body.classList.add('ee-fhda');
+      if (typeof confettiBurstCenter === 'function') confettiBurstCenter(35);
+      setTimeout(function() { document.body.classList.remove('ee-fhda'); }, 2000);
+    }
+  });
+})();
+
+// ═══ CONTEXTUAL KEYBOARD HINTS ═══
+(function() {
+  var hints = [
+    { section: 'monitor', msg: 'Press F for Theater Mode \u2014 spotlight one section at a time' },
+    { section: 'tracer', msg: 'Press V to see 12 visual interview scenarios' },
+    { section: 'patterns', msg: 'Press G to open the sections navigator' },
+    { section: 'comms', msg: 'Press / to quick-search any college' },
+    { section: 'aiVision', msg: 'Press Z for Zoom Mode \u2014 optimized for screenshare' }
+  ];
+  var hintShown = {};
+  var idleTimer = null;
+  var lastActivity = Date.now();
+
+  function resetIdle() { lastActivity = Date.now(); }
+  document.addEventListener('scroll', resetIdle, { passive: true });
+  document.addEventListener('click', resetIdle);
+  document.addEventListener('keydown', resetIdle);
+
+  function checkIdleHint() {
+    if (Date.now() - lastActivity < 12000) return;
+
+    for (var i = 0; i < hints.length; i++) {
+      var h = hints[i];
+      if (hintShown[h.section]) continue;
+      var el = document.getElementById(h.section);
+      if (!el) continue;
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.3) {
+        hintShown[h.section] = true;
+        toast(h.msg);
+        lastActivity = Date.now();
+        return;
+      }
+    }
+  }
+
+  setInterval(checkIdleHint, 3000);
+})();

@@ -2,18 +2,19 @@
 
 ## System Overview
 
-AppAnalyst is a single-page application with 13 interactive tools loaded via classic `<script>` tags. No build step, no bundler, no server required.
+AppAnalyst is a single-page application with 10 numbered tool sections, supporting tools, and a personal origin story — loaded via classic `<script>` tags. No build step, no bundler, no server required.
 
 ```
 Browser (file://)
   │
-  ├── index.html          HTML shell + section structure
+  ├── index.html          HTML shell + section structure (~1,500 lines)
   ├── css/*.css            8 stylesheets (tokens → responsive)
+  ├── img/                 Family photos for origin story section
   └── js/
       ├── data/*.js        9 data files (pure arrays/objects)
       ├── app.js           Entry point + observers
       ├── [tool].js        Tool-specific modules
-      └── [ui].js          Navigation, modes, keyboard, animations
+      └── [ui].js          Navigation, modes, keyboard, animations, delight
 ```
 
 ## Load Order
@@ -28,6 +29,7 @@ Scripts load synchronously in this order. Dependencies flow downward.
 5. Tool modules      (monitor, tracer, flow, patterns, kb, barriers, outreach, lookup, ai-vision, comms)
 6. UI modules        (nav, animations, modes)
 7. keyboard.js       (references all toggle functions from modes, nav)
+8. delight.js        (confetti, micro-interactions — runs last, no dependents)
 ```
 
 ## Component Map
@@ -48,6 +50,7 @@ Scripts load synchronously in this order. Dependencies flow downward.
 | AI Vision | `ai-vision.js` | `ai-vision.js` | `#aiVision` |
 | Barriers | `barriers.js` | `barriers.js` | `#barrierOverview`, `#lifecycle`, `#matrix`, `#equity`, `#correlator` |
 | Student Journey | `journey.js` | `journey.js` | `#journey` |
+| Origin Story | — | — (static HTML) | `#originStory` |
 
 ## Data Flow
 
@@ -86,6 +89,19 @@ aiData (4 categories)
 kbTemplates (4 templates)
   └── kb.js: editable template builder
 ```
+
+## Origin Story Section
+
+The origin story (`#originStory`) is a personal "why" section placed between `</main>` (after the last tool section) and `<footer>`. It is **not** numbered and does **not** appear in the TOC or progress dots navigation.
+
+- **Static HTML** — no JS module, no data file
+- **Photos** — `img/family-1.jpg` through `img/family-3.jpg` with `onerror` fallback to a CSS placeholder state (`.origin-photo-placeholder`)
+- **CSS** — all styles in `css/sections.css` under the `.origin-story` block
+- **Layout** — alternating photo/text grid beats, a centered quote card, and a closing statement
+
+## Delight Layer
+
+`js/delight.js` is a game-dev-inspired joy layer loaded last. It adds confetti particle effects and micro-interactions. Respects `prefers-reduced-motion` and reduces particles on mobile. No other modules depend on it.
 
 ## Presentation Modes
 

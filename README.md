@@ -4,7 +4,7 @@ Interactive portfolio demonstrating support operations for the **CVC Exchange** 
 
 ## What This Is
 
-A single-page application with 13 interactive tools covering the full support lifecycle for California's cross-enrollment system (115+ community colleges, 33,000+ annual cross-enrollments across 4 SIS platforms).
+A single-page application with 10 numbered tool sections (plus supporting tools and a personal origin story) covering the full support lifecycle for California's cross-enrollment system (115+ community colleges, 33,000+ annual cross-enrollments across 4 SIS platforms).
 
 **Tools (numbered 1–9, plus Barriers section 0):**
 1. **College Lookup** — Search 31 colleges by name, district, SIS type, issue status
@@ -22,6 +22,8 @@ A single-page application with 13 interactive tools covering the full support li
 - **Student Journey** — Side-by-side comparison: working enrollment vs broken
 - **KB Builder** — 4 editable fix templates (integration, auth, sync, onboarding)
 - **Counselor Toolkit** — Verification workflows, registration checklists, counselor scripts
+
+**Origin Story** — Personal "why" section between the tools and footer. Narrative arc with family photos, curated quotes, and a first-gen story anchoring the portfolio in purpose.
 
 ## Running Locally
 
@@ -50,12 +52,12 @@ start index.html         # Windows
 
 ```
 appanalyst/
-├── index.html              # HTML shell (~950 lines)
+├── index.html              # HTML shell (~1,500 lines)
 ├── css/
 │   ├── tokens.css          # Design tokens (colors, typography, spacing)
 │   ├── base.css            # Reset, body, layout primitives
 │   ├── components.css      # Tool frames, cards, badges, grids
-│   ├── sections.css        # Section-specific styles
+│   ├── sections.css        # Section-specific styles (incl. origin story)
 │   ├── nav.css             # Navigation, TOC, progress dots
 │   ├── animations.css      # @keyframes, transitions, entrance effects
 │   ├── modes.css           # Zoom, theater, accessibility, live resolution
@@ -87,7 +89,9 @@ appanalyst/
 │   ├── keyboard.js         # All keyboard shortcuts
 │   ├── modes.js            # Zoom, theater, accessibility toggles
 │   ├── animations.js       # Counters, ripple, bar animations
+│   ├── delight.js          # Joy layer — confetti, micro-interactions, discovery
 │   └── fhda.js             # FHDA district awareness (home badges, sorting)
+├── img/                    # Family photos for origin story (placeholder-ready)
 └── docs/
     └── architecture.md     # System architecture and extension guide
 ```

@@ -159,3 +159,76 @@ function toast(msg) {
     }
   }, { passive: true });
 })();
+
+// ═══ EXPLORATION PROGRESS TRACKER ═══
+(function() {
+  var sectionIds = ['lookup','cvcData','flow','monitor','tracer','patterns','comms','outreach','aiVision','barriers'];
+  var visited = {};
+  var total = sectionIds.length;
+  var tracker = document.getElementById('exploreTracker');
+  var fill = document.getElementById('etFill');
+  var label = document.getElementById('etLabel');
+  if (!tracker || !fill || !label) return;
+
+  var milestoneMessages = {
+    3: 'Nice \u2014 3 sections explored!',
+    5: 'Halfway there \u2014 5 of 10!',
+    7: 'Deep dive \u2014 7 of 10 sections!',
+    10: 'Full exploration complete!'
+  };
+
+  function update() {
+    var count = Object.keys(visited).length;
+    var pct = (count / total) * 100;
+    fill.setAttribute('stroke-dasharray', pct + ' ' + (100 - pct));
+    label.textContent = count + '/' + total;
+    if (count >= total) {
+      tracker.classList.add('et-complete');
+      if (typeof confettiBurstCenter === 'function') confettiBurstCenter(40);
+    }
+    if (milestoneMessages[count]) {
+      toast(milestoneMessages[count]);
+    }
+  }
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !visited[entry.target.id]) {
+        visited[entry.target.id] = true;
+        // Show tracker after first section visit
+        tracker.classList.add('et-visible');
+        update();
+      }
+    });
+  }, { threshold: 0.25 });
+
+  sectionIds.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) obs.observe(el);
+  });
+})();
+
+// ═══ INTERACTION MILESTONE CELEBRATIONS ═══
+(function() {
+  var el = document.getElementById('interactionCount');
+  var wrap = document.getElementById('interactionCounter');
+  if (!el || !wrap) return;
+  var celebrated = {};
+  var milestones = {
+    10: 'Explorer \u2014 10 interactions!',
+    25: 'Power user \u2014 25 interactions!',
+    50: 'Deep diver \u2014 50 interactions!',
+    100: 'Completionist \u2014 100 interactions!'
+  };
+  var obs = new MutationObserver(function() {
+    var count = parseInt(el.textContent || '0');
+    if (milestones[count] && !celebrated[count]) {
+      celebrated[count] = true;
+      toast(milestones[count]);
+      wrap.classList.add('fc-pop');
+      setTimeout(function() { wrap.classList.remove('fc-pop'); }, 600);
+      if (count === 100 && typeof confettiBurstCenter === 'function') confettiBurstCenter(40);
+    }
+  });
+  obs.observe(el, { childList: true, characterData: true, subtree: true });
+})();

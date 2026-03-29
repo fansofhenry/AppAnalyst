@@ -9,14 +9,14 @@
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0,0,0,.03), 0 1px 2px rgba(0,0,0,.02);
   overflow: hidden;
-  margin-bottom: 2.25rem;
+  margin-bottom: 1.75rem;
   transition: all .3s cubic-bezier(.16,1,.3,1);
   position: relative;
 }
 .tool-frame:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.03);
-  border-color: var(--border-2);
-  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.07);
+  border-color: var(--primary-bd);
+  transform: translateY(-4px);
 }
 .tool-frame:hover .tool-body {
   background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
@@ -34,9 +34,12 @@
   right: 0;
   height: 3px;
   border-radius: var(--r-xl) var(--r-xl) 0 0;
-  background: transparent;
+  background: linear-gradient(90deg, var(--primary), var(--teal));
+  opacity: .3;
   z-index: 1;
+  transition: opacity .3s;
 }
+.tool-frame:hover::before { opacity: .6; }
 
 /* ── Tool Bar ── */
 .tool-bar {
@@ -216,6 +219,10 @@
   background: rgba(26,107,80,.04);
   border-left-color: var(--primary);
 }
+.status-row:active {
+  transform: scale(.995);
+  transition-duration: .08s;
+}
 .status-row:hover .s-expand-icon { color: var(--primary); opacity: 1; }
 .status-row .s-expand-icon { opacity: .4; }
 .status-row.expanded {
@@ -263,8 +270,8 @@
 .b-card:hover, .ai-card:hover, .counsel-card:hover, .esc-card:hover,
 .insight-card:hover, .lookup-card:hover, .eq-card:hover {
   border-color: var(--border-2);
-  box-shadow: 0 6px 24px rgba(0,0,0,.06), 0 2px 6px rgba(0,0,0,.03);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
 }
 
 /* Active press feedback */
@@ -272,6 +279,13 @@
 .esc-card:active, .msg-preview:active, .lookup-card:active {
   transform: translateY(0) scale(.995);
   transition-duration: .1s;
+}
+
+/* Button click pop feedback */
+.td-btn:active, .deploy-fix-btn:active, .jt-btn:active,
+.lookup-filter:active, .iv-ftab:active, .outreach-tab:active,
+.ai-tab:active, .filter-tab:active, .footer-cta:active {
+  animation: btnPop .2s ease;
 }
 
 /* Expanded card state */
@@ -352,21 +366,12 @@
 .b-card:hover .b-head::after { opacity: 1; color: var(--primary); }
 .b-card.expanded .b-head::after { content: '\2212'; color: var(--red); transform: scale(1.1); opacity: 1; }
 
-/* Click hint */
+/* Click hint — disabled, using +/− icon in .b-head instead */
 .b-card::after {
-  content: 'Click to expand';
-  position: absolute;
-  bottom: .4rem;
-  right: .6rem;
-  font-family: var(--mono);
-  font-size: .5rem;
-  color: var(--text-3);
-  opacity: 0;
-  transition: opacity .15s;
-  pointer-events: none;
+  display: none;
 }
 .b-card:hover::after { opacity: .6; }
-.b-card.expanded::after { content: 'Click to collapse'; }
+.b-card.expanded::after { display: none; }
 
 /* Barrier ticket % badge */
 .b-card .b-head span[style*="border-radius:100px"] { font-weight: 600; }
@@ -570,12 +575,12 @@
   transition: all .2s cubic-bezier(.16,1,.3,1);
   white-space: nowrap;
 }
-.filter-tab:hover { color: var(--text-2); }
+.filter-tab:hover { color: var(--text); background: rgba(0,0,0,.03); }
 .filter-tab:active { transform: scale(.96); }
 .filter-tab.active {
-  background: var(--surface);
-  color: var(--text);
-  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(15,118,110,.2);
   border-radius: 8px;
   font-weight: 700;
 }
@@ -707,3 +712,45 @@
   transform: scale(0);
   pointer-events: none;
 }
+
+/* ── Delight: Confetti particles ── */
+.confetti-particle {
+  position: absolute;
+  animation: confettiFall ease-out forwards;
+  --spin: 720deg;
+  will-change: transform, opacity;
+}
+
+/* ── Delight: Achievement toast variant ── */
+.achievement-toast {
+  background: linear-gradient(135deg, #0F766E, #0D9488) !important;
+  box-shadow: 0 8px 32px rgba(15,118,110,.35) !important;
+}
+
+/* ── Delight: Card tilt ── */
+.tilt-enabled {
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+.tilt-enabled:hover {
+  transform: perspective(800px) rotateX(calc(var(--my, 0) * -3deg)) rotateY(calc(var(--mx, 0) * 3deg)) translateY(-4px);
+}
+
+/* ── Delight: Matrix rain columns ── */
+.matrix-column {
+  position: absolute;
+  top: 0;
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: #22C55E;
+  white-space: pre;
+  line-height: 1.6;
+  opacity: .7;
+  text-shadow: 0 0 8px rgba(34,197,94,.5);
+  animation: matrixFall linear forwards;
+}
+
+/* ── Delight: Logo animation states ── */
+.logo-bounce { animation: logoBounce .5s cubic-bezier(.16,1,.3,1); }
+.logo-wiggle { animation: logoWiggle .6s ease; }
+.logo-flip { animation: logoFlip .6s ease; }

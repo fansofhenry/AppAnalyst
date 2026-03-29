@@ -15,12 +15,12 @@
   --border-2: #D1CEC6;
   --text: #1A1815;
   --text-2: #4E4B46;
-  --text-3: #7A766F;
+  --text-3: #6E6A63;
 
   /* ── Primary — Teal-green ── */
   --primary: #0F766E;
-  --primary-light: #ECFDF5;
-  --primary-bd: #99F6E4;
+  --primary-light: #E8F5F0;
+  --primary-bd: #A7D8CD;
 
   /* ── Alert: Red ── */
   --red: #B91C1C;
@@ -52,23 +52,30 @@
   --body: 'Instrument Sans', sans-serif;
   --mono: 'IBM Plex Mono', monospace;
 
-  /* ── Type scale ── */
-  --fs-xs: .65rem;
-  --fs-sm: .75rem;
-  --fs-base: .92rem;
-  --fs-md: .95rem;
+  /* ── Type scale (5 steps only) ── */
+  --fs-xs: .68rem;
+  --fs-sm: .78rem;
+  --fs-base: .94rem;
   --fs-lg: 1.1rem;
+  --fs-xl: 1.35rem;
+
+  /* ── Spacing scale ── */
+  --sp-1: .5rem;
+  --sp-2: 1rem;
+  --sp-3: 1.5rem;
+  --sp-4: 2rem;
+  --sp-5: 3rem;
 
   /* ── Radii ── */
   --r: 10px;
   --r-lg: 14px;
   --r-xl: 20px;
 
-  /* ── Shadows ── */
-  --shadow: 0 1px 2px rgba(0,0,0,.04), 0 1px 3px rgba(0,0,0,.03);
-  --shadow-md: 0 2px 4px rgba(0,0,0,.03), 0 4px 16px rgba(0,0,0,.04);
-  --shadow-lg: 0 4px 6px rgba(0,0,0,.02), 0 12px 40px rgba(0,0,0,.06);
-  --shadow-xl: 0 8px 16px rgba(0,0,0,.03), 0 24px 64px rgba(0,0,0,.07);
+  /* ── Shadows (modern, subtle) ── */
+  --shadow: 0 1px 3px rgba(0,0,0,.04);
+  --shadow-md: 0 2px 8px rgba(0,0,0,.05);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,.06);
+  --shadow-xl: 0 8px 32px rgba(0,0,0,.07);
 
   /* ── Dark overlay palette (terminal, tooltips, IV panel) ── */
   --dark-bg: #1C1917;

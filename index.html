@@ -291,6 +291,8 @@
   </div>
 </div></section>
 
+<div class="sec-connector fu"><div class="sc-line"></div><div class="sc-text">Now that you've seen the architecture — here's what monitoring looks like</div><div class="sc-line"></div></div>
+
 <!-- ═══ TOOL 02: MONITOR ═══ -->
 <section class="sec sec-alt fu" id="monitor" role="region" aria-label="System Monitor"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:var(--amber)">4</span>Monitor</div>
@@ -359,6 +361,8 @@
     </div>
   </div>
 </div></section>
+
+<div class="sec-connector fu"><div class="sc-line"></div><div class="sc-text">From reacting to incidents — to spotting patterns before they repeat</div><div class="sc-line"></div></div>
 
 <!-- ═══ TOOL 04: PATTERNS ═══ -->
 <section class="sec sec-alt fu" id="patterns" role="region" aria-label="Ticket Intelligence"><div class="wrap">
@@ -508,6 +512,7 @@
   <div class="demo-caption">The difference between P1 and P3 isn't just speed — it's who you contact and what information you bring to the call</div>
 </div></section>
 
+<div class="sec-connector fu"><div class="sc-line"></div><div class="sc-text">From daily operations — to proactive outreach and strategic vision</div><div class="sc-line"></div></div>
 
 <!-- ═══════════════════════════════════════════ -->
 <!-- BARRIER INTELLIGENCE SECTION -->
@@ -811,10 +816,17 @@
     <div><div class="iv-head-title">Visual Reference</div><div class="iv-head-sub">12 scenarios · Click outside or press V to close</div></div>
     <button class="iv-close" onclick="document.getElementById('ivOverlay').classList.remove('iv-show')">×</button>
   </div>
+  <div class="iv-filters">
+    <button class="iv-ftab iv-ftab-active" onclick="ivFilter('all',this)">All</button>
+    <button class="iv-ftab" onclick="ivFilter('strategy',this)">Strategy</button>
+    <button class="iv-ftab" onclick="ivFilter('operations',this)">Operations</button>
+    <button class="iv-ftab" onclick="ivFilter('communication',this)">Communication</button>
+    <button class="iv-ftab" onclick="ivFilter('growth',this)">Growth</button>
+  </div>
   <div class="iv-grid">
 
     <!-- Q1: Feature Adoption -->
-    <div class="iv-card">
+    <div class="iv-card iv-cat-strategy" data-cat="strategy">
       <div class="iv-card-head"><span class="iv-num iv-num-grn">Q1</span><span class="iv-cat">Strategy</span></div>
       <div class="iv-q-title">Feature ≠ Adoption</div>
       <div class="iv-graphic">
@@ -839,7 +851,7 @@
     </div>
 
     <!-- Q2: Silent Risk Detection -->
-    <div class="iv-card">
+    <div class="iv-card iv-cat-operations" data-cat="operations">
       <div class="iv-card-head"><span class="iv-num iv-num-amb">Q2</span><span class="iv-cat">Coordination</span></div>
       <div class="iv-q-title">Silent Risk Detection</div>
       <div class="iv-graphic">
@@ -872,7 +884,7 @@
     </div>
 
     <!-- Q3: Multi-College Triage -->
-    <div class="iv-card">
+    <div class="iv-card iv-cat-operations" data-cat="operations">
       <div class="iv-card-head"><span class="iv-num iv-num-red">Q3</span><span class="iv-cat">Triage</span></div>
       <div class="iv-q-title">First Two Hours</div>
       <div class="iv-graphic">
@@ -904,7 +916,7 @@
     </div>
 
     <!-- Q4: Altitude Translation -->
-    <div class="iv-card">
+    <div class="iv-card iv-cat-communication" data-cat="communication">
       <div class="iv-card-head"><span class="iv-num iv-num-blu">Q4</span><span class="iv-cat">Communication</span></div>
       <div class="iv-q-title">Altitude Translation</div>
       <div class="iv-graphic">
@@ -914,13 +926,17 @@
             <polygon points="20,10 240,10 215,45 45,45" fill="rgba(29,78,216,.2)" stroke="rgba(96,165,250,.3)" stroke-width=".5"/>
             <text x="130" y="24" text-anchor="middle" fill="#60A5FA" font-size="9" font-family="var(--mono)" font-weight="700">ENGINEER</text>
             <text x="130" y="37" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)">OAuth2 · Ethos tokens · AER queue</text>
-            <!-- Arrow -->
-            <text x="130" y="54" text-anchor="middle" fill="#57534E" font-size="8" font-family="var(--mono)">↓ translate</text>
+            <!-- Arrow connector -->
+            <line x1="130" y1="46" x2="130" y2="55" stroke="#57534E" stroke-width="1"/>
+            <path d="M125,52 L130,57 L135,52" fill="none" stroke="#57534E" stroke-width="1"/>
+            <text x="142" y="53" fill="#57534E" font-size="6.5" font-family="var(--mono)">translate</text>
             <polygon points="45,58 215,58 195,88 65,88" fill="rgba(161,98,7,.2)" stroke="rgba(251,191,36,.25)" stroke-width=".5"/>
             <text x="130" y="70" text-anchor="middle" fill="#FBBF24" font-size="9" font-family="var(--mono)" font-weight="700">MANAGER</text>
             <text x="130" y="82" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)">7 colleges · 340 students · ETA 4h</text>
-            <!-- Arrow -->
-            <text x="130" y="97" text-anchor="middle" fill="#57534E" font-size="8" font-family="var(--mono)">↓ translate</text>
+            <!-- Arrow connector -->
+            <line x1="130" y1="89" x2="130" y2="98" stroke="#57534E" stroke-width="1"/>
+            <path d="M125,95 L130,100 L135,95" fill="none" stroke="#57534E" stroke-width="1"/>
+            <text x="142" y="96" fill="#57534E" font-size="6.5" font-family="var(--mono)">translate</text>
             <polygon points="65,100 195,100 180,118 80,118" fill="rgba(15,118,110,.2)" stroke="rgba(94,234,212,.25)" stroke-width=".5"/>
             <text x="130" y="113" text-anchor="middle" fill="#5EEAD4" font-size="9" font-family="var(--mono)" font-weight="700">BOARD — Resolved + prevention</text>
           </svg>
@@ -930,7 +946,7 @@
     </div>
 
     <!-- Q5: Equity Comparison -->
-    <div class="iv-card">
+    <div class="iv-card iv-cat-communication" data-cat="communication">
       <div class="iv-card-head"><span class="iv-num iv-num-blu">Q5</span><span class="iv-cat">Equity</span></div>
       <div class="iv-q-title">Rural College Priority</div>
       <div class="iv-graphic">
@@ -962,7 +978,7 @@
     </div>
 
     <!-- Q6: Pareto Pattern -->
-    <div class="iv-card">
+    <div class="iv-card iv-cat-strategy" data-cat="strategy">
       <div class="iv-card-head"><span class="iv-num iv-num-org">Q6</span><span class="iv-cat">Process</span></div>
       <div class="iv-q-title">The Pareto Pattern</div>
       <div class="iv-graphic">
@@ -994,7 +1010,7 @@
     </div>
 
     <!-- Q7: Perception vs Reality -->
-    <div class="iv-card">
+    <div class="iv-card iv-cat-communication" data-cat="communication">
       <div class="iv-card-head"><span class="iv-num iv-num-amb">Q7</span><span class="iv-cat">Diplomacy</span></div>
       <div class="iv-q-title">Perception vs. Reality</div>
       <div class="iv-graphic">
@@ -1002,7 +1018,7 @@
           <svg viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
             <!-- Event icon at top center -->
             <circle cx="130" cy="16" r="10" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.15)" stroke-width=".5"/>
-            <text x="130" y="20" text-anchor="middle" fill="#A8A29E" font-size="10">⚡</text>
+            <path d="M132,10 L126,18 L131,18 L128,26 L134,16 L130,16 Z" fill="#A8A29E"/>
             <text x="130" y="36" text-anchor="middle" fill="#57534E" font-size="7" font-family="var(--mono)">Single event</text>
             <!-- Diverging arrow left (perception - red) -->
             <line x1="120" y1="42" x2="55" y2="72" stroke="#F87171" stroke-width="1.5" opacity=".6"/>
@@ -1031,7 +1047,7 @@
     </div>
 
     <!-- Q8: Dual Identity -->
-    <div class="iv-card">
+    <div class="iv-card iv-cat-communication" data-cat="communication">
       <div class="iv-card-head"><span class="iv-num iv-num-pur">Q8</span><span class="iv-cat">Navigation</span></div>
       <div class="iv-q-title">Dual Identity</div>
       <div class="iv-graphic">
@@ -1062,7 +1078,7 @@
     </div>
 
     <!-- Q9: Five Data Questions -->
-    <div class="iv-card">
+    <div class="iv-card iv-cat-growth" data-cat="growth">
       <div class="iv-card-head"><span class="iv-num iv-num-blu">Q9</span><span class="iv-cat">Analysis</span></div>
       <div class="iv-q-title">Five Questions for Ticket Data</div>
       <div class="iv-graphic">
@@ -1094,7 +1110,7 @@
     </div>
 
     <!-- Q10: Student Crisis Timeline -->
-    <div class="iv-card">
+    <div class="iv-card iv-cat-operations" data-cat="operations">
       <div class="iv-card-head"><span class="iv-num iv-num-red">Q10</span><span class="iv-cat">Crisis</span></div>
       <div class="iv-q-title">24-Hour Countdown</div>
       <div class="iv-graphic">
@@ -1106,7 +1122,6 @@
             <text x="20" y="17" text-anchor="end" fill="#F87171" font-size="8" font-family="var(--mono)" font-weight="700">NOW</text>
             <text x="240" y="17" text-anchor="start" fill="#F87171" font-size="8" font-family="var(--mono)" font-weight="700">24h</text>
             <!-- Parallel tracks -->
-            <text x="20" y="38" text-anchor="end" fill="#78716C" font-size="6.5" font-family="var(--mono)"></text>
             <rect x="30" y="30" width="150" height="13" rx="3" fill="rgba(29,78,216,.15)" stroke="rgba(96,165,250,.2)" stroke-width=".5"/>
             <text x="36" y="39" fill="#60A5FA" font-size="7" font-family="var(--mono)" font-weight="600">Home SIS — verify enrollment</text>
             <rect x="30" y="47" width="130" height="13" rx="3" fill="rgba(109,40,217,.12)" stroke="rgba(167,139,250,.2)" stroke-width=".5"/>
@@ -1123,7 +1138,7 @@
     </div>
 
     <!-- Q11: Growth Roadmap -->
-    <div class="iv-card">
+    <div class="iv-card iv-cat-growth" data-cat="growth">
       <div class="iv-card-head"><span class="iv-num iv-num-grn">Q11</span><span class="iv-cat">Growth</span></div>
       <div class="iv-q-title">Analyst I → Analyst II</div>
       <div class="iv-graphic">
@@ -1141,10 +1156,11 @@
             <rect x="175" y="15" width="70" height="25" rx="4" fill="rgba(109,40,217,.2)" stroke="rgba(167,139,250,.25)" stroke-width=".5"/>
             <text x="210" y="27" text-anchor="middle" fill="#A78BFA" font-size="9" font-family="var(--mono)" font-weight="700">LEAD</text>
             <text x="210" y="37" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Mo 7-12</text>
-            <!-- Stair lines connecting steps -->
-            <line x1="85" y1="65" x2="95" y2="65" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
-            <line x1="95" y1="65" x2="95" y2="65" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
-            <line x1="165" y1="40" x2="175" y2="40" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+            <!-- Ascending arrow connectors -->
+            <line x1="85" y1="72" x2="95" y2="58" stroke="rgba(96,165,250,.35)" stroke-width="1.2"/>
+            <path d="M92,62 L95,56 L98,62" fill="none" stroke="rgba(96,165,250,.35)" stroke-width="1.2"/>
+            <line x1="165" y1="48" x2="175" y2="33" stroke="rgba(167,139,250,.35)" stroke-width="1.2"/>
+            <path d="M172,37 L175,31 L178,37" fill="none" stroke="rgba(167,139,250,.35)" stroke-width="1.2"/>
             <!-- Milestone labels -->
             <text x="50" y="98" text-anchor="middle" fill="#60A5FA" font-size="6" font-family="var(--mono)">Shadow · Map SIS</text>
             <text x="130" y="73" text-anchor="middle" fill="#5EEAD4" font-size="6" font-family="var(--mono)">KB · Templates</text>
@@ -1156,7 +1172,7 @@
     </div>
 
     <!-- Q12: Invisible Infrastructure -->
-    <div class="iv-card">
+    <div class="iv-card iv-cat-growth" data-cat="growth">
       <div class="iv-card-head"><span class="iv-num iv-num-pur">Q12</span><span class="iv-cat">Mission</span></div>
       <div class="iv-q-title">Invisible Infrastructure</div>
       <div class="iv-graphic">
@@ -1165,7 +1181,9 @@
             <!-- Iceberg shape — above waterline -->
             <polygon points="100,8 160,8 175,48 85,48" fill="rgba(94,234,212,.12)" stroke="rgba(94,234,212,.25)" stroke-width=".5"/>
             <!-- Students label on top -->
-            <text x="130" y="22" text-anchor="middle" fill="#D6D3D1" font-size="10">☺ ☺ ☺</text>
+            <circle cx="110" cy="14" r="4" fill="#D6D3D1"/><path d="M104,26 Q110,20 116,26" fill="#D6D3D1" opacity=".6"/>
+            <circle cx="130" cy="14" r="4" fill="#D6D3D1"/><path d="M124,26 Q130,20 136,26" fill="#D6D3D1" opacity=".6"/>
+            <circle cx="150" cy="14" r="4" fill="#D6D3D1"/><path d="M144,26 Q150,20 156,26" fill="#D6D3D1" opacity=".6"/>
             <text x="130" y="36" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)" font-weight="600">STUDENTS</text>
             <!-- Waterline -->
             <line x1="20" y1="50" x2="240" y2="50" stroke="rgba(96,165,250,.3)" stroke-width="1" stroke-dasharray="4,3"/>
@@ -1178,7 +1196,7 @@
             <rect x="105" y="80" width="50" height="14" rx="3" fill="rgba(15,118,110,.15)"/><text x="130" y="90" text-anchor="middle" fill="#5EEAD4" font-size="7.5" font-family="var(--mono)" font-weight="600">Exchange</text>
             <rect x="100" y="98" width="60" height="14" rx="3" fill="rgba(109,40,217,.12)"/><text x="130" y="108" text-anchor="middle" fill="#A78BFA" font-size="7.5" font-family="var(--mono)" font-weight="600">SIS</text>
             <!-- Lightning bolt -->
-            <text x="130" y="130" text-anchor="middle" fill="#F87171" font-size="12">⚡</text>
+            <path d="M132,120 L126,128 L131,128 L128,136 L134,126 L130,126 Z" fill="#F87171"/>
           </svg>
         </div>
         <div class="iv-stat-row">
@@ -1191,6 +1209,25 @@
   </div>
 </div>
 </div>
+<script>
+function ivFilter(cat,btn){
+  var tabs=document.querySelectorAll('.iv-ftab');
+  tabs.forEach(function(t){t.classList.remove('iv-ftab-active')});
+  if(btn)btn.classList.add('iv-ftab-active');
+  var cards=document.querySelectorAll('.iv-card');
+  cards.forEach(function(c){
+    c.style.display=(cat==='all'||c.getAttribute('data-cat')===cat)?'':'none';
+  });
+}
+</script>
+
+<div class="explore-tracker" id="exploreTracker" title="Sections explored">
+  <div class="et-ring-wrap">
+    <svg class="et-ring" viewBox="0 0 36 36"><circle class="et-bg" cx="18" cy="18" r="15.9" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="2.5"/><circle class="et-fill" id="etFill" cx="18" cy="18" r="15.9" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-dasharray="0 100" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+    <span class="et-label" id="etLabel">0/10</span>
+  </div>
+  <span class="et-sublabel">explored</span>
+</div>
 
 <div class="key-pill" id="keyPill" onclick="document.getElementById('kbOverlay').classList.add('kb-show')" title="Keyboard shortcuts (press ?)">
   <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="4" width="14" height="9" rx="1.5" stroke="#A8A29E" stroke-width="1.2"/><rect x="3.5" y="6.5" width="2" height="1.5" rx=".3" fill="#A8A29E"/><rect x="7" y="6.5" width="2" height="1.5" rx=".3" fill="#A8A29E"/><rect x="10.5" y="6.5" width="2" height="1.5" rx=".3" fill="#A8A29E"/><rect x="4.5" y="9.5" width="7" height="1.5" rx=".3" fill="#A8A29E"/></svg>
@@ -1202,8 +1239,75 @@
 
 </main><!-- /main-content -->
 
+<!-- ═══ ORIGIN STORY — Personal "Why" Section ═══ -->
+<section class="origin-story" id="originStory" role="region" aria-label="Origin Story">
+  <div class="wrap">
 
+    <!-- Section intro -->
+    <div class="origin-header">
+      <span class="origin-label">Origin Story</span>
+      <h2 class="origin-title">Be a good ancestor &mdash;<br>find out your origin story.</h2>
+      <p class="origin-intro">The tools above prove I can do this work. What follows is <em>why</em> I will.</p>
+    </div>
 
+    <!-- Story beats -->
+    <div class="origin-grid">
+
+      <!-- Beat 1: Hook — Living ancestors' dreams -->
+      <div class="origin-beat">
+        <div class="origin-photo">
+          <img src="img/family-1.jpg" alt="Henry with his parents" onerror="this.parentElement.classList.add('origin-photo-placeholder')" />
+          <span class="origin-caption">Mom &amp; Dad &mdash; everything starts here</span>
+        </div>
+        <div class="origin-narrative">
+          <p>I&rsquo;m not just applying for a position. I&rsquo;m living my ancestors&rsquo; wildest dreams. My parents came to this country with nothing but the conviction that education could change a family&rsquo;s trajectory. They were right &mdash; but the system they believed in wasn&rsquo;t built for people who look like us.</p>
+        </div>
+      </div>
+
+      <!-- Beat 2: Origin — First-gen story -->
+      <div class="origin-beat origin-beat-flip">
+        <div class="origin-photo">
+          <img src="img/family-2.jpg" alt="Henry's family" onerror="this.parentElement.classList.add('origin-photo-placeholder')" />
+          <span class="origin-caption">First-generation &mdash; Foothill College</span>
+        </div>
+        <div class="origin-narrative">
+          <blockquote class="origin-blockquote">&ldquo;The legacy that lives within us humans of color has cultures that go back hundreds and thousands of years. So when we were dropped in our first school, where they suppressed our authenticity and creativity &mdash; that&rsquo;s not where our story begins.&rdquo;</blockquote>
+          <p>I started at Foothill College. First in my family to navigate higher ed. The system wasn&rsquo;t designed with students like me in mind &mdash; but it&rsquo;s where I discovered that education, done right, is the most powerful form of social justice there is.</p>
+        </div>
+      </div>
+
+      <!-- Beat 3: The Awakening — Education as social justice -->
+      <div class="origin-quote-card">
+        <blockquote>&ldquo;When we receive our education while engaging in deep learning, we are interrupting 400 years of inequality.&rdquo;</blockquote>
+        <p class="origin-quote-sub">&ldquo;I want us as a collective community to realize we can have a focus on academic rigor concurrently with a focus on humanity.&rdquo;</p>
+      </div>
+
+      <!-- Beat 4: Resolution — Pursuits, not standards -->
+      <div class="origin-beat">
+        <div class="origin-photo">
+          <img src="img/family-3.jpg" alt="Henry's journey" onerror="this.parentElement.classList.add('origin-photo-placeholder')" />
+          <span class="origin-caption">The work continues</span>
+        </div>
+        <div class="origin-narrative">
+          <blockquote class="origin-blockquote">&ldquo;Real dreamers don&rsquo;t have standards &mdash; we have pursuits. There&rsquo;s no ceiling for pursuits.&rdquo;</blockquote>
+          <p>The CVC Exchange isn&rsquo;t just infrastructure. For students like the one I was, it&rsquo;s the difference between a degree that takes four years and one that takes eight &mdash; or never finishes. Every cross-enrollment that works is a student whose trajectory just changed. That&rsquo;s why I built this page, and that&rsquo;s why I want this role.</p>
+        </div>
+      </div>
+
+    </div><!-- /origin-grid -->
+
+    <!-- Belief statement -->
+    <div class="origin-belief">
+      <blockquote>&ldquo;There is <em>nothing</em> an initiative, a foundation, or a school is creating&hellip; that does not exist in the imaginations of the hearts and souls of those populations already.&rdquo;</blockquote>
+    </div>
+
+    <!-- Closing -->
+    <div class="origin-closing">
+      <p>Every tool on this page exists because I&rsquo;ve been on the student side of these problems. The monitor, the diagnostics, the outreach planner &mdash; they&rsquo;re not hypothetical. They&rsquo;re what I wish someone had built for students like me.</p>
+    </div>
+
+  </div>
+</section>
 
 
 
@@ -1398,6 +1502,7 @@
 <script src="js/animations.js"></script>
 <script src="js/modes.js"></script>
 <script src="js/keyboard.js"></script>
+<script src="js/delight.js"></script>
 
 </body>
 </html>
