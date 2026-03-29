@@ -187,20 +187,20 @@ if (growthSection) growthObs.observe(growthSection);
   var explored = new Set();
   var tracker = document.createElement('div');
   tracker.className = 'explore-tracker';
-  tracker.textContent = '0 of 10 explored';
+  tracker.textContent = '0 of 11 explored';
   var dotsContainer = document.querySelector('.progress-dots');
   if (dotsContainer) {
     dotsContainer.appendChild(tracker);
   }
 
-  var sectionIds = ['lookup', 'cvcData', 'flow', 'monitor', 'tracer', 'patterns', 'comms', 'outreach', 'aiVision', 'barrierOverview'];
+  var sectionIds = ['lookup', 'cvcData', 'flow', 'monitor', 'tracer', 'patterns', 'comms', 'outreach', 'aiVision', 'barrierOverview', 'originStory'];
   var exploreObs = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         var wasNew = !explored.has(entry.target.id);
         explored.add(entry.target.id);
         if (wasNew && tracker) {
-          tracker.textContent = explored.size + ' of 10 explored';
+          tracker.textContent = explored.size + ' of 11 explored';
           tracker.classList.add('et-updated');
           setTimeout(function() { tracker.classList.remove('et-updated'); }, 800);
         }
