@@ -117,6 +117,7 @@
 .h-stat-num.green { color: var(--primary); }
 .h-stat-num.red { color: var(--red); }
 .h-stat-num.blue { color: var(--blue); }
+.h-stat-num.purple { color: var(--purple); }
 .h-stat-num::after {
   content: '';
   position: absolute;
@@ -130,6 +131,7 @@
 .h-stat-num.green::after { background: var(--primary); }
 .h-stat-num.blue::after { background: var(--blue); }
 .h-stat-num.red::after { background: var(--red); }
+.h-stat-num.purple::after { background: var(--purple); }
 
 .h-stat-label {
   font-size: var(--fs-xs);
@@ -959,6 +961,7 @@
 .journey-step [style*="primary-light"] { font-size: .75rem; padding: .4rem .6rem; border-left: 3px solid var(--primary); }
 .journey-cols [style*="font-size:.55rem"] { font-size: .65rem; }
 
+.journey-toggle { display: flex; gap: 2px; background: var(--bg-3); border-radius: var(--r); padding: 2px; margin: .75rem .85rem 0; width: fit-content; }
 .jt-btn { padding: .4rem .85rem; border-radius: 6px; border: none; background: transparent; font-family: var(--mono); font-size: .62rem; font-weight: 500; color: var(--text-3); cursor: pointer; transition: all .2s; }
 .jt-btn:hover { background: var(--bg-3); color: var(--text-2); }
 .jt-btn.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,.08); font-weight: 700; }
@@ -1154,6 +1157,9 @@
 .divider-desc { font-size: .95rem; color: var(--text-2); max-width: 540px; margin: 0 auto; line-height: 1.8; }
 .divider-stats { display: flex; justify-content: center; gap: 2.5rem; margin-top: 1.75rem; }
 .ds-num { font-family: var(--display); font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; line-height: 1; transition: all .3s; }
+.ds-red { color: var(--red); }
+.ds-amber { color: var(--amber); }
+.ds-green { color: var(--primary); }
 .divider-sec:hover .ds-num { transform: scale(1.05); }
 .ds-label { font-size: .65rem; color: var(--text-3); margin-top: .15rem; }
 
@@ -1950,6 +1956,22 @@ footer {
   .iv-g-vs { padding: .15rem 0; }
   .iv-g-phase { flex-direction: column; }
 }
+
+/* ── Barrier bar visualization ── */
+.barrier-bar { display: flex; gap: .25rem; margin-top: .6rem; height: 8px; border-radius: 4px; overflow: hidden; }
+.bb-seg { border-radius: 0; }
+.bb-seg:first-child { border-radius: 4px 0 0 4px; }
+.bb-seg:last-child { border-radius: 0 4px 4px 0; }
+.bb-red { background: var(--red); }
+.bb-amber { background: var(--amber); }
+.bb-blue { background: var(--blue); }
+.bb-purple { background: var(--purple); }
+.bb-gray { background: var(--text-3); }
+.barrier-legend { display: flex; gap: .75rem; margin-top: .3rem; font-family: var(--mono); font-size: .5rem; color: var(--text-3); flex-wrap: wrap; }
+.bl-red { color: var(--red); }
+.bl-amber { color: var(--amber); }
+.bl-blue { color: var(--blue); }
+.bl-purple { color: var(--purple); }
 
 /* ── Info callout boxes (reusable) ── */
 .info-callout {
