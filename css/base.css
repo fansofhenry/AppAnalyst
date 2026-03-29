@@ -86,7 +86,7 @@ h2 {
   color: var(--text);
   margin-bottom: .75rem;
   position: relative;
-  padding-left: .75rem;
+  padding-left: .85rem;
 }
 h2::before {
   content: '';
@@ -161,11 +161,11 @@ p {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 10%;
-  right: 10%;
+  left: 8%;
+  right: 8%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border) 25%, var(--border) 75%, transparent);
-  opacity: .4;
+  background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
+  opacity: .55;
 }
 
 .sec-alt {

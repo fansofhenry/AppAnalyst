@@ -82,7 +82,7 @@
     </div>
 
     <!-- UX: All 5 actions map to the job description — show full coverage -->
-    <div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-align:center;margin-top:1.5rem;margin-bottom:.5rem">Explore the tools</div>
+    <div class="hero-tools-label">Explore the tools</div>
     <div class="quick-actions">
       <a class="qa-card qa-fhda" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">🏠</span><span class="qa-text">Check FHDA status</span></a>
       <a class="qa-card" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">⚡</span><span class="qa-text">See what breaks</span></a>
@@ -117,7 +117,7 @@
     <div class="why-inner">
       <div class="why-cols">
         <div class="why-col">
-          <div class="why-label" style="color:var(--primary)">The Problem</div>
+          <div class="why-label why-label-problem">The Problem</div>
           <div class="why-body">
             A student at Chabot enrolls in MATH 1A at De Anza through the Exchange. The next morning, the course isn’t in Canvas. She doesn’t know why. She emails her counselor, who doesn’t know either. She considers dropping.
           </div>
@@ -125,7 +125,7 @@
             The cause was technical — an expired authentication token between two systems she’s never heard of. The support analyst’s job is to find it, fix it, tell the right people, and make sure it doesn’t happen to the next 46 students in the queue.</div>
         </div>
         <div class="why-col">
-          <div class="why-label" style="color:var(--blue)">Why I Built This</div>
+          <div class="why-label why-label-solution">Why I Built This</div>
           <div class="why-body">
             Each section maps to a real part of the job: monitoring, diagnosis, escalation, documentation, and barrier analysis. This role sits inside FHDA but serves 116 colleges statewide.
           </div>
@@ -1248,14 +1248,14 @@ function ivFilter(cat,btn){
     <!-- Section intro -->
     <div class="origin-header fu">
       <span class="origin-label">Origin Story</span>
-      <h2 class="origin-title">Be a good ancestor &mdash;<br>find out your origin story.</h2>
-      <p class="origin-intro">The tools above prove I can do this work. What follows is <em>why</em> I will.</p>
+      <h2 class="origin-title">The tools prove I can do the work.<br>This is why I <em>will.</em></h2>
+      <p class="origin-intro">A second-round interview is about values alignment. Here are mine.</p>
     </div>
 
     <!-- Story beats -->
     <div class="origin-grid">
 
-      <!-- Beat 1: Hook — Living ancestors' dreams -->
+      <!-- Beat 1: Where I come from -->
       <div class="origin-beat fu">
         <div class="origin-tl">
           <span class="origin-chapter">01</span>
@@ -1265,12 +1265,13 @@ function ivFilter(cat,btn){
           <span class="origin-caption">Mom &amp; Dad &mdash; everything starts here</span>
         </div>
         <div class="origin-narrative">
-          <span class="origin-beat-label">The Inheritance</span>
-          <p>I&rsquo;m not just applying for a position. I&rsquo;m living my ancestors&rsquo; wildest dreams. My parents came to this country with nothing but the conviction that education could change a family&rsquo;s trajectory. They were right &mdash; but the system they believed in wasn&rsquo;t built for people who look like us.</p>
+          <span class="origin-beat-label">Where I Come From</span>
+          <p>My parents came to this country with the conviction that education could change a family&rsquo;s trajectory. I started at <strong>Foothill College</strong> as a first-generation student. I didn&rsquo;t know what a prerequisite was. I didn&rsquo;t know what office hours meant. The system wasn&rsquo;t built for people like me &mdash; but Foothill gave me a shot anyway.</p>
+          <p>That experience is why I understand, viscerally, what it means when the Exchange breaks. It&rsquo;s not an API timeout. It&rsquo;s a student reconsidering whether college is for them.</p>
         </div>
       </div>
 
-      <!-- Beat 2: Origin — First-gen story -->
+      <!-- Beat 2: Why CVC specifically -->
       <div class="origin-beat origin-beat-flip fu">
         <div class="origin-tl">
           <span class="origin-chapter">02</span>
@@ -1280,26 +1281,26 @@ function ivFilter(cat,btn){
           <span class="origin-caption">First-generation &mdash; Foothill College</span>
         </div>
         <div class="origin-narrative">
-          <span class="origin-beat-label">The Awakening</span>
-          <blockquote class="origin-blockquote">&ldquo;The legacy that lives within us humans of color has cultures that go back hundreds and thousands of years. So when we were dropped in our first school, where they suppressed our authenticity and creativity &mdash; that&rsquo;s not where our story begins.&rdquo;</blockquote>
-          <p>I started at Foothill College. First in my family to navigate higher ed. The system wasn&rsquo;t designed with students like me in mind &mdash; but it&rsquo;s where I discovered that education, done right, is the most powerful form of social justice there is.</p>
+          <span class="origin-beat-label">Why CVC, Why FHDA</span>
+          <p>I didn&rsquo;t apply to this role because it was open. I applied because the CVC Exchange is <strong>equity infrastructure</strong> &mdash; and FHDA is where it lives. When a student at a rural college with 12 course offerings can cross-enroll into De Anza&rsquo;s catalog, that&rsquo;s not a feature. That&rsquo;s access that didn&rsquo;t exist five years ago.</p>
+          <p>OEI&rsquo;s mission &mdash; removing barriers to student success across all 116 colleges &mdash; isn&rsquo;t abstract to me. I&rsquo;ve <em>been</em> the student those barriers were built around. Supporting this system from inside FHDA means protecting the thing that would have changed my own trajectory.</p>
         </div>
       </div>
 
-      <!-- Beat 3: The Turning Point — Education as social justice -->
+      <!-- Beat 3: Values alignment — the centerpiece -->
       <div class="origin-beat origin-beat-centerpiece fu">
         <div class="origin-tl">
           <span class="origin-chapter origin-chapter-accent">03</span>
         </div>
         <div class="origin-quote-card">
-          <span class="origin-beat-label origin-beat-label-center">The Turning Point</span>
-          <blockquote>&ldquo;When we receive our education while engaging in deep learning, we are interrupting 400 years of inequality.&rdquo;</blockquote>
-          <p class="origin-quote-sub">&ldquo;I want us as a collective community to realize we can have a focus on academic rigor concurrently with a focus on humanity.&rdquo;</p>
-          <cite class="origin-cite">&mdash; Words that changed how I see this work</cite>
+          <span class="origin-beat-label origin-beat-label-center">What I Believe</span>
+          <blockquote>&ldquo;Academic rigor and humanity are not competing priorities &mdash; they are the same work.&rdquo;</blockquote>
+          <p class="origin-quote-sub">Technical precision matters because people depend on it. Every sync that succeeds, every ticket resolved before a drop deadline, every proactive outreach to a struggling college &mdash; that&rsquo;s rigor in service of humanity. That&rsquo;s the standard I hold myself to.</p>
+          <cite class="origin-cite">&mdash; The lens I bring to this role</cite>
         </div>
       </div>
 
-      <!-- Beat 4: Resolution — Pursuits, not standards -->
+      <!-- Beat 4: Who I am as a colleague -->
       <div class="origin-beat fu">
         <div class="origin-tl">
           <span class="origin-chapter">04</span>
@@ -1309,19 +1310,19 @@ function ivFilter(cat,btn){
           <span class="origin-caption">The work continues</span>
         </div>
         <div class="origin-narrative">
-          <span class="origin-beat-label">The Resolution</span>
-          <blockquote class="origin-blockquote">&ldquo;Real dreamers don&rsquo;t have standards &mdash; we have pursuits. There&rsquo;s no ceiling for pursuits.&rdquo;</blockquote>
-          <p>The CVC Exchange isn&rsquo;t just infrastructure. For students like the one I was, it&rsquo;s the difference between a degree that takes four years and one that takes eight &mdash; or never finishes. Every cross-enrollment that works is a student whose trajectory just changed. That&rsquo;s why I built this page, and that&rsquo;s why I want this role.</p>
+          <span class="origin-beat-label">How I Work</span>
+          <p><strong>I build relationships before I need them.</strong> At SMCCD, I learned that the best support isn&rsquo;t reactive &mdash; it&rsquo;s knowing your colleges well enough to anticipate where they&rsquo;ll struggle. At Braven and OpenStax, I learned that documentation is a form of care: when you write a clear KB article, you&rsquo;re respecting the next person&rsquo;s time.</p>
+          <p><strong>I ask questions early and escalate without ego.</strong> I&rsquo;d rather say &ldquo;I don&rsquo;t know yet, but here&rsquo;s my plan to find out&rdquo; than guess. And when a problem is bigger than me, I bring it to the team with context, not just a forwarded ticket. That&rsquo;s the kind of colleague I am &mdash; and the kind I want to keep becoming.</p>
         </div>
       </div>
 
     </div><!-- /origin-grid -->
 
-    <!-- Closing — unified belief + resolution -->
+    <!-- Closing — unified values statement -->
     <div class="origin-coda fu">
       <div class="origin-coda-line" aria-hidden="true"></div>
-      <blockquote class="origin-coda-quote">&ldquo;There is <em>nothing</em> an initiative, a foundation, or a school is creating&hellip; that does not exist in the imaginations of the hearts and souls of those populations already.&rdquo;</blockquote>
-      <p class="origin-coda-closing">Every tool on this page exists because I&rsquo;ve been on the student side of these problems. The monitor, the diagnostics, the outreach planner &mdash; they&rsquo;re not hypothetical. They&rsquo;re what I wish someone had built for students like me.</p>
+      <blockquote class="origin-coda-quote">&ldquo;Every cross-enrollment that works is a student whose trajectory just changed. Every one that breaks is a student who might not come back.&rdquo;</blockquote>
+      <p class="origin-coda-closing">That&rsquo;s why I built ten working tools for a job I don&rsquo;t have yet. Not to prove I can &mdash; but because this is the work I want to do, at the place where it matters most.</p>
     </div>
 
   </div>
@@ -1347,9 +1348,11 @@ function ivFilter(cat,btn){
         </div>
       </div>
       <div class="footer-cta-wrap">
-        <a class="footer-cta" href="mailto:fanh@smccd.edu?subject=CVC-OEI Application Support — Henry Fan">Let's walk through this together</a>
+        <a class="footer-cta" href="#" onclick="event.preventDefault();document.getElementById('ivOverlay').classList.add('iv-show')">Walk through the scenarios</a>
         <div class="footer-secondary">
-          <a href="https://www.linkedin.com/in/henryfan" target="_blank" rel="noopener">LinkedIn Profile</a>
+          <a href="mailto:fanhenry@fhda.edu?subject=CVC-OEI Application Support — Henry Fan">fanhenry@fhda.edu</a>
+          <span class="fs-dot">&middot;</span>
+          <a href="https://www.linkedin.com/in/henryfan" target="_blank" rel="noopener">LinkedIn</a>
           <span class="fs-dot">&middot;</span>
           <a href="#" onclick="window.print();return false">Print / Save as PDF</a>
         </div>
@@ -1368,10 +1371,11 @@ function ivFilter(cat,btn){
 </footer>
 
 <!-- TABLE OF CONTENTS PANEL -->
-<div class="toc-panel" id="tocPanel">
+<div class="toc-panel" id="tocPanel" role="region" aria-label="Table of Contents">
   <div class="toc-header">
     <div class="toc-title">Sections</div>
     <div class="toc-subtitle">11 sections · Keys 1–9, 0, - · Click any row to jump</div>
+    <label for="tocSearch" class="sr-only">Filter sections</label>
     <input class="toc-search" id="tocSearch" type="text" placeholder="Filter sections..." oninput="filterToc(this.value)" autocomplete="off" style="width:100%;padding:.4rem .6rem;border:1px solid var(--border);border-radius:6px;font-family:var(--mono);font-size:.7rem;margin-top:.5rem;background:var(--surface);color:var(--text);outline:none;box-sizing:border-box">
   </div>
 
