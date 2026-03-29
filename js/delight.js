@@ -378,3 +378,123 @@
   }
 
 })();
+
+/*  Features 9-14 temporarily disabled for debugging
+// ═══ FEATURE 9: SCROLL DEPTH MILESTONES ═══
+  // Celebrate how far the user has scrolled — 25%, 50%, 75%, 100%
+
+  (function() {
+    var depthHit = {};
+    var depthMessages = {
+      25: "You're 25% through — keep going!",
+      50: "Halfway through the portfolio!",
+      75: "Almost there — 75% explored!",
+      100: "You scrolled the entire page!"
+    };
+
+    window.addEventListener('scroll', function() {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      if (h <= 0) return;
+      var pct = Math.round((window.scrollY / h) * 100);
+
+      [25, 50, 75, 100].forEach(function(milestone) {
+        if (pct >= milestone && !depthHit[milestone]) {
+          depthHit[milestone] = true;
+          // Brief delay to avoid stacking with exploration tracker toasts
+          setTimeout(function() {
+            toast(depthMessages[milestone]);
+            if (milestone === 100) {
+              confettiBurstCenter(30);
+            }
+          }, 800);
+        }
+      });
+    }, { passive: true });
+  })();
+
+
+  // ═══ FEATURE 10: (Hero stat count-up handled by animations.js) ═══
+
+
+  // ═══ FEATURE 11: SECTION FIRST-VISIT SPARKLE ═══
+  // First time a section scrolls into view: brief shimmer on the eyebrow
+
+  (function() {
+    if (reducedMotion) return;
+    var sparkled = {};
+
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var id = entry.target.id;
+        if (sparkled[id]) return;
+        sparkled[id] = true;
+
+        var eyebrow = entry.target.querySelector('.eyebrow');
+        if (eyebrow) {
+          eyebrow.classList.add('sparkle-in');
+          setTimeout(function() { eyebrow.classList.remove('sparkle-in'); }, 1000);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.sec[id], .sec-alt[id]').forEach(function(sec) {
+      obs.observe(sec);
+    });
+  })();
+
+
+  // ═══ FEATURE 12: PROGRESS DOT PULSE ON UNVISITED ═══
+  // Unvisited progress dots gently breathe to invite exploration
+
+  (function() {
+    if (reducedMotion || isMobile) return;
+    var dots = document.querySelectorAll('.progress-dot');
+    if (!dots.length) return;
+
+    // Add breathing class to all dots initially
+    dots.forEach(function(d) { d.classList.add('pd-breathe'); });
+
+    // Remove breathing when dot becomes active (visited)
+    var obs = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        if (m.target.classList.contains('pd-active')) {
+          m.target.classList.remove('pd-breathe');
+        }
+      });
+    });
+
+    dots.forEach(function(d) {
+      obs.observe(d, { attributes: true, attributeFilter: ['class'] });
+    });
+  })();
+
+
+  // ═══ FEATURE 13: FOOTER ENTRANCE STAGGER ═══
+  // Footer children stagger in when scrolled to (CSS class-based, safe fallback)
+
+  (function() {
+    if (reducedMotion) return;
+    var footer = document.querySelector('.site-footer');
+    if (!footer) return;
+
+    footer.classList.add('footer-stagger');
+
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        obs.unobserve(entry.target);
+        footer.classList.add('footer-revealed');
+      });
+    }, { threshold: 0.1 });
+
+    obs.observe(footer);
+
+    // Safety fallback: reveal footer after 5s even if observer fails
+    setTimeout(function() {
+      if (!footer.classList.contains('footer-revealed')) {
+        footer.classList.add('footer-revealed');
+      }
+    }, 5000);
+  })();
+End of features 9-14 */

@@ -301,6 +301,7 @@ a.nav-brand:hover .nav-title { color: var(--primary); }
 .tag-data { background: var(--blue-light); color: var(--blue); border: 1px solid var(--blue-bd); }
 .tag-analysis { background: var(--purple-light); color: var(--purple); border: 1px solid var(--purple-bd); }
 .tag-vision { background: var(--teal-light); color: var(--teal); border: 1px solid var(--teal-bd); }
+.tag-story { background: var(--amber-light); color: var(--amber); border: 1px solid var(--amber-bd); }
 
 /* TOC color-coded numbers */
 .tc-blue .toc-num { background: var(--blue); color: #fff; border-color: var(--blue); }
@@ -339,6 +340,9 @@ a.nav-brand:hover .nav-title { color: var(--primary); }
   cursor: pointer;
 }
 .progress-dot:hover { background: var(--text-2); border-color: var(--text-2); transform: scale(1.3); }
+.pd-origin { margin-top: 4px; border-color: var(--amber); background: transparent; }
+.pd-origin.pd-active { background: var(--amber); border-color: var(--amber); box-shadow: 0 0 0 3px rgba(161,98,7,.2); }
+.pd-origin.pd-active::after { border-color: var(--amber); }
 .progress-dot.pd-active {
   background: var(--primary);
   border-color: var(--primary);

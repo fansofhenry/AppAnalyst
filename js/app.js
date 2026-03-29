@@ -19,12 +19,24 @@ var fuObs = new IntersectionObserver(function(entries) {
 }, { threshold: .06, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.fu').forEach(function(el) { fuObs.observe(el); });
 
-// Toast notification
-function toast(msg) {
+// Toast notification (queued)
+var _toastQueue = [];
+var _toastBusy = false;
+function toast(msg, html) {
+  _toastQueue.push({ msg: msg, html: !!html });
+  if (!_toastBusy) _drainToast();
+}
+function _drainToast() {
+  if (!_toastQueue.length) { _toastBusy = false; return; }
+  _toastBusy = true;
+  var item = _toastQueue.shift();
   var t = document.getElementById('toast');
-  t.textContent = msg;
+  if (item.html) { t.innerHTML = item.msg; } else { t.textContent = item.msg; }
   t.classList.add('show');
-  setTimeout(function() { t.classList.remove('show'); }, 2200);
+  setTimeout(function() {
+    t.classList.remove('show');
+    setTimeout(_drainToast, 300);
+  }, 2200);
 }
 
 // Interaction counter system
@@ -113,7 +125,11 @@ function toast(msg) {
   var g = document.getElementById('greetingToast');
   if (!g) return;
   setTimeout(function() { g.classList.add('gt-show'); }, 800);
-  setTimeout(function() { g.classList.remove('gt-show'); }, 3200);
+  setTimeout(function() {
+    g.classList.remove('gt-show');
+    g.classList.add('gt-hide');
+    setTimeout(function() { g.remove(); }, 500);
+  }, 3200);
 })();
 
 // Dynamic page title — shows current section in tab
@@ -134,7 +150,8 @@ function toast(msg) {
     'counselorToolkit': 'Student & Counselor Toolkit',
     'aiVision': 'AI Vision',
     'barrierOverview': 'Barriers',
-    'barriers': 'Barriers'
+    'barriers': 'Barriers',
+    'originStory': 'Origin Story'
   };
   var current = '';
   var obs = new IntersectionObserver(function(entries) {

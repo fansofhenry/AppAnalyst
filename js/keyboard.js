@@ -49,6 +49,14 @@ document.addEventListener('keydown', function(e) {
     return;
   }
 
+  // - = origin story
+  if (e.key === '-') {
+    e.preventDefault();
+    var origin = document.getElementById('originStory');
+    if (origin) origin.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
   // Number keys 1-9 map to tools 0-8, 0 maps to tool 9
   var idx = -1;
   if (e.key >= '1' && e.key <= '9') idx = parseInt(e.key) - 1;
@@ -81,6 +89,15 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'f' || e.key === 'F') {
     e.preventDefault();
     window._toggleTheater();
+    return;
+  }
+
+  // Arrow keys in theater mode
+  if (document.body.classList.contains('theater-on') &&
+      (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowLeft')) {
+    e.preventDefault();
+    var dir = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? 1 : -1;
+    window._theaterNext(dir);
     return;
   }
 
