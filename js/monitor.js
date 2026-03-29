@@ -135,11 +135,11 @@ updateMonClock();
 
 // Live alerts
 var alertMsgs = [
-  { title: '\u26d4 Enrollment Anomaly', body: '<strong>Flagged:</strong> 6 new CCCIDs from same IP cross-enrolled into high-unit courses at 2:47 AM. FA Consortium Agreements pending.', time: 'Just now' },
-  { title: '\u26a1 Integration Alert', body: '<strong>Sacramento City College</strong> \u2014 Ethos API OAuth2 token expired. 47 AER records queued.', time: '3 min ago' },
-  { title: '\u26a0 IdP Proxy Alert', body: '<strong>Riverside City College</strong> \u2014 CCCID not asserted by college IdP. Students redirected to OpenCCC recovery.', time: '5 min ago' },
+  { title: '\u26d4 Enrollment Anomaly', body: '<strong>Flagged:</strong> 6 new student IDs from the same location cross-enrolled into high-unit courses at 2:47 AM. Financial aid agreements pending.', time: 'Just now' },
+  { title: '\u26a1 Integration Alert', body: '<strong>Sacramento City College</strong> \u2014 Security credential expired. 47 student enrollments waiting to be processed.', time: '3 min ago' },
+  { title: '\u26a0 Sign-On Alert', body: '<strong>Riverside City College</strong> \u2014 Student login not recognized by college system. Students redirected to account recovery.', time: '5 min ago' },
   { title: '\u23f1 Sync Warning', body: '<strong>City College of San Francisco</strong> \u2014 Seat count sync delayed 8 min. 3 courses showing outdated availability.', time: '8 min ago' },
-  { title: '\u2705 Resolved', body: '<strong>Feather River College</strong> \u2014 Colleague Ethos timeout resolved. 23 records transmitted.', time: '12 min ago' }
+  { title: '\u2705 Resolved', body: '<strong>Feather River College</strong> \u2014 Connection timeout resolved. 23 student records transmitted.', time: '12 min ago' }
 ];
 var alertIdx = 0;
 var alertEl = document.getElementById('liveAlert');
