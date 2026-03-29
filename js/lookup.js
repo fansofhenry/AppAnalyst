@@ -50,7 +50,7 @@ function renderLookup(colleges) {
   var withIssues = colleges.filter(function(c) { return c.issues.length > 0; }).length;
   var clean = colleges.filter(function(c) { return c.issues.length === 0; }).length;
 
-  stats.innerHTML =
+  if (stats) stats.innerHTML =
     '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--text)">' + colleges.length + '</div><div class="lookup-stat-label">Colleges</div></div>' +
     '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--primary)">' + automated + '</div><div class="lookup-stat-label">Aid Automated</div></div>' +
     '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--amber)">' + manual + '</div><div class="lookup-stat-label">Aid Manual</div></div>' +
@@ -59,7 +59,7 @@ function renderLookup(colleges) {
 
   if (colleges.length === 0) {
     results.innerHTML = '<div class="lookup-empty">No matches</div>';
-    counter.textContent = '';
+    if (counter) counter.textContent = '';
     return;
   }
 
@@ -83,6 +83,13 @@ function renderLookup(colleges) {
   var displayList = showAll ? colleges : colleges.slice(0, DISPLAY_LIMIT);
   var hasMore = colleges.length > DISPLAY_LIMIT && !showAll;
 
+  var readinessHtml = function(r) {
+    if (r === 'ready') return '<span class="readiness-badge rb-ready"><span class="readiness-dot"></span>Rollout Ready</span>';
+    if (r === 'support') return '<span class="readiness-badge rb-support"><span class="readiness-dot"></span>Needs Support</span>';
+    if (r === 'at-risk') return '<span class="readiness-badge rb-risk"><span class="readiness-dot"></span>At Risk</span>';
+    return '';
+  };
+
   var html = displayList.map(function(c) {
     var issues = c.issues.length > 0 ? c.issues.map(function(i) { return '<span class="lookup-issue-tag">' + i + '</span>'; }).join('') : '<span class="lookup-issue-tag issue-clear">All clear</span>';
 
@@ -90,6 +97,7 @@ function renderLookup(colleges) {
       '<div class="lookup-card-header">' +
       '<span class="lookup-college-name">' + c.name + '</span>' +
       '<span class="lookup-sis-badge ' + sisClass(c.sis) + '">' + c.sis + '</span>' +
+      (c.readiness ? readinessHtml(c.readiness) : '') +
       '<span class="lookup-region">' + c.region + '</span>' +
       '</div>' +
       '<div style="font-size:.68rem;color:var(--text-3);margin-bottom:.4rem">' + c.district + ' \u00b7 ' + c.role + ' \u00b7 Volume: ' + c.volume + '</div>' +
@@ -113,7 +121,7 @@ function renderLookup(colleges) {
   }
 
   results.innerHTML = html;
-  counter.textContent = colleges.length + ' of ' + collegeDB.length + ' colleges shown';
+  if (counter) counter.textContent = colleges.length + ' of ' + collegeDB.length + ' colleges shown';
 
   // Mark home colleges (from wrapper #1)
   setTimeout(markHomeLookups, 50);

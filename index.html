@@ -41,7 +41,7 @@
 <!-- Zoom mode indicator -->
 <div class="zoom-badge">Zoom Mode</div>
 <!-- Theater mode indicator -->
-<div class="theater-badge"><span class="tb-dot"></span>Theater Mode · hover to spotlight · <kbd>F</kbd> to exit</div>
+<div class="theater-badge"><span class="tb-dot"></span>Theater Mode · hover or arrow keys to navigate · <kbd>F</kbd> to exit</div>
 <!-- Accessibility mode indicator -->
 <div class="a11y-badge">WCAG AAA · High Contrast</div>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -53,7 +53,7 @@
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0" aria-hidden="true"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Sections</button>
   <div class="a11y-toggle" id="a11yToggle" onclick="toggleA11y()" role="switch" aria-checked="false" aria-label="Toggle accessibility high-contrast mode" tabindex="0"><span class="a11y-icon" aria-hidden="true">♿</span><span class="a11y-label">Accessibility</span><div class="a11y-switch"></div></div>
     <div class="nav-links">
-    <a href="#why">Context</a><a href="#lookup" class="nv nv-blue"><span class="nav-num">1</span>Lookup</a><a href="#cvcData" class="nv nv-green"><span class="nav-num">2</span>Exchange</a><a href="#flow" class="nv nv-sky"><span class="nav-num">3</span>Architecture</a><a href="#monitor" class="nv nv-amber"><span class="nav-num">4</span>Monitor</a><a href="#tracer" class="nv nv-rose"><span class="nav-num">5</span>Diagnostics</a><a href="#patterns" class="nv nv-orange"><span class="nav-num">6</span>Intelligence</a><a href="#comms" class="nv nv-indigo"><span class="nav-num">7</span>Response</a><a href="#outreach" class="nv nv-teal"><span class="nav-num">8</span>Toolkit</a><a href="#aiVision" class="nv nv-purple"><span class="nav-num">9</span>AI Vision</a><a href="#barriers" class="nav-barrier"><span class="nav-num">0</span>Barriers</a>
+    <a href="#why">Context</a><a href="#lookup" class="nv nv-blue"><span class="nav-num">1</span>Lookup</a><a href="#cvcData" class="nv nv-green"><span class="nav-num">2</span>Exchange</a><a href="#flow" class="nv nv-sky"><span class="nav-num">3</span>Architecture</a><a href="#monitor" class="nv nv-amber"><span class="nav-num">4</span>Monitor</a><a href="#tracer" class="nv nv-rose"><span class="nav-num">5</span>Diagnostics</a><a href="#patterns" class="nv nv-orange"><span class="nav-num">6</span>Intelligence</a><a href="#comms" class="nv nv-indigo"><span class="nav-num">7</span>Response</a><a href="#outreach" class="nv nv-teal"><span class="nav-num">8</span>Toolkit</a><a href="#aiVision" class="nv nv-purple"><span class="nav-num">9</span>AI Vision</a><a href="#barriers" class="nav-barrier"><span class="nav-num">0</span>Barriers</a><a href="#originStory" class="nv nv-amber"><span class="nav-num">-</span>Origin</a>
   </div>
 </nav>
 
@@ -82,13 +82,14 @@
     </div>
 
     <!-- UX: All 5 actions map to the job description — show full coverage -->
-    <div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-align:center;margin-top:1.5rem;margin-bottom:.5rem">Explore the tools</div>
+    <div class="hero-tools-label">Explore the tools</div>
     <div class="quick-actions">
       <a class="qa-card qa-fhda" onclick="document.getElementById('monitor').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">🏠</span><span class="qa-text">Check FHDA status</span></a>
       <a class="qa-card" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">⚡</span><span class="qa-text">See what breaks</span></a>
       <a class="qa-card" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">🛠</span><span class="qa-text">Trace an incident</span></a>
       <a class="qa-card" onclick="document.getElementById('counselorToolkit').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">📋</span><span class="qa-text">Help a counselor</span></a>
       <a class="qa-card" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">📊</span><span class="qa-text">See the barriers</span></a>
+      <a class="qa-card" onclick="document.getElementById('ivOverlay').classList.toggle('iv-show')"><span class="qa-icon">◆</span><span class="qa-text">Visual reference</span></a>
     </div>
 
     <!-- UX: Personal story as a visually distinct block — emotional anchor AFTER the action layer -->
@@ -111,26 +112,25 @@
 </div>
 
 <!-- ═══ WHY CVC ═══ -->
-<section id="why" class="why-section" style="padding:clamp(1.5rem,4vw,2.5rem) 0">
+<section id="why" class="why-section">
   <div class="wrap">
-    <div style="max-width:680px;margin:0 auto">
-      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem">
-        <div style="flex:1;min-width:200px">
-          <div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);font-weight:700;margin-bottom:.4rem">The Problem</div>
-          <div style="font-size:.88rem;color:var(--text);line-height:1.8">
+    <div class="why-inner">
+      <div class="why-cols">
+        <div class="why-col">
+          <div class="why-label why-label-problem">The Problem</div>
+          <div class="why-body">
             A student at Chabot enrolls in MATH 1A at De Anza through the Exchange. The next morning, the course isn’t in Canvas. She doesn’t know why. She emails her counselor, who doesn’t know either. She considers dropping.
           </div>
-          <div style="font-size:.82rem;color:var(--text-2);line-height:1.8;margin-top:.5rem">
+          <div class="why-detail">
             The cause was technical — an expired authentication token between two systems she’s never heard of. The support analyst’s job is to find it, fix it, tell the right people, and make sure it doesn’t happen to the next 46 students in the queue.</div>
         </div>
-        <div style="flex:1;min-width:200px">
-          <div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:.4rem">Why I Built This</div>
-          <div style="font-size:.88rem;color:var(--text);line-height:1.8">
-            Each section below addresses a real part of the job: monitoring, diagnosis, escalation, documentation, and barrier analysis. This role sits inside FHDA's ETS department but serves 116 colleges statewide — every decision has to work for both the district that employs the team and the system that depends on it.
+        <div class="why-col">
+          <div class="why-label why-label-solution">Why I Built This</div>
+          <div class="why-body">
+            Each section maps to a real part of the job: monitoring, diagnosis, escalation, documentation, and barrier analysis. This role sits inside FHDA but serves 116 colleges statewide.
           </div>
-          <!-- IMPROVEMENT: Credential tags — role-specific experience -->
-          <div style="font-size:.78rem;color:var(--text-2);line-height:1.8;margin-top:.75rem">
-            <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <div class="why-creds">
+            <div class="why-cred-wrap">
               <span class="cred-tag">Banner + PeopleSoft <span class="cred-org">SMCCD</span></span>
               <span class="cred-tag">Canvas + Data Pipelines <span class="cred-org">OpenStax / Rice</span></span>
               <span class="cred-tag">Tickets + Knowledge Base <span class="cred-org">Braven / SJSU</span></span>
@@ -149,7 +149,7 @@
 <section class="sec fu" id="lookup" role="region" aria-label="College Lookup"><div class="wrap">
   <div class="eyebrow" style="color:var(--blue)"><span class="sec-num" style="background:var(--blue)">1</span>Lookup</div>
   <h2>Look up any college in <em>the Exchange</em></h2>
-  <p class="sec-desc">Type a college name or system type. <strong>Foothill and De Anza are pinned to the top.</strong> A systemwide feature launch is never actually systemwide — it's 116 individual launches at colleges with different SIS platforms, IT staff levels, and student populations. Filter by FA status to see who needs extra support.</p>
+  <p class="sec-desc">Search any college by name, SIS type, or issue status. <strong>Foothill and De Anza are pinned.</strong> 116 colleges, 4 SIS platforms, different IT capacities — filter to see who needs extra support.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Lookup</span></div><span class="tool-hint">Click any card for analyst notes</span><span class="tool-bar-title">College Lookup · 31 Colleges · Searchable</span></div>
     <div class="tool-body">
@@ -178,12 +178,12 @@
 </div></section>
 
 <!-- CVC EXCHANGE DATA -->
-<section class="sec fu" id="cvcData"><div class="wrap">
+<section class="sec fu" id="cvcData" role="region" aria-label="Exchange Growth Data"><div class="wrap">
   <div class="eyebrow" style="color:var(--primary)"><span class="sec-num sec-num-green">2</span>Exchange</div>
   <h2>The numbers behind <em>course sharing</em></h2>
   <p class="sec-desc">From 1,500 to 33,000 cross-enrollments in three years. The support workload scales with it. <em style="font-size:.75rem;color:var(--text-3)">(Wheelhouse Center, Oct 2025)</em></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Data</span></div><span class="tool-bar-title">Exchange Growth · 2021–25</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--blue-light);color:var(--blue)">Data</span></div><span class="tool-hint">Hover bars for details</span><span class="tool-bar-title">Exchange Growth · 2021–25</span></div>
     <div class="tool-body">
       <div class="info-grid">
         <div class="info-panel">
@@ -215,6 +215,20 @@
         <div class="info-stat"><div class="info-stat-num" style="color:var(--blue)">78</div><div class="info-stat-label">Teaching colleges (up from 16)</div></div>
         <div class="info-stat"><div class="info-stat-num" style="color:var(--teal)">100K+</div><div class="info-stat-label">Course options annually</div></div>
         <div class="info-stat"><div class="info-stat-num" style="color:var(--purple)">2</div><div class="info-stat-label">Course limit per term</div></div>
+      </div>
+
+      <div class="translation-bridge">
+        <div class="tb-header"><span style="width:6px;height:6px;border-radius:50%;background:var(--purple)"></span> Same data, two audiences</div>
+        <div class="tb-row">
+          <div class="tb-col tb-col-left"><div class="tb-col-label">Internal / Analyst</div>AER queue depth exceeded SLA threshold 14 times. 78% correlated with Ethos token refresh failures at 7 Banner colleges.</div>
+          <div class="tb-arrow">→</div>
+          <div class="tb-col tb-col-right"><div class="tb-col-label">Board / VP</div>Our cross-enrollment system experienced intermittent delays affecting ~340 students. Root cause identified. Automated monitoring now alerts us 72 hours before recurrence.</div>
+        </div>
+        <div class="tb-row">
+          <div class="tb-col tb-col-left"><div class="tb-col-label">Internal / Analyst</div>FA Dashboard integration pending for 23 Ethos/Colleague colleges. Manual email workflow adds ~2.5 hrs/ticket.</div>
+          <div class="tb-arrow">→</div>
+          <div class="tb-col tb-col-right"><div class="tb-col-label">Board / VP</div>Financial aid processing is fully automated at 55 colleges. 23 on next phase, expected Fall 2026. Students at all colleges receive aid — the processing time differs.</div>
+        </div>
       </div>
 
       <div style="margin-top:1rem;padding:.75rem 1rem;border:1px solid var(--primary-bd);background:var(--primary-light);border-radius:var(--r-lg)">
@@ -252,7 +266,7 @@
 </div></section>
 
 <!-- ═══ TOOL 01: ARCHITECTURE ═══ -->
-<section class="sec fu" id="flow"><div class="wrap">
+<section class="sec fu" id="flow" role="region" aria-label="Architecture Flow"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:#0284c7">3</span>Architecture</div>
   <h2>How student data flows — and <em>where it breaks</em></h2>
   <p class="sec-desc">Four layers from home college to Canvas. <strong>FHDA uses Banner Direct</strong> — the most reliable integration path.</p>
@@ -265,23 +279,25 @@
   <div class="flow-visual">
     <div class="flow-title">Cross-Enrollment Data Flow<div style="font-size:.5rem;color:var(--primary);margin-top:.3rem;font-weight:600;letter-spacing:.06em">Click any node to explore</div></div>
     <div class="flow-row">
-      <div class="f-node fn-sis" onclick="showFlowInfo(0)"><div class="fn-label">Home SIS</div><div class="fn-desc">Banner Direct · Ethos<br>PeopleSoft · Colleague</div></div>
+      <div class="f-node fn-sis" onclick="showFlowInfo(0)" role="button" tabindex="0"><div class="fn-label">Home SIS</div><div class="fn-desc">Banner Direct · Ethos<br>PeopleSoft · Colleague</div></div>
       <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">Enrollment Data</div></div>
-      <div class="f-node fn-exc" onclick="showFlowInfo(1)"><div class="fn-label">CVC Exchange</div><div class="fn-desc">Cross-enrollment<br>+ FA Dashboard</div></div>
+      <div class="f-node fn-exc" onclick="showFlowInfo(1)" role="button" tabindex="0"><div class="fn-label">CVC Exchange</div><div class="fn-desc">Cross-enrollment<br>+ FA Dashboard</div></div>
       <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">Roster Sync</div></div>
-      <div class="f-node fn-lms" onclick="showFlowInfo(2)"><div class="fn-label">Teaching College</div><div class="fn-desc">Enrollment · Roster<br>Parchment transcript</div></div>
+      <div class="f-node fn-lms" onclick="showFlowInfo(2)" role="button" tabindex="0"><div class="fn-label">Teaching College</div><div class="fn-desc">Enrollment · Roster<br>Parchment transcript</div></div>
       <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">Sign-On</div></div>
-      <div class="f-node fn-stu" onclick="showFlowInfo(3)"><div class="fn-label">Student</div><div class="fn-desc">Student login<br>Canvas access</div></div>
+      <div class="f-node fn-stu" onclick="showFlowInfo(3)" role="button" tabindex="0"><div class="fn-label">Student</div><div class="fn-desc">Student login<br>Canvas access</div></div>
     </div>
     <div class="flow-info-panel" id="flowInfo"></div>
   </div>
 </div></section>
 
+<div class="sec-connector fu"><div class="sc-line"></div><div class="sc-text">Now that you've seen the architecture — here's what monitoring looks like</div><div class="sc-line"></div></div>
+
 <!-- ═══ TOOL 02: MONITOR ═══ -->
 <section class="sec sec-alt fu" id="monitor" role="region" aria-label="System Monitor"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:var(--amber)">4</span>Monitor</div>
   <h2>Spot the failure <em>before the tickets arrive</em></h2>
-  <p class="sec-desc">Which of the 115+ Exchange colleges are healthy, degraded, or failing right now? <strong>Foothill and De Anza status is highlighted.</strong> The most dangerous failures are the ones nobody reports — a college with zero tickets and a degraded SIS isn't a success story, it's a silent failure. This monitor surfaces both.</p>
+  <p class="sec-desc">Real-time health for 115+ colleges. <strong>Foothill and De Anza highlighted.</strong> The most dangerous failures are the ones nobody reports — zero tickets plus a degraded SIS isn't a success story, it's a silent failure.</p>
   <div class="tool-frame">
     <div style="position:relative"><div class="live-alert" id="liveAlert"><div class="live-alert-title">New Alert</div><div class="live-alert-body"></div><div class="live-alert-time"></div></div></div>
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><span class="tool-hint">Click any college for details</span><div class="tool-bar-title">Morning Monitor · Weekly Pulse · College Health Status</div></div>
@@ -299,7 +315,7 @@
         </div>
       </div>
       <div class="monitor-controls">
-        <input class="mon-search" id="monSearch" type="text" placeholder="Look up a college — type name or system type..." oninput="filterMonitor()">
+        <input class="mon-search" id="monSearch" type="text" placeholder="Look up a college — type name or system type..." oninput="filterMonitor()" aria-label="Search colleges by name or system type">
         <div class="filter-tabs" id="filterTabs">
           <button class="filter-tab active" onclick="setFilter('all',this)">All</button>
           <button class="filter-tab" onclick="setFilter('ok',this)">Healthy</button>
@@ -317,9 +333,9 @@
 <section class="sec fu" id="tracer" role="region" aria-label="Incident Tracer"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:#be185d">5</span>Diagnostics</div>
   <h2>Missing course reported — <em>where do you look?</em></h2>
-  <p class="sec-desc">Layer-by-layer diagnosis of a Banner Ethos failure. <strong>FHDA runs Banner Direct — a simpler path, but the same debugging method applies.</strong> The student doesn't care whose system failed. A student with an add deadline tomorrow needs resolution, not a jurisdiction debate.</p>
+  <p class="sec-desc">Walk a real incident from symptom to resolution. <strong>FHDA uses Banner Direct — same method, simpler path.</strong> A student with an add deadline tomorrow needs resolution, not a jurisdiction debate.</p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><div class="tool-bar-title">Incident Trace · Sacramento City · Ethos Token</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><span class="tool-hint">Click Run to trace the incident</span><div class="tool-bar-title">Incident Trace · Sacramento City · Ethos Token</div></div>
     <div class="tool-body">
       <div class="tracer-controls">
         <button class="tracer-btn tracer-btn-run" id="autoRunBtn" onclick="autoRunTrace()">▶ Auto-Run Trace</button>
@@ -333,15 +349,26 @@
         <div class="rb-title">✓ Incident Resolved</div>
         <div class="rb-text"><strong>Sacramento City College</strong> — Campus IT regenerated Ethos token. 47 AER records confirmed transmitted. Student access verified in Canvas. KB article drafted. Ticket CVC-4821 closed.</div>
       </div>
+      <!-- Systemic change banner — appears after resolution -->
+      <div class="systemic-banner" id="systemicBanner">
+        <div class="sb-header">What Changes Systemically</div>
+        <div class="sb-items">
+          <div class="sb-item"><span class="sb-type sb-prevention">Prevention</span><div class="sb-text">Automated token-expiration monitoring alerts CVC team 72 hours before any Ethos token expires.</div></div>
+          <div class="sb-item"><span class="sb-type sb-scale">Scale</span><div class="sb-text">KB article enables all 7 Banner Ethos colleges to self-service token refresh without opening a ticket.</div></div>
+          <div class="sb-item"><span class="sb-type sb-compounding">Compounding</span><div class="sb-text">Pattern data feeds Intelligence section. Next quarter shows auth ticket volume declining — proof the fix worked.</div></div>
+        </div>
+      </div>
     </div>
   </div>
 </div></section>
 
+<div class="sec-connector fu"><div class="sc-line"></div><div class="sc-text">From reacting to incidents — to spotting patterns before they repeat</div><div class="sc-line"></div></div>
+
 <!-- ═══ TOOL 04: PATTERNS ═══ -->
-<section class="sec sec-alt fu" id="patterns"><div class="wrap">
+<section class="sec sec-alt fu" id="patterns" role="region" aria-label="Ticket Intelligence"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:#c2410c">6</span>Intelligence</div>
   <h2>Is this one ticket — or <em>twenty waiting to happen?</em></h2>
-  <p class="sec-desc">Ticket data mapped to the CVC academic calendar. If the same 10 colleges generate 60% of tickets, <strong>that's not a support problem — it's an onboarding gap, a vendor dependency, or a calendar-driven pattern.</strong> Each one has a different intervention.</p>
+  <p class="sec-desc">Ticket volume mapped to the academic calendar. <strong>If 10 colleges generate 60% of tickets, that's not a support problem — it's an onboarding gap.</strong> Each pattern has a different intervention.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><span class="tool-hint">Click insight cards to highlight chart</span><div class="tool-bar-title">Ticket Intelligence · 12-Week Calendar</div></div>
     <div class="tool-body">
@@ -358,10 +385,10 @@
 </div></section>
 
 <!-- ═══ TOOL 05: KB BUILDER ═══ -->
-<section class="sec fu" id="kb"><div class="wrap">
+<section class="sec fu" id="kb" role="region" aria-label="Knowledge Base Builder"><div class="wrap">
   <div class="eyebrow">Documentation</div>
   <h2>If the fix isn’t documented, it didn’t <em>scale.</em></h2>
-  <p class="sec-desc">Four common fix types — integration, authentication, sync, and onboarding. <strong>Each template is editable and copy-ready.</strong> A college with limited IT staff shouldn’t need to call CVC for the same issue twice — the KB article should answer it the first time.</p>
+  <p class="sec-desc">Four fix types — editable, copy-ready templates. <strong>A college shouldn’t call CVC for the same issue twice.</strong> The KB article should answer it the first time.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation</span></div><span class="tool-hint">Select a template, then edit</span><div class="tool-bar-title">KB Builder · 4 Templates</div></div>
     <div class="tool-body" style="padding:0">
@@ -384,7 +411,7 @@
   <div class="wrap">
     <div class="eyebrow"><span class="sec-num" style="background:#4338ca">7</span>Response</div>
     <h2>The same failure, written <em>five different ways</em></h2>
-    <p class="sec-desc">The registrar needs reassurance. Campus IT needs the error code. The student needs to know their seat is safe. The internal team needs scope. The Board needs student impact, not jargon. <strong>Getting the audience wrong costs trust. Getting it right costs nothing.</strong></p>
+    <p class="sec-desc">Same incident, five audiences: student, campus IT, registrar, internal team, and Board. <strong>Getting the audience wrong costs trust. Getting it right costs nothing.</strong></p>
   <div style="display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .6rem;border-radius:100px;background:var(--amber-light);border:1px solid var(--amber-bd);font-family:var(--mono);font-size:.5rem;color:var(--amber);margin-bottom:1rem"><span style="width:5px;height:5px;border-radius:50%;background:var(--amber)"></span>Continues the Sacramento City scenario from Monitor → Diagnostics</div>
     <div style="padding:.55rem .85rem;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
       <div style="display:flex;align-items:center;gap:.35rem"><span style="width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0"></span><span style="font-family:var(--mono);font-size:.55rem;font-weight:600;color:var(--amber)">P2 ACTIVE</span></div>
@@ -392,11 +419,11 @@
       <div style="font-family:var(--mono);font-size:.52rem;color:var(--text-3);margin-left:auto">14:22 PST</div>
     </div>
     <div class="msg-grid">
-      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--teal-light)">🎓</div><div class="msg-to">To the Student</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Your MATH 1A enrollment — update</div><div class="msg-body">We’re aware your MATH 1A section isn’t showing in Canvas yet. This is a sync issue between your home college and the teaching college — <strong>not a problem with your enrollment.</strong> Your seat is secure. We expect this to be resolved within <span class="msg-highlight">2–4 hours</span>. No action needed on your end.</div></div>
-      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--purple-light)">🖥</div><div class="msg-to">To Campus IT (Teaching College)</div><div class="msg-channel">ServiceNow</div></div><div class="msg-body">AER for CCCID <strong>0012847593</strong> transmitted from Chabot at 14:22 PST but Canvas roster for MATH-1A-001 does not reflect enrollment. Ethos token at home college returned <span class="msg-warn">401 invalid_grant</span>. Can you verify whether the enrollment record exists in your Banner instance?</div></div>
-      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">📋</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Cross-enrollment sync — student enrollments confirmed, Canvas delay expected &lt;4hr</div><div class="msg-body">Quick update on the cross-enrollment sync issue. <strong>The student’s enrollment is confirmed</strong> — the delay is in how the data reaches Canvas. If students contact your office, you can confirm their enrollment is valid. Happy to provide a written summary if this needs to go to your VP.</div></div>
+      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--teal-light)">🎓</div><div class="msg-to">To the Student</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Your MATH 1A enrollment — update</div><div class="msg-body">We’re aware your MATH 1A section isn’t showing in Canvas yet. This is a sync issue between your home college and the teaching college — <strong>not a problem with your enrollment.</strong> <span class="tone-note" data-tip="Reassure first. Student doesn't need to understand OAuth — they need to know their seat is safe.">Why this tone</span> Your seat is secure. We expect this to be resolved within <span class="msg-highlight">2–4 hours</span>. No action needed on your end.</div></div>
+      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--purple-light)">🖥</div><div class="msg-to">To Campus IT (Teaching College)</div><div class="msg-channel">ServiceNow</div></div><div class="msg-body">AER for CCCID <strong>0012847593</strong> transmitted from Chabot at 14:22 PST but Canvas roster for MATH-1A-001 does not reflect enrollment. Ethos token at home college returned <span class="msg-warn">401 invalid_grant</span>. Can you verify whether the enrollment record exists in your Banner instance? <span class="tone-note" data-tip="Asks a question, not a demand. Positions CVC as collaborator, not authority.">Why a question</span></div></div>
+      <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">📋</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div><div style="padding:.25rem .75rem;background:var(--bg);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;color:var(--text-3)">Subject: Cross-enrollment sync — student enrollments confirmed, Canvas delay expected &lt;4hr</div><div class="msg-body">Quick update on the cross-enrollment sync issue. <strong>The student’s enrollment is confirmed</strong> — the delay is in how the data reaches Canvas. <span class="tone-note" data-tip="Avoids ‘your system failed.’ Names the problem without assigning blame.">Why this framing</span> If students contact your office, you can confirm their enrollment is valid. Happy to provide a written summary if this needs to go to your VP.</div></div>
       <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--blue-light)">⚙</div><div class="msg-to">To CVC Internal Team</div><div class="msg-channel">Slack</div></div><div class="msg-body"><strong>Scope:</strong> 47 AER records pending in Chabot → De Anza queue since 02:00 PST. Root cause: Ethos Open Authorization (OAuth2) token expired, <span class="msg-warn">invalid_grant</span> on refresh. <strong>Action:</strong> Token regenerated. Queue flush in progress. Knowledge Base (KB) article drafted.</div></div>
-      <div class="msg-preview msg-board"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--red-light)">📊</div><div class="msg-to">Board Brief (via Vice Chancellor)</div><div class="msg-channel">Quarterly ETS Report</div></div><div class="msg-body"><strong>Situation:</strong> During Fall 2025 peak registration, an authentication failure between the CVC Exchange and 7 Banner colleges caused enrollment sync delays affecting approximately <span class="msg-highlight">340 students</span> across 2 consecutive terms.<br><br><strong>Student Impact:</strong> 47 students experienced 4–12 hour delays in Canvas course access. 12 required manual intervention near the add deadline. Zero students lost enrollment; all resolved within SLA.<br><br><strong>Equity note:</strong> Disproportionate impact on FA-dependent students — the sync delay coincided with auto-drop-for-nonpayment windows at 3 colleges. Students relying on Consortium Agreements (3–5 day processing) were at highest risk.<br><br><strong>Root cause (plain language):</strong> An expired security credential between two systems. Analogous to a building key card that stopped working — the door is fine, the person is authorized, but the reader rejects them until IT reissues the credential.<br><br><strong>Remediation:</strong> Credential regenerated. Automated expiration monitoring added (alerts 72 hours before expiration). KB article published.<br><br><strong>Recommendation:</strong> No board action required. Status update recommended in quarterly ETS report under "CVC Exchange Reliability."</div></div>
+      <div class="msg-preview msg-board"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--red-light)">📊</div><div class="msg-to">Board Brief (via Vice Chancellor)</div><div class="msg-channel">Quarterly ETS Report</div></div><div class="msg-body"><strong>Situation:</strong> During Fall 2025 peak registration, an authentication failure between the CVC Exchange and 7 Banner colleges caused enrollment sync delays affecting approximately <span class="msg-highlight">340 students</span> across 2 consecutive terms.<br><br><strong>Student Impact:</strong> 47 students experienced 4–12 hour delays in Canvas course access. 12 required manual intervention near the add deadline. Zero students lost enrollment; all resolved within SLA.<br><br><strong>Equity note:</strong> Disproportionate impact on FA-dependent students — the sync delay coincided with auto-drop-for-nonpayment windows at 3 colleges. Students relying on Consortium Agreements (3–5 day processing) were at highest risk.<br><br><strong>Root cause (plain language):</strong> An expired security credential between two systems. Analogous to a building key card that stopped working — the door is fine, the person is authorized, but the reader rejects them until IT reissues the credential. <span class="tone-note" data-tip="Board members aren't technical. The 'key card' analogy makes the failure legible without jargon.">Why an analogy</span><br><br><strong>Remediation:</strong> Credential regenerated. Automated expiration monitoring added (alerts 72 hours before expiration). KB article published.<br><br><strong>Recommendation:</strong> No board action required. Status update recommended in quarterly ETS report under "CVC Exchange Reliability."</div></div>
     </div>
   </div>
 </section>
@@ -414,7 +441,7 @@
 <section class="sec sec-alt fu" id="escalation" role="region" aria-label="Escalation Matrix"><div class="wrap">
   <div class="eyebrow">Escalation</div>
   <h2>How do you know when to <em>own it</em> vs <em>escalate it?</em></h2>
-  <p class="sec-desc">P1, P2, or P3? Ellucian, campus IT, the CCC Tech Center, or OEI leadership — <strong>who to contact, how fast, and what to bring.</strong> Sometimes the root cause is the campus's own policy, not the Exchange. The job is to fix the student's problem without making the registrar wrong.</p>
+  <p class="sec-desc"><strong>Who to contact, how fast, and what to bring.</strong> The job is to fix the student's problem without making the registrar wrong.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Reference</span></div><span class="tool-hint">Click P1, P2, or P3 to compare</span><span class="tool-bar-title">Escalation Decision Matrix</span></div>
     <div class="tool-body">
@@ -432,6 +459,15 @@
             <div class="esc-row"><div class="esc-label">Who to contact</div>Senior analyst + supervisor simultaneously. If Ethos/Ellucian: vendor support with case number. Campus IT leads at affected colleges.</div>
             <div class="esc-row"><div class="esc-label">What you need first</div>Which colleges. How many students (check monitor). Error codes from tracer. When it started (check logs).</div>
             <div class="esc-row"><div class="esc-label">Comms</div>All 4 audiences within 30 minutes. Student-facing message first.</div>
+            <div class="esc-root-layer">
+              <div class="esc-root-label">Root Layer</div>
+              <div class="esc-root-pills">
+                <span class="esc-root-pill erp-vendor">Vendor</span>
+                <span class="esc-root-pill erp-campus">Campus IT</span>
+                <span class="esc-root-pill erp-cvc">CVC Infrastructure</span>
+              </div>
+              <div class="esc-root-note">Multi-college failures are usually vendor or CVC infrastructure. <strong>Name the layer before assigning blame.</strong></div>
+            </div>
           </div>
         </div>
         <div class="esc-card esc-p2 esc-active">
@@ -442,6 +478,14 @@
             <div class="esc-row"><div class="esc-label">Who to contact</div>Campus IT at the affected college. Senior analyst if root cause is unclear after 30 min of investigation.</div>
             <div class="esc-row"><div class="esc-label">What you need first</div>SIS type. Specific error from tracer. Whether it affects enrollment, sync, or Canvas only. Approximate student count.</div>
             <div class="esc-row"><div class="esc-label">Comms</div>Internal Slack update. Campus IT email with diagnostic detail. Student notice only if enrollment is blocked.</div>
+            <div class="esc-root-layer">
+              <div class="esc-root-label">Root Layer</div>
+              <div class="esc-root-pills">
+                <span class="esc-root-pill erp-campus erp-highlight">Campus IT</span>
+                <span class="esc-root-pill erp-vendor">Vendor (Ethos token)</span>
+              </div>
+              <div class="esc-root-note">CVC's role is to <strong>diagnose and coordinate</strong>, not to own the fix.</div>
+            </div>
           </div>
         </div>
         <div class="esc-card esc-p3">
@@ -452,6 +496,14 @@
             <div class="esc-row"><div class="esc-label">Who to contact</div>Handle directly. Escalate to supervisor only if the student has a deadline within 48 hours that will be missed.</div>
             <div class="esc-row"><div class="esc-label">What you need first</div>CCCID. Home college + teaching college. Specific error or symptom. Has the student already contacted either college?</div>
             <div class="esc-row"><div class="esc-label">Comms</div>Direct student response. KB article link if one exists. Document the resolution for pattern tracking.</div>
+            <div class="esc-root-layer">
+              <div class="esc-root-label">Root Layer</div>
+              <div class="esc-root-pills">
+                <span class="esc-root-pill erp-student">Student Action</span>
+                <span class="esc-root-pill erp-gap">System Gap</span>
+              </div>
+              <div class="esc-root-note">P3 tickets are often not failures — they're design gaps. <strong>Document the pattern; don't apologize for the architecture.</strong></div>
+            </div>
           </div>
         </div>
       </div>
@@ -460,6 +512,7 @@
   <div class="demo-caption">The difference between P1 and P3 isn't just speed — it's who you contact and what information you bring to the call</div>
 </div></section>
 
+<div class="sec-connector fu"><div class="sc-line"></div><div class="sc-text">From daily operations — to proactive outreach and strategic vision</div><div class="sc-line"></div></div>
 
 <!-- ═══════════════════════════════════════════ -->
 <!-- BARRIER INTELLIGENCE SECTION -->
@@ -489,7 +542,7 @@
 <section class="sec sec-alt fu" id="outreach"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:var(--teal)">8</span>Outreach</div>
   <h2>What if course sharing wasn’t a <em>last resort?</em></h2>
-  <p class="sec-desc">A small rural college with limited IT staff shouldn’t learn about an onboarding gap from a student complaint. <strong>17 triggers across the academic year</strong> — targeted to the right audience at the right moment — from counselors, peer ambassadors, FA offices, and social media. Proactive outreach without creating unnecessary alarm.</p>
+  <p class="sec-desc"><strong>17 triggers across the academic year</strong> — targeted to counselors, FA offices, and peer ambassadors at the right moment. A college shouldn’t learn about an onboarding gap from a student complaint.</p>
   <div style="display:flex;gap:.5rem;margin-top:.5rem"><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="flex:1;height:4px;border-radius:2px;background:var(--primary);opacity:.9"></span><span style="font-family:var(--mono);font-size:.5rem;color:var(--text-3);white-space:nowrap;align-self:center">7 of 7 months covered</span></div>
   <div style="padding:.6rem .85rem;border:1px solid var(--teal-bd);background:var(--teal-light);border-radius:var(--r);margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:.5rem">
     <span style="font-size:.85rem;flex-shrink:0">💬</span>
@@ -512,7 +565,7 @@
 <section class="sec sec-alt fu" id="counselorToolkit" role="region" aria-label="Student and Counselor Toolkit"><div class="wrap">
   <div class="eyebrow" style="color:var(--teal)">Student & Counselor Toolkit</div>
   <h2>Transfer confidence — <em>for students and the staff who advise them</em></h2>
-  <p class="sec-desc">Students need to trust that Exchange courses count toward their degree. Counselors need a fast way to verify. FA offices need to know the payment path. <strong>This toolkit serves all three — built for Foothill and De Anza.</strong></p>
+  <p class="sec-desc">Verification workflows, registration checklists, and counselor scripts. <strong>Built for Foothill and De Anza</strong> — serves students, counselors, and FA offices.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label" style="background:var(--teal-light);color:var(--teal)">Reference</span></div><span class="tool-hint">Click each topic to expand</span><span class="tool-bar-title">Student & Counselor Toolkit · Verification · Checklist · Scripts</span></div>
     <div class="tool-body">
@@ -525,7 +578,7 @@
 
       <div class="counsel-grid">
 
-        <div class="counsel-card" onclick="this.classList.toggle('cc-open')">
+        <div class="counsel-card" onclick="this.classList.toggle('cc-open');this.setAttribute('aria-expanded',this.classList.contains('cc-open'))" role="button" tabindex="0" aria-expanded="false">
           <div class="counsel-card-icon">🔍</div>
           <div class="counsel-card-title">It's not just GE</div>
           <div class="counsel-card-body">The CVC Exchange includes <strong>transfer-applicable courses</strong>, major prep courses, and courses with C-ID designations that are accepted system-wide. Students can search by Cal-GETC area, CSU GE area, or substitute their home college course by name.</div>
@@ -537,7 +590,7 @@
           </div>
         </div>
 
-        <div class="counsel-card" onclick="this.classList.toggle('cc-open')">
+        <div class="counsel-card" onclick="this.classList.toggle('cc-open');this.setAttribute('aria-expanded',this.classList.contains('cc-open'))" role="button" tabindex="0" aria-expanded="false">
           <div class="counsel-card-icon">✅</div>
           <div class="counsel-card-title">3-step verification workflow</div>
           <div class="counsel-card-body">Before recommending an Exchange course, counselors can verify transferability in under 2 minutes using three free tools. This is the workflow that builds confidence.</div>
@@ -549,7 +602,7 @@
           </div>
         </div>
 
-        <div class="counsel-card" onclick="this.classList.toggle('cc-open')" style="border:2px solid var(--teal-bd);background:linear-gradient(135deg,var(--teal-light) 0%,var(--surface) 100%)">
+        <div class="counsel-card" onclick="this.classList.toggle('cc-open');this.setAttribute('aria-expanded',this.classList.contains('cc-open'))" role="button" tabindex="0" aria-expanded="false" style="border:2px solid var(--teal-bd);background:linear-gradient(135deg,var(--teal-light) 0%,var(--surface) 100%)">
           <div style="position:absolute;top:.5rem;right:.5rem;font-family:var(--mono);font-size:.48rem;padding:.15rem .4rem;border-radius:100px;background:var(--teal);color:#fff;font-weight:700;letter-spacing:.04em">#1 PREVENTION</div>
           <div class="counsel-card-icon">📋</div>
           <div class="counsel-card-title">Student registration checklist</div>
@@ -570,7 +623,7 @@
           </div>
         </div>
 
-        <div class="counsel-card" onclick="this.classList.toggle('cc-open')">
+        <div class="counsel-card" onclick="this.classList.toggle('cc-open');this.setAttribute('aria-expanded',this.classList.contains('cc-open'))" role="button" tabindex="0" aria-expanded="false">
           <div class="counsel-card-icon">💬</div>
           <div class="counsel-card-title">What to say to the student</div>
           <div class="counsel-card-body">Sample counselor language that sets accurate expectations and prevents confusion. Tested against the most common misunderstandings.</div>
@@ -598,7 +651,7 @@
       <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:1.5rem 0 .5rem;font-weight:700">▸ For students — verify your courses yourself</div>
 
       <div class="counsel-grid">
-        <div class="counsel-card" onclick="this.classList.toggle('cc-open')" style="border-left:3px solid var(--blue)">
+        <div class="counsel-card" onclick="this.classList.toggle('cc-open');this.setAttribute('aria-expanded',this.classList.contains('cc-open'))" role="button" tabindex="0" aria-expanded="false" style="border-left:3px solid var(--blue)">
           <div class="counsel-card-icon">🎓</div>
           <div class="counsel-card-title">Will this course count toward my degree?</div>
           <div class="counsel-card-body">You don't have to take your counselor's word for it — you can verify yourself in under 2 minutes. Here's how to confirm any Exchange course will transfer.</div>
@@ -610,7 +663,7 @@
           </div>
         </div>
 
-        <div class="counsel-card" onclick="this.classList.toggle('cc-open')" style="border-left:3px solid var(--blue)">
+        <div class="counsel-card" onclick="this.classList.toggle('cc-open');this.setAttribute('aria-expanded',this.classList.contains('cc-open'))" role="button" tabindex="0" aria-expanded="false" style="border-left:3px solid var(--blue)">
           <div class="counsel-card-icon">💰</div>
           <div class="counsel-card-title">How do I pay? Will my financial aid cover it?</div>
           <div class="counsel-card-body">Three payment paths — and the biggest mistake students make is waiting. Here's what you need to know before you enroll.</div>
@@ -638,7 +691,7 @@
 <section class="sec fu" id="aiVision" role="region" aria-label="AI Vision"><div class="wrap">
   <div class="eyebrow" style="color:var(--purple)"><span class="sec-num" style="background:var(--purple)">9</span>AI Vision</div>
   <h2>What could AI <em style="color:var(--purple)">actually do here?</em></h2>
-  <p class="sec-desc">Aligned with CISOA 2026 themes: fraud deterrence, agentic AI, and equity-first automation. <strong>Each card shows today vs with-AI — grounded in real FHDA data patterns.</strong></p>
+  <p class="sec-desc">Grounded in CISOA 2026 themes: fraud deterrence, agentic AI, equity-first automation. <strong>Each card: today vs with-AI.</strong></p>
   <div style="display:flex;gap:.5rem;margin:.75rem 0;flex-wrap:wrap">
     <div style="padding:.4rem .65rem;border-radius:6px;background:var(--primary-light);border:1px solid var(--primary-bd);font-size:.7rem;color:var(--text-2)"><strong style="color:var(--primary)">4 quick wins</strong> you could build with rules, no machine learning</div>
     <div style="padding:.4rem .65rem;border-radius:6px;background:var(--purple-light);border:1px solid var(--purple-bd);font-size:.7rem;color:var(--text-2)"><strong style="color:var(--purple)">Fraud tab</strong> aligned with CISOA 2026 takeaways on agentic AI</div>
@@ -712,7 +765,7 @@
   <h2>Where do students <em class="red">hit friction?</em></h2>
   <p class="sec-desc">Nine steps from search.cvc.edu to state reporting. Red = students get stuck. Amber = manual workaround. <strong>Green = smooth.</strong></p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Lifecycle</span></div><span class="tool-bar-title">Enrollment Lifecycle · 9 Steps</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Lifecycle</span></div><span class="tool-hint">Click each step for detail</span><span class="tool-bar-title">Enrollment Lifecycle · 9 Steps</span></div>
     <div class="tool-body"><div class="lc-flow" id="lcFlow"></div></div>
   </div>
 </div></section>
@@ -746,16 +799,439 @@
 <section class="sec fu" id="correlator"><div class="wrap">
   <div class="eyebrow eyebrow-red">Correlation</div>
   <h2>How much of the ticket queue is <em class="red">preventable?</em></h2>
-  <p class="sec-desc">If most Exchange support tickets come from the same three barriers — <strong>fix the barriers, not just the tickets.</strong> These systems are invisible when they work and devastating when they don't. The students who get hurt first are the ones with the fewest alternatives.</p>
+  <p class="sec-desc">Most tickets trace back to three barriers. <strong>Fix the barriers, not just the tickets.</strong> The students who get hurt first are the ones with the fewest alternatives.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Correlation</span></div><span class="tool-bar-title">Ticket-to-Barrier Correlator</span></div>
     <div class="tool-body" id="corrBody"></div>
   </div>
 </div></section>
 
+<!-- Interview Visual Reference — subtle trigger -->
+<button class="iv-trigger" id="ivTrigger" onclick="document.getElementById('ivOverlay').classList.toggle('iv-show')" title="Visual reference">◆<span class="iv-trigger-label">Visual Ref</span></button>
+
+<!-- Interview Visual Reference Panel -->
+<div class="iv-overlay" id="ivOverlay" onclick="if(event.target===this)this.classList.remove('iv-show')">
+<div class="iv-panel">
+  <div class="iv-head">
+    <div><div class="iv-head-title">Visual Reference</div><div class="iv-head-sub">12 scenarios · Click outside or press V to close</div></div>
+    <button class="iv-close" onclick="document.getElementById('ivOverlay').classList.remove('iv-show')">×</button>
+  </div>
+  <div class="iv-filters">
+    <button class="iv-ftab iv-ftab-active" onclick="ivFilter('all',this)">All</button>
+    <button class="iv-ftab" onclick="ivFilter('strategy',this)">Strategy</button>
+    <button class="iv-ftab" onclick="ivFilter('operations',this)">Operations</button>
+    <button class="iv-ftab" onclick="ivFilter('communication',this)">Communication</button>
+    <button class="iv-ftab" onclick="ivFilter('growth',this)">Growth</button>
+  </div>
+  <div class="iv-grid">
+
+    <!-- Q1: Feature Adoption -->
+    <div class="iv-card iv-cat-strategy" data-cat="strategy">
+      <div class="iv-card-head"><span class="iv-num iv-num-grn">Q1</span><span class="iv-cat">Strategy</span></div>
+      <div class="iv-q-title">Feature ≠ Adoption</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <defs><linearGradient id="q1g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0F766E"/><stop offset="100%" stop-color="#B91C1C"/></linearGradient></defs>
+            <polygon points="30,10 230,10 220,35 40,35" fill="rgba(15,118,110,.55)" stroke="rgba(94,234,212,.3)" stroke-width=".5"/>
+            <text x="132" y="27" text-anchor="middle" fill="#5EEAD4" font-size="9" font-family="var(--mono)" font-weight="700">Launched — 100%</text>
+            <polygon points="40,38 220,38 205,63 55,63" fill="rgba(15,118,110,.35)" stroke="rgba(94,234,212,.2)" stroke-width=".5"/>
+            <text x="132" y="55" text-anchor="middle" fill="#5EEAD4" font-size="9" font-family="var(--mono)" font-weight="600">Campus Ready — 72%</text>
+            <polygon points="55,66 205,66 190,91 70,91" fill="rgba(161,98,7,.4)" stroke="rgba(251,191,36,.25)" stroke-width=".5"/>
+            <text x="132" y="83" text-anchor="middle" fill="#FBBF24" font-size="9" font-family="var(--mono)" font-weight="600">Using — 45%</text>
+            <polygon points="70,94 190,94 178,115 82,115" fill="rgba(185,28,28,.45)" stroke="rgba(248,113,113,.3)" stroke-width=".5"/>
+            <text x="132" y="109" text-anchor="middle" fill="#F87171" font-size="9" font-family="var(--mono)" font-weight="600">Adopted — 28%</text>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#F87171">72% gap<div class="iv-stat-sub">shipped → adopted</div></div>
+        </div>
+      </div>
+      <div class="iv-insight">My role: readiness assessments per SIS type, targeted onboarding, adoption tracking by college tier</div>
+    </div>
+
+    <!-- Q2: Silent Risk Detection -->
+    <div class="iv-card iv-cat-operations" data-cat="operations">
+      <div class="iv-card-head"><span class="iv-num iv-num-amb">Q2</span><span class="iv-cat">Coordination</span></div>
+      <div class="iv-q-title">Silent Risk Detection</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- OK dots (teal) -->
+            <circle cx="25" cy="18" r="7" fill="rgba(15,118,110,.5)" stroke="#5EEAD4" stroke-width=".5"/><circle cx="50" cy="18" r="7" fill="rgba(15,118,110,.5)"/>
+            <circle cx="75" cy="18" r="7" fill="rgba(15,118,110,.5)"/><circle cx="100" cy="18" r="7" fill="rgba(15,118,110,.5)"/>
+            <circle cx="125" cy="18" r="7" fill="rgba(15,118,110,.5)"/><circle cx="150" cy="18" r="7" fill="rgba(15,118,110,.5)"/>
+            <circle cx="175" cy="18" r="7" fill="rgba(15,118,110,.5)"/><circle cx="200" cy="18" r="7" fill="rgba(15,118,110,.5)"/>
+            <circle cx="225" cy="18" r="7" fill="rgba(15,118,110,.5)"/>
+            <!-- Silent risk dots (amber) -->
+            <circle cx="25" cy="43" r="7" fill="rgba(161,98,7,.55)" stroke="#FBBF24" stroke-width="1"/><circle cx="50" cy="43" r="7" fill="rgba(161,98,7,.55)" stroke="#FBBF24" stroke-width="1"/>
+            <circle cx="75" cy="43" r="7" fill="rgba(161,98,7,.55)" stroke="#FBBF24" stroke-width="1"/><circle cx="100" cy="43" r="7" fill="rgba(161,98,7,.55)" stroke="#FBBF24" stroke-width="1"/>
+            <!-- Known affected (red) -->
+            <circle cx="125" cy="43" r="7" fill="rgba(185,28,28,.6)" stroke="#F87171" stroke-width="1.5"/><circle cx="150" cy="43" r="7" fill="rgba(185,28,28,.6)" stroke="#F87171" stroke-width="1.5"/>
+            <circle cx="175" cy="43" r="7" fill="rgba(185,28,28,.6)" stroke="#F87171" stroke-width="1.5"/>
+            <!-- Legend -->
+            <circle cx="30" cy="72" r="5" fill="rgba(185,28,28,.6)"/><text x="42" y="75" fill="#F87171" font-size="8" font-family="var(--mono)">3 Known</text>
+            <circle cx="100" cy="72" r="5" fill="rgba(161,98,7,.55)"/><text x="112" y="75" fill="#FBBF24" font-size="8" font-family="var(--mono)">4 Silent risk</text>
+            <circle cx="185" cy="72" r="5" fill="rgba(15,118,110,.5)"/><text x="197" y="75" fill="#5EEAD4" font-size="8" font-family="var(--mono)">9 OK</text>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#FBBF24">Silent risks<div class="iv-stat-sub">same SIS + token age</div></div>
+          <div class="iv-stat" style="color:#5EEAD4">Soft check<div class="iv-stat-sub">confirm or escalate</div></div>
+        </div>
+      </div>
+      <div class="iv-insight">Balance urgency with sensitivity. 116 colleges = 116 relationships</div>
+    </div>
+
+    <!-- Q3: Multi-College Triage -->
+    <div class="iv-card iv-cat-operations" data-cat="operations">
+      <div class="iv-card-head"><span class="iv-num iv-num-red">Q3</span><span class="iv-cat">Triage</span></div>
+      <div class="iv-q-title">First Two Hours</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Clock icon -->
+            <circle cx="16" cy="30" r="10" fill="none" stroke="#F87171" stroke-width="1.2"/><line x1="16" y1="30" x2="16" y2="23" stroke="#F87171" stroke-width="1.2"/><line x1="16" y1="30" x2="21" y2="30" stroke="#F87171" stroke-width="1"/>
+            <!-- Timeline bar segments -->
+            <rect x="32" y="22" width="40" height="16" rx="3" fill="rgba(185,28,28,.45)"/><text x="52" y="33" text-anchor="middle" fill="#F87171" font-size="7" font-family="var(--mono)" font-weight="700">0-15m</text>
+            <rect x="74" y="22" width="45" height="16" rx="3" fill="rgba(161,98,7,.4)"/><text x="96" y="33" text-anchor="middle" fill="#FBBF24" font-size="7" font-family="var(--mono)" font-weight="700">15-30m</text>
+            <rect x="121" y="22" width="50" height="16" rx="3" fill="rgba(29,78,216,.35)"/><text x="146" y="33" text-anchor="middle" fill="#60A5FA" font-size="7" font-family="var(--mono)" font-weight="700">30-60m</text>
+            <rect x="173" y="22" width="60" height="16" rx="3" fill="rgba(15,118,110,.4)"/><text x="203" y="33" text-anchor="middle" fill="#5EEAD4" font-size="7" font-family="var(--mono)" font-weight="700">60-120m</text>
+            <!-- Checkmark -->
+            <circle cx="244" cy="30" r="10" fill="rgba(15,118,110,.3)"/><polyline points="239,30 242,34 250,26" fill="none" stroke="#5EEAD4" stroke-width="1.5"/>
+            <!-- Labels -->
+            <text x="52" y="50" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Scope</text>
+            <text x="96" y="50" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Pattern</text>
+            <text x="146" y="50" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Root cause</text>
+            <text x="203" y="50" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Coordinate</text>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#F87171">14 tickets<div class="iv-stat-sub">8 colleges</div></div>
+          <div class="iv-stat" style="color:#A78BFA">Group A<div class="iv-stat-sub">PeopleSoft → API</div></div>
+          <div class="iv-stat" style="color:#60A5FA">Group B<div class="iv-stat-sub">Banner → Ethos</div></div>
+        </div>
+      </div>
+      <div class="iv-insight">Structure the investigation — don't chase tickets one by one</div>
+    </div>
+
+    <!-- Q4: Altitude Translation -->
+    <div class="iv-card iv-cat-communication" data-cat="communication">
+      <div class="iv-card-head"><span class="iv-num iv-num-blu">Q4</span><span class="iv-cat">Communication</span></div>
+      <div class="iv-q-title">Altitude Translation</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Inverted pyramid: Engineer (wide) → Manager (medium) → Board (narrow) -->
+            <polygon points="20,10 240,10 215,45 45,45" fill="rgba(29,78,216,.2)" stroke="rgba(96,165,250,.3)" stroke-width=".5"/>
+            <text x="130" y="24" text-anchor="middle" fill="#60A5FA" font-size="9" font-family="var(--mono)" font-weight="700">ENGINEER</text>
+            <text x="130" y="37" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)">OAuth2 · Ethos tokens · AER queue</text>
+            <!-- Arrow connector -->
+            <line x1="130" y1="46" x2="130" y2="55" stroke="#57534E" stroke-width="1"/>
+            <path d="M125,52 L130,57 L135,52" fill="none" stroke="#57534E" stroke-width="1"/>
+            <text x="142" y="53" fill="#57534E" font-size="6.5" font-family="var(--mono)">translate</text>
+            <polygon points="45,58 215,58 195,88 65,88" fill="rgba(161,98,7,.2)" stroke="rgba(251,191,36,.25)" stroke-width=".5"/>
+            <text x="130" y="70" text-anchor="middle" fill="#FBBF24" font-size="9" font-family="var(--mono)" font-weight="700">MANAGER</text>
+            <text x="130" y="82" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)">7 colleges · 340 students · ETA 4h</text>
+            <!-- Arrow connector -->
+            <line x1="130" y1="89" x2="130" y2="98" stroke="#57534E" stroke-width="1"/>
+            <path d="M125,95 L130,100 L135,95" fill="none" stroke="#57534E" stroke-width="1"/>
+            <text x="142" y="96" fill="#57534E" font-size="6.5" font-family="var(--mono)">translate</text>
+            <polygon points="65,100 195,100 180,118 80,118" fill="rgba(15,118,110,.2)" stroke="rgba(94,234,212,.25)" stroke-width=".5"/>
+            <text x="130" y="113" text-anchor="middle" fill="#5EEAD4" font-size="9" font-family="var(--mono)" font-weight="700">BOARD — Resolved + prevention</text>
+          </svg>
+        </div>
+      </div>
+      <div class="iv-insight">Detail decreases, impact increases. Board needs scope + resolution + assurance</div>
+    </div>
+
+    <!-- Q5: Equity Comparison -->
+    <div class="iv-card iv-cat-communication" data-cat="communication">
+      <div class="iv-card-head"><span class="iv-num iv-num-blu">Q5</span><span class="iv-cat">Equity</span></div>
+      <div class="iv-q-title">Rural College Priority</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Metro building (tall, teal) -->
+            <rect x="30" y="15" width="60" height="75" rx="3" fill="rgba(15,118,110,.2)" stroke="rgba(94,234,212,.3)" stroke-width=".5"/>
+            <rect x="38" y="22" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="52" y="22" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="66" y="22" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/>
+            <rect x="38" y="35" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="52" y="35" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="66" y="35" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/>
+            <rect x="38" y="48" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="52" y="48" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="66" y="48" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/>
+            <rect x="38" y="61" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="52" y="61" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/><rect x="66" y="61" width="10" height="8" rx="1" fill="rgba(94,234,212,.15)"/>
+            <text x="60" y="8" text-anchor="middle" fill="#5EEAD4" font-size="8" font-family="var(--mono)" font-weight="700">METRO</text>
+            <text x="60" y="100" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)">12 IT staff</text>
+            <!-- vs divider -->
+            <text x="130" y="55" text-anchor="middle" fill="#57534E" font-size="10" font-family="var(--mono)" font-weight="700">vs</text>
+            <!-- Rural building (small, red) -->
+            <rect x="175" y="55" width="40" height="35" rx="3" fill="rgba(185,28,28,.2)" stroke="rgba(248,113,113,.3)" stroke-width=".5"/>
+            <rect x="182" y="62" width="10" height="8" rx="1" fill="rgba(248,113,113,.15)"/><rect x="198" y="62" width="10" height="8" rx="1" fill="rgba(248,113,113,.15)"/>
+            <rect x="182" y="75" width="10" height="8" rx="1" fill="rgba(248,113,113,.15)"/><rect x="198" y="75" width="10" height="8" rx="1" fill="rgba(248,113,113,.15)"/>
+            <text x="195" y="48" text-anchor="middle" fill="#F87171" font-size="8" font-family="var(--mono)" font-weight="700">RURAL</text>
+            <text x="195" y="100" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)">1 IT staff</text>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#F87171">Lower volume ≠ lower priority<div class="iv-stat-sub">Impact ∝ 1/alternatives</div></div>
+        </div>
+      </div>
+      <div class="iv-insight">Feather River, Siskiyous, Lake Tahoe — the Exchange IS their curriculum</div>
+    </div>
+
+    <!-- Q6: Pareto Pattern -->
+    <div class="iv-card iv-cat-strategy" data-cat="strategy">
+      <div class="iv-card-head"><span class="iv-num iv-num-org">Q6</span><span class="iv-cat">Process</span></div>
+      <div class="iv-q-title">The Pareto Pattern</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 105" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Horizontal bars -->
+            <rect x="55" y="8" width="190" height="16" rx="3" fill="rgba(185,28,28,.45)"/>
+            <text x="50" y="20" text-anchor="end" fill="#F87171" font-size="8" font-family="var(--mono)" font-weight="700">62%</text>
+            <text x="62" y="20" fill="#fff" font-size="7.5" font-family="var(--mono)" font-weight="600">12 colleges</text>
+            <rect x="55" y="28" width="55" height="14" rx="3" fill="rgba(161,98,7,.4)"/>
+            <text x="50" y="39" text-anchor="end" fill="#FBBF24" font-size="8" font-family="var(--mono)" font-weight="700">18%</text>
+            <text x="62" y="38" fill="#fff" font-size="7" font-family="var(--mono)">28 colleges</text>
+            <rect x="55" y="46" width="37" height="14" rx="3" fill="rgba(29,78,216,.3)"/>
+            <text x="50" y="57" text-anchor="end" fill="#60A5FA" font-size="8" font-family="var(--mono)" font-weight="700">12%</text>
+            <rect x="55" y="64" width="24" height="14" rx="3" fill="rgba(255,255,255,.08)"/>
+            <text x="50" y="75" text-anchor="end" fill="#57534E" font-size="8" font-family="var(--mono)" font-weight="700">8%</text>
+            <!-- Pareto line (dashed at 80%) -->
+            <line x1="207" y1="4" x2="207" y2="82" stroke="#FBBF24" stroke-width="1" stroke-dasharray="3,2"/>
+            <text x="207" y="92" text-anchor="middle" fill="#FBBF24" font-size="7" font-family="var(--mono)" font-weight="600">80% line</text>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#F87171">Config audits<div class="iv-stat-sub">Ethos + SSO</div></div>
+          <div class="iv-stat" style="color:#FBBF24">Targeted KB<div class="iv-stat-sub">self-service</div></div>
+          <div class="iv-stat" style="color:#5EEAD4">Check-ins<div class="iv-stat-sub">quarterly</div></div>
+        </div>
+      </div>
+      <div class="iv-insight">Fix 12 colleges, transform the queue. Think in systems, not tickets</div>
+    </div>
+
+    <!-- Q7: Perception vs Reality -->
+    <div class="iv-card iv-cat-communication" data-cat="communication">
+      <div class="iv-card-head"><span class="iv-num iv-num-amb">Q7</span><span class="iv-cat">Diplomacy</span></div>
+      <div class="iv-q-title">Perception vs. Reality</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Event icon at top center -->
+            <circle cx="130" cy="16" r="10" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.15)" stroke-width=".5"/>
+            <path d="M132,10 L126,18 L131,18 L128,26 L134,16 L130,16 Z" fill="#A8A29E"/>
+            <text x="130" y="36" text-anchor="middle" fill="#57534E" font-size="7" font-family="var(--mono)">Single event</text>
+            <!-- Diverging arrow left (perception - red) -->
+            <line x1="120" y1="42" x2="55" y2="72" stroke="#F87171" stroke-width="1.5" opacity=".6"/>
+            <polygon points="52,70 60,70 55,77" fill="#F87171" opacity=".6"/>
+            <rect x="10" y="72" width="90" height="24" rx="5" fill="rgba(185,28,28,.15)" stroke="rgba(248,113,113,.2)" stroke-width=".5"/>
+            <text x="55" y="83" text-anchor="middle" fill="#F87171" font-size="7.5" font-family="var(--mono)" font-weight="700">PERCEPTION</text>
+            <text x="55" y="92" text-anchor="middle" fill="#78716C" font-size="6" font-family="var(--mono)">"Exchange is dropping students"</text>
+            <!-- Diverging arrow right (reality - blue) -->
+            <line x1="140" y1="42" x2="205" y2="72" stroke="#60A5FA" stroke-width="1.5" opacity=".6"/>
+            <polygon points="202,70 210,70 205,77" fill="#60A5FA" opacity=".6"/>
+            <rect x="160" y="72" width="90" height="24" rx="5" fill="rgba(29,78,216,.15)" stroke="rgba(96,165,250,.2)" stroke-width=".5"/>
+            <text x="205" y="83" text-anchor="middle" fill="#60A5FA" font-size="7.5" font-family="var(--mono)" font-weight="700">REALITY</text>
+            <text x="205" y="92" text-anchor="middle" fill="#78716C" font-size="6" font-family="var(--mono)">SIS timing gap</text>
+            <!-- Converge to diplomatic frame -->
+            <line x1="55" y1="98" x2="130" y2="112" stroke="#5EEAD4" stroke-width="1" opacity=".4"/>
+            <line x1="205" y1="98" x2="130" y2="112" stroke="#5EEAD4" stroke-width="1" opacity=".4"/>
+            <rect x="85" y="105" width="90" height="15" rx="4" fill="rgba(15,118,110,.15)" stroke="rgba(94,234,212,.2)" stroke-width=".5"/>
+            <text x="130" y="115" text-anchor="middle" fill="#5EEAD4" font-size="7.5" font-family="var(--mono)" font-weight="700">DIPLOMATIC FRAME</text>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#A78BFA">Name the mechanism, not the blame</div>
+        </div>
+      </div>
+      <div class="iv-insight">Registrar VP is already escalating. Correct the record without making campus feel wrong</div>
+    </div>
+
+    <!-- Q8: Dual Identity -->
+    <div class="iv-card iv-cat-communication" data-cat="communication">
+      <div class="iv-card-head"><span class="iv-num iv-num-pur">Q8</span><span class="iv-cat">Navigation</span></div>
+      <div class="iv-q-title">Dual Identity</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- FHDA circle (blue, left) -->
+            <circle cx="95" cy="55" r="42" fill="rgba(29,78,216,.1)" stroke="rgba(96,165,250,.25)" stroke-width="1"/>
+            <text x="65" y="40" fill="#60A5FA" font-size="9" font-family="var(--mono)" font-weight="700">FHDA</text>
+            <text x="65" y="52" fill="#78716C" font-size="6.5" font-family="var(--mono)">Employer</text>
+            <text x="65" y="62" fill="#78716C" font-size="6.5" font-family="var(--mono)">District IT</text>
+            <text x="65" y="72" fill="#78716C" font-size="6.5" font-family="var(--mono)">Budget</text>
+            <!-- CVC circle (teal, right) -->
+            <circle cx="165" cy="55" r="42" fill="rgba(15,118,110,.1)" stroke="rgba(94,234,212,.25)" stroke-width="1"/>
+            <text x="175" y="40" fill="#5EEAD4" font-size="9" font-family="var(--mono)" font-weight="700">CVC-OEI</text>
+            <text x="175" y="52" fill="#78716C" font-size="6.5" font-family="var(--mono)">Mission</text>
+            <text x="175" y="62" fill="#78716C" font-size="6.5" font-family="var(--mono)">116 Colleges</text>
+            <text x="175" y="72" fill="#78716C" font-size="6.5" font-family="var(--mono)">Equity</text>
+            <!-- Overlap zone -->
+            <text x="130" y="52" text-anchor="middle" fill="#A78BFA" font-size="8" font-family="var(--mono)" font-weight="700">Analyst</text>
+            <text x="130" y="63" text-anchor="middle" fill="#A78BFA" font-size="6.5" font-family="var(--mono)">sits here</text>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#A78BFA">Navigate both without creating friction</div>
+        </div>
+      </div>
+      <div class="iv-insight">FHDA is fiscal agent. CVC serves statewide. Respect both chains, serve the students</div>
+    </div>
+
+    <!-- Q9: Five Data Questions -->
+    <div class="iv-card iv-cat-growth" data-cat="growth">
+      <div class="iv-card-head"><span class="iv-num iv-num-blu">Q9</span><span class="iv-cat">Analysis</span></div>
+      <div class="iv-q-title">Five Questions for Ticket Data</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Pentagon / radar spoke shape -->
+            <polygon points="130,18 210,58 190,110 70,110 50,58" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+            <polygon points="130,38 185,63 173,98 87,98 75,63" fill="none" stroke="rgba(255,255,255,.04)" stroke-width=".5"/>
+            <!-- Data shape fill -->
+            <polygon points="130,28 200,60 178,105 82,105 60,60" fill="rgba(15,118,110,.08)" stroke="rgba(94,234,212,.2)" stroke-width="1"/>
+            <!-- Center -->
+            <circle cx="130" cy="68" r="3" fill="rgba(255,255,255,.1)"/>
+            <!-- Spokes -->
+            <line x1="130" y1="68" x2="130" y2="18" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
+            <line x1="130" y1="68" x2="210" y2="58" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
+            <line x1="130" y1="68" x2="190" y2="110" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
+            <line x1="130" y1="68" x2="70" y2="110" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
+            <line x1="130" y1="68" x2="50" y2="58" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
+            <!-- Endpoint dots + labels -->
+            <circle cx="130" cy="18" r="4" fill="rgba(185,28,28,.6)"/><text x="130" y="10" text-anchor="middle" fill="#F87171" font-size="7" font-family="var(--mono)" font-weight="600">Repeats?</text>
+            <circle cx="210" cy="58" r="4" fill="rgba(161,98,7,.6)"/><text x="250" y="55" text-anchor="end" fill="#FBBF24" font-size="7" font-family="var(--mono)" font-weight="600">Spikes?</text>
+            <circle cx="190" cy="110" r="4" fill="rgba(29,78,216,.6)"/><text x="220" y="120" text-anchor="end" fill="#60A5FA" font-size="7" font-family="var(--mono)" font-weight="600">SIS type?</text>
+            <circle cx="70" cy="110" r="4" fill="rgba(15,118,110,.6)"/><text x="40" y="120" text-anchor="start" fill="#5EEAD4" font-size="7" font-family="var(--mono)" font-weight="600">Speed?</text>
+            <circle cx="50" cy="58" r="4" fill="rgba(109,40,217,.6)"/><text x="10" y="55" text-anchor="start" fill="#A78BFA" font-size="7" font-family="var(--mono)" font-weight="600">Preventable?</text>
+          </svg>
+        </div>
+      </div>
+      <div class="iv-insight">Right questions > right tools. Python + pandas are useless without the right hypothesis</div>
+    </div>
+
+    <!-- Q10: Student Crisis Timeline -->
+    <div class="iv-card iv-cat-operations" data-cat="operations">
+      <div class="iv-card-head"><span class="iv-num iv-num-red">Q10</span><span class="iv-cat">Crisis</span></div>
+      <div class="iv-q-title">24-Hour Countdown</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Gradient timeline bar -->
+            <defs><linearGradient id="q10g" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#B91C1C"/><stop offset="50%" stop-color="#A16207"/><stop offset="100%" stop-color="#0F766E"/></linearGradient></defs>
+            <rect x="30" y="8" width="200" height="12" rx="6" fill="url(#q10g)" opacity=".5"/>
+            <text x="20" y="17" text-anchor="end" fill="#F87171" font-size="8" font-family="var(--mono)" font-weight="700">NOW</text>
+            <text x="240" y="17" text-anchor="start" fill="#F87171" font-size="8" font-family="var(--mono)" font-weight="700">24h</text>
+            <!-- Parallel tracks -->
+            <rect x="30" y="30" width="150" height="13" rx="3" fill="rgba(29,78,216,.15)" stroke="rgba(96,165,250,.2)" stroke-width=".5"/>
+            <text x="36" y="39" fill="#60A5FA" font-size="7" font-family="var(--mono)" font-weight="600">Home SIS — verify enrollment</text>
+            <rect x="30" y="47" width="130" height="13" rx="3" fill="rgba(109,40,217,.12)" stroke="rgba(167,139,250,.2)" stroke-width=".5"/>
+            <text x="36" y="56" fill="#A78BFA" font-size="7" font-family="var(--mono)" font-weight="600">Teaching — manual fallback</text>
+            <rect x="30" y="64" width="170" height="13" rx="3" fill="rgba(161,98,7,.12)" stroke="rgba(251,191,36,.2)" stroke-width=".5"/>
+            <text x="36" y="73" fill="#FBBF24" font-size="7" font-family="var(--mono)" font-weight="600">Exchange — queue flush</text>
+            <!-- Result row -->
+            <rect x="30" y="82" width="200" height="14" rx="4" fill="rgba(15,118,110,.15)" stroke="rgba(94,234,212,.25)" stroke-width=".5"/>
+            <text x="130" y="92" text-anchor="middle" fill="#5EEAD4" font-size="8" font-family="var(--mono)" font-weight="700">Student notified · Seat secured · Deadline met</text>
+          </svg>
+        </div>
+      </div>
+      <div class="iv-insight">Own the coordination. Don't play hot potato between colleges. Student's clock is ticking</div>
+    </div>
+
+    <!-- Q11: Growth Roadmap -->
+    <div class="iv-card iv-cat-growth" data-cat="growth">
+      <div class="iv-card-head"><span class="iv-num iv-num-grn">Q11</span><span class="iv-cat">Growth</span></div>
+      <div class="iv-q-title">Analyst I → Analyst II</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Step 1: Learn -->
+            <rect x="15" y="65" width="70" height="25" rx="4" fill="rgba(29,78,216,.2)" stroke="rgba(96,165,250,.25)" stroke-width=".5"/>
+            <text x="50" y="77" text-anchor="middle" fill="#60A5FA" font-size="9" font-family="var(--mono)" font-weight="700">LEARN</text>
+            <text x="50" y="87" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Mo 1-3</text>
+            <!-- Step 2: Build -->
+            <rect x="95" y="40" width="70" height="25" rx="4" fill="rgba(15,118,110,.2)" stroke="rgba(94,234,212,.25)" stroke-width=".5"/>
+            <text x="130" y="52" text-anchor="middle" fill="#5EEAD4" font-size="9" font-family="var(--mono)" font-weight="700">BUILD</text>
+            <text x="130" y="62" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Mo 4-6</text>
+            <!-- Step 3: Lead -->
+            <rect x="175" y="15" width="70" height="25" rx="4" fill="rgba(109,40,217,.2)" stroke="rgba(167,139,250,.25)" stroke-width=".5"/>
+            <text x="210" y="27" text-anchor="middle" fill="#A78BFA" font-size="9" font-family="var(--mono)" font-weight="700">LEAD</text>
+            <text x="210" y="37" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Mo 7-12</text>
+            <!-- Ascending arrow connectors -->
+            <line x1="85" y1="72" x2="95" y2="58" stroke="rgba(96,165,250,.35)" stroke-width="1.2"/>
+            <path d="M92,62 L95,56 L98,62" fill="none" stroke="rgba(96,165,250,.35)" stroke-width="1.2"/>
+            <line x1="165" y1="48" x2="175" y2="33" stroke="rgba(167,139,250,.35)" stroke-width="1.2"/>
+            <path d="M172,37 L175,31 L178,37" fill="none" stroke="rgba(167,139,250,.35)" stroke-width="1.2"/>
+            <!-- Milestone labels -->
+            <text x="50" y="98" text-anchor="middle" fill="#60A5FA" font-size="6" font-family="var(--mono)">Shadow · Map SIS</text>
+            <text x="130" y="73" text-anchor="middle" fill="#5EEAD4" font-size="6" font-family="var(--mono)">KB · Templates</text>
+            <text x="210" y="48" text-anchor="middle" fill="#A78BFA" font-size="6" font-family="var(--mono)">Playbook · Mentor</text>
+          </svg>
+        </div>
+      </div>
+      <div class="iv-insight">Analyst II thinking from day one. The toolkit on this page is the proof</div>
+    </div>
+
+    <!-- Q12: Invisible Infrastructure -->
+    <div class="iv-card iv-cat-growth" data-cat="growth">
+      <div class="iv-card-head"><span class="iv-num iv-num-pur">Q12</span><span class="iv-cat">Mission</span></div>
+      <div class="iv-q-title">Invisible Infrastructure</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Iceberg shape — above waterline -->
+            <polygon points="100,8 160,8 175,48 85,48" fill="rgba(94,234,212,.12)" stroke="rgba(94,234,212,.25)" stroke-width=".5"/>
+            <!-- Students label on top -->
+            <circle cx="110" cy="14" r="4" fill="#D6D3D1"/><path d="M104,26 Q110,20 116,26" fill="#D6D3D1" opacity=".6"/>
+            <circle cx="130" cy="14" r="4" fill="#D6D3D1"/><path d="M124,26 Q130,20 136,26" fill="#D6D3D1" opacity=".6"/>
+            <circle cx="150" cy="14" r="4" fill="#D6D3D1"/><path d="M144,26 Q150,20 156,26" fill="#D6D3D1" opacity=".6"/>
+            <text x="130" y="36" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)" font-weight="600">STUDENTS</text>
+            <!-- Waterline -->
+            <line x1="20" y1="50" x2="240" y2="50" stroke="rgba(96,165,250,.3)" stroke-width="1" stroke-dasharray="4,3"/>
+            <text x="242" y="46" fill="#60A5FA" font-size="6.5" font-family="var(--mono)" font-weight="600">visibility</text>
+            <text x="242" y="56" fill="#60A5FA" font-size="6.5" font-family="var(--mono)" font-weight="600">line</text>
+            <!-- Below waterline (larger mass) -->
+            <polygon points="85,52 175,52 200,115 60,115" fill="rgba(29,78,216,.08)" stroke="rgba(96,165,250,.12)" stroke-width=".5"/>
+            <!-- Infrastructure labels inside iceberg -->
+            <rect x="88" y="62" width="42" height="14" rx="3" fill="rgba(29,78,216,.15)"/><text x="109" y="72" text-anchor="middle" fill="#60A5FA" font-size="7.5" font-family="var(--mono)" font-weight="600">Canvas</text>
+            <rect x="105" y="80" width="50" height="14" rx="3" fill="rgba(15,118,110,.15)"/><text x="130" y="90" text-anchor="middle" fill="#5EEAD4" font-size="7.5" font-family="var(--mono)" font-weight="600">Exchange</text>
+            <rect x="100" y="98" width="60" height="14" rx="3" fill="rgba(109,40,217,.12)"/><text x="130" y="108" text-anchor="middle" fill="#A78BFA" font-size="7.5" font-family="var(--mono)" font-weight="600">SIS</text>
+            <!-- Lightning bolt -->
+            <path d="M132,120 L126,128 L131,128 L128,136 L134,126 L130,126 Z" fill="#F87171"/>
+          </svg>
+        </div>
+        <div class="iv-stat-row">
+          <div class="iv-stat" style="color:#F87171">Breaks → lost seat<div class="iv-stat-sub">I was that student</div></div>
+        </div>
+      </div>
+      <div class="iv-insight">The motivation: I've been on the student side. The honesty: invisible work requires visible accountability</div>
+    </div>
+
+  </div>
+</div>
+</div>
+<script>
+function ivFilter(cat,btn){
+  var tabs=document.querySelectorAll('.iv-ftab');
+  tabs.forEach(function(t){t.classList.remove('iv-ftab-active')});
+  if(btn)btn.classList.add('iv-ftab-active');
+  var cards=document.querySelectorAll('.iv-card');
+  cards.forEach(function(c){
+    c.style.display=(cat==='all'||c.getAttribute('data-cat')===cat)?'':'none';
+  });
+}
+</script>
+
+<div class="explore-tracker" id="exploreTracker" title="Sections explored">
+  <div class="et-ring-wrap">
+    <svg class="et-ring" viewBox="0 0 36 36"><circle class="et-bg" cx="18" cy="18" r="15.9" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="2.5"/><circle class="et-fill" id="etFill" cx="18" cy="18" r="15.9" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-dasharray="0 100" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+    <span class="et-label" id="etLabel">0/11</span>
+  </div>
+  <span class="et-sublabel">explored</span>
+</div>
+
 <div class="key-pill" id="keyPill" onclick="document.getElementById('kbOverlay').classList.add('kb-show')" title="Keyboard shortcuts (press ?)">
   <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="4" width="14" height="9" rx="1.5" stroke="#A8A29E" stroke-width="1.2"/><rect x="3.5" y="6.5" width="2" height="1.5" rx=".3" fill="#A8A29E"/><rect x="7" y="6.5" width="2" height="1.5" rx=".3" fill="#A8A29E"/><rect x="10.5" y="6.5" width="2" height="1.5" rx=".3" fill="#A8A29E"/><rect x="4.5" y="9.5" width="7" height="1.5" rx=".3" fill="#A8A29E"/></svg>
-  <span class="key-pill-label"><kbd>1</kbd>–<kbd>0</kbd> sections</span>
+  <span class="key-pill-label"><kbd>1</kbd>–<kbd>0</kbd>, <kbd>-</kbd> sections</span>
   <span style="color:#6B7280">·</span>
   <span style="color:#6B7280">click for all</span>
 </div>
@@ -763,8 +1239,94 @@
 
 </main><!-- /main-content -->
 
+<div class="sec-connector"><div class="sc-line"></div><span class="sc-text">From analyzing the system — to the story of why it matters</span><div class="sc-line"></div></div>
 
+<!-- ═══ ORIGIN STORY — Personal "Why" Section ═══ -->
+<section class="origin-story" id="originStory" role="region" aria-label="Origin Story">
+  <div class="wrap">
 
+    <!-- Section intro -->
+    <div class="origin-header fu">
+      <span class="origin-label">Origin Story</span>
+      <h2 class="origin-title">The tools prove I can do the work.<br>This is why I <em>will.</em></h2>
+      <p class="origin-intro">A second-round interview is about values alignment. Here are mine.</p>
+    </div>
+
+    <!-- Story beats -->
+    <div class="origin-grid">
+
+      <!-- Beat 1: Where I come from -->
+      <div class="origin-beat fu">
+        <div class="origin-tl">
+          <span class="origin-chapter">01</span>
+        </div>
+        <div class="origin-photo">
+          <img src="img/family-1.jpg" alt="Henry with his parents" onerror="this.parentElement.classList.add('origin-photo-placeholder')" />
+          <span class="origin-caption">Mom &amp; Dad &mdash; everything starts here</span>
+        </div>
+        <div class="origin-narrative">
+          <span class="origin-beat-label">Where I Come From</span>
+          <p>My parents came to this country with the conviction that education could change a family&rsquo;s trajectory. I started at <strong>Foothill College</strong> as a first-generation student. I didn&rsquo;t know what a prerequisite was. I didn&rsquo;t know what office hours meant. The system wasn&rsquo;t built for people like me &mdash; but Foothill gave me a shot anyway.</p>
+          <p>That experience is why I understand, viscerally, what it means when the Exchange breaks. It&rsquo;s not an API timeout. It&rsquo;s a student reconsidering whether college is for them.</p>
+        </div>
+      </div>
+
+      <!-- Beat 2: Why CVC specifically -->
+      <div class="origin-beat origin-beat-flip fu">
+        <div class="origin-tl">
+          <span class="origin-chapter">02</span>
+        </div>
+        <div class="origin-photo">
+          <img src="img/family-2.jpg" alt="Henry's family" onerror="this.parentElement.classList.add('origin-photo-placeholder')" />
+          <span class="origin-caption">First-generation &mdash; Foothill College</span>
+        </div>
+        <div class="origin-narrative">
+          <span class="origin-beat-label">Why CVC, Why FHDA</span>
+          <p>I didn&rsquo;t apply to this role because it was open. I applied because the CVC Exchange is <strong>equity infrastructure</strong> &mdash; and FHDA is where it lives. When a student at a rural college with 12 course offerings can cross-enroll into De Anza&rsquo;s catalog, that&rsquo;s not a feature. That&rsquo;s access that didn&rsquo;t exist five years ago.</p>
+          <p>OEI&rsquo;s mission &mdash; removing barriers to student success across all 116 colleges &mdash; isn&rsquo;t abstract to me. I&rsquo;ve <em>been</em> the student those barriers were built around. Supporting this system from inside FHDA means protecting the thing that would have changed my own trajectory.</p>
+        </div>
+      </div>
+
+      <!-- Beat 3: Values alignment — the centerpiece -->
+      <div class="origin-beat origin-beat-centerpiece fu">
+        <div class="origin-tl">
+          <span class="origin-chapter origin-chapter-accent">03</span>
+        </div>
+        <div class="origin-quote-card">
+          <span class="origin-beat-label origin-beat-label-center">What I Believe</span>
+          <blockquote>&ldquo;Academic rigor and humanity are not competing priorities &mdash; they are the same work.&rdquo;</blockquote>
+          <p class="origin-quote-sub">Technical precision matters because people depend on it. Every sync that succeeds, every ticket resolved before a drop deadline, every proactive outreach to a struggling college &mdash; that&rsquo;s rigor in service of humanity. That&rsquo;s the standard I hold myself to.</p>
+          <cite class="origin-cite">&mdash; The lens I bring to this role</cite>
+        </div>
+      </div>
+
+      <!-- Beat 4: Who I am as a colleague -->
+      <div class="origin-beat fu">
+        <div class="origin-tl">
+          <span class="origin-chapter">04</span>
+        </div>
+        <div class="origin-photo">
+          <img src="img/family-3.jpg" alt="Henry's journey" onerror="this.parentElement.classList.add('origin-photo-placeholder')" />
+          <span class="origin-caption">The work continues</span>
+        </div>
+        <div class="origin-narrative">
+          <span class="origin-beat-label">How I Work</span>
+          <p><strong>I build relationships before I need them.</strong> At SMCCD, I learned that the best support isn&rsquo;t reactive &mdash; it&rsquo;s knowing your colleges well enough to anticipate where they&rsquo;ll struggle. At Braven and OpenStax, I learned that documentation is a form of care: when you write a clear KB article, you&rsquo;re respecting the next person&rsquo;s time.</p>
+          <p><strong>I ask questions early and escalate without ego.</strong> I&rsquo;d rather say &ldquo;I don&rsquo;t know yet, but here&rsquo;s my plan to find out&rdquo; than guess. And when a problem is bigger than me, I bring it to the team with context, not just a forwarded ticket. That&rsquo;s the kind of colleague I am &mdash; and the kind I want to keep becoming.</p>
+        </div>
+      </div>
+
+    </div><!-- /origin-grid -->
+
+    <!-- Closing — unified values statement -->
+    <div class="origin-coda fu">
+      <div class="origin-coda-line" aria-hidden="true"></div>
+      <blockquote class="origin-coda-quote">&ldquo;Every cross-enrollment that works is a student whose trajectory just changed. Every one that breaks is a student who might not come back.&rdquo;</blockquote>
+      <p class="origin-coda-closing">That&rsquo;s why I built ten working tools for a job I don&rsquo;t have yet. Not to prove I can &mdash; but because this is the work I want to do, at the place where it matters most.</p>
+    </div>
+
+  </div>
+</section>
 
 
 
@@ -780,13 +1342,20 @@
       <div class="footer-goals">
         <div class="footer-goals-title">What I'd build by month 6</div>
         <div class="footer-goals-list">
-          <span>A repeat-college intervention program that reduces ticket volume from the top 12 colleges by 30%</span>
-          <span>A Board-ready reporting template the team actually uses for quarterly updates</span>
-          <span>A proactive outreach calendar that reaches FA offices before each drop deadline — not after</span>
+          <span>A repeat-college intervention program that reduces ticket volume from the top 12 colleges by 30%<br><a class="evidence-link" onclick="document.getElementById('patterns').scrollIntoView({behavior:'smooth'})">See: Pattern Intelligence, Section 6</a></span>
+          <span>A Board-ready reporting template the team actually uses for quarterly updates<br><a class="evidence-link" onclick="document.getElementById('cvcData').scrollIntoView({behavior:'smooth'})">See: Translation Bridge, Section 2</a> <a class="evidence-link" onclick="document.getElementById('comms').scrollIntoView({behavior:'smooth'})">+ Board Brief, Section 7</a></span>
+          <span>A proactive outreach calendar that reaches FA offices before each drop deadline — not after<br><a class="evidence-link" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})">See: Outreach Planner, Section 8</a></span>
         </div>
       </div>
       <div class="footer-cta-wrap">
-        <a class="footer-cta" href="mailto:fanh@smccd.edu?subject=CVC-OEI Application Support — Henry Fan">Let's walk through this together</a>
+        <a class="footer-cta" href="#" onclick="event.preventDefault();document.getElementById('ivOverlay').classList.add('iv-show')">Walk through the scenarios</a>
+        <div class="footer-secondary">
+          <a href="mailto:fanhenry@fhda.edu?subject=CVC-OEI Application Support — Henry Fan">fanhenry@fhda.edu</a>
+          <span class="fs-dot">&middot;</span>
+          <a href="https://www.linkedin.com/in/henryfan" target="_blank" rel="noopener">LinkedIn</a>
+          <span class="fs-dot">&middot;</span>
+          <a href="#" onclick="window.print();return false">Print / Save as PDF</a>
+        </div>
       </div>
       <div class="footer-meta">
         All data is simulated &mdash; no real student records. Built with publicly available CVC documentation, the live <a href="https://search.cvc.edu" target="_blank" rel="noopener">CVC Exchange course search</a>, and Wheelhouse Center enrollment data.
@@ -802,10 +1371,11 @@
 </footer>
 
 <!-- TABLE OF CONTENTS PANEL -->
-<div class="toc-panel" id="tocPanel">
+<div class="toc-panel" id="tocPanel" role="region" aria-label="Table of Contents">
   <div class="toc-header">
     <div class="toc-title">Sections</div>
-    <div class="toc-subtitle">10 sections · Keys 1–9, 0 · Click any row to jump</div>
+    <div class="toc-subtitle">11 sections · Keys 1–9, 0, - · Click any row to jump</div>
+    <label for="tocSearch" class="sr-only">Filter sections</label>
     <input class="toc-search" id="tocSearch" type="text" placeholder="Filter sections..." oninput="filterToc(this.value)" autocomplete="off" style="width:100%;padding:.4rem .6rem;border:1px solid var(--border);border-radius:6px;font-family:var(--mono);font-size:.7rem;margin-top:.5rem;background:var(--surface);color:var(--text);outline:none;box-sizing:border-box">
   </div>
 
@@ -883,6 +1453,15 @@
     </div>
   </div>
 
+  <div class="toc-group">
+    <div class="toc-group-label">Origin Story</div>
+    <div class="toc-item tc-amber" onclick="tocGo('originStory')">
+      <div class="toc-num">-</div>
+      <div class="toc-text"><div class="toc-item-title">Origin Story</div><div class="toc-item-desc">The personal "why" — from first-generation student at Foothill to building tools for equity.</div></div>
+      <span class="toc-item-tag tag-story">Story</span>
+    </div>
+  </div>
+
 </div>
 
 <button class="back-to-top" id="backToTop" onclick="(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
@@ -897,18 +1476,22 @@
   <div class="progress-dot" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})" title="8 · Counselors"></div>
   <div class="progress-dot" onclick="document.getElementById('aiVision').scrollIntoView({behavior:'smooth'})" title="9 · AI Vision"></div>
   <div class="progress-dot" onclick="document.getElementById('barriers').scrollIntoView({behavior:'smooth'})" title="0 · Barriers"></div>
+  <div class="progress-dot pd-origin" onclick="document.getElementById('originStory').scrollIntoView({behavior:'smooth'})" title="- · Origin Story"></div>
 </nav>
 
 <!-- KEYBOARD SHORTCUTS HELP -->
 <div class="kb-overlay" id="kbOverlay" onclick="this.classList.remove('kb-show')">
   <div class="kb-help" onclick="event.stopPropagation()">
     <div class="kb-help-title">Keyboard Shortcuts</div>
+    <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.3rem">Tools</div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">1</span> Lookup</span><span class="kb-help-desc"><span class="kb-help-key">2</span> Exchange</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">3</span> Architecture</span><span class="kb-help-desc"><span class="kb-help-key">4</span> Monitor</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">5</span> Diagnostics</span><span class="kb-help-desc"><span class="kb-help-key">6</span> Intelligence</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">7</span> Response</span><span class="kb-help-desc"><span class="kb-help-key">8</span> Toolkit</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">9</span> AI Vision</span><span class="kb-help-desc"><span class="kb-help-key">0</span> Barriers</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">-</span> Origin Story</span></div>
     <div style="border-top:1px solid var(--border);margin-top:.5rem;padding-top:.5rem">
+    <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.3rem">Navigation</div>
     <div class="kb-help-row"><span class="kb-help-desc">Open sections</span><span class="kb-help-key">G</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Search colleges</span><span class="kb-help-key">/</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Back to top</span><span class="kb-help-key">T</span></div>
@@ -918,6 +1501,7 @@
     <div class="kb-help-row"><span class="kb-help-desc">Theater / focus mode</span><span class="kb-help-key">F</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Zoom screenshare mode</span><span class="kb-help-key">Z</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Accessibility mode</span><span class="kb-help-key">A</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc">Visual reference</span><span class="kb-help-key">V</span></div>
     </div>
     <div class="kb-help-close">Press any key or click outside to close</div>
   </div>
@@ -956,6 +1540,7 @@
 <script src="js/animations.js"></script>
 <script src="js/modes.js"></script>
 <script src="js/keyboard.js"></script>
+<script src="js/delight.js"></script>
 
 </body>
 </html>

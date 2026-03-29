@@ -114,7 +114,8 @@ var refreshCount = 30;
 setInterval(function() {
   refreshCount--;
   if (refreshCount <= 0) { refreshCount = 30; }
-  document.getElementById('refreshTimer').textContent = 'Auto-refresh: ' + refreshCount + 's';
+  var timerEl = document.getElementById('refreshTimer');
+  if (timerEl) timerEl.textContent = 'Auto-refresh: ' + refreshCount + 's';
 }, 1000);
 
 // Live clock
@@ -174,3 +175,62 @@ if (monitorSection) monitorAlertObs.observe(monitorSection);
 // Fallback: show after 8s even if Monitor never scrolled to
 setTimeout(function() { if (!monitorAlertShown) { monitorAlertShown = true; showNextAlert(); } }, 8000);
 if (alertEl) { alertEl.style.cursor = 'pointer'; alertEl.addEventListener('click', dismissAlert); }
+
+// ═══ LIVE SIMULATION — periodic status flickers ═══
+(function() {
+  var flickerActive = false;
+
+  function flickerRow() {
+    var rows = document.querySelectorAll('.status-row');
+    if (!rows.length || flickerActive) return;
+    flickerActive = true;
+
+    // Pick a random OK row to briefly flicker to warn and back
+    var okRows = [];
+    rows.forEach(function(r) {
+      if (r.querySelector('.s-ok')) okRows.push(r);
+    });
+    if (!okRows.length) { flickerActive = false; return; }
+
+    var row = okRows[Math.floor(Math.random() * okRows.length)];
+    var dot = row.querySelector('.s-indicator');
+    if (!dot) { flickerActive = false; return; }
+
+    // Brief amber flicker
+    dot.classList.remove('s-ok');
+    dot.classList.add('s-warn');
+    row.style.transition = 'background .3s';
+    row.style.background = 'rgba(251,191,36,.04)';
+
+    setTimeout(function() {
+      dot.classList.remove('s-warn');
+      dot.classList.add('s-ok');
+      row.style.background = '';
+      flickerActive = false;
+    }, 1800);
+  }
+
+  // Flicker every 8-15 seconds
+  function scheduleFlicker() {
+    var delay = 8000 + Math.random() * 7000;
+    setTimeout(function() {
+      // Only flicker if monitor section is in view
+      var mon = document.getElementById('monitor');
+      if (mon) {
+        var rect = mon.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          flickerRow();
+        }
+      }
+      scheduleFlicker();
+    }, delay);
+  }
+  scheduleFlicker();
+
+  // Cycle alerts every 12 seconds
+  setInterval(function() {
+    if (alertEl && !alertEl.classList.contains('show')) {
+      showNextAlert();
+    }
+  }, 12000);
+})();

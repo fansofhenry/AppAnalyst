@@ -19,12 +19,24 @@ var fuObs = new IntersectionObserver(function(entries) {
 }, { threshold: .06, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.fu').forEach(function(el) { fuObs.observe(el); });
 
-// Toast notification
-function toast(msg) {
+// Toast notification (queued)
+var _toastQueue = [];
+var _toastBusy = false;
+function toast(msg, html) {
+  _toastQueue.push({ msg: msg, html: !!html });
+  if (!_toastBusy) _drainToast();
+}
+function _drainToast() {
+  if (!_toastQueue.length) { _toastBusy = false; return; }
+  _toastBusy = true;
+  var item = _toastQueue.shift();
   var t = document.getElementById('toast');
-  t.textContent = msg;
+  if (item.html) { t.innerHTML = item.msg; } else { t.textContent = item.msg; }
   t.classList.add('show');
-  setTimeout(function() { t.classList.remove('show'); }, 2200);
+  setTimeout(function() {
+    t.classList.remove('show');
+    setTimeout(_drainToast, 300);
+  }, 2200);
 }
 
 // Interaction counter system
@@ -113,7 +125,11 @@ function toast(msg) {
   var g = document.getElementById('greetingToast');
   if (!g) return;
   setTimeout(function() { g.classList.add('gt-show'); }, 800);
-  setTimeout(function() { g.classList.remove('gt-show'); }, 3200);
+  setTimeout(function() {
+    g.classList.remove('gt-show');
+    g.classList.add('gt-hide');
+    setTimeout(function() { g.remove(); }, 500);
+  }, 3200);
 })();
 
 // Dynamic page title — shows current section in tab
@@ -134,7 +150,8 @@ function toast(msg) {
     'counselorToolkit': 'Student & Counselor Toolkit',
     'aiVision': 'AI Vision',
     'barrierOverview': 'Barriers',
-    'barriers': 'Barriers'
+    'barriers': 'Barriers',
+    'originStory': 'Origin Story'
   };
   var current = '';
   var obs = new IntersectionObserver(function(entries) {
@@ -158,4 +175,77 @@ function toast(msg) {
       document.title = base + ' \u00b7 FHDA';
     }
   }, { passive: true });
+})();
+
+// ═══ EXPLORATION PROGRESS TRACKER ═══
+(function() {
+  var sectionIds = ['lookup','cvcData','flow','monitor','tracer','patterns','comms','outreach','aiVision','barriers','originStory'];
+  var visited = {};
+  var total = sectionIds.length;
+  var tracker = document.getElementById('exploreTracker');
+  var fill = document.getElementById('etFill');
+  var label = document.getElementById('etLabel');
+  if (!tracker || !fill || !label) return;
+
+  var milestoneMessages = {
+    3: 'Nice \u2014 3 sections explored!',
+    6: 'Halfway there \u2014 6 of 11!',
+    8: 'Deep dive \u2014 8 of 11 sections!',
+    11: 'Full exploration complete!'
+  };
+
+  function update() {
+    var count = Object.keys(visited).length;
+    var pct = (count / total) * 100;
+    fill.setAttribute('stroke-dasharray', pct + ' ' + (100 - pct));
+    label.textContent = count + '/' + total;
+    if (count >= total) {
+      tracker.classList.add('et-complete');
+      if (typeof confettiBurstCenter === 'function') confettiBurstCenter(40);
+    }
+    if (milestoneMessages[count]) {
+      toast(milestoneMessages[count]);
+    }
+  }
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !visited[entry.target.id]) {
+        visited[entry.target.id] = true;
+        // Show tracker after first section visit
+        tracker.classList.add('et-visible');
+        update();
+      }
+    });
+  }, { threshold: 0.25 });
+
+  sectionIds.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) obs.observe(el);
+  });
+})();
+
+// ═══ INTERACTION MILESTONE CELEBRATIONS ═══
+(function() {
+  var el = document.getElementById('interactionCount');
+  var wrap = document.getElementById('interactionCounter');
+  if (!el || !wrap) return;
+  var celebrated = {};
+  var milestones = {
+    10: 'Explorer \u2014 10 interactions!',
+    25: 'Power user \u2014 25 interactions!',
+    50: 'Deep diver \u2014 50 interactions!',
+    100: 'Completionist \u2014 100 interactions!'
+  };
+  var obs = new MutationObserver(function() {
+    var count = parseInt(el.textContent || '0');
+    if (milestones[count] && !celebrated[count]) {
+      celebrated[count] = true;
+      toast(milestones[count]);
+      wrap.classList.add('fc-pop');
+      setTimeout(function() { wrap.classList.remove('fc-pop'); }, 600);
+      if (count === 100 && typeof confettiBurstCenter === 'function') confettiBurstCenter(40);
+    }
+  });
+  obs.observe(el, { childList: true, characterData: true, subtree: true });
 })();

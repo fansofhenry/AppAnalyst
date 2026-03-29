@@ -66,6 +66,21 @@
     if (active) deactivate(); else activate();
   };
 
+  // Arrow key navigation through sections
+  window._theaterNext = function(dir) {
+    if (!active) return;
+    var secs = Array.prototype.slice.call(getSections());
+    if (!secs.length) return;
+    var idx = currentSpot ? secs.indexOf(currentSpot) : -1;
+    idx += dir;
+    if (idx < 0) idx = secs.length - 1;
+    if (idx >= secs.length) idx = 0;
+    if (currentSpot) currentSpot.classList.remove('theater-spot');
+    currentSpot = secs[idx];
+    currentSpot.classList.add('theater-spot');
+    currentSpot.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
   // Click on a spotlighted section scrolls it to center
   document.addEventListener('click', function(e) {
     if (!active) return;

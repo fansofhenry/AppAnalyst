@@ -57,7 +57,15 @@ function renderInsights() {
       '<div class="ic-title">' + ins.title + '</div>' +
       '<div class="ic-desc">' + ins.desc + '</div>' +
       '<div class="ic-meta">' + ins.meta.map(function(m) { return '<span>' + m + '</span>'; }).join('') + '</div>' +
-      '<div class="ic-action">' + (activeInsight === i ? 'Highlighted in chart \u2713' : 'Click to highlight in chart \u2192') + '</div></div>';
+      '<div class="ic-action">' + (activeInsight === i ? 'Highlighted in chart \u2713' : 'Click to highlight in chart \u2192') + '</div>' +
+      (ins.action ? '<div class="pao-strip" onclick="event.stopPropagation()">' +
+        '<div class="pao-col"><div class="pao-col-label">Pattern</div>' + ins.title + '</div>' +
+        '<div class="pao-arrow">\u2192</div>' +
+        '<div class="pao-col"><div class="pao-col-label">Action</div>' + ins.action + '</div>' +
+        '<div class="pao-arrow">\u2192</div>' +
+        '<div class="pao-col"><div class="pao-col-label">Outcome</div><strong style="color:var(--primary)">' + ins.outcome + '</strong></div>' +
+      '</div>' : '') +
+      '</div>';
   }).join('');
 }
 

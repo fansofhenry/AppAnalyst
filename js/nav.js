@@ -16,24 +16,71 @@ document.querySelectorAll('.nav-links a').forEach(function(link) {
   });
 });
 
-// Nav active tracking
+// Nav active tracking + TOC active + Progress dots + Visited dots
+// Consolidated into a single IntersectionObserver for performance
 var navSecs = {};
 document.querySelectorAll('.nav-links a').forEach(function(a) {
   var h = a.getAttribute('href');
   if (h && h.startsWith('#')) { navSecs[h.substring(1)] = a; }
 });
-var navObs2 = new IntersectionObserver(function(entries) {
+
+var tocSectionIds = ['lookup', 'cvcData', 'flow', 'monitor', 'tracer', 'patterns', 'comms', 'outreach', 'aiVision', 'barrierOverview', 'originStory'];
+var tocItems = document.querySelectorAll('.toc-item');
+
+var dotSections = ['lookup', 'cvcData', 'flow', 'monitor', 'tracer', 'patterns', 'comms', 'outreach', 'aiVision', 'barriers', 'originStory'];
+var dotEls = document.querySelectorAll('.progress-dot');
+
+var _navVisited = new Set();
+var _navLinkMap = {};
+document.querySelectorAll('.nav-links a[href^="#"]').forEach(function(a) {
+  var id = a.getAttribute('href').replace('#', '');
+  if (id) _navLinkMap[id] = a;
+});
+
+// Collect all unique section IDs that any of the 4 systems need
+var _allNavIds = {};
+Object.keys(navSecs).forEach(function(id) { _allNavIds[id] = true; });
+tocSectionIds.forEach(function(id) { _allNavIds[id] = true; });
+dotSections.forEach(function(id) { _allNavIds[id] = true; });
+Object.keys(_navLinkMap).forEach(function(id) { _allNavIds[id] = true; });
+
+var sharedNavObs = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
-    var link = navSecs[entry.target.id];
-    if (link && entry.isIntersecting) {
+    var id = entry.target.id;
+    if (!entry.isIntersecting) return;
+
+    // 1. Nav active highlight
+    var link = navSecs[id];
+    if (link) {
       Object.values(navSecs).forEach(function(l) { l.classList.remove('nav-active'); });
       link.classList.add('nav-active');
     }
+
+    // 2. TOC current highlight
+    var tocIdx = tocSectionIds.indexOf(id);
+    if (tocIdx >= 0) {
+      tocItems.forEach(function(item) { item.classList.remove('toc-current'); });
+      if (tocItems[tocIdx]) tocItems[tocIdx].classList.add('toc-current');
+    }
+
+    // 3. Progress dot active
+    var dotIdx = dotSections.indexOf(id);
+    if (dotIdx >= 0) {
+      dotEls.forEach(function(d) { d.classList.remove('pd-active'); });
+      if (dotEls[dotIdx]) dotEls[dotIdx].classList.add('pd-active');
+    }
+
+    // 4. Nav visited dots
+    if (!_navVisited.has(id) && _navLinkMap[id]) {
+      _navVisited.add(id);
+      _navLinkMap[id].classList.add('nav-visited');
+    }
   });
-}, { threshold: .15, rootMargin: '-56px 0px -50% 0px' });
-Object.keys(navSecs).forEach(function(id) {
+}, { threshold: [0, 0.2, 0.5], rootMargin: '-56px 0px -50% 0px' });
+
+Object.keys(_allNavIds).forEach(function(id) {
   var el = document.getElementById(id);
-  if (el) navObs2.observe(el);
+  if (el) sharedNavObs.observe(el);
 });
 
 // Table of Contents
@@ -101,25 +148,6 @@ function filterToc(query) {
   });
 }
 
-// TOC active tracking
-var tocSectionIds = ['lookup', 'cvcData', 'flow', 'monitor', 'tracer', 'patterns', 'comms', 'outreach', 'aiVision', 'barrierOverview'];
-var tocItems = document.querySelectorAll('.toc-item');
-var tocObserver = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      var idx = tocSectionIds.indexOf(entry.target.id);
-      if (idx >= 0) {
-        tocItems.forEach(function(item) { item.classList.remove('toc-current'); });
-        if (tocItems[idx]) tocItems[idx].classList.add('toc-current');
-      }
-    }
-  });
-}, { threshold: 0.15, rootMargin: '-56px 0px -60% 0px' });
-tocSectionIds.forEach(function(id) {
-  var el = document.getElementById(id);
-  if (el) tocObserver.observe(el);
-});
-
 // Back to top
 var backBtn = document.getElementById('backToTop');
 if (backBtn) {
@@ -137,51 +165,6 @@ if (backBtn) {
   setInterval(checkBackBtn, 1000);
   checkBackBtn();
 }
-
-// Progress dots
-var dotSections = ['lookup', 'cvcData', 'flow', 'monitor', 'tracer', 'patterns', 'comms', 'outreach', 'aiVision', 'barriers'];
-var dotEls = document.querySelectorAll('.progress-dot');
-var dotObserver = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      var idx = dotSections.indexOf(entry.target.id);
-      if (idx >= 0) {
-        dotEls.forEach(function(d) { d.classList.remove('pd-active'); });
-        if (dotEls[idx]) dotEls[idx].classList.add('pd-active');
-      }
-    }
-  });
-}, { threshold: 0.2, rootMargin: '-56px 0px -50% 0px' });
-dotSections.forEach(function(id) {
-  var el = document.getElementById(id);
-  if (el) dotObserver.observe(el);
-});
-
-// Nav visited dots
-(function() {
-  var visited = new Set();
-  var navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-  var linkMap = {};
-  navLinks.forEach(function(a) {
-    var id = a.getAttribute('href').replace('#', '');
-    if (id) linkMap[id] = a;
-  });
-  var visitObs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting && !visited.has(e.target.id)) {
-        visited.add(e.target.id);
-        var link = linkMap[e.target.id];
-        if (link && !link.classList.contains('nav-visited')) {
-          link.classList.add('nav-visited');
-        }
-      }
-    });
-  }, { threshold: .3 });
-  Object.keys(linkMap).forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el) visitObs.observe(el);
-  });
-})();
 
 // Scroll progress bar
 (function() {
