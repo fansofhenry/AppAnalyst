@@ -377,6 +377,18 @@
           <div class="chart-header"><div class="chart-title">Tickets by Category</div><div class="chart-period">Academic Calendar · Registration → Add/Drop → Census → FA Disbursement → Midterm · <span id="chartTotal">0</span> total</div></div>
           <div class="chart-body" id="chartBody"></div>
           <div class="chart-legend" id="chartLegend"></div>
+        </div>
+        <!-- Repeat colleges heatmap — fills white space under chart -->
+        <div class="repeat-colleges">
+          <div class="rc-header"><div class="rc-title">Top Repeat-Ticket Colleges</div><div class="rc-sub">These 5 colleges generate 58% of all tickets. The pattern isn't random — it's an onboarding gap.</div></div>
+          <div class="rc-rows">
+            <div class="rc-row"><span class="rc-rank">1</span><span class="rc-name">Sacramento City</span><div class="rc-bar-bg"><div class="rc-bar" style="width:100%;background:var(--purple)"></div></div><span class="rc-count">23</span><span class="rc-tag rc-tag-auth">Auth</span></div>
+            <div class="rc-row"><span class="rc-rank">2</span><span class="rc-name">CCSF</span><div class="rc-bar-bg"><div class="rc-bar" style="width:65%;background:var(--blue)"></div></div><span class="rc-count">15</span><span class="rc-tag rc-tag-sync">Sync</span></div>
+            <div class="rc-row"><span class="rc-rank">3</span><span class="rc-name">Riverside City</span><div class="rc-bar-bg"><div class="rc-bar" style="width:52%;background:var(--purple)"></div></div><span class="rc-count">12</span><span class="rc-tag rc-tag-auth">Auth</span></div>
+            <div class="rc-row"><span class="rc-rank">4</span><span class="rc-name">Feather River</span><div class="rc-bar-bg"><div class="rc-bar" style="width:43%;background:var(--amber)"></div></div><span class="rc-count">10</span><span class="rc-tag rc-tag-data">Data</span></div>
+            <div class="rc-row"><span class="rc-rank">5</span><span class="rc-name">Bakersfield</span><div class="rc-bar-bg"><div class="rc-bar" style="width:35%;background:var(--blue)"></div></div><span class="rc-count">8</span><span class="rc-tag rc-tag-sync">Sync</span></div>
+          </div>
+          <div class="rc-footer">Intervention: targeted onboarding for top 5 → projected 30% ticket reduction</div>
         </div></div>
         <div class="insights-panel" id="insightsPanel"></div>
       </div>
