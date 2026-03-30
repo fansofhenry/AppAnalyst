@@ -49,8 +49,8 @@ document.addEventListener('keydown', function(e) {
     return;
   }
 
-  // - = origin story
-  if (e.key === '-') {
+  // ` = origin story
+  if (e.key === '`') {
     e.preventDefault();
     var origin = document.getElementById('originStory');
     if (origin) origin.scrollIntoView({ behavior: 'smooth', block: 'start' });

@@ -53,7 +53,7 @@
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0" aria-hidden="true"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Sections</button>
   <div class="a11y-toggle" id="a11yToggle" onclick="toggleA11y()" role="switch" aria-checked="false" aria-label="Toggle accessibility high-contrast mode" tabindex="0"><span class="a11y-icon" aria-hidden="true">♿</span><span class="a11y-label">Accessibility</span><div class="a11y-switch"></div></div>
     <div class="nav-links">
-    <a href="#why">Context</a><a href="#originStory" class="nv nv-amber"><span class="nav-num">-</span>Origin</a><a href="#lookup" class="nv nv-blue"><span class="nav-num">1</span>Lookup</a><a href="#cvcData" class="nv nv-green"><span class="nav-num">2</span>Exchange</a><a href="#flow" class="nv nv-sky"><span class="nav-num">3</span>Architecture</a><a href="#monitor" class="nv nv-amber"><span class="nav-num">4</span>Monitor</a><a href="#tracer" class="nv nv-rose"><span class="nav-num">5</span>Diagnostics</a><a href="#patterns" class="nv nv-orange"><span class="nav-num">6</span>Intelligence</a><a href="#comms" class="nv nv-indigo"><span class="nav-num">7</span>Response</a><a href="#outreach" class="nv nv-teal"><span class="nav-num">8</span>Toolkit</a><a href="#aiVision" class="nv nv-purple"><span class="nav-num">9</span>AI Vision</a><a href="#barrierOverview" class="nav-barrier"><span class="nav-num">0</span>Barriers</a>
+    <a href="#why">Context</a><a href="#originStory" class="nv nv-amber"><span class="nav-num">`</span>Origin</a><a href="#lookup" class="nv nv-blue"><span class="nav-num">1</span>Lookup</a><a href="#cvcData" class="nv nv-green"><span class="nav-num">2</span>Exchange</a><a href="#flow" class="nv nv-sky"><span class="nav-num">3</span>Architecture</a><a href="#monitor" class="nv nv-amber"><span class="nav-num">4</span>Monitor</a><a href="#tracer" class="nv nv-rose"><span class="nav-num">5</span>Diagnostics</a><a href="#patterns" class="nv nv-orange"><span class="nav-num">6</span>Intelligence</a><a href="#comms" class="nv nv-indigo"><span class="nav-num">7</span>Response</a><a href="#outreach" class="nv nv-teal"><span class="nav-num">8</span>Toolkit</a><a href="#aiVision" class="nv nv-purple"><span class="nav-num">9</span>AI Vision</a><a href="#barrierOverview" class="nav-barrier"><span class="nav-num">0</span>Barriers</a>
   </div>
 </nav>
 
@@ -1191,7 +1191,7 @@ function ivFilter(cat,btn){
 
 <div class="key-pill" id="keyPill" onclick="document.getElementById('kbOverlay').classList.add('kb-show')" title="Keyboard shortcuts (press ?)">
   <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="4" width="14" height="9" rx="1.5" stroke="#A8A29E" stroke-width="1.2"/><rect x="3.5" y="6.5" width="2" height="1.5" rx=".3" fill="#A8A29E"/><rect x="7" y="6.5" width="2" height="1.5" rx=".3" fill="#A8A29E"/><rect x="10.5" y="6.5" width="2" height="1.5" rx=".3" fill="#A8A29E"/><rect x="4.5" y="9.5" width="7" height="1.5" rx=".3" fill="#A8A29E"/></svg>
-  <span class="key-pill-label"><kbd>1</kbd>–<kbd>0</kbd>, <kbd>-</kbd> sections</span>
+  <span class="key-pill-label"><kbd>`</kbd>, <kbd>1</kbd>–<kbd>0</kbd> sections</span>
   <span style="color:#6B7280">·</span>
   <span style="color:#6B7280">click for all</span>
 </div>
@@ -1247,7 +1247,7 @@ function ivFilter(cat,btn){
 <div class="toc-panel" id="tocPanel" role="region" aria-label="Table of Contents">
   <div class="toc-header">
     <div class="toc-title">Sections</div>
-    <div class="toc-subtitle">11 sections · Keys 1–9, 0, - · Click any row to jump</div>
+    <div class="toc-subtitle">11 sections · Keys `, 1–9, 0 · Click any row to jump</div>
     <label for="tocSearch" class="sr-only">Filter sections</label>
     <input class="toc-search" id="tocSearch" type="text" placeholder="Filter sections..." oninput="filterToc(this.value)" autocomplete="off" style="width:100%;padding:.4rem .6rem;border:1px solid var(--border);border-radius:6px;font-family:var(--mono);font-size:.7rem;margin-top:.5rem;background:var(--surface);color:var(--text);outline:none;box-sizing:border-box">
   </div>
@@ -1255,7 +1255,7 @@ function ivFilter(cat,btn){
   <div class="toc-group">
     <div class="toc-group-label">Origin Story</div>
     <div class="toc-item tc-amber" onclick="tocGo('originStory')">
-      <div class="toc-num">-</div>
+      <div class="toc-num">`</div>
       <div class="toc-text"><div class="toc-item-title">Origin Story</div><div class="toc-item-desc">The personal "why" — from first-generation student at Foothill to building tools for equity.</div></div>
       <span class="toc-item-tag tag-story">Story</span>
     </div>
@@ -1340,7 +1340,7 @@ function ivFilter(cat,btn){
 
 <button class="back-to-top" id="backToTop" onclick="(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 <nav class="progress-dots" id="progressDots" aria-label="Page sections">
-  <div class="progress-dot pd-origin" onclick="document.getElementById('originStory').scrollIntoView({behavior:'smooth'})" title="- · Origin Story"></div>
+  <div class="progress-dot pd-origin" onclick="document.getElementById('originStory').scrollIntoView({behavior:'smooth'})" title="` · Origin Story"></div>
   <div class="progress-dot" onclick="document.getElementById('lookup').scrollIntoView({behavior:'smooth'})" title="1 · Lookup"></div>
   <div class="progress-dot" onclick="document.getElementById('cvcData').scrollIntoView({behavior:'smooth'})" title="2 · Exchange"></div>
   <div class="progress-dot" onclick="document.getElementById('flow').scrollIntoView({behavior:'smooth'})" title="3 · Architecture"></div>
@@ -1363,7 +1363,7 @@ function ivFilter(cat,btn){
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">5</span> Diagnostics</span><span class="kb-help-desc"><span class="kb-help-key">6</span> Intelligence</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">7</span> Response</span><span class="kb-help-desc"><span class="kb-help-key">8</span> Toolkit</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">9</span> AI Vision</span><span class="kb-help-desc"><span class="kb-help-key">0</span> Barriers</span></div>
-    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">-</span> Origin Story</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">`</span> Origin Story</span></div>
     <div style="border-top:1px solid var(--border);margin-top:.5rem;padding-top:.5rem">
     <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.3rem">Navigation</div>
     <div class="kb-help-row"><span class="kb-help-desc">Open sections</span><span class="kb-help-key">G</span></div>
