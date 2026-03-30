@@ -479,6 +479,7 @@
   box-shadow: var(--shadow);
 }
 .flow-title { text-align: center; font-family: var(--mono); font-size: .6rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase; color: var(--text-3); margin-bottom: 1.75rem; }
+.flow-title-hint { font-size: .5rem; color: var(--primary); margin-top: .3rem; font-weight: 600; letter-spacing: .06em; text-transform: none; }
 .flow-row { display: flex; align-items: center; justify-content: center; gap: 0; min-width: fit-content; margin: 0 auto; }
 .f-node {
   padding: 1rem 1.25rem;
@@ -859,6 +860,13 @@
 .esc-card.esc-active .esc-active-tag { display: inline-block; }
 
 /* ── Weekly Pulse ── */
+/* ── Pulse section ── */
+.pulse-wrap { margin-bottom: 1rem; padding: .65rem .85rem; border: 1px solid var(--border); border-radius: var(--r-lg); background: var(--surface); }
+.pulse-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: .5rem; gap: .5rem; flex-wrap: wrap; }
+.pulse-title { font-family: var(--mono); font-size: .55rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
+.pulse-badge { font-family: var(--mono); font-size: .55rem; padding: .15rem .45rem; border-radius: 4px; }
+.pulse-badge-red { background: var(--red-light); color: var(--red); border: 1px solid var(--red-bd); }
+.pulse-vs { font-family: var(--mono); font-size: .5rem; color: var(--text-3); }
 .pulse-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: .5rem; }
 .pulse-card { border: 1px solid var(--border); border-radius: var(--r-lg); padding: .65rem .75rem; text-align: center; transition: all .2s; background: var(--surface); box-shadow: var(--shadow); }
 .pulse-card:hover { border-color: var(--border-2); box-shadow: var(--shadow-md); transform: translateY(-2px); }
@@ -1165,6 +1173,7 @@
 
 /* ── Scenario Connector ── */
 .scenario-sec { background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%); border-top: 1px solid var(--border); padding: clamp(2rem, 5vw, 3.5rem) 0; }
+.workflow-steps { display: flex; gap: 0; overflow-x: auto; margin-top: 1.5rem; }
 .sc-step { flex: 1; min-width: 120px; padding: .75rem; border: 1px solid var(--border); background: var(--surface); text-align: center; position: relative; cursor: pointer; transition: all .25s cubic-bezier(.16,1,.3,1); border-radius: 0; }
 .sc-step:first-child { border-radius: 12px 0 0 12px; }
 .sc-step:last-child { border-radius: 0 12px 12px 0; }
@@ -1956,6 +1965,90 @@ footer {
   .iv-g-vs { padding: .15rem 0; }
   .iv-g-phase { flex-direction: column; }
 }
+
+/* ── AI highlights ── */
+.ai-highlights { display: flex; gap: .5rem; margin: .75rem 0; flex-wrap: wrap; }
+.ai-hl { padding: .4rem .65rem; border-radius: 6px; font-size: .7rem; color: var(--text-2); }
+.ai-hl strong { font-weight: 700; }
+.ai-hl-green { background: var(--primary-light); border: 1px solid var(--primary-bd); }
+.ai-hl-green strong { color: var(--primary); }
+.ai-hl-purple { background: var(--purple-light); border: 1px solid var(--purple-bd); }
+.ai-hl-purple strong { color: var(--purple); }
+.ai-hl-teal { background: var(--teal-light); border: 1px solid var(--teal-bd); }
+.ai-hl-teal strong { color: var(--teal); }
+
+/* ── Coverage bar ── */
+.coverage-bar { display: flex; gap: .5rem; margin-top: .5rem; align-items: center; }
+.cb-seg { flex: 1; height: 4px; border-radius: 2px; background: var(--primary); opacity: .9; }
+.cb-label { font-family: var(--mono); font-size: .5rem; color: var(--text-3); white-space: nowrap; }
+
+/* ── Toolkit section labels ── */
+.toolkit-section-label {
+  font-family: var(--mono);
+  font-size: .58rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: .5rem;
+  font-weight: 700;
+}
+
+/* ── Scenario thread badge + status bar ── */
+.scenario-thread-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .25rem .6rem;
+  border-radius: 100px;
+  background: var(--amber-light);
+  border: 1px solid var(--amber-bd);
+  font-family: var(--mono);
+  font-size: .5rem;
+  color: var(--amber);
+  margin-bottom: 1rem;
+}
+.scenario-thread-badge::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--amber);
+  flex-shrink: 0;
+}
+.scenario-status-bar {
+  padding: .55rem .85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+.ssb-indicator { display: flex; align-items: center; gap: .35rem; }
+.ssb-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
+.ssb-level { font-family: var(--mono); font-size: .55rem; font-weight: 600; color: var(--amber); }
+.ssb-detail { font-size: .78rem; color: var(--text-2); }
+.ssb-time { font-family: var(--mono); font-size: .52rem; color: var(--text-3); margin-left: auto; }
+
+/* ── Growth impact grid ── */
+.growth-impact-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .75rem; }
+.growth-impact-grid > div { font-size: .75rem; color: var(--text-2); line-height: 1.6; }
+.growth-impact-grid strong { color: var(--text); }
+
+/* ── Flow legend ── */
+.flow-legend { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .5rem; margin-bottom: .25rem; }
+.fl-item { display: inline-flex; align-items: center; gap: .25rem; font-size: .6rem; font-family: var(--mono); }
+.fl-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.fl-green { color: var(--primary); }
+.fl-green .fl-dot { background: var(--primary); }
+.fl-blue { color: var(--blue); }
+.fl-blue .fl-dot { background: var(--blue); }
+.fl-amber { color: var(--amber); }
+.fl-amber .fl-dot { background: var(--amber); }
+.fl-red { color: var(--red); }
+.fl-red .fl-dot { background: var(--red); }
 
 /* ── Barrier bar visualization ── */
 .barrier-bar { display: flex; gap: .25rem; margin-top: .6rem; height: 8px; border-radius: 4px; overflow: hidden; }

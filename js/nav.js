@@ -24,10 +24,10 @@ document.querySelectorAll('.nav-links a').forEach(function(a) {
   if (h && h.startsWith('#')) { navSecs[h.substring(1)] = a; }
 });
 
-var tocSectionIds = ['lookup', 'cvcData', 'flow', 'monitor', 'tracer', 'patterns', 'comms', 'outreach', 'aiVision', 'barrierOverview', 'originStory'];
+var tocSectionIds = ['originStory', 'lookup', 'cvcData', 'flow', 'monitor', 'tracer', 'patterns', 'comms', 'outreach', 'aiVision', 'barrierOverview'];
 var tocItems = document.querySelectorAll('.toc-item');
 
-var dotSections = ['lookup', 'cvcData', 'flow', 'monitor', 'tracer', 'patterns', 'comms', 'outreach', 'aiVision', 'barriers', 'originStory'];
+var dotSections = ['originStory', 'lookup', 'cvcData', 'flow', 'monitor', 'tracer', 'patterns', 'comms', 'outreach', 'aiVision', 'barrierOverview'];
 var dotEls = document.querySelectorAll('.progress-dot');
 
 var _navVisited = new Set();

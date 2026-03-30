@@ -193,7 +193,7 @@ if (growthSection) growthObs.observe(growthSection);
     dotsContainer.appendChild(tracker);
   }
 
-  var sectionIds = ['lookup', 'cvcData', 'flow', 'monitor', 'tracer', 'patterns', 'comms', 'outreach', 'aiVision', 'barrierOverview', 'originStory'];
+  var sectionIds = ['originStory', 'lookup', 'cvcData', 'flow', 'monitor', 'tracer', 'patterns', 'comms', 'outreach', 'aiVision', 'barrierOverview'];
   var exploreObs = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {

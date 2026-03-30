@@ -179,7 +179,7 @@ function _drainToast() {
 
 // ═══ EXPLORATION PROGRESS TRACKER ═══
 (function() {
-  var sectionIds = ['lookup','cvcData','flow','monitor','tracer','patterns','comms','outreach','aiVision','barriers','originStory'];
+  var sectionIds = ['originStory','lookup','cvcData','flow','monitor','tracer','patterns','comms','outreach','aiVision','barrierOverview'];
   var visited = {};
   var total = sectionIds.length;
   var tracker = document.getElementById('exploreTracker');

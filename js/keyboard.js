@@ -3,7 +3,7 @@
 // ═══════════════════════════════════════════════════════
 
 // Main keyboard shortcut handler (1-9, 0, ?, G, /, T)
-var toolAnchors = ['lookup', 'cvcData', 'flow', 'monitor', 'tracer', 'patterns', 'comms', 'outreach', 'aiVision', 'barriers'];
+var toolAnchors = ['lookup', 'cvcData', 'flow', 'monitor', 'tracer', 'patterns', 'comms', 'outreach', 'aiVision', 'barrierOverview'];
 
 document.addEventListener('keydown', function(e) {
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;

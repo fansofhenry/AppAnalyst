@@ -108,6 +108,7 @@
 .tl-purple::before { background: var(--purple); }
 .tl-red { background: var(--red-light); color: var(--red); }
 .tl-red::before { background: var(--red); }
+.tl-teal { background: var(--teal-light); color: var(--teal); }
 
 /* ── Tool Body ── */
 .tool-body {

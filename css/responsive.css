@@ -66,6 +66,8 @@
   .stakeholder-grid { grid-template-columns: 1fr 1fr; }
   .msg-grid { grid-template-columns: 1fr; }
   .journey-cols { grid-template-columns: 1fr; }
+  .growth-impact-grid { grid-template-columns: 1fr 1fr; }
+  .rc-name { min-width: 80px; font-size: .72rem; }
 }
 
 
@@ -175,6 +177,23 @@
 
   /* Why section columns stack */
   .why-cols { flex-direction: column; }
+
+  /* New components — mobile stacking */
+  .growth-impact-grid { grid-template-columns: 1fr; gap: .5rem; }
+  .ai-highlights { gap: .35rem; }
+  .ai-hl { font-size: .65rem; padding: .35rem .5rem; }
+  .scenario-status-bar { padding: .45rem .65rem; gap: .5rem; }
+  .ssb-time { display: none; }
+  .pulse-wrap { padding: .5rem .65rem; }
+  .pulse-grid { grid-template-columns: 1fr 1fr; }
+  .flow-legend { gap: .35rem; }
+  .fl-item { font-size: .52rem; }
+  .coverage-bar { gap: .3rem; }
+  .barrier-bar { height: 6px; }
+  .rc-name { min-width: 70px; font-size: .68rem; }
+  .rc-bar-bg { min-width: 40px; }
+  .rc-footer { font-size: .52rem; padding: .4rem .65rem; }
+  .toolkit-section-label { font-size: .52rem; }
 
   /* Footer tighter */
   footer { padding: 1.5rem 0; }
