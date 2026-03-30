@@ -326,10 +326,10 @@ a.nav-brand:hover .nav-title { color: var(--primary); }
   align-items: center;
   gap: 7px;
   z-index: 150;
-  opacity: .7;
+  opacity: .4;
   transition: opacity .2s;
 }
-.progress-dots:hover { opacity: 1; }
+.progress-dots:hover { opacity: .9; }
 .progress-dot {
   width: 9px;
   height: 9px;

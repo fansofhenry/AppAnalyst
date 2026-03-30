@@ -109,6 +109,30 @@
 .zoom-mode .h-desc { font-size: 1.1rem; line-height: 1.95; }
 .zoom-mode h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); }
 
+/* New components — zoom-safe sizes */
+.zoom-mode .origin-narrative p { font-size: .95rem; line-height: 1.85; }
+.zoom-mode .origin-beat-label { font-size: .72rem; }
+.zoom-mode .origin-intro { font-size: 1rem; }
+.zoom-mode .origin-coda-closing { font-size: 1rem; }
+.zoom-mode .rc-name { font-size: .85rem; }
+.zoom-mode .rc-count { font-size: .78rem; }
+.zoom-mode .rc-footer { font-size: .68rem; }
+.zoom-mode .pulse-title { font-size: .65rem; }
+.zoom-mode .pulse-num { font-size: 1.8rem; }
+.zoom-mode .ssb-detail { font-size: .85rem; }
+.zoom-mode .ssb-level { font-size: .65rem; }
+.zoom-mode .info-callout { font-size: .82rem; }
+.zoom-mode .why-body { font-size: .95rem; }
+.zoom-mode .why-detail { font-size: .88rem; }
+.zoom-mode .why-label { font-size: .68rem; }
+.zoom-mode .fl-item { font-size: .68rem; }
+.zoom-mode .ai-hl { font-size: .78rem; }
+.zoom-mode .toolkit-section-label { font-size: .68rem; }
+.zoom-mode .msg-subject { font-size: .68rem; }
+.zoom-mode .scenario-thread-badge { font-size: .6rem; }
+.zoom-mode .footer-tagline { font-size: .88rem; }
+.zoom-mode .footer-goals-list span { font-size: .85rem; }
+
 /* 3. Thicker borders + boosted contrast on status indicators */
 .zoom-mode .s-indicator { width: 12px; height: 12px; border: 2px solid #fff; }
 .zoom-mode .s-ok { background: #16A34A; box-shadow: 0 0 0 3px rgba(22,163,74,.3); }

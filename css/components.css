@@ -16,10 +16,6 @@
 .tool-frame:hover {
   box-shadow: 0 8px 24px rgba(0,0,0,.07);
   border-color: var(--primary-bd);
-  transform: translateY(-4px);
-}
-.tool-frame:hover .tool-body {
-  background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
 }
 .tool-frame + .tool-frame {
   margin-top: 1.5rem;

@@ -98,7 +98,7 @@
 
   // -- Shortcut Discoverer: wrap keyboard handler
   // Hooks into existing keydown — if any shortcut key pressed
-  var shortcutKeys = ['1','2','3','4','5','6','7','8','9','0','f','g','v','z','/','?'];
+  var shortcutKeys = ['`','1','2','3','4','5','6','7','8','9','0','f','g','v','z','/','?'];
   document.addEventListener('keydown', function(e) {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
     if (shortcutKeys.indexOf(e.key.toLowerCase()) >= 0 || e.key === '?') {
@@ -176,20 +176,20 @@
 
   // ═══ FEATURE 4: TIME-OF-DAY AWARENESS ═══
 
-  // -- Greeting message
+  // -- Greeting message (time-aware, preserves custom HTML text)
   var greetEl = document.getElementById('greetingToast');
   if (greetEl) {
-    var msg;
+    var greeting;
     if (hour >= 22 || hour < 5) {
-      msg = 'Working late? 🦉';
+      greeting = 'Working late? 🦉';
     } else if (hour < 12) {
-      msg = 'Good morning 👋';
+      greeting = 'Good morning 👋';
     } else if (hour < 17) {
-      msg = 'Good afternoon 👋';
+      greeting = 'Good afternoon 👋';
     } else {
-      msg = 'Good evening 👋';
+      greeting = 'Good evening 👋';
     }
-    greetEl.innerHTML = '<span class="gt-wave">' + msg.slice(-2) + '</span> ' + msg.slice(0, -3) + ' — Built for the Application Support Analyst I role at FHDA';
+    greetEl.innerHTML = '<span class="gt-wave">' + greeting.slice(-2) + '</span> ' + greeting.slice(0, -3) + ' — this site was built specifically for the CVC-OEI team';
   }
 
   // -- Evening selection color
@@ -207,7 +207,7 @@
         var num = parseInt(text) || 0;
         if (num <= 3) trackerEl.title = 'Great start!';
         else if (num <= 7) trackerEl.title = 'On a roll!';
-        else if (num >= 10) trackerEl.title = 'You explored everything!';
+        else if (num >= 11) trackerEl.title = 'You explored everything!';
       });
       obsTip.observe(labelEl, { childList: true, characterData: true, subtree: true });
     }
@@ -250,7 +250,7 @@
     var etCount = parseInt(etText) || 0;
     var interactions = parseInt(countObs ? countObs.textContent : '0') || 0;
 
-    if (etCount >= 10 && interactions >= 50) {
+    if (etCount >= 11 && interactions >= 50) {
       celebrated = true;
 
       // Footer warm gradient

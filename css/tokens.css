@@ -53,9 +53,9 @@
   --mono: 'IBM Plex Mono', monospace;
 
   /* ── Type scale (5 steps only) ── */
-  --fs-xs: .68rem;
+  --fs-xs: .72rem;
   --fs-sm: .78rem;
-  --fs-base: .94rem;
+  --fs-base: 1rem;
   --fs-lg: 1.1rem;
   --fs-xl: 1.35rem;
 
