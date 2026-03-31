@@ -44,7 +44,10 @@
       "Bash(curl -s https://api.github.com/repos/fansofhenry/AppAnalyst/commits?per_page=5)",
       "Bash(git stash:*)",
       "Bash(/tmp/check_order.txt:*)",
-      "Bash(__NEW_LINE_a571f5a62cd671fe__)"
+      "Bash(__NEW_LINE_a571f5a62cd671fe__)",
+      "Bash(at the:*)",
+      "Bash(exact system gave me\":*)",
+      "Bash(who almost dropped\":*)"
     ]
   }
 }
