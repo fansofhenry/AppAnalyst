@@ -51,7 +51,12 @@
       "Bash(Learn fast but deeply — so I don 't ask any question twice.\":*)",
       "Bash(pip install:*)",
       "Bash(never tell you when it fails.\":*)",
-      "WebFetch(domain:ets.fhda.edu)"
+      "WebFetch(domain:ets.fhda.edu)",
+      "WebFetch(domain:onlinenetworkofeducators.org)",
+      "WebSearch",
+      "WebFetch(domain:catalog.onlinenetworkofeducators.org)",
+      "WebFetch(domain:www.cvc.edu)",
+      "Bash(I can\" and explicit \"feels personal\" \\(the story already proved it\\):*)"
     ]
   }
 }
