@@ -85,12 +85,8 @@ document.addEventListener('keydown', function(e) {
     return;
   }
 
-  // F = theater mode
-  if (e.key === 'f' || e.key === 'F') {
-    e.preventDefault();
-    window._toggleTheater();
-    return;
-  }
+  // F key removed — reserved for Ctrl+F browser search
+  // Theater mode still available via _toggleTheater() but no keyboard shortcut
 
   // Arrow keys in theater mode
   if (document.body.classList.contains('theater-on') &&

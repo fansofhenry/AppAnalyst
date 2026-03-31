@@ -39,7 +39,7 @@
 <!-- Zoom mode indicator -->
 <div class="zoom-badge">Zoom Mode</div>
 <!-- Theater mode indicator -->
-<div class="theater-badge"><span class="tb-dot"></span>Theater Mode · hover or arrow keys to navigate · <kbd>F</kbd> to exit</div>
+<div class="theater-badge"><span class="tb-dot"></span>Theater Mode · hover or arrow keys to navigate</div>
 <!-- Accessibility mode indicator -->
 <div class="a11y-badge">WCAG AAA · High Contrast</div>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -1130,7 +1130,7 @@ function showBarrierView(view,btn){
       <div class="footer-goals">
         <div class="footer-goals-title">What I'd deliver</div>
         <div class="footer-goals-list">
-          <span><strong>First 30 days:</strong> Shadow the team, map every integration path, learn the ticket queue patterns, build relationships with campus IT contacts at the top 12 colleges</span>
+          <span><strong>First 30 days:</strong> Build trust with the team by working hard and creatively. Learn fast but deeply — so I don't ask any question twice. Map every integration path and build relationships with campus IT at the top 12 colleges.</span>
           <span><strong>By month 6:</strong> A repeat-college intervention program that reduces ticket volume from the top 12 colleges by 30%<br><a class="evidence-link" onclick="document.getElementById('patterns').scrollIntoView({behavior:'smooth'})">See: Pattern Intelligence, Section 6</a></span>
           <span><strong>By month 6:</strong> A Board-ready reporting template the team actually uses for quarterly updates<br><a class="evidence-link" onclick="document.getElementById('cvcData').scrollIntoView({behavior:'smooth'})">See: Translation Bridge, Section 2</a> <a class="evidence-link" onclick="document.getElementById('comms').scrollIntoView({behavior:'smooth'})">+ Board Brief, Section 7</a></span>
           <span><strong>By month 6:</strong> A proactive outreach calendar that reaches FA offices before each drop deadline — not after<br><a class="evidence-link" onclick="document.getElementById('outreach').scrollIntoView({behavior:'smooth'})">See: Outreach Planner, Section 8</a></span>
@@ -1140,17 +1140,10 @@ function showBarrierView(view,btn){
         <a class="footer-cta" href="#" onclick="event.preventDefault();document.getElementById('ivOverlay').classList.add('iv-show')">Walk through the scenarios</a>
         <div class="footer-secondary">
           <a href="mailto:fanhenry@fhda.edu?subject=CVC-OEI Application Support — Henry Fan">fanhenry@fhda.edu</a>
-          <span class="fs-dot">&middot;</span>
-          <a href="https://www.linkedin.com/in/henryfan" target="_blank" rel="noopener">LinkedIn</a>
-          <span class="fs-dot">&middot;</span>
-          <a href="#" onclick="window.print();return false">Print / Save as PDF</a>
         </div>
       </div>
       <div class="footer-meta">
         All data is simulated &mdash; no real student records. Built with publicly available CVC documentation, the live <a href="https://search.cvc.edu" target="_blank" rel="noopener">CVC Exchange course search</a>, and Wheelhouse Center enrollment data.
-      </div>
-      <div class="footer-counter" id="interactionCounter">
-        <span id="interactionCount">0</span> interactions on this page
       </div>
     </div>
   </div>
@@ -1271,12 +1264,12 @@ function showBarrierView(view,btn){
   <div class="kb-help" onclick="event.stopPropagation()">
     <div class="kb-help-title">Keyboard Shortcuts</div>
     <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.3rem">Tools</div>
-    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">1</span> Lookup</span><span class="kb-help-desc"><span class="kb-help-key">2</span> Exchange</span></div>
-    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">3</span> Architecture</span><span class="kb-help-desc"><span class="kb-help-key">4</span> Monitor</span></div>
-    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">5</span> Diagnostics</span><span class="kb-help-desc"><span class="kb-help-key">6</span> Intelligence</span></div>
-    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">7</span> Response</span><span class="kb-help-desc"><span class="kb-help-key">8</span> Toolkit</span></div>
-    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">9</span> AI Vision</span><span class="kb-help-desc"><span class="kb-help-key">0</span> Barriers</span></div>
-    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">`</span> Origin Story</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">`</span> Origin Story</span><span class="kb-help-desc"><span class="kb-help-key">1</span> Lookup</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">2</span> Exchange</span><span class="kb-help-desc"><span class="kb-help-key">3</span> Architecture</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">4</span> Monitor</span><span class="kb-help-desc"><span class="kb-help-key">5</span> Diagnostics</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">6</span> Intelligence</span><span class="kb-help-desc"><span class="kb-help-key">7</span> Response</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">8</span> Toolkit</span><span class="kb-help-desc"><span class="kb-help-key">9</span> AI Vision</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">0</span> Barriers</span></div>
     <div style="border-top:1px solid var(--border);margin-top:.5rem;padding-top:.5rem">
     <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.3rem">Navigation</div>
     <div class="kb-help-row"><span class="kb-help-desc">Open sections</span><span class="kb-help-key">G</span></div>
@@ -1285,7 +1278,6 @@ function showBarrierView(view,btn){
     </div>
     <div style="border-top:1px solid var(--border);margin-top:.5rem;padding-top:.5rem">
     <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.3rem">Presentation</div>
-    <div class="kb-help-row"><span class="kb-help-desc">Theater / focus mode</span><span class="kb-help-key">F</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Zoom screenshare mode</span><span class="kb-help-key">Z</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Accessibility mode</span><span class="kb-help-key">A</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Visual reference</span><span class="kb-help-key">V</span></div>
