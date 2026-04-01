@@ -218,7 +218,7 @@
 <section class="sec fu" id="lookup" role="region" aria-label="College Lookup"><div class="wrap">
   <div class="eyebrow" style="color:var(--blue)"><span class="sec-num" style="background:var(--blue)">1</span>Lookup</div>
   <h2>Look up any college in <em>the Exchange</em></h2>
-  <p class="sec-desc">Search any college by name, system type, or issue status. <strong>Foothill and De Anza are pinned.</strong> 116 colleges, 4 student record platforms, different IT capacities — filter to see who needs extra support.</p>
+  <p class="sec-desc">Search any college by name, system type, or issue status. <strong>FHDA colleges pinned.</strong> Banner Direct, Banner Ethos, PeopleSoft, Colleague — filter by platform to see who needs extra support.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Lookup</span></div><span class="tool-hint">Click any college for analyst notes</span><span class="tool-bar-title">College Lookup · 31 Colleges · Searchable</span></div>
     <div class="tool-body">
@@ -830,7 +830,7 @@
 <div class="iv-overlay" id="ivOverlay" onclick="if(event.target===this)this.classList.remove('iv-show')">
 <div class="iv-panel">
   <div class="iv-head">
-    <div><div class="iv-head-title">Interview Visual Reference</div><div class="iv-head-sub">9 themes · Each card maps to an interview question · Click outside or press V to close</div></div>
+    <div><div class="iv-head-title">Interview Visual Reference</div><div class="iv-head-sub">10 themes · Each card maps to an interview question · Click outside or press V to close</div></div>
     <button class="iv-close" onclick="document.getElementById('ivOverlay').classList.remove('iv-show')">×</button>
   </div>
   <div class="iv-filters">
@@ -865,7 +865,7 @@
           </svg>
         </div>
       </div>
-      <div class="iv-insight">"I'm motivated by making the invisible layer of access actually dependable."</div>
+      <div class="iv-insight">"Making access reliable is how I honor the opportunities I've been given — and how I earn the ones ahead."</div>
     </div>
 
     <!-- 2: Equity -->
@@ -901,26 +901,37 @@
       <div class="iv-q-title">116 Colleges, One System</div>
       <div class="iv-graphic">
         <div class="iv-hero">
-          <svg viewBox="0 0 260 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
-            <circle cx="25" cy="18" r="7" fill="rgba(15,118,110,.5)" stroke="#5EEAD4" stroke-width=".5"/><circle cx="50" cy="18" r="7" fill="rgba(15,118,110,.5)"/>
-            <circle cx="75" cy="18" r="7" fill="rgba(15,118,110,.5)"/><circle cx="100" cy="18" r="7" fill="rgba(15,118,110,.5)"/>
-            <circle cx="125" cy="18" r="7" fill="rgba(15,118,110,.5)"/><circle cx="150" cy="18" r="7" fill="rgba(15,118,110,.5)"/>
-            <circle cx="175" cy="18" r="7" fill="rgba(15,118,110,.5)"/><circle cx="200" cy="18" r="7" fill="rgba(15,118,110,.5)"/>
-            <circle cx="225" cy="18" r="7" fill="rgba(15,118,110,.5)"/>
-            <circle cx="25" cy="43" r="7" fill="rgba(161,98,7,.55)" stroke="#FBBF24" stroke-width="1"/><circle cx="50" cy="43" r="7" fill="rgba(161,98,7,.55)" stroke="#FBBF24" stroke-width="1"/>
-            <circle cx="75" cy="43" r="7" fill="rgba(29,78,216,.5)" stroke="#60A5FA" stroke-width="1"/><circle cx="100" cy="43" r="7" fill="rgba(29,78,216,.5)" stroke="#60A5FA" stroke-width="1"/>
-            <circle cx="125" cy="43" r="7" fill="rgba(109,40,217,.5)" stroke="#A78BFA" stroke-width="1"/>
-            <circle cx="30" cy="72" r="5" fill="rgba(15,118,110,.5)"/><text x="42" y="75" fill="#5EEAD4" font-size="8" font-family="var(--mono)">Banner</text>
-            <circle cx="100" cy="72" r="5" fill="rgba(161,98,7,.55)"/><text x="112" y="75" fill="#FBBF24" font-size="8" font-family="var(--mono)">PeopleSoft</text>
-            <circle cx="185" cy="72" r="5" fill="rgba(29,78,216,.5)"/><text x="197" y="75" fill="#60A5FA" font-size="8" font-family="var(--mono)">Colleague</text>
+          <svg viewBox="0 0 260 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- System layer (consistent) -->
+            <rect x="15" y="8" width="230" height="30" rx="4" fill="rgba(15,118,110,.1)" stroke="rgba(94,234,212,.2)" stroke-width=".5"/>
+            <text x="130" y="20" text-anchor="middle" fill="#5EEAD4" font-size="8" font-family="var(--mono)" font-weight="700">SYSTEM LAYER — consistent</text>
+            <text x="130" y="31" text-anchor="middle" fill="#78716C" font-size="6" font-family="var(--mono)">APIs · shared workflows · common documentation</text>
+            <!-- Arrow down -->
+            <line x1="130" y1="38" x2="130" y2="48" stroke="#57534E" stroke-width="1" stroke-dasharray="2,2"/>
+            <!-- Campus layer (variable) — 4 different-sized boxes -->
+            <rect x="15" y="50" width="50" height="40" rx="3" fill="rgba(29,78,216,.15)" stroke="rgba(96,165,250,.2)" stroke-width=".5"/>
+            <text x="40" y="64" text-anchor="middle" fill="#60A5FA" font-size="7" font-family="var(--mono)" font-weight="600">Banner</text>
+            <text x="40" y="74" text-anchor="middle" fill="#78716C" font-size="5.5" font-family="var(--mono)">12 IT staff</text>
+            <text x="40" y="83" text-anchor="middle" fill="#78716C" font-size="5.5" font-family="var(--mono)">full team</text>
+            <rect x="72" y="55" width="45" height="35" rx="3" fill="rgba(161,98,7,.15)" stroke="rgba(251,191,36,.2)" stroke-width=".5"/>
+            <text x="94" y="67" text-anchor="middle" fill="#FBBF24" font-size="7" font-family="var(--mono)" font-weight="600">PeopleSoft</text>
+            <text x="94" y="77" text-anchor="middle" fill="#78716C" font-size="5.5" font-family="var(--mono)">3 IT staff</text>
+            <rect x="124" y="58" width="40" height="32" rx="3" fill="rgba(109,40,217,.12)" stroke="rgba(167,139,250,.2)" stroke-width=".5"/>
+            <text x="144" y="70" text-anchor="middle" fill="#A78BFA" font-size="7" font-family="var(--mono)" font-weight="600">Colleague</text>
+            <text x="144" y="80" text-anchor="middle" fill="#78716C" font-size="5.5" font-family="var(--mono)">1 IT staff</text>
+            <rect x="171" y="62" width="35" height="28" rx="3" fill="rgba(185,28,28,.1)" stroke="rgba(248,113,113,.2)" stroke-width=".5"/>
+            <text x="188" y="74" text-anchor="middle" fill="#F87171" font-size="6.5" font-family="var(--mono)" font-weight="600">Rural</text>
+            <text x="188" y="83" text-anchor="middle" fill="#78716C" font-size="5.5" font-family="var(--mono)">0.5 staff</text>
+            <!-- Label -->
+            <text x="215" y="70" fill="#78716C" font-size="6.5" font-family="var(--mono)" font-weight="600">CAMPUS</text>
+            <text x="215" y="80" fill="#78716C" font-size="6.5" font-family="var(--mono)" font-weight="600">LAYER</text>
+            <text x="215" y="90" fill="#78716C" font-size="5.5" font-family="var(--mono)">— variable</text>
+            <!-- Bottom line -->
+            <text x="130" y="105" text-anchor="middle" fill="#5EEAD4" font-size="6.5" font-family="var(--mono)" font-weight="600">Design for consistency at the top. Build for variation at the bottom.</text>
           </svg>
         </div>
-        <div class="iv-stat-row">
-          <div class="iv-stat" style="color:#5EEAD4">Structure<div class="iv-stat-sub">analyze patterns across systems</div></div>
-          <div class="iv-stat" style="color:#FBBF24">Respect<div class="iv-stat-sub">implementation differs everywhere</div></div>
-        </div>
       </div>
-      <div class="iv-insight">"Standardization should reduce friction — not create it."</div>
+      <div class="iv-insight">"At this scale, you design for consistency — but build for variation."</div>
     </div>
 
     <!-- 4: Walk Through the Site -->
@@ -957,16 +968,16 @@
           <svg viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
             <polygon points="20,10 240,10 215,45 45,45" fill="rgba(29,78,216,.2)" stroke="rgba(96,165,250,.3)" stroke-width=".5"/>
             <text x="130" y="24" text-anchor="middle" fill="#60A5FA" font-size="9" font-family="var(--mono)" font-weight="700">CAMPUS IT</text>
-            <text x="130" y="37" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)">Technically accurate + practically useful</text>
+            <text x="130" y="37" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)">Home College or Teaching College IT team</text>
             <line x1="130" y1="46" x2="130" y2="55" stroke="#57534E" stroke-width="1"/>
             <path d="M125,52 L130,57 L135,52" fill="none" stroke="#57534E" stroke-width="1"/>
             <polygon points="45,58 215,58 195,88 65,88" fill="rgba(161,98,7,.2)" stroke="rgba(251,191,36,.25)" stroke-width=".5"/>
-            <text x="130" y="70" text-anchor="middle" fill="#FBBF24" font-size="9" font-family="var(--mono)" font-weight="700">MANAGER</text>
-            <text x="130" y="82" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)">Scope + timeline + what you need</text>
+            <text x="130" y="70" text-anchor="middle" fill="#FBBF24" font-size="9" font-family="var(--mono)" font-weight="700">CVC SUPERVISOR</text>
+            <text x="130" y="82" text-anchor="middle" fill="#78716C" font-size="7" font-family="var(--mono)">Scope + impact + what you need from them</text>
             <line x1="130" y1="89" x2="130" y2="98" stroke="#57534E" stroke-width="1"/>
             <path d="M125,95 L130,100 L135,95" fill="none" stroke="#57534E" stroke-width="1"/>
             <polygon points="65,100 195,100 180,118 80,118" fill="rgba(15,118,110,.2)" stroke="rgba(94,234,212,.25)" stroke-width=".5"/>
-            <text x="130" y="113" text-anchor="middle" fill="#5EEAD4" font-size="9" font-family="var(--mono)" font-weight="700">BOARD — Impact + resolution + assurance</text>
+            <text x="130" y="113" text-anchor="middle" fill="#5EEAD4" font-size="9" font-family="var(--mono)" font-weight="700">BOARD (via Vice Chancellor)</text>
           </svg>
         </div>
       </div>
@@ -1026,9 +1037,75 @@
       <div class="iv-insight">"Clarity matters as much as the fix — especially when multiple systems are involved."</div>
     </div>
 
-    <!-- 8: Growth -->
+    <!-- 8: OAuth Flow — How Cross-Enrollment Actually Works -->
+    <div class="iv-card" data-cat="technical">
+      <div class="iv-card-head"><span class="iv-num iv-num-amb">8</span><span class="iv-cat">Technical</span></div>
+      <div class="iv-q-title">OAuth: The Digital Passport</div>
+      <div class="iv-graphic">
+        <div class="iv-hero">
+          <svg viewBox="0 0 260 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Home College -->
+            <rect x="5" y="10" width="65" height="35" rx="4" fill="rgba(29,78,216,.2)" stroke="rgba(96,165,250,.25)" stroke-width=".5"/>
+            <text x="37" y="25" text-anchor="middle" fill="#60A5FA" font-size="7.5" font-family="var(--mono)" font-weight="700">HOME</text>
+            <text x="37" y="35" text-anchor="middle" fill="#78716C" font-size="6" font-family="var(--mono)">Foothill (Banner)</text>
+            <!-- Arrow 1: Token generation -->
+            <line x1="70" y1="27" x2="90" y2="27" stroke="#5EEAD4" stroke-width="1.2"/>
+            <path d="M87,24 L92,27 L87,30" fill="none" stroke="#5EEAD4" stroke-width="1"/>
+            <!-- OAuth Token -->
+            <rect x="92" y="15" width="55" height="25" rx="12" fill="rgba(15,118,110,.2)" stroke="rgba(94,234,212,.4)" stroke-width="1"/>
+            <text x="119" y="25" text-anchor="middle" fill="#5EEAD4" font-size="7" font-family="var(--mono)" font-weight="700">TOKEN</text>
+            <text x="119" y="34" text-anchor="middle" fill="#78716C" font-size="5.5" font-family="var(--mono)">60 min TTL</text>
+            <!-- Arrow 2: Token to Exchange -->
+            <line x1="147" y1="27" x2="167" y2="27" stroke="#5EEAD4" stroke-width="1.2"/>
+            <path d="M164,24 L169,27 L164,30" fill="none" stroke="#5EEAD4" stroke-width="1"/>
+            <!-- Exchange -->
+            <rect x="169" y="10" width="55" height="35" rx="4" fill="rgba(15,118,110,.15)" stroke="rgba(94,234,212,.25)" stroke-width=".5"/>
+            <text x="196" y="25" text-anchor="middle" fill="#5EEAD4" font-size="7.5" font-family="var(--mono)" font-weight="700">EXCHANGE</text>
+            <text x="196" y="35" text-anchor="middle" fill="#78716C" font-size="6" font-family="var(--mono)">CVC-OEI</text>
+            <!-- Arrow 3: Exchange to Teaching -->
+            <line x1="224" y1="27" x2="244" y2="27" stroke="#5EEAD4" stroke-width="1.2" stroke-dasharray="3,2"/>
+            <path d="M241,24 L246,27 L241,30" fill="none" stroke="#5EEAD4" stroke-width="1"/>
+            <!-- Teaching College (smaller, right) -->
+            <rect x="195" y="50" width="60" height="28" rx="4" fill="rgba(161,98,7,.15)" stroke="rgba(251,191,36,.25)" stroke-width=".5"/>
+            <text x="225" y="63" text-anchor="middle" fill="#FBBF24" font-size="7" font-family="var(--mono)" font-weight="700">TEACHING</text>
+            <text x="225" y="72" text-anchor="middle" fill="#78716C" font-size="5.5" font-family="var(--mono)">Sac City (Canvas)</text>
+            <!-- Arrow from Exchange down to Teaching -->
+            <line x1="210" y1="45" x2="220" y2="50" stroke="rgba(251,191,36,.4)" stroke-width="1"/>
+            <!-- Student icon -->
+            <circle cx="250" y="18" r="6" fill="rgba(255,255,255,.08)" stroke="#D6D3D1" stroke-width=".5"/>
+            <text x="250" y="20" text-anchor="middle" fill="#D6D3D1" font-size="5" font-family="var(--mono)">🎓</text>
+            <!-- THREE FAILURE POINTS -->
+            <!-- Failure 1: Token Expiration -->
+            <rect x="5" y="60" width="75" height="30" rx="4" fill="rgba(185,28,28,.12)" stroke="rgba(248,113,113,.2)" stroke-width=".5"/>
+            <circle cx="12" cy="70" r="4" fill="rgba(185,28,28,.5)"/>
+            <text x="12" y="72" text-anchor="middle" fill="#fff" font-size="5" font-family="var(--mono)" font-weight="700">1</text>
+            <text x="47" y="72" text-anchor="middle" fill="#F87171" font-size="6.5" font-family="var(--mono)" font-weight="600">Token Expired</text>
+            <text x="47" y="82" text-anchor="middle" fill="#78716C" font-size="5.5" font-family="var(--mono)">60-min TTL elapsed</text>
+            <!-- Failure 2: Scope Mismatch -->
+            <rect x="85" y="60" width="75" height="30" rx="4" fill="rgba(185,28,28,.12)" stroke="rgba(248,113,113,.2)" stroke-width=".5"/>
+            <circle cx="92" cy="70" r="4" fill="rgba(185,28,28,.5)"/>
+            <text x="92" y="72" text-anchor="middle" fill="#fff" font-size="5" font-family="var(--mono)" font-weight="700">2</text>
+            <text x="127" y="72" text-anchor="middle" fill="#F87171" font-size="6.5" font-family="var(--mono)" font-weight="600">Scope Mismatch</text>
+            <text x="127" y="82" text-anchor="middle" fill="#78716C" font-size="5.5" font-family="var(--mono)">Read ≠ Write access</text>
+            <!-- Failure 3: Clock Skew -->
+            <rect x="165" y="90" width="75" height="30" rx="4" fill="rgba(185,28,28,.12)" stroke="rgba(248,113,113,.2)" stroke-width=".5"/>
+            <circle cx="172" cy="100" r="4" fill="rgba(185,28,28,.5)"/>
+            <text x="172" y="102" text-anchor="middle" fill="#fff" font-size="5" font-family="var(--mono)" font-weight="700">3</text>
+            <text x="207" y="100" text-anchor="middle" fill="#F87171" font-size="6.5" font-family="var(--mono)" font-weight="600">Clock Skew</text>
+            <text x="207" y="112" text-anchor="middle" fill="#78716C" font-size="5.5" font-family="var(--mono)">Server time mismatch</text>
+            <!-- Label -->
+            <text x="5" y="55" fill="#F87171" font-size="6" font-family="var(--mono)" font-weight="600">WHERE IT BREAKS:</text>
+            <!-- Bottom summary -->
+            <text x="130" y="138" text-anchor="middle" fill="#78716C" font-size="6.5" font-family="var(--mono)">Student sees: "permission denied" · Analyst sees: boundary layer failure</text>
+          </svg>
+        </div>
+      </div>
+      <div class="iv-insight">"To the student, it looks like a broken website. In the logs, it's a token that expired before the Exchange could use it."</div>
+    </div>
+
+    <!-- 9: Growth -->
     <div class="iv-card" data-cat="growth">
-      <div class="iv-card-head"><span class="iv-num iv-num-pur">8</span><span class="iv-cat">Growth</span></div>
+      <div class="iv-card-head"><span class="iv-num iv-num-pur">9</span><span class="iv-cat">Growth</span></div>
       <div class="iv-q-title">Learn → Build → Lead</div>
       <div class="iv-graphic">
         <div class="iv-hero">
@@ -1057,7 +1134,7 @@
 
     <!-- 9: Closing / Identity -->
     <div class="iv-card" data-cat="growth">
-      <div class="iv-card-head"><span class="iv-num iv-num-pur">9</span><span class="iv-cat">Identity</span></div>
+      <div class="iv-card-head"><span class="iv-num iv-num-pur">10</span><span class="iv-cat">Identity</span></div>
       <div class="iv-q-title">Where I Sit</div>
       <div class="iv-graphic">
         <div class="iv-hero">
