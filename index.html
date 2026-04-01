@@ -81,7 +81,7 @@
       <a class="qa-card" onclick="document.getElementById('ivOverlay').classList.toggle('iv-show')"><span class="qa-icon">◆</span><span class="qa-text">Interview scenarios</span></a>
     </div>
     <div class="hero-story">
-      <p>The Exchange is <strong>equity infrastructure</strong> — when it breaks, students at rural colleges lose access to the same curriculum a metro college offers. I started at Foothill in 2017. I&rsquo;ve been on the student side of this. I want to be on the team that protects it.</p>
+      <p>The Exchange is <strong>equity infrastructure</strong> — when it breaks, students at rural colleges lose access to the same curriculum a metro college offers. I started at Foothill in 2017. I&rsquo;ve been on the student side of this. I want to help make the system quieter.</p>
       <span class="equity-callout">Aligned with OEI's Vision for Equitable Access · 2025 WCET WOW Award</span>
     </div>
 
@@ -109,7 +109,12 @@
         <div class="why-col">
           <div class="why-label why-label-solution">How I Think About Support</div>
           <div class="why-body">
-            CVC-OEI operates in three layers: infrastructure (the Exchange, SIS integrations, Canvas), quality (Course Design Rubric, POCR, faculty training through CVC@ONE), and people (116 colleges, each with different staffing and contexts). The support analyst sits at the intersection — and every section below reflects that.
+            CVC-OEI operates in three layers — and the support analyst sits at the intersection:
+          </div>
+          <div class="why-body" style="margin-top:.35rem;font-size:.82rem;line-height:1.7">
+            <strong style="color:var(--primary)">Infrastructure</strong> — the Exchange, SIS integrations, Canvas<br>
+            <strong style="color:var(--blue)">Quality</strong> — Course Design Rubric, POCR, faculty training through CVC@ONE<br>
+            <strong style="color:var(--purple)">People</strong> — 116 colleges, each with different staffing and contexts
           </div>
           <div class="why-detail">
             FHDA is the fiscal agent, which means this role serves statewide from inside a single district. Not hypotheticals — grounded in CVC documentation and the student experience.
@@ -130,7 +135,7 @@
     <div class="origin-header fu">
       <span class="origin-label">Origin Story</span>
       <h2 class="origin-title">Before the tools &mdash;<br>the reason I <em>built them.</em></h2>
-      <p class="origin-intro">The sections below prove I can do this work. This is why I will.</p>
+      <p class="origin-intro">The tools that follow prove I can do this work. This is why I will.</p>
     </div>
 
     <!-- Story beats -->
@@ -191,7 +196,7 @@
         </div>
         <div class="origin-narrative">
           <span class="origin-beat-label">What I&rsquo;ve Done</span>
-          <p>Over the past several years, I&rsquo;ve worked inside the systems behind those moments &mdash; supporting financial aid and enrollment services, working with Banner and PeopleSoft across multiple colleges, building in Canvas at OpenStax, and teaching computer science at Foothill and SJSU.</p>
+          <p>Over the past several years, I&rsquo;ve worked inside the systems behind those moments. At Faraday Future, I learned to close tickets fast. At OpenStax, I started analyzing patterns with Python. At SMCCD, I was tracing API integration failures in the financial aid system and doing root cause analysis on recurring breakdowns. Each role added a layer.</p>
           <p>When I taught, my sections ran <strong>three times the attendance</strong> of parallel sections &mdash; not because of better teaching, but because I was stubborn about understanding how learning works and removing friction. <strong>That&rsquo;s the same instinct I&rsquo;d bring to support.</strong></p>
         </div>
       </div>
@@ -323,7 +328,7 @@
   <div class="flow-visual">
     <div class="flow-title">Cross-Enrollment Data Flow<div class="flow-title-hint">Click any node to explore</div></div>
     <div class="flow-row">
-      <div class="f-node fn-sis" onclick="showFlowInfo(0)" role="button" tabindex="0"><div class="fn-label">Home SIS</div><div class="fn-desc">Banner Direct · Ethos<br>PeopleSoft · Colleague</div></div>
+      <div class="f-node fn-sis" onclick="showFlowInfo(0)" role="button" tabindex="0"><div class="fn-label">Home College</div><div class="fn-desc">Banner Direct · Ethos<br>PeopleSoft · Colleague</div></div>
       <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">Enrollment Data</div></div>
       <div class="f-node fn-exc" onclick="showFlowInfo(1)" role="button" tabindex="0"><div class="fn-label">CVC Exchange</div><div class="fn-desc">Cross-enrollment<br>+ FA Dashboard</div></div>
       <div class="f-arrow"><div class="f-arrow-line">→→→</div><div class="f-arrow-label">Roster Sync</div></div>
@@ -341,7 +346,7 @@
 <section class="sec sec-alt fu" id="monitor" role="region" aria-label="System Monitor"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:var(--amber)">4</span>Monitor</div>
   <h2>Spot the failure <em>before the tickets arrive</em></h2>
-  <p class="sec-desc">Real-time health for 115+ colleges. <strong>Foothill and De Anza highlighted.</strong> The most dangerous failures are the ones nobody reports — zero tickets plus a degraded system isn't a success story, it's a silent failure.</p>
+  <p class="sec-desc">Real-time health for 115+ colleges. <strong>FHDA colleges pinned at the top.</strong> The most dangerous failures are the ones nobody reports — zero tickets plus a degraded system isn&rsquo;t a success story, it&rsquo;s a silent failure.</p>
   <div class="tool-frame">
     <div style="position:relative"><div class="live-alert" id="liveAlert"><div class="live-alert-title">New Alert</div><div class="live-alert-body"></div><div class="live-alert-time"></div></div></div>
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><span class="tool-hint">Click any college for details</span><div class="tool-bar-title">Morning Monitor · Weekly Pulse · College Health Status</div></div>
@@ -467,7 +472,7 @@
   <div class="wrap">
     <div class="eyebrow"><span class="sec-num" style="background:#4338ca">7</span>Response</div>
     <h2>The same failure, written <em>five different ways</em></h2>
-    <p class="sec-desc">Same incident, five audiences: student, campus IT, registrar, internal team, and Board. <strong>Getting the audience wrong costs trust. Getting it right costs nothing.</strong></p>
+    <p class="sec-desc">Same incident, five audiences: student, campus IT, registrar, internal team, and Board. <strong>Getting the audience wrong costs trust. Getting it right is just knowing who you&rsquo;re talking to.</strong></p>
   <div class="scenario-thread-badge">Continues the Sacramento City scenario from Monitor → Diagnostics</div>
     <div class="scenario-status-bar">
       <div class="ssb-indicator"><span class="ssb-dot"></span><span class="ssb-level">P2 ACTIVE</span></div>
@@ -497,7 +502,7 @@
 <section class="sec sec-alt fu" id="escalation" role="region" aria-label="Escalation Matrix"><div class="wrap">
   <div class="eyebrow">Escalation</div>
   <h2>How do you know when to <em>own it</em> vs <em>escalate it?</em></h2>
-  <p class="sec-desc"><strong>Who to contact, how fast, and what to bring.</strong> The job requires tact, discretion, and independent judgment — fixing the student's problem without making the registrar wrong.</p>
+  <p class="sec-desc"><strong>Who to contact, how fast, and what to bring.</strong> In a consortium of 116 colleges, finger-pointing is the enemy of uptime. The job requires tact, discretion, and judgment — fixing the student&rsquo;s problem without making the registrar wrong.</p>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Reference</span></div><span class="tool-hint">Click P1, P2, or P3 to compare</span><span class="tool-bar-title">Escalation Decision Matrix</span></div>
     <div class="tool-body">
@@ -573,7 +578,7 @@
 <section class="sec sec-alt fu" id="outreach" role="region" aria-label="Outreach Planner"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:var(--teal)">8</span>Outreach</div>
   <h2>What if course sharing wasn’t a <em>last resort?</em></h2>
-  <p class="sec-desc"><strong>17 triggers across the academic year</strong> — targeted to counselors, FA offices, and peer ambassadors at the right moment. CVC@ONE already offers an <em>Online College Counseling</em> course for advisors — outreach should build on that foundation, not duplicate it.</p>
+  <p class="sec-desc"><strong>17 triggers across the academic year</strong> — targeted to counselors, FA offices, and peer ambassadors at the right moment. CVC@ONE already trains counselors through their <em>Online College Counseling</em> course — outreach should extend that investment, not start from scratch.</p>
   <div class="coverage-bar">
     <span class="cb-seg"></span><span class="cb-seg"></span><span class="cb-seg"></span><span class="cb-seg"></span><span class="cb-seg"></span><span class="cb-seg"></span><span class="cb-seg"></span>
     <span class="cb-label">7 of 7 months covered</span>
@@ -728,6 +733,7 @@
   <p class="sec-desc">Grounded in CISOA 2026 themes and CVC@ONE&rsquo;s Spring 2026 AI series. <strong>Each card: today vs with-AI.</strong></p>
   <div class="ai-highlights">
     <div class="ai-hl ai-hl-green"><strong>4 rule-based automations</strong> — no machine learning required · Click cards to compare today vs with-AI</div>
+    <div class="ai-hl ai-hl-purple"><strong>The goal:</strong> see a pattern at ticket #3, not ticket #15</div>
   </div>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Vision</span></div><span class="tool-hint">Click cards to compare today vs AI</span><span class="tool-bar-title">AI Vision · 4 Tabs</span></div>
@@ -1122,7 +1128,7 @@ function showBarrierView(view,btn){
 <footer class="site-footer" role="contentinfo">
   <div class="wrap">
     <div class="footer-inner">
-      <div class="footer-mission">I started at Foothill not knowing what a prerequisite was. I want to make sure the next student who cross-enrolls never has to wonder if the system will work.</div>
+      <div class="footer-mission">I want to make the system quieter — not because we're ignoring problems, but because there are fewer problems to hear.</div>
       <div class="footer-role">
         <strong>Henry Fan</strong> &middot; Application Support Analyst I &middot; <em>CVC-OEI / Foothill&ndash;De Anza CCD</em>
       </div>
