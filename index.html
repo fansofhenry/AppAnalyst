@@ -79,6 +79,7 @@
       <a class="qa-card" onclick="document.getElementById('tracer').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">🛠</span><span class="qa-text">Trace an incident</span></a>
       <a class="qa-card" onclick="document.getElementById('barrierOverview').scrollIntoView({behavior:'smooth'})"><span class="qa-icon">📊</span><span class="qa-text">See the barriers</span></a>
       <a class="qa-card" onclick="document.getElementById('ivOverlay').classList.toggle('iv-show')"><span class="qa-icon">◆</span><span class="qa-text">Interview scenarios</span></a>
+      <a class="qa-card" onclick="toggleCvcGuide()" style="border-color:var(--amber-bd);background:linear-gradient(135deg,rgba(232,168,56,.06),rgba(232,168,56,.02))"><span class="qa-icon">📖</span><span class="qa-text">CVC Companion Guide</span></a>
     </div>
     <div class="hero-story">
       <p>The Exchange is <strong>equity infrastructure</strong> — when it breaks, students at rural colleges lose access to the same curriculum a metro college offers. I started at Foothill in 2017. I&rsquo;ve been on the student side of this. I want to help make the system quieter.</p>
@@ -1396,6 +1397,63 @@ function showBarrierView(view,btn){
 <script src="js/lookup.js"></script>
 <script src="js/ai-vision.js"></script>
 <script src="js/comms.js"></script>
+
+<!-- CVC Companion Guide: FAB + Overlay -->
+<button class="cvc-fab" onclick="toggleCvcGuide()" aria-label="Open CVC Companion Guide">
+  <span class="cvc-fab-pulse"></span>
+  <span class="cvc-fab-icon">&#x2B;</span>
+  <span class="cvc-fab-text">CVC Companion Guide</span>
+</button>
+
+<div class="cvc-overlay" id="cvcOverlay">
+  <div class="cvc-overlay-bar">
+    <div class="cvc-overlay-bar-left">
+      <span class="cvc-overlay-bar-badge">Companion</span>
+      <span class="cvc-overlay-bar-title">CVC-OEI Ecosystem Guide</span>
+    </div>
+    <div class="cvc-overlay-links">
+      <button class="cvc-overlay-tab active" onclick="cvcNav('s-start')">Start Here</button>
+      <button class="cvc-overlay-tab" onclick="cvcNav('s-freetools')">Free Tools</button>
+      <button class="cvc-overlay-tab" onclick="cvcNav('f-ecosystem')">Ecosystem</button>
+      <button class="cvc-overlay-tab" onclick="cvcNav('f-a11y')">Accessibility</button>
+    </div>
+    <button class="cvc-overlay-close" onclick="toggleCvcGuide()" aria-label="Close">&times;</button>
+  </div>
+  <iframe id="cvcFrame" src="about:blank" title="CVC Companion Guide"></iframe>
+</div>
+
+<script>
+function toggleCvcGuide() {
+  var overlay = document.getElementById('cvcOverlay');
+  var frame = document.getElementById('cvcFrame');
+  var isOpen = overlay.classList.contains('cvc-show');
+  if (isOpen) {
+    overlay.classList.remove('cvc-show');
+    document.body.style.overflow = '';
+  } else {
+    if (frame.src === 'about:blank' || !frame.src.includes('cvc-guide')) {
+      frame.src = 'cvc-guide.html';
+    }
+    overlay.classList.add('cvc-show');
+    document.body.style.overflow = 'hidden';
+  }
+}
+function cvcNav(hash) {
+  var frame = document.getElementById('cvcFrame');
+  if (frame.contentWindow) {
+    frame.contentWindow.goTo(hash);
+  }
+  // Update active tab
+  document.querySelectorAll('.cvc-overlay-tab').forEach(function(t) { t.classList.remove('active'); });
+  event.currentTarget.classList.add('active');
+}
+// Close on Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('cvcOverlay').classList.contains('cvc-show')) {
+    toggleCvcGuide();
+  }
+});
+</script>
 
 <!-- UI -->
 <script src="js/nav.js"></script>

@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CVC Companion Guide — What the Official Site Doesn't Surface</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Fraunces:ital,wght@0,600;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0f1a2e;--navy-mid:#1a2d4a;--gold:#e8a838;--gold-light:#fdf0d5;--sky:#3b82f6;--sky-pale:#dbeafe;--mint:#10b981;--mint-pale:#d1fae5;--rose:#ef4444;--rose-pale:#fee2e2;--purple:#7c3aed;--purple-pale:#ede9fe;--teal:#0d9488;--teal-pale:#ccfbf1;--orange:#f97316;--orange-pale:#ffedd5;--sand:#faf7f2;--white:#fff;--g50:#f9fafb;--g100:#f3f4f6;--g200:#e5e7eb;--g400:#9ca3af;--g500:#6b7280;--g600:#4b5563;--g800:#1f2937;--r:16px;--rs:10px;--ss:0 1px 3px rgba(0,0,0,.06);--sm:0 4px 12px rgba(0,0,0,.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--g800);line-height:1.65}
+
+/* Companion banner */
+.companion-banner{background:var(--gold-light);border-bottom:2px solid var(--gold);padding:10px 20px;text-align:center;font-size:.82rem;color:#78350f}
+.companion-banner a{color:#92400e;font-weight:700}
+
+/* Hero */
+.hero{background:var(--navy);color:#fff;padding:44px 24px 16px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 25% 85%,rgba(232,168,56,.16) 0%,transparent 45%),radial-gradient(circle at 80% 15%,rgba(59,130,246,.12) 0%,transparent 45%)}
+.hero h1{font-family:'Fraunces',serif;font-weight:800;font-size:clamp(1.6rem,4.5vw,2.5rem);position:relative;letter-spacing:-.02em}
+.hero h1 span{color:var(--gold)}
+.hero .sub{margin-top:10px;font-size:.95rem;opacity:.75;max-width:640px;margin-inline:auto;position:relative;line-height:1.6}
+.hero .gap-pills{display:flex;gap:8px;justify-content:center;margin-top:18px;flex-wrap:wrap;position:relative}
+.hero .gap-pill{padding:6px 14px;border-radius:20px;font-size:.75rem;font-weight:700;background:rgba(232,168,56,.18);color:var(--gold);border:1px solid rgba(232,168,56,.25)}
+
+.audience-pick{display:flex;gap:8px;justify-content:center;margin-top:20px;position:relative;flex-wrap:wrap}
+.aud-btn{padding:10px 22px;border-radius:30px;border:2px solid rgba(255,255,255,.25);background:transparent;color:rgba(255,255,255,.7);font-family:'DM Sans',sans-serif;font-weight:700;font-size:.88rem;cursor:pointer;transition:all .2s}
+.aud-btn:hover{border-color:rgba(255,255,255,.5);color:#fff}
+.aud-btn.active{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+
+/* Nav */
+.nav-strip{background:var(--navy-mid);padding:10px 16px;position:sticky;top:0;z-index:100;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.nav-inner{display:flex;gap:5px;justify-content:center;min-width:max-content;max-width:1080px;margin:0 auto}
+.nav-tab{padding:7px 15px;border-radius:30px;border:none;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);font-family:'DM Sans',sans-serif;font-weight:600;font-size:.78rem;cursor:pointer;transition:all .2s;white-space:nowrap}
+.nav-tab:hover{background:rgba(255,255,255,.15);color:#fff}
+.nav-tab.active{background:var(--gold);color:var(--navy)}
+
+/* Layout */
+.container{max-width:900px;margin:0 auto;padding:0 20px}
+section{padding:36px 0}section+section{border-top:1px solid var(--g200)}
+h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.45rem;margin-bottom:8px;color:var(--navy)}
+h3{font-weight:700;font-size:1rem;margin-bottom:4px;color:var(--navy)}
+h4{font-weight:700;font-size:.88rem;margin-bottom:3px;color:var(--g800)}
+p+p{margin-top:8px}
+a{color:var(--sky)}
+
+/* "Go to cvc.edu" callout */
+.official-link{background:var(--sky-pale);border:1px solid #93c5fd;border-radius:var(--rs);padding:14px 18px;margin:14px 0;display:flex;gap:10px;align-items:center;font-size:.88rem}
+.official-link .ol-icon{font-size:1.1rem;flex-shrink:0}
+.official-link a{font-weight:700;text-decoration:none;color:var(--navy)}
+.official-link a:hover{text-decoration:underline}
+
+/* "Gap" label */
+.gap-label{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:var(--gold-light);color:#92400e;margin-bottom:10px}
+
+/* Cards */
+.card{background:var(--white);border-radius:var(--r);padding:22px 24px;box-shadow:var(--ss)}.card+.card{margin-top:12px}
+.ca{border-left:4px solid var(--sky)}.ca.gold{border-left-color:var(--gold)}.ca.mint{border-left-color:var(--mint)}.ca.purple{border-left-color:var(--purple)}.ca.teal{border-left-color:var(--teal)}.ca.rose{border-left-color:var(--rose)}.ca.orange{border-left-color:var(--orange)}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+
+/* Resource cards */
+.rc{background:var(--white);border-radius:var(--r);padding:18px 20px;box-shadow:var(--ss);display:flex;flex-direction:column;gap:5px}
+.rc .badge{display:inline-flex;padding:3px 9px;border-radius:20px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;width:fit-content}
+.badge.free{background:var(--mint-pale);color:#047857}
+.badge.pd{background:var(--purple-pale);color:var(--purple)}
+.badge.data{background:var(--sky-pale);color:var(--sky)}
+.badge.tool{background:var(--orange-pale);color:var(--orange)}
+.badge.oer{background:var(--gold-light);color:#92400e}
+.badge.access{background:var(--teal-pale);color:var(--teal)}
+.rc h3{font-size:.93rem;margin-bottom:1px}
+.rc p{font-size:.84rem;color:var(--g600);line-height:1.5}
+.rc .rc-link{font-size:.82rem;font-weight:600;margin-top:auto;padding-top:5px}
+
+/* Steps */
+.steps{counter-reset:step}
+.step{display:flex;gap:16px;padding:18px 0;align-items:flex-start}
+.step+.step{border-top:1px dashed var(--g200)}
+.step-num{flex-shrink:0;width:40px;height:40px;border-radius:50%;background:var(--navy);color:var(--gold);font-family:'Fraunces',serif;font-weight:800;font-size:1.05rem;display:flex;align-items:center;justify-content:center}
+.step-body{flex:1}.step-body p{margin-top:3px;color:var(--g600);font-size:.9rem}
+.pt{margin-top:7px;background:var(--gold-light);border-radius:8px;padding:8px 12px;font-size:.84rem;color:#78350f}
+
+/* Alerts */
+.alert{border-radius:var(--rs);padding:14px 18px;margin:14px 0;display:flex;gap:10px;align-items:flex-start;font-size:.88rem}
+.alert.warn{background:#fef3c7;border:1px solid #fde68a}.alert.info{background:var(--sky-pale);border:1px solid #93c5fd}.alert.danger{background:var(--rose-pale);border:1px solid #fca5a5}.alert.tip{background:var(--mint-pale);border:1px solid #6ee7b7}
+.ai{font-size:1rem;flex-shrink:0;margin-top:1px}
+
+/* Throughline */
+.throughline{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);color:#fff;border-radius:var(--r);padding:24px 26px;margin:16px 0;position:relative;overflow:hidden}
+.throughline::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 90% 80%,rgba(232,168,56,.12) 0%,transparent 50%)}
+.throughline h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.1rem;color:var(--gold);margin-bottom:6px;position:relative}
+.throughline p{font-size:.88rem;opacity:.82;line-height:1.65;position:relative}
+
+/* Table */
+.res-table{width:100%;border-collapse:collapse;background:var(--white);border-radius:var(--rs);overflow:hidden;box-shadow:var(--ss);font-size:.84rem}
+.res-table th{background:var(--navy);color:#fff;text-align:left;padding:10px 14px;font-weight:600;font-size:.78rem}
+.res-table td{padding:10px 14px;border-top:1px solid var(--g100);vertical-align:top}
+.res-table tr:nth-child(even) td{background:var(--g50)}
+.res-table a{font-weight:600;text-decoration:none}.res-table a:hover{text-decoration:underline}
+
+.trouble-table{width:100%;border-collapse:collapse;background:var(--white);border-radius:var(--rs);overflow:hidden;box-shadow:var(--ss);font-size:.86rem}
+.trouble-table th{background:var(--navy);color:#fff;text-align:left;padding:11px 14px;font-weight:600}
+.trouble-table td{padding:11px 14px;border-top:1px solid var(--g100);vertical-align:top}
+.trouble-table tr:nth-child(even) td{background:var(--g50)}
+
+/* Checklist */
+.checklist{background:var(--white);border-radius:var(--r);padding:20px 24px;box-shadow:var(--ss)}
+.ci{display:flex;align-items:flex-start;gap:10px;padding:8px 0}.ci+.ci{border-top:1px solid var(--g100)}
+.ck{flex-shrink:0;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.76rem;margin-top:2px;background:var(--mint-pale);color:var(--mint)}
+
+/* Checker */
+.checker{background:var(--white);border-radius:var(--r);padding:22px 24px;box-shadow:var(--sm);margin-top:16px}
+.checker-q{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--g100);font-size:.88rem}
+.checker-q:last-of-type{border-bottom:none}
+.checker-q .btns{display:flex;gap:5px;flex-shrink:0}
+.checker-q .btns button{padding:4px 13px;border-radius:20px;border:2px solid var(--g200);background:var(--white);font-family:'DM Sans',sans-serif;font-weight:600;font-size:.8rem;cursor:pointer;transition:all .15s}
+.checker-q .btns button.sel-yes{background:var(--mint-pale);border-color:var(--mint);color:#047857}
+.checker-q .btns button.sel-no{background:var(--rose-pale);border-color:var(--rose);color:#b91c1c}
+#checkerResult{margin-top:12px;padding:13px 16px;border-radius:var(--rs);font-weight:600;font-size:.9rem;display:none}
+#checkerResult.pass{background:var(--mint-pale);color:#047857;display:block}
+#checkerResult.fail{background:var(--rose-pale);color:#b91c1c;display:block}
+
+/* Special situations */
+.situation-card{border-radius:var(--rs);padding:18px;background:var(--white);border:1px solid var(--g200)}
+.tag{display:inline-block;padding:3px 9px;border-radius:20px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.tag.no{background:var(--rose-pale);color:var(--rose)}.tag.yes{background:var(--mint-pale);color:#047857}.tag.maybe{background:#fef3c7;color:#92400e}
+
+/* FAQ */
+.faq-item{background:var(--white);border-radius:var(--rs);margin-bottom:6px;box-shadow:0 1px 2px rgba(0,0,0,.04);overflow:hidden}
+.faq-q{width:100%;border:none;background:none;padding:14px 18px;text-align:left;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.9rem;color:var(--navy);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq-q:hover{background:var(--g50)}
+.faq-arrow{transition:transform .25s;font-size:.7rem;color:var(--g400);flex-shrink:0}
+.faq-q.open .faq-arrow{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 18px;color:var(--g600);font-size:.88rem;line-height:1.7}
+.faq-a.open{max-height:800px;padding:0 18px 14px}
+
+/* Ecosystem nodes */
+.eco-node{background:var(--white);border-radius:var(--r);padding:18px 20px;box-shadow:var(--ss);border-top:4px solid var(--sky);transition:transform .15s,box-shadow .15s}
+.eco-node:hover{transform:translateY(-2px);box-shadow:var(--sm)}
+.eco-node.gold-t{border-top-color:var(--gold)}.eco-node.mint-t{border-top-color:var(--mint)}.eco-node.purple-t{border-top-color:var(--purple)}.eco-node.teal-t{border-top-color:var(--teal)}.eco-node.orange-t{border-top-color:var(--orange)}.eco-node.rose-t{border-top-color:var(--rose)}.eco-node.sky-t{border-top-color:var(--sky)}
+.eco-node h3{font-size:.9rem;margin-bottom:3px}
+.eco-node p{font-size:.82rem;color:var(--g600);line-height:1.5}
+.eco-node a{font-size:.8rem;font-weight:600;text-decoration:none;display:inline-block;margin-top:6px}
+.eco-node a:hover{text-decoration:underline}
+
+/* Link list */
+.link-list{list-style:none;padding:0;margin-top:8px}
+.link-list li{padding:7px 0;border-bottom:1px solid var(--g100);font-size:.88rem}
+.link-list li:last-child{border-bottom:none}
+.link-list a{color:var(--sky);text-decoration:none;font-weight:600}
+.link-list a:hover{text-decoration:underline}
+.link-list .desc{color:var(--g500);font-size:.82rem;margin-top:1px}
+
+/* Role cards */
+.role-card{background:var(--white);border-radius:var(--r);padding:22px 24px;box-shadow:var(--ss);border-top:3px solid var(--sky)}
+.role-card.gold-t{border-top-color:var(--gold)}.role-card.mint-t{border-top-color:var(--mint)}.role-card.purple-t{border-top-color:var(--purple)}.role-card.teal-t{border-top-color:var(--teal)}.role-card.orange-t{border-top-color:var(--orange)}.role-card.rose-t{border-top-color:var(--rose)}
+.role-card ul{margin-top:6px;padding-left:16px;color:var(--g600);font-size:.88rem;line-height:1.7}
+
+/* Section nav */
+.section-nav{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding-top:18px;border-top:1px solid var(--g200);flex-wrap:wrap;gap:8px}
+.nav-btn{padding:9px 18px;border-radius:30px;border:2px solid var(--g200);background:var(--white);font-family:'DM Sans',sans-serif;font-weight:700;font-size:.83rem;color:var(--navy);cursor:pointer;transition:all .15s;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+.nav-btn:hover{border-color:var(--navy);background:var(--navy);color:#fff}
+.nav-btn.primary{background:var(--navy);border-color:var(--navy);color:var(--gold)}
+.nav-btn.primary:hover{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+
+/* Footer */
+.site-footer{background:var(--navy);color:#fff;padding:40px 24px;margin-top:40px;position:relative;overflow:hidden}
+.site-footer::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 100%,rgba(232,168,56,.1) 0%,transparent 50%)}
+.footer-inner{max-width:900px;margin:0 auto;position:relative}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:22px;margin-bottom:24px}
+.footer-col h4{color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;font-weight:700}
+.footer-col a{display:block;color:rgba(255,255,255,.7);text-decoration:none;font-size:.85rem;padding:3px 0;transition:color .15s}
+.footer-col a:hover{color:#fff}
+.footer-col .ext{font-size:.7rem;opacity:.5;margin-left:3px}
+.footer-divider{border-top:1px solid rgba(255,255,255,.12);padding-top:18px;text-align:center}
+.footer-divider p{font-size:.76rem;color:rgba(255,255,255,.4);line-height:1.7}
+.footer-divider a{color:rgba(255,255,255,.6)}
+
+/* Decision wizard */
+.wizard{background:var(--white);border-radius:var(--r);padding:24px 26px;box-shadow:var(--sm);margin:16px 0}
+.wizard h3{margin-bottom:12px}
+.wizard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.wiz-opt{padding:14px 16px;border-radius:var(--rs);border:2px solid var(--g200);background:var(--g50);cursor:pointer;transition:all .15s;text-align:center}
+.wiz-opt:hover{border-color:var(--sky);background:var(--sky-pale);transform:translateY(-1px)}
+.wiz-opt .wiz-icon{font-size:1.4rem;display:block;margin-bottom:4px}
+.wiz-opt .wiz-label{font-weight:700;font-size:.82rem;color:var(--navy);display:block}
+.wiz-opt .wiz-desc{font-size:.74rem;color:var(--g500);margin-top:2px;display:block}
+
+/* Cost calculator */
+.calc{background:var(--white);border-radius:var(--r);padding:22px 24px;box-shadow:var(--sm)}
+.calc-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--g100);font-size:.9rem}
+.calc-row:last-child{border-bottom:none}
+.calc-row .val{font-family:'Fraunces',serif;font-weight:800;font-size:1.1rem}
+.calc-row .val.savings{color:var(--mint)}
+.calc-row .val.cost{color:var(--g600)}
+
+/* Accessibility detail cards */
+.a11y-card{background:var(--white);border-radius:var(--r);padding:20px 22px;box-shadow:var(--ss);border-left:4px solid var(--teal)}
+.a11y-card h3{color:var(--teal);font-size:.93rem}
+.a11y-card p{font-size:.84rem;color:var(--g600);line-height:1.5;margin-top:4px}
+.a11y-card .a11y-link{margin-top:8px;font-size:.82rem;font-weight:600}
+
+/* Progress bar */
+.progress-wrap{height:3px;background:rgba(255,255,255,.15);position:relative;margin-top:6px}
+.progress-bar{height:100%;background:var(--gold);border-radius:2px;transition:width .3s ease}
+
+/* Deep link indicator */
+.section-anchor{scroll-margin-top:60px}
+
+/* Timeline visual */
+.deadline-bar{display:flex;align-items:stretch;gap:0;margin:16px 0;border-radius:var(--rs);overflow:hidden;box-shadow:var(--ss)}
+.deadline-seg{flex:1;padding:12px 14px;text-align:center;font-size:.78rem;font-weight:600;min-width:0}
+.deadline-seg.green{background:var(--mint-pale);color:#047857}
+.deadline-seg.yellow{background:#fef3c7;color:#92400e}
+.deadline-seg.red{background:var(--rose-pale);color:#b91c1c}
+.deadline-seg .dl-label{display:block;font-weight:400;font-size:.7rem;margin-top:2px;opacity:.8}
+
+/* Scenario result */
+.scenario-result{background:var(--sky-pale);border:1px solid #93c5fd;border-radius:var(--rs);padding:16px 20px;margin-top:12px;display:none}
+.scenario-result.visible{display:block}
+.scenario-result h4{color:var(--navy);margin-bottom:6px}
+.scenario-result ul{padding-left:16px;font-size:.88rem;color:var(--g600);line-height:1.7}
+
+/* Visibility */
+.page{display:none}.page.active{display:block}
+.audience-section{display:none}.audience-section.active{display:block}
+
+@media(max-width:640px){
+  .hero{padding:36px 16px 12px}
+  .step{flex-direction:column;gap:7px}
+  .nav-inner{justify-content:flex-start}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .checker-q{flex-direction:column;gap:5px;align-items:flex-start}
+  .section-nav{justify-content:center}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .wizard-grid{grid-template-columns:repeat(2,1fr)}
+  .deadline-bar{flex-direction:column}
+}
+
+@media print{
+  .nav-strip,.companion-banner,.hero,.audience-pick,.section-nav,.gap-pills,.aud-btn,.nav-btn{display:none!important}
+  .page,.audience-section{display:block!important}
+  .site-footer{break-before:page}
+  body{background:#fff;font-size:11pt}
+  .container{max-width:100%;padding:0}
+  section{padding:16px 0;break-inside:avoid}
+  .card,.rc,.role-card,.eco-node,.situation-card,.checker,.wizard,.a11y-card{box-shadow:none;border:1px solid #ddd}
+  .throughline{background:#1a2d4a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a[href]::after{content:" (" attr(href) ")";font-size:8pt;color:#666}
+  a[href^="javascript"]::after{content:none}
+}
+</style>
+</head>
+<body>
+
+<!-- COMPANION BANNER -->
+<div class="companion-banner">
+  Community companion to <a href="https://www.cvc.edu/students/" target="_blank">cvc.edu</a> &mdash; fills gaps the official site doesn't cover yet. Always use <a href="https://search.cvc.edu/" target="_blank">search.cvc.edu</a> for enrollment.
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>The <span>CVC</span> Companion Guide</h1>
+  <p class="sub">The official CVC site handles enrollment. This guide covers everything around it &mdash; the step-by-step walkthrough that's missing, the free tools nobody tells you about, and the hidden infrastructure connecting 116 colleges.</p>
+  <div class="gap-pills">
+    <span class="gap-pill">Missing enrollment guide</span>
+    <span class="gap-pill">Hidden free tools</span>
+    <span class="gap-pill">OER &amp; ZTC resources</span>
+    <span class="gap-pill">Troubleshooting</span>
+    <span class="gap-pill">Educator ecosystem</span>
+  </div>
+  <div class="audience-pick">
+    <button class="aud-btn active" id="audStudent" onclick="switchAudience('student')">I'm a Student</button>
+    <button class="aud-btn" id="audStaff" onclick="switchAudience('staff')">I'm Faculty / Staff</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-strip">
+  <div class="nav-inner" id="navBar"></div>
+</div>
+
+<!-- CONTENT -->
+<main class="container">
+
+<!-- ═══════════════════════════════════ -->
+<!-- STUDENT CONTENT                     -->
+<!-- ═══════════════════════════════════ -->
+<div class="audience-section active" id="aud-student">
+
+<!-- S: START HERE (Decision Wizard + Search Strategy) -->
+<div id="s-start" class="page active">
+<section class="section-anchor">
+  <h2>What Do You Need?</h2>
+  <p style="color:var(--g600);margin-bottom:12px;font-size:.9rem">Pick your situation. We'll point you to exactly the right sections.</p>
+
+  <div class="wizard">
+    <div class="wizard-grid">
+      <div class="wiz-opt" onclick="showScenario('need-class')">
+        <span class="wiz-icon">&#128269;</span>
+        <span class="wiz-label">Find a class</span>
+        <span class="wiz-desc">My college doesn't offer what I need</span>
+      </div>
+      <div class="wiz-opt" onclick="showScenario('speed-up')">
+        <span class="wiz-icon">&#9889;</span>
+        <span class="wiz-label">Speed up</span>
+        <span class="wiz-desc">Finish my degree or transfer faster</span>
+      </div>
+      <div class="wiz-opt" onclick="showScenario('save-money')">
+        <span class="wiz-icon">&#128176;</span>
+        <span class="wiz-label">Save money</span>
+        <span class="wiz-desc">Free textbooks, tutoring, tools</span>
+      </div>
+      <div class="wiz-opt" onclick="showScenario('online-help')">
+        <span class="wiz-icon">&#127891;</span>
+        <span class="wiz-label">Online success</span>
+        <span class="wiz-desc">Prepare for online courses</span>
+      </div>
+      <div class="wiz-opt" onclick="showScenario('transfer')">
+        <span class="wiz-icon">&#128640;</span>
+        <span class="wiz-label">Transfer</span>
+        <span class="wiz-desc">Plan my path to CSU or UC</span>
+      </div>
+      <div class="wiz-opt" onclick="showScenario('stuck')">
+        <span class="wiz-icon">&#128679;</span>
+        <span class="wiz-label">Fix a problem</span>
+        <span class="wiz-desc">Login issues, holds, errors</span>
+      </div>
+    </div>
+
+    <div id="sc-need-class" class="scenario-result">
+      <h4>Finding a class at another college</h4>
+      <ul>
+        <li><strong>Step 1:</strong> Confirm with your counselor that the course fits your Ed Plan</li>
+        <li><strong>Step 2:</strong> <a href="https://search.cvc.edu/" target="_blank">Search on cvc.edu</a> &mdash; filter by Cal-GETC, CSU GE, or IGETC to match transfer requirements</li>
+        <li><strong>Step 3:</strong> Look for <strong>"Add Class"</strong> (instant) vs "Apply Now" (requires separate app)</li>
+        <li><strong>Step 4:</strong> Follow the <a href="javascript:void(0)" onclick="goTo('s-enroll')">Step-by-Step Enrollment Guide</a></li>
+      </ul>
+    </div>
+    <div id="sc-speed-up" class="scenario-result">
+      <h4>Accelerating your degree or transfer</h4>
+      <ul>
+        <li>Take up to <strong>2 extra courses per term</strong> at other colleges via the Exchange</li>
+        <li>Search by transfer pattern to find GE courses that satisfy your requirements</li>
+        <li>Check the <a href="javascript:void(0)" onclick="goTo('s-freetools')">Program Pathways Mapper</a> to plan your full transfer path</li>
+        <li>Combine with <a href="javascript:void(0)" onclick="goTo('s-oer')">ZTC courses</a> to take more classes without increasing textbook costs</li>
+      </ul>
+    </div>
+    <div id="sc-save-money" class="scenario-result">
+      <h4>Maximizing free resources</h4>
+      <ul>
+        <li><a href="javascript:void(0)" onclick="goTo('s-oer')"><strong>Free textbooks:</strong></a> Filter for ZTC courses, or find OER alternatives at ASCCC OERI and COOL4Ed</li>
+        <li><a href="javascript:void(0)" onclick="goTo('s-freetools')"><strong>Free tutoring:</strong></a> NetTutor gives you 24/7 help in 150+ subjects through Canvas</li>
+        <li><a href="javascript:void(0)" onclick="goTo('s-freetools')"><strong>Free STEM labs:</strong></a> Labster has 160+ virtual lab simulations at no cost</li>
+        <li><a href="javascript:void(0)" onclick="goTo('s-money')"><strong>Financial aid:</strong></a> CCPG, Federal FA, and veterans benefits all work with the Exchange</li>
+      </ul>
+    </div>
+    <div id="sc-online-help" class="scenario-result">
+      <h4>Preparing for online courses</h4>
+      <ul>
+        <li>Take the free <a href="https://apps.3cmediasolutions.org/oei/" target="_blank">Online Readiness Tutorials</a> &mdash; time management, tech skills, study strategies</li>
+        <li>Use <a href="javascript:void(0)" onclick="goTo('s-freetools')">Wellness Central</a> for 24/7 confidential mental health support</li>
+        <li>Use <a href="javascript:void(0)" onclick="goTo('s-freetools')">Pronto</a> to connect with classmates and form study groups</li>
+        <li>Prefer <strong>Quality Reviewed</strong> courses &mdash; they've passed a 44-standard peer review for online teaching excellence</li>
+      </ul>
+    </div>
+    <div id="sc-transfer" class="scenario-result">
+      <h4>Planning your transfer</h4>
+      <ul>
+        <li>Use the <a href="https://programmapper.org/" target="_blank">Program Pathways Mapper</a> to visualize your CCC &rarr; CSU/UC path</li>
+        <li>On cvc.edu, filter courses by <strong>Cal-GETC</strong> (unified GE), <strong>CSU GE-Breadth</strong>, or <strong>IGETC</strong> (UC)</li>
+        <li>Transcripts auto-send to your Home College. For <strong>4-year transfer</strong>, request separately from Teaching College</li>
+        <li>Always confirm course equivalency with your counselor <em>before</em> enrolling</li>
+      </ul>
+    </div>
+    <div id="sc-stuck" class="scenario-result">
+      <h4>Fixing problems</h4>
+      <ul>
+        <li>Go directly to the <a href="javascript:void(0)" onclick="goTo('s-troubleshoot')">Troubleshooting Guide</a> &mdash; covers login failures, holds, CCCID issues, DSPS, payments, and more</li>
+        <li>Key insight: most issues are either a <strong>Home College</strong> problem (eligibility, FA, Canvas) or a <strong>Teaching College</strong> problem (holds, prereqs, DSPS)</li>
+        <li>For CVC platform issues: <a href="mailto:support@cvc.edu">support@cvc.edu</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section-anchor">
+  <h2>Smart Search Strategy</h2>
+  <p style="color:var(--g600);margin-bottom:14px;font-size:.9rem">The CVC search tool is powerful but has no guide. Here's how to use it effectively.</p>
+
+  <div class="card" style="margin-bottom:12px">
+    <h3>Timing Matters</h3>
+    <div class="deadline-bar">
+      <div class="deadline-seg green"><strong>Best</strong><span class="dl-label">4+ weeks before term</span></div>
+      <div class="deadline-seg green"><strong>Good</strong><span class="dl-label">2&ndash;4 weeks before</span></div>
+      <div class="deadline-seg yellow"><strong>Risky</strong><span class="dl-label">1&ndash;2 weeks</span></div>
+      <div class="deadline-seg red"><strong>Tight</strong><span class="dl-label">&lt; 1 week</span></div>
+    </div>
+    <p style="margin-top:8px;font-size:.86rem;color:var(--g600)">If your course has prerequisites, add 3 business days for review. Seats are NOT reserved during prereq review. Late starts also mean less time for payment processing.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card ca mint">
+      <h3>Filter for Quality</h3>
+      <p style="margin-top:4px;font-size:.86rem;color:var(--g600)"><strong>ZTC badge</strong> = $0 textbook cost.<br><strong>Quality Reviewed</strong> = passed 44-standard peer review.<br>Courses with both badges are the best value.</p>
+    </div>
+    <div class="card ca purple">
+      <h3>Filter for Transfer</h3>
+      <p style="margin-top:4px;font-size:.86rem;color:var(--g600)"><strong>Cal-GETC</strong> = new unified GE pattern.<br><strong>CSU GE-Breadth</strong> = CSU transfer.<br><strong>IGETC</strong> = UC transfer.<br>Always confirm with your counselor.</p>
+    </div>
+    <div class="card ca gold">
+      <h3>Read the Seat Count</h3>
+      <p style="margin-top:4px;font-size:.86rem;color:var(--g600)"><strong>Number shown</strong> = live remaining seats.<br><strong>"Unavailable"</strong> = college isn't sharing data, NOT necessarily full.<br>Low seat counts move fast &mdash; enroll quickly.</p>
+    </div>
+    <div class="card ca">
+      <h3>"Add Class" &gt; "Apply Now"</h3>
+      <p style="margin-top:4px;font-size:.86rem;color:var(--g600)"><strong>"Add Class"</strong> = instant enrollment in minutes.<br><strong>"Apply Now"</strong> = requires full CCCApply application (days/weeks).<br>Filter for Add Class courses when possible.</p>
+    </div>
+  </div>
+
+  <div class="section-nav">
+    <span></span>
+    <button class="nav-btn primary" onclick="goTo('s-enroll')">Next: Enrollment Guide &rarr;</button>
+  </div>
+</section>
+</div>
+
+<!-- S: ENROLLMENT GUIDE -->
+<div id="s-enroll" class="page">
+<section>
+  <span class="gap-label">Fills gap: cvc.edu/how-to-cross-enroll is a 404</span>
+  <h2>Step-by-Step Enrollment Guide</h2>
+  <p style="color:var(--g600);margin-bottom:14px;font-size:.9rem">The official CVC site doesn't have an enrollment walkthrough. Here's the full process from search to transcript.</p>
+
+  <div class="official-link"><span class="ol-icon">&#8594;</span><span>First, make sure you're eligible: <a href="https://www.cvc.edu/students/student-eligibility/" target="_blank">Check eligibility on cvc.edu</a></span></div>
+
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Search for a Course</h3><p>Go to <a href="https://search.cvc.edu/" target="_blank">search.cvc.edu</a>. Filter by subject, transfer pattern (Cal-GETC, CSU GE, IGETC), or keyword. Look for two badges: <strong>ZTC</strong> (no textbook cost) and <strong>Quality Reviewed</strong> (peer-reviewed for online teaching excellence).</p><div class="pt"><strong>Tip:</strong> Verify with your counselor that the course fits your Ed Plan before enrolling. The Exchange doesn't check degree requirements for you.</div></div></div>
+
+    <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Understand "Add Class" vs "Apply Now"</h3><p>This is the most confusing part of the Exchange. <strong>"Add Class"</strong> = instant cross-enrollment (no new application). <strong>"Apply Now"</strong> = that college isn't set up for instant enrollment, so you'll need to submit a full CCCApply application first. Always look for "Add Class" if you want the quick path.</p></div></div>
+
+    <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Log In with Home College Credentials</h3><p>Your identity is verified through your <strong>CCCID</strong> (the statewide ID created when you applied to any CCC via CCCApply). If login fails, see <a href="javascript:void(0)" onclick="goTo('s-troubleshoot')">Troubleshooting</a>.</p>
+    <div class="pt"><strong>Key terms:</strong> Your <strong>Home College</strong> is where you're enrolled (financial aid, Ed Plan, DSPS). The <strong>Teaching College</strong> is the one offering the course. You deal with both.</div></div></div>
+
+    <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Complete the Consent Form</h3><p>Agree to cross-enrollment consent, including automatic transcript sharing to your Home College at end of term.</p></div></div>
+
+    <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Handle Prerequisites (if any)</h3><p>Upload up to 3 PDF transcripts showing the exact course code and term completed. The Teaching College reviews within <strong>3 business days</strong>. Your seat is <strong>NOT reserved</strong> during review. If the course starts in 2&ndash;5 days, there may not be enough time.</p><div class="pt"><strong>Denied?</strong> You'll get an email with the reason. If you believe the prereq is met, contact your Home College counselor to ensure it's in the system, then try again.</div></div></div>
+
+    <div class="step"><div class="step-num">6</div><div class="step-body"><h3>Pay Fees</h3><p>Dashboard &rarr; "Pay Now." Three options:</p><p><strong>Credit card</strong> &mdash; immediate confirmation.<br><strong>CCPG</strong> (CA College Promise Grant) &mdash; re-apply at Teaching College.<br><strong>Federal Financial Aid</strong> &mdash; request from Home College. Requires 6+ units at Home College.</p>
+    <div class="alert warn" style="margin-top:8px;margin-bottom:0"><div class="ai">&#9888;</div><p><strong>Pay by the deadline regardless.</strong> Even if you've requested FA or CCPG, the Teaching College can drop you for non-payment. You get reimbursed if approved later.</p></div></div></div>
+
+    <div class="step"><div class="step-num">7</div><div class="step-body"><h3>Access Canvas</h3><p>Your course appears in Canvas using your <strong>Home College login</strong>. You'll also get a Teaching College email for their campus tools. <strong>Check both email addresses.</strong></p></div></div>
+
+    <div class="step"><div class="step-num">8</div><div class="step-body"><h3>Complete the Course &amp; Get Transcript</h3><p>Follow the Teaching College's schedule and policies. Your transcript auto-sends to your Home College ~3 weeks after term end via Parchment. <strong>For 4-year transfer or employer</strong>, request a separate transcript from the Teaching College directly.</p></div></div>
+  </div>
+
+  <div class="alert info"><div class="ai">&#8505;</div><p><strong>Limits:</strong> Max 2 courses per term via the Exchange. Winter + spring count as one term. Must be enrolled in 1+ course at Home College.</p></div>
+  <div class="alert info"><div class="ai">&#8505;</div><p><strong>To drop:</strong> <a href="https://search.cvc.edu/users/sign_in" target="_blank">search.cvc.edu</a> &rarr; Profile &rarr; Dashboard &rarr; "Drop Class." Check the Teaching College's refund deadlines first.</p></div>
+
+  <div class="section-nav">
+    <span></span>
+    <button class="nav-btn primary" onclick="goTo('s-eligibility')">Next: Eligibility Deep Dive &rarr;</button>
+  </div>
+</section>
+</div>
+
+<!-- S: ELIGIBILITY DEEP DIVE -->
+<div id="s-eligibility" class="page">
+<section>
+  <span class="gap-label">Adds: interactive checker + special situations</span>
+  <h2>Eligibility Deep Dive</h2>
+
+  <div class="official-link"><span class="ol-icon">&#8594;</span><span>Official requirements: <a href="https://www.cvc.edu/students/student-eligibility/" target="_blank">cvc.edu/students/student-eligibility</a></span></div>
+
+  <p style="color:var(--g600);margin-bottom:14px;font-size:.9rem">The official page lists requirements. This section adds an interactive checker and covers the edge cases students actually run into.</p>
+
+  <h3 style="margin-top:16px;margin-bottom:10px">Interactive Eligibility Checker</h3>
+  <div class="checker">
+    <div class="checker-q" data-key="enrolled"><span>Enrolled at a CA Community College?</span><div class="btns"><button onclick="checkClick(this,'yes')">Yes</button><button onclick="checkClick(this,'no')">No</button></div></div>
+    <div class="checker-q" data-key="completed"><span>Completed or taking at least one class?</span><div class="btns"><button onclick="checkClick(this,'yes')">Yes</button><button onclick="checkClick(this,'no')">No</button></div></div>
+    <div class="checker-q" data-key="age"><span>At least 18 years old?</span><div class="btns"><button onclick="checkClick(this,'yes')">Yes</button><button onclick="checkClick(this,'no')">No</button></div></div>
+    <div class="checker-q" data-key="gpa"><span>GPA 2.0+ or not yet established?</span><div class="btns"><button onclick="checkClick(this,'yes')">Yes</button><button onclick="checkClick(this,'no')">No</button></div></div>
+    <div class="checker-q" data-key="holds"><span>No holds or outstanding fees?</span><div class="btns"><button onclick="checkClick(this,'yes')">Yes</button><button onclick="checkClick(this,'no')">No</button></div></div>
+    <div class="checker-q" data-key="ca"><span>CA address on file?</span><div class="btns"><button onclick="checkClick(this,'yes')">Yes</button><button onclick="checkClick(this,'no')">No</button></div></div>
+    <div class="checker-q" data-key="dualhs"><span>Are you a high school student?</span><div class="btns"><button onclick="checkClick(this,'yes')">Yes</button><button onclick="checkClick(this,'no')">No</button></div></div>
+    <div class="checker-q" data-key="f1"><span>International / F-1 student?</span><div class="btns"><button onclick="checkClick(this,'yes')">Yes</button><button onclick="checkClick(this,'no')">No</button></div></div>
+    <div id="checkerResult"></div>
+  </div>
+</section>
+
+<section>
+  <h2>Special Situations</h2>
+  <p style="color:var(--g600);margin-bottom:12px;font-size:.9rem">The official eligibility page doesn't cover these clearly. Here's what actually happens:</p>
+  <div class="grid-2">
+    <div class="situation-card"><span class="tag yes">Eligible</span><h3>AB540</h3><p>Can cross-enroll. Establish AB540 at Home College first. Apply for CCPG at Teaching College via CCCApply or <a href="https://dream.csac.ca.gov/" target="_blank">CADAA</a>.</p></div>
+    <div class="situation-card"><span class="tag no">Not Eligible</span><h3>High School / Dual Enrollment</h3><p>Can search courses on cvc.edu but must apply directly through <a href="https://home.cccapply.org/en/" target="_blank">CCCApply</a>. Cannot use instant enrollment.</p></div>
+    <div class="situation-card"><span class="tag no">Not Eligible</span><h3>International / F-1</h3><p>Federal visa regulations prevent cross-enrollment. Can search courses and apply directly to the Teaching College.</p></div>
+    <div class="situation-card"><span class="tag maybe">Partial</span><h3>UC / CSU Students</h3><p>Can search the Exchange. Instant enrollment requires CCC registration. Consider concurrent enrollment at a CCC instead.</p></div>
+    <div class="situation-card"><span class="tag yes">Eligible</span><h3>Veterans</h3><p>Can use benefits. Home College VA office determines eligibility and sends authorization letter to Teaching College.</p></div>
+    <div class="situation-card"><span class="tag maybe">Requires Action</span><h3>DSPS / Accommodations</h3><p><strong>Does NOT auto-transfer.</strong> You must apply separately at the Teaching College's DSPS office. Bring documentation from your Home College.</p></div>
+  </div>
+  <div class="section-nav">
+    <button class="nav-btn" onclick="goTo('s-enroll')">&larr; Enrollment Guide</button>
+    <button class="nav-btn primary" onclick="goTo('s-money')">Next: Money &amp; Aid &rarr;</button>
+  </div>
+</section>
+</div>
+
+<!-- S: MONEY & FINANCIAL AID DEEP DIVE -->
+<div id="s-money" class="page">
+<section class="section-anchor">
+  <span class="gap-label">Supplements: cvc.edu/students/financial-aid is thin</span>
+  <h2>Money, Financial Aid &amp; Cost Savings</h2>
+
+  <div class="official-link"><span class="ol-icon">&#8594;</span><span>Official FA page: <a href="https://www.cvc.edu/students/financial-aid/" target="_blank">cvc.edu/students/financial-aid</a></span></div>
+
+  <p style="color:var(--g600);margin-bottom:14px;font-size:.9rem">The official page covers basics. Here's the detailed walkthrough of each payment method and how to stack free resources to minimize your total cost.</p>
+
+  <div class="throughline">
+    <h3>The $0 Online Degree Path</h3>
+    <p>CCPG waives enrollment fees. ZTC eliminates textbook costs. NetTutor replaces paid tutoring. Labster replaces paid lab kits. ConferZoom replaces paid video tools. Stack them all and your out-of-pocket cost for an online course can be literally $0.</p>
+  </div>
+
+  <div class="card" style="margin-top:14px;margin-bottom:12px">
+    <h3>What a CVC Exchange Course Costs</h3>
+    <div class="calc">
+      <div class="calc-row"><span>Enrollment fee (per unit, CA resident)</span><span class="val cost">$46/unit</span></div>
+      <div class="calc-row"><span>Typical 3-unit course</span><span class="val cost">$138</span></div>
+      <div class="calc-row"><span>With CCPG fee waiver</span><span class="val savings">$0</span></div>
+      <div class="calc-row"><span>Textbooks (ZTC course)</span><span class="val savings">$0</span></div>
+      <div class="calc-row"><span>Tutoring (NetTutor)</span><span class="val savings">$0</span></div>
+      <div class="calc-row"><span>Lab simulations (Labster)</span><span class="val savings">$0</span></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;margin-bottom:10px">Payment Methods: Step by Step</h3>
+
+  <div class="card" style="margin-bottom:10px">
+    <h3>Option 1: Credit Card (Fastest)</h3>
+    <p style="margin-top:4px;font-size:.88rem;color:var(--g600)">Dashboard &rarr; "Pay Now" &rarr; enter card details. Immediate confirmation. This is the safest way to avoid being dropped for non-payment while other methods process.</p>
+  </div>
+
+  <div class="card" style="margin-bottom:10px">
+    <h3>Option 2: CCPG (CA College Promise Grant)</h3>
+    <p style="margin-top:4px;font-size:.88rem;color:var(--g600)">Waives enrollment fees. <strong>Important:</strong> You must re-apply at the Teaching College, even if you already have CCPG at your Home College.</p>
+    <div class="steps" style="margin-top:8px">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><p>Go to Exchange Dashboard &rarr; Class Schedule &rarr; "Pay Now"</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><p>Select <strong>CCPG</strong> as payment method</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><p>Complete the Teaching College's financial aid application (separate from your Home College's)</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><p>If not approved before the payment deadline, <strong>pay by credit card first</strong> &mdash; you'll be reimbursed</p></div></div>
+    </div>
+    <div class="alert warn" style="margin-top:6px;margin-bottom:0"><div class="ai">&#9888;</div><p><strong>CCPG &ne; CA Promise Program.</strong> CCPG is a fee waiver. The Promise Program is free tuition for first-time, full-time students. Different programs entirely.</p></div>
+  </div>
+
+  <div class="card" style="margin-bottom:10px">
+    <h3>Option 3: Federal Financial Aid</h3>
+    <p style="margin-top:4px;font-size:.88rem;color:var(--g600)">All 116 colleges signed a <strong>FA Consortium Agreement</strong>. Your Home College combines units from both colleges to calculate your award.</p>
+    <div class="checklist" style="margin-top:8px;box-shadow:none;padding:0">
+      <div class="ci"><div class="ck">&#10003;</div><div><strong>6+ units at Home College</strong> (required for FA eligibility)</div></div>
+      <div class="ci"><div class="ck">&#10003;</div><div>Counselor confirms Exchange course is academically appropriate</div></div>
+      <div class="ci"><div class="ck">&#10003;</div><div>FA office reviews eligibility via centralized FA Dashboard</div></div>
+      <div class="ci"><div class="ck">&#10003;</div><div>Home College handles all awarding and disbursement</div></div>
+    </div>
+    <div class="alert danger" style="margin-top:8px;margin-bottom:0"><div class="ai">&#128680;</div><p><strong>R2T4 Warning:</strong> If you withdraw before completing 60% of the term, your financial aid is recalculated and you may owe money back. This applies to Exchange courses too.</p></div>
+  </div>
+
+  <div class="grid-2" style="margin-top:14px">
+    <div class="card ca mint">
+      <h3>Veterans Benefits</h3>
+      <p style="margin-top:4px;font-size:.88rem;color:var(--g600)">Your Home College VA office determines eligibility and sends a <strong>Parent School Authorization Letter</strong> to the Teaching College. Contact your VA certifying official before enrolling.</p>
+    </div>
+    <div class="card ca purple">
+      <h3>AB540 / Undocumented Students</h3>
+      <p style="margin-top:4px;font-size:.88rem;color:var(--g600)">Establish AB540 status at your Home College first. Then apply at the Teaching College via CCCApply or the <a href="https://dream.csac.ca.gov/" target="_blank">California Dream Act Application (CADAA)</a>. Use the Teaching College's CADAA code.</p>
+    </div>
+  </div>
+
+  <div class="section-nav">
+    <button class="nav-btn" onclick="goTo('s-eligibility')">&larr; Eligibility</button>
+    <button class="nav-btn primary" onclick="goTo('s-freetools')">Next: Free Tools &rarr;</button>
+  </div>
+</section>
+</div>
+
+<!-- S: FREE TOOLS -->
+<div id="s-freetools" class="page">
+<section>
+  <span class="gap-label">Fills gap: cvc.edu doesn't surface any of these to students</span>
+  <h2>Free Tools You Probably Don't Know About</h2>
+  <p style="color:var(--g600);margin-bottom:14px;font-size:.9rem">These are <strong>centrally funded by the Chancellor's Office</strong> and available to all CCC students at no cost. The official CVC site mentions some of these on an <a href="https://www.cvc.edu/educators/digital-technologies/" target="_blank">educator page</a> but never tells students they exist.</p>
+
+  <div class="grid-2">
+    <div class="rc">
+      <span class="badge free">Free &middot; 24/7</span>
+      <h3>NetTutor &mdash; Online Tutoring</h3>
+      <p>Live tutoring in 150+ subjects including writing, math, science, accounting, and nursing. 24/7 in multiple languages. Each college gets 250 funded hours/year.</p>
+      <p class="rc-link"><strong>How to access:</strong> Look in your Canvas course sidebar or ask your instructor.</p>
+    </div>
+
+    <div class="rc">
+      <span class="badge free">Free &middot; 160+ Sims</span>
+      <h3>Labster &mdash; Virtual STEM Labs</h3>
+      <p>Interactive 3D lab simulations for biology, chemistry, physics, and engineering. Complete lab experiments from home. Your instructor enables these in Canvas.</p>
+      <p class="rc-link"><a href="https://www.labster.com/higher-education/california-community-colleges" target="_blank">Browse simulations &rarr;</a></p>
+    </div>
+
+    <div class="rc">
+      <span class="badge free">Free &middot; Messaging</span>
+      <h3>Pronto &mdash; Class Communication</h3>
+      <p>Real-time messaging integrated with Canvas. Chat with classmates, form study groups, and reach your instructor. Like Slack for your courses.</p>
+      <p class="rc-link"><a href="https://pronto.io/education/" target="_blank">Learn about Pronto &rarr;</a></p>
+    </div>
+
+    <div class="rc">
+      <span class="badge free">Free &middot; Confidential</span>
+      <h3>Wellness Central &mdash; Mental Health</h3>
+      <p>Canvas-based platform with 24/7 confidential mental health resources, self-assessments, and wellness tools for all CCC students.</p>
+      <p class="rc-link"><a href="https://www.cccstudentmentalhealth.org/" target="_blank">Access Wellness Central &rarr;</a></p>
+    </div>
+
+    <div class="rc">
+      <span class="badge free">Free &middot; Self-Paced</span>
+      <h3>Online Readiness Tutorials</h3>
+      <p>Not sure if online learning is right for you? Interactive modules covering time management, tech skills, study strategies, and expectations.</p>
+      <p class="rc-link"><a href="https://apps.3cmediasolutions.org/oei/" target="_blank">Start tutorials &rarr;</a></p>
+    </div>
+
+    <div class="rc">
+      <span class="badge free">Free &middot; Video</span>
+      <h3>ConferZoom</h3>
+      <p>Zoom for all CCC campuses. Used by instructors for live sessions, office hours, and group work. Integrated with Canvas.</p>
+      <p class="rc-link"><a href="https://www.conferzoom.org/" target="_blank">ConferZoom portal &rarr;</a></p>
+    </div>
+  </div>
+
+  <div class="alert tip"><div class="ai">&#128161;</div><p><strong>Pro tip:</strong> These tools are often enabled but buried in Canvas. Check your course navigation sidebar, or ask your instructor to enable them.</p></div>
+</section>
+
+<section>
+  <h2>Transfer &amp; Pathway Planning</h2>
+  <div class="grid-2">
+    <div class="rc">
+      <span class="badge tool">73+ Colleges</span>
+      <h3>Program Pathways Mapper</h3>
+      <p>Visualize your entire CCC &rarr; CSU/UC transfer path. See required courses, plan term by term.</p>
+      <p class="rc-link"><a href="https://programmapper.org/" target="_blank">Map your pathway &rarr;</a></p>
+    </div>
+    <div class="rc">
+      <span class="badge tool">Guided Onboarding</span>
+      <h3>CCC MyPath</h3>
+      <p>Find the right program, understand requirements, and connect to support services at your college.</p>
+      <p class="rc-link"><a href="https://www.cccmypath.org/" target="_blank">Start MyPath &rarr;</a></p>
+    </div>
+  </div>
+  <div class="section-nav">
+    <button class="nav-btn" onclick="goTo('s-eligibility')">&larr; Eligibility</button>
+    <button class="nav-btn primary" onclick="goTo('s-oer')">Next: Free Textbooks &rarr;</button>
+  </div>
+</section>
+</div>
+
+<!-- S: OER & ZTC -->
+<div id="s-oer" class="page">
+<section>
+  <span class="gap-label">Fills gap: cvc.edu has no OER/ZTC guidance for students</span>
+  <h2>Free Textbooks: OER &amp; Zero Textbook Cost</h2>
+  <p style="color:var(--g600);margin-bottom:14px;font-size:.9rem">The CVC site mentions ZTC badges but doesn't explain the broader open textbook ecosystem. Here's where to find free materials even when your course isn't marked ZTC.</p>
+
+  <div class="throughline">
+    <h3>Why This Matters</h3>
+    <p>The average CCC student spends $1,200+ per year on textbooks. ZTC courses eliminate this entirely. When you combine free enrollment (Exchange) + free materials (ZTC/OER) + free tutoring (NetTutor) + free labs (Labster), the cost barrier to online education nearly disappears.</p>
+  </div>
+
+  <div class="card" style="margin-top:14px;margin-bottom:14px">
+    <h3>Finding ZTC Courses</h3>
+    <p style="margin-top:6px">When searching on <a href="https://search.cvc.edu/" target="_blank">search.cvc.edu</a>, filter for the <strong>ZTC badge</strong>. These courses have been verified to have $0 textbook costs &mdash; materials are free ebooks, library resources, or instructor-created content.</p>
+  </div>
+
+  <h3 style="margin-bottom:10px">Free Textbook Sources (Even for Non-ZTC Courses)</h3>
+  <div class="grid-2">
+    <div class="rc">
+      <span class="badge oer">By Discipline</span>
+      <h3>ASCCC OERI</h3>
+      <p>The Academic Senate's OER Initiative. Curated free textbook collections organized by subject area.</p>
+      <p class="rc-link"><a href="https://asccc-oeri.org/oer-repositories-and-collections/" target="_blank">Browse by discipline &rarr;</a></p>
+    </div>
+    <div class="rc">
+      <span class="badge oer">Textbook Library</span>
+      <h3>COOL4Ed</h3>
+      <p>California's open textbook library. Faculty-reviewed, searchable by subject and course.</p>
+      <p class="rc-link"><a href="https://cool4ed.org/" target="_blank">Search textbooks &rarr;</a></p>
+    </div>
+    <div class="rc">
+      <span class="badge oer">CCC Community</span>
+      <h3>OER Commons &mdash; CCC Hub</h3>
+      <p>A dedicated space for California Community College open resources.</p>
+      <p class="rc-link"><a href="https://oercommons.org/hubs/ccc" target="_blank">Visit CCC Hub &rarr;</a></p>
+    </div>
+    <div class="rc">
+      <span class="badge oer">National Consortium</span>
+      <h3>CCCOER</h3>
+      <p>Community College Consortium for OER. Connects colleges expanding free textbook adoption.</p>
+      <p class="rc-link"><a href="https://www.cccoer.org/" target="_blank">Learn more &rarr;</a></p>
+    </div>
+  </div>
+
+  <div class="alert tip"><div class="ai">&#128161;</div><p>Even if your course assigns a paid textbook, check ASCCC OERI and COOL4Ed for a free alternative. Many OER textbooks cover identical material and your instructor may accept them.</p></div>
+
+  <div class="section-nav">
+    <button class="nav-btn" onclick="goTo('s-freetools')">&larr; Free Tools</button>
+    <button class="nav-btn primary" onclick="goTo('s-troubleshoot')">Next: Troubleshooting &rarr;</button>
+  </div>
+</section>
+</div>
+
+<!-- S: TROUBLESHOOTING -->
+<div id="s-troubleshoot" class="page">
+<section>
+  <span class="gap-label">Fills gap: cvc.edu has no troubleshooting guide</span>
+  <h2>Troubleshooting &amp; Who to Contact</h2>
+  <p style="color:var(--g600);margin-bottom:14px;font-size:.9rem">The official site has almost no troubleshooting guidance. Here's what to do when things go wrong and &mdash; critically &mdash; <strong>who</strong> to contact for each issue.</p>
+
+  <table class="trouble-table">
+    <thead><tr><th style="width:30%">Problem</th><th>Fix</th></tr></thead>
+    <tbody>
+      <tr><td><strong>"Ineligible"</strong> at login</td><td>This is a Home College data issue. Contact <strong>Home College Admissions</strong>.</td></tr>
+      <tr><td><strong>Hold during registration</strong></td><td>Hold at Teaching College. Contact <strong>Teaching College Admissions</strong> directly.</td></tr>
+      <tr><td><strong>CCCID not found</strong></td><td>Verify at <a href="https://www.openccc.net/" target="_blank">OpenCCC</a>. If correct, contact <strong>Home College</strong>.</td></tr>
+      <tr><td><strong>Canvas access missing</strong></td><td>Contact <strong>Home College IT / Distance Ed</strong>.</td></tr>
+      <tr><td><strong>Prerequisite slow/denied</strong></td><td>Review takes up to 3 business days. If longer, contact <strong>Teaching College</strong>.</td></tr>
+      <tr><td><strong>Wrong email address</strong></td><td>Update at <a href="https://www.openccc.net/" target="_blank">OpenCCC</a> first, then email <a href="mailto:support@cvc.edu">support@cvc.edu</a>.</td></tr>
+      <tr><td><strong>Wrong residency / tuition</strong></td><td>Fix at <strong>Home College</strong> &rarr; get email confirmation &rarr; forward to <a href="mailto:support@cvc.edu">support@cvc.edu</a>.</td></tr>
+      <tr><td><strong>CCPG not applying</strong></td><td>Re-apply at Teaching College. Dashboard &rarr; Pay Now &rarr; select CCPG.</td></tr>
+      <tr><td><strong>Dropped for non-payment</strong></td><td>Contact <strong>Teaching College</strong> about reinstatement. Pay immediately.</td></tr>
+      <tr><td><strong>DSPS not recognized</strong></td><td>Apply separately at <strong>Teaching College DSPS</strong>. Identify as Exchange student.</td></tr>
+      <tr><td><strong>Two email confusion</strong></td><td>Home College email = Canvas. Teaching College email = their campus tools. Check both.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="card" style="margin-top:16px"><h3>Contact Routing Cheat Sheet</h3>
+  <p style="margin-top:6px;font-size:.9rem;color:var(--g600);line-height:1.8">
+    <strong>Login / eligibility / holds &rarr;</strong> Home College Admissions<br>
+    <strong>Registration hold at Teaching College &rarr;</strong> Teaching College Admissions<br>
+    <strong>Financial aid &rarr;</strong> Home College FA Office<br>
+    <strong>Canvas issues &rarr;</strong> Home College IT<br>
+    <strong>DSPS accommodations &rarr;</strong> Teaching College DSPS<br>
+    <strong>CVC platform / technical &rarr;</strong> <a href="mailto:support@cvc.edu">support@cvc.edu</a><br>
+    <strong>Transcripts &rarr;</strong> Teaching College A&amp;R<br>
+    <strong>Veterans benefits &rarr;</strong> Home College VA Official
+  </p></div>
+
+  <div class="alert danger" style="margin-top:16px"><div class="ai">&#128680;</div><p><strong>Still stuck?</strong> Email <a href="mailto:support@cvc.edu">support@cvc.edu</a> with: full name, Home College, CCCID, and screenshot of the error.</p></div>
+
+  <div class="section-nav">
+    <button class="nav-btn" onclick="goTo('s-oer')">&larr; Free Textbooks</button>
+    <button class="nav-btn primary" onclick="goTo('s-faq')">Next: FAQ &rarr;</button>
+  </div>
+</section>
+</div>
+
+<!-- S: FAQ -->
+<div id="s-faq" class="page">
+<section>
+  <h2>Student FAQ</h2>
+  <p style="color:var(--g600);margin-bottom:12px;font-size:.9rem">Questions the official site doesn't answer clearly.</p>
+  <div id="studentFaqs">
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What's the difference between "Add Class" and "Apply Now"?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a"><strong>"Add Class"</strong> = instant cross-enrollment, no new application. <strong>"Apply Now"</strong> = that college requires a separate CCCApply application first. Always prefer "Add Class" courses for the quickest path.</div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Do my DSPS accommodations transfer?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a"><strong>No.</strong> This is one of the biggest surprises. You must apply separately at the Teaching College's DSPS office. Bring your documentation from your Home College. Identify as a CVC Exchange student.</div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Why do I have two email addresses now?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a">Your <strong>Home College email</strong> is used for Canvas (where you do coursework). The <strong>Teaching College email</strong> is for their campus systems. Important notifications can go to either. Check both.</div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Is CCPG the same as the California Promise Program?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a"><strong>No.</strong> CCPG (CA College Promise Grant) is a fee waiver for eligible students. The Promise Program is free tuition for first-time, full-time students. Different programs, different eligibility, different applications.</div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Can I earn a degree entirely through the Exchange?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a">No. You must be enrolled in at least one course at your Home College each term. The Exchange supplements &mdash; it doesn't replace your Home College enrollment.</div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What free tools do I have access to as a CCC student?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a"><strong>NetTutor</strong> (24/7 tutoring), <strong>Labster</strong> (160+ virtual STEM labs), <strong>Pronto</strong> (class messaging), <strong>Wellness Central</strong> (mental health), <strong>ConferZoom</strong> (video), and <strong>Canvas</strong> &mdash; all at no cost, all centrally funded. Most are accessible through Canvas. See the <a href="javascript:void(0)" onclick="goTo('s-freetools')">Free Tools</a> section.</div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What does "Quality Reviewed" mean?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a">The course was reviewed by trained faculty peers using the <strong>CVC-OEI Course Design Rubric</strong> &mdash; 44 standards covering content design, interaction, assessment, and accessibility. It's the highest quality bar for online instruction in the CCC system.</div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>How do I find free textbooks?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a">Filter for <strong>ZTC</strong> (Zero Textbook Cost) badges when searching courses. For non-ZTC courses, check <a href="https://asccc-oeri.org/" target="_blank">ASCCC OERI</a> and <a href="https://cool4ed.org/" target="_blank">COOL4Ed</a> for free alternatives. See the <a href="javascript:void(0)" onclick="goTo('s-oer')">Free Textbooks</a> section.</div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Why does the cvc.edu support link go to two different places?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a">The CVC site has two support systems: <a href="https://cvc.freshservice.com/support/home" target="_blank">Freshservice</a> (linked from the nav) and <a href="https://cvc-oei.zendesk.com/hc/en-us/" target="_blank">Zendesk</a> (linked from the Students page). Both work. For fastest response, email <a href="mailto:support@cvc.edu">support@cvc.edu</a> directly.</div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Does my priority registration transfer?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a"><strong>No.</strong> You can only enroll at Teaching Colleges during open registration. Priority registration is not shared across colleges.</div></div>
+  </div>
+  <div class="section-nav">
+    <button class="nav-btn" onclick="goTo('s-troubleshoot')">&larr; Troubleshooting</button>
+    <button class="nav-btn primary" onclick="window.open('https://search.cvc.edu/','_blank')">Search Courses on CVC &nearr;</button>
+  </div>
+</section>
+</div>
+
+</div><!-- /aud-student -->
+
+
+<!-- ═══════════════════════════════════ -->
+<!-- FACULTY / STAFF CONTENT             -->
+<!-- ═══════════════════════════════════ -->
+<div class="audience-section" id="aud-staff">
+
+<!-- F: ECOSYSTEM -->
+<div id="f-ecosystem" class="page active">
+<section>
+  <span class="gap-label">Fills gap: cvc.edu/educators/ is placeholder text</span>
+  <h2>The CVC-OEI Ecosystem</h2>
+  <p style="color:var(--g600);margin-bottom:14px;font-size:.9rem">The <a href="https://www.cvc.edu/educators/" target="_blank">official educators page</a> is incomplete. This map shows the full ecosystem &mdash; how the Exchange, professional development, quality standards, free tools, and data infrastructure actually connect.</p>
+
+  <div class="grid-3">
+    <div class="eco-node gold-t">
+      <h3>CVC Exchange</h3>
+      <p>Cross-enrollment across 116 colleges. 10,000+ searchable online courses.</p>
+      <a href="https://cvc.edu" target="_blank">cvc.edu &nearr;</a>
+    </div>
+    <div class="eco-node purple-t">
+      <h3>@ONE Professional Dev</h3>
+      <p>Free/low-cost courses, certificates, and webinars for online teaching.</p>
+      <a href="https://onlinenetworkofeducators.org/" target="_blank">@ONE &nearr;</a>
+    </div>
+    <div class="eco-node mint-t">
+      <h3>Course Quality (POCR)</h3>
+      <p>44-standard rubric + peer review. Earns the Quality Reviewed badge.</p>
+      <a href="javascript:void(0)" onclick="goTo('f-quality')">Details &rarr;</a>
+    </div>
+    <div class="eco-node teal-t">
+      <h3>Accessibility Center</h3>
+      <p>Free scanning tools, PDF remediation, training for all CCC employees.</p>
+      <a href="https://cccaccessibility.org/" target="_blank">cccaccessibility.org &nearr;</a>
+    </div>
+    <div class="eco-node orange-t">
+      <h3>OER &amp; ZTC</h3>
+      <p>Open textbooks, zero-cost materials, Canvas Commons shells.</p>
+      <a href="javascript:void(0)" onclick="goTo('f-oer')">Details &rarr;</a>
+    </div>
+    <div class="eco-node sky-t">
+      <h3>Data &amp; Analytics</h3>
+      <p>Public dashboards: DataMart, DataVista, LaunchBoard, Key Facts.</p>
+      <a href="javascript:void(0)" onclick="goTo('f-data')">Details &rarr;</a>
+    </div>
+    <div class="eco-node rose-t">
+      <h3>Free Digital Tools</h3>
+      <p>Canvas, Zoom, Labster, NetTutor, Pronto, 3C Media, Studio.</p>
+      <a href="javascript:void(0)" onclick="goTo('f-tools')">Full list &rarr;</a>
+    </div>
+    <div class="eco-node gold-t">
+      <h3>CCC Tech Center</h3>
+      <p>CCCApply, OpenCCC, SSO, CENIC network. System backbone.</p>
+      <a href="https://ccctechcenter.org/" target="_blank">ccctechcenter.org &nearr;</a>
+    </div>
+    <div class="eco-node purple-t">
+      <h3>OTC &amp; Events</h3>
+      <p>Online Teaching Conference archives back to 2011. Annual events.</p>
+      <a href="https://onlineteachingconference.org/" target="_blank">OTC &nearr;</a>
+    </div>
+  </div>
+
+  <div class="throughline" style="margin-top:16px">
+    <h3>The Throughline</h3>
+    <p><strong>@ONE</strong> trains faculty to build excellent courses. The <strong>Rubric</strong> defines what "excellent" means. <strong>POCR</strong> verifies it through peer review. The <strong>Exchange</strong> makes those courses discoverable. <strong>Free tools</strong> make them accessible. <strong>OER</strong> makes them affordable. <strong>Data</strong> measures whether it's working. Every piece feeds the next.</p>
+  </div>
+
+  <div class="section-nav">
+    <span></span>
+    <button class="nav-btn primary" onclick="goTo('f-quality')">Next: Course Quality &rarr;</button>
+  </div>
+</section>
+</div>
+
+<!-- F: COURSE QUALITY -->
+<div id="f-quality" class="page">
+<section>
+  <h2>Course Quality: Rubric, POCR &amp; @ONE</h2>
+
+  <div class="card" style="margin-bottom:12px">
+    <h3>The CVC-OEI Course Design Rubric</h3>
+    <p style="margin-top:6px"><strong>44 standards</strong> across four sections:<br>
+    <strong>A:</strong> Course Design (content, navigation, objectives) &middot;
+    <strong>B:</strong> Interaction (instructor presence, engagement) &middot;
+    <strong>C:</strong> Assessment (alignment, feedback, integrity) &middot;
+    <strong>D:</strong> Accessibility (16 WCAG standards)</p>
+    <ul class="link-list" style="margin-top:10px">
+      <li><a href="https://onlinenetworkofeducators.org/course-design-academy/online-course-rubric/" target="_blank">Rubric overview &nearr;</a></li>
+      <li><a href="https://onlinenetworkofeducators.org/wp-content/uploads/2021/05/CVC_OEI_Course_Design_Rubric_rev_April_2020_ACC_52021.pdf" target="_blank">Download fillable rubric PDF (2020) &nearr;</a></li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-bottom:12px">
+    <h3>POCR &mdash; Peer Online Course Review</h3>
+    <p style="margin-top:6px">Non-evaluative, faculty-to-faculty review process. Trained reviewers examine courses against the rubric. Courses that meet all standards earn the <strong>Quality Reviewed badge</strong>, increasing visibility on the Exchange.</p>
+    <ul class="link-list" style="margin-top:10px">
+      <li><a href="https://onlinenetworkofeducators.org/course-design-academy/" target="_blank">Course Design Academy (POCR training) &nearr;</a></li>
+      <li><a href="https://www.asccc.org/content/effective-student-centered-online-education-using-cvc-oei-online-course-design-rubric-and" target="_blank">ASCCC Paper on Rubric &amp; POCR &nearr;</a></li>
+    </ul>
+  </div>
+
+  <div class="alert tip"><div class="ai">&#128161;</div><p><strong>Hidden resource:</strong> Search <strong>"CVC-OEI Adoptable"</strong> in Canvas Commons for CC BY licensed course shells aligned to the rubric. Ready to import and adapt.</p></div>
+</section>
+
+<section>
+  <h2>@ONE Professional Development</h2>
+  <p style="color:var(--g600);margin-bottom:12px;font-size:.9rem">The <a href="https://onlinenetworkofeducators.org/" target="_blank">Online Network of Educators</a> lives on a separate domain from cvc.edu and is easy to miss. It's the PD arm of the OEI, offering free and low-cost courses since the 1990s.</p>
+
+  <div class="card" style="margin-bottom:12px">
+    <h3>Certificate Programs</h3>
+    <ul class="link-list">
+      <li><a href="https://onlinenetworkofeducators.org/pd/certificates/online-teaching-certificate/" target="_blank">Certificate in Online Teaching Principles &nearr;</a><div class="desc">Capstone credential for online pedagogy, engagement, and assessment</div></li>
+      <li><a href="https://onlinenetworkofeducators.org/pd/certificates/course-design-fundamentals/" target="_blank">Course Design Fundamentals Certificate &nearr;</a><div class="desc">4-course sequence or 12-week intensive</div></li>
+      <li><a href="https://onlinenetworkofeducators.org/certificate-in-online-teaching-design/" target="_blank">Certificate in Online Teaching &amp; Design &nearr;</a><div class="desc">Combined teaching + design credential</div></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>More PD Resources</h3>
+    <ul class="link-list">
+      <li><a href="https://catalog.onlinenetworkofeducators.org/" target="_blank">Full Course Catalog &nearr;</a><div class="desc">Canvas-based, includes free self-paced options</div></li>
+      <li><a href="https://onlinenetworkofeducators.org/webinars/" target="_blank">Webinar Archive &nearr;</a><div class="desc">Recorded sessions including AI in education</div></li>
+      <li><a href="https://onlineteachingconference.org/otc_archives/" target="_blank">OTC Session Archives (2011&ndash;present) &nearr;</a><div class="desc">Years of recorded conference presentations</div></li>
+      <li><a href="https://www.youtube.com/@OnlineNetworkofEducators/playlists" target="_blank">@ONE YouTube Channel &nearr;</a></li>
+      <li><a href="https://visionresourcecenter.cccco.edu/" target="_blank">Vision Resource Center &nearr;</a><div class="desc">PD platform for 137,000+ CCC employees</div></li>
+    </ul>
+  </div>
+
+  <div class="section-nav">
+    <button class="nav-btn" onclick="goTo('f-ecosystem')">&larr; Ecosystem</button>
+    <button class="nav-btn primary" onclick="goTo('f-a11y')">Next: Accessibility &rarr;</button>
+  </div>
+</section>
+</div>
+
+<!-- F: ACCESSIBILITY -->
+<div id="f-a11y" class="page">
+<section class="section-anchor">
+  <span class="gap-label">Not on cvc.edu at all</span>
+  <h2>CCC Accessibility Center</h2>
+  <p style="color:var(--g600);margin-bottom:14px;font-size:.9rem">A dedicated accessibility support center funded by the Chancellor's Office. Provides free tools, training, and consultation to <strong>all CCC employees</strong>. Most people don't know it exists.</p>
+
+  <div class="grid-2">
+    <div class="a11y-card">
+      <h3>Pope Tech &mdash; Canvas Scanning</h3>
+      <p>Automated accessibility checker that scans your Canvas courses. Identifies issues with headings, alt text, links, color contrast, tables, and more. Generates reports with fix suggestions.</p>
+      <div class="a11y-link"><a href="https://cccaccessibility.org/tools-training/tools" target="_blank">Access Pope Tech &rarr;</a></div>
+    </div>
+    <div class="a11y-card">
+      <h3>Equidox &mdash; PDF Remediation</h3>
+      <p>Converts inaccessible PDFs into accessible documents with proper tagging, reading order, alt text, and table structure. Essential for converting scanned materials.</p>
+      <div class="a11y-link"><a href="https://cccaccessibility.org/tools-training/tools" target="_blank">Access Equidox &rarr;</a></div>
+    </div>
+    <div class="a11y-card">
+      <h3>Self-Paced Training</h3>
+      <p>Free courses on document accessibility, web content, Canvas, video captioning, and assistive technology. Available to all CCC employees at any time.</p>
+      <div class="a11y-link"><a href="https://cccaccessibility.org/tools-training/self-paced" target="_blank">Browse training catalog &rarr;</a></div>
+    </div>
+    <div class="a11y-card">
+      <h3>Canvas Accessibility Guide</h3>
+      <p>Specific guidance for making Canvas courses accessible. Rich Content Editor tips, assignment design, quiz accessibility, and navigation best practices.</p>
+      <div class="a11y-link"><a href="https://cccaccessibility.org/digital-content/canvas-accessibility" target="_blank">Canvas guide &rarr;</a></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h3>Quick Accessibility Checklist</h3>
+    <div class="checklist" style="box-shadow:none;padding:0;margin-top:8px">
+      <div class="ci"><div class="ck">&#10003;</div><div>All images have descriptive alt text (or are marked decorative)</div></div>
+      <div class="ci"><div class="ck">&#10003;</div><div>Videos have captions (Canvas Studio generates AI captions automatically)</div></div>
+      <div class="ci"><div class="ck">&#10003;</div><div>Documents use proper heading hierarchy (H1 &rarr; H2 &rarr; H3)</div></div>
+      <div class="ci"><div class="ck">&#10003;</div><div>PDFs are tagged and have reading order (use Equidox to fix)</div></div>
+      <div class="ci"><div class="ck">&#10003;</div><div>Color is not the only way information is conveyed</div></div>
+      <div class="ci"><div class="ck">&#10003;</div><div>Links have descriptive text (not "click here")</div></div>
+      <div class="ci"><div class="ck">&#10003;</div><div>Tables have header rows and clear structure</div></div>
+      <div class="ci"><div class="ck">&#10003;</div><div>Course navigation is logical and consistent</div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h3>More Accessibility Resources</h3>
+    <ul class="link-list">
+      <li><a href="https://cccaccessibility.org/" target="_blank">CCC Accessibility Center Home &nearr;</a><div class="desc">Full portal: tools, training, consultation, standards</div></li>
+      <li><a href="https://cccaccessibility.org/web/evaluating-web-content" target="_blank">Evaluating Web Content &nearr;</a><div class="desc">Step-by-step guides for checking web accessibility</div></li>
+      <li><a href="https://cccaccessibility.org/2-uncategorised/28-eit-accessibility-standards" target="_blank">EIT Accessibility Standards &nearr;</a><div class="desc">The standards all CCC digital content must meet</div></li>
+    </ul>
+  </div>
+
+  <div class="throughline" style="margin-top:16px">
+    <h3>Accessibility &amp; the Rubric</h3>
+    <p>Section D of the CVC-OEI Course Design Rubric contains <strong>16 accessibility standards</strong>. To earn the Quality Reviewed badge via POCR, your course must meet all 16. The Accessibility Center's tools and training are designed to help you get there.</p>
+  </div>
+
+  <div class="section-nav">
+    <button class="nav-btn" onclick="goTo('f-quality')">&larr; Quality &amp; PD</button>
+    <button class="nav-btn primary" onclick="goTo('f-tools')">Next: Free Tools &rarr;</button>
+  </div>
+</section>
+</div>
+
+<!-- F: FREE TOOLS & OER -->
+<div id="f-tools" class="page">
+<section>
+  <span class="gap-label">Supplements cvc.edu/educators/digital-technologies</span>
+  <h2>Centrally Funded Digital Tools</h2>
+  <p style="color:var(--g600);margin-bottom:14px;font-size:.9rem">The <a href="https://www.cvc.edu/educators/digital-technologies/" target="_blank">official page</a> lists 5 tools. Here's the expanded list including accessibility and content tools. See the <a href="javascript:void(0)" onclick="goTo('f-a11y')">Accessibility</a> section for Pope Tech and Equidox details.</p>
+
+  <table class="res-table">
+    <thead><tr><th>Tool</th><th>What It Does</th><th>For</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Canvas LMS</strong></td><td>Systemwide LMS &mdash; largest deployment in the country</td><td>All</td></tr>
+      <tr><td><strong>Canvas Studio</strong></td><td>Video management with AI-powered captions &amp; quizzing</td><td>Faculty</td></tr>
+      <tr><td><a href="https://cccedu.zoom.us/" target="_blank">ConferZoom</a></td><td>Zoom for all CCC employees, Canvas-integrated</td><td>All employees</td></tr>
+      <tr><td><strong>NetTutor</strong></td><td>24/7 multilingual tutoring (250 hrs/college/year)</td><td>Students</td></tr>
+      <tr><td><strong>Pisces</strong></td><td>24/7 collaboration platform for in-house tutors</td><td>Tutoring centers</td></tr>
+      <tr><td><a href="https://pronto.io/education/" target="_blank">Pronto</a></td><td>Real-time messaging integrated with Canvas</td><td>Faculty, students</td></tr>
+      <tr><td><a href="https://www.labster.com/higher-education/california-community-colleges" target="_blank">Labster</a></td><td>160+ virtual STEM lab simulations</td><td>STEM</td></tr>
+      <tr><td><a href="https://3cmediasolutions.org/" target="_blank">3C Media / TechConnect</a></td><td>Unlimited free video hosting, no ads, captioning included</td><td>Faculty</td></tr>
+      <tr><td><a href="https://cccaccessibility.org/tools-training/tools" target="_blank">Pope Tech</a></td><td>Automated Canvas accessibility scanning</td><td>Faculty, accessibility</td></tr>
+      <tr><td><a href="https://cccaccessibility.org/tools-training/tools" target="_blank">Equidox</a></td><td>PDF accessibility remediation</td><td>Faculty, accessibility</td></tr>
+    </tbody>
+  </table>
+
+  <div class="alert tip" style="margin-top:14px"><div class="ai">&#128161;</div><p><strong>Hidden gem:</strong> <a href="https://3cmediasolutions.org/" target="_blank">3C Media Solutions</a> provides <strong>unlimited free video hosting</strong> with no ads and built-in captioning. No YouTube needed, no student data concerns.</p></div>
+</section>
+
+<section id="f-oer">
+  <span class="gap-label">Fills gap: cvc.edu/educators/open-educational-resources has empty sections</span>
+  <h2>OER Resources for Educators</h2>
+  <p style="color:var(--g600);margin-bottom:14px;font-size:.9rem">The <a href="https://www.cvc.edu/educators/open-educational-resources/" target="_blank">official OER page</a> lists four section headings (Tools, Guidelines, ZTC, FAQ) but none contain actual content. Here are the resources those sections should link to:</p>
+
+  <div class="grid-2">
+    <div class="rc">
+      <span class="badge oer">Repository</span>
+      <h3>ASCCC OERI</h3>
+      <p>Academic Senate OER Initiative. Curated collections by discipline, adoption guides, faculty support.</p>
+      <p class="rc-link"><a href="https://asccc-oeri.org/" target="_blank">Browse OERI &rarr;</a></p>
+    </div>
+    <div class="rc">
+      <span class="badge oer">Library</span>
+      <h3>COOL4Ed</h3>
+      <p>California's open textbook library. Faculty-reviewed, searchable.</p>
+      <p class="rc-link"><a href="https://cool4ed.org/" target="_blank">Search textbooks &rarr;</a></p>
+    </div>
+    <div class="rc">
+      <span class="badge oer">Community</span>
+      <h3>OER Commons CCC Hub</h3>
+      <p>Shared space for all 116 colleges to discover and contribute open materials.</p>
+      <p class="rc-link"><a href="https://oercommons.org/hubs/ccc" target="_blank">Visit hub &rarr;</a></p>
+    </div>
+    <div class="rc">
+      <span class="badge oer">Canvas</span>
+      <h3>Canvas Commons</h3>
+      <p>Search "CVC-OEI Adoptable" or "OpenStax" for CC BY licensed course shells ready to import.</p>
+      <p class="rc-link"><a href="https://asccc-oeri.org/oer-repositories-and-collections/" target="_blank">More repositories &rarr;</a></p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h3>ZTC &amp; OER Programs</h3>
+    <ul class="link-list">
+      <li><a href="https://www.cccco.edu/About-Us/Chancellors-Office/Divisions/Educational-Services-and-Support/burden-free-instructional-materials/zero-textbook-cost-program" target="_blank">ZTC Program (Chancellor's Office) &nearr;</a></li>
+      <li><a href="https://www.cccoer.org/" target="_blank">CCCOER (Community College Consortium for OER) &nearr;</a></li>
+      <li><a href="https://asccc-oeri.org/resources/" target="_blank">ASCCC OERI Faculty Resources &nearr;</a></li>
+    </ul>
+  </div>
+
+  <div class="section-nav">
+    <button class="nav-btn" onclick="goTo('f-a11y')">&larr; Accessibility</button>
+    <button class="nav-btn primary" onclick="goTo('f-data')">Next: Data &amp; Infrastructure &rarr;</button>
+  </div>
+</section>
+</div>
+
+<!-- F: DATA & INFRASTRUCTURE -->
+<div id="f-data" class="page">
+<section>
+  <span class="gap-label">Not on cvc.edu at all</span>
+  <h2>Data Dashboards &amp; Analytics</h2>
+  <p style="color:var(--g600);margin-bottom:14px;font-size:.9rem">The CCC system publishes extensive public data. None of this is linked from cvc.edu.</p>
+
+  <div class="grid-2">
+    <div class="rc">
+      <span class="badge data">Queryable</span>
+      <h3>DataMart</h3>
+      <p>Query enrollment, success rates, demographics, transfer, and financial aid for any college or district.</p>
+      <p class="rc-link"><a href="https://datamart.cccco.edu/" target="_blank">Query DataMart &rarr;</a></p>
+    </div>
+    <div class="rc">
+      <span class="badge data">Visual</span>
+      <h3>DataVista</h3>
+      <p>Interactive visualizations of student success, workforce outcomes, and equity data.</p>
+      <p class="rc-link"><a href="https://datavista.cccco.edu/" target="_blank">Explore DataVista &rarr;</a></p>
+    </div>
+    <div class="rc">
+      <span class="badge data">Pipeline</span>
+      <h3>Cal-PASS Plus / LaunchBoard</h3>
+      <p>Cross-segmental K-12 to workforce tracking. Student Success Metrics and Strong Workforce pipelines.</p>
+      <p class="rc-link"><a href="https://www.calpassplus.org/launchboard/home.aspx" target="_blank">LaunchBoard &rarr;</a></p>
+    </div>
+    <div class="rc">
+      <span class="badge data">Reference</span>
+      <h3>Key Facts</h3>
+      <p>System-level statistics: enrollment, demographics, completion, funding.</p>
+      <p class="rc-link"><a href="https://www.cccco.edu/About-Us/Key-Facts/key-facts-table-data" target="_blank">Key facts &rarr;</a></p>
+    </div>
+  </div>
+
+  <div class="alert tip"><div class="ai">&#128161;</div><p><strong>For researchers &amp; IR:</strong> The CCC Data Warehouse has <a href="https://cccnext.jira.com/wiki/spaces/DWPub/overview" target="_blank">public Confluence documentation</a> with detailed data dictionaries.</p></div>
+</section>
+
+<section>
+  <h2>Technical Infrastructure</h2>
+  <p style="color:var(--g600);margin-bottom:14px;font-size:.9rem">The <a href="https://ccctechcenter.org/" target="_blank">CCC Technology Center</a> (Butte College) maintains the backbone systems. These public docs exist but are hard to find.</p>
+
+  <div class="grid-2">
+    <div class="rc">
+      <span class="badge tool">Identity</span>
+      <h3>OpenCCC &amp; CCCID</h3>
+      <p>Systemwide student identity. The foundation for cross-enrollment.</p>
+      <p class="rc-link"><a href="https://ccctechcenter.org/projects/openccc" target="_blank">Docs &rarr;</a></p>
+    </div>
+    <div class="rc">
+      <span class="badge tool">Application</span>
+      <h3>CCCApply</h3>
+      <p>Systemwide application processing millions annually.</p>
+      <p class="rc-link"><a href="https://cccnext.jira.com/wiki/spaces/PD/overview" target="_blank">Public docs &rarr;</a></p>
+    </div>
+    <div class="rc">
+      <span class="badge tool">Network</span>
+      <h3>CENIC / CalREN</h3>
+      <p>10 Gbps fiber connecting all colleges. Centrally funded.</p>
+      <p class="rc-link"><a href="https://cccnext.jira.com/wiki/spaces/CENPD/overview" target="_blank">Docs &rarr;</a></p>
+    </div>
+    <div class="rc">
+      <span class="badge tool">Auth</span>
+      <h3>SSO Federation</h3>
+      <p>InCommon-based single sign-on. Centrally paid for all colleges.</p>
+      <p class="rc-link"><a href="https://cccnext.jira.com/wiki/spaces/CSF/pages/131465614" target="_blank">Resource guide &rarr;</a></p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h3>Procurement</h3>
+    <ul class="link-list">
+      <li><a href="https://purchasing.collegebuys.org/" target="_blank">CollegeBuys &nearr;</a><div class="desc">Institutional purchasing portal for hardware, software, and services</div></li>
+      <li><a href="https://purchasing.collegebuys.org/systemwide-technology-access/" target="_blank">STAC (Systemwide Technology Access Collaborative) &nearr;</a><div class="desc">$31M+ in collective savings since 2021</div></li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h3>Hidden Confluence Wikis</h3>
+    <p style="margin-top:6px;color:var(--g600);font-size:.86rem">Public technical documentation most people never find:</p>
+    <ul class="link-list">
+      <li><a href="https://cccnext.jira.com/wiki/spaces/DWPub/overview" target="_blank">Data Warehouse &nearr;</a></li>
+      <li><a href="https://cccnext.jira.com/wiki/spaces/GLUEPD/overview" target="_blank">Project SuperGlue (Integration Framework) &nearr;</a></li>
+      <li><a href="https://cccnext.jira.com/wiki/spaces/PD/overview" target="_blank">CCCApply &nearr;</a></li>
+    </ul>
+  </div>
+
+  <div class="section-nav">
+    <button class="nav-btn" onclick="goTo('f-tools')">&larr; Tools &amp; OER</button>
+    <button class="nav-btn primary" onclick="goTo('f-exchange')">Next: Exchange Admin &rarr;</button>
+  </div>
+</section>
+</div>
+
+<!-- F: EXCHANGE ADMIN -->
+<div id="f-exchange" class="page">
+<section>
+  <span class="gap-label">Fills gap: cvc.edu/educators/resources links nowhere</span>
+  <h2>Exchange Administration by Role</h2>
+  <p style="color:var(--g600);margin-bottom:14px;font-size:.9rem">The <a href="https://www.cvc.edu/educators/resources/" target="_blank">official resources page</a> has role cards that don't link anywhere. Here's what each role actually needs to know.</p>
+
+  <div class="grid-2">
+    <div class="role-card gold-t"><h3>Admissions &amp; Records</h3><ul><li>Designate <strong>A&amp;R Campus Admin</strong> for Exchange Dashboard</li><li>Validate residency requests electronically</li><li>Process prereq evaluations within 3 business days</li><li>Monitor via Term Transcript Report</li></ul></div>
+    <div class="role-card"><h3>Financial Aid</h3><ul><li>Sign <strong>FA Consortium Agreement</strong> (FA Director + President)</li><li>Use centralized FA Dashboard with counselors</li><li>Home College handles all eligibility/awarding/disbursement</li><li>Process R2T4 for early withdrawals</li></ul></div>
+    <div class="role-card mint-t"><h3>Counseling</h3><ul><li>Verify Exchange courses fit student Ed Plans</li><li>Evaluate course eligibility on FA Dashboard</li><li>Advise that DSPS must be re-established</li><li>Use <a href="https://programmapper.org/" target="_blank">Pathways Mapper</a> for transfer advising</li></ul></div>
+    <div class="role-card purple-t"><h3>DSPS</h3><ul><li>Accommodations do <strong>NOT</strong> auto-transfer</li><li>Students apply separately at Teaching College</li><li>Home College notifies per Title 5 &sect;56022</li><li>Use <a href="https://cccaccessibility.org/" target="_blank">Accessibility Center</a> tools</li></ul></div>
+    <div class="role-card teal-t"><h3>IT / Technical</h3><ul><li>Canvas integration for cross-enrollees</li><li>All fully online courses auto-list</li><li><a href="https://cvc.edu/educators/technical-documentation/" target="_blank">Technical docs &nearr;</a></li><li><a href="https://ccctechcenter.org/" target="_blank">CCC Tech Center &nearr;</a> for infrastructure</li></ul></div>
+    <div class="role-card orange-t"><h3>Faculty</h3><ul><li>Online courses auto-list &mdash; no action needed</li><li>Exchange students appear normally in Canvas</li><li>Get <a href="javascript:void(0)" onclick="goTo('f-quality')">@ONE certified</a></li><li>Submit courses for <a href="javascript:void(0)" onclick="goTo('f-quality')">POCR review</a></li></ul></div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h3>Dashboard &amp; Admin Resources</h3>
+    <ul class="link-list">
+      <li><a href="https://cvc.edu/educators/consortium/" target="_blank">College Implementation Tracker &nearr;</a><div class="desc">Signed agreements, designated admins, technical status</div></li>
+      <li><a href="https://cvc.edu/educators/cvc-exchange/studentservices/" target="_blank">Student Services Training &nearr;</a><div class="desc">Videos, guides, webinars for FA, A&amp;R, Counseling, DSPS</div></li>
+      <li><a href="https://cvc.edu/release-notes/" target="_blank">Exchange Release Notes &nearr;</a><div class="desc">Monthly platform updates</div></li>
+      <li><a href="https://cvc.edu/educators/technical-documentation/" target="_blank">Technical Documentation &nearr;</a></li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h3>Key Documents</h3>
+    <ul class="link-list">
+      <li><a href="https://cvc.edu/wp-content/uploads/2022/05/FINAL-Common-LMS-Case-Study-2022.pdf" target="_blank">Common LMS Case Study (2022) &nearr;</a></li>
+      <li><a href="https://cvc.edu/wp-content/uploads/2024/10/Analysis-and-Recommendations-for-CBE-Technology-23-24.pdf" target="_blank">CBE Technology Analysis &nearr;</a></li>
+      <li><a href="https://www.asccc.org/sites/default/files/20231207_ASCCC_Demystifying_CBE.pdf" target="_blank">Demystifying CBE (ASCCC) &nearr;</a></li>
+    </ul>
+  </div>
+
+  <div class="section-nav">
+    <button class="nav-btn" onclick="goTo('f-data')">&larr; Data</button>
+    <button class="nav-btn primary" onclick="goTo('f-faq')">Next: FAQ &rarr;</button>
+  </div>
+</section>
+</div>
+
+<!-- F: FAQ -->
+<div id="f-faq" class="page">
+<section>
+  <h2>Faculty &amp; Staff FAQ</h2>
+  <div id="staffFaqs">
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Which courses appear on the Exchange?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a">All <strong>fully online courses</strong> with no on-campus requirements auto-list. Synchronous and asynchronous both qualify. No faculty action needed.</div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>How does cross-enrollment affect FTES?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a"><strong>Teaching College</strong> gains FTES. <strong>Home College</strong> retains Student Success credit under the funding formula. It's mutually beneficial &mdash; more students means less cancellation risk for Teaching College.</div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Where is the educator landing page content?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a">As of April 2026, <a href="https://www.cvc.edu/educators/" target="_blank">cvc.edu/educators/</a> contains placeholder text. The <a href="javascript:void(0)" onclick="goTo('f-ecosystem')">Ecosystem section</a> of this companion guide provides the orientation that page is missing.</div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What is @ONE and where do I find it?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a">The <a href="https://onlinenetworkofeducators.org/" target="_blank">Online Network of Educators</a> is the PD arm of CVC-OEI. It lives on a separate domain and is linked from cvc.edu as "Visit CVC@ONE." It offers free/low-cost courses, certificates, and webinars.</div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What free tools are centrally funded?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a">Canvas, Canvas Studio, ConferZoom, NetTutor, Pisces, Pronto, Labster, 3C Media, Pope Tech, and Equidox. All at no cost to your college. <a href="javascript:void(0)" onclick="goTo('f-tools')">See the full list &rarr;</a></div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Where are the OER resources the official page promises?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a">The CVC OER page has four empty sections. The actual resources: <a href="https://asccc-oeri.org/" target="_blank">ASCCC OERI</a>, <a href="https://cool4ed.org/" target="_blank">COOL4Ed</a>, <a href="https://oercommons.org/hubs/ccc" target="_blank">OER Commons CCC Hub</a>, and "CVC-OEI Adoptable" shells in Canvas Commons. <a href="javascript:void(0)" onclick="goTo('f-oer')">Full list &rarr;</a></div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Where can I find public CCC data?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a"><a href="https://datamart.cccco.edu/" target="_blank">DataMart</a> for queryable data, <a href="https://datavista.cccco.edu/" target="_blank">DataVista</a> for visual dashboards, <a href="https://www.calpassplus.org/launchboard/home.aspx" target="_blank">LaunchBoard</a> for pipeline data. All publicly accessible. <a href="javascript:void(0)" onclick="goTo('f-data')">Details &rarr;</a></div></div>
+
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Is there a Python API for CVC course data?</span><span class="faq-arrow">&#9660;</span></button><div class="faq-a">Yes &mdash; community-built: <a href="https://github.com/rob-m1/california-virtual-campus-api" target="_blank">california-virtual-campus-api</a> on GitHub. <code>pip install CaliforniaVirtualCampusAPI</code>. Course data is CC BY 4.0. <a href="https://cvc-api.github.io/" target="_blank">API docs &nearr;</a></div></div>
+  </div>
+
+  <div class="section-nav">
+    <button class="nav-btn" onclick="goTo('f-exchange')">&larr; Exchange Admin</button>
+    <button class="nav-btn primary" onclick="window.open('https://cvc.edu/educators/exchange/','_blank')">CVC Educators Portal &nearr;</button>
+  </div>
+</section>
+</div>
+
+</div><!-- /aud-staff -->
+</main>
+
+<!-- FOOTER -->
+<div class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Students</h4>
+        <a href="#s-start" onclick="goTo('s-start')">Start Here</a>
+        <a href="#s-enroll" onclick="goTo('s-enroll')">Enrollment Guide</a>
+        <a href="#s-money" onclick="goTo('s-money')">Money &amp; Aid</a>
+        <a href="#s-freetools" onclick="goTo('s-freetools')">Free Tools</a>
+        <a href="#s-oer" onclick="goTo('s-oer')">Free Textbooks</a>
+        <a href="#s-troubleshoot" onclick="goTo('s-troubleshoot')">Troubleshooting</a>
+      </div>
+      <div class="footer-col">
+        <h4>Official CVC</h4>
+        <a href="https://search.cvc.edu/" target="_blank">Search Courses <span class="ext">&nearr;</span></a>
+        <a href="https://www.cvc.edu/students/" target="_blank">CVC Students <span class="ext">&nearr;</span></a>
+        <a href="https://www.cvc.edu/students/student-eligibility/" target="_blank">Eligibility <span class="ext">&nearr;</span></a>
+        <a href="https://www.cvc.edu/students/financial-aid/" target="_blank">Financial Aid <span class="ext">&nearr;</span></a>
+        <a href="https://www.cvc.edu/educators/digital-technologies/" target="_blank">Digital Technologies <span class="ext">&nearr;</span></a>
+      </div>
+      <div class="footer-col">
+        <h4>Educators</h4>
+        <a href="#f-ecosystem" onclick="goTo('f-ecosystem')">Ecosystem Map</a>
+        <a href="#f-quality" onclick="goTo('f-quality')">Quality &amp; PD</a>
+        <a href="#f-a11y" onclick="goTo('f-a11y')">Accessibility</a>
+        <a href="#f-tools" onclick="goTo('f-tools')">Tools &amp; OER</a>
+        <a href="#f-data" onclick="goTo('f-data')">Data &amp; Infra</a>
+      </div>
+      <div class="footer-col">
+        <h4>Get Help</h4>
+        <a href="mailto:support@cvc.edu">support@cvc.edu</a>
+        <a href="https://www.openccc.net/" target="_blank">OpenCCC Account <span class="ext">&nearr;</span></a>
+        <a href="https://home.cccapply.org/en/" target="_blank">CCCApply <span class="ext">&nearr;</span></a>
+        <a href="https://cvc-oei.zendesk.com/hc/en-us/" target="_blank">Knowledge Base <span class="ext">&nearr;</span></a>
+      </div>
+    </div>
+    <div class="footer-divider">
+      <p>Community companion guide. Not affiliated with CVC-OEI. Compiled from <a href="https://cvc.edu" target="_blank">cvc.edu</a>, <a href="https://onlinenetworkofeducators.org" target="_blank">@ONE</a>, <a href="https://cccaccessibility.org" target="_blank">CCC Accessibility Center</a>, <a href="https://ccctechcenter.org" target="_blank">CCC Tech Center</a>, and other public sources. <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. Last updated April 2026.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+var TABS = {
+  student: [
+    {id:'s-start', label:'Start Here'},
+    {id:'s-enroll', label:'Enroll'},
+    {id:'s-eligibility', label:'Eligibility'},
+    {id:'s-money', label:'Money & Aid'},
+    {id:'s-freetools', label:'Free Tools'},
+    {id:'s-oer', label:'Free Textbooks'},
+    {id:'s-troubleshoot', label:'Help'},
+    {id:'s-faq', label:'FAQ'}
+  ],
+  staff: [
+    {id:'f-ecosystem', label:'Ecosystem'},
+    {id:'f-quality', label:'Quality & PD'},
+    {id:'f-a11y', label:'Accessibility'},
+    {id:'f-tools', label:'Tools & OER'},
+    {id:'f-data', label:'Data & Infra'},
+    {id:'f-exchange', label:'Exchange Admin'},
+    {id:'f-faq', label:'FAQ'}
+  ]
+};
+var audience = 'student';
+var currentPage = 's-start';
+
+function buildNav() {
+  var bar = document.getElementById('navBar');
+  bar.innerHTML = '';
+  TABS[audience].forEach(function(tab, i) {
+    var btn = document.createElement('button');
+    btn.className = 'nav-tab' + (tab.id === currentPage ? ' active' : '');
+    btn.textContent = tab.label;
+    btn.setAttribute('data-target', tab.id);
+    btn.addEventListener('click', function() { goTo(tab.id); });
+    bar.appendChild(btn);
+  });
+}
+
+function switchAudience(aud) {
+  audience = aud;
+  document.getElementById('audStudent').classList.toggle('active', aud === 'student');
+  document.getElementById('audStaff').classList.toggle('active', aud === 'staff');
+  document.getElementById('aud-student').classList.toggle('active', aud === 'student');
+  document.getElementById('aud-staff').classList.toggle('active', aud === 'staff');
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  currentPage = TABS[aud][0].id;
+  document.getElementById(currentPage).classList.add('active');
+  buildNav();
+  window.scrollTo({top: document.querySelector('.nav-strip').offsetTop, behavior: 'smooth'});
+}
+
+function goTo(pageId) {
+  var isStaff = pageId.startsWith('f-');
+  if (isStaff && audience !== 'staff') { audience = 'staff'; switchAudience('staff'); }
+  if (!isStaff && audience !== 'student') { audience = 'student'; switchAudience('student'); }
+  document.getElementById('aud-' + audience).querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(pageId).classList.add('active');
+  currentPage = pageId;
+  document.querySelectorAll('.nav-tab').forEach(function(t) {
+    t.classList.toggle('active', t.getAttribute('data-target') === pageId);
+  });
+  // Update URL hash for deep linking
+  history.replaceState(null, '', '#' + pageId);
+  window.scrollTo({top: document.querySelector('.nav-strip').offsetTop, behavior: 'smooth'});
+}
+
+// FAQ accordion
+function toggleFaq(btn) {
+  var answer = btn.nextElementSibling;
+  var wasOpen = btn.classList.contains('open');
+  btn.closest('section').querySelectorAll('.faq-q').forEach(function(q) { q.classList.remove('open'); });
+  btn.closest('section').querySelectorAll('.faq-a').forEach(function(a) { a.classList.remove('open'); });
+  if (!wasOpen) { btn.classList.add('open'); answer.classList.add('open'); }
+}
+
+// Decision wizard
+function showScenario(id) {
+  document.querySelectorAll('.scenario-result').forEach(function(r) { r.classList.remove('visible'); });
+  document.querySelectorAll('.wiz-opt').forEach(function(o) { o.style.borderColor = ''; o.style.background = ''; });
+  var result = document.getElementById('sc-' + id);
+  if (result) {
+    result.classList.add('visible');
+    result.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+  }
+  event.currentTarget.style.borderColor = 'var(--sky)';
+  event.currentTarget.style.background = 'var(--sky-pale)';
+}
+
+// Eligibility checker
+var checkerAnswers = {};
+function checkClick(btn, value) {
+  var row = btn.closest('.checker-q');
+  var key = row.getAttribute('data-key');
+  row.querySelectorAll('button').forEach(function(b) { b.classList.remove('sel-yes', 'sel-no'); });
+  btn.classList.add(value === 'yes' ? 'sel-yes' : 'sel-no');
+  checkerAnswers[key] = value;
+  evaluateChecker();
+}
+
+function evaluateChecker() {
+  var keys = ['enrolled','completed','age','gpa','holds','ca','dualhs','f1'];
+  var answered = keys.filter(function(k) { return checkerAnswers[k]; });
+  var el = document.getElementById('checkerResult');
+  if (answered.length < keys.length) { el.style.display = 'none'; el.className = ''; return; }
+  if (checkerAnswers.dualhs === 'yes') { el.className = 'fail'; el.style.display = 'block'; el.innerHTML = '<strong>Not eligible.</strong> Dual enrollment students cannot use instant enrollment. You can still search and apply directly via <a href="https://home.cccapply.org/en/" target="_blank">CCCApply</a>.'; return; }
+  if (checkerAnswers.f1 === 'yes') { el.className = 'fail'; el.style.display = 'block'; el.innerHTML = '<strong>Not eligible.</strong> International/F-1 students cannot cross-enroll. You can search courses and apply directly.'; return; }
+  var issues = [];
+  if (checkerAnswers.enrolled === 'no') issues.push('Must be enrolled at a CCC');
+  if (checkerAnswers.completed === 'no') issues.push('Must have completed or be taking at least one class');
+  if (checkerAnswers.age === 'no') issues.push('Must be 18+');
+  if (checkerAnswers.gpa === 'no') issues.push('GPA must be 2.0+');
+  if (checkerAnswers.holds === 'no') issues.push('Clear holds/fees at Home College');
+  if (checkerAnswers.ca === 'no') issues.push('Need CA address on file');
+  el.style.display = 'block';
+  if (issues.length === 0) { el.className = 'pass'; el.innerHTML = '<strong>You appear eligible!</strong> <a href="https://search.cvc.edu/" target="_blank" style="color:#047857;font-weight:700">Search courses on CVC &rarr;</a>'; }
+  else { el.className = 'fail'; el.innerHTML = '<strong>Not yet eligible.</strong> Resolve these:<br>' + issues.map(function(i) { return '&bull; ' + i; }).join('<br>'); }
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  var tabs = TABS[audience];
+  var idx = tabs.findIndex(function(t) { return t.id === currentPage; });
+  if (e.key === 'ArrowRight' && idx < tabs.length - 1) { goTo(tabs[idx + 1].id); e.preventDefault(); }
+  if (e.key === 'ArrowLeft' && idx > 0) { goTo(tabs[idx - 1].id); e.preventDefault(); }
+});
+
+// Deep linking on load
+function handleHash() {
+  var hash = window.location.hash.replace('#', '');
+  if (hash && document.getElementById(hash)) {
+    var isStaff = hash.startsWith('f-');
+    if (isStaff) { audience = 'staff'; } else { audience = 'student'; }
+    document.getElementById('audStudent').classList.toggle('active', audience === 'student');
+    document.getElementById('audStaff').classList.toggle('active', audience === 'staff');
+    document.getElementById('aud-student').classList.toggle('active', audience === 'student');
+    document.getElementById('aud-staff').classList.toggle('active', audience === 'staff');
+    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById(hash).classList.add('active');
+    currentPage = hash;
+    buildNav();
+    setTimeout(function() {
+      window.scrollTo({top: document.querySelector('.nav-strip').offsetTop, behavior: 'smooth'});
+    }, 100);
+  } else {
+    buildNav();
+  }
+}
+
+handleHash();
+window.addEventListener('hashchange', handleHash);
+</script>
+</body>
+</html>
