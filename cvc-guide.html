@@ -237,21 +237,159 @@ a{color:var(--sky)}
   .deadline-bar{flex-direction:column}
 }
 
+/* Skip link */
+.skip-link{position:absolute;top:-100%;left:16px;background:var(--navy);color:var(--gold);padding:10px 20px;border-radius:0 0 8px 8px;font-weight:700;font-size:.88rem;z-index:200;transition:top .2s}
+.skip-link:focus{top:0}
+
+/* Search */
+.search-wrap{position:relative;flex:1;max-width:340px;margin:0 8px}
+.search-input{width:100%;padding:7px 14px 7px 34px;border-radius:30px;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;font-family:'DM Sans',sans-serif;font-size:.82rem;outline:none;transition:all .2s}
+.search-input::placeholder{color:rgba(255,255,255,.4)}
+.search-input:focus{border-color:var(--gold);background:rgba(255,255,255,.12)}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:.82rem;opacity:.4;pointer-events:none}
+.search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--white);border-radius:var(--rs);box-shadow:var(--sm);max-height:320px;overflow-y:auto;display:none;z-index:150}
+.search-results.visible{display:block}
+.sr-item{padding:10px 16px;border-bottom:1px solid var(--g100);cursor:pointer;font-size:.84rem;color:var(--g800);transition:background .1s}
+.sr-item:hover{background:var(--sky-pale)}
+.sr-item:last-child{border-bottom:none}
+.sr-item .sr-section{font-size:.7rem;color:var(--g400);text-transform:uppercase;letter-spacing:.03em}
+.sr-item .sr-title{font-weight:700;color:var(--navy)}
+.sr-item mark{background:var(--gold-light);color:#78350f;border-radius:2px;padding:0 2px}
+.sr-empty{padding:14px 16px;font-size:.84rem;color:var(--g400);text-align:center}
+
+/* Dark mode toggle */
+.dm-toggle{display:flex;align-items:center;gap:4px;padding:5px 12px;border-radius:30px;border:2px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.6);font-family:'DM Sans',sans-serif;font-weight:600;font-size:.75rem;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0}
+.dm-toggle:hover{border-color:rgba(255,255,255,.3);color:#fff}
+.dm-icon{font-size:.9rem}
+
+/* Dark mode */
+body.dark{--sand:#0f1219;--white:#1a1f2e;--g50:#151a26;--g100:#1e2433;--g200:#2a3142;--g400:#6b7280;--g500:#9ca3af;--g600:#d1d5db;--g800:#f3f4f6;color:var(--g800)}
+body.dark .companion-banner{background:#1e1a10;border-bottom-color:#78350f;color:#d4a855}
+body.dark .companion-banner a{color:var(--gold)}
+body.dark .hero{background:#080d18}
+body.dark .nav-strip{background:#0d1220}
+body.dark h2,body.dark h3,body.dark h4{color:var(--g800)}
+body.dark .card,body.dark .rc,body.dark .role-card,body.dark .eco-node,body.dark .situation-card,body.dark .checker,body.dark .wizard,body.dark .a11y-card,body.dark .faq-item,body.dark .checklist{background:var(--white);box-shadow:0 1px 3px rgba(0,0,0,.2)}
+body.dark .official-link{background:#0d1f3a;border-color:#1e3a5f}
+body.dark .official-link a{color:var(--sky)}
+body.dark .alert.warn{background:#1e1a0c;border-color:#78350f}
+body.dark .alert.info{background:#0d1f3a;border-color:#1e3a5f}
+body.dark .alert.danger{background:#1e0d0d;border-color:#7f1d1d}
+body.dark .alert.tip{background:#0d1e1a;border-color:#065f46}
+body.dark .throughline{background:linear-gradient(135deg,#080d18,#0d1220)}
+body.dark .res-table th,body.dark .trouble-table th{background:#080d18}
+body.dark .res-table td,body.dark .trouble-table td{border-top-color:var(--g200)}
+body.dark .res-table tr:nth-child(even) td,body.dark .trouble-table tr:nth-child(even) td{background:var(--g50)}
+body.dark .gap-label{background:#1e1a10;color:#d4a855}
+body.dark .pt{background:#1e1a10;color:#d4a855}
+body.dark .nav-btn{border-color:var(--g200);background:var(--white);color:var(--g800)}
+body.dark .nav-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+body.dark .nav-btn.primary{background:var(--navy);color:var(--gold);border-color:var(--navy)}
+body.dark .faq-q{color:var(--g800)}
+body.dark .faq-q:hover{background:var(--g50)}
+body.dark .search-results{background:var(--white)}
+body.dark .sr-item{color:var(--g800)}
+body.dark .sr-item:hover{background:rgba(59,130,246,.1)}
+body.dark .sr-item .sr-title{color:var(--g800)}
+body.dark .wiz-opt{border-color:var(--g200);background:var(--g50)}
+body.dark .wiz-opt:hover{background:rgba(59,130,246,.1);border-color:var(--sky)}
+body.dark .situation-card{background:var(--white);border-color:var(--g200)}
+body.dark .deadline-seg.green{background:#0d1e1a;color:#6ee7b7}
+body.dark .deadline-seg.yellow{background:#1e1a0c;color:#fbbf24}
+body.dark .deadline-seg.red{background:#1e0d0d;color:#fca5a5}
+body.dark .badge.free{background:#0d1e1a;color:#6ee7b7}
+body.dark .badge.oer{background:#1e1a10;color:#d4a855}
+body.dark .badge.data{background:#0d1f3a;color:#93c5fd}
+body.dark .badge.tool{background:#1e140a;color:#fb923c}
+body.dark .a11y-card{background:var(--white)}
+body.dark a{color:#60a5fa}
+body.dark .site-footer{background:#080d18}
+body.dark .ck{background:#0d1e1a;color:#6ee7b7}
+body.dark .checker-q .btns button{border-color:var(--g200);background:var(--white);color:var(--g800)}
+
+/* Back to top */
+.btt{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--gold);border:none;font-size:1.1rem;cursor:pointer;box-shadow:var(--sm);opacity:0;pointer-events:none;transition:all .25s;z-index:90;display:flex;align-items:center;justify-content:center}
+.btt.visible{opacity:1;pointer-events:auto}
+.btt:hover{background:var(--gold);color:var(--navy);transform:translateY(-2px)}
+body.dark .btt{background:var(--gold);color:var(--navy)}
+body.dark .btt:hover{background:#fff;color:var(--navy)}
+
+/* Page transitions */
+.page{transition:opacity .2s ease,transform .2s ease}
+.page:not(.active){opacity:0;transform:translateY(6px)}
+.page.active{opacity:1;transform:translateY(0)}
+
+/* Print section button */
+.print-section-btn{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:20px;border:1px solid var(--g200);background:var(--white);font-family:'DM Sans',sans-serif;font-weight:600;font-size:.72rem;color:var(--g500);cursor:pointer;transition:all .15s;float:right}
+.print-section-btn:hover{border-color:var(--navy);color:var(--navy)}
+body.dark .print-section-btn{background:var(--white);border-color:var(--g200);color:var(--g500)}
+
+/* Section share link */
+.share-link{display:inline-flex;align-items:center;gap:3px;margin-left:8px;padding:2px 8px;border-radius:12px;font-size:.68rem;font-weight:600;color:var(--g400);background:transparent;border:1px solid transparent;cursor:pointer;transition:all .15s;vertical-align:middle;opacity:0}
+h2:hover .share-link,.share-link:focus{opacity:1}
+.share-link:hover{color:var(--sky);border-color:var(--g200)}
+.share-link.copied{color:var(--mint);border-color:var(--mint)}
+
+/* Keyboard hint */
+.kb-hint{text-align:center;padding:4px 0 0;font-size:.68rem;color:rgba(255,255,255,.3)}
+.kb-hint kbd{display:inline-block;padding:1px 6px;border-radius:4px;border:1px solid rgba(255,255,255,.15);font-family:'DM Sans',sans-serif;font-size:.65rem;margin:0 1px}
+
+/* Interactive calculator */
+.calc-interactive{margin-top:12px}
+.calc-slider-row{display:flex;align-items:center;gap:14px;padding:10px 0}
+.calc-slider-row label{font-size:.86rem;font-weight:600;min-width:120px;color:var(--g600)}
+.calc-slider{-webkit-appearance:none;appearance:none;flex:1;height:6px;border-radius:3px;background:var(--g200);outline:none}
+.calc-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--navy);cursor:pointer;border:2px solid var(--gold)}
+.calc-slider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--navy);cursor:pointer;border:2px solid var(--gold)}
+body.dark .calc-slider{background:var(--g200)}
+body.dark .calc-slider::-webkit-slider-thumb{background:var(--gold);border-color:var(--navy)}
+.calc-val{font-family:'Fraunces',serif;font-weight:800;font-size:1rem;min-width:40px;text-align:right;color:var(--navy)}
+body.dark .calc-val{color:var(--gold)}
+.calc-toggle-row{display:flex;gap:10px;flex-wrap:wrap;padding:8px 0}
+.calc-toggle{padding:6px 14px;border-radius:20px;border:2px solid var(--g200);background:var(--white);font-family:'DM Sans',sans-serif;font-weight:600;font-size:.8rem;cursor:pointer;transition:all .15s;color:var(--g600)}
+.calc-toggle.active{border-color:var(--mint);background:var(--mint-pale);color:#047857}
+body.dark .calc-toggle{background:var(--white);border-color:var(--g200);color:var(--g600)}
+body.dark .calc-toggle.active{background:#0d1e1a;border-color:#065f46;color:#6ee7b7}
+.calc-summary{margin-top:14px;background:var(--g50);border-radius:var(--rs);padding:16px 20px}
+.calc-summary-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:.88rem}
+.calc-summary-row.total{border-top:2px solid var(--g200);margin-top:6px;padding-top:10px;font-weight:700;font-size:1rem}
+.calc-summary-row .label{color:var(--g600)}
+.calc-summary-row .amount{font-family:'Fraunces',serif;font-weight:800}
+.calc-summary-row .amount.free{color:var(--mint)}
+.calc-summary-row .amount.cost{color:var(--g600)}
+.calc-summary-row .amount.saved{color:var(--mint);font-size:1.15rem}
+.calc-savings-bar{height:8px;border-radius:4px;background:var(--g200);margin-top:10px;overflow:hidden}
+.calc-savings-fill{height:100%;background:linear-gradient(90deg,var(--mint),var(--teal));border-radius:4px;transition:width .4s ease}
+
+@media(max-width:640px){
+  .search-wrap{max-width:none;margin:8px 0 0;order:10;flex-basis:100%}
+  .nav-inner{flex-wrap:wrap}
+  .dm-toggle{padding:5px 8px;font-size:.7rem}
+  .btt{bottom:16px;right:16px;width:40px;height:40px}
+  .print-section-btn{float:none;margin-bottom:8px}
+  .share-link{opacity:1}
+}
+
 @media print{
-  .nav-strip,.companion-banner,.hero,.audience-pick,.section-nav,.gap-pills,.aud-btn,.nav-btn{display:none!important}
+  .nav-strip,.companion-banner,.hero,.audience-pick,.section-nav,.gap-pills,.aud-btn,.nav-btn,.btt,.dm-toggle,.search-wrap,.print-section-btn,.share-link,.skip-link,.kb-hint{display:none!important}
   .page,.audience-section{display:block!important}
   .site-footer{break-before:page}
-  body{background:#fff;font-size:11pt}
+  body,body.dark{background:#fff!important;font-size:11pt;color:#1f2937!important;--white:#fff;--g50:#f9fafb;--g100:#f3f4f6;--g200:#e5e7eb;--g600:#4b5563;--g800:#1f2937;--sand:#fff}
   .container{max-width:100%;padding:0}
   section{padding:16px 0;break-inside:avoid}
-  .card,.rc,.role-card,.eco-node,.situation-card,.checker,.wizard,.a11y-card{box-shadow:none;border:1px solid #ddd}
+  .card,.rc,.role-card,.eco-node,.situation-card,.checker,.wizard,.a11y-card,.faq-item,.checklist{box-shadow:none;border:1px solid #ddd;background:#fff!important}
   .throughline{background:#1a2d4a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   a[href]::after{content:" (" attr(href) ")";font-size:8pt;color:#666}
   a[href^="javascript"]::after{content:none}
+  h2,h3,h4{color:#0f1a2e!important}
+  .alert,.official-link{border:1px solid #ddd}
 }
 </style>
 </head>
 <body>
+
+<!-- SKIP LINK -->
+<a href="#main-content" class="skip-link">Skip to content</a>
 
 <!-- COMPANION BANNER -->
 <div class="companion-banner">
@@ -278,10 +416,19 @@ a{color:var(--sky)}
 <!-- NAV -->
 <div class="nav-strip">
   <div class="nav-inner" id="navBar"></div>
+  <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:6px;max-width:1080px;margin-left:auto;margin-right:auto;flex-wrap:wrap">
+    <div class="search-wrap">
+      <span class="search-icon">&#128269;</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search the guide..." aria-label="Search the guide" autocomplete="off">
+      <div class="search-results" id="searchResults"></div>
+    </div>
+    <button class="dm-toggle" id="dmToggle" aria-label="Toggle dark mode"><span class="dm-icon" id="dmIcon">&#9790;</span> <span id="dmLabel">Dark</span></button>
+  </div>
+  <div class="kb-hint">Navigate sections: <kbd>&larr;</kbd> <kbd>&rarr;</kbd></div>
 </div>
 
 <!-- CONTENT -->
-<main class="container">
+<main class="container" id="main-content">
 
 <!-- ═══════════════════════════════════ -->
 <!-- STUDENT CONTENT                     -->
@@ -522,14 +669,38 @@ a{color:var(--sky)}
   </div>
 
   <div class="card" style="margin-top:14px;margin-bottom:12px">
-    <h3>What a CVC Exchange Course Costs</h3>
-    <div class="calc">
-      <div class="calc-row"><span>Enrollment fee (per unit, CA resident)</span><span class="val cost">$46/unit</span></div>
-      <div class="calc-row"><span>Typical 3-unit course</span><span class="val cost">$138</span></div>
-      <div class="calc-row"><span>With CCPG fee waiver</span><span class="val savings">$0</span></div>
-      <div class="calc-row"><span>Textbooks (ZTC course)</span><span class="val savings">$0</span></div>
-      <div class="calc-row"><span>Tutoring (NetTutor)</span><span class="val savings">$0</span></div>
-      <div class="calc-row"><span>Lab simulations (Labster)</span><span class="val savings">$0</span></div>
+    <h3>Interactive Cost Calculator</h3>
+    <p style="margin-top:4px;font-size:.86rem;color:var(--g600)">Adjust to match your situation and see your real costs.</p>
+    <div class="calc-interactive">
+      <div class="calc-slider-row">
+        <label>Units this term</label>
+        <input type="range" class="calc-slider" id="calcUnits" min="1" max="12" value="3" oninput="updateCalc()">
+        <span class="calc-val" id="calcUnitsVal">3</span>
+      </div>
+      <div class="calc-slider-row">
+        <label>Textbook cost/course</label>
+        <input type="range" class="calc-slider" id="calcBooks" min="0" max="300" value="120" step="10" oninput="updateCalc()">
+        <span class="calc-val" id="calcBooksVal">$120</span>
+      </div>
+      <div style="padding:6px 0">
+        <label style="font-size:.86rem;font-weight:600;color:var(--g600)">Free resources you'll use:</label>
+        <div class="calc-toggle-row">
+          <button class="calc-toggle active" id="ct-ccpg" onclick="toggleCalc(this)">CCPG Fee Waiver</button>
+          <button class="calc-toggle active" id="ct-ztc" onclick="toggleCalc(this)">ZTC Course</button>
+          <button class="calc-toggle active" id="ct-tutor" onclick="toggleCalc(this)">NetTutor</button>
+          <button class="calc-toggle active" id="ct-lab" onclick="toggleCalc(this)">Labster</button>
+        </div>
+      </div>
+      <div class="calc-summary" id="calcSummary">
+        <div class="calc-summary-row"><span class="label">Enrollment ($46/unit)</span><span class="amount cost" id="cs-enroll">$138</span></div>
+        <div class="calc-summary-row"><span class="label">CCPG waiver</span><span class="amount free" id="cs-ccpg">-$138</span></div>
+        <div class="calc-summary-row"><span class="label">Textbooks</span><span class="amount" id="cs-books">$0</span></div>
+        <div class="calc-summary-row"><span class="label">Tutoring</span><span class="amount free" id="cs-tutor">$0</span></div>
+        <div class="calc-summary-row"><span class="label">Lab simulations</span><span class="amount free" id="cs-lab">$0</span></div>
+        <div class="calc-summary-row total"><span class="label">Your cost</span><span class="amount" id="cs-total">$0</span></div>
+        <div class="calc-summary-row"><span class="label">You save</span><span class="amount saved" id="cs-saved">$138</span></div>
+        <div class="calc-savings-bar"><div class="calc-savings-fill" id="cs-bar" style="width:100%"></div></div>
+      </div>
     </div>
   </div>
 
@@ -1233,6 +1404,9 @@ a{color:var(--sky)}
 </div><!-- /aud-staff -->
 </main>
 
+<!-- BACK TO TOP -->
+<button class="btt" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
 <!-- FOOTER -->
 <div class="site-footer">
   <div class="footer-inner">
@@ -1428,6 +1602,219 @@ function handleHash() {
 
 handleHash();
 window.addEventListener('hashchange', handleHash);
+
+// ─── DARK MODE ─────────────────────────────────
+function initDarkMode() {
+  var saved = localStorage.getItem('cvc-dark');
+  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved === 'true' || (saved === null && prefersDark)) {
+    document.body.classList.add('dark');
+    updateDmUI(true);
+  }
+}
+function toggleDarkMode() {
+  var isDark = document.body.classList.toggle('dark');
+  localStorage.setItem('cvc-dark', isDark);
+  updateDmUI(isDark);
+}
+function updateDmUI(isDark) {
+  document.getElementById('dmIcon').innerHTML = isDark ? '&#9728;' : '&#9790;';
+  document.getElementById('dmLabel').textContent = isDark ? 'Light' : 'Dark';
+}
+document.getElementById('dmToggle').addEventListener('click', toggleDarkMode);
+initDarkMode();
+
+// ─── BACK TO TOP ───────────────────────────────
+var bttBtn = document.getElementById('bttBtn');
+var bttThreshold = 400;
+function checkBtt() {
+  bttBtn.classList.toggle('visible', window.scrollY > bttThreshold);
+}
+window.addEventListener('scroll', checkBtt, {passive: true});
+checkBtt();
+
+// ─── SEARCH ────────────────────────────────────
+var searchIndex = [];
+function buildSearchIndex() {
+  searchIndex = [];
+  var sections = document.querySelectorAll('.page section');
+  sections.forEach(function(sec) {
+    var page = sec.closest('.page');
+    if (!page) return;
+    var pageId = page.id;
+    var isStaff = pageId.startsWith('f-');
+    var audienceLabel = isStaff ? 'Faculty/Staff' : 'Student';
+    // Find tab label
+    var tabs = isStaff ? TABS.staff : TABS.student;
+    var tabLabel = '';
+    tabs.forEach(function(t) { if (t.id === pageId) tabLabel = t.label; });
+    // Get text content for searching
+    var h2 = sec.querySelector('h2');
+    var title = h2 ? h2.textContent.replace(/[\u{1F000}-\u{1FFFF}]/gu, '').trim() : tabLabel;
+    // Gather searchable text
+    var text = sec.textContent.replace(/\s+/g, ' ').toLowerCase();
+    searchIndex.push({
+      pageId: pageId,
+      audience: audienceLabel,
+      tabLabel: tabLabel,
+      title: title,
+      text: text
+    });
+  });
+}
+var searchInput = document.getElementById('searchInput');
+var searchResults = document.getElementById('searchResults');
+var searchTimeout;
+searchInput.addEventListener('input', function() {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(doSearch, 150);
+});
+searchInput.addEventListener('focus', function() {
+  if (searchInput.value.trim().length >= 2) doSearch();
+});
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.search-wrap')) {
+    searchResults.classList.remove('visible');
+  }
+});
+function doSearch() {
+  var q = searchInput.value.trim().toLowerCase();
+  if (q.length < 2) { searchResults.classList.remove('visible'); return; }
+  var words = q.split(/\s+/);
+  var results = [];
+  searchIndex.forEach(function(entry) {
+    var allMatch = words.every(function(w) { return entry.text.indexOf(w) !== -1; });
+    if (allMatch) {
+      results.push(entry);
+    }
+  });
+  renderSearchResults(results, q);
+}
+function renderSearchResults(results, q) {
+  searchResults.innerHTML = '';
+  if (results.length === 0) {
+    searchResults.innerHTML = '<div class="sr-empty">No results found</div>';
+    searchResults.classList.add('visible');
+    return;
+  }
+  results.slice(0, 8).forEach(function(r) {
+    var div = document.createElement('div');
+    div.className = 'sr-item';
+    div.innerHTML = '<div class="sr-section">' + r.audience + ' &middot; ' + r.tabLabel + '</div><div class="sr-title">' + r.title + '</div>';
+    div.addEventListener('click', function() {
+      goTo(r.pageId);
+      searchResults.classList.remove('visible');
+      searchInput.value = '';
+      searchInput.blur();
+    });
+    searchResults.appendChild(div);
+  });
+  searchResults.classList.add('visible');
+}
+// Build index after DOM ready
+setTimeout(buildSearchIndex, 200);
+
+// ─── INTERACTIVE COST CALCULATOR ───────────────
+function updateCalc() {
+  var units = parseInt(document.getElementById('calcUnits').value);
+  var bookCost = parseInt(document.getElementById('calcBooks').value);
+  var ccpg = document.getElementById('ct-ccpg').classList.contains('active');
+  var ztc = document.getElementById('ct-ztc').classList.contains('active');
+  var tutor = document.getElementById('ct-tutor').classList.contains('active');
+  var lab = document.getElementById('ct-lab').classList.contains('active');
+
+  document.getElementById('calcUnitsVal').textContent = units;
+  document.getElementById('calcBooksVal').textContent = '$' + bookCost;
+
+  var enrollment = units * 46;
+  var ccpgSavings = ccpg ? enrollment : 0;
+  var bookTotal = ztc ? 0 : bookCost;
+  var tutorCost = tutor ? 0 : 40; // estimated tutoring cost
+  var labCost = lab ? 0 : 75; // estimated lab kit cost
+
+  var totalWithout = enrollment + bookCost + 40 + 75;
+  var totalWith = (enrollment - ccpgSavings) + bookTotal + tutorCost + labCost;
+  var saved = totalWithout - totalWith;
+  var pct = totalWithout > 0 ? Math.round((saved / totalWithout) * 100) : 0;
+
+  document.getElementById('cs-enroll').textContent = '$' + enrollment;
+  document.getElementById('cs-enroll').className = 'amount cost';
+
+  var ccpgEl = document.getElementById('cs-ccpg');
+  ccpgEl.textContent = ccpg ? '-$' + ccpgSavings : '$0';
+  ccpgEl.className = 'amount ' + (ccpg ? 'free' : 'cost');
+
+  var booksEl = document.getElementById('cs-books');
+  booksEl.textContent = ztc ? '$0' : '$' + bookTotal;
+  booksEl.className = 'amount ' + (ztc ? 'free' : 'cost');
+
+  var tutorEl = document.getElementById('cs-tutor');
+  tutorEl.textContent = tutor ? '$0' : '$' + tutorCost;
+  tutorEl.className = 'amount ' + (tutor ? 'free' : 'cost');
+
+  var labEl = document.getElementById('cs-lab');
+  labEl.textContent = lab ? '$0' : '$' + labCost;
+  labEl.className = 'amount ' + (lab ? 'free' : 'cost');
+
+  var totalEl = document.getElementById('cs-total');
+  totalEl.textContent = '$' + totalWith;
+  totalEl.className = 'amount ' + (totalWith === 0 ? 'free' : 'cost');
+
+  document.getElementById('cs-saved').textContent = '$' + saved + ' (' + pct + '%)';
+  document.getElementById('cs-bar').style.width = pct + '%';
+}
+function toggleCalc(btn) {
+  btn.classList.toggle('active');
+  updateCalc();
+}
+updateCalc();
+
+// ─── SHARE SECTION LINK (add dynamically) ──────
+document.querySelectorAll('.page section h2').forEach(function(h2) {
+  var page = h2.closest('.page');
+  if (!page) return;
+  var btn = document.createElement('button');
+  btn.className = 'share-link';
+  btn.innerHTML = '&#128279; Link';
+  btn.setAttribute('aria-label', 'Copy link to this section');
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var url = window.location.origin + window.location.pathname + '#' + page.id;
+    navigator.clipboard.writeText(url).then(function() {
+      btn.innerHTML = '&#10003; Copied';
+      btn.classList.add('copied');
+      setTimeout(function() { btn.innerHTML = '&#128279; Link'; btn.classList.remove('copied'); }, 1500);
+    });
+  });
+  h2.appendChild(btn);
+});
+
+// ─── PRINT SECTION ─────────────────────────────
+document.querySelectorAll('.page section h2').forEach(function(h2) {
+  var sec = h2.closest('section');
+  if (!sec) return;
+  var btn = document.createElement('button');
+  btn.className = 'print-section-btn';
+  btn.innerHTML = '&#128424; Print';
+  btn.setAttribute('aria-label', 'Print this section');
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    // Temporarily show only this page/section for printing
+    var page = sec.closest('.page');
+    var audSection = page.closest('.audience-section');
+    var allPages = document.querySelectorAll('.page');
+    var allAud = document.querySelectorAll('.audience-section');
+    // Show everything temporarily
+    allAud.forEach(function(a) { a.style.display = 'block'; });
+    allPages.forEach(function(p) { p.style.display = 'none'; });
+    page.style.display = 'block';
+    window.print();
+    // Restore
+    allAud.forEach(function(a) { a.style.display = ''; });
+    allPages.forEach(function(p) { p.style.display = ''; });
+  });
+  h2.parentNode.insertBefore(btn, h2);
+});
 </script>
 </body>
 </html>
