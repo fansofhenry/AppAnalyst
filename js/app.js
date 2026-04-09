@@ -1,14 +1,14 @@
 // ═══════════════════════════════════════════════════════
-// APP.JS — Entry point: globals, init, misc utilities
+// APP.JS — Core: scroll, fade-up, toast, section titles
 // ═══════════════════════════════════════════════════════
 
-// ═══ GLOBALS ═══
+// ═══ NAV SCROLL STATE ═══
 var nav = document.getElementById('nav');
 window.addEventListener('scroll', function() {
   nav.classList.toggle('scrolled', window.scrollY > 20);
 });
 
-// IntersectionObserver for .fu fade-up elements
+// ═══ FADE-UP OBSERVER ═══
 var fuObs = new IntersectionObserver(function(entries) {
   entries.forEach(function(el) {
     if (el.isIntersecting) {
@@ -19,7 +19,7 @@ var fuObs = new IntersectionObserver(function(entries) {
 }, { threshold: .06, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.fu').forEach(function(el) { fuObs.observe(el); });
 
-// Toast notification (queued)
+// ═══ TOAST NOTIFICATION (QUEUED) ═══
 var _toastQueue = [];
 var _toastBusy = false;
 function toast(msg, html) {
@@ -39,119 +39,25 @@ function _drainToast() {
   }, 2200);
 }
 
-// Interaction counter system
+// ═══ DYNAMIC PAGE TITLE ═══
 (function() {
-  var count = 0;
-  var el = document.getElementById('interactionCount');
-  var wrap = document.getElementById('interactionCounter');
-  if (!el || !wrap) return;
-  function bump() {
-    count++;
-    el.textContent = count;
-    wrap.style.opacity = '1';
-    clearTimeout(wrap._t);
-    wrap._t = setTimeout(function() { wrap.style.opacity = '.5'; }, 2000);
-  }
-  document.addEventListener('click', function(e) {
-    var t = e.target;
-    if (t.closest && (t.closest('.b-card') || t.closest('.ai-card') || t.closest('.counsel-card') ||
-       t.closest('.lookup-card') || t.closest('.status-row') || t.closest('.esc-card') ||
-       t.closest('.jt-btn') || t.closest('.ai-tab') || t.closest('.outreach-tab') ||
-       t.closest('.cal-month') || t.closest('.trigger-card') || t.closest('.kb-nav-item') ||
-       t.closest('.qa-card') || t.closest('.lookup-filter') || t.closest('.insight-card') ||
-       t.closest('.toc-item') || t.closest('.progress-dot') ||
-       t.closest('[onclick]') || t.closest('button'))) {
-      bump();
-    }
-  });
-  var searchInput = document.getElementById('collegeLookup');
-  if (searchInput) {
-    var lastQ = '';
-    searchInput.addEventListener('input', function() {
-      if (this.value.length > 2 && this.value !== lastQ) {
-        lastQ = this.value;
-        bump();
-      }
-    });
-  }
-})();
-
-// Interaction counter milestones
-(function() {
-  var wrap = document.getElementById('interactionCounter');
-  var el = document.getElementById('interactionCount');
-  if (!wrap || !el) return;
-  var milestones = [5, 15, 30, 50];
-  var obs = new MutationObserver(function() {
-    var count = parseInt(el.textContent || '0');
-    if (milestones.indexOf(count) >= 0) {
-      wrap.classList.add('ic-milestone');
-      setTimeout(function() { wrap.classList.remove('ic-milestone'); }, 700);
-    }
-  });
-  obs.observe(el, { childList: true, characterData: true, subtree: true });
-})();
-
-// Scroll hint
-(function() {
-  var hint = document.getElementById('scrollHint');
-  if (!hint) return;
-  var dismissed = false;
-  function dismiss() {
-    if (dismissed) return;
-    dismissed = true;
-    hint.classList.add('hint-gone');
-    setTimeout(function() { hint.remove(); }, 600);
-  }
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > 100) dismiss();
-  }, { passive: true });
-  setTimeout(dismiss, 6000);
-})();
-
-// Keyboard shortcut hint on first visit
-(function() {
-  var shown = false;
-  setTimeout(function() {
-    if (shown) return;
-    shown = true;
-    toast('Press ? for keyboard shortcuts');
-  }, 6000);
-  document.addEventListener('keydown', function() { shown = true; }, { once: true });
-})();
-
-// Greeting toast on first visit
-(function() {
-  var g = document.getElementById('greetingToast');
-  if (!g) return;
-  setTimeout(function() { g.classList.add('gt-show'); }, 800);
-  setTimeout(function() {
-    g.classList.remove('gt-show');
-    g.classList.add('gt-hide');
-    setTimeout(function() { g.remove(); }, 500);
-  }, 3200);
-})();
-
-// Dynamic page title — shows current section in tab
-(function() {
-  var base = 'Henry Fan \u00b7 CVC-OEI';
+  var base = 'AppAnalyst \u00b7 CVC-OEI';
   var sectionNames = {
-    'lookup': 'College Lookup',
-    'cvcData': 'Exchange Data',
-    'journey': 'Student Journey',
+    'monitor': 'System Status',
+    'lookup': 'College Directory',
     'flow': 'Architecture',
-    'monitor': 'Monitor',
     'tracer': 'Diagnostics',
-    'patterns': 'Intelligence',
-    'kb': 'Documentation',
-    'comms': 'Response',
+    'journey': 'Student Journey',
+    'patterns': 'Ticket Intelligence',
+    'kb': 'Knowledge Base',
+    'comms': 'Communications',
     'escalation': 'Escalation',
-    'outreach': 'Outreach',
-    'counselorToolkit': 'Student & Counselor Toolkit',
-    'aiVision': 'AI Vision',
+    'outreach': 'Outreach Planner',
+    'counselorToolkit': 'Resources',
+    'cvcData': 'Exchange Metrics',
+    'aiVision': 'AI & Automation',
     'barrierOverview': 'Barriers',
-    'barriers': 'Barriers',
-    'originStory': 'Origin Story'
+    'barriers': 'Barriers'
   };
   var current = '';
   var obs = new IntersectionObserver(function(entries) {
@@ -172,80 +78,7 @@ function _drainToast() {
   window.addEventListener('scroll', function() {
     if (window.scrollY < 200 && current !== '') {
       current = '';
-      document.title = base + ' \u00b7 FHDA';
+      document.title = base + ' \u00b7 Support Hub';
     }
   }, { passive: true });
-})();
-
-// ═══ EXPLORATION PROGRESS TRACKER ═══
-(function() {
-  var sectionIds = ['originStory','lookup','cvcData','flow','monitor','tracer','patterns','comms','outreach','aiVision','barrierOverview'];
-  var visited = {};
-  var total = sectionIds.length;
-  var tracker = document.getElementById('exploreTracker');
-  var fill = document.getElementById('etFill');
-  var label = document.getElementById('etLabel');
-  if (!tracker || !fill || !label) return;
-
-  var milestoneMessages = {
-    3: 'Nice \u2014 3 sections explored!',
-    6: 'Halfway there \u2014 6 of 11!',
-    8: 'Deep dive \u2014 8 of 11 sections!',
-    11: 'Full exploration complete!'
-  };
-
-  function update() {
-    var count = Object.keys(visited).length;
-    var pct = (count / total) * 100;
-    fill.setAttribute('stroke-dasharray', pct + ' ' + (100 - pct));
-    label.textContent = count + '/' + total;
-    if (count >= total) {
-      tracker.classList.add('et-complete');
-      if (typeof confettiBurstCenter === 'function') confettiBurstCenter(40);
-    }
-    if (milestoneMessages[count]) {
-      toast(milestoneMessages[count]);
-    }
-  }
-
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting && !visited[entry.target.id]) {
-        visited[entry.target.id] = true;
-        // Show tracker after first section visit
-        tracker.classList.add('et-visible');
-        update();
-      }
-    });
-  }, { threshold: 0.25 });
-
-  sectionIds.forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el) obs.observe(el);
-  });
-})();
-
-// ═══ INTERACTION MILESTONE CELEBRATIONS ═══
-(function() {
-  var el = document.getElementById('interactionCount');
-  var wrap = document.getElementById('interactionCounter');
-  if (!el || !wrap) return;
-  var celebrated = {};
-  var milestones = {
-    10: 'Explorer \u2014 10 interactions!',
-    25: 'Power user \u2014 25 interactions!',
-    50: 'Deep diver \u2014 50 interactions!',
-    100: 'Completionist \u2014 100 interactions!'
-  };
-  var obs = new MutationObserver(function() {
-    var count = parseInt(el.textContent || '0');
-    if (milestones[count] && !celebrated[count]) {
-      celebrated[count] = true;
-      toast(milestones[count]);
-      wrap.classList.add('fc-pop');
-      setTimeout(function() { wrap.classList.remove('fc-pop'); }, 600);
-      if (count === 100 && typeof confettiBurstCenter === 'function') confettiBurstCenter(40);
-    }
-  });
-  obs.observe(el, { childList: true, characterData: true, subtree: true });
 })();
