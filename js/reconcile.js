@@ -1,13 +1,83 @@
 // ═══════════════════════════════════════════════════════
 // RECONCILIATION HELPER — Paste Exchange roster CSV + Home
 // SIS roster CSV, diff by student key + course, flag mismatches.
-// Pure client-side. No storage. No network.
+// Pure client-side. Field-mapping presets saved per college.
 // ═══════════════════════════════════════════════════════
 
 var RC_KEY_FIELD = 'studentId';
 var RC_COURSE_FIELD = 'course';
 var RC_UNITS_FIELD = 'units';
 var RC_TERM_FIELD = 'term';
+var RC_PRESETS_KEY = 'appanalyst.reconcile.presets.v1';
+var RC_LAST_FIELDS = null; // Cached from last successful rcRun
+
+function rcPresetsLoad() {
+  try {
+    var raw = localStorage.getItem(RC_PRESETS_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) { return {}; }
+}
+
+function rcPresetsSave(p) {
+  localStorage.setItem(RC_PRESETS_KEY, JSON.stringify(p));
+}
+
+function rcPresetSave() {
+  var name = prompt('Save this field mapping under which college name?');
+  if (!name) return;
+  if (!RC_LAST_FIELDS) { toast('Run a reconcile first to capture the field mapping'); return; }
+  var presets = rcPresetsLoad();
+  presets[name] = {
+    exKey: RC_LAST_FIELDS.exKey,
+    siKey: RC_LAST_FIELDS.siKey,
+    exCourse: RC_LAST_FIELDS.exCourse,
+    siCourse: RC_LAST_FIELDS.siCourse,
+    exUnits: RC_LAST_FIELDS.exUnits,
+    siUnits: RC_LAST_FIELDS.siUnits,
+    exTerm: RC_LAST_FIELDS.exTerm,
+    siTerm: RC_LAST_FIELDS.siTerm,
+    updated: new Date().toISOString()
+  };
+  rcPresetsSave(presets);
+  toast('Saved preset for ' + name);
+  rcPresetsRender();
+}
+
+function rcPresetDelete(name) {
+  if (!confirm('Delete preset for ' + name + '?')) return;
+  var presets = rcPresetsLoad();
+  delete presets[name];
+  rcPresetsSave(presets);
+  rcPresetsRender();
+  toast('Deleted');
+}
+
+function rcPresetApply(name) {
+  var presets = rcPresetsLoad();
+  var p = presets[name];
+  if (!p) return;
+  // We can't inject the preset into column detection directly — instead,
+  // we show an info note about which fields the preset expects.
+  var msg = 'Preset for ' + name + ' expects these columns:\n' +
+    'Exchange: ' + (p.exKey || '?') + ', ' + (p.exCourse || '?') + (p.exUnits ? ', ' + p.exUnits : '') + (p.exTerm ? ', ' + p.exTerm : '') + '\n' +
+    'Home SIS: ' + (p.siKey || '?') + ', ' + (p.siCourse || '?') + (p.siUnits ? ', ' + p.siUnits : '') + (p.siTerm ? ', ' + p.siTerm : '');
+  alert(msg);
+}
+
+function rcPresetsRender() {
+  var wrap = document.getElementById('rcPresets');
+  if (!wrap) return;
+  var presets = rcPresetsLoad();
+  var names = Object.keys(presets).sort();
+  if (names.length === 0) {
+    wrap.innerHTML = '<span class="rc-presets-empty">No presets saved yet. Run a reconcile, then click <strong>Save as preset</strong>.</span>';
+    return;
+  }
+  wrap.innerHTML = '<span class="rc-presets-label">Presets:</span>' +
+    names.map(function(n) {
+      return '<span class="rc-preset-chip"><button class="rc-preset-name" onclick="rcPresetApply(\'' + n.replace(/\'/g, "\\\\'") + '\')">' + rcEsc(n) + '</button><button class="rc-preset-x" onclick="rcPresetDelete(\'' + n.replace(/\'/g, "\\\\'") + '\')" title="Delete">&times;</button></span>';
+    }).join('');
+}
 
 function rcParse(csv) {
   if (!csv || !csv.trim()) return { headers: [], rows: [] };
@@ -86,6 +156,9 @@ function rcRun() {
   var siUnits = rcGuessField(si.headers, ['units', 'credits', 'credithours']);
   var exTerm = rcGuessField(ex.headers, ['term', 'semester']);
   var siTerm = rcGuessField(si.headers, ['term', 'semester']);
+
+  // Cache for preset save
+  RC_LAST_FIELDS = { exKey: exKey, siKey: siKey, exCourse: exCourse, siCourse: siCourse, exUnits: exUnits, siUnits: siUnits, exTerm: exTerm, siTerm: siTerm };
 
   if (!exKey || !siKey) {
     document.getElementById('rcResults').innerHTML = '<div class="rc-error">Could not find a student ID column in one of the CSVs. Columns detected:<br><strong>Exchange:</strong> ' + (ex.headers.join(', ') || '(none)') + '<br><strong>Home SIS:</strong> ' + (si.headers.join(', ') || '(none)') + '<br>Expected something like <code>cccid</code>, <code>studentId</code>, or <code>student_number</code>.</div>';
@@ -237,3 +310,6 @@ function rcClear() {
   document.getElementById('rcSis').value = '';
   document.getElementById('rcResults').innerHTML = '<div class="rc-hint">Paste a CSV into each box above, then click <strong>Reconcile</strong>.</div>';
 }
+
+// Initial presets render
+rcPresetsRender();

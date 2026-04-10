@@ -92,3 +92,78 @@
   /* ── Layout ── */
   --max-w: 1060px;
 }
+
+/* ═══════════════════════════════════════════════════════
+   DARK THEME — Toggled by [data-theme="dark"] on <html>
+   Overrides the core neutrals + lightens accent backgrounds.
+   ═══════════════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --bg: #161310;
+  --bg-2: #1C1917;
+  --bg-3: #292524;
+  --surface: #1C1917;
+  --surface-2: #231F1C;
+  --border: #2C2724;
+  --border-2: #3A3531;
+  --text: #F5F4F1;
+  --text-2: #C8C5BF;
+  --text-3: #8A867F;
+
+  --primary: #34D399;
+  --primary-light: rgba(52, 211, 153, .1);
+  --primary-bd: rgba(52, 211, 153, .35);
+
+  --red: #F87171;
+  --red-light: rgba(248, 113, 113, .1);
+  --red-bd: rgba(248, 113, 113, .3);
+
+  --amber: #FBBF24;
+  --amber-light: rgba(251, 191, 36, .1);
+  --amber-bd: rgba(251, 191, 36, .3);
+
+  --blue: #60A5FA;
+  --blue-light: rgba(96, 165, 250, .1);
+  --blue-bd: rgba(96, 165, 250, .3);
+
+  --purple: #A78BFA;
+  --purple-light: rgba(167, 139, 250, .1);
+  --purple-bd: rgba(167, 139, 250, .3);
+
+  --teal: #2DD4BF;
+  --teal-light: rgba(45, 212, 191, .1);
+  --teal-bd: rgba(45, 212, 191, .3);
+
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+  --shadow-md: 0 2px 8px rgba(0,0,0,.4);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,.5);
+  --shadow-xl: 0 8px 32px rgba(0,0,0,.6);
+}
+
+/* Prevent flash of light theme when dark is stored */
+html[data-theme="dark"] body { background: var(--bg); color: var(--text); }
+
+/* Smooth transition when toggling */
+html {
+  transition: background-color .25s ease;
+}
+html[data-theme] body,
+html[data-theme] .sec,
+html[data-theme] .tool-frame,
+html[data-theme] .today-card,
+html[data-theme] .backup-modal,
+html[data-theme] .search-modal,
+html[data-theme] .lookup-card {
+  transition: background-color .25s ease, border-color .25s ease, color .25s ease;
+}
+
+/* Dark theme: tighten a few places where hardcoded colors exist */
+html[data-theme="dark"] .sis-banner-direct { background: rgba(147, 197, 253, .12); color: #93c5fd; }
+html[data-theme="dark"] .sis-banner-ethos { background: rgba(252, 211, 77, .12); color: #fcd34d; }
+html[data-theme="dark"] .sis-peoplesoft { background: rgba(196, 181, 253, .12); color: #c4b5fd; }
+html[data-theme="dark"] .sis-colleague { background: rgba(249, 168, 212, .12); color: #f9a8d4; }
+html[data-theme="dark"] .sis-unknown { background: var(--bg-3); color: var(--text-3); }
+html[data-theme="dark"] .ob-cat-produce { background: rgba(34, 197, 94, .12); color: #86efac; }
+html[data-theme="dark"] .ob-cat-plan { background: rgba(249, 168, 212, .12); color: #f9a8d4; }
+
+/* Images + backdrops that may need adjustment */
+html[data-theme="dark"] .cvc-fab { box-shadow: 0 4px 16px rgba(0,0,0,.5); }

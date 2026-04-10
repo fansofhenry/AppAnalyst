@@ -455,3 +455,41 @@ a.nav-brand:hover .nav-title { color: var(--primary); }
 .a11y-toggle.a11y-on .a11y-switch { background: var(--primary); }
 .a11y-toggle.a11y-on .a11y-switch::after { transform: translateX(12px); }
 .a11y-icon { font-size: .8rem; line-height: 1; }
+
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  cursor: pointer;
+  padding: .32rem .65rem;
+  border-radius: 6px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-2);
+  transition: all .15s;
+  flex-shrink: 0;
+  font-family: var(--mono);
+  font-size: .55rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+.theme-toggle-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-light);
+}
+.theme-icon { font-size: .85rem; line-height: 1; }
+.theme-label { white-space: nowrap; }
+
+html[data-theme="dark"] .nav-brand .nav-icon {
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+}
+html[data-theme="dark"] #nav {
+  background: rgba(22, 19, 16, .88);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+html[data-theme="dark"] #nav.scrolled {
+  background: rgba(22, 19, 16, .95);
+}

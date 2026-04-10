@@ -15,6 +15,15 @@
 <meta property="og:url" content="https://fansofhenry.github.io/AppAnalyst/">
 <link rel="canonical" href="https://fansofhenry.github.io/AppAnalyst/">
 <meta name="theme-color" content="#0F766E">
+<script>
+// First-paint theme — runs before stylesheets apply to prevent flash
+(function() {
+  try {
+    var t = localStorage.getItem('appanalyst.theme.v1');
+    if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  } catch (e) {}
+})();
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <!-- Stylesheets -->
@@ -317,6 +326,7 @@
   <a class="nav-brand" href="#" onclick="event.preventDefault();(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" style="text-decoration:none;cursor:pointer" title="Back to top"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">AppAnalyst · CVC-OEI</span></a>
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0" aria-hidden="true"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Sections</button>
   <div class="a11y-toggle" id="a11yToggle" onclick="toggleA11y()" role="switch" aria-checked="false" aria-label="Toggle accessibility high-contrast mode" tabindex="0"><span class="a11y-icon" aria-hidden="true">&#9855;</span><span class="a11y-label">Accessibility</span><div class="a11y-switch"></div></div>
+  <button class="theme-toggle-btn" id="themeToggle" onclick="themeToggle()" title="Toggle theme (D)"><span class="theme-icon">&#9790;</span><span class="theme-label">Dark</span></button>
   <div class="nav-links">
     <a href="#monitor" class="nv nv-amber"><span class="nav-num">1</span>Status</a><a href="#lookup" class="nv nv-blue"><span class="nav-num">2</span>Colleges</a><a href="#flow" class="nv nv-sky"><span class="nav-num">3</span>Architecture</a><a href="#tracer" class="nv nv-rose"><span class="nav-num">4</span>Diagnostics</a><a href="#patterns" class="nv nv-orange"><span class="nav-num">5</span>Intelligence</a><a href="#kb" class="nv nv-green"><span class="nav-num">6</span>KB</a><a href="#comms" class="nv nv-indigo"><span class="nav-num">7</span>Comms</a><a href="#outreach" class="nv nv-teal"><span class="nav-num">8</span>Outreach</a><a href="#aiVision" class="nv nv-purple"><span class="nav-num">9</span>AI</a><a href="#barrierOverview" class="nav-barrier"><span class="nav-num">0</span>Barriers</a>
   </div>
@@ -360,9 +370,9 @@
         <h2 class="today-title">Today</h2>
       </div>
       <div class="today-head-actions">
-        <button class="today-btn" onclick="if(typeof tlAdd===\u0027function\u0027)tlAdd()"><kbd>N</kbd> New ticket</button>
-        <button class="today-btn" onclick="if(typeof searchOpen===\u0027function\u0027)searchOpen()"><kbd>\u2318K</kbd> Search</button>
-        <button class="today-btn" onclick="if(typeof backupOpen===\u0027function\u0027){backupOpen();backupRenderStats();}" title="Backup and restore all local data">Backup</button>
+        <button class="today-btn" onclick="if(typeof tlAdd===&#39;function&#39;)tlAdd()"><kbd>N</kbd> New ticket</button>
+        <button class="today-btn" onclick="if(typeof searchOpen===&#39;function&#39;)searchOpen()"><kbd>&#8984;K</kbd> Search</button>
+        <button class="today-btn" onclick="if(typeof backupOpen===&#39;function&#39;){backupOpen();backupRenderStats();}" title="Backup and restore all local data">Backup</button>
       </div>
     </div>
     <div id="todayBody"></div>
@@ -389,13 +399,23 @@
 
 <!-- ═══ SYSTEM STATUS (MONITOR) ═══ -->
 <section class="sec sec-alt fu" id="monitor" role="region" aria-label="System Monitor"><div class="wrap">
-  <div class="eyebrow"><span class="sec-num" style="background:var(--amber)">1</span>Status<span class="demo-badge" title="Simulated dashboard — the 11 colleges shown here use fake uptime and error data. Your real 115-college directory is below at #lookup. Pass 2 will rewire this against live ticket-log patterns.">Demo data</span></div>
-  <h2>System health across <em>all colleges</em></h2>
-  <p class="sec-desc">Real-time health for 115+ colleges. <strong>FHDA colleges pinned at the top.</strong> Filter by status or search by name. Zero tickets plus a degraded system isn't a success story — it's a silent failure.</p>
+  <div class="eyebrow"><span class="sec-num" style="background:var(--amber)">1</span>Status</div>
+  <h2>Active colleges — <em>your real queue</em></h2>
+  <p class="sec-desc">Colleges you're actively working, sorted by urgency. Populated from your ticket log. <strong>Urgent (7d+)</strong> colleges float to the top, then <strong>aging (3d+)</strong>, then any with open tickets. Click any row to jump to the filtered ticket log. Toggle to the demo view if you want to see the original status-dashboard reference.</p>
   <div class="tool-frame">
-    <div style="position:relative"><div class="live-alert" id="liveAlert"><div class="live-alert-title">New Alert</div><div class="live-alert-body"></div><div class="live-alert-time"></div></div></div>
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Live</span></div><div class="refresh-indicator"><span class="refresh-dot"></span><span id="refreshTimer">Auto-refresh: 30s</span></div><span class="tool-hint">Click any college for details</span><div class="tool-bar-title">System Status Dashboard</div></div>
+    <div class="tool-bar">
+      <div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Your data</span></div>
+      <div class="rm-view-toggle">
+        <button id="rmBtnReal" class="rm-view-btn rm-active" onclick="rmSetView('real')">Real data</button>
+        <button id="rmBtnDemo" class="rm-view-btn" onclick="rmSetView('demo')">Demo</button>
+      </div>
+      <span class="tool-bar-title">System Status</span>
+    </div>
     <div class="tool-body">
+      <div id="realMonitorBody"></div>
+      <div id="demoMonitorBody" style="display:none">
+      <div class="demo-view-banner">Simulated data &mdash; 11 colleges with fake uptime. Toggle back to "Real data" to see your actual queue.</div>
+      <div style="position:relative"><div class="live-alert" id="liveAlert"><div class="live-alert-title">New Alert</div><div class="live-alert-body"></div><div class="live-alert-time"></div></div></div>
       <div class="pulse-wrap">
         <div class="pulse-header">
           <span class="pulse-title">Weekly Pulse</span><span class="pulse-badge pulse-badge-red">Elevated</span>
@@ -419,6 +439,7 @@
       </div>
       <div class="monitor-summary" id="monSummary"></div>
       <div class="monitor-grid" id="monitorGrid"></div>
+      </div>
     </div>
   </div>
 </div></section>
@@ -485,12 +506,22 @@
 
 <!-- ═══ INCIDENT DIAGNOSTICS ═══ -->
 <section class="sec fu" id="tracer" role="region" aria-label="Incident Tracer"><div class="wrap">
-  <div class="eyebrow"><span class="sec-num" style="background:#be185d">4</span>Diagnostics<span class="demo-badge" title="Walkthrough uses a fictional Sacramento City token-expiration incident as a teaching scenario.">Demo data</span></div>
-  <h2>Missing course reported — <em>trace it layer by layer</em></h2>
-  <p class="sec-desc">Walk a real incident from symptom to resolution. Each stage shows what broke, where to look, and the analyst response. <strong>FHDA uses Banner Direct — the most reliable path.</strong></p>
+  <div class="eyebrow"><span class="sec-num" style="background:#be185d">4</span>Diagnostics</div>
+  <h2>Trace it layer by layer — <em>your checklist</em></h2>
+  <p class="sec-desc">Interactive 5-stage diagnostic: Symptom → Home SIS → Exchange → Teaching college → Canvas. Each stage has questions to work through. <strong>State persists in this browser</strong> so you can come back mid-triage. When you're done, click "Save to ticket log" to record the trace.</p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diagnostic</span></div><span class="tool-hint">Click Run to trace the incident</span><div class="tool-bar-title">Incident Trace &middot; Sacramento City &middot; Ethos Token</div></div>
+    <div class="tool-bar">
+      <div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Interactive</span></div>
+      <div class="rm-view-toggle">
+        <button id="rtBtnReal" class="rm-view-btn rm-active" onclick="rtSetView('real')">Checklist</button>
+        <button id="rtBtnDemo" class="rm-view-btn" onclick="rtSetView('demo')">Demo</button>
+      </div>
+      <span class="tool-bar-title">Diagnostic Tracer</span>
+    </div>
     <div class="tool-body">
+      <div id="realTracerBody"></div>
+      <div id="demoTracerBody" style="display:none">
+      <div class="demo-view-banner">Scripted Sacramento City walkthrough &mdash; teaching scenario. Toggle back to "Checklist" for the real diagnostic.</div>
       <div class="tracer-controls">
         <button class="tracer-btn tracer-btn-run" id="autoRunBtn" onclick="autoRunTrace()">&#9654; Auto-Run Trace</button>
         <button class="tracer-btn tracer-btn-reset" onclick="resetTrace()">&#8634; Reset</button>
@@ -509,6 +540,7 @@
           <div class="sb-item"><span class="sb-type sb-scale">Scale</span><div class="sb-text">KB article enables all 7 affected colleges to renew credentials themselves — without opening a ticket.</div></div>
           <div class="sb-item"><span class="sb-type sb-compounding">Compounding</span><div class="sb-text">Pattern data feeds Intelligence section. Next quarter shows auth ticket volume declining — proof the fix worked.</div></div>
         </div>
+      </div>
       </div>
     </div>
   </div>
@@ -536,12 +568,22 @@
 
 <!-- ═══ TICKET INTELLIGENCE ═══ -->
 <section class="sec sec-alt fu" id="patterns" role="region" aria-label="Ticket Intelligence"><div class="wrap">
-  <div class="eyebrow"><span class="sec-num" style="background:#c2410c">5</span>Ticket Intelligence<span class="demo-badge" title="Chart uses simulated ticket volume. Pass 2 will rewire this to read from your real ticket log.">Demo data</span></div>
-  <h2>One ticket — or <em>twenty waiting to happen?</em></h2>
-  <p class="sec-desc">Ticket volume mapped to the academic calendar. <strong>If 10 colleges generate 60% of tickets, that's not a support problem — it's an onboarding gap.</strong></p>
+  <div class="eyebrow"><span class="sec-num" style="background:#c2410c">5</span>Ticket Intelligence</div>
+  <h2>Your ticket patterns — <em>group and slice</em></h2>
+  <p class="sec-desc">Your real tickets, grouped by system, college, status, vendor, or week. <strong>If 5 colleges generate half the volume, that's an onboarding gap.</strong> Shows open vs total so you can spot what's stuck. Toggle to demo view for the original reference chart.</p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Analysis</span></div><span class="tool-hint">Click insight cards to highlight chart</span><div class="tool-bar-title">Ticket Intelligence &middot; 12-Week Calendar</div></div>
+    <div class="tool-bar">
+      <div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-purple">Your data</span></div>
+      <div class="rm-view-toggle">
+        <button id="rpBtnReal" class="rm-view-btn rm-active" onclick="rpSetView('real')">Real data</button>
+        <button id="rpBtnDemo" class="rm-view-btn" onclick="rpSetView('demo')">Demo</button>
+      </div>
+      <span class="tool-bar-title">Ticket Intelligence</span>
+    </div>
     <div class="tool-body">
+      <div id="realPatternsBody"></div>
+      <div id="demoPatternsBody" style="display:none">
+      <div class="demo-view-banner">Simulated 12-week chart. Toggle back to "Real data" to see your actual tickets.</div>
       <div class="pattern-grid">
         <div><div class="chart-area">
           <div class="chart-header"><div class="chart-title">Tickets by Category</div><div class="chart-period">Academic Calendar &middot; Registration &rarr; Add/Drop &rarr; Census &rarr; FA Disbursement &rarr; Midterm &middot; <span id="chartTotal">0</span> total</div></div>
@@ -560,6 +602,7 @@
           <div class="rc-footer">Intervention: targeted onboarding for top 5 &rarr; projected 30% ticket reduction</div>
         </div></div>
         <div class="insights-panel" id="insightsPanel"></div>
+      </div>
       </div>
     </div>
   </div>
@@ -636,9 +679,11 @@
         <button class="tl-btn tl-btn-new" onclick="rcRun()">Reconcile</button>
         <button class="tl-btn" onclick="rcLoadSample()">Load sample</button>
         <button class="tl-btn" onclick="rcClear()">Clear</button>
+        <button class="tl-btn" onclick="rcPresetSave()" title="Save detected field mapping under a college name">Save as preset</button>
       </div>
+      <div id="rcPresets" class="rc-presets"></div>
       <div id="rcResults"><div class="rc-hint">Paste a CSV into each box above, then click <strong>Reconcile</strong>. Both files should have a student ID/CCCID column and a course column. Units and term are compared if present.</div></div>
-      <div class="rc-privacy">No data leaves this page. All processing happens in your browser memory and is discarded on refresh. Still — strip PII before pasting anything if you\u2019re on a shared machine.</div>
+      <div class="rc-privacy">No data leaves this page. All processing happens in your browser memory and is discarded on refresh. Still &mdash; strip PII before pasting anything if you&rsquo;re on a shared machine.</div>
     </div>
   </div>
 </div></section>
@@ -684,11 +729,24 @@
 <div class="sec-group-divider"><span class="sgd-icon">&#9679;</span> Communications &amp; Response</div>
 
 <!-- ═══ COMMUNICATION TEMPLATES ═══ -->
-<section class="sec sec-alt fu" id="comms" role="region" aria-label="Incident Communication">
+<section class="sec sec-alt fu" id="comms" role="region" aria-label="Routine Communications">
   <div class="wrap">
-    <div class="eyebrow"><span class="sec-num" style="background:#4338ca">7</span>Communications<span class="demo-badge" title="Reference templates around a fictional Sacramento City P2 incident. Copy buttons still work — adapt the text to real situations.">Demo scenario</span></div>
-    <h2>Same failure, <em>five audiences</em></h2>
-    <p class="sec-desc">Same incident — adapted for student, campus IT, registrar, internal team, and Board. Copy-ready templates for each audience.</p>
+    <div class="eyebrow"><span class="sec-num" style="background:#4338ca">7</span>Communications</div>
+    <h2>Routine comms — <em>fill once, copy out</em></h2>
+    <p class="sec-desc">Templates for the non-incident work: ticket acknowledgments, closing notes, known-issue notices, weekly pulse summaries, and college onboarding welcomes. Fill in the variables, copy the draft. Form state persists so you don&rsquo;t lose work between sessions. For live incidents, use the <a href="#escHelper" style="color:var(--primary)">Escalation Helper</a> instead.</p>
+    <div class="tool-frame">
+      <div class="tool-bar">
+        <div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Fill-in generator</span></div>
+        <div class="rm-view-toggle">
+          <button id="rcCommsBtnReal" class="rm-view-btn rm-active" onclick="rcCommsSetView('real')">Templates</button>
+          <button id="rcCommsBtnDemo" class="rm-view-btn" onclick="rcCommsSetView('demo')">Demo scenario</button>
+        </div>
+        <span class="tool-bar-title">Routine Communications</span>
+      </div>
+      <div class="tool-body">
+        <div id="realCommsBody"></div>
+        <div id="demoCommsBody" style="display:none">
+        <div class="demo-view-banner">Reference scenario &mdash; fictional Sacramento City P2 incident. Toggle back to "Templates" for the fill-in generator.</div>
     <div class="scenario-status-bar">
       <div class="ssb-indicator"><span class="ssb-dot"></span><span class="ssb-level">P2 ACTIVE</span></div>
       <div class="ssb-detail">Sacramento City — security credential expired — 47 student enrollments stuck</div>
@@ -700,6 +758,9 @@
       <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--amber-light)">&#128203;</div><div class="msg-to">To the Registrar</div><div class="msg-channel">Email</div></div><div class="msg-subject">Subject: Cross-enrollment sync — student enrollments confirmed, Canvas delay expected &lt;4hr</div><div class="msg-body">Quick update on the cross-enrollment sync issue. <strong>The student's enrollment is confirmed</strong> — the delay is in how the data reaches Canvas. <span class="tone-note" data-tip="Avoids 'your system failed.' Names the problem without assigning blame.">Why this framing</span> If students contact your office, you can confirm their enrollment is valid. Happy to provide a written summary if this needs to go to your VP.</div></div>
       <div class="msg-preview"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--blue-light)">&#9881;</div><div class="msg-to">To CVC Internal Team</div><div class="msg-channel">Slack</div></div><div class="msg-body"><strong>Scope:</strong> 47 student enrollments pending in Chabot &rarr; De Anza queue since 02:00 PST. Root cause: security credential expired, <span class="msg-warn">access denied</span> on renewal attempt. <strong>Action:</strong> Credential regenerated. Queue processing in progress. Knowledge base article drafted.</div></div>
       <div class="msg-preview msg-board"><button class="msg-copy" onclick="event.stopPropagation();copyMsgText(this)" title="Copy message to clipboard">Copy</button><div class="msg-header"><div class="msg-icon" style="background:var(--red-light)">&#128202;</div><div class="msg-to">Board Brief (via Vice Chancellor)</div><div class="msg-channel">Quarterly ETS Report</div></div><div class="msg-body"><strong>Situation:</strong> During Fall 2025 peak registration, an authentication failure between the CVC Exchange and 7 Banner colleges caused enrollment sync delays affecting approximately <span class="msg-highlight">340 students</span> across 2 consecutive terms.<br><br><strong>Student Impact:</strong> 47 students experienced 4&ndash;12 hour delays in Canvas course access. 12 required manual intervention near the add deadline. Zero students lost enrollment; all resolved within SLA.<br><br><strong>Equity note:</strong> Disproportionate impact on low-income students — the sync delay coincided with auto-drop-for-nonpayment windows at 3 colleges.<br><br><strong>Root cause (plain language):</strong> An expired security credential between two systems. Analogous to a building key card that stopped working — the door is fine, the person is authorized, but the reader rejects them until IT reissues the credential. <span class="tone-note" data-tip="Board members aren't technical. The 'key card' analogy makes the failure legible without jargon.">Why an analogy</span><br><br><strong>Remediation:</strong> Credential regenerated. Automated expiration monitoring added (alerts 72 hours before expiration). KB article published.<br><br><strong>Recommendation:</strong> No board action required. Status update recommended in quarterly ETS report under &ldquo;CVC Exchange Reliability.&rdquo;</div></div>
+    </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1201,6 +1262,12 @@ function showBarrierView(view,btn){
 
 <button class="back-to-top" id="backToTop" onclick="(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&uarr;</button>
 
+<!-- ═══ SEARCH FLOATING BUTTON ═══ -->
+<button class="search-fab" onclick="searchOpen()" aria-label="Open search (Cmd+K)" title="Search (&#8984;K)">
+  <span class="search-fab-icon">&#128269;</span>
+  <span class="search-fab-key">&#8984;K</span>
+</button>
+
 <!-- ═══ BACKUP / RESTORE MODAL ═══ -->
 <div class="backup-overlay" id="backupModal" onclick="if(event.target===this)backupClose()" role="dialog" aria-label="Backup and restore">
   <div class="backup-modal">
@@ -1364,6 +1431,11 @@ document.addEventListener('keydown', function(e) {
 <script src="js/onboarding.js"></script>
 <script src="js/backup.js"></script>
 <script src="js/escalation.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/realMonitor.js"></script>
+<script src="js/realPatterns.js"></script>
+<script src="js/realTracer.js"></script>
+<script src="js/realComms.js"></script>
 <script src="js/barriers.js"></script>
 <script src="js/outreach.js"></script>
 <script src="js/lookup.js"></script>
