@@ -1,29 +1,32 @@
-# AppAnalyst — CVC-OEI Application Support Portfolio
+# AppAnalyst — CVC-OEI Support Hub
 
-Interactive portfolio demonstrating support operations for the **CVC Exchange** at **Foothill–De Anza CCD**. Built for the Application Support Analyst I role on the CVC-OEI team.
+Personal working toolbench for an **Application Support Analyst** on the **CVC-OEI team at Foothill–De Anza CCD**. Originally built as an interview portfolio; Pass 1 of the post-hire rewrite turns the simulated demos into real day-to-day tools backed by localStorage. Everything stays in your browser — no backend, no PII, no sync.
 
 ## What This Is
 
-A single-page application with 10 numbered tool sections (plus supporting tools and a personal origin story) covering the full support lifecycle for California's cross-enrollment system (115+ community colleges, 33,000+ annual cross-enrollments across 4 SIS platforms).
+A single-page web app with working tools (localStorage-backed) alongside the existing reference sections. Runs on GitHub Pages and `file://`.
 
-**Tools (numbered 1–9, plus Barriers section 0):**
-1. **College Lookup** — Search 31 colleges by name, district, SIS type, issue status
-2. **Exchange Data** — 2,100% growth, Cal-GETC enrollment distribution
-3. **Architecture Diagram** — Four-layer data flow with clickable failure points
-4. **Morning Monitor** — Real-time college health dashboard with live alerts and weekly pulse
-5. **Incident Tracer** — Layer-by-layer diagnosis with auto-run and live resolution
-6. **Pattern Analyzer** — Ticket trends mapped to the CVC academic calendar
-7. **Incident Response** — Same failure written for 5 audiences (student, IT, registrar, team, Board); P1/P2/P3 escalation matrix
-8. **Outreach Planner** — 17 triggers across 7 months for proactive student engagement
-9. **AI Vision** — Predictive monitoring, fraud deterrence, equity-first AI (grounded in CISOA 2026)
-0. **Barrier Intelligence** — 10 systemic friction points with lifecycle map, equity scorer, campus matrix, and ticket correlator
+**Pass 1 real tools (this release):**
+- **College Directory** — All 115 California community colleges, FHDA pinned, SIS tagged from public portal evidence where determinable. Click any college to add personal notes, contacts per Exchange staff role (A&R, FA, Counseling, DSPS, General), and correct/confirm the SIS tier.
+- **Ticket Log** — Personal working queue: college, system, symptom, status, vendor escalation, notes, resolution. Age highlighting (yellow 3d+, red 7d+). Filter, search, CSV export, JSON backup/restore.
+- **Runbook / KB** — Markdown entries tagged by system (Banner, PeopleSoft, Exchange, Ethos, SuperGlue, CCCApply, Canvas, SSO) and by the 5 Exchange staff audiences. Copy-to-clipboard for ticket replies. JSON backup/restore.
 
-**Additional tools:**
-- **Student Journey** — Side-by-side comparison: working enrollment vs broken
-- **KB Builder** — 4 editable fix templates (integration, auth, sync, onboarding)
-- **Counselor Toolkit** — Verification workflows, registration checklists, counselor scripts
+**Reference / interview-era sections (unchanged):** System Status, Architecture, Incident Diagnostics, Student Journey, Ticket Intelligence, Communications & Escalation, Outreach Planner, Exchange Data, AI Vision, Barrier Intelligence. These still use simulated data — Pass 2 will rewire them against real ticket-log data.
 
-**Origin Story** — Personal "why" section between the tools and footer. Narrative arc with family photos, curated quotes, and a first-gen story anchoring the portfolio in purpose.
+## Data boundary
+
+**Public hosting.** GitHub Pages serves the static site world-readable. Never commit real contact names, student IDs, ticket numbers, or internal URLs to this repo.
+
+**Personal data.** The Directory overlay, Ticket Log, and KB Runbook all persist in `localStorage` keys (`appanalyst.colleges.overlay.v1`, `appanalyst.tickets.v1`, `appanalyst.kb.v1`). That means:
+- Private to this browser on this machine. Clearing browser data erases it.
+- No sync across devices. Export JSON backups regularly.
+- Safe to use for working notes, but still avoid pasting PII — exported CSVs are only as private as where they end up.
+
+## SIS tagging — verify before relying
+
+The 115-college SIS tier list (Banner, PeopleSoft, Colleague) was seeded from public portal evidence (WebSMART, PASSPORT, eServices, MyCoast, etc.). Tags are marked **verified** only where a portal name or district IT page publicly documents the platform. Everything else is **unverified** or **unknown** and flagged visually.
+
+**Critical caveat:** public portal names don't distinguish **Banner Direct vs Banner Ethos** (or Colleague Direct vs Colleague Ethos). This is the key CVC integration distinction per the April 2025 CVC Exchange release notes — Ethos variants still require manual unit reconciliation. Confirm with district IT before using the tag for escalation decisions. Every entry is editable in-browser to capture corrections as you learn.
 
 ## Running Locally
 
@@ -40,11 +43,12 @@ start index.html         # Windows
 | Key | Action |
 |-----|--------|
 | `1`–`9`, `0` | Jump to section |
+| `L` | Jump to Ticket Log |
+| `N` | New ticket (quick-add from anywhere) |
 | `?` | Show all shortcuts |
 | `G` | Open section panel |
 | `/` | Focus college search |
 | `T` | Back to top |
-| `F` | Theater/focus mode |
 | `Z` | Zoom presentation mode |
 | `A` | Accessibility (WCAG AAA) mode |
 

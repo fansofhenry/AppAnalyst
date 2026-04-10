@@ -1,133 +1,93 @@
 // ═══════════════════════════════════════════════════════
-// COLLEGE QUICK LOOKUP — Search, filter, render
+// COLLEGE DIRECTORY — Search, filter, render, personal overlay
+// Static roster from collegeDB (js/data/colleges.js).
+// User overlay (notes, SIS corrections, contacts) in localStorage.
 // ═══════════════════════════════════════════════════════
 
+var CL_OVERLAY_KEY = 'appanalyst.colleges.overlay.v1';
 var activeLookupFilter = 'all';
+var clSearch = '';
+var clExpanded = null;
 
+// ── Overlay store ─────────────────────────────────────
+function clOverlayLoad() {
+  try { return JSON.parse(localStorage.getItem(CL_OVERLAY_KEY) || '{}'); }
+  catch (e) { return {}; }
+}
+function clOverlaySave(o) {
+  localStorage.setItem(CL_OVERLAY_KEY, JSON.stringify(o));
+}
+function clOverlayGet(name) {
+  var o = clOverlayLoad();
+  return o[name] || {};
+}
+function clOverlayUpdate(name, field, value) {
+  var o = clOverlayLoad();
+  if (!o[name]) o[name] = {};
+  o[name][field] = value;
+  o[name].updated = new Date().toISOString();
+  clOverlaySave(o);
+}
+
+// ── Merge static + overlay ─────────────────────────────
+function clMerged() {
+  var overlay = clOverlayLoad();
+  return collegeDB.map(function(c) {
+    var o = overlay[c.name] || {};
+    return {
+      name: c.name,
+      district: c.district,
+      city: c.city,
+      county: c.county,
+      region: c.region,
+      website: c.website,
+      sis: o.sis || c.sis,
+      sisSource: o.sis ? 'user override' : c.sisSource,
+      verified: o.verified != null ? o.verified : c.verified,
+      isFHDA: c.isFHDA,
+      tip: c.tip,
+      readiness: c.readiness,
+      notes: o.notes || '',
+      contacts: o.contacts || {}
+    };
+  });
+}
+
+// ── Filters ─────────────────────────────────────────────
 function filterColleges(filter, el) {
   activeLookupFilter = filter;
   window._lookupShowAll = false;
   document.querySelectorAll('.lookup-filter').forEach(function(b) { b.classList.remove('lf-active'); });
   if (el) el.classList.add('lf-active');
-  document.getElementById('collegeLookup').value = '';
+  var input = document.getElementById('collegeLookup');
+  if (input) input.value = '';
+  clSearch = '';
   renderLookup(getFilteredColleges());
 }
 
 function getFilteredColleges() {
-  if (activeLookupFilter === 'all') return collegeDB;
-  if (activeLookupFilter === 'issues') return collegeDB.filter(function(c) { return c.issues.length > 0; });
-  if (activeLookupFilter === 'manual') return collegeDB.filter(function(c) { return c.fa.indexOf('Manual') >= 0 || c.fa === 'Pending'; });
-  return collegeDB.filter(function(c) { return c.sis.indexOf(activeLookupFilter) >= 0; });
+  var all = clMerged();
+  var f = activeLookupFilter;
+  if (f === 'all') return all;
+  if (f === 'unverified') return all.filter(function(c) { return !c.verified; });
+  if (f === 'unknown') return all.filter(function(c) { return c.sis === 'unknown'; });
+  if (f === 'fhda') return all.filter(function(c) { return c.isFHDA; });
+  if (f === 'ethos-risk') return all.filter(function(c) { return c.sis.indexOf('Banner') >= 0 || c.sis.indexOf('Colleague') >= 0; });
+  return all.filter(function(c) { return c.sis.toLowerCase().indexOf(f.toLowerCase()) >= 0; });
 }
 
 function searchColleges(query) {
   window._lookupShowAll = false;
-  var q = query.trim().toLowerCase();
+  clSearch = query;
+  var q = (query || '').trim().toLowerCase();
   if (!q) { renderLookup(getFilteredColleges()); return; }
   var base = getFilteredColleges();
   var matches = base.filter(function(c) {
-    return c.name.toLowerCase().indexOf(q) >= 0 || c.district.toLowerCase().indexOf(q) >= 0 ||
-      c.sis.toLowerCase().indexOf(q) >= 0 || c.region.toLowerCase().indexOf(q) >= 0 ||
-      c.fa.toLowerCase().indexOf(q) >= 0 || c.role.toLowerCase().indexOf(q) >= 0 ||
-      c.tip.toLowerCase().indexOf(q) >= 0 || c.issues.some(function(issue) { return issue.toLowerCase().indexOf(q) >= 0; });
+    return (c.name + ' ' + c.district + ' ' + c.sis + ' ' + c.region + ' ' + c.city + ' ' + c.county + ' ' + c.tip + ' ' + (c.notes || '')).toLowerCase().indexOf(q) >= 0;
   });
   renderLookup(matches);
 }
 
-// MERGED: original renderLookup + sortFHDAFirst wrapper + markHomeLookups wrapper
-function renderLookup(colleges) {
-  // Sort FHDA first (from wrapper #2)
-  sortFHDAFirst(colleges);
-
-  var results = document.getElementById('lookupResults');
-  var counter = document.getElementById('lookupCount');
-  var stats = document.getElementById('lookupStats');
-  if (!results) return;
-
-  // Compute stats for current set
-  var automated = colleges.filter(function(c) { return c.fa === 'Automated'; }).length;
-  var manual = colleges.filter(function(c) { return c.fa.indexOf('Manual') >= 0 || c.fa === 'Pending'; }).length;
-  var withIssues = colleges.filter(function(c) { return c.issues.length > 0; }).length;
-  var clean = colleges.filter(function(c) { return c.issues.length === 0; }).length;
-
-  if (stats) stats.innerHTML =
-    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--text)">' + colleges.length + '</div><div class="lookup-stat-label">Colleges</div></div>' +
-    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--primary)">' + automated + '</div><div class="lookup-stat-label">Aid Automated</div></div>' +
-    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--amber)">' + manual + '</div><div class="lookup-stat-label">Aid Manual</div></div>' +
-    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--amber)">' + withIssues + '</div><div class="lookup-stat-label">Known Issues</div></div>' +
-    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--teal)">' + clean + '</div><div class="lookup-stat-label">Clean</div></div>';
-
-  if (colleges.length === 0) {
-    results.innerHTML = '<div class="lookup-empty">No matches</div>';
-    if (counter) counter.textContent = '';
-    return;
-  }
-
-  var sisClass = function(sis) {
-    if (sis.indexOf('PeopleSoft') >= 0) return 'sis-peoplesoft';
-    if (sis.indexOf('Colleague') >= 0) return 'sis-colleague';
-    if (sis.indexOf('Ethos') >= 0) return 'sis-banner-ethos';
-    return 'sis-banner-direct';
-  };
-  var faClass = function(fa) { return fa === 'Automated' ? 'lf-ok' : fa.indexOf('Manual') >= 0 ? 'lf-warn' : 'lf-err'; };
-  var ssoClass = function(sso) { return sso === 'Active' ? 'lf-ok' : 'lf-warn'; };
-  var syncClass = function(sync) {
-    if (sync === 'Degraded' || sync === 'N/A') return 'lf-err';
-    var num = parseInt(sync);
-    if (num > 30) return 'lf-warn';
-    return 'lf-ok';
-  };
-
-  var DISPLAY_LIMIT = 6;
-  var showAll = window._lookupShowAll || false;
-  var displayList = showAll ? colleges : colleges.slice(0, DISPLAY_LIMIT);
-  var hasMore = colleges.length > DISPLAY_LIMIT && !showAll;
-
-  var readinessHtml = function(r) {
-    if (r === 'ready') return '<span class="readiness-badge rb-ready"><span class="readiness-dot"></span>Rollout Ready</span>';
-    if (r === 'support') return '<span class="readiness-badge rb-support"><span class="readiness-dot"></span>Needs Support</span>';
-    if (r === 'at-risk') return '<span class="readiness-badge rb-risk"><span class="readiness-dot"></span>At Risk</span>';
-    return '';
-  };
-
-  var html = displayList.map(function(c) {
-    var issues = c.issues.length > 0 ? c.issues.map(function(i) { return '<span class="lookup-issue-tag">' + i + '</span>'; }).join('') : '<span class="lookup-issue-tag issue-clear">All clear</span>';
-
-    return '<div class="lookup-card" onclick="this.classList.toggle(\'lc-expanded\')">' +
-      '<div class="lookup-card-header">' +
-      '<span class="lookup-college-name">' + c.name + '</span>' +
-      '<span class="lookup-sis-badge ' + sisClass(c.sis) + '">' + c.sis + '</span>' +
-      (c.readiness ? readinessHtml(c.readiness) : '') +
-      '<span class="lookup-region">' + c.region + '</span>' +
-      '</div>' +
-      '<div style="font-size:.68rem;color:var(--text-3);margin-bottom:.4rem">' + c.district + ' \u00b7 ' + c.role + ' \u00b7 Volume: ' + c.volume + '</div>' +
-      '<div class="lookup-grid">' +
-      '<div class="lookup-field"><div class="lookup-field-label">Financial Aid</div><div class="lookup-field-value ' + faClass(c.fa) + '">' + c.fa + '</div></div>' +
-      '<div class="lookup-field"><div class="lookup-field-label">Sign-On</div><div class="lookup-field-value ' + ssoClass(c.sso) + '">' + c.sso + '</div></div>' +
-      '<div class="lookup-field"><div class="lookup-field-label">Last Sync</div><div class="lookup-field-value ' + syncClass(c.lastSync) + '">' + c.lastSync + '</div></div>' +
-      '</div>' +
-      '<div class="lookup-issues">' + issues + '</div>' +
-      '<div class="lookup-card-click">Click for analyst notes</div>' +
-      '<div class="lookup-card-expand">' +
-      '<div class="lookup-action"><strong>Analyst note:</strong> ' + c.tip + '</div>' +
-      '</div></div>';
-  }).join('');
-
-  if (hasMore) {
-    html += '<button onclick="window._lookupShowAll=true;renderLookup(getFilteredColleges())" style="width:100%;padding:.65rem;border:1.5px dashed var(--border-2);border-radius:var(--r);background:var(--surface);font-family:var(--mono);font-size:.75rem;font-weight:600;color:var(--primary);cursor:pointer;margin-top:.5rem;transition:all .15s" onmouseover="this.style.borderColor=\'var(--primary)\';this.style.background=\'var(--primary-light)\'" onmouseout="this.style.borderColor=\'var(--border-2)\';this.style.background=\'var(--surface)\'">Show all ' + colleges.length + ' colleges</button>';
-  }
-  if (showAll && colleges.length > DISPLAY_LIMIT) {
-    html += '<button onclick="window._lookupShowAll=false;renderLookup(getFilteredColleges())" style="width:100%;padding:.55rem;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);font-family:var(--mono);font-size:.68rem;color:var(--text-3);cursor:pointer;margin-top:.35rem;transition:all .15s" onmouseover="this.style.color=\'var(--primary)\'" onmouseout="this.style.color=\'var(--text-3)\'">Show fewer</button>';
-  }
-
-  results.innerHTML = html;
-  if (counter) counter.textContent = colleges.length + ' of ' + collegeDB.length + ' colleges shown';
-
-  // Mark home colleges (from wrapper #1)
-  setTimeout(markHomeLookups, 50);
-}
-
-// Clear search
 function clearSearch() {
   var input = document.getElementById('collegeLookup');
   if (input) {
@@ -138,7 +98,153 @@ function clearSearch() {
   }
 }
 
-// Search input color feedback
+// ── Render ─────────────────────────────────────────────
+function sisClass(sis) {
+  if (sis === 'unknown') return 'sis-unknown';
+  if (sis.indexOf('PeopleSoft') >= 0) return 'sis-peoplesoft';
+  if (sis.indexOf('Colleague') >= 0) return 'sis-colleague';
+  if (sis.indexOf('Ethos') >= 0) return 'sis-banner-ethos';
+  return 'sis-banner-direct';
+}
+
+function clEsc(s) {
+  return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function renderLookup(colleges) {
+  // FHDA first, then alphabetical
+  colleges.sort(function(a, b) {
+    if (a.isFHDA && !b.isFHDA) return -1;
+    if (!a.isFHDA && b.isFHDA) return 1;
+    return a.name.localeCompare(b.name);
+  });
+
+  var results = document.getElementById('lookupResults');
+  var counter = document.getElementById('lookupCount');
+  var stats = document.getElementById('lookupStats');
+  if (!results) return;
+
+  var total = colleges.length;
+  var unverified = colleges.filter(function(c) { return !c.verified; }).length;
+  var ethosRisk = colleges.filter(function(c) { return c.sis.indexOf('Banner') >= 0 || c.sis.indexOf('Colleague') >= 0; }).length;
+  var psCount = colleges.filter(function(c) { return c.sis.indexOf('PeopleSoft') >= 0; }).length;
+  var withNotes = colleges.filter(function(c) { return c.notes && c.notes.length > 0; }).length;
+
+  if (stats) stats.innerHTML =
+    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--text)">' + total + '</div><div class="lookup-stat-label">Colleges</div></div>' +
+    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--primary)">' + psCount + '</div><div class="lookup-stat-label">PeopleSoft</div></div>' +
+    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--amber)">' + ethosRisk + '</div><div class="lookup-stat-label">Banner / Colleague</div></div>' +
+    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--red)">' + unverified + '</div><div class="lookup-stat-label">Unverified</div></div>' +
+    '<div class="lookup-stat"><div class="lookup-stat-num" style="color:var(--blue)">' + withNotes + '</div><div class="lookup-stat-label">With Notes</div></div>';
+
+  if (colleges.length === 0) {
+    results.innerHTML = '<div class="lookup-empty">No matches</div>';
+    if (counter) counter.textContent = '';
+    return;
+  }
+
+  var DISPLAY_LIMIT = 8;
+  var showAll = window._lookupShowAll || false;
+  var displayList = showAll ? colleges : colleges.slice(0, DISPLAY_LIMIT);
+  var hasMore = colleges.length > DISPLAY_LIMIT && !showAll;
+
+  var html = displayList.map(function(c) {
+    var verifiedBadge = c.verified
+      ? '<span class="cl-verified" title="SIS confirmed from public portal evidence">&#10003; verified</span>'
+      : '<span class="cl-unverified" title="SIS inferred — please confirm with district IT">? unverified</span>';
+    var fhdaBadge = c.isFHDA ? '<span class="cl-fhda">FHDA</span>' : '';
+    var ethosWarn = (c.sis.indexOf('Banner') >= 0 || c.sis.indexOf('Colleague') >= 0)
+      ? '<div class="cl-warn">Banner/Colleague tiers: verify Direct vs Ethos with district IT. Ethos variants still require manual unit reconciliation per April 2025 CVC release notes.</div>'
+      : '';
+    var notesPreview = c.notes ? '<div class="cl-notes-preview">' + clEsc(c.notes.slice(0, 120)) + (c.notes.length > 120 ? '…' : '') + '</div>' : '';
+    var contactsPreview = '';
+    if (c.contacts && Object.keys(c.contacts).length > 0) {
+      var pairs = [];
+      ['ar','fa','counseling','dsps','general'].forEach(function(k) {
+        if (c.contacts[k]) pairs.push('<span class="cl-contact-tag">' + k.toUpperCase() + ': ' + clEsc(c.contacts[k]) + '</span>');
+      });
+      if (pairs.length) contactsPreview = '<div class="cl-contacts-preview">' + pairs.join('') + '</div>';
+    }
+
+    return '<div class="lookup-card' + (clExpanded === c.name ? ' lc-expanded' : '') + '" data-college="' + clEsc(c.name) + '">' +
+      '<div class="lookup-card-header" onclick="clToggle(\'' + c.name.replace(/\'/g, '\\\'') + '\')">' +
+        '<span class="lookup-college-name">' + clEsc(c.name) + '</span>' +
+        fhdaBadge +
+        '<span class="lookup-sis-badge ' + sisClass(c.sis) + '">' + clEsc(c.sis) + '</span>' +
+        verifiedBadge +
+        '<span class="lookup-region">' + clEsc(c.region) + '</span>' +
+      '</div>' +
+      '<div style="font-size:.68rem;color:var(--text-3);margin-bottom:.4rem">' + clEsc(c.district) + ' &middot; ' + clEsc(c.city || '') + ', ' + clEsc(c.county || '') + ' County</div>' +
+      ethosWarn +
+      notesPreview +
+      contactsPreview +
+      '<div class="lookup-card-click">Click to edit notes, contacts, correct SIS</div>' +
+      clEditPanel(c) +
+    '</div>';
+  }).join('');
+
+  if (hasMore) {
+    html += '<button onclick="window._lookupShowAll=true;renderLookup(getFilteredColleges())" class="cl-showmore">Show all ' + colleges.length + ' colleges</button>';
+  }
+  if (showAll && colleges.length > DISPLAY_LIMIT) {
+    html += '<button onclick="window._lookupShowAll=false;renderLookup(getFilteredColleges())" class="cl-showless">Show fewer</button>';
+  }
+
+  results.innerHTML = html;
+  if (counter) counter.textContent = colleges.length + ' of ' + collegeDB.length + ' colleges shown';
+}
+
+function clToggle(name) {
+  clExpanded = (clExpanded === name) ? null : name;
+  renderLookup(getFilteredColleges());
+  setTimeout(function() {
+    var el = document.querySelector('.lookup-card[data-college="' + name.replace(/"/g, '\\"') + '"]');
+    if (el && clExpanded === name) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 30);
+}
+
+function clEditPanel(c) {
+  var sisOptions = ['unknown','PeopleSoft','Banner Direct','Banner Ethos','Colleague Direct','Colleague Ethos'];
+  var ctc = c.contacts || {};
+  var nameAttr = c.name.replace(/'/g, "\\'");
+  return '<div class="lookup-card-expand">' +
+    '<div class="cl-edit-row">' +
+      '<div class="cl-edit-field"><label>SIS tier (override)</label>' +
+        '<select onchange="clOverlayUpdate(\'' + nameAttr + '\',\'sis\',this.value);clOverlayUpdate(\'' + nameAttr + '\',\'verified\',true);renderLookup(getFilteredColleges())">' +
+          sisOptions.map(function(s) { return '<option' + (s === c.sis ? ' selected' : '') + '>' + s + '</option>'; }).join('') +
+        '</select>' +
+      '</div>' +
+      '<div class="cl-edit-field"><label>Source: ' + clEsc(c.sisSource || '—') + '</label></div>' +
+    '</div>' +
+    '<div class="cl-edit-field cl-edit-full"><label>Personal notes (localStorage — no PII)</label>' +
+      '<textarea rows="3" placeholder="Contacts, integration quirks, past tickets, IT liaison…" oninput="clOverlayUpdate(\'' + nameAttr + '\',\'notes\',this.value)">' + clEsc(c.notes) + '</textarea>' +
+    '</div>' +
+    '<div class="cl-contacts-grid">' +
+      ['ar','fa','counseling','dsps','general'].map(function(role) {
+        var label = { ar: 'A&R', fa: 'Financial Aid', counseling: 'Counseling', dsps: 'DSPS', general: 'General' }[role];
+        return '<div class="cl-edit-field"><label>' + label + '</label>' +
+          '<input type="text" value="' + clEsc(ctc[role] || '') + '" placeholder="name or email" oninput="clOverlayContact(\'' + nameAttr + '\',\'' + role + '\',this.value)">' +
+        '</div>';
+      }).join('') +
+    '</div>' +
+    (c.website ? '<div class="cl-website"><a href="' + clEsc(c.website) + '" target="_blank" rel="noopener">' + clEsc(c.website) + ' &rarr;</a></div>' : '') +
+  '</div>';
+}
+
+function clOverlayContact(name, role, value) {
+  var o = clOverlayLoad();
+  if (!o[name]) o[name] = {};
+  if (!o[name].contacts) o[name].contacts = {};
+  o[name].contacts[role] = value;
+  o[name].updated = new Date().toISOString();
+  clOverlaySave(o);
+}
+
+// Backwards-compat wrappers for functions called elsewhere
+function sortFHDAFirst(list) { /* handled in renderLookup */ }
+function markHomeLookups() { /* handled via CSS class */ }
+
+// Search input color feedback (preserved from v1)
 (function() {
   var input = document.getElementById('collegeLookup');
   if (!input) return;
@@ -163,5 +269,4 @@ function clearSearch() {
   });
 })();
 
-// Initial render
-renderLookup(collegeDB);
+renderLookup(getFilteredColleges());

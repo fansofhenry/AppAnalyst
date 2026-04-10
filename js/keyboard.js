@@ -82,4 +82,23 @@ document.addEventListener('keydown', function(e) {
     toggleA11y();
     return;
   }
+
+  // L = ticket log
+  if (e.key === 'l' || e.key === 'L') {
+    e.preventDefault();
+    var tl = document.getElementById('ticketLog');
+    if (tl) tl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
+  // N = new ticket (quick-add from anywhere)
+  if (e.key === 'n' || e.key === 'N') {
+    e.preventDefault();
+    if (typeof tlAdd === 'function') {
+      var tl2 = document.getElementById('ticketLog');
+      if (tl2) tl2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(tlAdd, 400);
+    }
+    return;
+  }
 });

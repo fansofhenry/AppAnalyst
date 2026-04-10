@@ -392,21 +392,22 @@
 <!-- ═══ COLLEGE DIRECTORY ═══ -->
 <section class="sec fu" id="lookup" role="region" aria-label="College Lookup"><div class="wrap">
   <div class="eyebrow" style="color:var(--blue)"><span class="sec-num" style="background:var(--blue)">2</span>Directory</div>
-  <h2>College directory — <em>the Exchange</em></h2>
-  <p class="sec-desc">Search any college by name, system type, or issue status. <strong>FHDA colleges pinned.</strong> Banner Direct, Banner Ethos, PeopleSoft, Colleague — filter by platform.</p>
+  <h2>College directory — <em>all 115 CCCs</em></h2>
+  <p class="sec-desc">Every California community college. <strong>FHDA pinned first.</strong> SIS tier tagged from public portal evidence where determinable — unverified entries flagged for confirmation. Click any college to add personal notes, contacts, and SIS corrections. All edits stay in this browser.</p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Directory</span></div><span class="tool-hint">Click any college for details</span><span class="tool-bar-title">College Directory &middot; 31 Colleges</span></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Directory · localStorage overlay</span></div><span class="tool-hint">Click to edit</span><span class="tool-bar-title">Directory &middot; 115 CCCs</span></div>
     <div class="tool-body">
       <div class="lookup-wrap">
         <div class="lookup-stats" id="lookupStats"></div>
         <div class="lookup-filters" id="lookupFilters">
           <button class="lookup-filter lf-active" onclick="filterColleges('all',this)">All</button>
-          <button class="lookup-filter" onclick="filterColleges('Banner Direct',this)" style="border-color:#93c5fd">Banner Direct</button>
-          <button class="lookup-filter" onclick="filterColleges('Banner Ethos',this)" style="border-color:#fcd34d">Banner Ethos</button>
+          <button class="lookup-filter" onclick="filterColleges('fhda',this)" style="border-color:var(--primary)">FHDA</button>
+          <button class="lookup-filter" onclick="filterColleges('Banner',this)" style="border-color:#93c5fd">Banner</button>
           <button class="lookup-filter" onclick="filterColleges('PeopleSoft',this)" style="border-color:#c4b5fd">PeopleSoft</button>
-          <button class="lookup-filter" onclick="filterColleges('Colleague',this)" style="border-color:#f9a8d4">Colleague Ethos</button>
-          <button class="lookup-filter" onclick="filterColleges('issues',this)" style="border-color:var(--amber)">Has Issues</button>
-          <button class="lookup-filter" onclick="filterColleges('manual',this)" style="border-color:var(--red)">FA Manual</button>
+          <button class="lookup-filter" onclick="filterColleges('Colleague',this)" style="border-color:#f9a8d4">Colleague</button>
+          <button class="lookup-filter" onclick="filterColleges('ethos-risk',this)" style="border-color:var(--amber)">Banner/Colleague (manual risk)</button>
+          <button class="lookup-filter" onclick="filterColleges('unknown',this)" style="border-color:var(--text-3)">Unknown SIS</button>
+          <button class="lookup-filter" onclick="filterColleges('unverified',this)" style="border-color:var(--red)">Unverified</button>
         </div>
         <div class="lookup-input-wrap">
           <label for="collegeLookup" class="sr-only">Search colleges by name, district, or system type</label>
@@ -533,21 +534,82 @@
 <!-- ═══ KNOWLEDGE BASE ═══ -->
 <section class="sec fu" id="kb" role="region" aria-label="Knowledge Base Builder"><div class="wrap">
   <div class="eyebrow" style="color:var(--amber)"><span class="sec-num" style="background:var(--amber)">6</span>Knowledge Base</div>
-  <h2>If the fix isn't documented, it didn't <em>scale</em></h2>
-  <p class="sec-desc">Four fix types — editable, copy-ready templates. <strong>A college shouldn't call CVC for the same issue twice.</strong></p>
+  <h2>Your runbook — <em>written as you learn</em></h2>
+  <p class="sec-desc">Personal KB. Markdown entries tagged by system and by the 5 Exchange staff audiences (A&amp;R, FA, Counseling, DSPS, General). Copy to clipboard for ticket replies. <strong>Stored in this browser only</strong> — keep JSON backups.</p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation</span></div><span class="tool-hint">Select a template, then edit</span><div class="tool-bar-title">KB Builder &middot; 4 Templates</div></div>
+    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-amber">Documentation · localStorage</span></div><span class="tool-hint">Select an entry, then edit. Copy as markdown.</span><div class="tool-bar-title">KB Runbook &middot; Personal</div></div>
     <div class="tool-body" style="padding:0">
+      <div class="kb-toolbar">
+        <input class="tl-search kb-search" type="text" placeholder="Search entries…" oninput="kbSetSearch(this.value)">
+        <select class="kb-select" onchange="kbSetSysFilter(this.value)">
+          <option value="all">All systems</option>
+          <option>Banner Direct</option>
+          <option>Banner Ethos</option>
+          <option>Colleague Ethos</option>
+          <option>PeopleSoft</option>
+          <option>Exchange</option>
+          <option>CCCApply</option>
+          <option>SuperGlue</option>
+          <option>Canvas</option>
+          <option>SSO / IdP</option>
+          <option>General</option>
+        </select>
+        <select class="kb-select" onchange="kbSetAudFilter(this.value)">
+          <option value="all">All audiences</option>
+          <option>A&amp;R</option>
+          <option>Financial Aid</option>
+          <option>Counseling</option>
+          <option>DSPS</option>
+          <option>General</option>
+        </select>
+        <button class="tl-btn tl-btn-new" onclick="kbAdd()">+ New entry</button>
+        <button class="tl-btn" onclick="kbExportJSON()">Backup</button>
+        <label class="tl-btn tl-btn-import">Restore
+          <input type="file" accept="application/json" style="display:none" onchange="if(this.files[0])kbImportJSON(this.files[0])">
+        </label>
+      </div>
       <div class="kb-layout">
-        <div class="kb-sidebar">
-          <div class="kb-nav-label">Templates</div>
-          <div class="kb-nav-item active" onclick="loadKB(0,this)"><span class="kb-nav-icon">&#9889;</span>Integration Fix</div>
-          <div class="kb-nav-item" onclick="loadKB(1,this)"><span class="kb-nav-icon">&#128274;</span>Sign-On Fix</div>
-          <div class="kb-nav-item" onclick="loadKB(2,this)"><span class="kb-nav-icon">&#128260;</span>Data Sync Fix</div>
-          <div class="kb-nav-item" onclick="loadKB(3,this)"><span class="kb-nav-icon">&#128203;</span>Onboarding Guide</div>
-        </div>
+        <div class="kb-sidebar" id="kbSidebarList"></div>
         <div class="kb-main" id="kbMain"></div>
       </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═══ TICKET LOG ═══ -->
+<section class="sec fu" id="ticketLog" role="region" aria-label="Personal Ticket Log"><div class="wrap">
+  <div class="eyebrow" style="color:var(--primary)"><span class="sec-num" style="background:var(--primary)">&#9679;</span>Workbench</div>
+  <h2>My ticket log — <em>the queue that follows me</em></h2>
+  <p class="sec-desc">Personal working queue. Every ticket you touch, logged briefly, searchable later. <strong>Lives in this browser only</strong> — nothing syncs, nothing leaves. No student names, IDs, or other PII. Aging highlights after 3 days, urgent after 7.</p>
+  <div class="tool-frame">
+    <div class="tool-bar">
+      <div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Private · localStorage</span></div>
+      <span class="tool-hint">No PII. Back up regularly.</span>
+      <span class="tool-bar-title">Ticket Log &middot; Personal Workbench</span>
+    </div>
+    <div class="tool-body">
+      <div class="tl-stats" id="tlStats"></div>
+      <div class="tl-controls">
+        <div class="tl-filters">
+          <button class="tl-filter tl-f-active" onclick="tlSetFilter('open-any',this)">Open</button>
+          <button class="tl-filter" onclick="tlSetFilter('aging',this)">Aging 3d+</button>
+          <button class="tl-filter" onclick="tlSetFilter('waiting-vendor',this)">Vendor</button>
+          <button class="tl-filter" onclick="tlSetFilter('waiting-college',this)">College</button>
+          <button class="tl-filter" onclick="tlSetFilter('resolved',this)">Resolved</button>
+          <button class="tl-filter" onclick="tlSetFilter('all',this)">All</button>
+        </div>
+        <input class="tl-search" type="text" placeholder="Search notes, symptom, college, system…" oninput="tlSetSearch(this.value)">
+      </div>
+      <div class="tl-actions">
+        <button class="tl-btn tl-btn-new" onclick="tlAdd()">+ New ticket</button>
+        <button class="tl-btn" onclick="tlExportCSV()">Export CSV</button>
+        <button class="tl-btn" onclick="tlExportJSON()">Backup JSON</button>
+        <label class="tl-btn tl-btn-import">Restore JSON
+          <input type="file" accept="application/json" style="display:none" onchange="if(this.files[0])tlImportJSON(this.files[0])">
+        </label>
+      </div>
+      <div class="tl-body" id="tlBody"></div>
+      <div class="tl-privacy">Stored in <code>localStorage</code> key <code>appanalyst.tickets.v1</code>. Clearing browser data erases it — keep JSON backups.</div>
     </div>
   </div>
 </div></section>
@@ -1016,8 +1078,13 @@ function showBarrierView(view,btn){
     </div>
     <div class="toc-item tc-amber" onclick="tocGo('kb')">
       <div class="toc-num">7</div>
-      <div class="toc-text"><div class="toc-item-title">Knowledge Base</div><div class="toc-item-desc">Four editable KB templates for common fix types.</div></div>
-      <span class="toc-item-tag tag-interactive">Interactive</span>
+      <div class="toc-text"><div class="toc-item-title">Runbook / KB</div><div class="toc-item-desc">Your personal markdown KB, tagged by system and audience.</div></div>
+      <span class="toc-item-tag tag-interactive">localStorage</span>
+    </div>
+    <div class="toc-item" onclick="tocGo('ticketLog')" style="--toc-color:var(--primary)">
+      <div class="toc-num" style="background:var(--primary);color:#fff">&#9679;</div>
+      <div class="toc-text"><div class="toc-item-title">Ticket Log</div><div class="toc-item-desc">Personal working queue. Aging, search, CSV export — no PII.</div></div>
+      <span class="toc-item-tag tag-interactive">localStorage</span>
     </div>
   </div>
 
@@ -1057,6 +1124,7 @@ function showBarrierView(view,btn){
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">5</span> Intelligence</span><span class="kb-help-desc"><span class="kb-help-key">6</span> KB</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">7</span> Comms</span><span class="kb-help-desc"><span class="kb-help-key">8</span> Outreach</span></div>
     <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">9</span> AI</span><span class="kb-help-desc"><span class="kb-help-key">0</span> Barriers</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc"><span class="kb-help-key">L</span> Ticket Log</span><span class="kb-help-desc"><span class="kb-help-key">N</span> + New ticket</span></div>
     <div style="border-top:1px solid var(--border);margin-top:.5rem;padding-top:.5rem">
     <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.3rem">Navigation</div>
     <div class="kb-help-row"><span class="kb-help-desc">Open sections</span><span class="kb-help-key">G</span></div>
@@ -1149,6 +1217,7 @@ document.addEventListener('keydown', function(e) {
 <script src="js/flow.js"></script>
 <script src="js/patterns.js"></script>
 <script src="js/kb.js"></script>
+<script src="js/tickets.js"></script>
 <script src="js/barriers.js"></script>
 <script src="js/outreach.js"></script>
 <script src="js/lookup.js"></script>

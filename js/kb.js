@@ -1,68 +1,211 @@
 // ═══════════════════════════════════════════════════════
-// KB BUILDER — Knowledge base template rendering
+// KB BUILDER — Personal knowledge base, localStorage-backed
+// Seeds from kbTemplates on first load, then fully editable.
+// Copy-to-clipboard as markdown for pasting into ticket replies.
 // ═══════════════════════════════════════════════════════
 
-var currentKB = 0;
-var kbStatus = 'draft';
-var kbEdits = {};
+var KB_KEY = 'appanalyst.kb.v1';
+var KB_SYSTEMS = ['Banner Direct', 'Banner Ethos', 'Colleague Ethos', 'PeopleSoft', 'Exchange', 'CCCApply', 'SuperGlue', 'Canvas', 'SSO / IdP', 'General'];
+var KB_AUDIENCES = ['A&R', 'Financial Aid', 'Counseling', 'DSPS', 'General'];
+var KB_ACTIVE_ID = null;
+var KB_SYS_FILTER = 'all';
+var KB_AUD_FILTER = 'all';
+var KB_SEARCH = '';
 
-function loadKB(idx, el) {
-  currentKB = idx;
-  kbStatus = 'draft';
-  kbEdits = {};
-  document.querySelectorAll('.kb-nav-item').forEach(function(n) { n.classList.remove('active'); });
-  if (el) el.classList.add('active');
-  renderKB();
+function kbLoad() {
+  try {
+    var raw = localStorage.getItem(KB_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (e) { }
+  // Seed from the legacy kbTemplates
+  var seeded = (typeof kbTemplates !== 'undefined' ? kbTemplates : []).map(function(t, i) {
+    var body = (t.desc || '') + '\n\n## Steps\n\n' +
+      (t.steps || []).map(function(s, idx) { return (idx + 1) + '. ' + s; }).join('\n') +
+      '\n\n## Escalation\n\n' + (t.escalation || '');
+    var sys = 'General';
+    if (/ethos|token/i.test(t.title || '')) sys = 'Banner Ethos';
+    else if (/saml|sso/i.test(t.title || '')) sys = 'SSO / IdP';
+    else if (/onboard/i.test(t.title || '')) sys = 'Exchange';
+    else if (/sync/i.test(t.title || '')) sys = 'Exchange';
+    return {
+      id: 'K' + Date.now().toString(36) + '-' + i,
+      title: t.title || 'Untitled',
+      system: sys,
+      audience: 'General',
+      severity: t.severity || 'P3',
+      body: body,
+      updated: new Date().toISOString()
+    };
+  });
+  kbSave(seeded);
+  return seeded;
 }
 
-function renderKB() {
-  var t = kbTemplates[currentKB];
-  var title = kbEdits.title || t.title;
-  var desc = kbEdits.desc || t.desc;
-  var steps = kbEdits.steps || [].concat(t.steps);
-  var esc = kbEdits.escalation || t.escalation;
+function kbSave(entries) {
+  localStorage.setItem(KB_KEY, JSON.stringify(entries));
+}
 
-  document.getElementById('kbMain').innerHTML =
-    '<div class="kb-header-row">' +
-    '<div class="kb-status ' + (kbStatus === 'published' ? 'kb-status-published' : 'kb-status-draft') + '">' + (kbStatus === 'published' ? '\u25cf Published' : '\u25d0 Draft') + '</div>' +
-    '<div class="kb-doc-meta"><span>\ud83d\udcc1 ' + t.cat + '</span><span>\ud83d\udd34 ' + t.severity + '</span></div>' +
+function kbAdd() {
+  var list = kbLoad();
+  var entry = {
+    id: 'K' + Date.now().toString(36) + Math.random().toString(36).slice(2, 4),
+    title: 'New entry',
+    system: 'General',
+    audience: 'General',
+    severity: 'P3',
+    body: '',
+    updated: new Date().toISOString()
+  };
+  list.unshift(entry);
+  kbSave(list);
+  KB_ACTIVE_ID = entry.id;
+  kbRender();
+}
+
+function kbDelete(id) {
+  if (!confirm('Delete this KB entry? This cannot be undone.')) return;
+  var list = kbLoad().filter(function(e) { return e.id !== id; });
+  kbSave(list);
+  if (KB_ACTIVE_ID === id) KB_ACTIVE_ID = list[0] ? list[0].id : null;
+  kbRender();
+  toast('Entry deleted');
+}
+
+function kbUpdate(id, field, value) {
+  var list = kbLoad();
+  var e = list.find(function(x) { return x.id === id; });
+  if (!e) return;
+  e[field] = value;
+  e.updated = new Date().toISOString();
+  kbSave(list);
+  if (field === 'title') {
+    var side = document.querySelector('.kb-list-item[data-id="' + id + '"] .kb-list-title');
+    if (side) side.textContent = value || 'Untitled';
+  }
+  if (field === 'system' || field === 'audience') {
+    kbRender();
+  }
+}
+
+function kbSelect(id) {
+  KB_ACTIVE_ID = id;
+  kbRender();
+}
+
+function kbFiltered() {
+  var list = kbLoad();
+  var q = KB_SEARCH.trim().toLowerCase();
+  return list.filter(function(e) {
+    if (KB_SYS_FILTER !== 'all' && e.system !== KB_SYS_FILTER) return false;
+    if (KB_AUD_FILTER !== 'all' && e.audience !== KB_AUD_FILTER) return false;
+    if (q) {
+      var hay = (e.title + ' ' + e.body + ' ' + e.system + ' ' + e.audience).toLowerCase();
+      if (hay.indexOf(q) < 0) return false;
+    }
+    return true;
+  });
+}
+
+function kbRender() {
+  var list = kbFiltered();
+  if (!KB_ACTIVE_ID && list.length > 0) KB_ACTIVE_ID = list[0].id;
+  var active = list.find(function(e) { return e.id === KB_ACTIVE_ID; });
+
+  var sidebar = document.getElementById('kbSidebarList');
+  if (sidebar) {
+    if (list.length === 0) {
+      sidebar.innerHTML = '<div class="kb-list-empty">No entries match. <a href="#" onclick="kbAdd();return false">Create one</a>.</div>';
+    } else {
+      sidebar.innerHTML = list.map(function(e) {
+        var isActive = e.id === KB_ACTIVE_ID;
+        return '<div class="kb-list-item' + (isActive ? ' kb-active' : '') + '" data-id="' + e.id + '" onclick="kbSelect(\'' + e.id + '\')">' +
+          '<div class="kb-list-title">' + kbEsc(e.title || 'Untitled') + '</div>' +
+          '<div class="kb-list-meta"><span class="kb-tag kb-tag-sys">' + e.system + '</span><span class="kb-tag kb-tag-aud">' + e.audience + '</span></div>' +
+        '</div>';
+      }).join('');
+    }
+  }
+
+  var main = document.getElementById('kbMain');
+  if (!main) return;
+  if (!active) {
+    main.innerHTML = '<div class="kb-empty-main"><p>No entry selected.</p><button class="tl-btn tl-btn-new" onclick="kbAdd()">+ New entry</button></div>';
+    return;
+  }
+
+  main.innerHTML =
+    '<div class="kb-edit-head">' +
+      '<input class="kb-edit-title" type="text" value="' + kbEsc(active.title) + '" placeholder="Entry title" oninput="kbUpdate(\'' + active.id + '\', \'title\', this.value)">' +
+      '<div class="kb-edit-tags">' +
+        '<select onchange="kbUpdate(\'' + active.id + '\', \'system\', this.value)">' +
+          KB_SYSTEMS.map(function(s) { return '<option' + (s === active.system ? ' selected' : '') + '>' + s + '</option>'; }).join('') +
+        '</select>' +
+        '<select onchange="kbUpdate(\'' + active.id + '\', \'audience\', this.value)">' +
+          KB_AUDIENCES.map(function(a) { return '<option' + (a === active.audience ? ' selected' : '') + '>' + a + '</option>'; }).join('') +
+        '</select>' +
+        '<select onchange="kbUpdate(\'' + active.id + '\', \'severity\', this.value)">' +
+          ['P1', 'P2', 'P3', 'Info'].map(function(s) { return '<option' + (s === active.severity ? ' selected' : '') + '>' + s + '</option>'; }).join('') +
+        '</select>' +
+      '</div>' +
     '</div>' +
-    '<input class="kb-doc-title-input" value="' + title + '" oninput="kbEdits.title=this.value">' +
-    '<div class="kb-field" style="margin-top:1rem"><label class="kb-label">Description</label><textarea class="kb-textarea" oninput="kbEdits.desc=this.value">' + desc + '</textarea></div>' +
-    '<div class="kb-field"><label class="kb-label">Resolution Steps</label><div class="kb-steps">' +
-    steps.map(function(s, i) {
-      return '<div class="kb-step"><div class="kb-step-num">' + (i + 1) + '</div><textarea class="kb-step-input" rows="1" oninput="getSteps()[' + i + ']=this.value">' + s + '</textarea><div class="kb-step-actions"><button class="kb-step-btn del" onclick="removeStep(' + i + ')">\u2715</button></div></div>';
-    }).join('') +
-    '</div><div class="kb-add-step" onclick="addStep()">+ Add Step</div></div>' +
-    '<div class="kb-field"><label class="kb-label">Escalation</label><div class="kb-escalation"><div class="kb-esc-label">When to Escalate</div><textarea class="kb-esc-input" oninput="kbEdits.escalation=this.value">' + esc + '</textarea></div></div>' +
-    '<div class="kb-footer">' +
-    '<button class="kb-btn kb-btn-save" onclick="kbStatus=\'draft\';renderKB();toast(\'Draft saved\')">\ud83d\udcbe Save</button>' +
-    '<button class="kb-btn kb-btn-publish" onclick="kbStatus=\'published\';renderKB();toast(\'Published\')">\ud83d\ude80 Publish</button>' +
-    '<button class="kb-btn kb-btn-copy" onclick="copyKB()">\ud83d\udccb Copy Docs</button>' +
+    '<textarea class="kb-edit-body" placeholder="# Summary&#10;&#10;What this covers…&#10;&#10;## Steps&#10;&#10;1. Check X&#10;2. Verify Y&#10;&#10;## Escalation&#10;&#10;If X fails, page Y." oninput="kbUpdate(\'' + active.id + '\', \'body\', this.value)">' + kbEsc(active.body) + '</textarea>' +
+    '<div class="kb-edit-footer">' +
+      '<span class="kb-edit-meta">Updated ' + new Date(active.updated).toLocaleString() + '</span>' +
+      '<div class="kb-edit-actions">' +
+        '<button class="tl-btn" onclick="kbCopy(\'' + active.id + '\')">Copy markdown</button>' +
+        '<button class="tl-btn tl-btn-del" onclick="kbDelete(\'' + active.id + '\')">Delete</button>' +
+      '</div>' +
     '</div>';
 }
 
-function getSteps() {
-  if (!kbEdits.steps) kbEdits.steps = [].concat(kbTemplates[currentKB].steps);
-  return kbEdits.steps;
+function kbCopy(id) {
+  var e = kbLoad().find(function(x) { return x.id === id; });
+  if (!e) return;
+  var md = '# ' + e.title + '\n\n' +
+    '**System:** ' + e.system + '  \n' +
+    '**Audience:** ' + e.audience + '  \n' +
+    '**Severity:** ' + e.severity + '\n\n' +
+    e.body;
+  navigator.clipboard.writeText(md).then(function() { toast('Copied markdown'); }).catch(function() { toast('Copy failed'); });
 }
 
-function addStep() {
-  getSteps().push('');
-  renderKB();
+function kbSetSysFilter(v) { KB_SYS_FILTER = v; kbRender(); }
+function kbSetAudFilter(v) { KB_AUD_FILTER = v; kbRender(); }
+function kbSetSearch(v) { KB_SEARCH = v; kbRender(); }
+
+function kbExportJSON() {
+  var list = kbLoad();
+  var blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'kb-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast('Backup saved');
 }
 
-function removeStep(i) {
-  var s = getSteps();
-  if (s.length > 1) { s.splice(i, 1); renderKB(); }
+function kbImportJSON(file) {
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var parsed = JSON.parse(e.target.result);
+      if (!Array.isArray(parsed)) throw new Error('Expected array');
+      kbSave(parsed);
+      KB_ACTIVE_ID = null;
+      kbRender();
+      toast('Imported ' + parsed.length + ' entries');
+    } catch (err) {
+      toast('Import failed: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
 }
 
-function copyKB() {
-  var t = kbTemplates[currentKB];
-  var md = '# ' + (kbEdits.title || t.title) + '\n\n' + (kbEdits.desc || t.desc) + '\n\n## Steps\n\n';
-  (kbEdits.steps || t.steps).forEach(function(s, i) { md += (i + 1) + '. ' + s + '\n'; });
-  md += '\n## Escalation\n\n' + (kbEdits.escalation || t.escalation);
-  navigator.clipboard.writeText(md).then(function() { toast('Copied to clipboard'); }).catch(function() { toast('Copy failed'); });
+function kbEsc(s) {
+  return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-loadKB(0, null);
+kbRender();
