@@ -362,10 +362,26 @@
       <div class="today-head-actions">
         <button class="today-btn" onclick="if(typeof tlAdd===\u0027function\u0027)tlAdd()"><kbd>N</kbd> New ticket</button>
         <button class="today-btn" onclick="if(typeof searchOpen===\u0027function\u0027)searchOpen()"><kbd>\u2318K</kbd> Search</button>
+        <button class="today-btn" onclick="if(typeof backupOpen===\u0027function\u0027){backupOpen();backupRenderStats();}" title="Backup and restore all local data">Backup</button>
       </div>
     </div>
     <div id="todayBody"></div>
     <div class="today-hint">All data here reads from your browser storage. Nothing syncs, nothing leaves this machine.</div>
+  </div>
+</section>
+
+<!-- ═══ FIRST 30 DAYS ONBOARDING ═══ -->
+<section class="sec fu" id="onboarding" role="region" aria-label="First 30 Days checklist">
+  <div class="wrap">
+    <div class="ob-header">
+      <div>
+        <div class="today-eyebrow"><span class="today-dot" style="background:var(--amber)"></span>First 30 Days</div>
+        <h2 class="today-title" style="font-size:clamp(1.4rem,3vw,1.8rem)">Onboarding checklist</h2>
+        <p class="ob-sub">A concrete first-month plan for the CVC-OEI App Support Analyst role. Edit, check off, add your own. Progress persists in this browser.</p>
+      </div>
+      <div id="obHead" class="ob-head-right"></div>
+    </div>
+    <div id="obBody"></div>
   </div>
 </section>
 
@@ -688,9 +704,29 @@
   </div>
 </section>
 
-<!-- ═══ ESCALATION MATRIX ═══ -->
+<!-- ═══ ESCALATION HELPER (interactive) ═══ -->
+<section class="sec fu" id="escHelper" role="region" aria-label="Escalation Helper"><div class="wrap">
+  <div class="eyebrow" style="color:var(--red)"><span class="sec-num" style="background:var(--red)">!</span>Escalation</div>
+  <h2>Draft an escalation in <em>under a minute</em></h2>
+  <p class="sec-desc">Pick severity, fill in the basics, get copy-ready drafts for student, campus IT, registrar, internal, and vendor. Click <strong>Save as ticket</strong> to drop it into your ticket log with the severity pre-tagged.</p>
+  <div class="tool-frame">
+    <div class="tool-bar">
+      <div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Fill-in generator</span></div>
+      <span class="tool-hint">Everything is in-browser. No templates committed.</span>
+      <span class="tool-bar-title">Escalation Helper</span>
+    </div>
+    <div class="tool-body">
+      <div class="esc-helper-grid">
+        <div id="escForm" class="esc-helper-form"></div>
+        <div id="escOutput" class="esc-helper-output"></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═══ ESCALATION MATRIX (reference) ═══ -->
 <section class="sec sec-alt fu" id="escalation" role="region" aria-label="Escalation Matrix"><div class="wrap">
-  <div class="eyebrow">Escalation</div>
+  <div class="eyebrow">Escalation<span class="demo-badge" title="Reference matrix. The interactive Escalation Helper above drafts actual messages.">Reference</span></div>
   <h2>When to <em>own it</em> vs <em>escalate it</em></h2>
   <p class="sec-desc"><strong>Who to contact, how fast, and what to bring.</strong> The job requires tact, discretion, and judgment — fixing the student's problem without making the registrar wrong.</p>
   <div class="tool-frame">
@@ -1165,6 +1201,42 @@ function showBarrierView(view,btn){
 
 <button class="back-to-top" id="backToTop" onclick="(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&uarr;</button>
 
+<!-- ═══ BACKUP / RESTORE MODAL ═══ -->
+<div class="backup-overlay" id="backupModal" onclick="if(event.target===this)backupClose()" role="dialog" aria-label="Backup and restore">
+  <div class="backup-modal">
+    <div class="backup-head">
+      <div>
+        <div class="backup-title">Backup & Restore</div>
+        <div class="backup-sub">Everything you've logged in this browser, in one file.</div>
+      </div>
+      <button class="backup-close" onclick="backupClose()" aria-label="Close">&times;</button>
+    </div>
+    <div class="backup-body">
+      <div class="backup-section">
+        <div class="backup-section-title">Current data</div>
+        <div id="backupStats" class="backup-stats"></div>
+      </div>
+      <div class="backup-section">
+        <div class="backup-section-title">Export</div>
+        <p class="backup-help">Download a single JSON file with every ticket, KB entry, college note, and onboarding item. Keep it somewhere safe — losing browser storage loses everything.</p>
+        <button class="tl-btn tl-btn-new" onclick="backupExportAll()">Download backup</button>
+      </div>
+      <div class="backup-section">
+        <div class="backup-section-title">Restore</div>
+        <p class="backup-help">Restore from a previously exported backup file. <strong>This replaces all current data.</strong> Make an export first if you're not sure.</p>
+        <label class="tl-btn tl-btn-import">Choose backup file
+          <input type="file" accept="application/json" style="display:none" onchange="if(this.files[0])backupImportAll(this.files[0])">
+        </label>
+      </div>
+      <div class="backup-section backup-danger">
+        <div class="backup-section-title">Clear everything</div>
+        <p class="backup-help">Wipe all local data from this browser. Irreversible. Export first.</p>
+        <button class="tl-btn tl-btn-del" onclick="backupClearAll()">Clear all data</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ GLOBAL SEARCH OVERLAY (⌘K) ═══ -->
 <div class="search-overlay" id="searchOverlay" onclick="if(event.target===this)searchClose()" role="dialog" aria-label="Global search">
   <div class="search-modal">
@@ -1289,6 +1361,9 @@ document.addEventListener('keydown', function(e) {
 <script src="js/today.js"></script>
 <script src="js/search.js"></script>
 <script src="js/reconcile.js"></script>
+<script src="js/onboarding.js"></script>
+<script src="js/backup.js"></script>
+<script src="js/escalation.js"></script>
 <script src="js/barriers.js"></script>
 <script src="js/outreach.js"></script>
 <script src="js/lookup.js"></script>
