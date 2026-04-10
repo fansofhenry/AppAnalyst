@@ -351,11 +351,29 @@
 
 <main id="main-content">
 
+<!-- ═══ TODAY DASHBOARD ═══ -->
+<section class="sec sec-today fu" id="today" role="region" aria-label="Today dashboard">
+  <div class="wrap">
+    <div class="today-head">
+      <div>
+        <div class="today-eyebrow"><span class="today-dot"></span>Workbench · <span id="todayDate"></span></div>
+        <h2 class="today-title">Today</h2>
+      </div>
+      <div class="today-head-actions">
+        <button class="today-btn" onclick="if(typeof tlAdd===\u0027function\u0027)tlAdd()"><kbd>N</kbd> New ticket</button>
+        <button class="today-btn" onclick="if(typeof searchOpen===\u0027function\u0027)searchOpen()"><kbd>\u2318K</kbd> Search</button>
+      </div>
+    </div>
+    <div id="todayBody"></div>
+    <div class="today-hint">All data here reads from your browser storage. Nothing syncs, nothing leaves this machine.</div>
+  </div>
+</section>
+
 <div class="sec-group-divider"><span class="sgd-icon">&#9679;</span> Daily Operations</div>
 
 <!-- ═══ SYSTEM STATUS (MONITOR) ═══ -->
 <section class="sec sec-alt fu" id="monitor" role="region" aria-label="System Monitor"><div class="wrap">
-  <div class="eyebrow"><span class="sec-num" style="background:var(--amber)">1</span>Status</div>
+  <div class="eyebrow"><span class="sec-num" style="background:var(--amber)">1</span>Status<span class="demo-badge" title="Simulated dashboard — the 11 colleges shown here use fake uptime and error data. Your real 115-college directory is below at #lookup. Pass 2 will rewire this against live ticket-log patterns.">Demo data</span></div>
   <h2>System health across <em>all colleges</em></h2>
   <p class="sec-desc">Real-time health for 115+ colleges. <strong>FHDA colleges pinned at the top.</strong> Filter by status or search by name. Zero tickets plus a degraded system isn't a success story — it's a silent failure.</p>
   <div class="tool-frame">
@@ -451,7 +469,7 @@
 
 <!-- ═══ INCIDENT DIAGNOSTICS ═══ -->
 <section class="sec fu" id="tracer" role="region" aria-label="Incident Tracer"><div class="wrap">
-  <div class="eyebrow"><span class="sec-num" style="background:#be185d">4</span>Diagnostics</div>
+  <div class="eyebrow"><span class="sec-num" style="background:#be185d">4</span>Diagnostics<span class="demo-badge" title="Walkthrough uses a fictional Sacramento City token-expiration incident as a teaching scenario.">Demo data</span></div>
   <h2>Missing course reported — <em>trace it layer by layer</em></h2>
   <p class="sec-desc">Walk a real incident from symptom to resolution. Each stage shows what broke, where to look, and the analyst response. <strong>FHDA uses Banner Direct — the most reliable path.</strong></p>
   <div class="tool-frame">
@@ -482,7 +500,7 @@
 
 <!-- ═══ STUDENT JOURNEY (reference) ═══ -->
 <section class="sec sec-alt fu" id="journey" role="region" aria-label="Student Journey"><div class="wrap">
-  <div class="eyebrow">Student Experience</div>
+  <div class="eyebrow">Student Experience<span class="demo-badge" title="Scripted comparison for training/presentation use.">Demo data</span></div>
   <h2>Same enrollment — <em>working</em> vs <em class="red">broken</em></h2>
   <p class="sec-desc">When the Exchange works, a student at Chabot takes MATH 1A at <strong>De Anza</strong> without thinking about it. When it breaks — <strong>the course vanishes from Canvas.</strong></p>
   <div class="tool-frame">
@@ -502,7 +520,7 @@
 
 <!-- ═══ TICKET INTELLIGENCE ═══ -->
 <section class="sec sec-alt fu" id="patterns" role="region" aria-label="Ticket Intelligence"><div class="wrap">
-  <div class="eyebrow"><span class="sec-num" style="background:#c2410c">5</span>Ticket Intelligence</div>
+  <div class="eyebrow"><span class="sec-num" style="background:#c2410c">5</span>Ticket Intelligence<span class="demo-badge" title="Chart uses simulated ticket volume. Pass 2 will rewire this to read from your real ticket log.">Demo data</span></div>
   <h2>One ticket — or <em>twenty waiting to happen?</em></h2>
   <p class="sec-desc">Ticket volume mapped to the academic calendar. <strong>If 10 colleges generate 60% of tickets, that's not a support problem — it's an onboarding gap.</strong></p>
   <div class="tool-frame">
@@ -576,6 +594,39 @@
   </div>
 </div></section>
 
+<!-- ═══ RECONCILIATION HELPER ═══ -->
+<section class="sec fu" id="reconcile" role="region" aria-label="Reconciliation Helper"><div class="wrap">
+  <div class="eyebrow" style="color:var(--blue)"><span class="sec-num" style="background:var(--blue)">&#8644;</span>Reconcile</div>
+  <h2>CSV reconciliation — <em>Exchange vs home SIS</em></h2>
+  <p class="sec-desc">Paste the Exchange roster on the left and the home college SIS roster on the right. Diff by <code>CCCID + course</code>, flag missing rows, unit mismatches, and term mismatches. <strong>Pure client-side. Nothing uploaded, nothing stored.</strong> This is the literal work at Banner Ethos and Colleague Ethos colleges until Ellucian ships direct integration.</p>
+  <div class="tool-frame">
+    <div class="tool-bar">
+      <div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-blue">Diff &middot; in-memory only</span></div>
+      <span class="tool-hint">Expected columns: cccid/studentId, course/crn, units, term</span>
+      <span class="tool-bar-title">Reconciliation Helper</span>
+    </div>
+    <div class="tool-body">
+      <div class="rc-input-grid">
+        <div class="rc-input">
+          <label>Exchange roster CSV</label>
+          <textarea id="rcExchange" rows="8" placeholder="cccid,course,units,term&#10;CCC123,MATH1A,5,Spring2026&#10;..." spellcheck="false"></textarea>
+        </div>
+        <div class="rc-input">
+          <label>Home SIS roster CSV</label>
+          <textarea id="rcSis" rows="8" placeholder="cccid,course,units,term&#10;CCC123,MATH1A,5,Spring2026&#10;..." spellcheck="false"></textarea>
+        </div>
+      </div>
+      <div class="rc-actions">
+        <button class="tl-btn tl-btn-new" onclick="rcRun()">Reconcile</button>
+        <button class="tl-btn" onclick="rcLoadSample()">Load sample</button>
+        <button class="tl-btn" onclick="rcClear()">Clear</button>
+      </div>
+      <div id="rcResults"><div class="rc-hint">Paste a CSV into each box above, then click <strong>Reconcile</strong>. Both files should have a student ID/CCCID column and a course column. Units and term are compared if present.</div></div>
+      <div class="rc-privacy">No data leaves this page. All processing happens in your browser memory and is discarded on refresh. Still — strip PII before pasting anything if you\u2019re on a shared machine.</div>
+    </div>
+  </div>
+</div></section>
+
 <!-- ═══ TICKET LOG ═══ -->
 <section class="sec fu" id="ticketLog" role="region" aria-label="Personal Ticket Log"><div class="wrap">
   <div class="eyebrow" style="color:var(--primary)"><span class="sec-num" style="background:var(--primary)">&#9679;</span>Workbench</div>
@@ -619,7 +670,7 @@
 <!-- ═══ COMMUNICATION TEMPLATES ═══ -->
 <section class="sec sec-alt fu" id="comms" role="region" aria-label="Incident Communication">
   <div class="wrap">
-    <div class="eyebrow"><span class="sec-num" style="background:#4338ca">7</span>Communications</div>
+    <div class="eyebrow"><span class="sec-num" style="background:#4338ca">7</span>Communications<span class="demo-badge" title="Reference templates around a fictional Sacramento City P2 incident. Copy buttons still work — adapt the text to real situations.">Demo scenario</span></div>
     <h2>Same failure, <em>five audiences</em></h2>
     <p class="sec-desc">Same incident — adapted for student, campus IT, registrar, internal team, and Board. Copy-ready templates for each audience.</p>
     <div class="scenario-status-bar">
@@ -1114,6 +1165,23 @@ function showBarrierView(view,btn){
 
 <button class="back-to-top" id="backToTop" onclick="(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&uarr;</button>
 
+<!-- ═══ GLOBAL SEARCH OVERLAY (⌘K) ═══ -->
+<div class="search-overlay" id="searchOverlay" onclick="if(event.target===this)searchClose()" role="dialog" aria-label="Global search">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <span class="search-input-icon">&#128269;</span>
+      <input id="searchInput" class="search-input" type="text" placeholder="Search tickets, KB, colleges, sections..." oninput="searchRender(this.value)" autocomplete="off" spellcheck="false">
+      <span class="search-input-hint"><kbd>esc</kbd> close</span>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+    <div class="search-footer">
+      <span><kbd>&uarr;&darr;</kbd> navigate</span>
+      <span><kbd>&crarr;</kbd> open</span>
+      <span><kbd>&#8984;K</kbd> toggle</span>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ KEYBOARD SHORTCUTS HELP ═══ -->
 <div class="kb-overlay" id="kbOverlay" onclick="this.classList.remove('kb-show')">
   <div class="kb-help" onclick="event.stopPropagation()">
@@ -1218,6 +1286,9 @@ document.addEventListener('keydown', function(e) {
 <script src="js/patterns.js"></script>
 <script src="js/kb.js"></script>
 <script src="js/tickets.js"></script>
+<script src="js/today.js"></script>
+<script src="js/search.js"></script>
+<script src="js/reconcile.js"></script>
 <script src="js/barriers.js"></script>
 <script src="js/outreach.js"></script>
 <script src="js/lookup.js"></script>
