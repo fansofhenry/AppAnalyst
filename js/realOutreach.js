@@ -20,7 +20,8 @@ function roLoad() {
 }
 
 function roSave(list) {
-  localStorage.setItem(RO_KEY, JSON.stringify(list));
+  if (typeof safeStorage !== 'undefined') { safeStorage.set(RO_KEY, list); return; }
+  try { localStorage.setItem(RO_KEY, JSON.stringify(list)); } catch (e) {}
 }
 
 function roEsc(s) {

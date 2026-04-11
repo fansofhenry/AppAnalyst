@@ -7,10 +7,14 @@
 var BARRIERS_STATE_KEY = 'appanalyst.barriers.state.v1';
 
 function barriersStateLoad() {
+  if (typeof safeStorage !== 'undefined') return safeStorage.get(BARRIERS_STATE_KEY, {});
   try { return JSON.parse(localStorage.getItem(BARRIERS_STATE_KEY) || '{}'); }
   catch (e) { return {}; }
 }
-function barriersStateSave(s) { localStorage.setItem(BARRIERS_STATE_KEY, JSON.stringify(s)); }
+function barriersStateSave(s) {
+  if (typeof safeStorage !== 'undefined') { safeStorage.set(BARRIERS_STATE_KEY, s); return; }
+  try { localStorage.setItem(BARRIERS_STATE_KEY, JSON.stringify(s)); } catch (e) {}
+}
 
 function barrierToggleActive(n, ev) {
   if (ev) ev.stopPropagation();

@@ -61,14 +61,25 @@ function backupImportAll(file) {
         throw new Error('Not a valid backup file (missing stores)');
       }
       var restored = [];
+      var failed = [];
       BACKUP_STORES.forEach(function(s) {
         if (snapshot.stores[s.name] != null) {
-          localStorage.setItem(s.key, JSON.stringify(snapshot.stores[s.name]));
-          restored.push(s.name);
+          var ok;
+          if (typeof safeStorage !== 'undefined') {
+            ok = safeStorage.set(s.key, snapshot.stores[s.name]);
+          } else {
+            try { localStorage.setItem(s.key, JSON.stringify(snapshot.stores[s.name])); ok = true; }
+            catch (err) { ok = false; }
+          }
+          if (ok) restored.push(s.name); else failed.push(s.name);
         }
       });
-      toast('Restored ' + restored.length + ' stores — refreshing...');
-      setTimeout(function() { location.reload(); }, 1200);
+      if (failed.length) {
+        toast('Partial restore: ' + restored.length + ' ok, ' + failed.length + ' failed (' + failed.join(', ') + ')');
+      } else {
+        toast('Restored ' + restored.length + ' stores — refreshing...');
+        setTimeout(function() { location.reload(); }, 1200);
+      }
     } catch (err) {
       toast('Restore failed: ' + err.message);
     }

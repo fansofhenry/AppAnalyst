@@ -141,10 +141,15 @@ function obSwitchRole(role) {
 }
 
 function obLoad() {
-  try {
-    var raw = localStorage.getItem(OB_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch (e) {}
+  if (typeof safeStorage !== 'undefined') {
+    var stored = safeStorage.get(OB_KEY, null);
+    if (stored) return stored;
+  } else {
+    try {
+      var raw = localStorage.getItem(OB_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+  }
   // Seed on first load based on current role
   var activeRole = obGetActiveRole();
   var seeds = OB_ROLE_SEEDS[activeRole] || OB_ROLE_SEEDS.analyst;
@@ -164,7 +169,8 @@ function obLoad() {
 }
 
 function obSave(items) {
-  localStorage.setItem(OB_KEY, JSON.stringify(items));
+  if (typeof safeStorage !== 'undefined') { safeStorage.set(OB_KEY, items); return; }
+  try { localStorage.setItem(OB_KEY, JSON.stringify(items)); } catch (e) {}
 }
 
 function obToggle(id) {

@@ -11,11 +11,13 @@ var clExpanded = null;
 
 // ── Overlay store ─────────────────────────────────────
 function clOverlayLoad() {
+  if (typeof safeStorage !== 'undefined') return safeStorage.get(CL_OVERLAY_KEY, {});
   try { return JSON.parse(localStorage.getItem(CL_OVERLAY_KEY) || '{}'); }
   catch (e) { return {}; }
 }
 function clOverlaySave(o) {
-  localStorage.setItem(CL_OVERLAY_KEY, JSON.stringify(o));
+  if (typeof safeStorage !== 'undefined') { safeStorage.set(CL_OVERLAY_KEY, o); return; }
+  try { localStorage.setItem(CL_OVERLAY_KEY, JSON.stringify(o)); } catch (e) {}
 }
 function clOverlayGet(name) {
   var o = clOverlayLoad();

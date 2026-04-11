@@ -6,11 +6,13 @@
 // Bumping CACHE_VERSION invalidates old caches on next load.
 // ═══════════════════════════════════════════════════════
 
-var CACHE_VERSION = 'appanalyst-v11';
+// Bump this when any cached file changes so old clients reload the new assets.
+var CACHE_VERSION = 'appanalyst-v12';
 var PRECACHE_URLS = [
   './',
   './index.html',
   './manifest.json',
+  // Stylesheets
   './css/tokens.css',
   './css/base.css',
   './css/components.css',
@@ -20,7 +22,7 @@ var PRECACHE_URLS = [
   './css/modes.css',
   './css/responsive.css',
   './css/print.css',
-  './js/app.js',
+  // Data modules
   './js/data/colleges.js',
   './js/data/kb.js',
   './js/data/flow.js',
@@ -30,6 +32,10 @@ var PRECACHE_URLS = [
   './js/data/outreach.js',
   './js/data/journey.js',
   './js/data/ai-vision.js',
+  // Core + persistence
+  './js/storage.js',
+  './js/app.js',
+  // Tools
   './js/tickets.js',
   './js/lookup.js',
   './js/kb.js',
@@ -61,6 +67,14 @@ var PRECACHE_URLS = [
   './js/externalTools.js',
   './js/quickRefCards.js',
   './js/tooltips.js',
+  './js/pwa.js',
+  './js/manager.js',
+  './js/handoff.js',
+  './js/notifications.js',
+  './js/annualReview.js',
+  './js/storageHealth.js',
+  './js/quickCapture.js',
+  './js/focusMode.js',
   './js/monitor.js',
   './js/tracer.js',
   './js/flow.js',

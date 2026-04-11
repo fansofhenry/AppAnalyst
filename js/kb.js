@@ -178,10 +178,15 @@ function kbStarterUse(idx) {
 }
 
 function kbLoad() {
-  try {
-    var raw = localStorage.getItem(KB_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch (e) { }
+  if (typeof safeStorage !== 'undefined') {
+    var stored = safeStorage.get(KB_KEY, null);
+    if (stored) return stored;
+  } else {
+    try {
+      var raw = localStorage.getItem(KB_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) { }
+  }
   // Seed from the legacy kbTemplates
   var seeded = (typeof kbTemplates !== 'undefined' ? kbTemplates : []).map(function(t, i) {
     var body = (t.desc || '') + '\n\n## Steps\n\n' +
@@ -207,7 +212,11 @@ function kbLoad() {
 }
 
 function kbSave(entries) {
-  localStorage.setItem(KB_KEY, JSON.stringify(entries));
+  if (typeof safeStorage !== 'undefined') {
+    safeStorage.set(KB_KEY, entries);
+  } else {
+    try { localStorage.setItem(KB_KEY, JSON.stringify(entries)); } catch (e) {}
+  }
 }
 
 function kbAdd() {

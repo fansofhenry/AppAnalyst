@@ -19,7 +19,8 @@ function rcPresetsLoad() {
 }
 
 function rcPresetsSave(p) {
-  localStorage.setItem(RC_PRESETS_KEY, JSON.stringify(p));
+  if (typeof safeStorage !== 'undefined') { safeStorage.set(RC_PRESETS_KEY, p); return; }
+  try { localStorage.setItem(RC_PRESETS_KEY, JSON.stringify(p)); } catch (e) {}
 }
 
 function rcPresetSave() {

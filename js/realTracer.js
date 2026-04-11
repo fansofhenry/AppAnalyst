@@ -99,7 +99,8 @@ function rtLoadState() {
 
 function rtSaveState(s) {
   s.updated = new Date().toISOString();
-  localStorage.setItem(RT_STATE_KEY, JSON.stringify(s));
+  if (typeof safeStorage !== 'undefined') { safeStorage.set(RT_STATE_KEY, s); return; }
+  try { localStorage.setItem(RT_STATE_KEY, JSON.stringify(s)); } catch (e) {}
 }
 
 function rtApplyView() {

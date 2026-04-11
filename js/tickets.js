@@ -16,10 +16,14 @@ var TL_PRESETS_KEY = 'appanalyst.tickets.filterPresets.v1';
 
 // ── Filter presets ──
 function tlPresetsLoad() {
+  if (typeof safeStorage !== 'undefined') return safeStorage.get(TL_PRESETS_KEY, []);
   try { return JSON.parse(localStorage.getItem(TL_PRESETS_KEY) || '[]'); }
   catch (e) { return []; }
 }
-function tlPresetsSave(list) { localStorage.setItem(TL_PRESETS_KEY, JSON.stringify(list)); }
+function tlPresetsSave(list) {
+  if (typeof safeStorage !== 'undefined') { safeStorage.set(TL_PRESETS_KEY, list); return; }
+  try { localStorage.setItem(TL_PRESETS_KEY, JSON.stringify(list)); } catch (e) {}
+}
 
 function tlPresetSaveCurrent() {
   var name = prompt('Save current filter + search as preset. Name:');
@@ -205,10 +209,14 @@ function tlRenderBulkBar() {
 var TL_VIEW = 'active'; // 'active' or 'archive'
 
 function tlArchiveLoad() {
+  if (typeof safeStorage !== 'undefined') return safeStorage.get(TL_ARCHIVE_KEY, []);
   try { return JSON.parse(localStorage.getItem(TL_ARCHIVE_KEY) || '[]'); }
   catch (e) { return []; }
 }
-function tlArchiveSave(list) { localStorage.setItem(TL_ARCHIVE_KEY, JSON.stringify(list)); }
+function tlArchiveSave(list) {
+  if (typeof safeStorage !== 'undefined') { safeStorage.set(TL_ARCHIVE_KEY, list); return; }
+  try { localStorage.setItem(TL_ARCHIVE_KEY, JSON.stringify(list)); } catch (e) {}
+}
 
 function tlAutoArchive() {
   var list = tlLoad();
@@ -261,10 +269,14 @@ setTimeout(function() {
 
 // ── Ticket templates ──────────────────────────────────
 function tlTemplatesLoad() {
+  if (typeof safeStorage !== 'undefined') return safeStorage.get(TL_TEMPLATES_KEY, []);
   try { return JSON.parse(localStorage.getItem(TL_TEMPLATES_KEY) || '[]'); }
   catch (e) { return []; }
 }
-function tlTemplatesSave(list) { localStorage.setItem(TL_TEMPLATES_KEY, JSON.stringify(list)); }
+function tlTemplatesSave(list) {
+  if (typeof safeStorage !== 'undefined') { safeStorage.set(TL_TEMPLATES_KEY, list); return; }
+  try { localStorage.setItem(TL_TEMPLATES_KEY, JSON.stringify(list)); } catch (e) {}
+}
 
 function tlSaveAsTemplate(id) {
   var t = tlLoad().find(function(x) { return x.id === id; });
@@ -364,6 +376,7 @@ function tlSetFollowUpDays(id, days) {
 }
 
 function tlLoad() {
+  if (typeof safeStorage !== 'undefined') return safeStorage.get(TL_KEY, []);
   try {
     var raw = localStorage.getItem(TL_KEY);
     return raw ? JSON.parse(raw) : [];
@@ -371,7 +384,11 @@ function tlLoad() {
 }
 
 function tlSave(tickets) {
-  localStorage.setItem(TL_KEY, JSON.stringify(tickets));
+  if (typeof safeStorage !== 'undefined') {
+    safeStorage.set(TL_KEY, tickets);
+  } else {
+    try { localStorage.setItem(TL_KEY, JSON.stringify(tickets)); } catch (e) {}
+  }
   if (typeof navBadgeUpdate === 'function') navBadgeUpdate();
 }
 
@@ -922,8 +939,11 @@ function tlRender() {
 
   container.innerHTML = tagChipRow + filtered.map(function(t) {
     var ageCls = tlAgeClass(t);
-    var symptomShort = t.symptom || '<em style="color:var(--text-3)">no symptom yet</em>';
-    var collegeShort = t.college || '<em style="color:var(--text-3)">college?</em>';
+    // XSS-safe: tlEsc escapes user input (symptom/college) before interpolation.
+    var symptomShort = t.symptom ? tlEsc(t.symptom) : '<em style="color:var(--text-3)">no symptom yet</em>';
+    var collegeShort = t.college ? tlEsc(t.college) : '<em style="color:var(--text-3)">college?</em>';
+    var systemShort = tlEsc(t.system || '');
+    var statusShort = tlEsc(t.status || '');
     var fuCls = tlFollowUpClass(t);
     var fuBadge = '';
     var subtaskBadge = '';
@@ -959,9 +979,9 @@ function tlRender() {
         '<input type="checkbox" class="tl-select-box"' + (TL_SELECTED[t.id] ? ' checked' : '') + ' onclick="event.stopPropagation();tlSelectToggle(\'' + t.id + '\')" onchange="event.stopPropagation()" title="Select for bulk action">' +
         '<span class="tl-age ' + ageCls + '" onclick="tlEdit(\'' + t.id + '\')">' + tlAgeText(t.created) + '</span>' +
         '<span class="tl-college" onclick="tlEdit(\'' + t.id + '\')">' + collegeShort + fuBadge + subtaskBadge + timerBadge + blockedBadge + tagBadges + '</span>' +
-        '<span class="tl-sys" onclick="tlEdit(\'' + t.id + '\')">' + t.system + '</span>' +
+        '<span class="tl-sys" onclick="tlEdit(\'' + t.id + '\')">' + systemShort + '</span>' +
         '<span class="tl-symptom" onclick="tlEdit(\'' + t.id + '\')">' + symptomShort + '</span>' +
-        '<span class="tl-status tl-st-' + t.status + '" onclick="tlEdit(\'' + t.id + '\')">' + t.status + '</span>' +
+        '<span class="tl-status tl-st-' + statusShort + '" onclick="tlEdit(\'' + t.id + '\')">' + statusShort + '</span>' +
       '</div>' +
       '<div class="tl-detail">' +
         '<div class="tl-field-row">' +
@@ -1107,9 +1127,10 @@ function tlDupeWarning(t) {
 function tlKbSuggestions(t) {
   var symptom = (t.symptom || '').trim().toLowerCase();
   if (symptom.length < 4) return '';
-  var kb = [];
-  try { kb = JSON.parse(localStorage.getItem('appanalyst.kb.v1') || '[]'); } catch (e) { return ''; }
-  if (kb.length === 0) return '';
+  var kb = (typeof safeStorage !== 'undefined')
+    ? safeStorage.get('appanalyst.kb.v1', [])
+    : (function() { try { return JSON.parse(localStorage.getItem('appanalyst.kb.v1') || '[]'); } catch (e) { return []; } })();
+  if (!kb || kb.length === 0) return '';
 
   // Tokenize symptom into words, score each KB entry by match count
   var tokens = symptom.split(/\s+/).filter(function(w) { return w.length >= 3; });

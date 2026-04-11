@@ -133,7 +133,10 @@ function rcCommsLoadState() {
   } catch (e) {}
   return { active: 'ack', values: {} };
 }
-function rcCommsSaveState(s) { localStorage.setItem(RC_STATE_KEY, JSON.stringify(s)); }
+function rcCommsSaveState(s) {
+  if (typeof safeStorage !== 'undefined') { safeStorage.set(RC_STATE_KEY, s); return; }
+  try { localStorage.setItem(RC_STATE_KEY, JSON.stringify(s)); } catch (e) {}
+}
 
 function rcCommsApplyView() {
   var v = rcCommsGetView();
