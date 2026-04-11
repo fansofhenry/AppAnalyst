@@ -103,11 +103,12 @@ html[data-theme="dark"] {
   --bg-3: #292524;
   --surface: #1C1917;
   --surface-2: #231F1C;
-  --border: #2C2724;
-  --border-2: #3A3531;
+  --border: #3A3531;
+  --border-2: #4A4540;
   --text: #F5F4F1;
-  --text-2: #C8C5BF;
-  --text-3: #8A867F;
+  --text-2: #D6D3CC;
+  /* --text-3 raised from #8A867F (3.2:1) to #B3AFA6 (~6.5:1) for WCAG AA body */
+  --text-3: #B3AFA6;
 
   --primary: #34D399;
   --primary-light: rgba(52, 211, 153, .1);
