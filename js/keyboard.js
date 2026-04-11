@@ -102,40 +102,60 @@ document.addEventListener('keydown', function(e) {
     return;
   }
 
-  // Arrow keys / j / k inside ticket log: navigate rows
-  var tlSection = document.getElementById('ticketLog');
-  if (tlSection) {
-    var rect = tlSection.getBoundingClientRect();
-    var inView = rect.top < window.innerHeight * 0.5 && rect.bottom > 100;
-    if (inView) {
-      var rows = Array.from(tlSection.querySelectorAll('.tl-row'));
-      if (rows.length === 0) return;
-      var focused = rows.findIndex(function(r) { return r.classList.contains('tl-focused'); });
-      if (e.key === 'ArrowDown' || e.key === 'j') {
-        e.preventDefault();
-        var next = focused < 0 ? 0 : Math.min(rows.length - 1, focused + 1);
-        rows.forEach(function(r) { r.classList.remove('tl-focused'); });
-        rows[next].classList.add('tl-focused');
-        rows[next].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-        return;
-      }
-      if (e.key === 'ArrowUp' || e.key === 'k') {
-        e.preventDefault();
-        var prev = focused <= 0 ? 0 : focused - 1;
-        rows.forEach(function(r) { r.classList.remove('tl-focused'); });
-        rows[prev].classList.add('tl-focused');
-        rows[prev].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-        return;
-      }
-      if (e.key === 'Enter' && focused >= 0) {
-        e.preventDefault();
-        rows[focused].classList.toggle('tl-expanded');
-        return;
-      }
-      if (e.key === 'Escape' && focused >= 0) {
-        rows[focused].classList.remove('tl-expanded');
-        return;
-      }
+  // Generic list keyboard nav — works on whichever "row list" is in view
+  var listConfigs = [
+    { sectionId: 'ticketLog', rowSel: '.tl-row', focusCls: 'tl-focused', openToggle: 'tl-expanded' },
+    { sectionId: 'kb', rowSel: '.kb-list-item', focusCls: 'kb-focused', openToggle: null,
+      onEnter: function(row) { var id = row.dataset.id; if (id && typeof kbSelect === 'function') kbSelect(id); } },
+    { sectionId: 'activity', rowSel: '.act-item', focusCls: 'act-focused', openToggle: null,
+      onEnter: function(row) { row.click(); } },
+    { sectionId: 'onboarding', rowSel: '.ob-item', focusCls: 'ob-focused', openToggle: null,
+      onEnter: function(row) {
+        var cb = row.querySelector('input[type="checkbox"]');
+        if (cb) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change', { bubbles: true })); }
+      } }
+  ];
+
+  for (var i = 0; i < listConfigs.length; i++) {
+    var cfg = listConfigs[i];
+    var section = document.getElementById(cfg.sectionId);
+    if (!section) continue;
+    var rect = section.getBoundingClientRect();
+    var inView = rect.top < window.innerHeight * 0.6 && rect.bottom > 100;
+    if (!inView) continue;
+
+    var rows = Array.from(section.querySelectorAll(cfg.rowSel));
+    if (rows.length === 0) continue;
+    var focusedIdx = rows.findIndex(function(r) { return r.classList.contains(cfg.focusCls); });
+
+    if (e.key === 'ArrowDown' || e.key === 'j') {
+      e.preventDefault();
+      var next = focusedIdx < 0 ? 0 : Math.min(rows.length - 1, focusedIdx + 1);
+      rows.forEach(function(r) { r.classList.remove(cfg.focusCls); });
+      rows[next].classList.add(cfg.focusCls);
+      rows[next].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      return;
     }
+    if (e.key === 'ArrowUp' || e.key === 'k') {
+      e.preventDefault();
+      var prev = focusedIdx <= 0 ? 0 : focusedIdx - 1;
+      rows.forEach(function(r) { r.classList.remove(cfg.focusCls); });
+      rows[prev].classList.add(cfg.focusCls);
+      rows[prev].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      return;
+    }
+    if (e.key === 'Enter' && focusedIdx >= 0) {
+      e.preventDefault();
+      var row = rows[focusedIdx];
+      if (cfg.openToggle) row.classList.toggle(cfg.openToggle);
+      else if (cfg.onEnter) cfg.onEnter(row);
+      return;
+    }
+    if (e.key === 'Escape' && focusedIdx >= 0) {
+      if (cfg.openToggle) rows[focusedIdx].classList.remove(cfg.openToggle);
+      else rows.forEach(function(r) { r.classList.remove(cfg.focusCls); });
+      return;
+    }
+    break; // Only handle the topmost in-view list
   }
 });

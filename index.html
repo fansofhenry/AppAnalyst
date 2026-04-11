@@ -15,6 +15,10 @@
 <meta property="og:url" content="https://fansofhenry.github.io/AppAnalyst/">
 <link rel="canonical" href="https://fansofhenry.github.io/AppAnalyst/">
 <meta name="theme-color" content="#0F766E">
+<link rel="manifest" href="./manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="AppAnalyst">
 <script>
 // First-paint theme + role — runs before stylesheets apply to prevent flash
 (function() {
@@ -403,6 +407,16 @@
       <div id="obHead" class="ob-head-right"></div>
     </div>
     <div id="obBody"></div>
+  </div>
+</section>
+
+<!-- ═══ MANAGER / LEAD DASHBOARD ═══ -->
+<section class="sec fu" id="manager" role="region" aria-label="Manager and Team Lead dashboard">
+  <div class="wrap">
+    <div class="today-eyebrow"><span class="today-dot" style="background:#CA8A04"></span>For managers &amp; team leads</div>
+    <h2 class="today-title" style="font-size:clamp(1.5rem,3vw,1.9rem)">Leadership rollup &mdash; the view for 1:1s and weekly reports</h2>
+    <p class="ob-sub">Week-over-week deltas, resolution trends, hotspot colleges, and ready-made talking points for weekly reporting and 1:1 prep. Works on your own single-user data today; team-wide rollups would need a shared backend (out of scope).</p>
+    <div id="managerBody"></div>
   </div>
 </section>
 
@@ -817,6 +831,7 @@
           <input type="file" accept="application/json" style="display:none" onchange="if(this.files[0])tlImportJSON(this.files[0])">
         </label>
       </div>
+      <div id="tlBulkBar" class="tl-bulk-bar"></div>
       <div class="tl-body" id="tlBody"></div>
       <div class="tl-privacy">Stored in <code>localStorage</code> key <code>appanalyst.tickets.v1</code>. Clearing browser data erases it — keep JSON backups.</div>
     </div>
@@ -1477,8 +1492,8 @@ function showBarrierView(view,btn){
     <div class="kb-help-row"><span class="kb-help-desc">Accessibility mode</span><span class="kb-help-key">A</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Toggle dark theme</span><span class="kb-help-key">&#8679;D</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Global search</span><span class="kb-help-key">&#8984;K</span></div>
-    <div class="kb-help-row"><span class="kb-help-desc">Nav ticket rows</span><span class="kb-help-key">&uarr;&darr; / j k</span></div>
-    <div class="kb-help-row"><span class="kb-help-desc">Expand / collapse row</span><span class="kb-help-key">&crarr; / esc</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc">Nav list rows (tickets, KB, activity, onboarding)</span><span class="kb-help-key">&uarr;&darr; / j k</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc">Open / toggle row</span><span class="kb-help-key">&crarr; / esc</span></div>
     </div>
     <div class="kb-help-close">Press any key or click outside to close</div>
   </div>
@@ -1588,6 +1603,8 @@ document.addEventListener('keydown', function(e) {
 <script src="js/externalTools.js"></script>
 <script src="js/quickRefCards.js"></script>
 <script src="js/tooltips.js"></script>
+<script src="js/pwa.js"></script>
+<script src="js/manager.js"></script>
 <script src="js/packet.js"></script>
 <script src="js/router.js"></script>
 <script src="js/barriers.js"></script>

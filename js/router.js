@@ -13,12 +13,12 @@ function routerApply() {
   // Role
   var role = params.get('role');
   if (role && typeof roleSet === 'function') {
-    var validRoles = ['analyst', 'ar', 'fa', 'counselor', 'dsps', 'student'];
+    var validRoles = ['analyst', 'ar', 'fa', 'counselor', 'dsps', 'student', 'manager'];
     if (validRoles.indexOf(role) >= 0) {
       try { localStorage.setItem('appanalyst.role.v1', role); } catch (e) {}
       document.documentElement.setAttribute('data-role', role);
       if (document.body) {
-        document.body.classList.remove('role-analyst', 'role-ar', 'role-fa', 'role-counselor', 'role-dsps', 'role-student');
+        document.body.classList.remove('role-analyst', 'role-ar', 'role-fa', 'role-counselor', 'role-dsps', 'role-student', 'role-manager');
         document.body.classList.add('role-' + role);
       }
       if (typeof roleRenderButton === 'function') roleRenderButton();
@@ -27,7 +27,7 @@ function routerApply() {
 
   // Student guide language
   var lang = params.get('lang');
-  if (lang && ['en', 'es', 'zh', 'vi'].indexOf(lang) >= 0) {
+  if (lang && ['en', 'es', 'zh', 'vi', 'tl'].indexOf(lang) >= 0) {
     try { localStorage.setItem('appanalyst.student.lang.v1', lang); } catch (e) {}
   }
 

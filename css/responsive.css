@@ -354,7 +354,7 @@
 
 /* Ticket log: tighter summary grid below 540px */
 @media (max-width: 540px) {
-  .tl-summary { grid-template-columns: 44px 1fr; gap: .5rem; padding: .6rem .75rem; }
+  .tl-summary { grid-template-columns: 20px 44px 1fr; gap: .4rem; padding: .6rem .75rem; }
   .tl-sys, .tl-status, .tl-symptom { display: none; }
   .tl-row-tags { display: none; }
 }

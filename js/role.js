@@ -61,6 +61,15 @@ var ROLES = [
     color: '#0EA5E9',
     greeting: 'your Exchange guide',
     desc: 'Use this self-help guide to find and enroll in courses at other colleges.'
+  },
+  {
+    id: 'manager',
+    label: 'Manager / Team Lead',
+    short: 'Lead',
+    icon: '\u25BE',
+    color: '#CA8A04',
+    greeting: 'your leadership view',
+    desc: 'Weekly rollups, resolution trends, college hotspots, and team metrics surfaced for 1:1s and reporting.'
   }
 ];
 
@@ -92,7 +101,7 @@ function roleMeta(id) {
 }
 
 function roleApplyBodyClass() {
-  document.body.classList.remove('role-analyst', 'role-ar', 'role-fa', 'role-counselor', 'role-dsps', 'role-student');
+  document.body.classList.remove('role-analyst', 'role-ar', 'role-fa', 'role-counselor', 'role-dsps', 'role-student', 'role-manager');
   document.body.classList.add('role-' + roleGet());
 }
 

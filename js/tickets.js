@@ -10,6 +10,133 @@ var TL_STATUSES = ['open', 'waiting-vendor', 'waiting-college', 'waiting-student
 var TL_VENDORS = ['', 'Ellucian', 'CCCTC', 'Internal (FHDA ETS)', 'College IT', 'Other'];
 var TL_FILTER = 'open-any';
 var TL_SEARCH = '';
+var TL_SELECTED = {};  // id -> true for bulk-selected tickets
+
+// ── Bulk selection ───────────────────────────────────
+function tlSelectToggle(id) {
+  if (TL_SELECTED[id]) delete TL_SELECTED[id];
+  else TL_SELECTED[id] = true;
+  tlRenderBulkBar();
+  var row = document.querySelector('.tl-row[data-id="' + id + '"]');
+  if (row) row.classList.toggle('tl-selected', !!TL_SELECTED[id]);
+}
+
+function tlSelectNone() {
+  TL_SELECTED = {};
+  document.querySelectorAll('.tl-row.tl-selected').forEach(function(r) { r.classList.remove('tl-selected'); });
+  document.querySelectorAll('.tl-select-box').forEach(function(c) { c.checked = false; });
+  tlRenderBulkBar();
+}
+
+function tlSelectAllVisible() {
+  tlFilter(tlLoad()).forEach(function(t) { TL_SELECTED[t.id] = true; });
+  tlRender();
+}
+
+function tlSelectedIds() {
+  return Object.keys(TL_SELECTED);
+}
+
+function tlBulkStatus(newStatus) {
+  var ids = tlSelectedIds();
+  if (ids.length === 0) return;
+  var list = tlLoad();
+  list.forEach(function(t) {
+    if (TL_SELECTED[t.id]) {
+      t.status = newStatus;
+      t.updated = new Date().toISOString();
+    }
+  });
+  tlSave(list);
+  tlRender();
+  toast('Updated ' + ids.length + ' tickets \u2192 ' + newStatus);
+}
+
+function tlBulkAddTag() {
+  var ids = tlSelectedIds();
+  if (ids.length === 0) return;
+  var tag = prompt('Add a tag to ' + ids.length + ' tickets:');
+  if (!tag || !tag.trim()) return;
+  tag = tag.trim();
+  var list = tlLoad();
+  list.forEach(function(t) {
+    if (TL_SELECTED[t.id]) {
+      var tags = (t.tags || '').split(',').map(function(s) { return s.trim(); }).filter(function(s) { return s; });
+      if (tags.indexOf(tag) < 0) tags.push(tag);
+      t.tags = tags.join(', ');
+      t.updated = new Date().toISOString();
+    }
+  });
+  tlSave(list);
+  tlRender();
+  toast('Added "' + tag + '" to ' + ids.length + ' tickets');
+}
+
+function tlBulkFollowUp() {
+  var ids = tlSelectedIds();
+  if (ids.length === 0) return;
+  var days = prompt('Set follow-up date: enter number of days from today (e.g. 3). Blank to clear.');
+  if (days === null) return;
+  var iso = '';
+  if (days !== '') {
+    var n = parseInt(days, 10);
+    if (isNaN(n)) { toast('Invalid number'); return; }
+    var d = new Date();
+    d.setDate(d.getDate() + n);
+    iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  var list = tlLoad();
+  list.forEach(function(t) {
+    if (TL_SELECTED[t.id]) {
+      t.followUp = iso;
+      t.updated = new Date().toISOString();
+    }
+  });
+  tlSave(list);
+  tlRender();
+  toast('Updated follow-up on ' + ids.length + ' tickets');
+}
+
+function tlBulkDelete() {
+  var ids = tlSelectedIds();
+  if (ids.length === 0) return;
+  if (!confirm('Delete ' + ids.length + ' tickets? Undo will restore all of them.')) return;
+  var all = tlLoad();
+  var deleted = all.filter(function(t) { return TL_SELECTED[t.id]; });
+  var list = all.filter(function(t) { return !TL_SELECTED[t.id]; });
+  tlSave(list);
+  TL_SELECTED = {};
+  tlRender();
+  if (typeof undoPush === 'function') {
+    undoPush(function() {
+      var cur = tlLoad();
+      deleted.forEach(function(t) { cur.unshift(t); });
+      tlSave(cur);
+      tlRender();
+    }, ids.length + ' tickets');
+  }
+}
+
+function tlRenderBulkBar() {
+  var bar = document.getElementById('tlBulkBar');
+  if (!bar) return;
+  var count = tlSelectedIds().length;
+  if (count === 0) {
+    bar.classList.remove('tl-bulk-show');
+    bar.innerHTML = '';
+    return;
+  }
+  bar.classList.add('tl-bulk-show');
+  bar.innerHTML =
+    '<span class="tl-bulk-count"><strong>' + count + '</strong> selected</span>' +
+    '<button class="tl-btn" onclick="tlBulkStatus(\'open\')">Mark open</button>' +
+    '<button class="tl-btn" onclick="tlBulkStatus(\'waiting-vendor\')">Waiting vendor</button>' +
+    '<button class="tl-btn" onclick="tlBulkStatus(\'resolved\')">Resolve all</button>' +
+    '<button class="tl-btn" onclick="tlBulkAddTag()">Add tag</button>' +
+    '<button class="tl-btn" onclick="tlBulkFollowUp()">Follow-up</button>' +
+    '<button class="tl-btn tl-btn-del" onclick="tlBulkDelete()">Delete</button>' +
+    '<button class="tl-btn" onclick="tlSelectNone()">Clear</button>';
+}
 
 // ── Ticket templates ──────────────────────────────────
 function tlTemplatesLoad() {
@@ -335,13 +462,14 @@ function tlRender() {
         }).join('') + (tagList.length > 3 ? '<span class="tl-row-tag-more">+' + (tagList.length - 3) + '</span>' : '') + '</span>';
       }
     }
-    return '<div class="tl-row" data-id="' + t.id + '">' +
-      '<div class="tl-summary" onclick="tlEdit(\'' + t.id + '\')">' +
-        '<span class="tl-age ' + ageCls + '">' + tlAgeText(t.created) + '</span>' +
-        '<span class="tl-college">' + collegeShort + fuBadge + tagBadges + '</span>' +
-        '<span class="tl-sys">' + t.system + '</span>' +
-        '<span class="tl-symptom">' + symptomShort + '</span>' +
-        '<span class="tl-status tl-st-' + t.status + '">' + t.status + '</span>' +
+    return '<div class="tl-row' + (TL_SELECTED[t.id] ? ' tl-selected' : '') + '" data-id="' + t.id + '">' +
+      '<div class="tl-summary">' +
+        '<input type="checkbox" class="tl-select-box"' + (TL_SELECTED[t.id] ? ' checked' : '') + ' onclick="event.stopPropagation();tlSelectToggle(\'' + t.id + '\')" onchange="event.stopPropagation()" title="Select for bulk action">' +
+        '<span class="tl-age ' + ageCls + '" onclick="tlEdit(\'' + t.id + '\')">' + tlAgeText(t.created) + '</span>' +
+        '<span class="tl-college" onclick="tlEdit(\'' + t.id + '\')">' + collegeShort + fuBadge + tagBadges + '</span>' +
+        '<span class="tl-sys" onclick="tlEdit(\'' + t.id + '\')">' + t.system + '</span>' +
+        '<span class="tl-symptom" onclick="tlEdit(\'' + t.id + '\')">' + symptomShort + '</span>' +
+        '<span class="tl-status tl-st-' + t.status + '" onclick="tlEdit(\'' + t.id + '\')">' + t.status + '</span>' +
       '</div>' +
       '<div class="tl-detail">' +
         '<div class="tl-field-row">' +
@@ -401,6 +529,7 @@ function tlRender() {
       '</div>' +
     '</div>';
   }).join('');
+  tlRenderBulkBar();
 }
 
 // ── KB suggestions: find existing entries that match current symptom ──

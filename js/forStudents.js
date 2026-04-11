@@ -16,6 +16,83 @@ function studentsSetLang(lang) {
   studentsRender();
 }
 
+var STUDENT_CONTENT_TL = {
+  stepsTitle: 'Limang-hakbang na gabay',
+  steps: [
+    {
+      n: 1,
+      title: 'Siguraduhing aktibo ka sa iyong pangunahing kolehiyo',
+      body: 'Kailangan mong magkaroon ng aktibong student record sa isang California community college bago mo magagamit ang CVC Exchange. Ito ang iyong <strong>pangunahing kolehiyo</strong> \u2014 kung saan ka nagbabayad ng matrikula, nag-aapply para sa tulong pinansyal, at tumatanggap ng iyong degree. Kung hindi ka pa nag-a-apply, magsimula sa <a href="https://www.cccapply.org" target="_blank" rel="noopener">cccapply.org</a>.',
+      check: 'May aktibong student ID ako sa aking pangunahing kolehiyo'
+    },
+    {
+      n: 2,
+      title: 'Hanapin ang iyong kurso sa cvc.edu',
+      body: 'Pumunta sa <a href="https://search.cvc.edu" target="_blank" rel="noopener">search.cvc.edu</a>. I-type ang kurso na kailangan mo (halimbawa, "Math 1A") o i-browse sa pamamagitan ng subject. Ipapakita ng mga resulta ang bawat California community college na nag-aalok ng kursong iyon sa online ngayong termino, na may mga available na upuan.',
+      check: 'Nakahanap ako ng section na gusto ko'
+    },
+    {
+      n: 3,
+      title: 'I-click ang "Enroll" at mag-sign in gamit ang iyong OpenCCC account',
+      body: 'Kapag nakahanap ka ng section, i-click ang Enroll button. Mag-sign in ka gamit ang iyong <strong>OpenCCC account</strong> \u2014 ang pareho mong ginamit para sa CCCApply. Kung hihilingin nitong pumili ng iyong pangunahing kolehiyo, piliin ang kolehiyong kung saan ka na naka-enroll.',
+      check: 'Nag-sign in ako at pumili ng pangunahing kolehiyo'
+    },
+    {
+      n: 4,
+      title: 'Kumpirmahin ang iyong enrollment at hintayin ang sync',
+      body: 'Kapag na-submit mo na, ipapadala ng Exchange ang iyong enrollment sa parehong pangunahing kolehiyo at sa kolehiyong nagtuturo. Maaari itong tumagal ng ilang minuto hanggang ilang oras depende sa mga system na kasangkot. Makakatanggap ka ng confirmation email.',
+      check: 'Nakatanggap ako ng confirmation email'
+    },
+    {
+      n: 5,
+      title: 'I-access ang kurso sa Canvas',
+      body: 'Pagkatapos makumpleto ang sync, lalabas ang kurso sa iyong <strong>Canvas dashboard</strong>. Mag-sign in sa Canvas site ng kolehiyong nagtuturo (halimbawa, <code>canvas.foothill.edu</code>) gamit ang iyong OpenCCC credentials o ang SSO ng iyong kolehiyo, depende sa kolehiyo. Lalabas ang kurso sa iyong listahan.',
+      check: 'Nasa Canvas ko na ang kurso'
+    }
+  ],
+  troublesTitle: 'Pag-troubleshoot \u2014 karaniwang mga problema',
+  troubles: [
+    {
+      symptom: 'Hindi lumalabas ang kurso ko sa Canvas',
+      causes: 'Hindi pa tapos mag-sync ang enrollment data, o may system delay sa pagitan ng mga kolehiyo.',
+      action: 'Maghintay ng 24 oras. Kung wala pa rin, kontakin ang <strong>Admissions & Records</strong> office sa iyong pangunahing kolehiyo (hindi sa kolehiyong nagtuturo) at hilingin sa kanilang i-verify ang iyong Exchange enrollment record.'
+    },
+    {
+      symptom: 'May error ako noong sinubukan kong mag-enroll',
+      causes: 'Mga karaniwang error: hindi mo pa nakumpleto ang orientation sa iyong pangunahing kolehiyo, may registration hold ka, kailangan ng kurso ng prerequisite na hindi mo pa natapos, o puno na ang section.',
+      action: 'Suriin ang student portal ng iyong pangunahing kolehiyo para sa anumang hold o block. Kung walang lumalabas doon, mag-email sa Counseling office ng iyong pangunahing kolehiyo na may screenshot ng error.'
+    },
+    {
+      symptom: 'Hindi saklaw ng financial aid ko ang CVC course',
+      causes: 'Kailangang i-setup ng iyong pangunahing kolehiyo ang isang <strong>Consortium Agreement</strong> para ma-apply ang tulong mo sa mga kursong kinuha sa ibang kolehiyo sa pamamagitan ng Exchange.',
+      action: 'Kontakin ang Financial Aid office sa iyong pangunahing kolehiyo at magtanong tungkol sa Consortium Agreement para sa iyong CVC Exchange course. Kailangan itong i-setup bago ang add deadline.'
+    },
+    {
+      symptom: 'Kailangan ko ng accommodation (DSPS) sa kolehiyong nagtuturo',
+      causes: 'Hindi awtomatikong nale-transfer ang mga accommodation. Kailangan mong magrehistro sa DSPS sa kolehiyong nagtuturo.',
+      action: 'Mag-email o tumawag sa DSPS office ng kolehiyong nagtuturo sa sandaling mag-enroll ka. Sabihin sa kanilang isa kang CVC Exchange student mula sa [iyong pangunahing kolehiyo] at magtanong kung paano ibahagi ang iyong accommodation letter.'
+    },
+    {
+      symptom: 'Gusto kong mag-drop ng CVC course',
+      causes: 'Kailangan gawin ang pag-drop sa pamamagitan ng Exchange, hindi sa regular na drop process ng kolehiyong nagtuturo.',
+      action: 'Bumalik sa <a href="https://cvc.edu" target="_blank" rel="noopener">cvc.edu</a>, mag-sign in, hanapin ang kurso sa iyong dashboard, at gamitin ang drop option doon. Bigyang-pansin ang drop deadlines \u2014 sumusunod ang mga ito sa kalendaryo ng kolehiyong nagtuturo.'
+    },
+    {
+      symptom: 'Hindi ako makapag-sign in gamit ang aking OpenCCC account',
+      causes: 'Maaaring kailanganing i-reset ang iyong OpenCCC password, o pansamantalang down ang sign-on integration ng iyong pangunahing kolehiyo.',
+      action: 'Subukan muna ang <a href="https://www.opencccapply.net" target="_blank" rel="noopener">password recovery</a> sa OpenCCC. Kung hindi iyon gagana, kontakin ang IT help desk ng iyong pangunahing kolehiyo.'
+    }
+  ],
+  contactsTitle: 'Sino ang kokontakin sa bawat kolehiyo',
+  contacts: [
+    { role: 'Admissions & Records', body: 'Para sa enrollment records, transcripts, registration holds, at dropped-course questions. <strong>Magsimula sa iyong pangunahing kolehiyo</strong> para sa anumang enrollment o transcript issue.' },
+    { role: 'Financial Aid', body: 'Para sa FAFSA, CCPG (fee waiver), Consortium Agreements, at disbursement. <strong>Ang iyong pangunahing kolehiyo lamang</strong> ang humahawak ng iyong tulong pinansyal.' },
+    { role: 'Counseling', body: 'Para sa course planning, transfer questions, at tulong sa pag-navigate ng Exchange. Malapit na nakikipagtulungan sa iyong pangunahing kolehiyo.' },
+    { role: 'DSPS', body: 'Para sa mga accommodation, alternative formats, at accessibility support. Kontakin ang <strong>parehong</strong> pangunahing kolehiyo at kolehiyong nagtuturo na DSPS offices.' },
+    { role: 'Instructor', body: 'Para sa mga tanong tungkol sa nilalaman ng kurso, mga assignment, at Canvas. <strong>Kontakin ang instructor sa kolehiyong nagtuturo</strong> para sa mga course-specific question.' }
+  ]
+};
+
 var STUDENT_CONTENT_ZH = {
   stepsTitle: '\u4e94\u6b65\u6307\u5357',
   steps: [
@@ -325,7 +402,8 @@ function studentsRender() {
   var contentMap = {
     es: STUDENT_CONTENT_ES,
     zh: STUDENT_CONTENT_ZH,
-    vi: STUDENT_CONTENT_VI
+    vi: STUDENT_CONTENT_VI,
+    tl: STUDENT_CONTENT_TL
   };
   var c = contentMap[lang] || null;
   var steps = c ? c.steps : STUDENT_STEPS;
@@ -333,14 +411,15 @@ function studentsRender() {
   var contacts = c ? c.contacts : null;
   var troublesTitle = c ? c.troublesTitle : 'Troubleshooting \u2014 common problems';
   var contactsTitle = c ? c.contactsTitle : 'Who to contact at each college';
-  var causeLabel = lang === 'es' ? 'Causa probable' : lang === 'zh' ? '\u53ef\u80fd\u539f\u56e0' : lang === 'vi' ? 'Nguy\u00ean nh\u00e2n' : 'Likely cause';
-  var actionLabel = lang === 'es' ? 'Qu\u00e9 hacer' : lang === 'zh' ? '\u600e\u4e48\u529e' : lang === 'vi' ? 'C\u1ea7n l\u00e0m g\u00ec' : 'What to do';
+  var causeLabel = lang === 'es' ? 'Causa probable' : lang === 'zh' ? '\u53ef\u80fd\u539f\u56e0' : lang === 'vi' ? 'Nguy\u00ean nh\u00e2n' : lang === 'tl' ? 'Posibleng sanhi' : 'Likely cause';
+  var actionLabel = lang === 'es' ? 'Qu\u00e9 hacer' : lang === 'zh' ? '\u600e\u4e48\u529e' : lang === 'vi' ? 'C\u1ea7n l\u00e0m g\u00ec' : lang === 'tl' ? 'Ano ang gagawin' : 'What to do';
 
   var langs = [
     { code: 'en', label: 'English' },
     { code: 'es', label: 'Espa\u00f1ol' },
     { code: 'zh', label: '\u4e2d\u6587' },
-    { code: 'vi', label: 'Ti\u1ebfng Vi\u1ec7t' }
+    { code: 'vi', label: 'Ti\u1ebfng Vi\u1ec7t' },
+    { code: 'tl', label: 'Tagalog' }
   ];
   var langToggle = '<div class="stu-lang-wrap">' +
     langs.map(function(l) {
