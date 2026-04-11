@@ -51,6 +51,18 @@ function todayRender() {
     return new Date(a.created).getTime() - new Date(b.created).getTime();
   }).slice(0, 3);
 
+  // Follow-ups: overdue or due today/tomorrow
+  var dueTickets = openTickets.filter(function(t) {
+    if (!t.followUp) return false;
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var due = new Date(t.followUp + 'T00:00:00'); due.setHours(0, 0, 0, 0);
+    if (isNaN(due.getTime())) return false;
+    var diffDays = Math.round((due.getTime() - today.getTime()) / 86400000);
+    return diffDays <= 2;
+  }).sort(function(a, b) {
+    return new Date(a.followUp).getTime() - new Date(b.followUp).getTime();
+  });
+
   // Top 3 recent KB entries
   var recentKB = kb.slice().sort(function(a, b) {
     return new Date(b.updated || 0).getTime() - new Date(a.updated || 0).getTime();
@@ -102,6 +114,34 @@ function todayRender() {
       '<div class="today-stat"><div class="today-stat-num">' + collegeEditCount + '</div><div class="today-stat-label">Colleges noted</div></div>' +
       '<div class="today-stat"><div class="today-stat-num" style="color:var(--primary)">' + resolved + '</div><div class="today-stat-label">Resolved all-time</div></div>' +
     '</div>';
+
+  // ── Follow-up card (only shown if there are due/overdue tickets) ──
+  var followUpCard = '';
+  if (dueTickets.length > 0) {
+    followUpCard =
+      '<div class="today-card today-card-followup">' +
+        '<div class="today-card-head">' +
+          '<div class="today-card-title">Follow up now</div>' +
+          '<span class="today-followup-count">' + dueTickets.length + '</span>' +
+        '</div>' +
+        '<div class="today-list">' + dueTickets.slice(0, 4).map(function(t) {
+          var today = new Date(); today.setHours(0, 0, 0, 0);
+          var due = new Date(t.followUp + 'T00:00:00'); due.setHours(0, 0, 0, 0);
+          var diffDays = Math.round((due.getTime() - today.getTime()) / 86400000);
+          var label = diffDays < 0 ? (Math.abs(diffDays) + 'd late') :
+                      diffDays === 0 ? 'Today' :
+                      diffDays === 1 ? 'Tomorrow' : '+' + diffDays + 'd';
+          var cls = diffDays < 0 ? 'today-fu-over' : diffDays === 0 ? 'today-fu-now' : 'today-fu-soon';
+          return '<a class="today-item" onclick="document.getElementById(\'ticketLog\').scrollIntoView({behavior:\'smooth\'});setTimeout(function(){var r=document.querySelector(\'.tl-row[data-id=&quot;' + t.id + '&quot;]\');if(r){r.classList.add(\'tl-expanded\');r.scrollIntoView({behavior:\'smooth\',block:\'center\'})}},400)">' +
+            '<span class="today-fu-marker ' + cls + '">' + label + '</span>' +
+            '<span class="today-item-main">' +
+              '<span class="today-item-title">' + todayEsc(t.symptom || '(no symptom)') + '</span>' +
+              '<span class="today-item-sub">' + todayEsc(t.college || 'no college') + '</span>' +
+            '</span>' +
+          '</a>';
+        }).join('') + '</div>' +
+      '</div>';
+  }
 
   // ── Three cards: tickets, KB, colleges ──────
   var ticketsCard =
@@ -214,7 +254,7 @@ function todayRender() {
   container.innerHTML =
     statStrip +
     rollup +
-    '<div class="today-grid">' + ticketsCard + kbCard + collegesCard + outreachCard + '</div>';
+    '<div class="today-grid">' + followUpCard + ticketsCard + kbCard + collegesCard + outreachCard + '</div>';
 
   var dateEl = document.getElementById('todayDate');
   if (dateEl) dateEl.textContent = todayFmtDate();

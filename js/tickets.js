@@ -82,6 +82,18 @@ function tlToggleTemplatesMenu() {
   menu.classList.toggle('tl-templates-open');
 }
 
+function tlSetFollowUpDays(id, days) {
+  if (days == null) {
+    tlUpdate(id, 'followUp', '');
+  } else {
+    var d = new Date();
+    d.setDate(d.getDate() + days);
+    var iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    tlUpdate(id, 'followUp', iso);
+  }
+  tlRender();
+}
+
 function tlLoad() {
   try {
     var raw = localStorage.getItem(TL_KEY);
@@ -109,9 +121,23 @@ function tlNewBlank() {
     status: 'open',
     vendor: '',
     tags: '',
+    followUp: '',
     notes: '',
     resolution: ''
   };
+}
+
+// Classify a follow-up date against today
+function tlFollowUpClass(t) {
+  if (!t.followUp || t.status === 'resolved') return '';
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  var due = new Date(t.followUp + 'T00:00:00'); due.setHours(0, 0, 0, 0);
+  if (isNaN(due.getTime())) return '';
+  var diffDays = Math.round((due.getTime() - today.getTime()) / 86400000);
+  if (diffDays < 0) return 'overdue';
+  if (diffDays === 0) return 'due-today';
+  if (diffDays <= 2) return 'due-soon';
+  return 'scheduled';
 }
 
 // All distinct tags currently in the ticket log
@@ -208,6 +234,10 @@ function tlFilter(tickets) {
     else if (f === 'open-any') { if (t.status === 'resolved') return false; }
     else if (f === 'resolved') { if (t.status !== 'resolved') return false; }
     else if (f === 'aging') { if (t.status === 'resolved' || tlAgeDays(t.created) < 3) return false; }
+    else if (f === 'due') {
+      var cls = tlFollowUpClass(t);
+      if (!(cls === 'overdue' || cls === 'due-today' || cls === 'due-soon')) return false;
+    }
     else if (f.indexOf('tag:') === 0) {
       var wantedTag = f.slice(4);
       var tags = (t.tags || '').split(',').map(function(s) { return s.trim(); });
@@ -290,6 +320,12 @@ function tlRender() {
     var ageCls = tlAgeClass(t);
     var symptomShort = t.symptom || '<em style="color:var(--text-3)">no symptom yet</em>';
     var collegeShort = t.college || '<em style="color:var(--text-3)">college?</em>';
+    var fuCls = tlFollowUpClass(t);
+    var fuBadge = '';
+    if (fuCls) {
+      var fuLabel = fuCls === 'overdue' ? 'Overdue' : fuCls === 'due-today' ? 'Due today' : fuCls === 'due-soon' ? 'Soon' : t.followUp;
+      fuBadge = '<span class="tl-fu-badge tl-fu-' + fuCls + '">' + fuLabel + '</span>';
+    }
     var tagBadges = '';
     if (t.tags) {
       var tagList = t.tags.split(',').map(function(s) { return s.trim(); }).filter(function(s) { return s; });
@@ -302,7 +338,7 @@ function tlRender() {
     return '<div class="tl-row" data-id="' + t.id + '">' +
       '<div class="tl-summary" onclick="tlEdit(\'' + t.id + '\')">' +
         '<span class="tl-age ' + ageCls + '">' + tlAgeText(t.created) + '</span>' +
-        '<span class="tl-college">' + collegeShort + tagBadges + '</span>' +
+        '<span class="tl-college">' + collegeShort + fuBadge + tagBadges + '</span>' +
         '<span class="tl-sys">' + t.system + '</span>' +
         '<span class="tl-symptom">' + symptomShort + '</span>' +
         '<span class="tl-status tl-st-' + t.status + '">' + t.status + '</span>' +
@@ -326,6 +362,19 @@ function tlRender() {
             '<select onchange="tlUpdate(\'' + t.id + '\', \'vendor\', this.value)">' +
               TL_VENDORS.map(function(v) { return '<option value="' + v + '"' + (v === t.vendor ? ' selected' : '') + '>' + (v || '—') + '</option>'; }).join('') +
             '</select>' +
+          '</div>' +
+        '</div>' +
+        '<div class="tl-field-row tl-field-row-2col">' +
+          '<div class="tl-field"><label>Follow up date</label>' +
+            '<input type="date" value="' + tlEsc(t.followUp || '') + '" oninput="tlUpdate(\'' + t.id + '\', \'followUp\', this.value);tlRender()">' +
+          '</div>' +
+          '<div class="tl-field"><label>Quick set</label>' +
+            '<div class="tl-followup-quick">' +
+              '<button class="tl-fu-btn" onclick="tlSetFollowUpDays(\'' + t.id + '\', 1)">Tomorrow</button>' +
+              '<button class="tl-fu-btn" onclick="tlSetFollowUpDays(\'' + t.id + '\', 3)">+3d</button>' +
+              '<button class="tl-fu-btn" onclick="tlSetFollowUpDays(\'' + t.id + '\', 7)">+1w</button>' +
+              '<button class="tl-fu-btn" onclick="tlSetFollowUpDays(\'' + t.id + '\', null)">Clear</button>' +
+            '</div>' +
           '</div>' +
         '</div>' +
         '<div class="tl-field tl-field-full"><label>Symptom (one line — what the user reported)</label>' +

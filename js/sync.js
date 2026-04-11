@@ -14,23 +14,28 @@ window.addEventListener('storage', function(e) {
       if (typeof rpRender === 'function') rpRender();
       if (typeof todayRender === 'function') todayRender();
       if (typeof navBadgeUpdate === 'function') navBadgeUpdate();
+      if (typeof actRender === 'function') actRender();
     },
     'appanalyst.kb.v1': function() {
       if (typeof kbRender === 'function') kbRender();
       if (typeof todayRender === 'function') todayRender();
+      if (typeof actRender === 'function') actRender();
     },
     'appanalyst.colleges.overlay.v1': function() {
       if (typeof renderLookup === 'function' && typeof getFilteredColleges === 'function') {
         renderLookup(getFilteredColleges());
       }
       if (typeof todayRender === 'function') todayRender();
+      if (typeof actRender === 'function') actRender();
     },
     'appanalyst.onboarding.v1': function() {
       if (typeof obRender === 'function') obRender();
+      if (typeof actRender === 'function') actRender();
     },
     'appanalyst.outreach.v1': function() {
       if (typeof roRender === 'function') roRender();
       if (typeof todayRender === 'function') todayRender();
+      if (typeof actRender === 'function') actRender();
     },
     'appanalyst.barriers.state.v1': function() {
       // Barrier cards have their own update path — reload the page section would be jarring.

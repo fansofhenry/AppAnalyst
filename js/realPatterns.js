@@ -47,6 +47,20 @@ function rpWeekLabel(key) {
   return months[parseInt(parts[1]) - 1] + ' ' + parseInt(parts[2]);
 }
 
+function rpMedian(nums) {
+  if (!nums.length) return 0;
+  var sorted = nums.slice().sort(function(a, b) { return a - b; });
+  var mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
+}
+
+function rpHumanTime(hours) {
+  if (!hours || hours < 0) return '—';
+  if (hours < 1) return Math.round(hours * 60) + 'm';
+  if (hours < 24) return hours.toFixed(1).replace(/\.0$/, '') + 'h';
+  return (hours / 24).toFixed(1).replace(/\.0$/, '') + 'd';
+}
+
 function rpRender() {
   var container = document.getElementById('realPatternsBody');
   if (!container) return;
@@ -57,6 +71,26 @@ function rpRender() {
   var total = tickets.length;
   var open = tickets.filter(function(t) { return t.status !== 'resolved'; }).length;
   var resolved = total - open;
+
+  // Resolution time stats
+  var resolvedTickets = tickets.filter(function(t) { return t.status === 'resolved'; });
+  var resolutionHours = resolvedTickets.map(function(t) {
+    var diffMs = new Date(t.updated || t.created).getTime() - new Date(t.created).getTime();
+    return Math.max(0, diffMs / 3600000);
+  });
+  var medianHours = rpMedian(resolutionHours);
+  var meanHours = resolutionHours.length > 0
+    ? resolutionHours.reduce(function(a, b) { return a + b; }, 0) / resolutionHours.length
+    : 0;
+
+  // By system
+  var bySystemResolution = {};
+  resolvedTickets.forEach(function(t) {
+    var s = t.system || 'Unknown';
+    if (!bySystemResolution[s]) bySystemResolution[s] = [];
+    var h = Math.max(0, (new Date(t.updated || t.created).getTime() - new Date(t.created).getTime()) / 3600000);
+    bySystemResolution[s].push(h);
+  });
 
   if (total === 0) {
     container.innerHTML =
@@ -131,6 +165,40 @@ function rpRender() {
     '</div>';
   }).join('');
 
+  // Resolution time panel
+  var resolutionPanel = '';
+  if (resolvedTickets.length > 0) {
+    var sysRows = Object.keys(bySystemResolution).map(function(s) {
+      var hrs = bySystemResolution[s];
+      var med = rpMedian(hrs);
+      return { system: s, count: hrs.length, median: med };
+    }).sort(function(a, b) { return b.count - a.count; }).slice(0, 6);
+
+    resolutionPanel =
+      '<div class="rp-resolution">' +
+        '<div class="rp-resolution-head">' +
+          '<div class="rp-resolution-title">Resolution time</div>' +
+          '<span class="rp-resolution-help">Time from ticket created to last update on resolved tickets. Median is usually more honest than mean.</span>' +
+        '</div>' +
+        '<div class="rp-resolution-stats">' +
+          '<div class="rp-res-stat"><div class="rp-res-num">' + rpHumanTime(medianHours) + '</div><div class="rp-res-label">Median overall</div></div>' +
+          '<div class="rp-res-stat"><div class="rp-res-num">' + rpHumanTime(meanHours) + '</div><div class="rp-res-label">Mean overall</div></div>' +
+          '<div class="rp-res-stat"><div class="rp-res-num">' + resolvedTickets.length + '</div><div class="rp-res-label">Resolved tickets</div></div>' +
+        '</div>' +
+        (sysRows.length > 0
+          ? '<div class="rp-res-sys"><div class="rp-res-sys-label">Median by system</div>' +
+              sysRows.map(function(r) {
+                return '<div class="rp-res-sys-row">' +
+                  '<span class="rp-res-sys-name">' + rpEsc(r.system) + '</span>' +
+                  '<span class="rp-res-sys-count">' + r.count + '</span>' +
+                  '<span class="rp-res-sys-time">' + rpHumanTime(r.median) + '</span>' +
+                '</div>';
+              }).join('') +
+            '</div>'
+          : '') +
+      '</div>';
+  }
+
   container.innerHTML = strip +
     '<div class="rp-group-picker">' +
       '<span class="rp-group-label">Group by:</span>' + groupBtns +
@@ -139,7 +207,8 @@ function rpRender() {
     '<div class="rp-legend">' +
       '<span class="rp-legend-item"><span class="rp-legend-swatch rp-swatch-open"></span>Open</span>' +
       '<span class="rp-legend-item"><span class="rp-legend-swatch rp-swatch-all"></span>Total (includes resolved)</span>' +
-    '</div>';
+    '</div>' +
+    resolutionPanel;
 }
 
 window.addEventListener('focus', function() { if (rpGetView() === 'real') rpRender(); });
