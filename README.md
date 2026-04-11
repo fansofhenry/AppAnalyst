@@ -1,36 +1,58 @@
 # AppAnalyst — CVC-OEI Support Hub
 
-Personal working toolbench for an **Application Support Analyst** on the **CVC-OEI team at Foothill–De Anza CCD**. Originally built as an interview portfolio; Pass 1 of the post-hire rewrite turns the simulated demos into real day-to-day tools backed by localStorage. Everything stays in your browser — no backend, no PII, no sync.
+A personal working instrument built and maintained by **Henry Fan**, Application Support Analyst on the **CVC-OEI team at Foothill–De Anza CCD**, with mentorship from **Jeff Anderson**.
 
-## What This Is
+Live: **https://fansofhenry.github.io/AppAnalyst/**
 
-A single-page web app with working tools (localStorage-backed) alongside the existing reference sections. Runs on GitHub Pages and `file://`.
+This is an operational tool first and a public portfolio second. The Ticket Log, College Directory, and Runbook are the same ones used day-to-day during incident triage. Everything runs in the browser — no backend, no accounts, no network calls for the working tools.
 
-**Pass 1 real tools (this release):**
-- **College Directory** — All 115 California community colleges, FHDA pinned, SIS tagged from public portal evidence where determinable. Click any college to add personal notes, contacts per Exchange staff role (A&R, FA, Counseling, DSPS, General), and correct/confirm the SIS tier.
-- **Ticket Log** — Personal working queue: college, system, symptom, status, vendor escalation, notes, resolution. Age highlighting (yellow 3d+, red 7d+). Filter, search, CSV export, JSON backup/restore.
-- **Runbook / KB** — Markdown entries tagged by system (Banner, PeopleSoft, Exchange, Ethos, SuperGlue, CCCApply, Canvas, SSO) and by the 5 Exchange staff audiences. Copy-to-clipboard for ticket replies. JSON backup/restore.
+## What this is
 
-**Reference / interview-era sections (unchanged):** System Status, Architecture, Incident Diagnostics, Student Journey, Ticket Intelligence, Communications & Escalation, Outreach Planner, Exchange Data, AI Vision, Barrier Intelligence. These still use simulated data — Pass 2 will rewire them against real ticket-log data.
+A single-page web app that bundles three categories of content:
+
+1. **Working tools** — backed by `localStorage`, these are the things actually used on the job:
+   - **Ticket Log** — personal working queue (college, system, symptom, status, vendor escalation, tags, time tracking, sub-tasks, links, follow-up dates). Age highlighting, filter presets, CSV export, JSON backup/restore, undo.
+   - **College Directory** — all 115 California community colleges, FHDA pinned, SIS tier tagged from public portal evidence where determinable. Click any college to add notes, Exchange role contacts (A&R, FA, Counseling, DSPS, General), and correct the SIS tier.
+   - **Runbook / KB** — markdown entries tagged by system and audience, with copy-to-clipboard for ticket replies. Seeds from templates on first load; fully editable.
+   - **Today dashboard, global search, escalation helper, onboarding checklist, handoff packet generator, activity log, storage health.**
+2. **Reference sections** — architecture diagram, incident diagnostics, student journey, ticket intelligence, communications templates, outreach planner, Exchange metrics, AI vision, barrier intelligence. These use illustrative data seeded from public CVC documentation.
+3. **Role modes** — switch between Analyst / A&R / FA / Counselor / DSPS / Student views. The site foregrounds content relevant to each audience without hiding the rest.
+
+## What this is not
+
+Not a replacement for district-managed ticketing (Jira, ServiceNow, Salesforce). Not connected to any real CVC Exchange API. Not a multi-user system — there is no server and no sync. **Not a research paper or a principal-investigator project** — it's a working analyst's daily tool that also happens to be a useful interview / graduate-school artifact.
 
 ## Data boundary
 
-**Public hosting.** GitHub Pages serves the static site world-readable. Never commit real contact names, student IDs, ticket numbers, or internal URLs to this repo.
+**Public hosting.** GitHub Pages serves the site world-readable. Never commit real contact names, student IDs, ticket numbers, or internal URLs to this repo.
 
-**Personal data.** The Directory overlay, Ticket Log, and KB Runbook all persist in `localStorage` keys (`appanalyst.colleges.overlay.v1`, `appanalyst.tickets.v1`, `appanalyst.kb.v1`). That means:
-- Private to this browser on this machine. Clearing browser data erases it.
-- No sync across devices. Export JSON backups regularly.
-- Safe to use for working notes, but still avoid pasting PII — exported CSVs are only as private as where they end up.
+**Personal data.** All working tools persist in browser `localStorage` under the `appanalyst.*` namespace:
+
+| Key | Contents |
+|-----|----------|
+| `appanalyst.tickets.v1` | Personal ticket queue |
+| `appanalyst.kb.v1` | Runbook entries (markdown) |
+| `appanalyst.colleges.overlay.v1` | Personal notes, contacts, SIS overrides |
+| `appanalyst.onboarding.v1` | Checklist progress |
+| `appanalyst.incidents.v1` | Incident diagnostic state |
+| `appanalyst.theme.v1` / `appanalyst.role.v1` | UI preferences |
+
+Everything in that namespace:
+- Is private to this browser on this machine. Clearing browser data erases it.
+- Does not sync across devices. Export JSON backups regularly (`Backup` action in the footer).
+- Is safe to use for working notes, but still avoid pasting PII — exported CSVs and JSON files are only as private as where they end up.
+
+All writes flow through `js/storage.js`, which catches `QuotaExceededError` and surfaces a visible toast instead of silently dropping data. If you see "Storage full", export a backup and archive old tickets.
 
 ## SIS tagging — verify before relying
 
-The 115-college SIS tier list (Banner, PeopleSoft, Colleague) was seeded from public portal evidence (WebSMART, PASSPORT, eServices, MyCoast, etc.). Tags are marked **verified** only where a portal name or district IT page publicly documents the platform. Everything else is **unverified** or **unknown** and flagged visually.
+The 115-college SIS tier list (Banner Direct, Banner Ethos, Colleague Direct, Colleague Ethos, PeopleSoft) was seeded from public portal evidence (WebSMART, PASSPORT, eServices, MyCoast, etc.). Tags are marked **verified** only where a portal name or district IT page publicly documents the platform. Everything else is **unverified** or **unknown** and flagged visually in the directory.
 
 **Critical caveat:** public portal names don't distinguish **Banner Direct vs Banner Ethos** (or Colleague Direct vs Colleague Ethos). This is the key CVC integration distinction per the April 2025 CVC Exchange release notes — Ethos variants still require manual unit reconciliation. Confirm with district IT before using the tag for escalation decisions. Every entry is editable in-browser to capture corrections as you learn.
 
-## Running Locally
+## Running locally
 
-Open `index.html` in any modern browser. No server required — works via `file://` protocol.
+Open `index.html` in any modern browser. No server required — works via `file://` protocol as well as GitHub Pages.
 
 ```
 open index.html          # macOS
@@ -38,7 +60,9 @@ xdg-open index.html      # Linux
 start index.html         # Windows
 ```
 
-## Keyboard Shortcuts
+The service worker (`sw.js`) is only active over HTTPS or `localhost`; `file://` falls back to direct script loading.
+
+## Keyboard shortcuts
 
 | Key | Action |
 |-----|--------|
@@ -51,77 +75,65 @@ start index.html         # Windows
 | `T` | Back to top |
 | `Z` | Zoom presentation mode |
 | `A` | Accessibility (WCAG AAA) mode |
+| `Shift+D` | Toggle dark theme |
 
-## Project Structure
+## Project structure
 
 ```
 appanalyst/
-├── index.html              # HTML shell (~1,500 lines)
+├── index.html              # HTML shell + hub styles
+├── manifest.json           # PWA manifest
+├── sw.js                   # Service worker (cache-first)
 ├── css/
 │   ├── tokens.css          # Design tokens (colors, typography, spacing)
-│   ├── base.css            # Reset, body, layout primitives
+│   ├── base.css            # Reset, body, layout, focus-visible rings
 │   ├── components.css      # Tool frames, cards, badges, grids
-│   ├── sections.css        # Section-specific styles (incl. origin story)
-│   ├── nav.css             # Navigation, TOC, progress dots
-│   ├── animations.css      # @keyframes, transitions, entrance effects
+│   ├── sections.css        # Section-specific styles
+│   ├── nav.css             # Navigation, TOC, progress dots, skip link
+│   ├── animations.css      # @keyframes, honors prefers-reduced-motion
 │   ├── modes.css           # Zoom, theater, accessibility, live resolution
-│   └── responsive.css      # Media queries by breakpoint
+│   ├── responsive.css      # Media queries
+│   └── print.css           # Loaded via media="print" (non-blocking)
 ├── js/
-│   ├── data/               # Pure data arrays (no logic)
-│   │   ├── colleges.js     # allColleges, collegeDB (31 colleges)
-│   │   ├── flow.js         # flowData (4 architecture nodes)
-│   │   ├── tracer.js       # stages (5 diagnostic stages)
-│   │   ├── patterns.js     # chartData, categories, insights
-│   │   ├── kb.js           # kbTemplates (4 templates)
-│   │   ├── barriers.js     # barriers, lifecycle, matrix, equity, correlation
-│   │   ├── outreach.js     # calMonths (7 months, 17 triggers)
-│   │   ├── journey.js      # journeySteps (6 comparison steps)
-│   │   └── ai-vision.js    # aiData (4 categories, 16 cards)
-│   ├── app.js              # Entry point, observers, interaction tracking
-│   ├── monitor.js          # College health dashboard
-│   ├── tracer.js           # Incident diagnosis + live resolution
-│   ├── flow.js             # Architecture diagram
-│   ├── patterns.js         # Ticket pattern analyzer
-│   ├── kb.js               # Knowledge base builder
-│   ├── barriers.js         # Barrier cards, lifecycle, equity, correlator
-│   ├── outreach.js         # Outreach planner calendar
-│   ├── journey.js          # Student journey comparison
-│   ├── lookup.js           # College quick lookup
-│   ├── ai-vision.js        # AI vision tool
-│   ├── comms.js            # Message copy, escalation interaction
-│   ├── nav.js              # TOC, progress dots, scroll tracking
-│   ├── keyboard.js         # All keyboard shortcuts
-│   ├── modes.js            # Zoom, theater, accessibility toggles
-│   ├── animations.js       # Counters, ripple, bar animations
-│   ├── delight.js          # Joy layer — confetti, micro-interactions, discovery
-│   └── fhda.js             # FHDA district awareness (home badges, sorting)
-├── img/                    # Family photos for origin story (placeholder-ready)
+│   ├── storage.js          # Safe localStorage wrapper (quota + corrupt JSON guards)
+│   ├── app.js              # Entry point, scroll observers, toast queue
+│   ├── data/               # Pure data arrays (colleges, KB seeds, etc.)
+│   ├── tickets.js          # Ticket Log (largest module)
+│   ├── lookup.js           # College Directory
+│   ├── kb.js               # Knowledge base builder + markdown renderer
+│   ├── backup.js           # Export/restore/clear across all stores
+│   ├── real*.js            # Real-data versions of the reference tools
+│   └── ...                 # Per-feature modules, one file each
 └── docs/
-    └── architecture.md     # System architecture and extension guide
+    └── architecture.md     # Component documentation and extension guide
 ```
 
-## Architecture
+## Architecture decisions
+
+- **Classic `<script>` tags** (not ES modules) — `file://` CORS blocks ES modules, and this codebase needs to run offline without a build step.
+- **Data as JS globals** — `fetch()` fails on `file://`; data loaded via script tags.
+- **Safe localStorage wrapper** (`js/storage.js`) — every write goes through `safeStorage.set`, which catches `QuotaExceededError`, Safari partitioned-storage failures, and corrupt JSON. Failures surface as a toast, not silent data loss.
+- **CSS organized by concern** — 9 files mapping to architectural responsibilities. Tokens are the single source of truth; last-defined value wins.
+- **PWA** — service worker precaches all static assets for offline use. Cache version bumps on every asset change.
 
 See [docs/architecture.md](docs/architecture.md) for detailed component documentation, data flow, and extension guide.
 
-**Key decisions:**
-- **Classic `<script>` tags** (not ES modules) — `file://` CORS blocks ES modules
-- **Data as JS globals** — `fetch()` fails on `file://`; data loaded via script tags
-- **Inline `onclick` handlers** — pragmatic at this scale
-- **CSS organized by concern** — 8 files mapping to architectural responsibilities
-
-## FHDA District Awareness
+## FHDA district awareness
 
 Foothill and De Anza colleges are highlighted throughout: pinned to the top of lookup results, marked with home badges in the monitor, and health status prominently displayed. This reflects the role's focus on the FHDA district.
 
-## Equity Framing
+## Equity framing
 
-The Exchange is equity infrastructure — when it breaks, students at smaller colleges lose access to courses that larger colleges offer directly. The barrier intelligence section scores each friction point by impact on first-generation, CCPG-eligible, and DSPS students.
+The Exchange is equity infrastructure — when it breaks, students at smaller colleges lose access to courses that larger colleges offer directly. The barrier intelligence section scores each friction point by estimated impact on first-generation, CCPG-eligible, and DSPS students. These scores are rough signals for prioritization, not measured outcomes; they're meant to make the equity dimension visible during triage rather than to claim causal evidence.
 
-## Data Sources
+## Data sources (illustrative sections)
 
-All data is simulated — no real student records. Built with:
 - [CVC Exchange course search](https://search.cvc.edu) (public)
 - Wheelhouse Center enrollment research (Oct 2025)
 - CVC documentation and Spring 2025 FA Dashboard rollout
-- CISOA 2026 themes for AI vision section
+- April 2025 CVC Exchange release notes (Ethos reconciliation)
+- CISOA 2026 themes for the AI vision section
+
+## License
+
+Source is MIT-licensed. Seeded reference content (SIS tier tags, KB templates, college metadata) is drawn from public sources; contributions welcome to correct or extend tags via the in-browser editor or a pull request.

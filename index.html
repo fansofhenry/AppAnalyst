@@ -32,6 +32,9 @@
   } catch (e) {}
 })();
 </script>
+<!-- Open a TCP+TLS connection to Google's font CDNs before the CSS request lands. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <!-- Stylesheets -->
@@ -43,7 +46,8 @@
 <link rel="stylesheet" href="css/animations.css">
 <link rel="stylesheet" href="css/modes.css">
 <link rel="stylesheet" href="css/responsive.css">
-<link rel="stylesheet" href="css/print.css">
+<!-- print.css downloads non-blocking and only applies when printing. -->
+<link rel="stylesheet" href="css/print.css" media="print">
 
 <style>
 /* ── Hub Dashboard Overrides ── */
@@ -234,7 +238,7 @@
   border-top: 1px solid var(--border);
 }
 .hub-footer-inner {
-  max-width: 700px;
+  max-width: 820px;
   margin: 0 auto;
   text-align: center;
 }
@@ -248,15 +252,49 @@
 .hub-footer-team {
   font-size: var(--fs-sm);
   color: var(--text-2);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   line-height: 1.7;
+}
+.hub-footer-about {
+  max-width: 680px;
+  margin: 0 auto 2rem;
+  text-align: left;
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+  line-height: 1.7;
+}
+.hub-footer-about p {
+  margin: 0 0 .85rem;
+}
+.hub-footer-about p:last-child { margin-bottom: 0; }
+.hub-footer-about strong { color: var(--text); }
+.hub-footer-boundary {
+  padding: .75rem .9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--primary);
+  border-radius: 6px;
+  font-size: .72rem;
+  color: var(--text-3);
+}
+.hub-footer-boundary strong { color: var(--primary); }
+.hub-footer-boundary code {
+  font-family: var(--mono);
+  font-size: .68rem;
+  padding: 1px 5px;
+  background: var(--bg-2);
+  border-radius: 4px;
+  color: var(--text-2);
 }
 .hub-footer-cols {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   text-align: left;
   margin-bottom: 1.5rem;
+}
+@media (max-width: 720px) {
+  .hub-footer-cols { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 500px) {
   .hub-footer-cols { grid-template-columns: 1fr; }
@@ -373,7 +411,7 @@
   </div>
 </header>
 
-<main id="main-content">
+<main id="main-content" role="main" tabindex="-1">
 
 <!-- ═══ TODAY DASHBOARD ═══ -->
 <section class="sec sec-today fu" id="today" role="region" aria-label="Today dashboard">
@@ -1284,6 +1322,12 @@ function showBarrierView(view,btn){
     <div class="hub-footer-inner">
       <div class="hub-footer-brand">AppAnalyst &middot; CVC-OEI Support Hub</div>
       <div class="hub-footer-team">Application Support &middot; Foothill&ndash;De Anza Community College District</div>
+
+      <div class="hub-footer-about">
+        <p>A working instrument built and maintained by <strong>Henry Fan</strong>, Application Support Analyst on the CVC-OEI team at Foothill&ndash;De Anza CCD, with mentorship from <strong>Jeff Anderson</strong>. This is an operational tool first and a public portfolio second &mdash; the Ticket Log, College Directory, and Runbook are the same ones used day-to-day during incident triage.</p>
+        <p class="hub-footer-boundary"><strong>Data boundary.</strong> Your tickets, college notes, and KB entries live in this browser's <code>localStorage</code> and never leave the device. The reference sections (System Status, Intelligence, AI Vision, Barriers) use illustrative data from public CVC documentation &mdash; no real student records. Export JSON backups regularly; clearing browser data erases local state.</p>
+      </div>
+
       <div class="hub-footer-cols">
         <div class="hub-footer-col">
           <div class="hub-footer-col-label">External Tools</div>
@@ -1299,9 +1343,18 @@ function showBarrierView(view,btn){
           <a href="#" onclick="event.preventDefault();toggleCvcGuide()">CVC Companion Guide</a>
           <a href="#" onclick="event.preventDefault();document.getElementById('kbOverlay').classList.add('kb-show')">Keyboard Shortcuts (?)</a>
         </div>
+        <div class="hub-footer-col">
+          <div class="hub-footer-col-label">Source &amp; Repo</div>
+          <a href="https://github.com/fansofhenry/AppAnalyst" target="_blank" rel="noopener">GitHub Repository</a>
+          <a href="https://github.com/fansofhenry/AppAnalyst/blob/main/README.md" target="_blank" rel="noopener">README &amp; Architecture</a>
+          <a href="https://fansofhenry.github.io/research-lab/" target="_blank" rel="noopener">Research Lab</a>
+          <a href="https://fansofhenry.github.io/" target="_blank" rel="noopener">fansofhenry.github.io</a>
+        </div>
       </div>
+
       <div class="hub-footer-meta">
-        All data is simulated &mdash; no real student records. Built with publicly available CVC documentation, the live CVC Exchange course search, and Wheelhouse Center enrollment data.<br>Press <strong>?</strong> for keyboard shortcuts &middot; <strong>Z</strong> for zoom mode &middot; <strong>A</strong> for high-contrast accessibility mode
+        Seeded from publicly available CVC documentation, the live CVC Exchange course search, and Wheelhouse Center enrollment research (Oct 2025). SIS tier tags are <em>unverified</em> where public portal evidence is ambiguous &mdash; confirm with district IT before relying on them for escalation decisions.<br>
+        Press <strong>?</strong> for keyboard shortcuts &middot; <strong>Z</strong> for zoom &middot; <strong>A</strong> for high-contrast mode
       </div>
     </div>
   </div>
@@ -1576,6 +1629,7 @@ document.addEventListener('keydown', function(e) {
 <script src="js/data/ai-vision.js"></script>
 
 <!-- Core -->
+<script src="js/storage.js"></script>
 <script src="js/app.js"></script>
 <script src="js/journey.js"></script>
 <script src="js/fhda.js"></script>
