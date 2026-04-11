@@ -11,6 +11,66 @@ var TL_VENDORS = ['', 'Ellucian', 'CCCTC', 'Internal (FHDA ETS)', 'College IT', 
 var TL_FILTER = 'open-any';
 var TL_SEARCH = '';
 var TL_SELECTED = {};  // id -> true for bulk-selected tickets
+var TL_PRESETS_KEY = 'appanalyst.tickets.filterPresets.v1';
+
+// ── Filter presets ──
+function tlPresetsLoad() {
+  try { return JSON.parse(localStorage.getItem(TL_PRESETS_KEY) || '[]'); }
+  catch (e) { return []; }
+}
+function tlPresetsSave(list) { localStorage.setItem(TL_PRESETS_KEY, JSON.stringify(list)); }
+
+function tlPresetSaveCurrent() {
+  var name = prompt('Save current filter + search as preset. Name:');
+  if (!name || !name.trim()) return;
+  var presets = tlPresetsLoad();
+  presets.push({
+    id: 'TFP' + Date.now().toString(36),
+    name: name.trim(),
+    filter: TL_FILTER,
+    search: TL_SEARCH,
+    created: new Date().toISOString()
+  });
+  tlPresetsSave(presets);
+  toast('Preset saved: ' + name.trim());
+  tlRender();
+}
+
+function tlPresetApply(id) {
+  var preset = tlPresetsLoad().find(function(p) { return p.id === id; });
+  if (!preset) return;
+  TL_FILTER = preset.filter || 'open-any';
+  TL_SEARCH = preset.search || '';
+  // Update filter button UI
+  document.querySelectorAll('.tl-filter').forEach(function(b) { b.classList.remove('tl-f-active'); });
+  // Try to find matching filter button
+  document.querySelectorAll('.tl-filter').forEach(function(b) {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').indexOf("'" + preset.filter + "'") >= 0) {
+      b.classList.add('tl-f-active');
+    }
+  });
+  // Update search input
+  var input = document.querySelector('#ticketLog .tl-search');
+  if (input) input.value = TL_SEARCH;
+  tlRender();
+  toast('Applied preset: ' + preset.name);
+}
+
+function tlPresetDelete(id) {
+  var all = tlPresetsLoad();
+  var deleted = all.find(function(p) { return p.id === id; });
+  if (!deleted) return;
+  tlPresetsSave(all.filter(function(p) { return p.id !== id; }));
+  tlRender();
+  if (typeof undoPush === 'function') {
+    undoPush(function() {
+      var cur = tlPresetsLoad();
+      cur.push(deleted);
+      tlPresetsSave(cur);
+      tlRender();
+    }, 'filter preset');
+  }
+}
 
 // ── Bulk selection ───────────────────────────────────
 function tlSelectToggle(id) {
@@ -276,6 +336,102 @@ function tlNewBlank() {
     resolution: ''
   };
 }
+
+// ── Time tracking ──
+// Each ticket stores:
+//   timeLogged: total accumulated seconds
+//   timerStart: ISO timestamp if currently running, null otherwise
+// Only one ticket can be actively timing at a time.
+var TL_ACTIVE_TIMER_ID = null;
+
+function tlTimerFormat(seconds) {
+  if (!seconds || seconds < 0) return '0m';
+  var h = Math.floor(seconds / 3600);
+  var m = Math.floor((seconds % 3600) / 60);
+  var s = seconds % 60;
+  if (h > 0) return h + 'h ' + m + 'm';
+  if (m > 0) return m + 'm' + (s > 0 && h === 0 ? ' ' + s + 's' : '');
+  return s + 's';
+}
+
+function tlTimerCurrent(t) {
+  var accumulated = t.timeLogged || 0;
+  if (t.timerStart) {
+    var delta = Math.floor((Date.now() - new Date(t.timerStart).getTime()) / 1000);
+    accumulated += Math.max(0, delta);
+  }
+  return accumulated;
+}
+
+function tlTimerStart(ticketId) {
+  var list = tlLoad();
+  // Stop any other running timer first
+  list.forEach(function(x) {
+    if (x.timerStart && x.id !== ticketId) {
+      var delta = Math.floor((Date.now() - new Date(x.timerStart).getTime()) / 1000);
+      x.timeLogged = (x.timeLogged || 0) + Math.max(0, delta);
+      x.timerStart = null;
+      x.updated = new Date().toISOString();
+    }
+  });
+  var t = list.find(function(x) { return x.id === ticketId; });
+  if (!t) return;
+  t.timerStart = new Date().toISOString();
+  t.updated = new Date().toISOString();
+  tlSave(list);
+  TL_ACTIVE_TIMER_ID = ticketId;
+  tlRender();
+  tlTimerTick();
+}
+
+function tlTimerStop(ticketId) {
+  var list = tlLoad();
+  var t = list.find(function(x) { return x.id === ticketId; });
+  if (!t || !t.timerStart) return;
+  var delta = Math.floor((Date.now() - new Date(t.timerStart).getTime()) / 1000);
+  t.timeLogged = (t.timeLogged || 0) + Math.max(0, delta);
+  t.timerStart = null;
+  t.updated = new Date().toISOString();
+  tlSave(list);
+  if (TL_ACTIVE_TIMER_ID === ticketId) TL_ACTIVE_TIMER_ID = null;
+  tlRender();
+}
+
+function tlTimerReset(ticketId) {
+  if (!confirm('Reset the logged time on this ticket to zero?')) return;
+  var list = tlLoad();
+  var t = list.find(function(x) { return x.id === ticketId; });
+  if (!t) return;
+  t.timeLogged = 0;
+  if (t.timerStart) t.timerStart = null;
+  t.updated = new Date().toISOString();
+  tlSave(list);
+  tlRender();
+}
+
+// Live tick: while any timer is running, update the display every 10 seconds
+function tlTimerTick() {
+  var list = tlLoad();
+  var running = list.find(function(t) { return t.timerStart; });
+  if (!running) return;
+  var el = document.querySelector('.tl-row[data-id="' + running.id + '"] .tl-timer-display');
+  if (el) el.textContent = tlTimerFormat(tlTimerCurrent(running));
+  setTimeout(tlTimerTick, 10000);
+}
+
+// Re-bind on page focus (to resume the tick)
+window.addEventListener('focus', function() {
+  var list = tlLoad();
+  var running = list.find(function(t) { return t.timerStart; });
+  if (running) tlTimerTick();
+});
+
+// On load, kick off the tick if a timer is already running
+setTimeout(function() {
+  var list = tlLoad();
+  var running = list.find(function(t) { return t.timerStart; });
+  if (running) tlTimerTick();
+}, 1000);
 
 // ── Ticket linking ──
 function tlLinkAdd(ticketId) {
@@ -573,6 +729,22 @@ function tlRender() {
     }).join('');
   }
 
+  // Filter presets chips
+  var presetsBar = document.getElementById('tlPresetsBar');
+  if (presetsBar) {
+    var presets = tlPresetsLoad();
+    var html = '<button class="tl-preset-save" onclick="tlPresetSaveCurrent()" title="Save current filter + search as a preset">+ Save current</button>';
+    if (presets.length > 0) {
+      html += presets.map(function(p) {
+        return '<span class="tl-preset-chip">' +
+          '<button class="tl-preset-apply" onclick="tlPresetApply(\'' + p.id + '\')">' + tlEsc(p.name) + '</button>' +
+          '<button class="tl-preset-del" onclick="tlPresetDelete(\'' + p.id + '\')" title="Delete preset">&times;</button>' +
+        '</span>';
+      }).join('');
+    }
+    presetsBar.innerHTML = html;
+  }
+
   // Render tag chips above the list
   var tagChipRow = '';
   var allTags = tlAllTags();
@@ -616,6 +788,12 @@ function tlRender() {
       var doneCount = t.subtasks.filter(function(s) { return s.done; }).length;
       subtaskBadge = '<span class="tl-subtask-count" title="' + doneCount + ' of ' + t.subtasks.length + ' sub-tasks done">' + doneCount + '/' + t.subtasks.length + '</span>';
     }
+    var timerBadge = '';
+    if (t.timerStart) {
+      timerBadge = '<span class="tl-timer-badge tl-timer-running" title="Timer running">\u25CF ' + tlTimerFormat(tlTimerCurrent(t)) + '</span>';
+    } else if (t.timeLogged && t.timeLogged > 0) {
+      timerBadge = '<span class="tl-timer-badge" title="Total time logged">' + tlTimerFormat(t.timeLogged) + '</span>';
+    }
     if (fuCls) {
       var fuLabel = fuCls === 'overdue' ? 'Overdue' : fuCls === 'due-today' ? 'Due today' : fuCls === 'due-soon' ? 'Soon' : t.followUp;
       fuBadge = '<span class="tl-fu-badge tl-fu-' + fuCls + '">' + fuLabel + '</span>';
@@ -633,7 +811,7 @@ function tlRender() {
       '<div class="tl-summary">' +
         '<input type="checkbox" class="tl-select-box"' + (TL_SELECTED[t.id] ? ' checked' : '') + ' onclick="event.stopPropagation();tlSelectToggle(\'' + t.id + '\')" onchange="event.stopPropagation()" title="Select for bulk action">' +
         '<span class="tl-age ' + ageCls + '" onclick="tlEdit(\'' + t.id + '\')">' + tlAgeText(t.created) + '</span>' +
-        '<span class="tl-college" onclick="tlEdit(\'' + t.id + '\')">' + collegeShort + fuBadge + subtaskBadge + tagBadges + '</span>' +
+        '<span class="tl-college" onclick="tlEdit(\'' + t.id + '\')">' + collegeShort + fuBadge + subtaskBadge + timerBadge + tagBadges + '</span>' +
         '<span class="tl-sys" onclick="tlEdit(\'' + t.id + '\')">' + t.system + '</span>' +
         '<span class="tl-symptom" onclick="tlEdit(\'' + t.id + '\')">' + symptomShort + '</span>' +
         '<span class="tl-status tl-st-' + t.status + '" onclick="tlEdit(\'' + t.id + '\')">' + t.status + '</span>' +
@@ -677,6 +855,16 @@ function tlRender() {
         '</div>' +
         '<div class="tl-field tl-field-full"><label>Tags (comma-separated, autocomplete)</label>' +
           '<input type="text" list="tlTagList" value="' + tlEsc(t.tags || '') + '" placeholder="e.g. ethos, fa-delay, needs-kb" oninput="tlUpdate(\'' + t.id + '\', \'tags\', this.value)">' +
+        '</div>' +
+        '<div class="tl-field tl-field-full"><label>Time tracking</label>' +
+          '<div class="tl-timer-row">' +
+            '<span class="tl-timer-display">' + tlTimerFormat(tlTimerCurrent(t)) + '</span>' +
+            (t.timerStart
+              ? '<button class="tl-timer-btn tl-timer-stop" onclick="tlTimerStop(\'' + t.id + '\')">\u25A0 Pause</button>'
+              : '<button class="tl-timer-btn tl-timer-start" onclick="tlTimerStart(\'' + t.id + '\')">\u25B6 Start</button>'
+            ) +
+            (t.timeLogged > 0 || t.timerStart ? '<button class="tl-timer-btn tl-timer-reset" onclick="tlTimerReset(\'' + t.id + '\')">Reset</button>' : '') +
+          '</div>' +
         '</div>' +
         '<div class="tl-field tl-field-full"><label>Sub-tasks</label>' +
           '<div class="tl-subtasks">' +

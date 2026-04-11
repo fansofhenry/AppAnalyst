@@ -1,8 +1,193 @@
 // ═══════════════════════════════════════════════════════
 // FOR A&R / FA / DSPS — Role-specific workflow sections
 // mirroring the Counselor pattern. Each section has
-// scenario cards grouped by category.
+// scenario cards grouped by category. EN + draft ES.
 // ═══════════════════════════════════════════════════════
+
+var ROLES_LANG_KEY = 'appanalyst.roles.lang.v1';
+
+function rolesGetLang() {
+  try { return localStorage.getItem(ROLES_LANG_KEY) || 'en'; }
+  catch (e) { return 'en'; }
+}
+function rolesSetLang(lang) {
+  try { localStorage.setItem(ROLES_LANG_KEY, lang); } catch (e) {}
+  forARRender(); forFARender(); forDSPSRender();
+}
+
+var AR_SCENARIOS_ES = [
+  {
+    category: 'Registros de inscripci\u00f3n entrantes',
+    trigger: 'Lleg\u00f3 una inscripci\u00f3n del Exchange pero el estudiante no est\u00e1 en nuestro SIS',
+    first: 'Revisa si tu SIS aplica los registros del Exchange en tiempo real, por lotes, o manual. Los niveles Banner Ethos y Colleague Ethos son m\u00e1s propensos a esto.',
+    steps: [
+      'Busca al estudiante por CCCID en tu SIS para confirmar cualquier registro previo',
+      'Revisa el Exchange Admin Dashboard para el registro autoritativo y su estado',
+      'Si tu colegio est\u00e1 en Banner/Colleague Ethos: la inscripci\u00f3n probablemente necesita registro manual hoy',
+      'Si est\u00e1 en Banner Direct / PeopleSoft: la inscripci\u00f3n deber\u00eda haberse registrado autom\u00e1ticamente \u2014 escala a IT',
+      'Registra manualmente si es necesario y marca el ticket para que tu Analista de Soporte rastree el patr\u00f3n'
+    ],
+    escalate: 'Tu equipo ETS / IT \u2192 si la brecha es repetida o afecta m\u00e1s de un estudiante',
+    say: 'El Exchange tiene el registro. Nuestro SIS solo necesita un registro manual por la configuraci\u00f3n de nuestra integraci\u00f3n. Lo manejar\u00e9 hoy.'
+  },
+  {
+    category: 'Registros de inscripci\u00f3n entrantes',
+    trigger: 'Un estudiante aparece en nuestro listado con bandera "CVC Exchange" pero no reconozco el curso',
+    first: 'Esa bandera significa que el estudiante est\u00e1 inscrito en nuestro colegio a trav\u00e9s del Exchange como su colegio que ensea. Confirma que esto es intencional.',
+    steps: [
+      'Busca el c\u00f3digo/secci\u00f3n del curso en tu horario \u2014 confirma que existe y est\u00e1 disponible para estudiantes del Exchange',
+      'Revisa el colegio principal del estudiante (mostrado en el registro) para verificar que est\u00e1n leg\u00edtimamente inscritos ah\u00ed',
+      'Confirma que el Acuerdo de Consorcio est\u00e1 en archivo si hay ayuda financiera involucrada',
+      'No se necesita acci\u00f3n a menos que haya una discrepancia \u2014 esta es una inscripci\u00f3n normal del Exchange'
+    ],
+    escalate: 'T\u00edpicamente no se necesita',
+    say: 'Este es un estudiante de [colegio principal] tomando nuestro curso a trav\u00e9s del CVC Exchange. Su colegio principal maneja su ayuda y registros; nosotros solo ensea\u0301amos el curso.'
+  },
+  {
+    category: 'Reconciliaci\u00f3n',
+    trigger: 'Nuestra reconciliaci\u00f3n mensual muestra que Exchange y SIS no coinciden',
+    first: 'Usa el Reconciliation Helper en esta herramienta o exporta ambos listados a CSV y comp\u00e1ralos.',
+    steps: [
+      'Exporta el listado del Exchange Admin Dashboard para el periodo + Exporta tu listado del SIS filtrado por "CVC Exchange"',
+      'Pega ambos en el Reconciliation Helper (&rarr; Secci\u00f3n \u21C4 Reconcile)',
+      'Investiga cada discrepancia marcada individualmente \u2014 faltante, unidades incorrectas, periodo incorrecto',
+      'Registra correcciones manualmente en SIS o escala al proveedor si el patr\u00f3n sugiere un problema de integraci\u00f3n',
+      'Documenta el n\u00famero de brechas por periodo en una entrada KB para tu gerente'
+    ],
+    escalate: 'Tu equipo de IT si >5% de los registros no coinciden',
+    say: 'Tenemos una brecha de reconciliaci\u00f3n de N registros este mes. La mayor\u00eda son retrasos de registro manual, no p\u00e9rdida de datos. Aqu\u00ed est\u00e1 la lista.'
+  },
+  {
+    category: 'Identidad',
+    trigger: 'Dos estudiantes tienen el mismo nombre y no estoy seguro cu\u00e1l es del Exchange',
+    first: 'El CCCID es el identificador autoritativo. Nunca conf\u00edes solo en el nombre.',
+    steps: [
+      'Obt\u00e9n el CCCID del registro del Exchange Admin Dashboard',
+      'Busca en SIS por CCCID, no por nombre o fecha de nacimiento',
+      'Si tu SIS almacena el CCCID como ID alternativo, usa ese campo para la b\u00fasqueda',
+      'Si no, considera pedirle a IT que agregue el almacenamiento de CCCID como solicitud permanente'
+    ],
+    escalate: 'Tu equipo de IT para problemas de mapeo de identidad',
+    say: 'El CCCID es el identificador \u00fanico en el que nos basamos para los estudiantes del Exchange. Dejame obtenerlo y busc\u00e1rtelos.'
+  }
+];
+
+var FA_SCENARIOS_ES = [
+  {
+    category: 'Acuerdos de Consorcio',
+    trigger: 'Un estudiante quiere ayuda financiera para un curso en otro CCC por el Exchange',
+    first: 'Necesitan un Acuerdo de Consorcio en archivo ANTES del deadline para agregar clases. Empieza hoy.',
+    steps: [
+      'Confirma que el estudiante tiene un archivo de FA activo en tu (principal) colegio para este periodo',
+      'Verifica el conteo de unidades y cr\u00e9ditos del curso del Exchange \u2014 \u00bfse agregar\u00e1n al c\u00e1lculo de carga de FA?',
+      'Redacta el Acuerdo de Consorcio con el colegio que ensea (usa tu formulario est\u00e1ndar)',
+      'Obt\u00e9n la firma del estudiante, env\u00eda al FA del colegio que ensea, archiva una copia',
+      'Actualiza la carga de FA del estudiante y vuelve a ejecutar los c\u00e1lculos de Pell/CCPG',
+      'Confirma que el calendario de desembolso refleja las unidades del Exchange'
+    ],
+    escalate: 'Director(a) de FA \u2192 si el acuerdo es rechazado o demorado m\u00e1s all\u00e1 del deadline',
+    say: 'Absolutamente podemos usar tu ayuda financiera para este curso. Requiere un acuerdo \u00fanico entre nuestras dos oficinas de FA. Lo empezar\u00e9 hoy \u2014 lo necesitamos en archivo para [fecha l\u00edmite].'
+  },
+  {
+    category: 'CCPG / exenciones',
+    trigger: 'La exenci\u00f3n CCPG del estudiante no se transfiri\u00f3 al curso del Exchange',
+    first: 'CCPG se otorga en el colegio principal y deber\u00eda aplicarse. Si no lo hizo, puede que el Acuerdo de Consorcio no se haya configurado.',
+    steps: [
+      'Confirma la elegibilidad CCPG activa en tu colegio principal para este periodo',
+      'Revisa si existe un Acuerdo de Consorcio para este curso espec\u00edfico del Exchange',
+      'Si no hay acuerdo: config\u00faralo inmediatamente (ver flujo de arriba)',
+      'Si el acuerdo existe: contacta al FA del colegio que ensea y pideles aplicar la exenci\u00f3n basada en el acuerdo',
+      'Si ya pas\u00f3 el deadline y el estudiante pag\u00f3 de su bolsillo, investiga opciones de reembolso'
+    ],
+    escalate: 'Director(a) de FA para procesamiento de reembolso',
+    say: 'Tu exenci\u00f3n de cuota es v\u00e1lida. No se aplic\u00f3 autom\u00e1ticamente por c\u00f3mo fluyen los cursos del Exchange entre colegios. Dejame asegurarme de que tu Acuerdo de Consorcio est\u00e9 configurado correctamente para que esto se resuelva hoy.'
+  },
+  {
+    category: 'Desembolso',
+    trigger: 'El desembolso de Pell se ejecut\u00f3 pero el estudiante dice que falta',
+    first: 'Causa probable: las unidades del curso del Exchange no se incluyeron en el c\u00e1lculo de carga al momento del desembolso.',
+    steps: [
+      'Revisa la carga de inscripci\u00f3n del estudiante TAL COMO SE CALCUL\u00d3 en la \u00faltima ejecuci\u00f3n de desembolso',
+      'Compara con la carga actual incluyendo las unidades del Exchange',
+      'Verifica que el Acuerdo de Consorcio fue archivado y las unidades reportadas a tu sistema de FA a tiempo',
+      'Si la diferencia es real, presenta una solicitud de desembolso suplementario',
+      'Documenta la brecha de tiempo para futuros periodos \u2014 patr\u00f3n com\u00fan en el census'
+    ],
+    escalate: 'Director(a) de FA para desembolsos suplementarios',
+    say: 'Las unidades de tu curso del Exchange fueron agregadas a tu carga, pero despu\u00e9s de que se ejecut\u00f3 el \u00faltimo desembolso. Procesaremos un desembolso suplementario para cubrir la diferencia.'
+  },
+  {
+    category: 'R2T4',
+    trigger: 'Estudiante se retir\u00f3 de un curso del Exchange a mitad de periodo; las reglas R2T4 no son claras',
+    first: 'R2T4 es calculado por el colegio principal basado en el total de unidades inscritas (incluyendo Exchange).',
+    steps: [
+      'Obt\u00e9n la fecha de retiro del registro del Exchange o del colegio que ensea',
+      'Recalcula el total de unidades inscritas despu\u00e9s del retiro',
+      'Ejecuta R2T4 en tu colegio principal usando el nuevo conteo de unidades',
+      'Si hay ayuda que devolver, proc\u00e9sala por tu flujo est\u00e1ndar de R2T4',
+      'Coordina con el colegio que ensea sobre cualquier responsabilidad de cuota restante'
+    ],
+    escalate: 'Director(a) de FA para preguntas de R2T4',
+    say: 'Porque este fue un curso del Exchange, R2T4 se calcula en nuestro lado \u2014 tu colegio principal \u2014 usando el conteo reducido total de unidades. Dejame guiarte por c\u00f3mo se ve eso.'
+  }
+];
+
+var DSPS_SCENARIOS_ES = [
+  {
+    category: 'Acomodaciones entre colegios',
+    trigger: 'Estudiante del Exchange necesita sus acomodaciones en el colegio que ensea',
+    first: 'Las acomodaciones no se transfieren autom\u00e1ticamente. Conecta al estudiante con DSPS del colegio que ensea inmediatamente.',
+    steps: [
+      'Confirma que el estudiante est\u00e1 activo con DSPS en tu colegio (principal)',
+      'Prepara una copia de su carta de acomodaciones \u2014 el estudiante debe consentir compartir',
+      'Ayuda al estudiante a enviar un correo a DSPS del colegio que ensea: presentarse, decir que son estudiantes CVC Exchange de [colegio principal], solicitar configuraci\u00f3n de acomodaciones',
+      'Opcionalmente inicia contacto coordinador-a-coordinador si el estudiante no ha podido alcanzar DSPS del colegio que ensea',
+      'Haz seguimiento con el estudiante despu\u00e9s de 48 horas para confirmar que el colegio que ensea responde'
+    ],
+    escalate: 'Tu Coordinador(a) DSPS si el colegio que ensea no responde en 48 horas',
+    say: 'Tus acomodaciones son v\u00e1lidas. Cada colegio las maneja a trav\u00e9s de su propia oficina DSPS, as\u00ed que necesitamos involucrar al colegio que ensea hoy. As\u00ed es c\u00f3mo lo haremos juntos.'
+  },
+  {
+    category: 'Formatos alternativos',
+    trigger: 'Estudiante necesita materiales en formato alternativo para un curso del Exchange',
+    first: 'La responsabilidad del formato alternativo recae en el colegio que ensea el curso.',
+    steps: [
+      'El estudiante contacta DSPS del colegio que ensea para materiales alternativos',
+      'Si el colegio que ensea dice que no o es lento, escala coordinador-a-coordinador',
+      'DSPS del colegio principal puede proporcionar apoyo general (entrenamiento de tecnolog\u00eda asistiva, estrategias) pero el formato alternativo pertenece al colegio que ensea',
+      'Documenta la cronolog\u00eda en caso de que haya una pregunta sobre acceso equitativo'
+    ],
+    escalate: 'Coordinador-a-coordinador, luego cumplimiento 504 / ADA si no se resuelve',
+    say: 'Los materiales en formato alternativo para cursos del Exchange vienen del colegio que ensea el curso. Aseguremonos de que su oficina DSPS sepa lo que necesitas, y te respaldo si hay alg\u00fan retraso.'
+  },
+  {
+    category: 'Acomodaciones de examen',
+    trigger: 'Estudiante del Exchange necesita tiempo extendido para un examen de Canvas en el colegio que ensea',
+    first: 'La configuraci\u00f3n de Canvas vive en el colegio que ensea. El instructor debe agregar la extensi\u00f3n de tiempo.',
+    steps: [
+      'Estudiante contacta DSPS del colegio que ensea con su carta de acomodaciones',
+      'DSPS del colegio que ensea notifica al instructor',
+      'El instructor establece la extensi\u00f3n de tiempo en el examen en Canvas en el colegio que ensea',
+      'DSPS del colegio principal puede ayudar con la abogac\u00eda si hay retraso, pero no tiene acceso a Canvas del colegio que ensea'
+    ],
+    escalate: 'DSPS del colegio que ensea \u2192 instructor \u2192 decano de divisi\u00f3n si no responde',
+    say: 'Tu acomodaci\u00f3n de tiempo extendido aplica aqu\u00ed \u2014 la oficina DSPS del colegio que ensea necesita notificar a tu instructor para que lo establezca en Canvas. Contact\u00e9moslos ahora mismo.'
+  },
+  {
+    category: 'Coordinaci\u00f3n DSPS-Exchange',
+    trigger: 'Construyendo un flujo de coordinaci\u00f3n regular con oficinas DSPS de colegios socios',
+    first: 'Al inicio de cada periodo, contacta proactivamente a DSPS en tus 5-10 colegios socios de mayor volumen.',
+    steps: [
+      'Mant\u00e9n una lista de contactos de coordinadores DSPS en tus colegios socios principales (usa las notas de Directorio)',
+      'Env\u00eda un correo de inicio de periodo "hola, con qui\u00e9n trabajamos" a cada uno',
+      'Comparte tu formato est\u00e1ndar de carta de acomodaciones y proceso preferido',
+      'Pideles que compartan los suyos',
+      'Registra las actividades de coordinaci\u00f3n como eventos de outreach en el Outreach Planner de este workbench'
+    ],
+    escalate: 'T\u00edpicamente no se necesita \u2014 esto es proactivo',
+    say: 'No es un escenario de cara al estudiante, pero vale la pena construirlo como h\u00e1bito cada periodo.'
+  }
+];
 
 var AR_SCENARIOS = [
   {
@@ -183,13 +368,25 @@ function forRolesEsc(s) {
 }
 
 function forRolesRenderScenarios(scenarios, accentColor) {
+  var lang = rolesGetLang();
+  var firstLabel = lang === 'es' ? 'Primero:' : 'First thing:';
+  var sayLabel = lang === 'es' ? 'Qu\u00e9 decir' : 'What to say';
+  var stepsLabel = lang === 'es' ? 'Pasos' : 'Steps';
+  var escLabel = lang === 'es' ? 'Escalar a:' : 'Escalate to:';
+
   var categories = {};
   scenarios.forEach(function(s) {
     if (!categories[s.category]) categories[s.category] = [];
     categories[s.category].push(s);
   });
 
-  var html = '<div class="cnl-grid">';
+  var langToggle = '<div class="stu-lang-wrap" style="margin-bottom:1.25rem">' +
+    '<button class="stu-lang-btn' + (lang === 'en' ? ' stu-lang-active' : '') + '" onclick="rolesSetLang(\'en\')">English</button>' +
+    '<button class="stu-lang-btn' + (lang === 'es' ? ' stu-lang-active' : '') + '" onclick="rolesSetLang(\'es\')">Espa\u00f1ol</button>' +
+    (lang === 'es' ? '<span class="stu-lang-note">Draft translation &mdash; please flag any errors</span>' : '') +
+  '</div>';
+
+  var html = langToggle + '<div class="cnl-grid">';
   Object.keys(categories).forEach(function(cat) {
     html += '<div class="cnl-group"><div class="cnl-group-title" style="color:' + accentColor + ';border-color:' + accentColor + '">' + cat + '</div>';
     categories[cat].forEach(function(s) {
@@ -199,18 +396,18 @@ function forRolesRenderScenarios(scenarios, accentColor) {
           '<span class="cnl-trigger-text">' + s.trigger + '</span>' +
         '</div>' +
         '<div class="cnl-detail">' +
-          '<div class="cnl-first"><span class="cnl-label">First thing:</span> ' + s.first + '</div>' +
+          '<div class="cnl-first"><span class="cnl-label">' + firstLabel + '</span> ' + s.first + '</div>' +
           '<div class="cnl-say-box">' +
-            '<div class="cnl-label">What to say</div>' +
+            '<div class="cnl-label">' + sayLabel + '</div>' +
             '<div class="cnl-say">&ldquo;' + s.say + '&rdquo;</div>' +
           '</div>' +
           '<div class="cnl-steps-box">' +
-            '<div class="cnl-label">Steps</div>' +
+            '<div class="cnl-label">' + stepsLabel + '</div>' +
             '<ol class="cnl-steps">' +
               s.steps.map(function(step) { return '<li>' + step + '</li>'; }).join('') +
             '</ol>' +
           '</div>' +
-          '<div class="cnl-escalate"><span class="cnl-label">Escalate to:</span> ' + s.escalate + '</div>' +
+          '<div class="cnl-escalate"><span class="cnl-label">' + escLabel + '</span> ' + s.escalate + '</div>' +
         '</div>' +
       '</div>';
     });
@@ -223,19 +420,22 @@ function forRolesRenderScenarios(scenarios, accentColor) {
 function forARRender() {
   var body = document.getElementById('forARBody');
   if (!body) return;
-  body.innerHTML = forRolesRenderScenarios(AR_SCENARIOS, 'var(--blue)');
+  var data = rolesGetLang() === 'es' ? AR_SCENARIOS_ES : AR_SCENARIOS;
+  body.innerHTML = forRolesRenderScenarios(data, 'var(--blue)');
 }
 
 function forFARender() {
   var body = document.getElementById('forFABody');
   if (!body) return;
-  body.innerHTML = forRolesRenderScenarios(FA_SCENARIOS, 'var(--amber)');
+  var data = rolesGetLang() === 'es' ? FA_SCENARIOS_ES : FA_SCENARIOS;
+  body.innerHTML = forRolesRenderScenarios(data, 'var(--amber)');
 }
 
 function forDSPSRender() {
   var body = document.getElementById('forDSPSBody');
   if (!body) return;
-  body.innerHTML = forRolesRenderScenarios(DSPS_SCENARIOS, 'var(--teal)');
+  var data = rolesGetLang() === 'es' ? DSPS_SCENARIOS_ES : DSPS_SCENARIOS;
+  body.innerHTML = forRolesRenderScenarios(data, 'var(--teal)');
 }
 
 window.addEventListener('appanalyst:role-change', function() {

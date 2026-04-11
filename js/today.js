@@ -23,6 +23,108 @@ function todayEsc(s) {
   return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+// ── Pattern detection ──────────────────────────────────
+// Scans the ticket log for recurring patterns in the last 14 days.
+function todayDetectPatterns(tickets) {
+  var patterns = [];
+  var now = Date.now();
+  var twoWeeksAgo = now - 14 * 86400000;
+  var recent = tickets.filter(function(t) {
+    return new Date(t.created).getTime() >= twoWeeksAgo;
+  });
+  if (recent.length < 3) return patterns;
+
+  // Pattern 1: Same college 3+ in 2 weeks
+  var byCollege = {};
+  recent.forEach(function(t) {
+    if (!t.college) return;
+    if (!byCollege[t.college]) byCollege[t.college] = [];
+    byCollege[t.college].push(t);
+  });
+  Object.keys(byCollege).forEach(function(name) {
+    if (byCollege[name].length >= 3) {
+      patterns.push({
+        kind: 'college',
+        severity: byCollege[name].length >= 5 ? 'high' : 'med',
+        label: name + ' \u2014 ' + byCollege[name].length + ' tickets in 2 weeks',
+        hint: 'Recurring college hotspot. Worth a proactive outreach or KB entry.',
+        filterTerm: name
+      });
+    }
+  });
+
+  // Pattern 2: Same system 4+ in 2 weeks
+  var bySystem = {};
+  recent.forEach(function(t) {
+    if (!t.system) return;
+    if (!bySystem[t.system]) bySystem[t.system] = [];
+    bySystem[t.system].push(t);
+  });
+  Object.keys(bySystem).forEach(function(sys) {
+    if (bySystem[sys].length >= 4) {
+      patterns.push({
+        kind: 'system',
+        severity: bySystem[sys].length >= 7 ? 'high' : 'med',
+        label: sys + ' \u2014 ' + bySystem[sys].length + ' tickets in 2 weeks',
+        hint: 'System-level pattern. Check for a shared root cause or vendor issue.',
+        filterTerm: sys
+      });
+    }
+  });
+
+  // Pattern 3: Recurring symptom keywords
+  var stopwords = ['ticket','enrollment','student','college','issue','problem','getting','cannot','doesnt','didnt','still','there','their','which','where','which','after','before','about','without'];
+  var wordBuckets = {};
+  recent.forEach(function(t) {
+    var words = (t.symptom || '').toLowerCase().replace(/[^\w\s]/g, ' ').split(/\s+/).filter(function(w) {
+      return w.length >= 5 && stopwords.indexOf(w) < 0;
+    });
+    // De-dupe within a single ticket
+    var seen = {};
+    words.forEach(function(w) {
+      if (seen[w]) return;
+      seen[w] = true;
+      if (!wordBuckets[w]) wordBuckets[w] = 0;
+      wordBuckets[w]++;
+    });
+  });
+  var commonWords = Object.keys(wordBuckets).filter(function(w) {
+    return wordBuckets[w] >= 3;
+  }).sort(function(a, b) { return wordBuckets[b] - wordBuckets[a]; }).slice(0, 2);
+
+  commonWords.forEach(function(w) {
+    patterns.push({
+      kind: 'keyword',
+      severity: 'med',
+      label: '"' + w + '" in ' + wordBuckets[w] + ' recent tickets',
+      hint: 'Same language keeps showing up. Consider writing a KB entry.',
+      filterTerm: w
+    });
+  });
+
+  patterns.sort(function(a, b) {
+    if (a.severity === b.severity) return 0;
+    return a.severity === 'high' ? -1 : 1;
+  });
+  return patterns.slice(0, 4);
+}
+
+var _todayPatterns = [];
+
+function todayPatternClick(idx) {
+  var p = _todayPatterns[idx];
+  if (!p) return;
+  var tl = document.getElementById('ticketLog');
+  if (tl) tl.scrollIntoView({ behavior: 'smooth' });
+  setTimeout(function() {
+    var input = document.querySelector('#ticketLog .tl-search');
+    if (input && p.filterTerm) {
+      input.value = p.filterTerm;
+      if (typeof tlSetSearch === 'function') tlSetSearch(p.filterTerm);
+    }
+  }, 400);
+}
+
 function todayRender() {
   var container = document.getElementById('todayBody');
   if (!container) return;
@@ -36,6 +138,8 @@ function todayRender() {
   try { kb = JSON.parse(localStorage.getItem('appanalyst.kb.v1') || '[]'); } catch (e) {}
   try { overlay = JSON.parse(localStorage.getItem('appanalyst.colleges.overlay.v1') || '{}'); } catch (e) {}
   try { outreach = JSON.parse(localStorage.getItem('appanalyst.outreach.v1') || '[]'); } catch (e) {}
+
+  _todayPatterns = todayDetectPatterns(tickets);
 
   // Compute
   var openTickets = tickets.filter(function(t) { return t.status !== 'resolved'; });
@@ -251,9 +355,27 @@ function todayRender() {
       ) +
     '</div>';
 
+  // Patterns alert (only if any detected)
+  var patternsBar = '';
+  if (_todayPatterns.length > 0) {
+    patternsBar = '<div class="today-patterns">' +
+      '<div class="today-patterns-label">&#9888; Patterns detected</div>' +
+      '<div class="today-patterns-list">' +
+        _todayPatterns.map(function(p, i) {
+          return '<a class="today-pattern' + (p.severity === 'high' ? ' today-pat-high' : '') + '" onclick="todayPatternClick(' + i + ')">' +
+            '<span class="today-pat-kind">' + p.kind + '</span>' +
+            '<span class="today-pat-label">' + todayEsc(p.label) + '</span>' +
+            '<span class="today-pat-hint">' + todayEsc(p.hint) + '</span>' +
+          '</a>';
+        }).join('') +
+      '</div>' +
+    '</div>';
+  }
+
   container.innerHTML =
     statStrip +
     rollup +
+    patternsBar +
     '<div class="today-grid">' + followUpCard + ticketsCard + kbCard + collegesCard + outreachCard + '</div>';
 
   var dateEl = document.getElementById('todayDate');
