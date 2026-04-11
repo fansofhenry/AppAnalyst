@@ -389,6 +389,7 @@
         <button class="today-btn" onclick="if(typeof backupOpen===&#39;function&#39;){backupOpen();backupRenderStats();}" title="Backup and restore all local data">Backup</button>
         <button class="today-btn" onclick="if(typeof packetOpen===&#39;function&#39;)packetOpen()" title="Generate a printable one-pager for a partner college">Partner packet</button>
         <button class="today-btn" onclick="if(typeof handoffGenerate===&#39;function&#39;)handoffGenerate()" title="Generate a printable handoff packet summarizing your current work">Handoff packet</button>
+        <button class="today-btn" onclick="if(typeof arvGenerate===&#39;function&#39;)arvGenerate()" title="Generate a year-in-review summary">Annual review</button>
       </div>
     </div>
     <div id="todayBody"></div>
@@ -1434,6 +1435,10 @@ function showBarrierView(view,btn){
         <div id="backupStats" class="backup-stats"></div>
       </div>
       <div class="backup-section">
+        <div class="backup-section-title">Storage health</div>
+        <div id="shBar" class="sh-bar"></div>
+      </div>
+      <div class="backup-section">
         <div class="backup-section-title">Export</div>
         <p class="backup-help">Download a single JSON file with every ticket, KB entry, college note, and onboarding item. Keep it somewhere safe — losing browser storage loses everything.</p>
         <button class="tl-btn tl-btn-new" onclick="backupExportAll()">Download backup</button>
@@ -1609,6 +1614,8 @@ document.addEventListener('keydown', function(e) {
 <script src="js/manager.js"></script>
 <script src="js/handoff.js"></script>
 <script src="js/notifications.js"></script>
+<script src="js/annualReview.js"></script>
+<script src="js/storageHealth.js"></script>
 <script src="js/packet.js"></script>
 <script src="js/router.js"></script>
 <script src="js/barriers.js"></script>

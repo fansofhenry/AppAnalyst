@@ -111,6 +111,7 @@ function backupStats() {
 }
 
 function backupRenderStats() {
+  if (typeof shRenderBar === 'function') shRenderBar();
   var wrap = document.getElementById('backupStats');
   if (!wrap) return;
   var stats = backupStats();

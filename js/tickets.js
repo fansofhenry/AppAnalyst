@@ -270,9 +270,142 @@ function tlNewBlank() {
     vendor: '',
     tags: '',
     followUp: '',
+    subtasks: [],
+    related: [],
     notes: '',
     resolution: ''
   };
+}
+
+// ── Ticket linking ──
+function tlLinkAdd(ticketId) {
+  var list = tlLoad();
+  var t = list.find(function(x) { return x.id === ticketId; });
+  if (!t) return;
+  // Build a picker showing candidate tickets (exclude self, already-linked, resolved first filtered out)
+  var candidates = list.filter(function(x) {
+    if (x.id === ticketId) return false;
+    if ((t.related || []).indexOf(x.id) >= 0) return false;
+    return true;
+  }).slice(0, 30);
+  if (candidates.length === 0) { toast('No other tickets to link'); return; }
+
+  var choice = prompt('Link to which ticket? Type a search term (college, symptom, or id):');
+  if (!choice || !choice.trim()) return;
+  var q = choice.trim().toLowerCase();
+  var match = candidates.find(function(x) {
+    return (x.id + ' ' + x.college + ' ' + x.symptom + ' ' + x.system).toLowerCase().indexOf(q) >= 0;
+  });
+  if (!match) { toast('No ticket matched "' + choice + '"'); return; }
+
+  if (!t.related) t.related = [];
+  t.related.push(match.id);
+  t.updated = new Date().toISOString();
+
+  // Also link back on the other side
+  var other = list.find(function(x) { return x.id === match.id; });
+  if (other) {
+    if (!other.related) other.related = [];
+    if (other.related.indexOf(ticketId) < 0) other.related.push(ticketId);
+    other.updated = new Date().toISOString();
+  }
+
+  tlSave(list);
+  tlRender();
+  toast('Linked to ' + (match.symptom || match.id));
+}
+
+function tlLinkRemove(ticketId, otherId) {
+  var list = tlLoad();
+  var t = list.find(function(x) { return x.id === ticketId; });
+  if (!t || !t.related) return;
+  t.related = t.related.filter(function(id) { return id !== otherId; });
+  t.updated = new Date().toISOString();
+
+  var other = list.find(function(x) { return x.id === otherId; });
+  if (other && other.related) {
+    other.related = other.related.filter(function(id) { return id !== ticketId; });
+    other.updated = new Date().toISOString();
+  }
+
+  tlSave(list);
+  tlRender();
+}
+
+function tlRenderLinks(t) {
+  if (!t.related || t.related.length === 0) return '';
+  var list = tlLoad();
+  var rows = t.related.map(function(id) {
+    var other = list.find(function(x) { return x.id === id; });
+    if (!other) return '';
+    return '<div class="tl-link-item">' +
+      '<a class="tl-link-link" onclick="var r=document.querySelector(\'.tl-row[data-id=&quot;' + other.id + '&quot;]\');if(r){r.classList.add(\'tl-expanded\');r.scrollIntoView({behavior:\'smooth\',block:\'center\'})}">' +
+        '<span class="tl-link-status tl-st-' + other.status + '">' + other.status + '</span>' +
+        '<span class="tl-link-text">' + tlEsc(other.symptom || '(no symptom)') + '</span>' +
+        '<span class="tl-link-meta">' + tlEsc(other.college || '') + ' · ' + tlAgeText(other.created) + ' old</span>' +
+      '</a>' +
+      '<button class="tl-link-rm" onclick="tlLinkRemove(\'' + t.id + '\',\'' + other.id + '\')" title="Unlink">&times;</button>' +
+    '</div>';
+  }).filter(function(s) { return s; }).join('');
+  if (!rows) return '';
+  return '<div class="tl-links"><div class="tl-links-label">Related tickets</div>' + rows + '</div>';
+}
+
+// ── Sub-tasks (inline checklist per ticket) ──
+function tlSubtaskAdd(ticketId) {
+  var list = tlLoad();
+  var t = list.find(function(x) { return x.id === ticketId; });
+  if (!t) return;
+  if (!t.subtasks) t.subtasks = [];
+  t.subtasks.push({ id: 'ST' + Date.now().toString(36) + Math.random().toString(36).slice(2, 4), text: '', done: false });
+  t.updated = new Date().toISOString();
+  tlSave(list);
+  tlRender();
+  setTimeout(function() {
+    var inputs = document.querySelectorAll('.tl-row[data-id="' + ticketId + '"] .tl-subtask-text');
+    if (inputs.length > 0) inputs[inputs.length - 1].focus();
+  }, 30);
+}
+
+function tlSubtaskToggle(ticketId, subId) {
+  var list = tlLoad();
+  var t = list.find(function(x) { return x.id === ticketId; });
+  if (!t || !t.subtasks) return;
+  var st = t.subtasks.find(function(s) { return s.id === subId; });
+  if (!st) return;
+  st.done = !st.done;
+  t.updated = new Date().toISOString();
+  tlSave(list);
+  // Update summary count without full re-render to preserve focus
+  var row = document.querySelector('.tl-row[data-id="' + ticketId + '"]');
+  if (row) {
+    var countEl = row.querySelector('.tl-subtask-count');
+    if (countEl) {
+      var done = t.subtasks.filter(function(s) { return s.done; }).length;
+      countEl.textContent = done + '/' + t.subtasks.length;
+    }
+  }
+}
+
+function tlSubtaskUpdate(ticketId, subId, text) {
+  var list = tlLoad();
+  var t = list.find(function(x) { return x.id === ticketId; });
+  if (!t || !t.subtasks) return;
+  var st = t.subtasks.find(function(s) { return s.id === subId; });
+  if (!st) return;
+  st.text = text;
+  t.updated = new Date().toISOString();
+  tlSave(list);
+}
+
+function tlSubtaskDelete(ticketId, subId) {
+  var list = tlLoad();
+  var t = list.find(function(x) { return x.id === ticketId; });
+  if (!t || !t.subtasks) return;
+  t.subtasks = t.subtasks.filter(function(s) { return s.id !== subId; });
+  t.updated = new Date().toISOString();
+  tlSave(list);
+  tlRender();
 }
 
 // Classify a follow-up date against today
@@ -478,6 +611,11 @@ function tlRender() {
     var collegeShort = t.college || '<em style="color:var(--text-3)">college?</em>';
     var fuCls = tlFollowUpClass(t);
     var fuBadge = '';
+    var subtaskBadge = '';
+    if (t.subtasks && t.subtasks.length > 0) {
+      var doneCount = t.subtasks.filter(function(s) { return s.done; }).length;
+      subtaskBadge = '<span class="tl-subtask-count" title="' + doneCount + ' of ' + t.subtasks.length + ' sub-tasks done">' + doneCount + '/' + t.subtasks.length + '</span>';
+    }
     if (fuCls) {
       var fuLabel = fuCls === 'overdue' ? 'Overdue' : fuCls === 'due-today' ? 'Due today' : fuCls === 'due-soon' ? 'Soon' : t.followUp;
       fuBadge = '<span class="tl-fu-badge tl-fu-' + fuCls + '">' + fuLabel + '</span>';
@@ -495,7 +633,7 @@ function tlRender() {
       '<div class="tl-summary">' +
         '<input type="checkbox" class="tl-select-box"' + (TL_SELECTED[t.id] ? ' checked' : '') + ' onclick="event.stopPropagation();tlSelectToggle(\'' + t.id + '\')" onchange="event.stopPropagation()" title="Select for bulk action">' +
         '<span class="tl-age ' + ageCls + '" onclick="tlEdit(\'' + t.id + '\')">' + tlAgeText(t.created) + '</span>' +
-        '<span class="tl-college" onclick="tlEdit(\'' + t.id + '\')">' + collegeShort + fuBadge + tagBadges + '</span>' +
+        '<span class="tl-college" onclick="tlEdit(\'' + t.id + '\')">' + collegeShort + fuBadge + subtaskBadge + tagBadges + '</span>' +
         '<span class="tl-sys" onclick="tlEdit(\'' + t.id + '\')">' + t.system + '</span>' +
         '<span class="tl-symptom" onclick="tlEdit(\'' + t.id + '\')">' + symptomShort + '</span>' +
         '<span class="tl-status tl-st-' + t.status + '" onclick="tlEdit(\'' + t.id + '\')">' + t.status + '</span>' +
@@ -540,18 +678,34 @@ function tlRender() {
         '<div class="tl-field tl-field-full"><label>Tags (comma-separated, autocomplete)</label>' +
           '<input type="text" list="tlTagList" value="' + tlEsc(t.tags || '') + '" placeholder="e.g. ethos, fa-delay, needs-kb" oninput="tlUpdate(\'' + t.id + '\', \'tags\', this.value)">' +
         '</div>' +
+        '<div class="tl-field tl-field-full"><label>Sub-tasks</label>' +
+          '<div class="tl-subtasks">' +
+            (t.subtasks && t.subtasks.length > 0
+              ? t.subtasks.map(function(st) {
+                  return '<div class="tl-subtask' + (st.done ? ' tl-st-done' : '') + '">' +
+                    '<input type="checkbox"' + (st.done ? ' checked' : '') + ' onchange="tlSubtaskToggle(\'' + t.id + '\',\'' + st.id + '\')">' +
+                    '<input type="text" class="tl-subtask-text" value="' + tlEsc(st.text) + '" placeholder="Step description..." oninput="tlSubtaskUpdate(\'' + t.id + '\',\'' + st.id + '\',this.value)">' +
+                    '<button class="tl-subtask-del" onclick="tlSubtaskDelete(\'' + t.id + '\',\'' + st.id + '\')" title="Delete sub-task">&times;</button>' +
+                  '</div>';
+                }).join('')
+              : '') +
+            '<button class="tl-subtask-add" onclick="tlSubtaskAdd(\'' + t.id + '\')">+ Add sub-task</button>' +
+          '</div>' +
+        '</div>' +
         '<div class="tl-field tl-field-full"><label>Notes (working log — no PII)</label>' +
           '<textarea rows="3" placeholder="What you tried, who you talked to, error codes…" oninput="tlUpdate(\'' + t.id + '\', \'notes\', this.value)">' + tlEsc(t.notes) + '</textarea>' +
         '</div>' +
         '<div class="tl-field tl-field-full"><label>Resolution (fill when closing)</label>' +
           '<textarea rows="2" placeholder="What fixed it. Consider promoting to a KB entry." oninput="tlUpdate(\'' + t.id + '\', \'resolution\', this.value)">' + tlEsc(t.resolution) + '</textarea>' +
         '</div>' +
+        tlRenderLinks(t) +
         tlDupeWarning(t) +
         tlKbSuggestions(t) +
         '<div class="tl-row-footer">' +
           '<span class="tl-meta">Created ' + new Date(t.created).toLocaleString() + ' · id ' + t.id + '</span>' +
           '<div class="tl-row-footer-actions">' +
             '<button class="tl-btn" onclick="tlClone(\'' + t.id + '\')">Clone</button>' +
+            '<button class="tl-btn" onclick="tlLinkAdd(\'' + t.id + '\')">Link ticket</button>' +
             '<button class="tl-btn" onclick="tlSaveAsTemplate(\'' + t.id + '\')">Save as template</button>' +
             (t.resolution ? '<button class="tl-btn" onclick="tlPromoteToKb(\'' + t.id + '\')">Save resolution to KB</button>' : '') +
             '<button class="tl-btn tl-btn-del" onclick="tlDelete(\'' + t.id + '\')">Delete</button>' +
