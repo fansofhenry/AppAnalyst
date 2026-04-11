@@ -860,18 +860,29 @@
 <!-- ═══ OUTREACH PLANNER ═══ -->
 <section class="sec sec-alt fu" id="outreach" role="region" aria-label="Outreach Planner"><div class="wrap">
   <div class="eyebrow"><span class="sec-num" style="background:var(--teal)">8</span>Outreach</div>
-  <h2>Proactive engagement across <em>the academic year</em></h2>
-  <p class="sec-desc"><strong>17 triggers across 7 months</strong> — targeted to counselors, FA offices, and peer ambassadors at the right moment.</p>
-  <div class="coverage-bar">
-    <span class="cb-seg"></span><span class="cb-seg"></span><span class="cb-seg"></span><span class="cb-seg"></span><span class="cb-seg"></span><span class="cb-seg"></span><span class="cb-seg"></span>
-    <span class="cb-label">7 of 7 months covered</span>
-  </div>
+  <h2>Your outreach calendar — <em>plan, track, reflect</em></h2>
+  <p class="sec-desc">Personal outreach calendar. Plan events by month, track status (planned / in progress / done / skipped), add notes. Toggle to <strong>Reference</strong> for 17 example triggers across the academic year &mdash; those stay as reference you can browse.</p>
   <div class="tool-frame">
-    <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Outreach</span></div><span class="tool-hint">Click any month to see triggers</span><span class="tool-bar-title">Outreach Planner &middot; 7 Months</span></div>
+    <div class="tool-bar">
+      <div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-green">Your data</span></div>
+      <div class="rm-view-toggle">
+        <button id="roBtnReal" class="rm-view-btn rm-active" onclick="roSetView('real')">My plan</button>
+        <button id="roBtnDemo" class="rm-view-btn" onclick="roSetView('demo')">Reference</button>
+      </div>
+      <span class="tool-bar-title">Outreach Planner</span>
+    </div>
     <div class="tool-body">
+      <div id="realOutreachBody"></div>
+      <div id="demoOutreachBody" style="display:none">
+      <div class="demo-view-banner">17 reference triggers across 7 months, organized by the academic calendar. These are examples to import or adapt.</div>
+      <div class="coverage-bar">
+        <span class="cb-seg"></span><span class="cb-seg"></span><span class="cb-seg"></span><span class="cb-seg"></span><span class="cb-seg"></span><span class="cb-seg"></span><span class="cb-seg"></span>
+        <span class="cb-label">7 of 7 months covered</span>
+      </div>
       <div class="outreach-tabs"><button class="outreach-tab active" onclick="setOutreachTab('all',this)">All</button><button class="outreach-tab" onclick="setOutreachTab('inreach',this)">Inreach</button><button class="outreach-tab" onclick="setOutreachTab('outreach',this)">Outreach</button><button class="outreach-tab" onclick="setOutreachTab('orientation',this)">Orientation</button><button class="outreach-tab" onclick="setOutreachTab('intervention',this)">Intervention</button><button class="outreach-tab" onclick="setOutreachTab('peer',this)" style="border-left:2px solid var(--border);margin-left:.25rem">Peer-Led</button><button class="outreach-tab" onclick="setOutreachTab('fa',this)">FA Office</button></div>
       <div class="cal-timeline" id="calTimeline"></div>
       <div class="outreach-detail" id="outreachDetail"></div>
+      </div>
     </div>
   </div>
 </div></section>
@@ -1101,7 +1112,10 @@
   </div>
   <div class="tool-frame">
     <div class="tool-bar"><div class="tool-bar-left"><div class="tool-dots"><span></span><span></span><span></span></div><span class="tool-label tl-red">Barriers</span></div><span class="tool-hint">Click any card to expand</span><span class="tool-bar-title">Barrier Intelligence &middot; 10 Systemic Friction Points</span></div>
-    <div class="tool-body"><div class="b-grid" id="bGrid"></div></div>
+    <div class="tool-body">
+      <div class="b-personal" id="barriersSummary">Click <strong>Mark as active</strong> on any barrier below to track which are affecting your work right now.</div>
+      <div class="b-grid" id="bGrid"></div>
+    </div>
   </div>
 </div></section>
 
@@ -1449,6 +1463,7 @@ document.addEventListener('keydown', function(e) {
 <script src="js/realComms.js"></script>
 <script src="js/navBadge.js"></script>
 <script src="js/welcome.js"></script>
+<script src="js/realOutreach.js"></script>
 <script src="js/barriers.js"></script>
 <script src="js/outreach.js"></script>
 <script src="js/lookup.js"></script>

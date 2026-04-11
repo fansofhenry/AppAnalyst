@@ -247,6 +247,131 @@
 }
 
 
+/* ═══════════════════════════════════════════════════════
+   NEW TOOLS — mobile polish (Pass 5 audit)
+   ═══════════════════════════════════════════════════════ */
+
+/* Nav: hide labels on toggle buttons below 640px, keep icons */
+@media (max-width: 640px) {
+  .theme-label, .a11y-label { display: none; }
+  .theme-toggle-btn, .a11y-toggle { padding: .32rem .5rem; }
+  .a11y-switch { display: none; }
+}
+
+/* Today dashboard: stack header actions below 600px */
+@media (max-width: 600px) {
+  .today-head { flex-direction: column; align-items: stretch; gap: .75rem; }
+  .today-head-actions { justify-content: flex-start; flex-wrap: wrap; }
+  .today-btn { flex: 1 1 auto; min-width: 0; justify-content: center; }
+}
+
+/* Real tool view toggles: wrap, don't overflow */
+@media (max-width: 720px) {
+  .rm-view-toggle { margin: 0; order: 2; width: 100%; justify-content: center; }
+  .tool-bar { flex-wrap: wrap; gap: .4rem; }
+  .tool-bar .tool-bar-title { order: 3; width: 100%; }
+}
+
+/* Tool bar on phones */
+@media (max-width: 500px) {
+  .tool-bar { padding: .5rem .6rem; }
+  .rm-view-btn { padding: .3rem .5rem; font-size: .58rem; }
+}
+
+/* Welcome tour modal: tighter padding on small screens */
+@media (max-width: 560px) {
+  .welcome-modal { padding: 1.75rem 1.5rem 1.35rem; }
+  .welcome-title { font-size: 1.25rem; }
+  .welcome-content { font-size: .85rem; }
+  .welcome-foot-note { font-size: .68rem; padding: .6rem .75rem; }
+  .welcome-actions { flex-wrap: wrap; gap: .4rem; }
+  .welcome-step-count { order: -1; }
+}
+
+/* Backup modal: avoid edge-touching on small screens */
+@media (max-width: 520px) {
+  .backup-body { padding: 1rem; }
+  .backup-head { padding: .9rem 1rem; }
+  .backup-title { font-size: 1.05rem; }
+}
+
+/* Search modal: fits above keyboard on phones */
+@media (max-width: 560px) {
+  .search-overlay { padding-top: 6vh; }
+  .search-input { font-size: .9rem; }
+  .search-footer { gap: .75rem; font-size: .55rem; }
+  .search-result { padding: .55rem .65rem; }
+  .search-label { font-size: .82rem; }
+}
+
+/* Escalation helper: stack sev buttons vertically */
+@media (max-width: 700px) {
+  .esc-sev-btn { padding: .6rem .55rem; }
+  .esc-sev-text { font-size: .6rem; }
+}
+
+/* Onboarding items: hide category pill more aggressively */
+@media (max-width: 560px) {
+  .ob-item { grid-template-columns: 22px 1fr 22px; padding: .5rem .65rem; }
+  .ob-cat { display: none; }
+  .ob-text-input { font-size: .78rem; }
+  .ob-group-head { padding: .6rem .75rem; }
+}
+
+/* Nav: keep key controls on small screens without wrap chaos */
+@media (max-width: 560px) {
+  nav { flex-wrap: wrap; }
+  .nav-brand { min-width: 0; }
+  .nav-title { font-size: .72rem; }
+  .nav-title-sub { display: none; }
+}
+
+/* Hide the nav-title-sub on medium screens too to prevent overflow */
+@media (max-width: 768px) {
+  .nav-title-sub { display: none; }
+}
+
+/* Reconcile CSV inputs stack on phones with compact textareas */
+@media (max-width: 560px) {
+  .rc-input textarea { min-height: 110px; font-size: .68rem; }
+  .rc-actions { flex-wrap: wrap; }
+  .rc-actions button { flex: 1 1 auto; min-width: 0; }
+}
+
+/* Real outreach: single-column events below 480px */
+@media (max-width: 480px) {
+  .ro-event { grid-template-columns: 80px 1fr 22px; gap: .3rem; padding: .45rem .5rem; }
+  .ro-event .ro-month-select { display: none; }
+  .ro-status-pill { font-size: .54rem; padding: .2rem .3rem; }
+}
+
+/* KB toolbar wraps cleanly */
+@media (max-width: 720px) {
+  .kb-toolbar { gap: .4rem; padding: .65rem .75rem; }
+  .kb-search { min-width: 100%; margin-bottom: .3rem; }
+  .kb-select { flex: 1 1 auto; min-width: 120px; }
+}
+
+/* Ticket log: tighter summary grid below 540px */
+@media (max-width: 540px) {
+  .tl-summary { grid-template-columns: 44px 1fr; gap: .5rem; padding: .6rem .75rem; }
+  .tl-sys, .tl-status, .tl-symptom { display: none; }
+  .tl-row-tags { display: none; }
+}
+
+/* Today stat strip: single row of 2 on very small */
+@media (max-width: 420px) {
+  .today-strip { grid-template-columns: repeat(2, 1fr); gap: .4rem; }
+  .today-stat { padding: .7rem .5rem; }
+  .today-stat-num { font-size: 1.4rem; }
+}
+
+/* Nav badge: slightly smaller on tiny screens */
+@media (max-width: 400px) {
+  .nav-count-badge { min-width: 16px; height: 16px; font-size: .55rem; }
+}
+
+
 /* ═══ PRINT ═══ */
 
 @media print {

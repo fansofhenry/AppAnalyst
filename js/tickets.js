@@ -36,9 +36,25 @@ function tlNewBlank() {
     symptom: '',
     status: 'open',
     vendor: '',
+    tags: '',
     notes: '',
     resolution: ''
   };
+}
+
+// All distinct tags currently in the ticket log
+function tlAllTags() {
+  var set = {};
+  tlLoad().forEach(function(t) {
+    if (!t.tags) return;
+    t.tags.split(',').forEach(function(tag) {
+      var clean = tag.trim();
+      if (clean) set[clean] = (set[clean] || 0) + 1;
+    });
+  });
+  return Object.keys(set).sort().map(function(tag) {
+    return { tag: tag, count: set[tag] };
+  });
 }
 
 function tlAdd() {
@@ -109,10 +125,15 @@ function tlFilter(tickets) {
     else if (f === 'open-any') { if (t.status === 'resolved') return false; }
     else if (f === 'resolved') { if (t.status !== 'resolved') return false; }
     else if (f === 'aging') { if (t.status === 'resolved' || tlAgeDays(t.created) < 3) return false; }
+    else if (f.indexOf('tag:') === 0) {
+      var wantedTag = f.slice(4);
+      var tags = (t.tags || '').split(',').map(function(s) { return s.trim(); });
+      if (tags.indexOf(wantedTag) < 0) return false;
+    }
     else if (t.status !== f) return false;
 
     if (q) {
-      var hay = [t.college, t.system, t.symptom, t.notes, t.resolution, t.vendor].join(' ').toLowerCase();
+      var hay = [t.college, t.system, t.symptom, t.notes, t.resolution, t.vendor, t.tags].join(' ').toLowerCase();
       if (hay.indexOf(q) < 0) return false;
     }
     return true;
@@ -150,14 +171,36 @@ function tlRender() {
     return;
   }
 
-  container.innerHTML = filtered.map(function(t) {
+  // Render tag chips above the list
+  var tagChipRow = '';
+  var allTags = tlAllTags();
+  if (allTags.length > 0) {
+    tagChipRow = '<div class="tl-tag-chips"><span class="tl-tag-chips-label">Tags:</span>' +
+      allTags.map(function(t) {
+        var active = TL_FILTER === 'tag:' + t.tag;
+        return '<button class="tl-tag-chip' + (active ? ' tl-tag-chip-active' : '') + '" onclick="tlSetFilter(\'' + (active ? 'open-any' : 'tag:' + t.tag) + '\',null)">' +
+          tlEsc(t.tag) + ' <span class="tl-tag-chip-count">' + t.count + '</span>' +
+        '</button>';
+      }).join('') + '</div>';
+  }
+
+  container.innerHTML = tagChipRow + filtered.map(function(t) {
     var ageCls = tlAgeClass(t);
     var symptomShort = t.symptom || '<em style="color:var(--text-3)">no symptom yet</em>';
     var collegeShort = t.college || '<em style="color:var(--text-3)">college?</em>';
+    var tagBadges = '';
+    if (t.tags) {
+      var tagList = t.tags.split(',').map(function(s) { return s.trim(); }).filter(function(s) { return s; });
+      if (tagList.length > 0) {
+        tagBadges = '<span class="tl-row-tags">' + tagList.slice(0, 3).map(function(tag) {
+          return '<span class="tl-row-tag">' + tlEsc(tag) + '</span>';
+        }).join('') + (tagList.length > 3 ? '<span class="tl-row-tag-more">+' + (tagList.length - 3) + '</span>' : '') + '</span>';
+      }
+    }
     return '<div class="tl-row" data-id="' + t.id + '">' +
       '<div class="tl-summary" onclick="tlEdit(\'' + t.id + '\')">' +
         '<span class="tl-age ' + ageCls + '">' + tlAgeText(t.created) + '</span>' +
-        '<span class="tl-college">' + collegeShort + '</span>' +
+        '<span class="tl-college">' + collegeShort + tagBadges + '</span>' +
         '<span class="tl-sys">' + t.system + '</span>' +
         '<span class="tl-symptom">' + symptomShort + '</span>' +
         '<span class="tl-status tl-st-' + t.status + '">' + t.status + '</span>' +
@@ -185,6 +228,9 @@ function tlRender() {
         '</div>' +
         '<div class="tl-field tl-field-full"><label>Symptom (one line — what the user reported)</label>' +
           '<input type="text" value="' + tlEsc(t.symptom) + '" placeholder="Student cannot see MATH 1A in Canvas" oninput="tlUpdate(\'' + t.id + '\', \'symptom\', this.value);tlRenderSummary(\'' + t.id + '\')">' +
+        '</div>' +
+        '<div class="tl-field tl-field-full"><label>Tags (comma-separated)</label>' +
+          '<input type="text" value="' + tlEsc(t.tags || '') + '" placeholder="e.g. ethos, fa-delay, needs-kb" oninput="tlUpdate(\'' + t.id + '\', \'tags\', this.value)">' +
         '</div>' +
         '<div class="tl-field tl-field-full"><label>Notes (working log — no PII)</label>' +
           '<textarea rows="3" placeholder="What you tried, who you talked to, error codes…" oninput="tlUpdate(\'' + t.id + '\', \'notes\', this.value)">' + tlEsc(t.notes) + '</textarea>' +

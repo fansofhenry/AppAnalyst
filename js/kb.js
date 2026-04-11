@@ -11,6 +11,62 @@ var KB_ACTIVE_ID = null;
 var KB_SYS_FILTER = 'all';
 var KB_AUD_FILTER = 'all';
 var KB_SEARCH = '';
+var KB_PREVIEW_KEY = 'appanalyst.kb.preview.v1';
+
+// ── Tiny markdown renderer — enough for everyday notes ──
+function kbMdToHtml(md) {
+  if (!md) return '<em style="color:var(--text-3)">Empty entry. Switch to edit mode to start writing.</em>';
+  var html = md;
+  // Escape first
+  html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  // Fenced code
+  html = html.replace(/```([\s\S]*?)```/g, function(_, code) {
+    return '<pre class="kb-md-code">' + code.replace(/\n/g, '\n') + '</pre>';
+  });
+  // Inline code
+  html = html.replace(/`([^`\n]+)`/g, '<code class="kb-md-inline-code">$1</code>');
+  // Headings
+  html = html.replace(/^###### (.*)$/gm, '<h6>$1</h6>')
+             .replace(/^##### (.*)$/gm, '<h5>$1</h5>')
+             .replace(/^#### (.*)$/gm, '<h4>$1</h4>')
+             .replace(/^### (.*)$/gm, '<h3>$1</h3>')
+             .replace(/^## (.*)$/gm, '<h2>$1</h2>')
+             .replace(/^# (.*)$/gm, '<h1>$1</h1>');
+  // Bold, italic, strike
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+             .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
+             .replace(/~~([^~]+)~~/g, '<del>$1</del>');
+  // Links (markdown only)
+  html = html.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  // Unordered lists
+  html = html.replace(/(^|\n)(- .*(\n- .*)*)/g, function(_, pre, block) {
+    var items = block.split(/\n/).map(function(line) {
+      return '<li>' + line.replace(/^- /, '') + '</li>';
+    }).join('');
+    return pre + '<ul class="kb-md-list">' + items + '</ul>';
+  });
+  // Ordered lists
+  html = html.replace(/(^|\n)(\d+\. .*(\n\d+\. .*)*)/g, function(_, pre, block) {
+    var items = block.split(/\n/).map(function(line) {
+      return '<li>' + line.replace(/^\d+\. /, '') + '</li>';
+    }).join('');
+    return pre + '<ol class="kb-md-list">' + items + '</ol>';
+  });
+  // Horizontal rule
+  html = html.replace(/^---+$/gm, '<hr>');
+  // Paragraphs — wrap runs of text separated by blank lines
+  html = html.split(/\n{2,}/).map(function(block) {
+    block = block.trim();
+    if (!block) return '';
+    if (/^<(h[1-6]|ul|ol|pre|hr|blockquote)/.test(block)) return block;
+    return '<p>' + block.replace(/\n/g, '<br>') + '</p>';
+  }).join('\n');
+  return html;
+}
+
+function kbGetPreview() { try { return localStorage.getItem(KB_PREVIEW_KEY) === '1'; } catch (e) { return false; } }
+function kbSetPreview(v) { try { localStorage.setItem(KB_PREVIEW_KEY, v ? '1' : '0'); } catch (e) {} kbRender(); }
+function kbTogglePreview() { kbSetPreview(!kbGetPreview()); }
 
 function kbLoad() {
   try {
@@ -133,6 +189,14 @@ function kbRender() {
     return;
   }
 
+  var previewOn = kbGetPreview();
+  var bodyPane = previewOn
+    ? '<div class="kb-edit-split">' +
+        '<textarea class="kb-edit-body" placeholder="# Summary&#10;&#10;What this covers\u2026" oninput="kbUpdate(\'' + active.id + '\', \'body\', this.value);kbUpdatePreview()">' + kbEsc(active.body) + '</textarea>' +
+        '<div class="kb-edit-preview" id="kbPreviewPane">' + kbMdToHtml(active.body) + '</div>' +
+      '</div>'
+    : '<textarea class="kb-edit-body" placeholder="# Summary&#10;&#10;What this covers\u2026&#10;&#10;## Steps&#10;&#10;1. Check X&#10;2. Verify Y" oninput="kbUpdate(\'' + active.id + '\', \'body\', this.value)">' + kbEsc(active.body) + '</textarea>';
+
   main.innerHTML =
     '<div class="kb-edit-head">' +
       '<input class="kb-edit-title" type="text" value="' + kbEsc(active.title) + '" placeholder="Entry title" oninput="kbUpdate(\'' + active.id + '\', \'title\', this.value)">' +
@@ -146,9 +210,12 @@ function kbRender() {
         '<select onchange="kbUpdate(\'' + active.id + '\', \'severity\', this.value)">' +
           ['P1', 'P2', 'P3', 'Info'].map(function(s) { return '<option' + (s === active.severity ? ' selected' : '') + '>' + s + '</option>'; }).join('') +
         '</select>' +
+        '<button class="kb-preview-toggle' + (previewOn ? ' kb-preview-on' : '') + '" onclick="kbTogglePreview()" title="Toggle preview pane">' +
+          (previewOn ? '\u25A3 Edit + preview' : '\u25A1 Preview') +
+        '</button>' +
       '</div>' +
     '</div>' +
-    '<textarea class="kb-edit-body" placeholder="# Summary&#10;&#10;What this covers…&#10;&#10;## Steps&#10;&#10;1. Check X&#10;2. Verify Y&#10;&#10;## Escalation&#10;&#10;If X fails, page Y." oninput="kbUpdate(\'' + active.id + '\', \'body\', this.value)">' + kbEsc(active.body) + '</textarea>' +
+    bodyPane +
     '<div class="kb-edit-footer">' +
       '<span class="kb-edit-meta">Updated ' + new Date(active.updated).toLocaleString() + '</span>' +
       '<div class="kb-edit-actions">' +
@@ -156,6 +223,14 @@ function kbRender() {
         '<button class="tl-btn tl-btn-del" onclick="kbDelete(\'' + active.id + '\')">Delete</button>' +
       '</div>' +
     '</div>';
+}
+
+function kbUpdatePreview() {
+  var pane = document.getElementById('kbPreviewPane');
+  if (!pane) return;
+  var list = kbLoad();
+  var active = list.find(function(e) { return e.id === KB_ACTIVE_ID; });
+  if (active) pane.innerHTML = kbMdToHtml(active.body);
 }
 
 function kbCopy(id) {

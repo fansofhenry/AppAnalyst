@@ -3,11 +3,50 @@
 // Barrier cards, lifecycle, matrix, equity, correlator
 // ═══════════════════════════════════════════════════════
 
+// ── Personal barrier tracking: which barriers are active in your work ──
+var BARRIERS_STATE_KEY = 'appanalyst.barriers.state.v1';
+
+function barriersStateLoad() {
+  try { return JSON.parse(localStorage.getItem(BARRIERS_STATE_KEY) || '{}'); }
+  catch (e) { return {}; }
+}
+function barriersStateSave(s) { localStorage.setItem(BARRIERS_STATE_KEY, JSON.stringify(s)); }
+
+function barrierToggleActive(n, ev) {
+  if (ev) ev.stopPropagation();
+  var s = barriersStateLoad();
+  if (!s[n]) s[n] = {};
+  s[n].active = !s[n].active;
+  s[n].updated = new Date().toISOString();
+  barriersStateSave(s);
+  var card = document.querySelector('.b-card[data-barrier="' + n + '"]');
+  if (card) {
+    card.classList.toggle('b-active', s[n].active);
+    var btn = card.querySelector('.b-active-btn');
+    if (btn) btn.textContent = s[n].active ? '\u2713 Active concern' : '\u25CB Mark as active';
+  }
+  barriersUpdateSummary();
+}
+
+function barriersUpdateSummary() {
+  var s = barriersStateLoad();
+  var activeCount = Object.keys(s).filter(function(k) { return s[k].active; }).length;
+  var summary = document.getElementById('barriersSummary');
+  if (summary) {
+    summary.innerHTML = activeCount > 0
+      ? '<strong>' + activeCount + '</strong> barrier' + (activeCount === 1 ? '' : 's') + ' marked as active in your work'
+      : 'Click <strong>Mark as active</strong> on any barrier below to track which are affecting your work right now.';
+  }
+}
+
 // Render barrier cards
 var bGrid = document.getElementById('bGrid');
+var barriersInitState = barriersStateLoad();
 barriers.forEach(function(b) {
   var card = document.createElement('div');
-  card.className = 'b-card b-sev-' + b.sev;
+  var isActive = !!(barriersInitState[b.n] && barriersInitState[b.n].active);
+  card.className = 'b-card b-sev-' + b.sev + (isActive ? ' b-active' : '');
+  card.setAttribute('data-barrier', b.n);
   card.innerHTML =
     '<div class="b-head"><div class="b-num">' + b.n + '</div><div class="b-title">' + b.title + '</div>' +
     (b.ticketPct ? '<span style="font-family:var(--mono);font-size:.5rem;padding:.12rem .4rem;border-radius:100px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-2);white-space:nowrap;margin-left:auto">~' + b.ticketPct + '% of tickets</span>' : '') +
@@ -16,10 +55,15 @@ barriers.forEach(function(b) {
     '<div class="b-d-box"><div class="b-d-label lbl-red">The Barrier</div><div class="b-d-text">' + b.impact + '</div></div>' +
     '<div class="b-d-box"><div class="b-d-label lbl-grey">Who\'s Affected</div><div class="b-d-text">' + b.who + '</div></div>' +
     '<div class="b-d-box" style="background:var(--primary-light);border-color:var(--primary-bd)"><div class="b-d-label lbl-green">Analyst Approach</div><div class="b-d-text">' + b.approach + '</div></div>' +
-    '</div></div>';
+    '</div>' +
+    '<div class="b-actions">' +
+      '<button class="b-active-btn" onclick="barrierToggleActive(' + b.n + ', event)">' + (isActive ? '\u2713 Active concern' : '\u25CB Mark as active') + '</button>' +
+    '</div>' +
+    '</div>';
   card.addEventListener('click', function() { card.classList.toggle('expanded'); });
   bGrid.appendChild(card);
 });
+barriersUpdateSummary();
 
 // Lifecycle flow
 // lcData is a global from js/data/barriers.js
