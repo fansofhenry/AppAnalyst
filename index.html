@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="css/animations.css">
 <link rel="stylesheet" href="css/modes.css">
 <link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/print.css">
 
 <style>
 /* ── Hub Dashboard Overrides ── */
@@ -326,7 +327,7 @@
   <a class="nav-brand" href="#" onclick="event.preventDefault();(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" style="text-decoration:none;cursor:pointer" title="Back to top"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">AppAnalyst · CVC-OEI</span></a>
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0" aria-hidden="true"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Sections</button>
   <div class="a11y-toggle" id="a11yToggle" onclick="toggleA11y()" role="switch" aria-checked="false" aria-label="Toggle accessibility high-contrast mode" tabindex="0"><span class="a11y-icon" aria-hidden="true">&#9855;</span><span class="a11y-label">Accessibility</span><div class="a11y-switch"></div></div>
-  <button class="theme-toggle-btn" id="themeToggle" onclick="themeToggle()" title="Toggle theme (D)"><span class="theme-icon">&#9790;</span><span class="theme-label">Dark</span></button>
+  <button class="theme-toggle-btn" id="themeToggle" onclick="themeToggle()" title="Toggle theme (Shift+D)"><span class="theme-icon">&#9790;</span><span class="theme-label">Dark</span></button>
   <div class="nav-links">
     <a href="#monitor" class="nv nv-amber"><span class="nav-num">1</span>Status</a><a href="#lookup" class="nv nv-blue"><span class="nav-num">2</span>Colleges</a><a href="#flow" class="nv nv-sky"><span class="nav-num">3</span>Architecture</a><a href="#tracer" class="nv nv-rose"><span class="nav-num">4</span>Diagnostics</a><a href="#patterns" class="nv nv-orange"><span class="nav-num">5</span>Intelligence</a><a href="#kb" class="nv nv-green"><span class="nav-num">6</span>KB</a><a href="#comms" class="nv nv-indigo"><span class="nav-num">7</span>Comms</a><a href="#outreach" class="nv nv-teal"><span class="nav-num">8</span>Outreach</a><a href="#aiVision" class="nv nv-purple"><span class="nav-num">9</span>AI</a><a href="#barrierOverview" class="nav-barrier"><span class="nav-num">0</span>Barriers</a>
   </div>
@@ -1262,6 +1263,14 @@ function showBarrierView(view,btn){
 
 <button class="back-to-top" id="backToTop" onclick="(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&uarr;</button>
 
+<!-- ═══ WELCOME TOUR ═══ -->
+<div class="welcome-overlay" id="welcomeOverlay" onclick="if(event.target===this)welcomeDismiss(false)" role="dialog" aria-label="Welcome tour">
+  <div class="welcome-modal">
+    <button class="welcome-close" onclick="welcomeDismiss(true)" aria-label="Close and don&rsquo;t show again">&times;</button>
+    <div id="welcomeBody"></div>
+  </div>
+</div>
+
 <!-- ═══ SEARCH FLOATING BUTTON ═══ -->
 <button class="search-fab" onclick="searchOpen()" aria-label="Open search (Cmd+K)" title="Search (&#8984;K)">
   <span class="search-fab-icon">&#128269;</span>
@@ -1342,6 +1351,8 @@ function showBarrierView(view,btn){
     <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.3rem">Presentation</div>
     <div class="kb-help-row"><span class="kb-help-desc">Zoom screenshare mode</span><span class="kb-help-key">Z</span></div>
     <div class="kb-help-row"><span class="kb-help-desc">Accessibility mode</span><span class="kb-help-key">A</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc">Toggle dark theme</span><span class="kb-help-key">&#8679;D</span></div>
+    <div class="kb-help-row"><span class="kb-help-desc">Global search</span><span class="kb-help-key">&#8984;K</span></div>
     </div>
     <div class="kb-help-close">Press any key or click outside to close</div>
   </div>
@@ -1436,6 +1447,8 @@ document.addEventListener('keydown', function(e) {
 <script src="js/realPatterns.js"></script>
 <script src="js/realTracer.js"></script>
 <script src="js/realComms.js"></script>
+<script src="js/navBadge.js"></script>
+<script src="js/welcome.js"></script>
 <script src="js/barriers.js"></script>
 <script src="js/outreach.js"></script>
 <script src="js/lookup.js"></script>

@@ -973,6 +973,59 @@
   padding-top: .5rem;
   border-top: 1px dashed var(--border);
   margin-top: .5rem;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+.tl-row-footer-actions {
+  display: flex;
+  gap: .4rem;
+  flex-wrap: wrap;
+}
+
+.tl-kb-suggest {
+  margin: .75rem 0;
+  padding: .75rem .9rem;
+  background: var(--amber-light);
+  border: 1px solid var(--amber-bd);
+  border-radius: var(--r);
+}
+.tl-kb-suggest-label {
+  font-family: var(--mono);
+  font-size: .58rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--amber);
+  font-weight: 700;
+  margin-bottom: .45rem;
+}
+.tl-kb-suggest-item {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+  padding: .4rem .55rem;
+  margin: .2rem 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: all .12s;
+}
+.tl-kb-suggest-item:hover {
+  border-color: var(--amber);
+  background: var(--surface-2);
+}
+.tl-kb-sug-title {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}
+.tl-kb-sug-meta {
+  font-family: var(--mono);
+  font-size: .6rem;
+  color: var(--text-3);
 }
 .tl-meta {
   font-family: var(--mono);
@@ -1760,6 +1813,122 @@
     padding: .65rem .85rem;
   }
   .search-fab-key { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   WELCOME TOUR MODAL
+   ═══════════════════════════════════════════════════════ */
+.welcome-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 24, 21, .65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 10002;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+.welcome-overlay.welcome-show { display: flex; animation: searchFadeIn .2s ease; }
+.welcome-modal {
+  position: relative;
+  width: min(580px, 100%);
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  padding: 2.25rem 2.25rem 1.75rem;
+  box-shadow: var(--shadow-xl), 0 0 0 1px var(--border);
+  animation: searchSlideIn .25s cubic-bezier(.16,1,.3,1);
+}
+.welcome-close {
+  position: absolute;
+  top: .75rem;
+  right: .85rem;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  font-size: 1.4rem;
+  color: var(--text-3);
+  cursor: pointer;
+  border-radius: 4px;
+  line-height: 1;
+}
+.welcome-close:hover { background: var(--bg-2); color: var(--text); }
+
+.welcome-progress {
+  display: flex;
+  gap: .4rem;
+  margin-bottom: 1.5rem;
+}
+.welcome-dot {
+  flex: 1;
+  height: 4px;
+  background: var(--bg-3);
+  border-radius: 100px;
+  transition: background .3s;
+}
+.welcome-dot-done { background: var(--primary-bd); }
+.welcome-dot-active { background: var(--primary); }
+
+.welcome-title {
+  font-family: var(--display);
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 1rem;
+  line-height: 1.25;
+}
+.welcome-content {
+  font-family: var(--body);
+  font-size: .92rem;
+  line-height: 1.7;
+  color: var(--text-2);
+  margin-bottom: 1.25rem;
+}
+.welcome-content strong { color: var(--text); }
+.welcome-content kbd {
+  display: inline-block;
+  padding: .1rem .4rem;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: var(--text-2);
+}
+.welcome-foot-note {
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--text-3);
+  padding: .75rem .9rem;
+  background: var(--surface-2);
+  border-left: 3px solid var(--primary);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  line-height: 1.55;
+}
+.welcome-foot-note kbd {
+  display: inline-block;
+  padding: .08rem .35rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: .62rem;
+  color: var(--text-2);
+}
+.welcome-actions {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--border);
+}
+.welcome-step-count {
+  font-family: var(--mono);
+  font-size: .62rem;
+  color: var(--text-3);
 }
 
 /* ═══════════════════════════════════════════════════════

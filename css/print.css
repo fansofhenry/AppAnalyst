@@ -1,0 +1,98 @@
+/* ═══════════════════════════════════════════════════════
+   PRINT CSS — Archive-friendly output for tickets, KB, and
+   escalation drafts. Everything else is hidden.
+   ═══════════════════════════════════════════════════════ */
+
+@media print {
+  /* Hide noise */
+  nav, .toc-btn, .theme-toggle-btn, .a11y-toggle, .nav-links,
+  #nav, .search-fab, .cvc-fab, .cvc-overlay, .search-overlay,
+  .backup-overlay, .welcome-overlay, .kb-overlay,
+  .toc-panel, .hub-footer, .hub-header::before,
+  .sec-group-divider, .fu, .demo-badge,
+  .rm-view-toggle, .demo-view-banner,
+  #demoMonitorBody, #demoPatternsBody, #demoTracerBody, #demoCommsBody,
+  .live-alert, .scenario-status-bar {
+    display: none !important;
+  }
+
+  /* Reset page chrome */
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 10pt !important;
+  }
+  html[data-theme="dark"] body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .sec, .sec-alt, section {
+    background: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 1rem 0 !important;
+    break-inside: avoid;
+  }
+  .wrap {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .tool-frame {
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    background: #fff !important;
+  }
+  .tool-bar {
+    background: #f5f5f5 !important;
+    border-bottom: 1px solid #ccc !important;
+  }
+  .tool-dots, .tool-hint { display: none !important; }
+
+  h2, h3, h4 {
+    color: #000 !important;
+    page-break-after: avoid;
+  }
+
+  /* Ticket log: expand all rows for print */
+  .tl-row { break-inside: avoid; }
+  .tl-detail { display: block !important; }
+
+  /* KB: show full entry */
+  .kb-sidebar, .kb-toolbar { display: none !important; }
+  .kb-layout { grid-template-columns: 1fr !important; }
+  .kb-edit-body { min-height: auto !important; border: none !important; }
+
+  /* Ensure every section starts on its own page for long archives */
+  section.sec { page-break-before: auto; }
+
+  /* Links: show URL after text */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    color: #555;
+  }
+  /* But not for internal anchors */
+  a[href^="#"]::after { content: none !important; }
+
+  /* Remove hover transforms */
+  * { transform: none !important; transition: none !important; animation: none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   REDUCED MOTION — Respect user preference
+   ═══════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .today-dot, .nav-count-badge.nav-badge-urgent {
+    animation: none !important;
+  }
+}

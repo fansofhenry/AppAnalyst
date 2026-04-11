@@ -19,6 +19,7 @@ function tlLoad() {
 
 function tlSave(tickets) {
   localStorage.setItem(TL_KEY, JSON.stringify(tickets));
+  if (typeof navBadgeUpdate === 'function') navBadgeUpdate();
 }
 
 function tlId() {
@@ -191,13 +192,93 @@ function tlRender() {
         '<div class="tl-field tl-field-full"><label>Resolution (fill when closing)</label>' +
           '<textarea rows="2" placeholder="What fixed it. Consider promoting to a KB entry." oninput="tlUpdate(\'' + t.id + '\', \'resolution\', this.value)">' + tlEsc(t.resolution) + '</textarea>' +
         '</div>' +
+        tlKbSuggestions(t) +
         '<div class="tl-row-footer">' +
           '<span class="tl-meta">Created ' + new Date(t.created).toLocaleString() + ' · id ' + t.id + '</span>' +
-          '<button class="tl-btn tl-btn-del" onclick="tlDelete(\'' + t.id + '\')">Delete</button>' +
+          '<div class="tl-row-footer-actions">' +
+            (t.resolution ? '<button class="tl-btn" onclick="tlPromoteToKb(\'' + t.id + '\')">Save resolution to KB</button>' : '') +
+            '<button class="tl-btn tl-btn-del" onclick="tlDelete(\'' + t.id + '\')">Delete</button>' +
+          '</div>' +
         '</div>' +
       '</div>' +
     '</div>';
   }).join('');
+}
+
+// ── KB suggestions: find existing entries that match current symptom ──
+function tlKbSuggestions(t) {
+  var symptom = (t.symptom || '').trim().toLowerCase();
+  if (symptom.length < 4) return '';
+  var kb = [];
+  try { kb = JSON.parse(localStorage.getItem('appanalyst.kb.v1') || '[]'); } catch (e) { return ''; }
+  if (kb.length === 0) return '';
+
+  // Tokenize symptom into words, score each KB entry by match count
+  var tokens = symptom.split(/\s+/).filter(function(w) { return w.length >= 3; });
+  if (tokens.length === 0) return '';
+
+  var scored = kb.map(function(entry) {
+    var hay = (entry.title + ' ' + entry.body + ' ' + entry.system + ' ' + entry.audience).toLowerCase();
+    var score = 0;
+    tokens.forEach(function(tok) { if (hay.indexOf(tok) >= 0) score++; });
+    // Bonus: same system match
+    if (t.system && entry.system === t.system) score += 2;
+    return { entry: entry, score: score };
+  }).filter(function(s) { return s.score > 0; }).sort(function(a, b) { return b.score - a.score; }).slice(0, 3);
+
+  if (scored.length === 0) return '';
+
+  return '<div class="tl-kb-suggest">' +
+    '<div class="tl-kb-suggest-label">&#9768; Related KB entries</div>' +
+    scored.map(function(s) {
+      var e = s.entry;
+      return '<a class="tl-kb-suggest-item" onclick="event.stopPropagation();document.getElementById(\'kb\').scrollIntoView({behavior:\'smooth\'});setTimeout(function(){if(typeof kbSelect===\'function\')kbSelect(\'' + e.id + '\')},400);return false">' +
+        '<span class="tl-kb-sug-title">' + tlEsc(e.title) + '</span>' +
+        '<span class="tl-kb-sug-meta">' + tlEsc(e.system) + ' &middot; ' + tlEsc(e.audience) + '</span>' +
+      '</a>';
+    }).join('') +
+  '</div>';
+}
+
+// ── Promote ticket resolution to a KB entry ──
+function tlPromoteToKb(id) {
+  if (typeof kbLoad !== 'function' || typeof kbSave !== 'function') { toast('KB not loaded'); return; }
+  var t = tlLoad().find(function(x) { return x.id === id; });
+  if (!t) return;
+  if (!t.resolution || !t.resolution.trim()) { toast('Fill in the resolution first'); return; }
+
+  // Guess audience from system
+  var audience = 'General';
+  var systemToAudience = {
+    'Banner Direct': 'A&R',
+    'Banner Ethos': 'A&R',
+    'Colleague Ethos': 'A&R',
+    'PeopleSoft': 'A&R',
+    'CCCApply': 'A&R',
+    'Canvas': 'General',
+    'SSO / IdP': 'General'
+  };
+  if (systemToAudience[t.system]) audience = systemToAudience[t.system];
+
+  var body = '## Symptom\n\n' + (t.symptom || '') + '\n\n' +
+    '## Context\n\n' + (t.notes || '(no notes)') + '\n\n' +
+    '## Resolution\n\n' + t.resolution;
+
+  var list = kbLoad();
+  var entry = {
+    id: 'K' + Date.now().toString(36) + Math.random().toString(36).slice(2, 4),
+    title: t.symptom || 'Resolved ticket',
+    system: t.system || 'General',
+    audience: audience,
+    severity: 'P3',
+    body: body,
+    updated: new Date().toISOString()
+  };
+  list.unshift(entry);
+  kbSave(list);
+  if (typeof kbRender === 'function') kbRender();
+  if (typeof todayRender === 'function') todayRender();
+  toast('Saved to KB — scroll to runbook to edit');
 }
 
 function tlRenderSummary(id) {

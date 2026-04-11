@@ -493,3 +493,30 @@ html[data-theme="dark"] #nav {
 html[data-theme="dark"] #nav.scrolled {
   background: rgba(22, 19, 16, .95);
 }
+
+.nav-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 .4rem;
+  margin-left: .35rem;
+  border-radius: 100px;
+  background: var(--blue);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: .6rem;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: middle;
+}
+.nav-count-badge.nav-badge-aging { background: var(--amber); }
+.nav-count-badge.nav-badge-urgent {
+  background: var(--red);
+  animation: navBadgePulse 2s ease-in-out infinite;
+}
+@keyframes navBadgePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(185, 28, 28, .4); }
+  50% { box-shadow: 0 0 0 4px rgba(185, 28, 28, 0); }
+}

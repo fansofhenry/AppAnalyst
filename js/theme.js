@@ -35,11 +35,12 @@ function themeRenderButton() {
   btn.setAttribute('aria-label', current === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
 }
 
-// Bind keyboard shortcut 'D'
+// Bind keyboard shortcut Shift+D (avoids single-letter D which some
+// browsers grab for back/bookmarks).
 document.addEventListener('keydown', function(e) {
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
   if (e.metaKey || e.ctrlKey || e.altKey) return;
-  if (e.key === 'd' || e.key === 'D') {
+  if (e.shiftKey && (e.key === 'D' || e.key === 'd')) {
     var overlay = document.getElementById('kbOverlay');
     if (overlay && overlay.classList.contains('kb-show')) return;
     e.preventDefault();
