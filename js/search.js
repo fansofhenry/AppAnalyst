@@ -100,6 +100,24 @@ function searchQuery(q) {
     });
   } catch (e) {}
 
+  // Glossary terms
+  if (typeof GLOSSARY_TERMS !== 'undefined' && q) {
+    GLOSSARY_TERMS.forEach(function(t) {
+      var hay = (t.term + ' ' + t.long + ' ' + t.body + ' ' + (t.tags || []).join(' ')).toLowerCase();
+      if (hay.indexOf(q) >= 0) {
+        results.push({
+          kind: 'glossary',
+          id: t.term,
+          label: t.term + ' — ' + t.long,
+          desc: t.body.slice(0, 100),
+          score: t.term.toLowerCase() === q ? 110
+               : t.term.toLowerCase().indexOf(q) === 0 ? 95
+               : t.long.toLowerCase().indexOf(q) === 0 ? 85 : 65
+        });
+      }
+    });
+  }
+
   // Colleges
   if (typeof collegeDB !== 'undefined') {
     var overlay = {};
@@ -136,8 +154,8 @@ function searchRender(q) {
   }
 
   body.innerHTML = SEARCH_RESULTS.map(function(r, i) {
-    var iconMap = { section: '§', ticket: '⌘', kb: '◆', college: '●' };
-    var kindLabel = { section: 'Section', ticket: 'Ticket', kb: 'KB', college: 'College' };
+    var iconMap = { section: '§', ticket: '⌘', kb: '◆', college: '●', glossary: 'ℹ' };
+    var kindLabel = { section: 'Section', ticket: 'Ticket', kb: 'KB', college: 'College', glossary: 'Glossary' };
     return '<div class="search-result' + (i === 0 ? ' search-selected' : '') + '" data-i="' + i + '" onclick="searchPick(' + i + ')" onmouseover="searchHover(' + i + ')">' +
       '<span class="search-icon search-icon-' + r.kind + '">' + iconMap[r.kind] + '</span>' +
       '<div class="search-main">' +
@@ -179,6 +197,18 @@ function searchPick(i) {
       var lk = document.getElementById('lookup');
       if (lk) lk.scrollIntoView({ behavior: 'smooth' });
       setTimeout(function() { if (typeof clToggle === 'function') clToggle(r.id); }, 400);
+    } else if (r.kind === 'glossary') {
+      var gl = document.getElementById('glossary');
+      if (gl) gl.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(function() {
+        var slug = 'gloss-' + r.id.toLowerCase().replace(/[^a-z0-9]/g, '-');
+        var el = document.getElementById(slug);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.add('gloss-highlight');
+          setTimeout(function() { el.classList.remove('gloss-highlight'); }, 1800);
+        }
+      }, 450);
     }
   }, 150);
 }

@@ -27,7 +27,7 @@ function routerApply() {
 
   // Student guide language
   var lang = params.get('lang');
-  if (lang && (lang === 'en' || lang === 'es')) {
+  if (lang && ['en', 'es', 'zh', 'vi'].indexOf(lang) >= 0) {
     try { localStorage.setItem('appanalyst.student.lang.v1', lang); } catch (e) {}
   }
 

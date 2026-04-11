@@ -148,7 +148,10 @@ function roleRenderMenu() {
   '<div class="role-share">' +
     '<div class="role-share-label">Share this view</div>' +
     '<div class="role-share-desc">Copy a link that opens this site in ' + roleMeta().short + ' mode for anyone you send it to.</div>' +
-    '<button class="tl-btn" onclick="routerCopyShareLink(\'' + current + '\')">Copy share link</button>' +
+    '<div style="display:flex;gap:.4rem;flex-wrap:wrap">' +
+      '<button class="tl-btn" onclick="routerCopyShareLink(\'' + current + '\')">Copy share link</button>' +
+      '<button class="tl-btn" onclick="qrefPrintCurrent()">Print quick-ref card</button>' +
+    '</div>' +
   '</div>';
 }
 
