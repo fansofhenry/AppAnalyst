@@ -6,6 +6,30 @@
 var toolAnchors = ['monitor', 'lookup', 'flow', 'tracer', 'patterns', 'kb', 'comms', 'outreach', 'aiVision', 'barrierOverview'];
 
 document.addEventListener('keydown', function(e) {
+  // Esc closes any open modal (works even while focused in inputs)
+  if (e.key === 'Escape') {
+    var search = document.getElementById('searchOverlay');
+    if (search && search.classList.contains('search-show')) {
+      if (typeof searchClose === 'function') { searchClose(); return; }
+    }
+    var backup = document.getElementById('backupModal');
+    if (backup && backup.classList.contains('backup-show')) {
+      if (typeof backupClose === 'function') { backupClose(); return; }
+    }
+    var packet = document.getElementById('packetOverlay');
+    if (packet && packet.classList.contains('packet-show')) {
+      if (typeof packetClose === 'function') { packetClose(); return; }
+    }
+    var welcome = document.getElementById('welcomeOverlay');
+    if (welcome && welcome.classList.contains('welcome-show')) {
+      if (typeof welcomeDismiss === 'function') { welcomeDismiss(true); return; }
+    }
+    var roleMenu = document.getElementById('roleMenu');
+    if (roleMenu && roleMenu.classList.contains('role-menu-open')) {
+      if (typeof roleCloseMenu === 'function') { roleCloseMenu(); return; }
+    }
+  }
+
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
   var overlay = document.getElementById('kbOverlay');

@@ -118,19 +118,26 @@ function roleRenderButton() {
 
 function roleToggleMenu() {
   var menu = document.getElementById('roleMenu');
+  var btn = document.getElementById('roleToggle');
   if (!menu) return;
   menu.classList.toggle('role-menu-open');
-  if (menu.classList.contains('role-menu-open')) {
+  var isOpen = menu.classList.contains('role-menu-open');
+  if (btn) btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  if (isOpen) {
     roleRenderMenu();
     setTimeout(function() {
       document.addEventListener('click', roleOutsideClick);
+      var first = menu.querySelector('.role-option');
+      if (first) first.focus();
     }, 10);
   }
 }
 
 function roleCloseMenu() {
   var menu = document.getElementById('roleMenu');
+  var btn = document.getElementById('roleToggle');
   if (menu) menu.classList.remove('role-menu-open');
+  if (btn) btn.setAttribute('aria-expanded', 'false');
   document.removeEventListener('click', roleOutsideClick);
 }
 

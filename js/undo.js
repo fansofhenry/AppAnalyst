@@ -33,11 +33,14 @@ function undoShowToast() {
     el = document.createElement('div');
     el.id = 'undoToast';
     el.className = 'undo-toast';
+    el.setAttribute('role', 'status');
+    el.setAttribute('aria-live', 'polite');
+    el.setAttribute('aria-atomic', 'true');
     document.body.appendChild(el);
   }
   el.innerHTML =
     '<span class="undo-toast-msg">Deleted <strong>' + (UNDO_STATE ? UNDO_STATE.label : 'item') + '</strong></span>' +
-    '<button class="undo-toast-btn" onclick="undoRun()">Undo</button>';
+    '<button class="undo-toast-btn" onclick="undoRun()" aria-label="Undo delete">Undo</button>';
   el.classList.add('undo-show');
 }
 

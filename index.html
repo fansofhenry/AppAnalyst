@@ -336,10 +336,10 @@
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0" aria-hidden="true"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Sections</button>
   <div class="a11y-toggle" id="a11yToggle" onclick="toggleA11y()" role="switch" aria-checked="false" aria-label="Toggle accessibility high-contrast mode" tabindex="0"><span class="a11y-icon" aria-hidden="true">&#9855;</span><span class="a11y-label">Accessibility</span><div class="a11y-switch"></div></div>
   <div class="role-picker-wrap">
-    <button class="role-toggle" id="roleToggle" onclick="roleToggleMenu()"></button>
-    <div class="role-menu" id="roleMenu"></div>
+    <button class="role-toggle" id="roleToggle" onclick="roleToggleMenu()" aria-label="Change your role" aria-haspopup="true" aria-expanded="false"></button>
+    <div class="role-menu" id="roleMenu" role="menu" aria-label="Role picker"></div>
   </div>
-  <span id="autosaveDot" class="autosave-dot" title="Auto-save indicator &mdash; flashes when your data is written to localStorage"></span>
+  <span id="autosaveDot" class="autosave-dot" title="Auto-save indicator &mdash; flashes when your data is written to localStorage" role="status" aria-live="polite" aria-label="Data saved"></span>
   <button class="theme-toggle-btn" id="themeToggle" onclick="themeToggle()" title="Toggle theme (Shift+D)"><span class="theme-icon">&#9790;</span><span class="theme-label">Dark</span></button>
   <div class="nav-links">
     <a href="#monitor" class="nv nv-amber"><span class="nav-num">1</span>Status</a><a href="#lookup" class="nv nv-blue"><span class="nav-num">2</span>Colleges</a><a href="#flow" class="nv nv-sky"><span class="nav-num">3</span>Architecture</a><a href="#tracer" class="nv nv-rose"><span class="nav-num">4</span>Diagnostics</a><a href="#patterns" class="nv nv-orange"><span class="nav-num">5</span>Intelligence</a><a href="#kb" class="nv nv-green"><span class="nav-num">6</span>KB</a><a href="#comms" class="nv nv-indigo"><span class="nav-num">7</span>Comms</a><a href="#outreach" class="nv nv-teal"><span class="nav-num">8</span>Outreach</a><a href="#aiVision" class="nv nv-purple"><span class="nav-num">9</span>AI</a><a href="#barrierOverview" class="nav-barrier"><span class="nav-num">0</span>Barriers</a>
@@ -388,6 +388,7 @@
         <button class="today-btn" onclick="if(typeof searchOpen===&#39;function&#39;)searchOpen()"><kbd>&#8984;K</kbd> Search</button>
         <button class="today-btn" onclick="if(typeof backupOpen===&#39;function&#39;){backupOpen();backupRenderStats();}" title="Backup and restore all local data">Backup</button>
         <button class="today-btn" onclick="if(typeof packetOpen===&#39;function&#39;)packetOpen()" title="Generate a printable one-pager for a partner college">Partner packet</button>
+        <button class="today-btn" onclick="if(typeof handoffGenerate===&#39;function&#39;)handoffGenerate()" title="Generate a printable handoff packet summarizing your current work">Handoff packet</button>
       </div>
     </div>
     <div id="todayBody"></div>
@@ -832,6 +833,7 @@
         </label>
       </div>
       <div id="tlBulkBar" class="tl-bulk-bar"></div>
+      <datalist id="tlTagList"></datalist>
       <div class="tl-body" id="tlBody"></div>
       <div class="tl-privacy">Stored in <code>localStorage</code> key <code>appanalyst.tickets.v1</code>. Clearing browser data erases it — keep JSON backups.</div>
     </div>
@@ -1268,7 +1270,7 @@ function showBarrierView(view,btn){
 }
 </script>
 
-<div class="kb-toast" id="toast"></div>
+<div class="kb-toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
 </main>
 
@@ -1605,6 +1607,8 @@ document.addEventListener('keydown', function(e) {
 <script src="js/tooltips.js"></script>
 <script src="js/pwa.js"></script>
 <script src="js/manager.js"></script>
+<script src="js/handoff.js"></script>
+<script src="js/notifications.js"></script>
 <script src="js/packet.js"></script>
 <script src="js/router.js"></script>
 <script src="js/barriers.js"></script>

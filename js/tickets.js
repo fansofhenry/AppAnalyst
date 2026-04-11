@@ -209,6 +209,27 @@ function tlToggleTemplatesMenu() {
   menu.classList.toggle('tl-templates-open');
 }
 
+function tlClone(id) {
+  var orig = tlLoad().find(function(x) { return x.id === id; });
+  if (!orig) return;
+  var list = tlLoad();
+  var clone = tlNewBlank();
+  clone.college = orig.college;
+  clone.system = orig.system;
+  clone.symptom = orig.symptom;
+  clone.tags = orig.tags || '';
+  clone.vendor = orig.vendor || '';
+  clone.notes = '[Cloned from ' + orig.id + ']\n' + (orig.notes || '');
+  list.unshift(clone);
+  tlSave(list);
+  tlRender();
+  setTimeout(function() {
+    var row = document.querySelector('.tl-row[data-id="' + clone.id + '"]');
+    if (row) { row.classList.add('tl-expanded'); row.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  }, 30);
+  toast('Cloned');
+}
+
 function tlSetFollowUpDays(id, days) {
   if (days == null) {
     tlUpdate(id, 'followUp', '');
@@ -411,6 +432,14 @@ function tlRender() {
     return;
   }
 
+  // Populate tag autocomplete datalist
+  var tlDatalist = document.getElementById('tlTagList');
+  if (tlDatalist) {
+    tlDatalist.innerHTML = tlAllTags().map(function(t) {
+      return '<option value="' + tlEsc(t.tag) + '">';
+    }).join('');
+  }
+
   // Render tag chips above the list
   var tagChipRow = '';
   var allTags = tlAllTags();
@@ -508,8 +537,8 @@ function tlRender() {
         '<div class="tl-field tl-field-full"><label>Symptom (one line — what the user reported)</label>' +
           '<input type="text" value="' + tlEsc(t.symptom) + '" placeholder="Student cannot see MATH 1A in Canvas" oninput="tlUpdate(\'' + t.id + '\', \'symptom\', this.value);tlRenderSummary(\'' + t.id + '\')">' +
         '</div>' +
-        '<div class="tl-field tl-field-full"><label>Tags (comma-separated)</label>' +
-          '<input type="text" value="' + tlEsc(t.tags || '') + '" placeholder="e.g. ethos, fa-delay, needs-kb" oninput="tlUpdate(\'' + t.id + '\', \'tags\', this.value)">' +
+        '<div class="tl-field tl-field-full"><label>Tags (comma-separated, autocomplete)</label>' +
+          '<input type="text" list="tlTagList" value="' + tlEsc(t.tags || '') + '" placeholder="e.g. ethos, fa-delay, needs-kb" oninput="tlUpdate(\'' + t.id + '\', \'tags\', this.value)">' +
         '</div>' +
         '<div class="tl-field tl-field-full"><label>Notes (working log — no PII)</label>' +
           '<textarea rows="3" placeholder="What you tried, who you talked to, error codes…" oninput="tlUpdate(\'' + t.id + '\', \'notes\', this.value)">' + tlEsc(t.notes) + '</textarea>' +
@@ -517,10 +546,12 @@ function tlRender() {
         '<div class="tl-field tl-field-full"><label>Resolution (fill when closing)</label>' +
           '<textarea rows="2" placeholder="What fixed it. Consider promoting to a KB entry." oninput="tlUpdate(\'' + t.id + '\', \'resolution\', this.value)">' + tlEsc(t.resolution) + '</textarea>' +
         '</div>' +
+        tlDupeWarning(t) +
         tlKbSuggestions(t) +
         '<div class="tl-row-footer">' +
           '<span class="tl-meta">Created ' + new Date(t.created).toLocaleString() + ' · id ' + t.id + '</span>' +
           '<div class="tl-row-footer-actions">' +
+            '<button class="tl-btn" onclick="tlClone(\'' + t.id + '\')">Clone</button>' +
             '<button class="tl-btn" onclick="tlSaveAsTemplate(\'' + t.id + '\')">Save as template</button>' +
             (t.resolution ? '<button class="tl-btn" onclick="tlPromoteToKb(\'' + t.id + '\')">Save resolution to KB</button>' : '') +
             '<button class="tl-btn tl-btn-del" onclick="tlDelete(\'' + t.id + '\')">Delete</button>' +
@@ -530,6 +561,50 @@ function tlRender() {
     '</div>';
   }).join('');
   tlRenderBulkBar();
+}
+
+// ── Duplicate detection: find other tickets with similar symptom / same college ──
+function tlDuplicates(t) {
+  var symptom = (t.symptom || '').trim().toLowerCase();
+  if (symptom.length < 6) return [];
+  var list = tlLoad();
+  var tokens = symptom.split(/\s+/).filter(function(w) { return w.length >= 4; });
+  if (tokens.length === 0) return [];
+
+  var scored = list.map(function(other) {
+    if (other.id === t.id) return null;
+    var score = 0;
+    // Same college is a strong signal
+    if (t.college && other.college && t.college.toLowerCase() === other.college.toLowerCase()) score += 3;
+    // Same system
+    if (t.system && other.system && t.system === other.system) score += 1;
+    // Keyword overlap in symptom
+    var otherSym = (other.symptom || '').toLowerCase();
+    var overlap = 0;
+    tokens.forEach(function(tok) { if (otherSym.indexOf(tok) >= 0) overlap++; });
+    if (overlap === 0 && tokens.length > 0) return null;
+    score += overlap * 2;
+    // Newer open tickets rank higher
+    if (other.status !== 'resolved') score += 2;
+    return { ticket: other, score: score };
+  }).filter(function(s) { return s !== null && s.score >= 4; });
+
+  scored.sort(function(a, b) { return b.score - a.score; });
+  return scored.slice(0, 3).map(function(s) { return s.ticket; });
+}
+
+function tlDupeWarning(t) {
+  var dupes = tlDuplicates(t);
+  if (dupes.length === 0) return '';
+  return '<div class="tl-dupe-warn">' +
+    '<div class="tl-dupe-label">&#9888; Possible duplicates</div>' +
+    dupes.map(function(d) {
+      return '<a class="tl-dupe-item" onclick="event.stopPropagation();var r=document.querySelector(\'.tl-row[data-id=&quot;' + d.id + '&quot;]\');if(r){r.classList.add(\'tl-expanded\');r.scrollIntoView({behavior:\'smooth\',block:\'center\'})}return false">' +
+        '<span class="tl-dupe-symptom">' + tlEsc(d.symptom || '(no symptom)') + '</span>' +
+        '<span class="tl-dupe-meta">' + tlEsc(d.college || '') + ' &middot; ' + tlEsc(d.status) + ' &middot; ' + tlAgeText(d.created) + ' old</span>' +
+      '</a>';
+    }).join('') +
+  '</div>';
 }
 
 // ── KB suggestions: find existing entries that match current symptom ──

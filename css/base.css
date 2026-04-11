@@ -248,7 +248,11 @@ p {
 a:focus-visible,
 button:focus-visible,
 [onclick]:focus-visible,
+[tabindex="0"]:focus-visible,
 input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible,
 .lookup-filter:focus-visible,
 .ai-tab:focus-visible,
 .filter-tab:focus-visible,
@@ -263,9 +267,17 @@ input:focus-visible,
 .status-row:focus-visible,
 .lookup-card:focus-visible,
 .msg-preview:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 3px;
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* Never remove focus from form fields when they're inside a container with
+   its own outline — keep the explicit ring visible */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline-offset: 1px;
 }
 
 /* ── Landmark styling ── */
