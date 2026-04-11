@@ -593,6 +593,101 @@
 }
 .cl-showless { font-size: .65rem; color: var(--text-3); padding: .45rem; }
 .cl-showmore:hover { border-color: var(--primary); background: var(--primary-light); }
+
+.cl-tickets {
+  margin-bottom: .85rem;
+  padding: .75rem .9rem;
+  background: var(--blue-light);
+  border: 1px solid var(--blue-bd);
+  border-radius: var(--r);
+}
+.cl-tickets-label {
+  font-family: var(--mono);
+  font-size: .6rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--blue);
+  font-weight: 700;
+  margin-bottom: .5rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.cl-tickets-count {
+  font-weight: 400;
+  color: var(--text-3);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.cl-tickets-list { display: flex; flex-direction: column; gap: .3rem; }
+.cl-ticket-item {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .4rem .55rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .12s;
+}
+.cl-ticket-item:hover { border-color: var(--blue); }
+.cl-t-status {
+  font-family: var(--mono);
+  font-size: .54rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: .14rem .4rem;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.cl-t-open { background: var(--blue); color: #fff; }
+.cl-t-resolved { background: var(--primary-light); color: var(--primary); }
+.cl-t-text {
+  font-size: .72rem;
+  color: var(--text-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+.cl-tickets-more {
+  display: block;
+  margin-top: .5rem;
+  padding-top: .5rem;
+  border-top: 1px dashed var(--blue-bd);
+  font-family: var(--mono);
+  font-size: .65rem;
+  color: var(--blue);
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.cl-tickets-more:hover { text-decoration: underline; }
+
+.fip-jump {
+  display: block;
+  margin-top: .85rem;
+  padding: .55rem .85rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--r);
+  font-family: var(--mono);
+  font-size: .7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .15s;
+  width: 100%;
+  text-align: left;
+}
+.fip-jump:hover {
+  background: #0d665f;
+  transform: translateX(2px);
+}
 @media (max-width: 720px) {
   .cl-edit-row { grid-template-columns: 1fr; }
   .cl-contacts-grid { grid-template-columns: repeat(2, 1fr); }

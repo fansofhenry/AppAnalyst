@@ -72,10 +72,20 @@ function roUpdate(id, field, value) {
 }
 
 function roDelete(id) {
-  if (!confirm('Delete this outreach event?')) return;
-  var list = roLoad().filter(function(e) { return e.id !== id; });
+  var all = roLoad();
+  var deleted = all.find(function(e) { return e.id === id; });
+  if (!deleted) return;
+  var list = all.filter(function(e) { return e.id !== id; });
   roSave(list);
   roRender();
+  if (typeof undoPush === 'function') {
+    undoPush(function() {
+      var cur = roLoad();
+      cur.push(deleted);
+      roSave(cur);
+      roRender();
+    }, 'outreach event');
+  }
 }
 
 function roImportTemplate(title, month, notes) {

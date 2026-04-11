@@ -203,11 +203,43 @@ function clToggle(name) {
   }, 30);
 }
 
+function clRelatedTickets(collegeName) {
+  var tickets = [];
+  try { tickets = JSON.parse(localStorage.getItem('appanalyst.tickets.v1') || '[]'); } catch (e) { return ''; }
+  var related = tickets.filter(function(t) { return t.college === collegeName; });
+  if (related.length === 0) return '';
+
+  var open = related.filter(function(t) { return t.status !== 'resolved'; });
+  var resolved = related.filter(function(t) { return t.status === 'resolved'; });
+
+  // Top 4 most recent
+  var recent = related.slice().sort(function(a, b) {
+    return new Date(b.updated || b.created).getTime() - new Date(a.updated || a.created).getTime();
+  }).slice(0, 4);
+
+  return '<div class="cl-tickets">' +
+    '<div class="cl-tickets-label">Related tickets <span class="cl-tickets-count">' +
+      open.length + ' open, ' + resolved.length + ' resolved' +
+    '</span></div>' +
+    '<div class="cl-tickets-list">' +
+      recent.map(function(t) {
+        var statusCls = t.status === 'resolved' ? 'cl-t-resolved' : 'cl-t-open';
+        return '<a class="cl-ticket-item" onclick="event.stopPropagation();document.getElementById(\'ticketLog\').scrollIntoView({behavior:\'smooth\'});setTimeout(function(){var r=document.querySelector(\'.tl-row[data-id=&quot;' + t.id + '&quot;]\');if(r){r.classList.add(\'tl-expanded\');r.scrollIntoView({behavior:\'smooth\',block:\'center\'})}},400);return false">' +
+          '<span class="cl-t-status ' + statusCls + '">' + t.status + '</span>' +
+          '<span class="cl-t-text">' + clEsc(t.symptom || '(no symptom)') + '</span>' +
+        '</a>';
+      }).join('') +
+    '</div>' +
+    (related.length > 4 ? '<a class="cl-tickets-more" onclick="event.stopPropagation();document.getElementById(\'ticketLog\').scrollIntoView({behavior:\'smooth\'});setTimeout(function(){var i=document.querySelector(\'#ticketLog .tl-search\');if(i){i.value=\'' + collegeName.replace(/'/g, "\\'") + '\';if(typeof tlSetSearch===\'function\')tlSetSearch(\'' + collegeName.replace(/'/g, "\\'") + '\')}},400);return false">View all ' + related.length + ' in Ticket Log &rarr;</a>' : '') +
+  '</div>';
+}
+
 function clEditPanel(c) {
   var sisOptions = ['unknown','PeopleSoft','Banner Direct','Banner Ethos','Colleague Direct','Colleague Ethos'];
   var ctc = c.contacts || {};
   var nameAttr = c.name.replace(/'/g, "\\'");
   return '<div class="lookup-card-expand">' +
+    clRelatedTickets(c.name) +
     '<div class="cl-edit-row">' +
       '<div class="cl-edit-field"><label>SIS tier (override)</label>' +
         '<select onchange="clOverlayUpdate(\'' + nameAttr + '\',\'sis\',this.value);clOverlayUpdate(\'' + nameAttr + '\',\'verified\',true);renderLookup(getFilteredColleges())">' +

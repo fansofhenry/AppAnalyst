@@ -715,6 +715,10 @@
       </div>
       <div class="tl-actions">
         <button class="tl-btn tl-btn-new" onclick="tlAdd()">+ New ticket</button>
+        <div class="tl-templates-wrap">
+          <button class="tl-btn" onclick="tlToggleTemplatesMenu()">From template &#9662;</button>
+          <div class="tl-templates-menu" id="tlTemplatesMenu"></div>
+        </div>
         <button class="tl-btn" onclick="tlExportCSV()">Export CSV</button>
         <button class="tl-btn" onclick="tlExportJSON()">Backup JSON</button>
         <label class="tl-btn tl-btn-import">Restore JSON
@@ -1464,6 +1468,8 @@ document.addEventListener('keydown', function(e) {
 <script src="js/navBadge.js"></script>
 <script src="js/welcome.js"></script>
 <script src="js/realOutreach.js"></script>
+<script src="js/undo.js"></script>
+<script src="js/sync.js"></script>
 <script src="js/barriers.js"></script>
 <script src="js/outreach.js"></script>
 <script src="js/lookup.js"></script>

@@ -110,10 +110,20 @@ function obUpdate(id, field, value) {
 }
 
 function obDelete(id) {
-  if (!confirm('Delete this item?')) return;
-  var items = obLoad().filter(function(i) { return i.id !== id; });
+  var all = obLoad();
+  var deleted = all.find(function(i) { return i.id === id; });
+  if (!deleted) return;
+  var items = all.filter(function(i) { return i.id !== id; });
   obSave(items);
   obRender();
+  if (typeof undoPush === 'function') {
+    undoPush(function() {
+      var cur = obLoad();
+      cur.push(deleted);
+      obSave(cur);
+      obRender();
+    }, 'onboarding item');
+  }
 }
 
 function obReset() {

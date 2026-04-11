@@ -4,11 +4,83 @@
 // ═══════════════════════════════════════════════════════
 
 var TL_KEY = 'appanalyst.tickets.v1';
+var TL_TEMPLATES_KEY = 'appanalyst.tickets.templates.v1';
 var TL_SYSTEMS = ['Banner Direct', 'Banner Ethos', 'Colleague Ethos', 'PeopleSoft', 'CCCApply', 'SuperGlue', 'Canvas', 'Ethos API', 'SSO / IdP', 'Other'];
 var TL_STATUSES = ['open', 'waiting-vendor', 'waiting-college', 'waiting-student', 'resolved'];
 var TL_VENDORS = ['', 'Ellucian', 'CCCTC', 'Internal (FHDA ETS)', 'College IT', 'Other'];
 var TL_FILTER = 'open-any';
 var TL_SEARCH = '';
+
+// ── Ticket templates ──────────────────────────────────
+function tlTemplatesLoad() {
+  try { return JSON.parse(localStorage.getItem(TL_TEMPLATES_KEY) || '[]'); }
+  catch (e) { return []; }
+}
+function tlTemplatesSave(list) { localStorage.setItem(TL_TEMPLATES_KEY, JSON.stringify(list)); }
+
+function tlSaveAsTemplate(id) {
+  var t = tlLoad().find(function(x) { return x.id === id; });
+  if (!t) return;
+  var name = prompt('Save this ticket as a template. Name:');
+  if (!name || !name.trim()) return;
+  var templates = tlTemplatesLoad();
+  templates.push({
+    id: 'TPL' + Date.now().toString(36),
+    name: name.trim(),
+    system: t.system,
+    symptom: t.symptom,
+    tags: t.tags || '',
+    notes: t.notes || '',
+    vendor: t.vendor || '',
+    created: new Date().toISOString()
+  });
+  tlTemplatesSave(templates);
+  toast('Template saved: ' + name.trim());
+  tlRender();
+}
+
+function tlAddFromTemplate(templateId) {
+  var tpl = tlTemplatesLoad().find(function(x) { return x.id === templateId; });
+  if (!tpl) return;
+  var list = tlLoad();
+  var ticket = tlNewBlank();
+  ticket.system = tpl.system || ticket.system;
+  ticket.symptom = tpl.symptom || '';
+  ticket.tags = tpl.tags || '';
+  ticket.notes = tpl.notes || '';
+  ticket.vendor = tpl.vendor || '';
+  list.unshift(ticket);
+  tlSave(list);
+  tlRender();
+  setTimeout(function() {
+    var first = document.querySelector('.tl-row[data-id="' + ticket.id + '"]');
+    if (first) first.classList.add('tl-expanded');
+  }, 30);
+  toast('Created from template');
+}
+
+function tlDeleteTemplate(id) {
+  var all = tlTemplatesLoad();
+  var deleted = all.find(function(t) { return t.id === id; });
+  if (!deleted) return;
+  var list = all.filter(function(t) { return t.id !== id; });
+  tlTemplatesSave(list);
+  tlRender();
+  if (typeof undoPush === 'function') {
+    undoPush(function() {
+      var cur = tlTemplatesLoad();
+      cur.push(deleted);
+      tlTemplatesSave(cur);
+      tlRender();
+    }, 'template');
+  }
+}
+
+function tlToggleTemplatesMenu() {
+  var menu = document.getElementById('tlTemplatesMenu');
+  if (!menu) return;
+  menu.classList.toggle('tl-templates-open');
+}
 
 function tlLoad() {
   try {
@@ -69,11 +141,22 @@ function tlAdd() {
 }
 
 function tlDelete(id) {
-  if (!confirm('Delete this ticket? This cannot be undone.')) return;
-  var list = tlLoad().filter(function(t) { return t.id !== id; });
+  var all = tlLoad();
+  var deleted = all.find(function(t) { return t.id === id; });
+  if (!deleted) return;
+  var list = all.filter(function(t) { return t.id !== id; });
   tlSave(list);
   tlRender();
-  toast('Ticket deleted');
+  if (typeof undoPush === 'function') {
+    undoPush(function() {
+      var cur = tlLoad();
+      cur.unshift(deleted);
+      tlSave(cur);
+      tlRender();
+    }, 'ticket');
+  } else {
+    toast('Ticket deleted');
+  }
 }
 
 function tlUpdate(id, field, value) {
@@ -184,6 +267,25 @@ function tlRender() {
       }).join('') + '</div>';
   }
 
+  // Populate templates dropdown menu
+  var tmenu = document.getElementById('tlTemplatesMenu');
+  if (tmenu) {
+    var templates = tlTemplatesLoad();
+    if (templates.length === 0) {
+      tmenu.innerHTML = '<div class="tl-tpl-empty">No templates yet. Open a ticket and click <strong>Save as template</strong> to create one.</div>';
+    } else {
+      tmenu.innerHTML = templates.map(function(tpl) {
+        return '<div class="tl-tpl-item">' +
+          '<button class="tl-tpl-use" onclick="tlAddFromTemplate(\'' + tpl.id + '\');tlToggleTemplatesMenu()">' +
+            '<span class="tl-tpl-name">' + tlEsc(tpl.name) + '</span>' +
+            '<span class="tl-tpl-meta">' + tlEsc(tpl.system) + (tpl.symptom ? ' · ' + tlEsc(tpl.symptom.slice(0, 40)) : '') + '</span>' +
+          '</button>' +
+          '<button class="tl-tpl-del" onclick="tlDeleteTemplate(\'' + tpl.id + '\');tlRender()" title="Delete template">&times;</button>' +
+        '</div>';
+      }).join('');
+    }
+  }
+
   container.innerHTML = tagChipRow + filtered.map(function(t) {
     var ageCls = tlAgeClass(t);
     var symptomShort = t.symptom || '<em style="color:var(--text-3)">no symptom yet</em>';
@@ -242,6 +344,7 @@ function tlRender() {
         '<div class="tl-row-footer">' +
           '<span class="tl-meta">Created ' + new Date(t.created).toLocaleString() + ' · id ' + t.id + '</span>' +
           '<div class="tl-row-footer-actions">' +
+            '<button class="tl-btn" onclick="tlSaveAsTemplate(\'' + t.id + '\')">Save as template</button>' +
             (t.resolution ? '<button class="tl-btn" onclick="tlPromoteToKb(\'' + t.id + '\')">Save resolution to KB</button>' : '') +
             '<button class="tl-btn tl-btn-del" onclick="tlDelete(\'' + t.id + '\')">Delete</button>' +
           '</div>' +

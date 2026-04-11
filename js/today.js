@@ -27,13 +27,15 @@ function todayRender() {
   var container = document.getElementById('todayBody');
   if (!container) return;
 
-  // Load from localStorage — all three stores
+  // Load from localStorage — all stores
   var tickets = [];
   var kb = [];
   var overlay = {};
+  var outreach = [];
   try { tickets = JSON.parse(localStorage.getItem('appanalyst.tickets.v1') || '[]'); } catch (e) {}
   try { kb = JSON.parse(localStorage.getItem('appanalyst.kb.v1') || '[]'); } catch (e) {}
   try { overlay = JSON.parse(localStorage.getItem('appanalyst.colleges.overlay.v1') || '{}'); } catch (e) {}
+  try { outreach = JSON.parse(localStorage.getItem('appanalyst.outreach.v1') || '[]'); } catch (e) {}
 
   // Compute
   var openTickets = tickets.filter(function(t) { return t.status !== 'resolved'; });
@@ -65,6 +67,30 @@ function todayRender() {
   var resolved = tickets.filter(function(t) { return t.status === 'resolved'; }).length;
   var kbCount = kb.length;
   var collegeEditCount = Object.keys(overlay).length;
+
+  // Weekly rollup — things updated or created in the last 7 days
+  var weekAgo = Date.now() - 7 * 86400000;
+  var resolvedThisWeek = tickets.filter(function(t) {
+    if (t.status !== 'resolved') return false;
+    return new Date(t.updated || t.created).getTime() >= weekAgo;
+  }).length;
+  var kbNewThisWeek = kb.filter(function(e) {
+    return new Date(e.updated || 0).getTime() >= weekAgo;
+  }).length;
+  var collegesTouchedThisWeek = Object.keys(overlay).filter(function(name) {
+    var u = overlay[name].updated;
+    return u && new Date(u).getTime() >= weekAgo;
+  }).length;
+  var ticketsCreatedThisWeek = tickets.filter(function(t) {
+    return new Date(t.created).getTime() >= weekAgo;
+  }).length;
+
+  // Current month outreach
+  var curMonth = new Date().getMonth();
+  var monthEvents = outreach.filter(function(e) { return e.month === curMonth; });
+  var monthDone = monthEvents.filter(function(e) { return e.status === 'done'; }).length;
+  var monthPlanned = monthEvents.filter(function(e) { return e.status === 'planned'; }).length;
+  var monthInProgress = monthEvents.filter(function(e) { return e.status === 'in-progress'; }).length;
 
   // ── Top-line stat strip ─────────────────────
   var statStrip =
@@ -146,9 +172,49 @@ function todayRender() {
       ) +
     '</div>';
 
+  // Weekly rollup bar — minimal, horizontal
+  var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var rollup =
+    '<div class="today-rollup">' +
+      '<div class="today-rollup-label">This week</div>' +
+      '<div class="today-rollup-items">' +
+        '<span class="today-rollup-item"><strong>' + ticketsCreatedThisWeek + '</strong> tickets opened</span>' +
+        '<span class="today-rollup-item"><strong>' + resolvedThisWeek + '</strong> resolved</span>' +
+        '<span class="today-rollup-item"><strong>' + kbNewThisWeek + '</strong> KB entries updated</span>' +
+        '<span class="today-rollup-item"><strong>' + collegesTouchedThisWeek + '</strong> colleges touched</span>' +
+      '</div>' +
+    '</div>';
+
+  // Outreach card — this month
+  var outreachCard =
+    '<div class="today-card today-card-outreach">' +
+      '<div class="today-card-head">' +
+        '<div class="today-card-title">' + monthNames[curMonth] + ' outreach</div>' +
+        '<button class="today-card-action" onclick="document.getElementById(\'outreach\').scrollIntoView({behavior:\'smooth\'});setTimeout(function(){if(typeof roAdd===\'function\')roAdd(' + curMonth + ')},400)">+ New</button>' +
+      '</div>' +
+      (monthEvents.length === 0
+        ? '<div class="today-empty">No outreach planned for this month. Click + to add one.</div>'
+        : '<div class="today-outreach-stats">' +
+            '<span class="today-or-stat"><strong>' + monthPlanned + '</strong> planned</span>' +
+            '<span class="today-or-stat"><strong>' + monthInProgress + '</strong> active</span>' +
+            '<span class="today-or-stat"><strong>' + monthDone + '</strong> done</span>' +
+          '</div>' +
+          '<div class="today-list">' + monthEvents.slice(0, 3).map(function(e) {
+            return '<a class="today-item" onclick="document.getElementById(\'outreach\').scrollIntoView({behavior:\'smooth\'})">' +
+              '<span class="today-or-mark today-or-' + e.status + '"></span>' +
+              '<span class="today-item-main">' +
+                '<span class="today-item-title">' + todayEsc(e.title || '(untitled)') + '</span>' +
+                '<span class="today-item-sub">' + todayEsc(e.status) + (e.notes ? ' · ' + todayEsc(e.notes.slice(0, 30)) : '') + '</span>' +
+              '</span>' +
+            '</a>';
+          }).join('') + '</div>'
+      ) +
+    '</div>';
+
   container.innerHTML =
     statStrip +
-    '<div class="today-grid">' + ticketsCard + kbCard + collegesCard + '</div>';
+    rollup +
+    '<div class="today-grid">' + ticketsCard + kbCard + collegesCard + outreachCard + '</div>';
 
   var dateEl = document.getElementById('todayDate');
   if (dateEl) dateEl.textContent = todayFmtDate();

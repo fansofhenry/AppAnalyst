@@ -119,12 +119,24 @@ function kbAdd() {
 }
 
 function kbDelete(id) {
-  if (!confirm('Delete this KB entry? This cannot be undone.')) return;
-  var list = kbLoad().filter(function(e) { return e.id !== id; });
+  var all = kbLoad();
+  var deleted = all.find(function(e) { return e.id === id; });
+  if (!deleted) return;
+  var list = all.filter(function(e) { return e.id !== id; });
   kbSave(list);
   if (KB_ACTIVE_ID === id) KB_ACTIVE_ID = list[0] ? list[0].id : null;
   kbRender();
-  toast('Entry deleted');
+  if (typeof undoPush === 'function') {
+    undoPush(function() {
+      var cur = kbLoad();
+      cur.unshift(deleted);
+      kbSave(cur);
+      KB_ACTIVE_ID = deleted.id;
+      kbRender();
+    }, 'KB entry');
+  } else {
+    toast('Entry deleted');
+  }
 }
 
 function kbUpdate(id, field, value) {
