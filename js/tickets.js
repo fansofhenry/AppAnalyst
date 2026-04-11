@@ -14,6 +14,18 @@ var TL_SEARCH = '';
 var TL_SELECTED = {};  // id -> true for bulk-selected tickets
 var TL_PRESETS_KEY = 'appanalyst.tickets.filterPresets.v1';
 
+// Capped-window rendering: past ~200 rows the browser re-flow cost on
+// filter/bulk-action starts to bite. We render a window and let the user
+// opt into the full list when they need it. Bulk actions still operate on
+// the full filtered set via tlFilter(tlLoad()).
+var TL_VISIBLE_LIMIT = 200;
+var TL_SHOW_ALL = false;
+
+// Schema migration runs once per page load on first tlLoad(). After that
+// the store is known to match the current shape so subsequent reads skip
+// the coerce pass and go straight to JSON.parse.
+var TL_MIGRATED = false;
+
 // ── Filter presets ──
 function tlPresetsLoad() {
   if (typeof safeStorage !== 'undefined') return safeStorage.get(TL_PRESETS_KEY, []);
@@ -375,12 +387,37 @@ function tlSetFollowUpDays(id, days) {
   tlRender();
 }
 
-function tlLoad() {
+function tlLoadRaw() {
   if (typeof safeStorage !== 'undefined') return safeStorage.get(TL_KEY, []);
   try {
     var raw = localStorage.getItem(TL_KEY);
     return raw ? JSON.parse(raw) : [];
   } catch (e) { return []; }
+}
+
+function tlLoad() {
+  var raw = tlLoadRaw();
+  if (TL_MIGRATED || typeof schema === 'undefined' || !schema.coerceTickets) return raw;
+  TL_MIGRATED = true;
+  var res = schema.coerceTickets(raw);
+  if (res.dropped > 0 || res.warnings.length > 0) {
+    if (typeof errorLog !== 'undefined') {
+      errorLog.record(
+        'Ticket migration: ' + res.dropped + ' dropped, ' + res.warnings.length + ' warnings. ' +
+        res.warnings.slice(0, 5).join(' | '),
+        'schema.coerceTickets'
+      );
+    }
+    if (typeof console !== 'undefined') {
+      console.warn('[schema] migrated tickets:', res.dropped, 'dropped,', res.warnings.length, 'warnings');
+    }
+  }
+  if (res.changed > 0 || res.dropped > 0) {
+    // Persist the coerced form back so future loads are fast and clean.
+    if (typeof safeStorage !== 'undefined') safeStorage.set(TL_KEY, res.tickets);
+    else try { localStorage.setItem(TL_KEY, JSON.stringify(res.tickets)); } catch (e) {}
+  }
+  return res.tickets;
 }
 
 function tlSave(tickets) {
@@ -852,6 +889,26 @@ function tlFilter(tickets) {
 }
 
 function tlRender() {
+  try {
+    tlRenderInner();
+  } catch (e) {
+    if (typeof errorLog !== 'undefined') errorLog.record(e, 'tlRender');
+    var container = document.getElementById('tlBody');
+    if (container) {
+      container.innerHTML = '<div class="tl-empty" role="alert">' +
+        'Ticket list failed to render. The error has been logged (Storage Health panel). ' +
+        'Refreshing usually clears transient issues.</div>';
+    }
+    if (typeof console !== 'undefined') console.error('[tlRender]', e);
+  }
+}
+
+function tlToggleShowAll() {
+  TL_SHOW_ALL = !TL_SHOW_ALL;
+  tlRender();
+}
+
+function tlRenderInner() {
   var container = document.getElementById('tlBody');
   if (!container) return;
   var tickets = TL_VIEW === 'archive' ? tlArchiveLoad() : tlLoad();
@@ -937,7 +994,24 @@ function tlRender() {
     }
   }
 
-  container.innerHTML = tagChipRow + filtered.map(function(t) {
+  // Capped window: render at most TL_VISIBLE_LIMIT rows unless the user
+  // has opted into the full list. Keeps filter/bulk-action re-renders
+  // snappy at 1000+ tickets. Bulk selection and stats use the full
+  // filtered set, so nothing is hidden from aggregate operations.
+  var totalFiltered = filtered.length;
+  var capped = !TL_SHOW_ALL && totalFiltered > TL_VISIBLE_LIMIT;
+  var visible = capped ? filtered.slice(0, TL_VISIBLE_LIMIT) : filtered;
+  var windowFooter = '';
+  if (capped) {
+    windowFooter = '<div class="tl-window-footer">Showing <strong>' + TL_VISIBLE_LIMIT + '</strong> of ' +
+      totalFiltered + ' matching tickets. <button class="tl-window-more" onclick="tlToggleShowAll()">Show all</button> ' +
+      '<span class="tl-window-hint">(large lists can slow the filter; use search to narrow down)</span></div>';
+  } else if (TL_SHOW_ALL && totalFiltered > TL_VISIBLE_LIMIT) {
+    windowFooter = '<div class="tl-window-footer">Showing all <strong>' + totalFiltered + '</strong>. ' +
+      '<button class="tl-window-more" onclick="tlToggleShowAll()">Show first ' + TL_VISIBLE_LIMIT + '</button></div>';
+  }
+
+  container.innerHTML = tagChipRow + windowFooter + visible.map(function(t) {
     var ageCls = tlAgeClass(t);
     // XSS-safe: tlEsc escapes user input (symptom/college) before interpolation.
     var symptomShort = t.symptom ? tlEsc(t.symptom) : '<em style="color:var(--text-3)">no symptom yet</em>';

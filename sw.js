@@ -7,7 +7,7 @@
 // ═══════════════════════════════════════════════════════
 
 // Bump this when any cached file changes so old clients reload the new assets.
-var CACHE_VERSION = 'appanalyst-v14';
+var CACHE_VERSION = 'appanalyst-v15';
 var PRECACHE_URLS = [
   './',
   './index.html',
@@ -34,6 +34,8 @@ var PRECACHE_URLS = [
   './js/data/ai-vision.js',
   // Core + persistence
   './js/storage.js',
+  './js/errorLog.js',
+  './js/schema.js',
   './js/app.js',
   // Tools
   './js/tickets.js',

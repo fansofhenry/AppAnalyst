@@ -121,6 +121,8 @@
 </footer>
 
 <script src="js/storage.js"></script>
+<script src="js/errorLog.js"></script>
+<script src="js/schema.js"></script>
 <script src="js/insights.js"></script>
 <script>
 (function () {
@@ -564,6 +566,200 @@
       insights.renderInto(div, tickets);
       assertTrue(div.innerHTML.indexOf('<script>alert') < 0, 'raw script must not appear in HTML');
       assertTrue(div.innerHTML.indexOf('onerror=alert') < 0, 'raw onerror must not appear in HTML');
+    });
+  });
+
+  // ══════════════════════════════════════════════════════════════════
+  //  Schema — ticket validation + coercion
+  // ══════════════════════════════════════════════════════════════════
+
+  group('schema.coerceTicket', function () {
+    test('empty object mints id and fills defaults', function () {
+      var r = schema.coerceTicket({});
+      assertTrue(r.ticket && r.ticket.id, 'id minted');
+      assertEqual(r.ticket.system, 'Other');
+      assertEqual(r.ticket.status, 'open');
+      assertTrue(Array.isArray(r.ticket.blockedBy));
+      assertTrue(Array.isArray(r.ticket.subtasks));
+      assertEqual(r.ticket.timeLogged, 0);
+      assertEqual(r.ticket.timerStart, null);
+    });
+
+    test('preserves existing fields', function () {
+      var old = { id: 'T1', created: '2026-03-01T00:00:00Z', updated: '2026-03-01T00:00:00Z', symptom: 'x', system: 'Canvas' };
+      var r = schema.coerceTicket(old);
+      assertEqual(r.ticket.id, 'T1');
+      assertEqual(r.ticket.symptom, 'x');
+      assertEqual(r.ticket.system, 'Canvas');
+    });
+
+    test('old ticket missing blockedBy gets []', function () {
+      var r = schema.coerceTicket({ id: 'T1', created: '2026-03-01T00:00:00Z', updated: '2026-03-01T00:00:00Z' });
+      assertDeepEqual(r.ticket.blockedBy, []);
+      assertDeepEqual(r.ticket.related, []);
+      assertDeepEqual(r.ticket.subtasks, []);
+    });
+
+    test('unparseable created date is replaced and warned', function () {
+      var r = schema.coerceTicket({ id: 'T', created: 'not-a-date', updated: '2026-03-01T00:00:00Z' });
+      assertTrue(r.ticket.created !== 'not-a-date');
+      assertTrue(!isNaN(new Date(r.ticket.created).getTime()));
+      assertTrue(r.warnings.length > 0);
+    });
+
+    test('bad followUp cleared to empty string', function () {
+      var r = schema.coerceTicket({ id: 'T', created: '2026-03-01T00:00:00Z', updated: '2026-03-01T00:00:00Z', followUp: 'garbage' });
+      assertEqual(r.ticket.followUp, '');
+    });
+
+    test('valid YYYY-MM-DD followUp preserved', function () {
+      var r = schema.coerceTicket({ id: 'T', created: '2026-03-01T00:00:00Z', updated: '2026-03-01T00:00:00Z', followUp: '2026-04-15' });
+      assertEqual(r.ticket.followUp, '2026-04-15');
+    });
+
+    test('unknown field preserved in _extra', function () {
+      var r = schema.coerceTicket({ id: 'T', created: '2026-03-01T00:00:00Z', updated: '2026-03-01T00:00:00Z', futureField: 'hi' });
+      assertTrue(r.ticket._extra && r.ticket._extra.futureField === 'hi');
+    });
+
+    test('enum drift kept with warning', function () {
+      var r = schema.coerceTicket({ id: 'T', created: '2026-03-01T00:00:00Z', updated: '2026-03-01T00:00:00Z', system: 'NewSystem' });
+      assertEqual(r.ticket.system, 'NewSystem');
+      assertTrue(r.warnings.some(function (w) { return w.indexOf('system') >= 0; }));
+    });
+
+    test('primitive subtask coerced to object', function () {
+      var r = schema.coerceTicket({ id: 'T', created: '2026-03-01T00:00:00Z', updated: '2026-03-01T00:00:00Z', subtasks: ['step one', 'step two'] });
+      assertEqual(r.ticket.subtasks.length, 2);
+      assertEqual(r.ticket.subtasks[0].text, 'step one');
+      assertEqual(r.ticket.subtasks[0].done, false);
+      assertTrue(typeof r.ticket.subtasks[0].id === 'string');
+    });
+
+    test('negative timeLogged clamped to 0', function () {
+      var r = schema.coerceTicket({ id: 'T', created: '2026-03-01T00:00:00Z', updated: '2026-03-01T00:00:00Z', timeLogged: -50 });
+      assertEqual(r.ticket.timeLogged, 0);
+    });
+
+    test('non-object input returns null ticket', function () {
+      var r = schema.coerceTicket('garbage');
+      assertEqual(r.ticket, null);
+      assertTrue(r.warnings.length > 0);
+    });
+  });
+
+  group('schema.coerceTickets (batch)', function () {
+    test('drops non-object entries and keeps valid ones', function () {
+      var batch = [
+        { id: 'A', created: '2026-03-01T00:00:00Z', updated: '2026-03-01T00:00:00Z' },
+        'garbage',
+        null,
+        { id: 'B', created: '2026-03-01T00:00:00Z', updated: '2026-03-01T00:00:00Z' }
+      ];
+      var r = schema.coerceTickets(batch);
+      assertEqual(r.tickets.length, 2);
+      assertEqual(r.dropped, 2);
+    });
+
+    test('non-array input handled', function () {
+      var r = schema.coerceTickets('not an array');
+      assertEqual(r.tickets.length, 0);
+      assertEqual(r.dropped, 1);
+    });
+
+    test('changed count reflects drift', function () {
+      var r = schema.coerceTickets([{ id: 'A', created: '2026-03-01T00:00:00Z', updated: '2026-03-01T00:00:00Z' }]);
+      // One ticket missing fields → changed must be > 0
+      assertTrue(r.changed >= 1);
+    });
+  });
+
+  group('schema.validateTicket', function () {
+    test('missing id is an error', function () {
+      var v = schema.validateTicket({});
+      assertEqual(v.ok, false);
+      assertTrue(v.errors.some(function (e) { return e.indexOf('id') >= 0; }));
+    });
+
+    test('complete minimal ticket is ok', function () {
+      var v = schema.validateTicket({ id: 'T', created: '2026-03-01T00:00:00Z', updated: '2026-03-01T00:00:00Z' });
+      assertEqual(v.ok, true);
+    });
+
+    test('enum drift is a warning not an error', function () {
+      var v = schema.validateTicket({ id: 'T', created: '2026-03-01T00:00:00Z', updated: '2026-03-01T00:00:00Z', system: 'MadeUp' });
+      assertEqual(v.ok, true);
+      assertTrue(v.warnings.length > 0);
+    });
+  });
+
+  // ══════════════════════════════════════════════════════════════════
+  //  errorLog — ring buffer + dedupe
+  // ══════════════════════════════════════════════════════════════════
+
+  group('errorLog', function () {
+    test('clear → count 0', function () {
+      errorLog.clear();
+      assertEqual(errorLog.count(), 0);
+    });
+
+    test('record captures message, context, name, stack', function () {
+      errorLog.clear();
+      errorLog.record(new Error('boom'), 'testCtx');
+      assertEqual(errorLog.count(), 1);
+      var e = errorLog.recent(1)[0];
+      assertEqual(e.message, 'boom');
+      assertEqual(e.context, 'testCtx');
+      assertEqual(e.name, 'Error');
+      assertTrue(typeof e.stack === 'string' && e.stack.length > 0);
+    });
+
+    test('duplicate within dedupe window is dropped', function () {
+      errorLog.clear();
+      errorLog.record(new Error('dup'), 'ctx');
+      errorLog.record(new Error('dup'), 'ctx');
+      assertEqual(errorLog.count(), 1);
+    });
+
+    test('different context is not deduped', function () {
+      errorLog.clear();
+      errorLog.record(new Error('same'), 'ctxA');
+      errorLog.record(new Error('same'), 'ctxB');
+      assertEqual(errorLog.count(), 2);
+    });
+
+    test('string and object errors both accepted', function () {
+      errorLog.clear();
+      errorLog.record('plain string', 'strCtx');
+      errorLog.record({ message: 'obj err', code: 1 }, 'objCtx');
+      assertEqual(errorLog.count(), 2);
+    });
+
+    test('ring buffer capped at MAX_ENTRIES', function () {
+      errorLog.clear();
+      for (var i = 0; i < errorLog.MAX_ENTRIES + 12; i++) {
+        errorLog.record(new Error('e' + i), 'ctx' + i);
+      }
+      assertEqual(errorLog.count(), errorLog.MAX_ENTRIES);
+      assertEqual(errorLog.recent(1)[0].message, 'e' + (errorLog.MAX_ENTRIES + 11));
+    });
+
+    test('formatForExport produces plain text with context + message', function () {
+      errorLog.clear();
+      errorLog.record(new Error('xyz'), 'expCtx');
+      var fmt = errorLog.formatForExport();
+      assertTrue(fmt.indexOf('expCtx') >= 0);
+      assertTrue(fmt.indexOf('xyz') >= 0);
+    });
+
+    test('empty log formats to fixed string', function () {
+      errorLog.clear();
+      assertEqual(errorLog.formatForExport(), 'No errors logged.');
+    });
+
+    test('normalize handles null and undefined', function () {
+      assertEqual(errorLog.normalize(null).message, 'null');
+      assertTrue(typeof errorLog.normalize(undefined).message === 'string');
     });
   });
 

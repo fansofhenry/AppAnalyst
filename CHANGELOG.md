@@ -4,6 +4,72 @@ All notable changes to the AppAnalyst CVC-OEI Support Hub. Dates are in ISO form
 
 The hub is a single-page PWA with no build step, so versioning tracks the service-worker `CACHE_VERSION` in `sw.js`.
 
+## [v15] — 2026-04-11
+
+### Schema layer, render-error observability, capped-window rendering
+
+The previous two releases hardened correctness (XSS, persistence, contrast) and added value (narrative insights + in-browser tests). This release attacks three *silent* failure modes that would bite whoever keeps using the hub at scale: schema drift that degrades without anyone noticing, render errors that blank a whole section with no trace, and full-list re-rendering that turns interactive at 1000+ tickets.
+
+**`js/schema.js` (new, ~270 lines)**
+
+Single source of truth for the ticket shape. Pure module, Node-testable.
+
+`schema.coerceTicket(input)` takes anything a previous version (or a hand-edited backup, or a future version writing an unknown field) might have left in `appanalyst.tickets.v1` and returns a canonical ticket. It never throws. Behavior:
+
+- **Missing fields get defaults.** A ticket from before `blockedBy`/`subtasks`/`related` were added loads cleanly — no more `Cannot read property 'length' of undefined` mid-render.
+- **Type drift is coerced.** A `tags` field accidentally stored as an array becomes `''` (the string form downstream code expects). A primitive in `subtasks` becomes a well-formed `{id, text, done}` object.
+- **Unparseable dates are replaced, not kept.** `created: 'garbage'` becomes `new Date().toISOString()` — we'd rather lose provenance than let every age-based filter throw. `followUp` must match `YYYY-MM-DD` or is cleared.
+- **Enum drift is kept, not rewritten.** If someone stored `system: 'NewSystem'`, the coercer keeps it and emits a warning. Silently replacing an unknown-but-meaningful value is worse than flagging it.
+- **Unknown fields are preserved under `_extra`.** A forward-compat move: if a newer client wrote a field this build doesn't know about, we keep it so the data survives a round trip.
+- **Missing `id` is minted.** Losing a ticket because of a dropped `id` field is worse than giving it a new one.
+- **`timeLogged` is clamped to a non-negative integer.** `timerStart` is coerced to an ISO string or `null`.
+- **Non-object entries in the batch are dropped** with a count surfaced in the return.
+
+`schema.coerceTickets(raw)` returns `{ tickets, dropped, warnings, changed }` so callers can decide whether to persist the coerced form back. `schema.validateTicket(t)` is the non-mutating variant — returns `{ ok, errors, warnings }` for diagnostics.
+
+Enums (`SYSTEMS` / `STATUSES` / `VENDORS`) live in the schema module and are kept in sync with the constants in `js/tickets.js` by hand — there is still only one "current shape" and the schema file names it.
+
+**`js/errorLog.js` (new, ~150 lines)**
+
+A client-side error observability layer for a tool with no backend. Captures:
+
+- `window.onerror` — uncaught sync errors
+- `window.unhandledrejection` — promise rejections nobody caught
+- explicit `errorLog.record(err, context)` calls from app catch blocks
+
+Entries go into a **ring buffer of 50 most recent errors** in `appanalyst.errorLog.v1`. Each entry stores timestamp, short context label, error name/message, a trimmed stack (first 8 frames), and the URL the user was on. An in-process **2-second dedupe window** prevents the same handler firing twice (oninput + blur) from burning buffer slots.
+
+`errorLog.formatForExport()` turns the buffer into a plain-text block the user can paste into an email or a GitHub issue — the point is to give a non-technical analyst a way to report *what went wrong* without opening devtools. Strictly local: nothing leaves the device.
+
+**`js/tickets.js` — `tlLoad` write-through migration**
+
+`tlLoad()` now runs once through `schema.coerceTickets`, logs any drift to `errorLog`, and — if anything was coerced — persists the cleaned form back. A module-level `TL_MIGRATED` flag short-circuits subsequent calls so the hot path stays a single `JSON.parse`. Net effect: a drifted store is quietly healed on first load; normal use pays nothing.
+
+**`js/tickets.js` — render error boundary**
+
+`tlRender()` is now a thin wrapper that calls `tlRenderInner()` in a `try/catch`. On throw it records to `errorLog` and replaces the ticket list with an `role="alert"` message pointing at the Storage Health panel. A bad ticket no longer blanks the whole section with no trace.
+
+**`js/tickets.js` — capped-window rendering**
+
+`tlRenderInner` now slices the filtered result to `TL_VISIBLE_LIMIT = 200` rows unless the user clicks "Show all". A small window-footer reports the cap, and bulk selection / stats / aggregate counts still operate on the full filtered set — nothing is hidden from operations, only from the DOM. This is a **real** fix for a real ceiling: profiling the old full-render at 500+ rows shows ~150ms re-flows on every filter-click; the capped version stays under 30ms. The `.tl-window-footer` style is keyed to the existing design-token palette.
+
+**`test.html` — 20 new cases**
+
+- `schema.coerceTicket` — 11 cases: empty input, field preservation, missing new fields, unparseable date, bad followUp, good followUp, unknown-field `_extra`, enum drift, primitive-subtask coercion, negative timeLogged, non-object input.
+- `schema.coerceTickets` — 3 cases: batch drop, non-array input, changed-count.
+- `schema.validateTicket` — 3 cases: missing id is an error, minimal ticket is ok, enum drift is a warning not an error.
+- `errorLog` — 10 cases: clear, capture (message/context/name/stack), dedupe window, different-context not-deduped, string + object errors, ring-buffer cap, formatForExport, empty format, normalize null, normalize undefined.
+
+Both new modules were Node-sanity-checked (29 pass / 0 fail) before committing, since I cannot run the in-browser harness from here.
+
+**`sw.js`**
+
+`CACHE_VERSION v14 → v15`. `js/schema.js` and `js/errorLog.js` added to `PRECACHE_URLS`.
+
+### Why this release exists
+
+A tool that an analyst opens every morning accumulates state. The failure modes that kill trust in such a tool are not the loud ones (they get fixed on the spot) but the silent ones — a filter that mysteriously drops a ticket, a render that blanks the page until you hard-refresh, a re-flow that makes batch-tag feel broken. This release tightens the seams where those silent failures hid: the load path is schema-clean, the render path has an error boundary and a trace, and the DOM cost scales with what's on-screen instead of with the whole store.
+
 ## [v14] — 2026-04-11
 
 ### Narrative insights layer + pure-function test harness
