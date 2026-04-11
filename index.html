@@ -16,11 +16,15 @@
 <link rel="canonical" href="https://fansofhenry.github.io/AppAnalyst/">
 <meta name="theme-color" content="#0F766E">
 <script>
-// First-paint theme — runs before stylesheets apply to prevent flash
+// First-paint theme + role — runs before stylesheets apply to prevent flash
 (function() {
   try {
     var t = localStorage.getItem('appanalyst.theme.v1');
     if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  } catch (e) {}
+  try {
+    var r = localStorage.getItem('appanalyst.role.v1') || 'analyst';
+    document.documentElement.setAttribute('data-role', r);
   } catch (e) {}
 })();
 </script>
@@ -327,6 +331,10 @@
   <a class="nav-brand" href="#" onclick="event.preventDefault();(document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});window.scrollTo({top:0,behavior:'smooth'})" style="text-decoration:none;cursor:pointer" title="Back to top"><div class="nav-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5h2M5 7v2M11 7v2" stroke="#fff" stroke-width="1.2"/></svg></div><span class="nav-title">AppAnalyst · CVC-OEI</span></a>
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0" aria-hidden="true"><rect y="2" width="14" height="1.5" rx=".75" fill="#fff"/><rect y="6.25" width="10" height="1.5" rx=".75" fill="#fff"/><rect y="10.5" width="14" height="1.5" rx=".75" fill="#fff"/></svg> Sections</button>
   <div class="a11y-toggle" id="a11yToggle" onclick="toggleA11y()" role="switch" aria-checked="false" aria-label="Toggle accessibility high-contrast mode" tabindex="0"><span class="a11y-icon" aria-hidden="true">&#9855;</span><span class="a11y-label">Accessibility</span><div class="a11y-switch"></div></div>
+  <div class="role-picker-wrap">
+    <button class="role-toggle" id="roleToggle" onclick="roleToggleMenu()"></button>
+    <div class="role-menu" id="roleMenu"></div>
+  </div>
   <span id="autosaveDot" class="autosave-dot" title="Auto-save indicator &mdash; flashes when your data is written to localStorage"></span>
   <button class="theme-toggle-btn" id="themeToggle" onclick="themeToggle()" title="Toggle theme (Shift+D)"><span class="theme-icon">&#9790;</span><span class="theme-label">Dark</span></button>
   <div class="nav-links">
@@ -375,6 +383,7 @@
         <button class="today-btn" onclick="if(typeof tlAdd===&#39;function&#39;)tlAdd()"><kbd>N</kbd> New ticket</button>
         <button class="today-btn" onclick="if(typeof searchOpen===&#39;function&#39;)searchOpen()"><kbd>&#8984;K</kbd> Search</button>
         <button class="today-btn" onclick="if(typeof backupOpen===&#39;function&#39;){backupOpen();backupRenderStats();}" title="Backup and restore all local data">Backup</button>
+        <button class="today-btn" onclick="if(typeof packetOpen===&#39;function&#39;)packetOpen()" title="Generate a printable one-pager for a partner college">Partner packet</button>
       </div>
     </div>
     <div id="todayBody"></div>
@@ -394,6 +403,26 @@
       <div id="obHead" class="ob-head-right"></div>
     </div>
     <div id="obBody"></div>
+  </div>
+</section>
+
+<!-- ═══ FOR STUDENTS — self-help guide ═══ -->
+<section class="sec fu" id="forStudents" role="region" aria-label="Student Guide">
+  <div class="wrap">
+    <div class="today-eyebrow"><span class="today-dot" style="background:#0EA5E9"></span>For students</div>
+    <h2 class="today-title" style="font-size:clamp(1.5rem,3vw,1.9rem)">Using the CVC Exchange &mdash; a plain-language guide</h2>
+    <p class="ob-sub">Everything you need to find a class at another California community college, enroll in it, and access it in Canvas. No jargon. If you get stuck, the troubleshooting section below covers the most common problems.</p>
+    <div id="forStudentsBody"></div>
+  </div>
+</section>
+
+<!-- ═══ FOR COUNSELORS — triage workflows ═══ -->
+<section class="sec fu" id="forCounselors" role="region" aria-label="Counselor Workflows">
+  <div class="wrap">
+    <div class="today-eyebrow"><span class="today-dot" style="background:var(--purple)"></span>For counselors &amp; student services</div>
+    <h2 class="today-title" style="font-size:clamp(1.5rem,3vw,1.9rem)">Triage workflows &mdash; "a student came to me with..."</h2>
+    <p class="ob-sub">Scripts, talking points, and escalation paths for the most common CVC Exchange situations a counselor or A&amp;R/FA/DSPS staffer encounters. Designed to answer "what do I tell the student right now?" in under 60 seconds.</p>
+    <div id="forCounselorsBody"></div>
   </div>
 </section>
 
@@ -1307,6 +1336,20 @@ function showBarrierView(view,btn){
   <span class="search-fab-key">&#8984;K</span>
 </button>
 
+<!-- ═══ PARTNER PACKET MODAL ═══ -->
+<div class="packet-overlay" id="packetOverlay" onclick="if(event.target===this)packetClose()" role="dialog" aria-label="College partner packet">
+  <div class="packet-modal">
+    <div class="packet-modal-head">
+      <div>
+        <div class="packet-modal-title">College Partner Packet</div>
+        <div class="packet-modal-sub">Printable one-pager for sharing with partner college staff</div>
+      </div>
+      <button class="backup-close" onclick="packetClose()" aria-label="Close">&times;</button>
+    </div>
+    <div id="packetBody" class="packet-modal-body"></div>
+  </div>
+</div>
+
 <!-- ═══ BACKUP / RESTORE MODAL ═══ -->
 <div class="backup-overlay" id="backupModal" onclick="if(event.target===this)backupClose()" role="dialog" aria-label="Backup and restore">
   <div class="backup-modal">
@@ -1486,6 +1529,10 @@ document.addEventListener('keydown', function(e) {
 <script src="js/sync.js"></script>
 <script src="js/activity.js"></script>
 <script src="js/autosave.js"></script>
+<script src="js/role.js"></script>
+<script src="js/forStudents.js"></script>
+<script src="js/forCounselors.js"></script>
+<script src="js/packet.js"></script>
 <script src="js/barriers.js"></script>
 <script src="js/outreach.js"></script>
 <script src="js/lookup.js"></script>

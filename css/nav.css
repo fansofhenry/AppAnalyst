@@ -521,6 +521,114 @@ html[data-theme="dark"] #nav.scrolled {
   50% { box-shadow: 0 0 0 4px rgba(185, 28, 28, 0); }
 }
 
+.role-picker-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+.role-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .3rem .55rem .3rem .35rem;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-2);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .15s;
+  font-family: var(--mono);
+  font-size: .58rem;
+  font-weight: 600;
+}
+.role-toggle:hover { border-color: var(--primary); background: var(--primary-light); }
+.role-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: .72rem;
+}
+.role-label { color: var(--text); font-weight: 700; letter-spacing: .03em; }
+.role-caret { color: var(--text-3); font-size: .6rem; }
+
+.role-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + .35rem);
+  right: 0;
+  min-width: 320px;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(0,0,0,.02);
+  z-index: 9999;
+  padding: .35rem;
+  flex-direction: column;
+  gap: .15rem;
+}
+.role-menu.role-menu-open { display: flex; }
+
+.role-option {
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  gap: .65rem;
+  align-items: center;
+  padding: .7rem .8rem;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  transition: background .15s;
+}
+.role-option:hover { background: var(--bg-2); }
+.role-option-active { background: var(--primary-light); }
+.role-option-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.role-option-main {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+  min-width: 0;
+}
+.role-option-label {
+  font-family: var(--body);
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.role-option-desc {
+  font-family: var(--mono);
+  font-size: .62rem;
+  color: var(--text-3);
+  line-height: 1.4;
+}
+.role-option-check {
+  font-size: 1rem;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .role-label, .role-caret { display: none; }
+  .role-toggle { padding: .3rem; }
+  .role-menu { right: -8px; min-width: 280px; }
+}
+
 .autosave-dot {
   display: inline-block;
   width: 7px;
