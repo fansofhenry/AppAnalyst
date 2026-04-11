@@ -49,6 +49,19 @@ The runner surfaces pass/fail counts in the document title (`✓ 40/40 — AppAn
 
 `rpRender()` now mounts the insights layer at the top of the panel via `insights.renderInto`. New card styles keyed to `.ins-*` classes, responsive grid, and severity-colored left accents tied to the existing design-token palette.
 
+**KB auto-suggest rewrite — `insights.suggestKB` + `tickets.js`**
+
+The existing `tlKbSuggestions` in `js/tickets.js` did substring matching on whitespace tokens: "canvas" would match "canvasing", stopwords like "the" and "and" scored equally with domain terms, and the absolute match count favored longer symptoms over shorter ones. Replaced with a pure function `insights.suggestKB(ticket, kbEntries, opts)` that:
+
+- Tokenizes ticket `symptom + notes + tags` through `insights.tokenize` — stopword and short-word filtering for free.
+- Builds a token **set** per KB entry for title and body separately, and scores on token-vs-token membership, not substring containment.
+- Weights: `3 × title matches + 1 × body matches`, plus a `+5` boost when the KB entry's system equals the ticket's system, and `+2` when the entry's audience appears in the ticket's tag list.
+- Normalizes by ticket token count so longer tickets don't automatically dominate the top-k.
+
+`tlKbSuggestions` is now a thin DOM adapter that loads the KB from `safeStorage`, calls the scorer, and renders the result. The match meta line now reports the number of token matches so the reader can judge why a KB entry was surfaced.
+
+Tests: seven additional cases covering the canvas/canvasing regression (the prior implementation would have matched), system boost ranking, empty ticket and KB, stopword-only input, and score normalization across ticket length.
+
 **`sw.js`**
 
 `CACHE_VERSION` bumped `v13 → v14`; `js/insights.js` added to `PRECACHE_URLS`.

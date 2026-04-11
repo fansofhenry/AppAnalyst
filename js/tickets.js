@@ -1125,35 +1125,27 @@ function tlDupeWarning(t) {
 
 // ── KB suggestions: find existing entries that match current symptom ──
 function tlKbSuggestions(t) {
-  var symptom = (t.symptom || '').trim().toLowerCase();
-  if (symptom.length < 4) return '';
+  // Scoring lives in js/insights.js as insights.suggestKB — pure and
+  // testable. This function is the DOM adapter: it loads the KB,
+  // calls the scorer, and renders the result.
   var kb = (typeof safeStorage !== 'undefined')
     ? safeStorage.get('appanalyst.kb.v1', [])
     : (function() { try { return JSON.parse(localStorage.getItem('appanalyst.kb.v1') || '[]'); } catch (e) { return []; } })();
   if (!kb || kb.length === 0) return '';
-
-  // Tokenize symptom into words, score each KB entry by match count
-  var tokens = symptom.split(/\s+/).filter(function(w) { return w.length >= 3; });
-  if (tokens.length === 0) return '';
-
-  var scored = kb.map(function(entry) {
-    var hay = (entry.title + ' ' + entry.body + ' ' + entry.system + ' ' + entry.audience).toLowerCase();
-    var score = 0;
-    tokens.forEach(function(tok) { if (hay.indexOf(tok) >= 0) score++; });
-    // Bonus: same system match
-    if (t.system && entry.system === t.system) score += 2;
-    return { entry: entry, score: score };
-  }).filter(function(s) { return s.score > 0; }).sort(function(a, b) { return b.score - a.score; }).slice(0, 3);
-
+  if (typeof insights === 'undefined' || !insights.suggestKB) return '';
+  var scored = insights.suggestKB(t, kb, { limit: 3 });
   if (scored.length === 0) return '';
 
   return '<div class="tl-kb-suggest">' +
     '<div class="tl-kb-suggest-label">&#9768; Related KB entries</div>' +
     scored.map(function(s) {
       var e = s.entry;
+      var matchInfo = s.titleMatches + s.bodyMatches > 0
+        ? ' · ' + (s.titleMatches + s.bodyMatches) + ' token match' + ((s.titleMatches + s.bodyMatches) === 1 ? '' : 'es')
+        : '';
       return '<a class="tl-kb-suggest-item" onclick="event.stopPropagation();document.getElementById(\'kb\').scrollIntoView({behavior:\'smooth\'});setTimeout(function(){if(typeof kbSelect===\'function\')kbSelect(\'' + e.id + '\')},400);return false">' +
         '<span class="tl-kb-sug-title">' + tlEsc(e.title) + '</span>' +
-        '<span class="tl-kb-sug-meta">' + tlEsc(e.system) + ' &middot; ' + tlEsc(e.audience) + '</span>' +
+        '<span class="tl-kb-sug-meta">' + tlEsc(e.system || '') + ' &middot; ' + tlEsc(e.audience || '') + matchInfo + '</span>' +
       '</a>';
     }).join('') +
   '</div>';

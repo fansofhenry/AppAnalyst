@@ -343,6 +343,70 @@
     };
   }
 
+  // ── KB suggestion (ticket → ranked KB entries) ────────
+  //
+  // The prior implementation in tickets.js did substring matching on
+  // whitespace tokens, which matched "tic" inside "tictactoe" and
+  // weighted stopwords the same as domain terms. This replaces it with
+  // a pure function that:
+  //
+  //  • tokenizes ticket symptom + notes + tags through insTokenize
+  //    (stopword + short-word filtering for free)
+  //  • builds a token SET per KB entry for title and body separately
+  //    (token-vs-token, not substring)
+  //  • scores: 3 * title-matches + 1 * body-match + 5 if system equals
+  //    the ticket's system + 2 if audience overlaps any ticket tag
+  //  • normalizes by ticket token count so longer tickets don't
+  //    automatically dominate the top-k
+  //
+  // Pure, deterministic, testable. No DOM, no storage.
+  function insSuggestKB(ticket, kbEntries, opts) {
+    opts = opts || {};
+    var limit = opts.limit || 3;
+    var minScore = opts.minScore != null ? opts.minScore : 0.25;
+    if (!ticket || !kbEntries || kbEntries.length === 0) return [];
+
+    var ticketText = [ticket.symptom, ticket.notes, ticket.tags].filter(Boolean).join(' ');
+    var ticketTokens = insTokenize(ticketText);
+    if (ticketTokens.length === 0) return [];
+    var ticketTokenSet = {};
+    ticketTokens.forEach(function (t) { ticketTokenSet[t] = true; });
+    var ticketTagList = String(ticket.tags || '').toLowerCase()
+      .split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+
+    var scored = kbEntries.map(function (entry) {
+      var titleTokens = insTokenize(entry.title || '');
+      var bodyTokens = insTokenize(entry.body || '');
+      var titleMatch = 0;
+      var titleSeen = {};
+      titleTokens.forEach(function (t) {
+        if (ticketTokenSet[t] && !titleSeen[t]) { titleMatch++; titleSeen[t] = true; }
+      });
+      var bodyMatch = 0;
+      var bodySeen = {};
+      bodyTokens.forEach(function (t) {
+        if (ticketTokenSet[t] && !bodySeen[t]) { bodyMatch++; bodySeen[t] = true; }
+      });
+      var raw = 3 * titleMatch + 1 * bodyMatch;
+      if (ticket.system && entry.system && ticket.system === entry.system) raw += 5;
+      var audienceLower = String(entry.audience || '').toLowerCase();
+      if (audienceLower && ticketTagList.indexOf(audienceLower) >= 0) raw += 2;
+      var normalized = raw / Math.max(1, ticketTokens.length);
+      return {
+        entry: entry,
+        score: normalized,
+        rawScore: raw,
+        titleMatches: titleMatch,
+        bodyMatches: bodyMatch
+      };
+    });
+
+    return scored
+      .filter(function (s) { return s.score >= minScore; })
+      .sort(function (a, b) { return b.score - a.score; })
+      .slice(0, limit);
+  }
+
   // ── Compose everything ────────────────────────────────
 
   function insComputeAll(tickets, now) {
@@ -490,6 +554,8 @@
     computeEscalationCandidates: insComputeEscalationCandidates,
     computeSystemDistributions: insComputeSystemDistributions,
     computeAll: insComputeAll,
+    // KB suggestion
+    suggestKB: insSuggestKB,
     // Rendering
     renderInto: insRenderInto,
     esc: insEsc

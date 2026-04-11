@@ -440,6 +440,50 @@
     });
   });
 
+  group('insights.suggestKB (ticket → ranked KB entries)', function () {
+    var kb = [
+      { id: 'K1', title: 'Canvas enrollment missing after census', system: 'Canvas', audience: 'A&R', body: 'If a student reports canvas enrollment missing, check ethos sync first.' },
+      { id: 'K2', title: 'Financial aid disbursement delays', system: 'PeopleSoft', audience: 'Financial Aid', body: 'Verify SAP status and disbursement codes.' },
+      { id: 'K3', title: 'Banner Ethos integration pending', system: 'Banner Ethos', audience: 'A&R', body: 'Check vendor backlog on Ellucian portal for enrollment records.' }
+    ];
+    test('symptom tokens match the most relevant KB entry first', function () {
+      var r = insights.suggestKB({ symptom: 'Student reports canvas enrollment missing', system: 'Canvas' }, kb);
+      assertTrue(r.length > 0, 'should return at least one suggestion');
+      assertEqual(r[0].entry.id, 'K1');
+    });
+    test('system exact match boosts even when symptom overlap is thin', function () {
+      var r = insights.suggestKB({ symptom: 'disbursement code issue for student', system: 'PeopleSoft' }, kb);
+      assertTrue(r.length > 0, 'should return at least one suggestion');
+      assertEqual(r[0].entry.id, 'K2');
+    });
+    test('empty ticket returns empty array', function () {
+      assertDeepEqual(insights.suggestKB({}, kb), []);
+    });
+    test('empty KB returns empty array', function () {
+      var r = insights.suggestKB({ symptom: 'anything goes here' }, []);
+      assertDeepEqual(r, []);
+    });
+    test('stopword-only symptom returns empty', function () {
+      var r = insights.suggestKB({ symptom: 'the student the the the' }, kb);
+      assertDeepEqual(r, []);
+    });
+    test('token-set match, not substring match', function () {
+      // "canvas" in the ticket must NOT match "canvasing" in a KB entry.
+      // The prior substring-based implementation would have matched this.
+      var bogus = [{ id: 'K4', title: 'Canvasing for ballots', system: '', audience: '', body: 'Unrelated.' }];
+      var r = insights.suggestKB({ symptom: 'canvas enrollment issue' }, bogus);
+      assertDeepEqual(r, []);
+    });
+    test('normalization: long ticket does not automatically outscore short', function () {
+      var shortT = { symptom: 'banner ethos integration' };
+      var longT = { symptom: 'banner ethos integration is pending and we have many records and students report issues and more context' };
+      var rS = insights.suggestKB(shortT, kb);
+      var rL = insights.suggestKB(longT, kb);
+      assertTrue(rS.length > 0 && rL.length > 0, 'both should return hits');
+      assertTrue(rS[0].score >= rL[0].score, 'normalized score for short should be ≥ long');
+    });
+  });
+
   group('insights.computeAll (full pipeline)', function () {
     test('empty tickets → empty insights array', function () {
       var r = insights.computeAll([], BASE);
