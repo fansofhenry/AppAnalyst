@@ -7,7 +7,7 @@
 // ═══════════════════════════════════════════════════════
 
 // Bump this when any cached file changes so old clients reload the new assets.
-var CACHE_VERSION = 'appanalyst-v12';
+var CACHE_VERSION = 'appanalyst-v13';
 var PRECACHE_URLS = [
   './',
   './index.html',

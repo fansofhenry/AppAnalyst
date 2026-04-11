@@ -134,6 +134,10 @@ The Exchange is equity infrastructure — when it breaks, students at smaller co
 - April 2025 CVC Exchange release notes (Ethos reconciliation)
 - CISOA 2026 themes for the AI vision section
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a full change history, keyed to the service-worker `CACHE_VERSION` in `sw.js`.
+
 ## License
 
 Source is MIT-licensed. Seeded reference content (SIS tier tags, KB templates, college metadata) is drawn from public sources; contributions welcome to correct or extend tags via the in-browser editor or a pull request.

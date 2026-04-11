@@ -116,7 +116,7 @@ function rmRender() {
     var badgeText = c.urgent > 0 ? c.urgent + ' urgent' : c.aging > 0 ? c.aging + ' aging' : c.open + ' open';
     var badgeCls = c.urgent > 0 ? 'sb-err' : c.aging > 0 ? 'sb-warn' : 'sb-ok';
     var topSystems = Object.keys(c.systems).sort(function(a, b) { return c.systems[b] - c.systems[a]; }).slice(0, 3);
-    return '<div class="rm-row" onclick="rmJumpToCollege(\'' + c.college.replace(/\'/g, "\\\\'") + '\')">' +
+    return '<div class="rm-row" data-rm-college="' + rmEsc(c.college) + '" tabindex="0" role="button">' +
       '<span class="s-indicator ' + indicator + '"></span>' +
       '<div class="rm-info">' +
         '<div class="rm-name">' + rmEsc(c.college) + '</div>' +
@@ -135,6 +135,21 @@ function rmRender() {
       '<span class="rm-list-hint">Sorted by urgency. Click any row to jump to the ticket log filtered by that college.</span>' +
     '</div>' +
     '<div class="rm-list">' + rowHtml + '</div>';
+
+  // Delegated click — avoids interpolating user-typed college names into onclick handlers (XSS safe)
+  var listEl = container.querySelector('.rm-list');
+  if (listEl && !listEl._rmBound) {
+    listEl._rmBound = true;
+    listEl.addEventListener('click', function(ev) {
+      var row = ev.target.closest('.rm-row');
+      if (row && row.dataset.rmCollege) rmJumpToCollege(row.dataset.rmCollege);
+    });
+    listEl.addEventListener('keydown', function(ev) {
+      if (ev.key !== 'Enter' && ev.key !== ' ') return;
+      var row = ev.target.closest('.rm-row');
+      if (row && row.dataset.rmCollege) { ev.preventDefault(); rmJumpToCollege(row.dataset.rmCollege); }
+    });
+  }
 }
 
 function rmJumpToCollege(name) {

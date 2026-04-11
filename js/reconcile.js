@@ -76,8 +76,22 @@ function rcPresetsRender() {
   }
   wrap.innerHTML = '<span class="rc-presets-label">Presets:</span>' +
     names.map(function(n) {
-      return '<span class="rc-preset-chip"><button class="rc-preset-name" onclick="rcPresetApply(\'' + n.replace(/\'/g, "\\\\'") + '\')">' + rcEsc(n) + '</button><button class="rc-preset-x" onclick="rcPresetDelete(\'' + n.replace(/\'/g, "\\\\'") + '\')" title="Delete">&times;</button></span>';
+      var safe = rcEsc(n);
+      return '<span class="rc-preset-chip">' +
+        '<button class="rc-preset-name" data-rc-preset="' + safe + '">' + safe + '</button>' +
+        '<button class="rc-preset-x" data-rc-preset-del="' + safe + '" title="Delete">&times;</button>' +
+      '</span>';
     }).join('');
+  // Delegated — avoids interpolating user-typed preset names into onclick (XSS safe)
+  if (!wrap._rcBound) {
+    wrap._rcBound = true;
+    wrap.addEventListener('click', function(ev) {
+      var apply = ev.target.closest('[data-rc-preset]');
+      if (apply) { rcPresetApply(apply.dataset.rcPreset); return; }
+      var del = ev.target.closest('[data-rc-preset-del]');
+      if (del) rcPresetDelete(del.dataset.rcPresetDel);
+    });
+  }
 }
 
 function rcParse(csv) {
