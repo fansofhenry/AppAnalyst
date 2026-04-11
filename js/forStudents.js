@@ -1,7 +1,97 @@
 // ═══════════════════════════════════════════════════════
 // FOR STUDENTS — Plain-language self-help guide to using
-// the CVC Exchange. No technical jargon. Linked from home.
+// the CVC Exchange. English + draft Spanish translation.
+// The Spanish is a first draft; a native speaker should
+// review it before it goes out to students.
 // ═══════════════════════════════════════════════════════
+
+var STUDENT_LANG_KEY = 'appanalyst.student.lang.v1';
+
+function studentsGetLang() {
+  try { return localStorage.getItem(STUDENT_LANG_KEY) || 'en'; }
+  catch (e) { return 'en'; }
+}
+function studentsSetLang(lang) {
+  try { localStorage.setItem(STUDENT_LANG_KEY, lang); } catch (e) {}
+  studentsRender();
+}
+
+var STUDENT_CONTENT_ES = {
+  stepsTitle: 'Gu\u00eda en 5 pasos',
+  steps: [
+    {
+      n: 1,
+      title: 'Aseg\u00farate de estar inscrito(a) en tu colegio principal',
+      body: 'Necesitas un expediente estudiantil activo en un colegio comunitario de California antes de poder usar el CVC Exchange. Este es tu <strong>colegio principal</strong> &mdash; donde pagas matr\u00edcula, solicitas ayuda financiera, y recibes tu t\u00edtulo. Si a\u00fan no has solicitado admisi\u00f3n, empieza en <a href="https://www.cccapply.org" target="_blank" rel="noopener">cccapply.org</a>.',
+      check: 'Tengo un n\u00famero de estudiante activo en mi colegio principal'
+    },
+    {
+      n: 2,
+      title: 'Busca tu clase en cvc.edu',
+      body: 'Ve a <a href="https://search.cvc.edu" target="_blank" rel="noopener">search.cvc.edu</a>. Escribe la clase que necesitas (por ejemplo "Math 1A") o navega por materia. Los resultados te muestran cada colegio comunitario de California que ofrece esa clase en l\u00ednea este semestre, con los cupos disponibles.',
+      check: 'Encontr\u00e9 una secci\u00f3n que quiero tomar en otro colegio'
+    },
+    {
+      n: 3,
+      title: 'Haz clic en "Inscribirse" e inicia sesi\u00f3n con tu cuenta OpenCCC',
+      body: 'Cuando encuentres una secci\u00f3n, haz clic en el bot\u00f3n Inscribirse. Iniciar\u00e1s sesi\u00f3n con tu <strong>cuenta OpenCCC</strong> &mdash; la misma que usaste para CCCApply. Si te pide elegir tu colegio principal, selecciona el colegio donde ya est\u00e1s inscrito(a).',
+      check: 'Inici\u00e9 sesi\u00f3n y seleccion\u00e9 mi colegio principal'
+    },
+    {
+      n: 4,
+      title: 'Confirma tu inscripci\u00f3n y espera la sincronizaci\u00f3n',
+      body: 'Una vez que env\u00edes, el Exchange manda tu inscripci\u00f3n tanto a tu colegio principal como al colegio que ensea el curso. Esto puede tardar desde unos minutos hasta algunas horas, dependiendo de los sistemas involucrados. Recibir\u00e1s un correo de confirmaci\u00f3n.',
+      check: 'Recib\u00ed un correo de confirmaci\u00f3n'
+    },
+    {
+      n: 5,
+      title: 'Accede al curso en Canvas',
+      body: 'Despu\u00e9s de que se complete la sincronizaci\u00f3n, el curso aparece en tu <strong>panel de Canvas</strong>. Inicia sesi\u00f3n en el sitio de Canvas del colegio que ensea (por ejemplo, <code>canvas.foothill.edu</code>) con tus credenciales de OpenCCC o con el SSO de tu colegio, seg\u00fan el caso. El curso aparecer\u00e1 en tu lista.',
+      check: 'El curso est\u00e1 en mi Canvas'
+    }
+  ],
+  troublesTitle: 'Soluci\u00f3n de problemas \u2014 situaciones comunes',
+  troubles: [
+    {
+      symptom: 'Mi clase no aparece en Canvas',
+      causes: 'La informaci\u00f3n de la inscripci\u00f3n a\u00fan no ha terminado de sincronizarse, o hay un retraso entre los sistemas de los colegios.',
+      action: 'Espera 24 horas. Si todav\u00eda no aparece, contacta la oficina de <strong>Admissions & Records</strong> en tu colegio principal (no el que ensea) y pide que verifiquen tu registro de inscripci\u00f3n en el Exchange.'
+    },
+    {
+      symptom: 'Recib\u00ed un error cuando intent\u00e9 inscribirme',
+      causes: 'Errores comunes: no has completado la orientaci\u00f3n en tu colegio principal, tienes un bloqueo de inscripci\u00f3n, la clase requiere un prerrequisito que no has cumplido, o la secci\u00f3n est\u00e1 llena.',
+      action: 'Revisa el portal de tu colegio principal para ver si tienes alg\u00fan bloqueo. Si no hay nada, env\u00eda un correo a la oficina de Counseling de tu colegio principal con una captura de pantalla del error.'
+    },
+    {
+      symptom: 'Mi ayuda financiera no cubre el curso del Exchange',
+      causes: 'Tu colegio principal necesita configurar un <strong>Acuerdo de Consorcio (Consortium Agreement)</strong> para que tu ayuda se aplique a cursos tomados en otros colegios a trav\u00e9s del Exchange.',
+      action: 'Contacta la oficina de Financial Aid en tu colegio principal y preg\u00fanta sobre un Acuerdo de Consorcio para tu curso del Exchange. Esto debe configurarse antes de la fecha l\u00edmite para agregar clases.'
+    },
+    {
+      symptom: 'Necesito una acomodaci\u00f3n (DSPS) en el colegio que ensea',
+      causes: 'Las acomodaciones no se transfieren autom\u00e1ticamente entre colegios. Tienes que registrarte con DSPS en el colegio que ensea.',
+      action: 'Env\u00eda un correo o llama a la oficina DSPS del colegio que ensea tan pronto como te inscribas. Diles que eres estudiante del CVC Exchange de [tu colegio principal] y pregunta c\u00f3mo compartir tu carta de acomodaciones.'
+    },
+    {
+      symptom: 'Quiero retirarme del curso del Exchange',
+      causes: 'Retirarse debe hacerse a trav\u00e9s del Exchange, no del proceso normal del colegio que ensea.',
+      action: 'Regresa a <a href="https://cvc.edu" target="_blank" rel="noopener">cvc.edu</a>, inicia sesi\u00f3n, encuentra el curso en tu panel, y usa la opci\u00f3n de retiro ah\u00ed. Presta atenci\u00f3n a las fechas l\u00edmite \u2014 siguen el calendario del colegio que ensea.'
+    },
+    {
+      symptom: 'No puedo iniciar sesi\u00f3n con mi cuenta OpenCCC',
+      causes: 'Tu contrase\u00f1a de OpenCCC podr\u00eda necesitar un reinicio, o la integraci\u00f3n de inicio de sesi\u00f3n de tu colegio principal podr\u00eda estar temporalmente ca\u00edda.',
+      action: 'Primero intenta la <a href="https://www.opencccapply.net" target="_blank" rel="noopener">recuperaci\u00f3n de contrase\u00f1a</a> en OpenCCC. Si eso no funciona, contacta la mesa de ayuda de IT de tu colegio principal.'
+    }
+  ],
+  contactsTitle: 'A qui\u00e9n contactar en cada colegio',
+  contacts: [
+    { role: 'Admissions & Records', body: 'Para registros de inscripci\u00f3n, transcripciones, bloqueos de registraci\u00f3n, y preguntas sobre cursos retirados. <strong>Empieza con tu colegio principal</strong> para cualquier asunto de inscripci\u00f3n o transcripci\u00f3n.' },
+    { role: 'Financial Aid', body: 'Para FAFSA, CCPG (exenci\u00f3n de cuotas), Acuerdos de Consorcio, y desembolso. <strong>Solo tu colegio principal</strong> maneja tu ayuda financiera.' },
+    { role: 'Counseling', body: 'Para planeaci\u00f3n de cursos, preguntas sobre transferencia, y ayuda navegando el Exchange. Trabaja estrechamente con tu colegio principal.' },
+    { role: 'DSPS', body: 'Para acomodaciones, formatos alternativos, y apoyo de accesibilidad. Contacta <strong>ambos</strong> colegios principales y los que ensean.' },
+    { role: 'Instructor', body: 'Para preguntas sobre contenido del curso, tareas, y Canvas. <strong>Contacta al instructor en el colegio que ensea</strong> para preguntas espec\u00edficas del curso.' }
+  ]
+};
 
 var STUDENT_STEPS = [
   {
@@ -77,8 +167,22 @@ function studentsRender() {
   var container = document.getElementById('forStudentsBody');
   if (!container) return;
 
+  var lang = studentsGetLang();
+  var steps = lang === 'es' ? STUDENT_CONTENT_ES.steps : STUDENT_STEPS;
+  var troubles = lang === 'es' ? STUDENT_CONTENT_ES.troubles : STUDENT_TROUBLES;
+  var contacts = lang === 'es' ? STUDENT_CONTENT_ES.contacts : null;
+  var troublesTitle = lang === 'es' ? STUDENT_CONTENT_ES.troublesTitle : 'Troubleshooting \u2014 common problems';
+  var contactsTitle = lang === 'es' ? STUDENT_CONTENT_ES.contactsTitle : 'Who to contact at each college';
+
+  var langToggle =
+    '<div class="stu-lang-wrap">' +
+      '<button class="stu-lang-btn' + (lang === 'en' ? ' stu-lang-active' : '') + '" onclick="studentsSetLang(\'en\')">English</button>' +
+      '<button class="stu-lang-btn' + (lang === 'es' ? ' stu-lang-active' : '') + '" onclick="studentsSetLang(\'es\')">Espa\u00f1ol</button>' +
+      (lang === 'es' ? '<span class="stu-lang-note">Draft translation &mdash; please flag any errors</span>' : '') +
+    '</div>';
+
   var stepsHtml = '<div class="stu-steps">' +
-    STUDENT_STEPS.map(function(s) {
+    steps.map(function(s) {
       return '<div class="stu-step">' +
         '<div class="stu-step-num">' + s.n + '</div>' +
         '<div class="stu-step-main">' +
@@ -91,29 +195,44 @@ function studentsRender() {
   '</div>';
 
   var troublesHtml = '<div class="stu-troubles">' +
-    '<h3 class="stu-troubles-title">Troubleshooting &mdash; common problems</h3>' +
-    STUDENT_TROUBLES.map(function(t) {
+    '<h3 class="stu-troubles-title">' + troublesTitle + '</h3>' +
+    troubles.map(function(t) {
+      var causeLabel = lang === 'es' ? 'Causa probable' : 'Likely cause';
+      var actionLabel = lang === 'es' ? 'Qu\u00e9 hacer' : 'What to do';
       return '<div class="stu-trouble">' +
         '<div class="stu-trouble-symptom">' + t.symptom + '</div>' +
-        '<div class="stu-trouble-row"><span class="stu-trouble-label">Likely cause</span><span>' + t.causes + '</span></div>' +
-        '<div class="stu-trouble-row stu-trouble-action"><span class="stu-trouble-label">What to do</span><span>' + t.action + '</span></div>' +
+        '<div class="stu-trouble-row"><span class="stu-trouble-label">' + causeLabel + '</span><span>' + t.causes + '</span></div>' +
+        '<div class="stu-trouble-row stu-trouble-action"><span class="stu-trouble-label">' + actionLabel + '</span><span>' + t.action + '</span></div>' +
       '</div>';
     }).join('') +
   '</div>';
 
-  var contactsHtml =
-    '<div class="stu-contacts">' +
-      '<h3 class="stu-contacts-title">Who to contact at each college</h3>' +
-      '<div class="stu-contact-grid">' +
-        '<div class="stu-contact-card"><div class="stu-contact-role">Admissions & Records</div><div class="stu-contact-body">For enrollment records, transcripts, registration holds, and dropped-course questions. <strong>Start with your home college</strong> for any enrollment or transcript issue.</div></div>' +
-        '<div class="stu-contact-card"><div class="stu-contact-role">Financial Aid</div><div class="stu-contact-body">For FAFSA, CCPG (fee waiver), Consortium Agreements, and disbursement. <strong>Only your home college</strong> handles your aid.</div></div>' +
-        '<div class="stu-contact-card"><div class="stu-contact-role">Counseling</div><div class="stu-contact-body">For course planning, transfer questions, and help navigating the Exchange. Works closely with your home college.</div></div>' +
-        '<div class="stu-contact-card"><div class="stu-contact-role">DSPS</div><div class="stu-contact-body">For accommodations, alternative formats, and accessibility support. Contact <strong>both</strong> home and teaching college DSPS offices.</div></div>' +
-        '<div class="stu-contact-card"><div class="stu-contact-role">Instructor</div><div class="stu-contact-body">For questions about course content, assignments, and Canvas. <strong>Contact the instructor at the teaching college</strong> for course-specific questions.</div></div>' +
-      '</div>' +
-    '</div>';
+  var contactsHtml;
+  if (contacts) {
+    contactsHtml =
+      '<div class="stu-contacts">' +
+        '<h3 class="stu-contacts-title">' + contactsTitle + '</h3>' +
+        '<div class="stu-contact-grid">' +
+          contacts.map(function(c) {
+            return '<div class="stu-contact-card"><div class="stu-contact-role">' + c.role + '</div><div class="stu-contact-body">' + c.body + '</div></div>';
+          }).join('') +
+        '</div>' +
+      '</div>';
+  } else {
+    contactsHtml =
+      '<div class="stu-contacts">' +
+        '<h3 class="stu-contacts-title">Who to contact at each college</h3>' +
+        '<div class="stu-contact-grid">' +
+          '<div class="stu-contact-card"><div class="stu-contact-role">Admissions & Records</div><div class="stu-contact-body">For enrollment records, transcripts, registration holds, and dropped-course questions. <strong>Start with your home college</strong> for any enrollment or transcript issue.</div></div>' +
+          '<div class="stu-contact-card"><div class="stu-contact-role">Financial Aid</div><div class="stu-contact-body">For FAFSA, CCPG (fee waiver), Consortium Agreements, and disbursement. <strong>Only your home college</strong> handles your aid.</div></div>' +
+          '<div class="stu-contact-card"><div class="stu-contact-role">Counseling</div><div class="stu-contact-body">For course planning, transfer questions, and help navigating the Exchange. Works closely with your home college.</div></div>' +
+          '<div class="stu-contact-card"><div class="stu-contact-role">DSPS</div><div class="stu-contact-body">For accommodations, alternative formats, and accessibility support. Contact <strong>both</strong> home and teaching college DSPS offices.</div></div>' +
+          '<div class="stu-contact-card"><div class="stu-contact-role">Instructor</div><div class="stu-contact-body">For questions about course content, assignments, and Canvas. <strong>Contact the instructor at the teaching college</strong> for course-specific questions.</div></div>' +
+        '</div>' +
+      '</div>';
+  }
 
-  container.innerHTML = stepsHtml + troublesHtml + contactsHtml;
+  container.innerHTML = langToggle + stepsHtml + troublesHtml + contactsHtml;
 }
 
 window.addEventListener('appanalyst:role-change', studentsRender);

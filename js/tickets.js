@@ -503,6 +503,73 @@ function tlSetSearch(v) {
   tlRender();
 }
 
+function tlExportCalendar() {
+  var tickets = tlLoad().filter(function(t) {
+    return t.followUp && t.status !== 'resolved';
+  });
+  if (tickets.length === 0) { toast('No open tickets with follow-up dates'); return; }
+
+  // Build an .ics file (VCALENDAR)
+  var esc = function(s) {
+    return (s || '').toString()
+      .replace(/\\/g, '\\\\')
+      .replace(/;/g, '\\;')
+      .replace(/,/g, '\\,')
+      .replace(/\n/g, '\\n');
+  };
+
+  var lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//AppAnalyst Hub//Follow-ups//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'X-WR-CALNAME:AppAnalyst follow-ups',
+    'X-WR-TIMEZONE:America/Los_Angeles'
+  ];
+
+  tickets.forEach(function(t) {
+    var date = t.followUp.replace(/-/g, '');
+    var uid = t.id + '@appanalyst-hub.local';
+    var summary = '[' + (t.system || '?') + '] ' + (t.symptom || '(no symptom)');
+    var desc = [];
+    if (t.college) desc.push('College: ' + t.college);
+    if (t.system) desc.push('System: ' + t.system);
+    if (t.status) desc.push('Status: ' + t.status);
+    if (t.vendor) desc.push('Vendor: ' + t.vendor);
+    if (t.tags) desc.push('Tags: ' + t.tags);
+    if (t.notes) desc.push('Notes: ' + t.notes.slice(0, 300));
+    lines.push('BEGIN:VEVENT');
+    lines.push('UID:' + uid);
+    lines.push('DTSTAMP:' + new Date().toISOString().replace(/[-:.]/g, '').slice(0, 15) + 'Z');
+    lines.push('DTSTART;VALUE=DATE:' + date);
+    lines.push('DTEND;VALUE=DATE:' + date);
+    lines.push('SUMMARY:' + esc(summary));
+    lines.push('DESCRIPTION:' + esc(desc.join('\n')));
+    lines.push('CATEGORIES:AppAnalyst,Follow-up');
+    lines.push('STATUS:CONFIRMED');
+    lines.push('BEGIN:VALARM');
+    lines.push('ACTION:DISPLAY');
+    lines.push('DESCRIPTION:Follow up: ' + esc(summary));
+    lines.push('TRIGGER:-PT9H'); // 9 hours before start = morning of
+    lines.push('END:VALARM');
+    lines.push('END:VEVENT');
+  });
+  lines.push('END:VCALENDAR');
+
+  var ics = lines.join('\r\n');
+  var blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'appanalyst-followups-' + new Date().toISOString().slice(0, 10) + '.ics';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast('Exported ' + tickets.length + ' follow-ups');
+}
+
 function tlExportCSV() {
   var tickets = tlLoad();
   if (tickets.length === 0) { toast('No tickets to export'); return; }

@@ -623,6 +623,29 @@ html[data-theme="dark"] #nav.scrolled {
   font-weight: 700;
 }
 
+.role-share {
+  margin-top: .35rem;
+  padding: .85rem 1rem;
+  border-top: 1px dashed var(--border);
+  background: var(--surface-2);
+  border-radius: 0 0 var(--r) var(--r);
+}
+.role-share-label {
+  font-family: var(--mono);
+  font-size: .6rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-3);
+  font-weight: 700;
+  margin-bottom: .25rem;
+}
+.role-share-desc {
+  font-size: .72rem;
+  color: var(--text-2);
+  margin-bottom: .5rem;
+  line-height: 1.45;
+}
+
 @media (max-width: 640px) {
   .role-label, .role-caret { display: none; }
   .role-toggle { padding: .3rem; }

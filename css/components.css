@@ -1553,6 +1553,135 @@
 }
 .stu-contact-body strong { color: var(--text); }
 
+.stu-lang-wrap {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  margin-bottom: 1.25rem;
+  padding: .5rem .75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+}
+.stu-lang-btn {
+  font-family: var(--mono);
+  font-size: .7rem;
+  font-weight: 600;
+  padding: .4rem .85rem;
+  border: 1px solid var(--border-2);
+  border-radius: 100px;
+  background: var(--surface-2);
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all .15s;
+}
+.stu-lang-btn:hover { border-color: #0EA5E9; color: #0EA5E9; }
+.stu-lang-active {
+  background: #0EA5E9;
+  border-color: #0EA5E9;
+  color: #fff;
+}
+.stu-lang-note {
+  font-family: var(--mono);
+  font-size: .62rem;
+  color: var(--text-3);
+  font-style: italic;
+  margin-left: .4rem;
+}
+
+/* ═══════════════════════════════════════════════════════
+   GLOSSARY
+   ═══════════════════════════════════════════════════════ */
+.gloss-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin: 1rem 0 1.25rem;
+}
+.gloss-search {
+  flex: 1;
+  padding: .7rem 1rem;
+  border: 1px solid var(--border-2);
+  border-radius: var(--r);
+  font-family: var(--body);
+  font-size: .88rem;
+  background: var(--surface);
+  color: var(--text);
+}
+.gloss-search:focus { outline: none; border-color: var(--primary); }
+.gloss-count {
+  font-family: var(--mono);
+  font-size: .62rem;
+  color: var(--text-3);
+  flex-shrink: 0;
+}
+.gloss-empty {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-3);
+  font-family: var(--mono);
+  font-size: .78rem;
+}
+.gloss-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .75rem;
+}
+.gloss-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1rem 1.2rem;
+  transition: border-color .15s;
+}
+.gloss-item:hover { border-color: var(--border-2); }
+.gloss-term-row {
+  display: flex;
+  align-items: baseline;
+  gap: .75rem;
+  flex-wrap: wrap;
+  margin-bottom: .5rem;
+}
+.gloss-term {
+  font-family: var(--mono);
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: .02em;
+}
+.gloss-long {
+  font-family: var(--body);
+  font-size: .78rem;
+  color: var(--text-3);
+  font-style: italic;
+}
+.gloss-tags {
+  display: inline-flex;
+  gap: .25rem;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+.gloss-tag {
+  font-family: var(--mono);
+  font-size: .55rem;
+  padding: .12rem .4rem;
+  background: var(--bg-2);
+  color: var(--text-3);
+  border-radius: 3px;
+  font-weight: 600;
+}
+.gloss-body {
+  font-size: .85rem;
+  color: var(--text-2);
+  line-height: 1.65;
+}
+.gloss-body strong { color: var(--text); }
+.gloss-body a { color: var(--primary); }
+@media (max-width: 560px) {
+  .gloss-term-row { flex-direction: column; gap: .25rem; align-items: flex-start; }
+  .gloss-tags { margin-left: 0; }
+}
+
 /* ═══════════════════════════════════════════════════════
    FOR COUNSELORS — triage workflows
    ═══════════════════════════════════════════════════════ */
@@ -2140,6 +2269,55 @@ html[data-role="counselor"] #ticketLog {
 html[data-role="counselor"] #reconcile:hover,
 html[data-role="counselor"] #activity:hover,
 html[data-role="counselor"] #ticketLog:hover {
+  opacity: 1;
+}
+
+/* Role-specific workflow sections — show only to their own role
+   (and analyst as a reference) by default */
+#forAR, #forFA, #forDSPS { display: none; }
+
+html[data-role="ar"] #forAR,
+html[data-role="analyst"] #forAR {
+  display: block;
+}
+html[data-role="fa"] #forFA,
+html[data-role="analyst"] #forFA {
+  display: block;
+}
+html[data-role="dsps"] #forDSPS,
+html[data-role="analyst"] #forDSPS {
+  display: block;
+}
+
+/* Analyst sees them but slightly dimmed so they don't crowd the main tools */
+html[data-role="analyst"] #forAR,
+html[data-role="analyst"] #forFA,
+html[data-role="analyst"] #forDSPS,
+html[data-role="analyst"] #forCounselors {
+  opacity: .85;
+}
+html[data-role="analyst"] #forAR:hover,
+html[data-role="analyst"] #forFA:hover,
+html[data-role="analyst"] #forDSPS:hover,
+html[data-role="analyst"] #forCounselors:hover {
+  opacity: 1;
+}
+
+/* A&R / FA / DSPS modes dim analyst power tools */
+html[data-role="ar"] #reconcile,
+html[data-role="fa"] #reconcile,
+html[data-role="dsps"] #reconcile,
+html[data-role="ar"] #activity,
+html[data-role="fa"] #activity,
+html[data-role="dsps"] #activity {
+  opacity: .55;
+}
+html[data-role="ar"] #reconcile:hover,
+html[data-role="fa"] #reconcile:hover,
+html[data-role="dsps"] #reconcile:hover,
+html[data-role="ar"] #activity:hover,
+html[data-role="fa"] #activity:hover,
+html[data-role="dsps"] #activity:hover {
   opacity: 1;
 }
 

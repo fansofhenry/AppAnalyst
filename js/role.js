@@ -144,7 +144,12 @@ function roleRenderMenu() {
       '</span>' +
       (active ? '<span class="role-option-check">\u2713</span>' : '') +
     '</button>';
-  }).join('');
+  }).join('') +
+  '<div class="role-share">' +
+    '<div class="role-share-label">Share this view</div>' +
+    '<div class="role-share-desc">Copy a link that opens this site in ' + roleMeta().short + ' mode for anyone you send it to.</div>' +
+    '<button class="tl-btn" onclick="routerCopyShareLink(\'' + current + '\')">Copy share link</button>' +
+  '</div>';
 }
 
 // Apply on load
