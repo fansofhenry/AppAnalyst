@@ -4,6 +4,59 @@ All notable changes to the AppAnalyst CVC-OEI Support Hub. Dates are in ISO form
 
 The hub is a single-page PWA with no build step, so versioning tracks the service-worker `CACHE_VERSION` in `sw.js`.
 
+## [v14] — 2026-04-11
+
+### Narrative insights layer + pure-function test harness
+
+The "Real Patterns" panel already charted ticket volume by system / college / week. It showed what the data *was*, not what the data *meant*. This release adds a narrative analytics layer on top of those charts and backs it with an in-browser test harness — the first tests this repo has ever had.
+
+**`js/insights.js` (new, 420 lines)**
+
+A pure-compute module that turns the ticket log into seven orthogonal insight types:
+
+1. **Time sinks** — per-system sum of resolution hours as a share of total. Answers "where is my time actually going", which is different from "where are my tickets" — a system with a few long tickets can outweigh a system with many short ones. Fires with ≥ 5 resolved tickets.
+2. **Statistically stale open tickets** — for each system with ≥ 5 resolved tickets, computes the p80 of prior resolution hours and flags open tickets whose current age exceeds that threshold. A learned per-system threshold, not a hardcoded 3d/7d. "This one is taking longer than 80% of past comparable tickets" is load-bearing information.
+3. **Velocity trend** — this week's resolutions vs the median of the trailing 4 weeks. Reports up/down/flat with a percentage and the raw weekly counts, so the reader can sanity-check the claim.
+4. **Recurring symptom phrases** — bigram document-frequency across all tickets, filtered by a stopword list. Surfaces "we keep seeing this same language" — usually a KB candidate. Fires with ≥ 6 tickets and at least one bigram appearing in ≥ 3 distinct tickets.
+5. **Hot colleges** — MAD-based outlier detection on per-college open-ticket load. Uses median + 2·MAD, not mean + 2σ, because a small sample with one giant ticket will trash a mean-based detector. Short-circuits when MAD = 0 (flat distribution = no signal).
+6. **Escalation candidates** — waiting-vendor tickets untouched for ≥ 5 days. Vendor queues go quiet unless you pull the thread.
+7. **System resolution distributions** — p50 / p90 per system, with ≥ 5 resolved required per row. Transparent reference, not a finding per se. p50 is the honest median, p90 is the tail.
+
+Design principles:
+
+- **Pure compute, separate render.** The whole compute layer takes `(tickets, now)` and returns plain data. `now` is injectable so tests can pin time without mocking `Date`.
+- **Graceful degradation.** Each insight has its own minimum-data threshold and returns `null` below it instead of firing on noise. Better silence than a false signal.
+- **Robust statistics.** Percentiles with linear interpolation, MAD instead of standard deviation, median instead of mean for anything the user will read.
+- **Every headline is checkable.** Detail lines always include the raw numbers so a skeptical reader can verify the claim without clicking through.
+
+**`test.html` (new)**
+
+A plain-HTML in-browser test harness. No framework. Runs from `file://`, from GitHub Pages, and from a local server with no build step. Loads `js/storage.js` and `js/insights.js` and exercises:
+
+- `insights.median` — empty, single, odd, even, unsorted, mutation.
+- `insights.percentile` — p0, p1, p50 (odd + even), p80, p90, empty.
+- `insights.mad` — flat, simple sequence, outlier-resistance.
+- `insights.tokenize` + `bigrams` — stopword + short-word filtering, empty input.
+- `insights.fmtHours` — sub-hour, single-digit, ≥ 10, multi-day, negative, null.
+- Each insight computer — fires on golden input, returns null on below-threshold input.
+- `insights.computeAll` — empty + populated end-to-end.
+- `safeStorage` — round-trip an object, fallback on missing key, fallback on corrupt JSON, usageBytes increases after set.
+- `insights.renderInto` — smoke test that empty data produces the help card, and that a ticket with `<script>` / `onerror` in its user-typed fields does not surface raw script in the output HTML.
+
+The runner surfaces pass/fail counts in the document title (`✓ 40/40 — AppAnalyst tests`) so it's readable from a tab bar without switching focus.
+
+**`js/realPatterns.js` + `css/components.css`**
+
+`rpRender()` now mounts the insights layer at the top of the panel via `insights.renderInto`. New card styles keyed to `.ins-*` classes, responsive grid, and severity-colored left accents tied to the existing design-token palette.
+
+**`sw.js`**
+
+`CACHE_VERSION` bumped `v13 → v14`; `js/insights.js` added to `PRECACHE_URLS`.
+
+### Why this release exists
+
+The previous iterations fixed correctness problems (XSS, silent persistence failures, contrast). This one adds *value* — the hub can now tell an analyst something they couldn't see by staring at a bar chart. The test harness exists because going deep on an analytics module without tests is how you ship silent numeric bugs.
+
 ## [v12] — 2026-04-11
 
 ### Hardening pass — persistence, XSS, accessibility, contrast

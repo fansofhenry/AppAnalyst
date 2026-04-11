@@ -7,7 +7,7 @@
 // ═══════════════════════════════════════════════════════
 
 // Bump this when any cached file changes so old clients reload the new assets.
-var CACHE_VERSION = 'appanalyst-v13';
+var CACHE_VERSION = 'appanalyst-v14';
 var PRECACHE_URLS = [
   './',
   './index.html',
@@ -46,6 +46,7 @@ var PRECACHE_URLS = [
   './js/backup.js',
   './js/escalation.js',
   './js/theme.js',
+  './js/insights.js',
   './js/realMonitor.js',
   './js/realPatterns.js',
   './js/realTracer.js',

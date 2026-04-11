@@ -200,6 +200,7 @@ function rpRender() {
   }
 
   container.innerHTML = strip +
+    '<div id="rpInsightsMount" class="rp-insights-mount"></div>' +
     '<div class="rp-group-picker">' +
       '<span class="rp-group-label">Group by:</span>' + groupBtns +
     '</div>' +
@@ -209,6 +210,11 @@ function rpRender() {
       '<span class="rp-legend-item"><span class="rp-legend-swatch rp-swatch-all"></span>Total (includes resolved)</span>' +
     '</div>' +
     resolutionPanel;
+
+  // Narrative insights layer — pure compute in js/insights.js, rendered above the chart.
+  if (typeof insights !== 'undefined' && insights.renderInto) {
+    insights.renderInto(document.getElementById('rpInsightsMount'), tickets);
+  }
 }
 
 window.addEventListener('focus', function() { if (rpGetView() === 'real') rpRender(); });
