@@ -39,6 +39,64 @@ function routerApply() {
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 600);
   }
+
+  // Deep link to a specific ticket: ?ticket=T3fb0abc
+  var ticketId = params.get('ticket');
+  if (ticketId) {
+    setTimeout(function() {
+      var tl = document.getElementById('ticketLog');
+      if (tl) tl.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(function() {
+        var row = document.querySelector('.tl-row[data-id="' + ticketId + '"]');
+        if (row) {
+          row.classList.add('tl-expanded');
+          row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 700);
+    }, 600);
+  }
+
+  // Deep link to a specific KB entry: ?kb=K12345
+  var kbId = params.get('kb');
+  if (kbId) {
+    setTimeout(function() {
+      var kbEl = document.getElementById('kb');
+      if (kbEl) kbEl.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(function() {
+        if (typeof kbSelect === 'function') kbSelect(kbId);
+      }, 500);
+    }, 600);
+  }
+
+  // Deep link to a specific college: ?college=Foothill%20College
+  var collegeName = params.get('college');
+  if (collegeName) {
+    setTimeout(function() {
+      var lk = document.getElementById('lookup');
+      if (lk) lk.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(function() {
+        if (typeof clToggle === 'function') clToggle(collegeName);
+      }, 500);
+    }, 600);
+  }
+}
+
+// ── Native Web Share (mobile-friendly) ──────────
+function routerShareTicket(ticketId) {
+  var url = window.location.origin + window.location.pathname + '?ticket=' + encodeURIComponent(ticketId);
+  routerNativeShare('Ticket link', 'CVC-OEI ticket: ' + ticketId, url);
+}
+
+function routerNativeShare(title, text, url) {
+  if (navigator.share) {
+    navigator.share({ title: title, text: text, url: url }).catch(function() { /* user cancelled */ });
+  } else if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(function() {
+      toast('Link copied to clipboard');
+    }).catch(function() { toast('Share not supported'); });
+  } else {
+    toast('Share not supported');
+  }
 }
 
 // Apply routing on load

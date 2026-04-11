@@ -747,6 +747,7 @@
           <option>General</option>
         </select>
         <button class="tl-btn tl-btn-new" onclick="kbAdd()">+ New entry</button>
+        <button class="tl-btn" onclick="kbStarterOpen()" title="Start from a pre-written skeleton for common issues">From template</button>
         <button class="tl-btn" onclick="kbExportJSON()">Backup</button>
         <label class="tl-btn tl-btn-import">Restore
           <input type="file" accept="application/json" style="display:none" onchange="if(this.files[0])kbImportJSON(this.files[0])">
@@ -822,6 +823,7 @@
       </div>
       <div class="tl-actions">
         <button class="tl-btn tl-btn-new" onclick="tlAdd()">+ New ticket</button>
+        <button class="tl-btn" onclick="tlArchiveToggleView();this.textContent=TL_VIEW==='archive'?'\u2190 Active':'Archive \u2192'" title="Toggle between active log and archive (resolved 90d+)">Archive &rarr;</button>
         <div class="tl-templates-wrap">
           <button class="tl-btn" onclick="tlToggleTemplatesMenu()">From template &#9662;</button>
           <div class="tl-templates-menu" id="tlTemplatesMenu"></div>
@@ -1618,6 +1620,7 @@ document.addEventListener('keydown', function(e) {
 <script src="js/annualReview.js"></script>
 <script src="js/storageHealth.js"></script>
 <script src="js/quickCapture.js"></script>
+<script src="js/focusMode.js"></script>
 <script src="js/packet.js"></script>
 <script src="js/router.js"></script>
 <script src="js/barriers.js"></script>

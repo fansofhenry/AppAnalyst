@@ -1900,6 +1900,155 @@
   .qc-overlay { padding-top: 10vh; }
 }
 
+/* KB starter template items */
+.kb-starter-item {
+  display: block;
+  width: 100%;
+  padding: .85rem 1rem;
+  margin-bottom: .55rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  cursor: pointer;
+  text-align: left;
+  transition: all .15s;
+}
+.kb-starter-item:hover {
+  border-color: var(--amber);
+  background: var(--amber-light);
+}
+.kb-starter-title {
+  font-family: var(--body);
+  font-size: .92rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: .2rem;
+}
+.kb-starter-meta {
+  font-family: var(--mono);
+  font-size: .62rem;
+  color: var(--text-3);
+  margin-bottom: .35rem;
+}
+.kb-starter-preview {
+  font-family: var(--body);
+  font-size: .74rem;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+
+/* Focus mode */
+body.focus-on #nav,
+body.focus-on .sec-group-divider,
+body.focus-on footer,
+body.focus-on .hub-header,
+body.focus-on #toc,
+body.focus-on .search-fab,
+body.focus-on .cvc-fab {
+  display: none !important;
+}
+body.focus-on main > section.sec,
+body.focus-on main > section {
+  display: none !important;
+}
+/* Sections in focus-on mode are hidden; the JS adds a .focus-target class to the chosen one */
+body.focus-on main > .focus-target {
+  display: block !important;
+}
+
+.focus-exit-btn {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10000;
+  padding: .55rem 1rem;
+  border: 1px solid var(--border-2);
+  border-radius: 100px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: .72rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: all .15s;
+}
+.focus-exit-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Archive view styling */
+.tl-blocked-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: .56rem;
+  font-weight: 700;
+  padding: .13rem .4rem;
+  background: var(--red);
+  color: #fff;
+  border-radius: 3px;
+  margin-left: .45rem;
+  vertical-align: middle;
+}
+
+.tl-blocks {
+  margin: .75rem 0;
+  padding: .75rem .9rem;
+  background: var(--red-light);
+  border: 1px solid var(--red-bd);
+  border-radius: var(--r);
+}
+.tl-blocks-label {
+  font-family: var(--mono);
+  font-size: .62rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--red);
+  font-weight: 700;
+  margin-bottom: .45rem;
+}
+.tl-block-item {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  margin: .25rem 0;
+}
+.tl-block-item.tl-block-ok {
+  opacity: .65;
+}
+.tl-block-link {
+  flex: 1;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .55rem;
+  align-items: center;
+  padding: .45rem .6rem;
+  background: var(--surface);
+  border: 1px solid var(--red-bd);
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+.tl-block-link:hover { border-color: var(--red); }
+.tl-block-status {
+  font-family: var(--mono);
+  font-size: .55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: .14rem .4rem;
+  border-radius: 3px;
+}
+.tl-block-text {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .tl-tag-chips {
   display: flex;
   flex-wrap: wrap;

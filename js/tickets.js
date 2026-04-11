@@ -4,6 +4,7 @@
 // ═══════════════════════════════════════════════════════
 
 var TL_KEY = 'appanalyst.tickets.v1';
+var TL_ARCHIVE_KEY = 'appanalyst.tickets.archive.v1';
 var TL_TEMPLATES_KEY = 'appanalyst.tickets.templates.v1';
 var TL_SYSTEMS = ['Banner Direct', 'Banner Ethos', 'Colleague Ethos', 'PeopleSoft', 'CCCApply', 'SuperGlue', 'Canvas', 'Ethos API', 'SSO / IdP', 'Other'];
 var TL_STATUSES = ['open', 'waiting-vendor', 'waiting-college', 'waiting-student', 'resolved'];
@@ -198,6 +199,66 @@ function tlRenderBulkBar() {
     '<button class="tl-btn" onclick="tlSelectNone()">Clear</button>';
 }
 
+// ── Ticket archive ──────────────────────────────
+// Resolved tickets older than 90 days move to a separate
+// store to keep the main log performant.
+var TL_VIEW = 'active'; // 'active' or 'archive'
+
+function tlArchiveLoad() {
+  try { return JSON.parse(localStorage.getItem(TL_ARCHIVE_KEY) || '[]'); }
+  catch (e) { return []; }
+}
+function tlArchiveSave(list) { localStorage.setItem(TL_ARCHIVE_KEY, JSON.stringify(list)); }
+
+function tlAutoArchive() {
+  var list = tlLoad();
+  var archive = tlArchiveLoad();
+  var threshold = Date.now() - 90 * 86400000;
+  var toArchive = list.filter(function(t) {
+    if (t.status !== 'resolved') return false;
+    var ts = new Date(t.updated || t.created).getTime();
+    return ts < threshold;
+  });
+  if (toArchive.length === 0) return 0;
+  var remaining = list.filter(function(t) {
+    if (t.status !== 'resolved') return true;
+    var ts = new Date(t.updated || t.created).getTime();
+    return ts >= threshold;
+  });
+  // Move
+  toArchive.forEach(function(t) { archive.unshift(t); });
+  tlSave(remaining);
+  tlArchiveSave(archive);
+  return toArchive.length;
+}
+
+function tlArchiveRestore(id) {
+  var archive = tlArchiveLoad();
+  var t = archive.find(function(x) { return x.id === id; });
+  if (!t) return;
+  var newArchive = archive.filter(function(x) { return x.id !== id; });
+  tlArchiveSave(newArchive);
+  var list = tlLoad();
+  list.unshift(t);
+  tlSave(list);
+  tlRender();
+  toast('Restored to main log');
+}
+
+function tlArchiveToggleView() {
+  TL_VIEW = TL_VIEW === 'active' ? 'archive' : 'active';
+  tlRender();
+}
+
+// Run auto-archive on load (with a delay so the page is ready)
+setTimeout(function() {
+  var n = tlAutoArchive();
+  if (n > 0) {
+    console.log('Auto-archived ' + n + ' resolved tickets older than 90 days');
+    if (typeof tlRender === 'function') tlRender();
+  }
+}, 2000);
+
 // ── Ticket templates ──────────────────────────────────
 function tlTemplatesLoad() {
   try { return JSON.parse(localStorage.getItem(TL_TEMPLATES_KEY) || '[]'); }
@@ -332,9 +393,78 @@ function tlNewBlank() {
     followUp: '',
     subtasks: [],
     related: [],
+    blockedBy: [],  // ids of tickets this one is blocked on
     notes: '',
     resolution: ''
   };
+}
+
+// ── Dependencies ──
+function tlBlockedByAdd(ticketId) {
+  var list = tlLoad();
+  var t = list.find(function(x) { return x.id === ticketId; });
+  if (!t) return;
+
+  var candidates = list.filter(function(x) {
+    if (x.id === ticketId) return false;
+    if ((t.blockedBy || []).indexOf(x.id) >= 0) return false;
+    return true;
+  });
+  if (candidates.length === 0) { toast('No other tickets to depend on'); return; }
+
+  var choice = prompt('This ticket is blocked by which ticket? Search by college, symptom, or id:');
+  if (!choice || !choice.trim()) return;
+  var q = choice.trim().toLowerCase();
+  var match = candidates.find(function(x) {
+    return (x.id + ' ' + x.college + ' ' + x.symptom + ' ' + x.system).toLowerCase().indexOf(q) >= 0;
+  });
+  if (!match) { toast('No ticket matched "' + choice + '"'); return; }
+
+  if (!t.blockedBy) t.blockedBy = [];
+  t.blockedBy.push(match.id);
+  t.updated = new Date().toISOString();
+  tlSave(list);
+  tlRender();
+  toast('Blocked by: ' + (match.symptom || match.id));
+}
+
+function tlBlockedByRemove(ticketId, otherId) {
+  var list = tlLoad();
+  var t = list.find(function(x) { return x.id === ticketId; });
+  if (!t || !t.blockedBy) return;
+  t.blockedBy = t.blockedBy.filter(function(id) { return id !== otherId; });
+  t.updated = new Date().toISOString();
+  tlSave(list);
+  tlRender();
+}
+
+// Check if a ticket is currently blocked (any dependencies still open)
+function tlIsBlocked(t) {
+  if (!t.blockedBy || t.blockedBy.length === 0) return false;
+  var list = tlLoad();
+  return t.blockedBy.some(function(id) {
+    var dep = list.find(function(x) { return x.id === id; });
+    return dep && dep.status !== 'resolved';
+  });
+}
+
+function tlRenderBlockedBy(t) {
+  if (!t.blockedBy || t.blockedBy.length === 0) return '';
+  var list = tlLoad();
+  var rows = t.blockedBy.map(function(id) {
+    var other = list.find(function(x) { return x.id === id; });
+    if (!other) return '';
+    var resolved = other.status === 'resolved';
+    return '<div class="tl-block-item' + (resolved ? ' tl-block-ok' : '') + '">' +
+      '<a class="tl-block-link" onclick="var r=document.querySelector(\'.tl-row[data-id=&quot;' + other.id + '&quot;]\');if(r){r.classList.add(\'tl-expanded\');r.scrollIntoView({behavior:\'smooth\',block:\'center\'})}">' +
+        '<span class="tl-block-status tl-st-' + other.status + '">' + (resolved ? '\u2713 ' : '') + other.status + '</span>' +
+        '<span class="tl-block-text">' + tlEsc(other.symptom || '(no symptom)') + '</span>' +
+      '</a>' +
+      '<button class="tl-link-rm" onclick="tlBlockedByRemove(\'' + t.id + '\',\'' + other.id + '\')" title="Remove dependency">&times;</button>' +
+    '</div>';
+  }).filter(function(s) { return s; }).join('');
+  if (!rows) return '';
+  return '<div class="tl-blocks"><div class="tl-blocks-label">&#128274; Blocked by</div>' + rows + '</div>';
 }
 
 // ── Time tracking ──
@@ -626,6 +756,19 @@ function tlUpdate(id, field, value) {
   var list = tlLoad();
   var t = list.find(function(x) { return x.id === id; });
   if (!t) return;
+  // If resolving a blocked ticket, warn the user first
+  if (field === 'status' && value === 'resolved' && tlIsBlocked(t)) {
+    if (!confirm('This ticket is still blocked by another open ticket. Resolve anyway?')) {
+      // Roll back the select UI
+      var sel = document.querySelector('.tl-row[data-id="' + id + '"] select');
+      if (sel) {
+        for (var i = 0; i < sel.options.length; i++) {
+          if (sel.options[i].value === t.status) { sel.selectedIndex = i; break; }
+        }
+      }
+      return;
+    }
+  }
   t[field] = value;
   t.updated = new Date().toISOString();
   tlSave(list);
@@ -694,7 +837,7 @@ function tlFilter(tickets) {
 function tlRender() {
   var container = document.getElementById('tlBody');
   if (!container) return;
-  var tickets = tlLoad();
+  var tickets = TL_VIEW === 'archive' ? tlArchiveLoad() : tlLoad();
   var filtered = tlFilter(tickets);
 
   var stats = {
@@ -794,6 +937,10 @@ function tlRender() {
     } else if (t.timeLogged && t.timeLogged > 0) {
       timerBadge = '<span class="tl-timer-badge" title="Total time logged">' + tlTimerFormat(t.timeLogged) + '</span>';
     }
+    var blockedBadge = '';
+    if (tlIsBlocked(t)) {
+      blockedBadge = '<span class="tl-blocked-badge" title="Blocked by another open ticket">\u{1F512} blocked</span>';
+    }
     if (fuCls) {
       var fuLabel = fuCls === 'overdue' ? 'Overdue' : fuCls === 'due-today' ? 'Due today' : fuCls === 'due-soon' ? 'Soon' : t.followUp;
       fuBadge = '<span class="tl-fu-badge tl-fu-' + fuCls + '">' + fuLabel + '</span>';
@@ -811,7 +958,7 @@ function tlRender() {
       '<div class="tl-summary">' +
         '<input type="checkbox" class="tl-select-box"' + (TL_SELECTED[t.id] ? ' checked' : '') + ' onclick="event.stopPropagation();tlSelectToggle(\'' + t.id + '\')" onchange="event.stopPropagation()" title="Select for bulk action">' +
         '<span class="tl-age ' + ageCls + '" onclick="tlEdit(\'' + t.id + '\')">' + tlAgeText(t.created) + '</span>' +
-        '<span class="tl-college" onclick="tlEdit(\'' + t.id + '\')">' + collegeShort + fuBadge + subtaskBadge + timerBadge + tagBadges + '</span>' +
+        '<span class="tl-college" onclick="tlEdit(\'' + t.id + '\')">' + collegeShort + fuBadge + subtaskBadge + timerBadge + blockedBadge + tagBadges + '</span>' +
         '<span class="tl-sys" onclick="tlEdit(\'' + t.id + '\')">' + t.system + '</span>' +
         '<span class="tl-symptom" onclick="tlEdit(\'' + t.id + '\')">' + symptomShort + '</span>' +
         '<span class="tl-status tl-st-' + t.status + '" onclick="tlEdit(\'' + t.id + '\')">' + t.status + '</span>' +
@@ -886,17 +1033,24 @@ function tlRender() {
         '<div class="tl-field tl-field-full"><label>Resolution (fill when closing)</label>' +
           '<textarea rows="2" placeholder="What fixed it. Consider promoting to a KB entry." oninput="tlUpdate(\'' + t.id + '\', \'resolution\', this.value)">' + tlEsc(t.resolution) + '</textarea>' +
         '</div>' +
+        tlRenderBlockedBy(t) +
         tlRenderLinks(t) +
         tlDupeWarning(t) +
         tlKbSuggestions(t) +
         '<div class="tl-row-footer">' +
           '<span class="tl-meta">Created ' + new Date(t.created).toLocaleString() + ' · id ' + t.id + '</span>' +
           '<div class="tl-row-footer-actions">' +
-            '<button class="tl-btn" onclick="tlClone(\'' + t.id + '\')">Clone</button>' +
-            '<button class="tl-btn" onclick="tlLinkAdd(\'' + t.id + '\')">Link ticket</button>' +
-            '<button class="tl-btn" onclick="tlSaveAsTemplate(\'' + t.id + '\')">Save as template</button>' +
-            (t.resolution ? '<button class="tl-btn" onclick="tlPromoteToKb(\'' + t.id + '\')">Save resolution to KB</button>' : '') +
-            '<button class="tl-btn tl-btn-del" onclick="tlDelete(\'' + t.id + '\')">Delete</button>' +
+            (TL_VIEW === 'archive'
+              ? '<button class="tl-btn tl-btn-new" onclick="tlArchiveRestore(\'' + t.id + '\')">Restore to active</button>' +
+                '<button class="tl-btn tl-btn-del" onclick="(function(){var a=tlArchiveLoad().filter(function(x){return x.id!==\'' + t.id + '\'});tlArchiveSave(a);tlRender();toast(\'Deleted from archive\')})()">Delete forever</button>'
+              : '<button class="tl-btn" onclick="tlClone(\'' + t.id + '\')">Clone</button>' +
+                '<button class="tl-btn" onclick="routerShareTicket(\'' + t.id + '\')" title="Copy a shareable link to this ticket">Share link</button>' +
+                '<button class="tl-btn" onclick="tlLinkAdd(\'' + t.id + '\')">Link ticket</button>' +
+                '<button class="tl-btn" onclick="tlBlockedByAdd(\'' + t.id + '\')" title="Mark this ticket as blocked by another">Blocked by\u2026</button>' +
+                '<button class="tl-btn" onclick="tlSaveAsTemplate(\'' + t.id + '\')">Save as template</button>' +
+                (t.resolution ? '<button class="tl-btn" onclick="tlPromoteToKb(\'' + t.id + '\')">Save resolution to KB</button>' : '') +
+                '<button class="tl-btn tl-btn-del" onclick="tlDelete(\'' + t.id + '\')">Delete</button>'
+            ) +
           '</div>' +
         '</div>' +
       '</div>' +
