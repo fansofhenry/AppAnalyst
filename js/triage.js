@@ -133,6 +133,34 @@
     return '';
   }
 
+  // ── BEAM env + term codes lookup (district-level) ──
+  function getBeamForDistrict(district) {
+    if (!district || typeof triageBEAM_BY_DISTRICT === 'undefined') return null;
+    if (triageBEAM_BY_DISTRICT[district]) return triageBEAM_BY_DISTRICT[district];
+    // Fuzzy match — district names sometimes drift (e.g., "CCD" vs "Community College District")
+    var dl = district.toLowerCase();
+    for (var key in triageBEAM_BY_DISTRICT) {
+      if (triageBEAM_BY_DISTRICT.hasOwnProperty(key)) {
+        var kl = key.toLowerCase();
+        // Match if both share their first 2 significant words
+        var dKey = dl.replace(/community college district|ccd|joint/g, '').trim();
+        var kKey = kl.replace(/community college district|ccd|joint/g, '').trim();
+        if (dKey && kKey && (dKey.indexOf(kKey.split(' ')[0]) === 0 || kKey.indexOf(dKey.split(' ')[0]) === 0)) {
+          return triageBEAM_BY_DISTRICT[key];
+        }
+      }
+    }
+    return null;
+  }
+
+  // ── CCCID validation: 7 chars, 3 letters + 4 digits ──
+  function validateCCCID(s) {
+    if (!s) return {valid: null, msg: ''};
+    var clean = s.trim().toUpperCase();
+    if (/^[A-Z]{3}\d{4}$/.test(clean)) return {valid: true, normalized: clean, msg: 'OK'};
+    return {valid: false, msg: 'CCCID is 3 letters + 4 digits (e.g., CRB4106). Got: ' + clean};
+  }
+
   // ── Main diagnose ──
   function diagnose(payload) {
     var patterns = matchPatterns(payload.errorText || '', payload.status || '', payload.timeline || '');
@@ -381,6 +409,7 @@
     html += '<div class="tri-tabs" role="tablist">';
     html += '<button type="button" class="tri-tab-btn tri-active" data-tab="diagnose" role="tab">Diagnose</button>';
     html += '<button type="button" class="tri-tab-btn" data-tab="reply" role="tab">Reply Drafter</button>';
+    html += '<button type="button" class="tri-tab-btn" data-tab="note" role="tab">Internal Note</button>';
     html += '<button type="button" class="tri-tab-btn" data-tab="history" role="tab">History</button>';
     html += '<button type="button" class="tri-tab-btn" data-tab="principles" role="tab">Principles</button>';
     html += '</div>';
@@ -389,13 +418,24 @@
     html += '<div class="tri-tab-panel" data-tab="diagnose" style="display:block;">';
     html += '<form id="triForm" class="tri-form">';
     html += '<div class="tri-grid">';
+    html += '<div><label for="triCCCID">CCCID <span class="tri-hint">(optional)</span></label><input type="text" id="triCCCID" placeholder="e.g. CRB4106" maxlength="7"><span id="triCCCIDFeedback" class="tri-feedback"></span></div>';
+    html += '<div><label for="triName">Student first name <span class="tri-hint">(optional)</span></label><input type="text" id="triName" placeholder="e.g. Owen"></div>';
     html += '<div><label for="triTC">Teaching College</label><select id="triTC">' + collegeOpts + '</select></div>';
     html += '<div><label for="triHC">Home College</label><select id="triHC">' + collegeOpts + '</select></div>';
+    html += '<div class="tri-full" id="triTCContext" style="display:none;"></div>';
     html += '<div class="tri-full"><label for="triErr">Verbatim error string</label><input type="text" id="triErr" placeholder=\'e.g. "Closed To waitlist this class..." or "Canvas account not found"\'></div>';
     html += '<div class="tri-full"><label for="triStatus">Admin Panel — current Status (top-line)</label><input type="text" id="triStatus" placeholder=\'e.g. "Enrolled" or "Pending Person Match" or "Drop Failed"\'></div>';
-    html += '<div class="tri-full"><label for="triTimeline">Workflow Timeline (paste stages with timestamps)</label><textarea id="triTimeline" rows="4" placeholder="Created — 4/11&#10;AER Form Submitted — 4/11&#10;Eligible and Approved — 4/11&#10;Enrolled — 4/11&#10;Prerequisite Pending Review — 4/16"></textarea></div>';
+    html += '<div class="tri-full"><label>Workflow stages reached <span class="tri-hint">(check what Admin Panel timeline shows)</span></label>';
+    html += '<div class="tri-stage-checks">';
+    for (var ws = 0; ws < triageWORKFLOW_STAGES.length; ws++) {
+      html += '<label class="tri-stage-cb"><input type="checkbox" class="tri-stage-input" data-stage="' + escapeHtml(triageWORKFLOW_STAGES[ws]) + '"> <span>' + (ws + 1) + '. ' + escapeHtml(triageWORKFLOW_STAGES[ws]) + '</span></label>';
+    }
     html += '</div>';
-    html += '<div class="tri-actions"><button type="submit" class="tri-btn-primary">Run diagnosis</button><button type="reset" class="tri-btn-secondary">Clear</button></div>';
+    html += '<details style="margin-top:.5rem;"><summary class="tri-meta">Or paste the verbatim timeline (overrides checkboxes)</summary>';
+    html += '<textarea id="triTimeline" rows="3" placeholder="Created — 4/11&#10;Eligible and Approved — 4/11&#10;Enrolled — 4/11&#10;Prerequisite Pending Review — 4/16" style="margin-top:.4rem;"></textarea>';
+    html += '</details></div>';
+    html += '</div>';
+    html += '<div class="tri-actions"><button type="submit" class="tri-btn-primary">Run diagnosis <span class="tri-kbd">⌘⏎</span></button><button type="reset" class="tri-btn-secondary">Clear</button></div>';
     html += '</form>';
     html += '<div id="triResult" class="tri-result"></div>';
     html += '</div>';
@@ -414,6 +454,20 @@
     html += '</form>';
     html += '<div id="triReplyResult" class="tri-result"></div>';
     html += '<div id="triChecklist" class="tri-checklist" style="display:none;"></div>';
+    html += '</div>';
+
+    // ── Internal Note panel ──
+    html += '<div class="tri-tab-panel" data-tab="note" style="display:none;">';
+    html += '<p class="tri-meta">Generates the 4-beat Freshservice internal note from your last diagnosis. Format mirrors v7\'s worked-case template (Situation / Action / Student-facing / Escalation).</p>';
+    html += '<form id="triNoteForm" class="tri-form">';
+    html += '<div class="tri-grid">';
+    html += '<div class="tri-full"><label for="triNoteAction">What I just did <span class="tri-hint">(this triage step)</span></label><input type="text" id="triNoteAction" placeholder="e.g. Pulled Admin Panel record + ran diagnose; matched OWEN pattern → PICE-795."></div>';
+    html += '<div class="tri-full"><label for="triNoteStudent">What I told the student <span class="tri-hint">(or "drafted reply, awaiting send")</span></label><input type="text" id="triNoteStudent" placeholder=\'e.g. "Section was full at registration. Directed to Course Finder for alternate."\'></div>';
+    html += '<div class="tri-full"><label for="triNoteEsc">Escalation status</label><input type="text" id="triNoteEsc" placeholder=\'e.g. "Deferred to PICE-795 (Donna already has N2N ticket open). No new escalation."\'></div>';
+    html += '</div>';
+    html += '<div class="tri-actions"><button type="submit" class="tri-btn-primary">Generate note</button><button type="button" id="triNoteCopy" class="tri-btn-secondary" disabled>Copy to clipboard</button></div>';
+    html += '</form>';
+    html += '<div id="triNoteResult" class="tri-result"></div>';
     html += '</div>';
 
     // ── History panel ──
@@ -460,20 +514,93 @@
       btn.addEventListener('click', function() { activateTab(btn.getAttribute('data-tab')); if (btn.getAttribute('data-tab') === 'history') renderHistory(); });
     });
 
+    // Build a synthetic timeline string from the stage checkboxes if no
+    // textarea content is provided — gives the diagnostic engine the same
+    // signal without requiring Henry to type.
+    function buildTimelineFromCheckboxes() {
+      var checked = document.querySelectorAll('.tri-stage-input:checked');
+      if (!checked.length) return '';
+      var lines = [];
+      checked.forEach(function(cb) { lines.push(cb.getAttribute('data-stage')); });
+      return lines.join('\n');
+    }
+
+    // Render the TC quick-context card on TC selection — district, SIS,
+    // BEAM env, term codes, special-handling notes. No submit needed.
+    function renderTCContext(tcName) {
+      var box = el('triTCContext');
+      if (!tcName) { box.style.display = 'none'; box.innerHTML = ''; return; }
+      var district = getDistrictForCollege(tcName);
+      var sis = getSisForCollege(tcName);
+      var beam = getBeamForDistrict(district);
+      var special = getSpecialHandling(district);
+      var html = '<div class="tri-tc-context">';
+      html += '<div class="tri-tc-context-row">';
+      html += '<span class="tri-tc-context-label">SIS</span><span class="tri-sis' + (sis && sis.toLowerCase().indexOf('banner direct') !== -1 ? ' tri-sis-warn' : '') + '">' + escapeHtml(sis || '—') + '</span>';
+      html += '<span class="tri-tc-context-label">District</span><span class="tri-district">' + escapeHtml(district || '—') + '</span>';
+      html += '</div>';
+      if (beam) {
+        html += '<div class="tri-tc-context-row">';
+        html += '<span class="tri-tc-context-label">BEAM env</span><code class="tri-code">' + escapeHtml(beam.env) + '</code>';
+        if (beam.company) html += '<span class="tri-tc-context-label">Company</span><code class="tri-code">' + escapeHtml(beam.company) + '</code>';
+        html += '</div>';
+        if (beam.noTermCodes) {
+          html += '<div class="tri-tc-context-row tri-meta"><em>BEAM term codes not in discovery scan — verify before relying on them.</em></div>';
+        } else {
+          html += '<div class="tri-tc-context-row">';
+          if (beam.sp26) html += '<span class="tri-tc-context-label">Spring 2026</span><code class="tri-code">' + escapeHtml(beam.sp26) + '</code>';
+          if (beam.su26) html += '<span class="tri-tc-context-label">Summer 2026</span><code class="tri-code">' + escapeHtml(beam.su26) + '</code>';
+          if (beam.fa27) html += '<span class="tri-tc-context-label">Fall 2027</span><code class="tri-code">' + escapeHtml(beam.fa27) + '</code>';
+          html += '</div>';
+        }
+      } else if (district) {
+        html += '<div class="tri-tc-context-row tri-meta"><em>No BEAM env for this district. Likely not integrated, homegrown, or not in discovery scan.</em></div>';
+      }
+      if (special.length) {
+        html += '<div class="tri-tc-context-special"><strong>Special handling:</strong><ul>';
+        for (var i = 0; i < special.length; i++) html += '<li>' + escapeHtml(special[i]) + '</li>';
+        html += '</ul></div>';
+      }
+      html += '</div>';
+      box.innerHTML = html;
+      box.style.display = 'block';
+    }
+
+    el('triTC').addEventListener('change', function() { renderTCContext(this.value); });
+
+    // CCCID validation (live)
+    el('triCCCID').addEventListener('input', function() {
+      var fb = el('triCCCIDFeedback');
+      var v = this.value;
+      if (!v) { fb.textContent = ''; fb.className = 'tri-feedback'; return; }
+      var r = validateCCCID(v);
+      if (r.valid) {
+        fb.textContent = '✓ ' + r.normalized;
+        fb.className = 'tri-feedback tri-feedback-ok';
+      } else if (r.valid === false) {
+        fb.textContent = r.msg;
+        fb.className = 'tri-feedback tri-feedback-warn';
+      }
+    });
+
     el('triForm').addEventListener('submit', function(e) {
       e.preventDefault();
+      var timelineText = el('triTimeline').value || buildTimelineFromCheckboxes();
       var payload = {
+        cccid: el('triCCCID').value,
+        name: el('triName').value,
         tc: el('triTC').value,
         hc: el('triHC').value,
         errorText: el('triErr').value,
         status: el('triStatus').value,
-        timeline: el('triTimeline').value
+        timeline: timelineText
       };
       var d = diagnose(payload);
       lastDiagnosis = d;
       el('triResult').innerHTML = renderDiagnosis(d);
+      el('triResult').scrollIntoView({behavior: 'smooth', block: 'start'});
       // Save to history (only if there's some signal)
-      if (payload.tc || payload.errorText || payload.status || payload.timeline) {
+      if (payload.tc || payload.errorText || payload.status || payload.timeline || payload.cccid) {
         saveHistoryEntry({
           when: Date.now(),
           input: payload,
@@ -486,6 +613,19 @@
           stageWarning: d.stageWarning,
           nextSteps: d.nextSteps
         });
+      }
+    });
+
+    // Keyboard shortcuts: Cmd/Ctrl+Enter submits diagnose form
+    section.addEventListener('keydown', function(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+        var activePanel = document.querySelector('.tri-tab-panel[style*="block"]');
+        if (!activePanel) return;
+        var form = activePanel.querySelector('form');
+        if (form) {
+          e.preventDefault();
+          form.dispatchEvent(new Event('submit', {cancelable: true}));
+        }
       }
     });
 
@@ -528,6 +668,71 @@
       if (!lastReplyText) return;
       navigator.clipboard.writeText(lastReplyText).then(function() {
         var btn = el('triRCopy');
+        var orig = btn.textContent;
+        btn.textContent = '✓ Copied';
+        setTimeout(function() { btn.textContent = orig; }, 2000);
+      }).catch(function() { alert('Copy failed — select text manually.'); });
+    });
+
+    // ── Internal Note generator ──
+    var lastNoteText = '';
+    el('triNoteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var out = el('triNoteResult');
+      if (!lastDiagnosis) {
+        out.innerHTML = '<p class="tri-meta">Run a diagnosis first — the note pulls context from your latest one.</p>';
+        return;
+      }
+      var d = lastDiagnosis;
+      var input = d.input || {};
+      var action = el('triNoteAction').value.trim() || '(fill in what you did)';
+      var student = el('triNoteStudent').value.trim() || '(fill in what you told the student, or "drafted reply, not yet sent")';
+      var esc = el('triNoteEsc').value.trim() || '(none)';
+      var primaryLabel = d.primary ? (d.primary.letter + ' — ' + d.primary.name) : '(no clear pattern match)';
+      var workflowSummary = '';
+      if (d.workflow && d.workflow.latestName) {
+        workflowSummary = 'Workflow at "' + d.workflow.latestName + '" (stage ' + d.workflow.latestReached + ' of 8)';
+        if (d.workflow.regression) workflowSummary += ' — REGRESSION detected.';
+        else if (d.workflow.isTerminalSuccess) workflowSummary += ' — terminal success.';
+        else if (d.workflow.latestReached === 5) workflowSummary += ' — NOT terminal (Validated & Registered missing).';
+      }
+      var lines = [];
+      lines.push('SITUATION');
+      var situationParts = [];
+      if (input.cccid) situationParts.push('CCCID: ' + input.cccid.toUpperCase());
+      if (input.tc) situationParts.push('TC: ' + input.tc);
+      if (input.hc) situationParts.push('HC: ' + input.hc);
+      if (input.status) situationParts.push('Status: ' + input.status);
+      if (input.errorText) situationParts.push('Error: ' + input.errorText);
+      if (situationParts.length) lines.push('  ' + situationParts.join(' · '));
+      if (workflowSummary) lines.push('  ' + workflowSummary);
+      if (d.sis) lines.push('  SIS: ' + d.sis + (d.district ? ' (' + d.district + ')' : ''));
+      lines.push('');
+      lines.push('PATTERN');
+      lines.push('  ' + primaryLabel);
+      if (d.specialHandling && d.specialHandling.length) {
+        lines.push('  Special handling notes for district:');
+        for (var sh = 0; sh < d.specialHandling.length; sh++) lines.push('    · ' + d.specialHandling[sh]);
+      }
+      lines.push('');
+      lines.push('ACTION');
+      lines.push('  ' + action);
+      lines.push('');
+      lines.push('STUDENT-FACING');
+      lines.push('  ' + student);
+      lines.push('');
+      lines.push('ESCALATION');
+      lines.push('  ' + esc);
+      var note = lines.join('\n');
+      lastNoteText = note;
+      out.innerHTML = '<pre class="tri-reply-out">' + escapeHtml(note) + '</pre><p class="tri-meta">' + note.length + ' characters · paste as a Freshservice internal note.</p>';
+      el('triNoteCopy').disabled = false;
+    });
+
+    el('triNoteCopy').addEventListener('click', function() {
+      if (!lastNoteText) return;
+      navigator.clipboard.writeText(lastNoteText).then(function() {
+        var btn = el('triNoteCopy');
         var orig = btn.textContent;
         btn.textContent = '✓ Copied';
         setTimeout(function() { btn.textContent = orig; }, 2000);

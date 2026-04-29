@@ -3584,3 +3584,124 @@ footer {
 }
 .tri-principles-card ol li { margin-bottom: .35rem; }
 .tri-principles-card ol li strong { color: var(--text); }
+
+/* ── Iteration 2: TC quick-context, stage checkboxes, hints ── */
+.tri-hint {
+  font-family: var(--mono);
+  font-size: .65rem;
+  font-weight: 400;
+  color: var(--text-3, #6a6a6a);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: .35rem;
+}
+.tri-feedback {
+  display: block;
+  font-family: var(--mono);
+  font-size: .72rem;
+  margin-top: .3rem;
+  color: var(--text-3, #6a6a6a);
+}
+.tri-feedback-ok { color: #1d6c1d; }
+.tri-feedback-warn { color: #946400; }
+.tri-kbd {
+  display: inline-block;
+  padding: .08rem .35rem;
+  margin-left: .35rem;
+  font-family: var(--mono);
+  font-size: .68rem;
+  background: rgba(255,255,255,.20);
+  border-radius: 3px;
+  vertical-align: middle;
+}
+
+/* TC quick-context card */
+.tri-tc-context {
+  background: rgba(26,107,80,.04);
+  border: 1px solid rgba(26,107,80,.18);
+  border-left: 3px solid var(--accent, #1A6B50);
+  border-radius: 0 5px 5px 0;
+  padding: .7rem .9rem;
+  margin: 0;
+}
+.tri-tc-context-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35rem .75rem;
+  margin-bottom: .4rem;
+  font-size: .82rem;
+}
+.tri-tc-context-row:last-child { margin-bottom: 0; }
+.tri-tc-context-label {
+  font-family: var(--mono);
+  font-size: .65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--text-3, #6a6a6a);
+  margin-right: -.4rem;
+}
+.tri-code {
+  font-family: var(--mono);
+  font-size: .78rem;
+  background: rgba(0,0,0,.05);
+  padding: .12rem .45rem;
+  border-radius: 3px;
+  color: var(--text);
+}
+.tri-tc-context-special {
+  margin-top: .55rem;
+  padding-top: .55rem;
+  border-top: 1px dashed rgba(26,107,80,.18);
+  font-size: .82rem;
+  color: var(--text-2, #4a4a4a);
+}
+.tri-tc-context-special strong {
+  color: var(--accent, #1A6B50);
+  display: block;
+  font-family: var(--mono);
+  font-size: .68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: .25rem;
+}
+.tri-tc-context-special ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.tri-tc-context-special li { margin-bottom: .2rem; line-height: 1.45; }
+
+/* Stage checkboxes */
+.tri-stage-checks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .35rem .65rem;
+  margin-top: .35rem;
+  padding: .65rem .8rem;
+  background: var(--surface, #fff);
+  border: 1px solid var(--border, #e8e6e1);
+  border-radius: 5px;
+}
+@media (min-width: 720px) {
+  .tri-stage-checks { grid-template-columns: repeat(4, 1fr); }
+}
+.tri-stage-cb {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .78rem;
+  color: var(--text-2, #4a4a4a);
+  cursor: pointer;
+  font-family: inherit;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+.tri-stage-cb input { margin: 0; }
+.tri-stage-cb:hover { color: var(--text); }
+.tri-stage-cb input:checked + span {
+  color: var(--accent, #1A6B50);
+  font-weight: 500;
+}
