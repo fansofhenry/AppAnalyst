@@ -380,7 +380,7 @@
   <span id="autosaveDot" class="autosave-dot" title="Auto-save indicator &mdash; flashes when your data is written to localStorage" role="status" aria-live="polite" aria-label="Data saved"></span>
   <button class="theme-toggle-btn" id="themeToggle" onclick="themeToggle()" title="Toggle theme (Shift+D)"><span class="theme-icon">&#9790;</span><span class="theme-label">Dark</span></button>
   <div class="nav-links">
-    <a href="#monitor" class="nv nv-amber"><span class="nav-num">1</span>Status</a><a href="#lookup" class="nv nv-blue"><span class="nav-num">2</span>Colleges</a><a href="#flow" class="nv nv-sky"><span class="nav-num">3</span>Architecture</a><a href="#tracer" class="nv nv-rose"><span class="nav-num">4</span>Diagnostics</a><a href="#patterns" class="nv nv-orange"><span class="nav-num">5</span>Intelligence</a><a href="#kb" class="nv nv-green"><span class="nav-num">6</span>KB</a><a href="#comms" class="nv nv-indigo"><span class="nav-num">7</span>Comms</a><a href="#outreach" class="nv nv-teal"><span class="nav-num">8</span>Outreach</a><a href="#aiVision" class="nv nv-purple"><span class="nav-num">9</span>AI</a><a href="#barrierOverview" class="nav-barrier"><span class="nav-num">0</span>Barriers</a>
+    <a href="#monitor" class="nv nv-amber"><span class="nav-num">1</span>Status</a><a href="#triage" class="nv nv-rose" style="font-weight:600"><span class="nav-num" style="background:#1A6B50">★</span>Triage</a><a href="#lookup" class="nv nv-blue"><span class="nav-num">2</span>Colleges</a><a href="#flow" class="nv nv-sky"><span class="nav-num">3</span>Architecture</a><a href="#tracer" class="nv nv-rose"><span class="nav-num">4</span>Diagnostics</a><a href="#patterns" class="nv nv-orange"><span class="nav-num">5</span>Intelligence</a><a href="#kb" class="nv nv-green"><span class="nav-num">6</span>KB</a><a href="#comms" class="nv nv-indigo"><span class="nav-num">7</span>Comms</a><a href="#outreach" class="nv nv-teal"><span class="nav-num">8</span>Outreach</a><a href="#aiVision" class="nv nv-purple"><span class="nav-num">9</span>AI</a><a href="#barrierOverview" class="nav-barrier"><span class="nav-num">0</span>Barriers</a>
   </div>
 </nav>
 
@@ -588,6 +588,9 @@
     </div>
   </div>
 </div></section>
+
+<!-- ═══ TRIAGE COMPANION ═══ -->
+<section class="sec fu" id="triage" role="region" aria-label="Triage Companion"><!-- populated by js/triage.js --></section>
 
 <!-- ═══ COLLEGE DIRECTORY ═══ -->
 <section class="sec fu" id="lookup" role="region" aria-label="College Lookup"><div class="wrap">
@@ -1623,6 +1626,7 @@ document.addEventListener('keydown', function(e) {
 <script src="js/data/tracer.js"></script>
 <script src="js/data/patterns.js"></script>
 <script src="js/data/kb.js"></script>
+<script src="js/data/triage.js"></script>
 <script src="js/data/barriers.js"></script>
 <script src="js/data/outreach.js"></script>
 <script src="js/data/journey.js"></script>
@@ -1683,6 +1687,7 @@ document.addEventListener('keydown', function(e) {
 <script src="js/barriers.js"></script>
 <script src="js/outreach.js"></script>
 <script src="js/lookup.js"></script>
+<script src="js/triage.js"></script>
 <script src="js/ai-vision.js"></script>
 <script src="js/comms.js"></script>
 
